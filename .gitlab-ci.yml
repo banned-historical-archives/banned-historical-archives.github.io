@@ -1,0 +1,33 @@
+image: node:latest
+
+services:
+  - mysql:5.7
+
+cache:
+  paths:
+    - node_modules/
+
+variables:
+  # Configure mysql environment variables (https://hub.docker.com/_/mysql/)
+  MYSQL_ROOT_PASSWORD: root_password
+
+test:
+  script:
+    - npm install
+    - npm run test
+
+pages:
+  before_script:
+    - apt-get update -y -qq
+    - apt-get install -y -qq --no-install-recommends default-mysql-client
+  script:
+    - mysql --user=root --password="root_password" --host=mysql --execute "CREATE DATABASE banned_history CHARACTER SET utf8 COLLATE utf8_general_ci;"
+    - GITLAB_CI=true npm run init-db
+    - GITLAB_CI=true npm run build
+    - rm -rf public
+    - mv dist public
+  artifacts:  
+    paths:
+      - public
+  rules:
+    - if: $CI_COMMIT_BRANCH == "master"

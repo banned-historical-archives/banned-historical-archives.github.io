@@ -1,0 +1,3 @@
+from paddlecloud/paddleocr:2.5-cpu-efbb0a
+RUN pip install --upgrade paddlenlp && pip install lac
+COPY ./lac.py /lac.py

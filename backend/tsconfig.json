@@ -1,0 +1,8 @@
+{
+  "compilerOptions": {
+    "rootDir": "../",
+    "strictPropertyInitialization": false
+  },
+  "include": ["./**/*.ts", "../types"],
+  "extends": "../tsconfig.node.json"
+}
