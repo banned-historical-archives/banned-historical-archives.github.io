@@ -1,4 +1,6 @@
 import { Link, Route, Routes } from 'react-router-dom'
+import ArticleComponent from './components/Article';
+import Stack from '@mui/material/Stack';
 
 // Auto generates routes from files under ./pages
 // https://vitejs.dev/guide/features.html#glob-import
@@ -15,7 +17,7 @@ const routes = Object.keys(pages).map((path) => {
 
 export default function App() {
   return (
-    <>
+    <Stack sx={{ position: 'absolute', height: '100%', width: '100%' }} direction="column">
       <nav>
         <ul>
           {routes.map(({ name, path }) => {
@@ -23,15 +25,22 @@ export default function App() {
               <li key={path}>
                 <Link to={path}>{name}</Link>
               </li>
-            )
+            );
           })}
         </ul>
       </nav>
       <Routes>
         {routes.map(({ path, component: RouteComp }) => {
-          return <Route key={path} path={path} element={<RouteComp />}></Route>
+          if (path == '/articles') {
+            return (
+              <Route path={path} element={<RouteComp />}>
+                <Route path=":id" element={<ArticleComponent />} />
+              </Route>
+            );
+          }
+          return <Route key={path} path={path} element={<RouteComp />}></Route>;
         })}
       </Routes>
-    </>
-  )
+    </Stack>
+  );
 }
