@@ -123,11 +123,11 @@ type ArticleDiff = { line_diffs: LineDiff[]; id: string }[];
 export default function ArticleViewer() {
   const [article, setArticle] = useState<Article>();
   const [loading, setLoading] = useState(true);
+  const { id } = useParams();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [compareType, setCompareType] = useState<CompareType>(CompareType.none);
   const [comparePublication, setComparePublication] = useState<string>();
   const [selectedPublication, setSelectedPublication] = useState<string>();
-  const { id } = useParams<{ id: string }>();
 
   useEffect(() => {
     (async () => {
@@ -148,11 +148,12 @@ export default function ArticleViewer() {
     (i) => i.id === selectedPublication,
   )!;
 
-  const compareArticleDetails:{ comments: Comment[]; contents: Content[] } ={
-    comments: [],contents:[]
+  const compareArticleDetails: { comments: Comment[]; contents: Content[] } = {
+    comments: [],
+    contents: [],
   };
   if (comparePublication) {
-    const x = article.publications.find(i => i.id === comparePublication)!;
+    const x = article.publications.find((i) => i.id === comparePublication)!;
     compareArticleDetails!.contents = x.contents;
     compareArticleDetails!.comments = x.comments;
   }
@@ -206,7 +207,7 @@ export default function ArticleViewer() {
       sx={{
         flex: 1,
         height: '100%',
-        overflowY: compareType === CompareType.none ? 'auto' : 'scroll',
+        overflowY: compareType === CompareType.none ? 'none' : 'scroll',
       }}
     >
       <ArticleComponent
@@ -220,7 +221,8 @@ export default function ArticleViewer() {
     compare_elements.push(
       <Stack sx={{ flex: 1, height: '100%', overflowY: 'scroll' }}>
         <Typography variant="subtitle1">
-          来源文件(页码{publication.pages[0]!.start}-{publication.pages[0]!.end})：
+          来源文件(页码{publication.pages[0]!.start}-{publication.pages[0]!.end}
+          )：
         </Typography>
         <Document
           file={publication.pdf}
@@ -229,7 +231,9 @@ export default function ArticleViewer() {
             cMapPacked: true,
           }}
         >
-          {new Array(publication.pages[0]!.end - publication.pages[0]!.start + 1)
+          {new Array(
+            publication.pages[0]!.end - publication.pages[0]!.start + 1,
+          )
             .fill(0)
             .map((i, idx) => (
               <Page pageNumber={idx + publication.pages[0]!.start} key={idx} />
@@ -279,7 +283,16 @@ export default function ArticleViewer() {
     );
   }
   return (
-    <Stack>
+    <Stack
+      sx={{
+        height: '100%',
+        background: 'white',
+        position: 'absolute',
+        zIndex: 1,
+        top: 0,
+        left: 0,
+      }}
+    >
       <Stack direction="row">
         <Stack>选择来源：</Stack>
         <Stack direction="row" spacing={1} sx={{ flex: 1 }}>

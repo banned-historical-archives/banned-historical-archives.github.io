@@ -5,7 +5,7 @@
   "scripts": {
     "dev:build-static": "ts-node --project ./tsconfig.node.json ./backend/build-static.ts",
     "init-db": "ts-node --project ./tsconfig.node.json ./backend/init-db.ts",
-    "dev:prepare": "cp -r ./node_modules/pdfjs-dist /public/pdfjs-dist",
+    "dev:prepare": "cp -r ./node_modules/pdfjs-dist ./public/pdfjs-dist",
     "dev": "npm run dev:prepare && vite",
     "build-static": "PRODUCTION_MODE=true ts-node --project ./tsconfig.node.json ./backend/build-static.ts",
     "test": "vitest",
