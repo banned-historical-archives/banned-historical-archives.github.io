@@ -24,6 +24,7 @@ const opt = {
   title_threshold: 20,
   align_center_threshold: 20,
   sameline_threshold: 10,
+  no_indent_threshold: 20,
 };
 
 function ensure10digits(x: number) {
@@ -221,7 +222,7 @@ function extract_parts(
     if (
       parts[i][1] == parts[i - prev_offset][1] &&
       (parts[i][1] == ContentType.paragraph
-        ? Math.abs(parts[i][2].transform[4] - opt.content_min_x) < 5
+        ? parts[i][2].transform[4] < opt.content_min_x + opt.no_indent_threshold
         : true) &&
       (parts[i][1] == ContentType.subdate ? false : true)
     ) {

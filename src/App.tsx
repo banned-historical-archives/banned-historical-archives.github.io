@@ -33,7 +33,7 @@ export default function App() {
         {routes.map(({ path, component: RouteComp }) => {
           if (path == '/articles') {
             return (
-              <Route path={path} element={<RouteComp />}>
+              <Route key={path} path={path} element={<RouteComp />}>
                 <Route path=":id" element={<ArticleComponent />} />
               </Route>
             );

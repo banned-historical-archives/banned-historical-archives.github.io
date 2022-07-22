@@ -112,6 +112,9 @@ describe('wenji6', async () => {
   it('comments & pivots', () => {
     expect(n_comments_equals_n_pivots(res)).toBe(true);
   });
+  it('alignment', () => {
+    expect(res.filter((i) => i.title === '青年团的工作要照顾青年的特点')).toMatchSnapshot();
+  });
 });
 
 describe('wenji7', async () => {

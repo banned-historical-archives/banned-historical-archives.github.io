@@ -5,11 +5,11 @@
   "scripts": {
     "dev:build-static": "ts-node --project ./tsconfig.node.json ./backend/build-static.ts",
     "init-db": "ts-node --project ./tsconfig.node.json ./backend/init-db.ts",
-    "dev:prepare": "cp -r ./node_modules/pdfjs-dist ./public/pdfjs-dist",
+    "dev:prepare": "cp -r ./node_modules/pdfjs-dist ./public/",
     "dev": "npm run dev:prepare && vite",
     "build-static": "PRODUCTION_MODE=true ts-node --project ./tsconfig.node.json ./backend/build-static.ts",
     "test": "vitest",
-    "build": "vite build && cp -r ./node_modules/pdfjs-dist ./dist/pdfjs-dist && npm run build-static && cp -r ./public/books ./dist/books",
+    "build": "vite build && cp -r ./node_modules/pdfjs-dist ./dist/ && npm run build-static && cp -r ./public/books ./dist/books",
     "preview": "vite preview"
   },
   "dependencies": {
@@ -29,6 +29,7 @@
     "mysql": "^2.18.1",
     "node-fetch": "^2.6.7",
     "pdf.js": "^0.1.0",
+    "pdfjs-dist": "2.12",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-pdf": "^5.7.2",
