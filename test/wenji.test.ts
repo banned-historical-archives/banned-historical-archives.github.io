@@ -99,7 +99,7 @@ describe('wenji5', async () => {
   });
 });
 
-describe('wenji6', async () => {
+describe.only('wenji6', async () => {
   const book = books.find((i) => i.entity.id === 'wenji6')!;
   const res = await book.parser(book.path, book.parser_option);
   it('title & dates', () => {
@@ -111,6 +111,9 @@ describe('wenji6', async () => {
   });
   it('comments & pivots', () => {
     expect(n_comments_equals_n_pivots(res)).toBe(true);
+  });
+  it('alignment', () => {
+    expect(res.filter((i) => i.title === '青年团的工作要照顾青年的特点')).toMatchSnapshot();
   });
 });
 
