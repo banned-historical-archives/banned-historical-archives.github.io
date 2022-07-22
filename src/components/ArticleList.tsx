@@ -89,7 +89,7 @@ const columns: GridColDef<Article>[] = [
                 .filter((j) => j)
                 .join('/'),
             )
-            .map((j) => <Typography variant="caption">{j}</Typography>)
+            .map((j) => <Typography key={j} variant="caption">{j}</Typography>)
         )}
       </Stack>
     ),

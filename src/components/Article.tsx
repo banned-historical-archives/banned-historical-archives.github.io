@@ -53,7 +53,7 @@ function ArticleComponent({
           .map((i) =>
             [i.year, i.month || '', i.day || ''].filter((j) => j).join('/'),
           )
-          .map((j) => <h2 style={{ textAlign: 'center' }}>{j}</h2>)
+          .map((j) => <h2 key={j} style={{ textAlign: 'center' }}>{j}</h2>)
       )}
       {contents
         .sort((a, b) => (a.index > b.index ? 1 : -1))
@@ -82,32 +82,57 @@ function ArticleComponent({
             if (part_comments.length) {
               const comment_idx = part_comments.shift()!.index;
               content.push(
-                <>{text}</>,
-                <a href={`#comment${comment_idx}`}>[{comment_idx}]</a>,
+                <span key={Math.random()}>{text}</span>,
+                <span key={Math.random()}>[{comment_idx}]</span>,
               );
             } else {
-              content.push(<>{text}</>);
+              content.push(<span key={Math.random()}>{text}</span>);
             }
           });
+          const key = part.id;
           if (part.type === ContentType.title) {
-            return <h1 style={{ textAlign: 'center' }}>{content}</h1>;
+            return (
+              <Typography key={key} variant="h3" sx={{ textAlign: 'center', margin: 4 }}>
+                {content}
+              </Typography>
+            );
           } else if (part.type === ContentType.appellation) {
-            return <p style={{ textIndent: '0em', margin: 3 }}>{content}</p>;
+            return (
+              <Typography key={key} variant="body1" sx={{ margin: 0.5 }}>
+                {content}
+              </Typography>
+            );
           } else if (part.type === ContentType.subtitle) {
-            return <h2 style={{ textAlign: 'center' }}>{content}</h2>;
+            return (
+              <Typography key={key} variant="subtitle1" sx={{ textAlign: 'center' }}>
+                {content}
+              </Typography>
+            );
           } else if (part.type === ContentType.subdate) {
-            return <h3 style={{ textAlign: 'center' }}>{content}</h3>;
+            return (
+              <Typography
+                key={key}
+                variant="subtitle1"
+                sx={{ textAlign: 'center' }}
+              >
+                {content}
+              </Typography>
+            );
           } else if (part.type === ContentType.paragraph) {
-            return <p style={{ textIndent: '2em', margin: 3 }}>{content}</p>;
+            return (
+              <Typography key={key} variant="body1" sx={{ textIndent: '2em', margin: 0.5 }}>
+                {content}
+              </Typography>
+            );
           }
         })}
       {comments
         .filter((i) => i.index !== -1)
         .sort((a, b) => (a.index > b.index ? 1 : -1))
         .map((i) => (
-          <p id={`comment${i.index}`} key={i.index}>
+          <Typography id={`comment${i.index}`} key={i.id} variant="body1">
             [{i.index}]{i.text}
-          </p>
+          </Typography>
         ))}
     </>
   );
@@ -207,8 +232,10 @@ export default function ArticleViewer() {
       sx={{
         flex: 1,
         height: '100%',
+        p: 2,
         overflowY: compareType === CompareType.none ? 'none' : 'scroll',
       }}
+      key="version_a"
     >
       <ArticleComponent
         article={article}
@@ -219,7 +246,7 @@ export default function ArticleViewer() {
   ];
   if (compareType === CompareType.origin) {
     compare_elements.push(
-      <Stack sx={{ flex: 1, height: '100%', overflowY: 'scroll' }}>
+      <Stack key="origin" sx={{ flex: 1, height: '100%', overflowY: 'scroll' }}>
         <Typography variant="subtitle1">
           来源文件(页码{publication.pages[0]!.start}-{publication.pages[0]!.end}
           )：
@@ -227,7 +254,7 @@ export default function ArticleViewer() {
         <Document
           file={publication.pdf}
           options={{
-            cMapUrl: `/static/pdfjs-dist/cmaps/`,
+            cMapUrl: `/pdfjs-dist/cmaps/`,
             cMapPacked: true,
           }}
         >
@@ -243,7 +270,7 @@ export default function ArticleViewer() {
     );
   } else if (compareType === CompareType.version) {
     compare_elements.push(
-      <Stack sx={{ flex: 1, height: '100%' }}>
+      <Stack key="version_b" sx={{ flex: 1, height: '100%' }}>
         <Select
           size="small"
           value={comparePublication}
@@ -253,10 +280,10 @@ export default function ArticleViewer() {
           }}
         >
           {article.publications.map((i) => (
-            <MenuItem value={i.id}>{i.name}</MenuItem>
+            <MenuItem key={i.id} value={i.id}>{i.name}</MenuItem>
           ))}
         </Select>
-        <Stack sx={{ height: '100%', overflowY: 'scroll' }}>
+        <Stack sx={{ height: '100%', overflowY: 'scroll', p: 1 }}>
           <ArticleComponent
             article={article}
             comments={compareArticleDetails!.comments}
@@ -264,7 +291,7 @@ export default function ArticleViewer() {
           />
         </Stack>
       </Stack>,
-      <Stack sx={{ flex: 1, height: '100%', overflowY: 'scroll' }}>
+      <Stack key="result" sx={{ flex: 1, height: '100%', overflowY: 'scroll' }}>
         {article_diff!.map((i) => (
           <p key={i.id}>
             {i.line_diffs.map((j) => (
