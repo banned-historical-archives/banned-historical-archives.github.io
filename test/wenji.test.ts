@@ -99,7 +99,7 @@ describe('wenji5', async () => {
   });
 });
 
-describe.only('wenji6', async () => {
+describe('wenji6', async () => {
   const book = books.find((i) => i.entity.id === 'wenji6')!;
   const res = await book.parser(book.path, book.parser_option);
   it('title & dates', () => {
