@@ -1,8 +1,9 @@
 import Stack from '@mui/material/Stack';
 import loadable from '@loadable/component';
+import Loading from '../components/Loading';
 
 const LoadableComponent = loadable(() => import('../components/ArticleList'), {
-  fallback: <></>
+  fallback: <Loading/>
 });
 
 export default function Articles() {

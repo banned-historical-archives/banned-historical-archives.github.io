@@ -114,6 +114,7 @@ describe('wenji6', async () => {
   });
   it('alignment', () => {
     expect(res.filter((i) => i.title === '青年团的工作要照顾青年的特点')).toMatchSnapshot();
+    expect(res.filter((i) => i.title === '关于中华人民共和国宪法草案')).toMatchSnapshot();
   });
 });
 
@@ -130,6 +131,9 @@ describe('wenji7', async () => {
   it('comments & pivots', () => {
     expect(n_comments_equals_n_pivots(res)).toBe(true);
   });
+  it('alignment', () => {
+    expect(res.filter((i) => i.title === '关于国际形势问题')).toMatchSnapshot();
+  });
 });
 
 describe('wenji8', async () => {
@@ -144,5 +148,8 @@ describe('wenji8', async () => {
   });
   it('comments & pivots', () => {
     expect(n_comments_equals_n_pivots(res)).toBe(true);
+  });
+  it('alignment', () => {
+    expect(res.filter((i) => i.title === '大兴调查研究之风')).toMatchSnapshot();
   });
 });

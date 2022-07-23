@@ -17,6 +17,7 @@ import * as Diff from 'diff';
 import type Content from '../../backend/entity/content';
 import type Article from '../../backend/entity/article';
 import type Comment from '../../backend/entity/comment';
+import Loading from './Loading';
 
 pdfjs.GlobalWorkerOptions.workerSrc = `/pdfjs-dist/legacy/build/pdf.worker.min.js`;
 
@@ -138,6 +139,12 @@ function ArticleComponent({
   );
 }
 
+function join_text(contents: { text: string }[]) {
+  let s = '';
+  contents.forEach((i) => (s += i.text));
+  return s;
+}
+
 type LineDiff = {
   id: string;
   removed?: boolean;
@@ -145,6 +152,10 @@ type LineDiff = {
   value: string;
 };
 type ArticleDiff = { line_diffs: LineDiff[]; id: string }[];
+enum CompareMode {
+  line = '逐行对比',
+  literal = '逐字对比',
+}
 export default function ArticleViewer() {
   const [article, setArticle] = useState<Article>();
   const [loading, setLoading] = useState(true);
@@ -152,6 +163,7 @@ export default function ArticleViewer() {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [compareType, setCompareType] = useState<CompareType>(CompareType.none);
   const [comparePublication, setComparePublication] = useState<string>();
+  const [compareMode, setCompareMode] = useState(CompareMode.line);
   const [selectedPublication, setSelectedPublication] = useState<string>();
 
   useEffect(() => {
@@ -163,33 +175,31 @@ export default function ArticleViewer() {
     })();
   }, []);
 
-  const showCompareMenu = !!anchorEl;
-
-  if (!article || !selectedPublication) {
-    return null;
-  }
-
-  const publication = article.publications.find(
-    (i) => i.id === selectedPublication,
-  )!;
-
-  const compareArticleDetails: { comments: Comment[]; contents: Content[] } = {
-    comments: [],
-    contents: [],
-  };
-  if (comparePublication) {
-    const x = article.publications.find((i) => i.id === comparePublication)!;
-    compareArticleDetails!.contents = x.contents;
-    compareArticleDetails!.comments = x.comments;
-  }
-  const { contents, comments } = publication;
-  const article_diff: ArticleDiff | undefined = (() => {
-    if (compareType !== CompareType.version) return;
+  const article_diff: ArticleDiff | undefined = useMemo(() => {
+    if (compareType !== CompareType.version || !article) return;
     let i = 0;
-    const contents_a = contents.sort((a, b) => (a.index > b.index ? 1 : -1));
-    const contents_b = compareArticleDetails!.contents.sort((a, b) =>
-      a.index > b.index ? 1 : -1,
-    );
+
+    const { contents } = article.publications.find(
+      (i) => i.id === selectedPublication,
+    )!;
+    const comparePub = article.publications.find(
+      (i) => i.id === comparePublication,
+    )!;
+    let contents_a;
+    let contents_b;
+    if (compareMode === CompareMode.line) {
+      contents_a = contents.sort((a, b) => (a.index > b.index ? 1 : -1));
+      contents_b = comparePub!.contents.sort((a, b) =>
+        a.index > b.index ? 1 : -1,
+      );
+    } else {
+      contents_a = [{ text: join_text(contents) }];
+      contents_b = [
+        {
+          text: join_text(comparePub!.contents),
+        },
+      ];
+    }
     const a_diff: ArticleDiff = [];
     while (i < contents_a.length && i < contents_b.length) {
       const line_diffs: LineDiff[] = [];
@@ -225,13 +235,40 @@ export default function ArticleViewer() {
       }
     }
     return a_diff;
-  })();
+  }, [
+    compareType,
+    compareMode,
+    comparePublication,
+    selectedPublication,
+    article,
+  ]);
+
+  if (!article || !selectedPublication) {
+    return <Loading/>;
+  }
+
+  const showCompareMenu = !!anchorEl;
+
+  const publication = article.publications.find(
+    (i) => i.id === selectedPublication,
+  )!;
+
+  const compareArticleDetails: { comments: Comment[]; contents: Content[] } = {
+    comments: [],
+    contents: [],
+  };
+  if (comparePublication) {
+    const x = article.publications.find((i) => i.id === comparePublication)!;
+    compareArticleDetails!.contents = x.contents;
+    compareArticleDetails!.comments = x.comments;
+  }
+  const { contents, comments } = publication;
 
   const compare_elements: ReactElement[] = [
     <Stack
       sx={{
         flex: 1,
-        p: 2,
+        overflowY: compareType === CompareType.none ? 'none' : 'scroll',
       }}
       key="version_a"
     >
@@ -278,7 +315,9 @@ export default function ArticleViewer() {
           }}
         >
           {article.publications.map((i) => (
-            <MenuItem key={i.id} value={i.id}>{i.name}</MenuItem>
+            <MenuItem key={i.id} value={i.id}>
+              {i.name}
+            </MenuItem>
           ))}
         </Select>
         <Stack sx={{ overflowY: 'scroll', p: 1 }}>
@@ -289,21 +328,38 @@ export default function ArticleViewer() {
           />
         </Stack>
       </Stack>,
-      <Stack key="result" sx={{ flex: 1, overflowY: 'scroll' }}>
-        {article_diff!.map((i) => (
-          <p key={i.id}>
-            {i.line_diffs.map((j) => (
-              <span
-                key={j.id}
-                style={{
-                  color: j.added ? 'green' : j.removed ? 'red' : 'auto',
-                }}
-              >
-                {j.value}
-              </span>
-            ))}
-          </p>
-        ))}
+      <Stack key="result" sx={{ flex: 1 }}>
+        <Select
+          size="small"
+          value={compareMode}
+          label="对比模式"
+          onChange={(e) => {
+            setCompareMode(e.target.value as CompareMode);
+          }}
+        >
+          <MenuItem value={CompareMode.line}>
+            {CompareMode.line}
+          </MenuItem>
+          <MenuItem value={CompareMode.literal}>
+            {CompareMode.literal}
+          </MenuItem>
+        </Select>
+        <Stack sx={{ overflowY: 'scroll' }}>
+          {article_diff ? article_diff!.map((i) => (
+            <p key={i.id}>
+              {i.line_diffs.map((j) => (
+                <span
+                  key={j.id}
+                  style={{
+                    color: j.added ? 'green' : j.removed ? 'red' : 'auto',
+                  }}
+                >
+                  {j.value}
+                </span>
+              ))}
+            </p>
+          )) : null}
+        </Stack>
       </Stack>,
     );
   }
@@ -319,6 +375,7 @@ export default function ArticleViewer() {
         left: 0,
       }}
       p={2}
+      pb={0}
       spacing={1}
     >
       <Stack direction="row">
