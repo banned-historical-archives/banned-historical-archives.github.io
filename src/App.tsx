@@ -62,7 +62,6 @@ export default function App() {
               variant="h6"
               noWrap
               component="a"
-              href="/"
               sx={{
                 ml: 1,
                 mr: 2,
@@ -70,7 +69,9 @@ export default function App() {
                 letterSpacing: '.3rem',
                 color: 'inherit',
                 textDecoration: 'none',
+                cursor: 'pointer',
               }}
+              onClick={() => navigate('/', { replace: true })}
             >
               和谐历史档案馆
             </Typography>
