@@ -12,9 +12,10 @@ import Music from './pages/Music';
 import Articles from './pages/Articles';
 
 import loadable from '@loadable/component';
+import Loading from './components/Loading';
 
 const LoadableArticle = loadable(() => import('./components/Article'), {
-  fallback: <></>
+  fallback: <Loading/>
 });
 
 const routes = [

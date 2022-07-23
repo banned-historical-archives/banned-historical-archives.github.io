@@ -21,6 +21,7 @@ import Stack from '@mui/material/Stack';
 import SettingsIcon from '@mui/icons-material/Settings';
 import { ArticleType } from '../../types';
 import Typography from '@mui/material/Typography';
+import Loading from './Loading';
 
 function ensure_two_digits(a?: number) {
   if (!a && a!== 0) {
@@ -229,6 +230,7 @@ export default function Articles() {
   }, []);
   return (
     <>
+      {loading ? <Loading /> : null}
       <Dialog
         onClose={() => setDateFilterDialog((s) => ({ ...s, show: false }))}
         open={dateFilterDialog.show}
@@ -356,8 +358,13 @@ export default function Articles() {
           </Button>
         </DialogActions>
       </Dialog>
-      <Stack p={2} spacing={2} sx={{ position: 'relative', flex: 1 }} direction="column">
-        <Outlet/>
+      <Stack
+        p={2}
+        spacing={2}
+        sx={{ position: 'relative', flex: 1 }}
+        direction="column"
+      >
+        <Outlet />
         <Stack direction="row">
           <Stack>时间范围：</Stack>
           <Stack direction="row" spacing={1}>

@@ -17,6 +17,7 @@ import * as Diff from 'diff';
 import type Content from '../../backend/entity/content';
 import type Article from '../../backend/entity/article';
 import type Comment from '../../backend/entity/comment';
+import Loading from './Loading';
 
 pdfjs.GlobalWorkerOptions.workerSrc = `/pdfjs-dist/legacy/build/pdf.worker.min.js`;
 
@@ -138,6 +139,12 @@ function ArticleComponent({
   );
 }
 
+function join_text(contents: { text: string }[]) {
+  let s = '';
+  contents.forEach((i) => (s += i.text));
+  return s;
+}
+
 type LineDiff = {
   id: string;
   removed?: boolean;
@@ -168,43 +175,31 @@ export default function ArticleViewer() {
     })();
   }, []);
 
-  const showCompareMenu = !!anchorEl;
-
-  if (!article || !selectedPublication) {
-    return null;
-  }
-
-  const publication = article.publications.find(
-    (i) => i.id === selectedPublication,
-  )!;
-
-  const compareArticleDetails: { comments: Comment[]; contents: Content[] } = {
-    comments: [],
-    contents: [],
-  };
-  if (comparePublication) {
-    const x = article.publications.find((i) => i.id === comparePublication)!;
-    compareArticleDetails!.contents = x.contents;
-    compareArticleDetails!.comments = x.comments;
-  }
-  const { contents, comments } = publication;
-  const article_diff: ArticleDiff | undefined = (() => {
-    if (compareType !== CompareType.version) return;
+  const article_diff: ArticleDiff | undefined = useMemo(() => {
+    if (compareType !== CompareType.version || !article) return;
     let i = 0;
-    const contents_a =
-      compareMode === CompareMode.line
-        ? contents.sort((a, b) => (a.index > b.index ? 1 : -1))
-        : [{ text: contents.map((i) => i.text).join('') }];
-    const contents_b =
-      compareMode === CompareMode.line
-        ? compareArticleDetails!.contents.sort((a, b) =>
-            a.index > b.index ? 1 : -1,
-          )
-        : [
-            {
-              text: compareArticleDetails!.contents.map((i) => i.text).join(''),
-            },
-          ];
+
+    const { contents } = article.publications.find(
+      (i) => i.id === selectedPublication,
+    )!;
+    const comparePub = article.publications.find(
+      (i) => i.id === comparePublication,
+    )!;
+    let contents_a;
+    let contents_b;
+    if (compareMode === CompareMode.line) {
+      contents_a = contents.sort((a, b) => (a.index > b.index ? 1 : -1));
+      contents_b = comparePub!.contents.sort((a, b) =>
+        a.index > b.index ? 1 : -1,
+      );
+    } else {
+      contents_a = [{ text: join_text(contents) }];
+      contents_b = [
+        {
+          text: join_text(comparePub!.contents),
+        },
+      ];
+    }
     const a_diff: ArticleDiff = [];
     while (i < contents_a.length && i < contents_b.length) {
       const line_diffs: LineDiff[] = [];
@@ -240,7 +235,34 @@ export default function ArticleViewer() {
       }
     }
     return a_diff;
-  })();
+  }, [
+    compareType,
+    compareMode,
+    comparePublication,
+    selectedPublication,
+    article,
+  ]);
+
+  if (!article || !selectedPublication) {
+    return <Loading/>;
+  }
+
+  const showCompareMenu = !!anchorEl;
+
+  const publication = article.publications.find(
+    (i) => i.id === selectedPublication,
+  )!;
+
+  const compareArticleDetails: { comments: Comment[]; contents: Content[] } = {
+    comments: [],
+    contents: [],
+  };
+  if (comparePublication) {
+    const x = article.publications.find((i) => i.id === comparePublication)!;
+    compareArticleDetails!.contents = x.contents;
+    compareArticleDetails!.comments = x.comments;
+  }
+  const { contents, comments } = publication;
 
   const compare_elements: ReactElement[] = [
     <Stack
@@ -323,7 +345,7 @@ export default function ArticleViewer() {
           </MenuItem>
         </Select>
         <Stack sx={{ overflowY: 'scroll' }}>
-          {article_diff!.map((i) => (
+          {article_diff ? article_diff!.map((i) => (
             <p key={i.id}>
               {i.line_diffs.map((j) => (
                 <span
@@ -336,7 +358,7 @@ export default function ArticleViewer() {
                 </span>
               ))}
             </p>
-          ))}
+          )) : null}
         </Stack>
       </Stack>,
     );
