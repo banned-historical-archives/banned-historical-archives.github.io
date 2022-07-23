@@ -231,9 +231,7 @@ export default function ArticleViewer() {
     <Stack
       sx={{
         flex: 1,
-        height: '100%',
         p: 2,
-        overflowY: compareType === CompareType.none ? 'none' : 'scroll',
       }}
       key="version_a"
     >
@@ -246,7 +244,7 @@ export default function ArticleViewer() {
   ];
   if (compareType === CompareType.origin) {
     compare_elements.push(
-      <Stack key="origin" sx={{ flex: 1, height: '100%', overflowY: 'scroll' }}>
+      <Stack key="origin" sx={{ flex: 1, overflowY: 'scroll' }}>
         <Typography variant="subtitle1">
           来源文件(页码{publication.pages[0]!.start}-{publication.pages[0]!.end}
           )：
@@ -270,7 +268,7 @@ export default function ArticleViewer() {
     );
   } else if (compareType === CompareType.version) {
     compare_elements.push(
-      <Stack key="version_b" sx={{ flex: 1, height: '100%' }}>
+      <Stack key="version_b" sx={{ flex: 1 }}>
         <Select
           size="small"
           value={comparePublication}
@@ -283,7 +281,7 @@ export default function ArticleViewer() {
             <MenuItem key={i.id} value={i.id}>{i.name}</MenuItem>
           ))}
         </Select>
-        <Stack sx={{ height: '100%', overflowY: 'scroll', p: 1 }}>
+        <Stack sx={{ overflowY: 'scroll', p: 1 }}>
           <ArticleComponent
             article={article}
             comments={compareArticleDetails!.comments}
@@ -291,7 +289,7 @@ export default function ArticleViewer() {
           />
         </Stack>
       </Stack>,
-      <Stack key="result" sx={{ flex: 1, height: '100%', overflowY: 'scroll' }}>
+      <Stack key="result" sx={{ flex: 1, overflowY: 'scroll' }}>
         {article_diff!.map((i) => (
           <p key={i.id}>
             {i.line_diffs.map((j) => (
@@ -313,6 +311,7 @@ export default function ArticleViewer() {
     <Stack
       sx={{
         height: '100%',
+        boxSizing: 'border-box',
         background: 'white',
         position: 'absolute',
         zIndex: 1,
@@ -320,6 +319,7 @@ export default function ArticleViewer() {
         left: 0,
       }}
       p={2}
+      spacing={1}
     >
       <Stack direction="row">
         <Stack>选择来源：</Stack>
@@ -341,6 +341,7 @@ export default function ArticleViewer() {
           variant="outlined"
           aria-controls={showCompareMenu ? 'basic-menu' : undefined}
           aria-haspopup="true"
+          size="small"
           aria-expanded={showCompareMenu ? 'true' : undefined}
           onClick={(event) => setAnchorEl(event.currentTarget)}
         >
@@ -384,7 +385,7 @@ export default function ArticleViewer() {
         direction="row"
         divider={<Divider orientation="vertical" flexItem />}
         spacing={2}
-        style={{ height: window.innerHeight }}
+        style={{ flex: 1, overflow: 'auto' }}
       >
         {compare_elements}
       </Stack>

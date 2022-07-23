@@ -1,41 +1,39 @@
 import { Link, Route, Routes, useNavigate } from 'react-router-dom'
 import BlockIcon from '@mui/icons-material/Block';
-import ArticleComponent from './components/Article';
 import Stack from '@mui/material/Stack';
 import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import Menu from '@mui/material/Menu';
 import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
-import MenuItem from '@mui/material/MenuItem';
+import MenuBookIcon from '@mui/icons-material/MenuBook';
+import Home from './pages/Home';
+import Music from './pages/Music';
+import Articles from './pages/Articles';
 
-const pages = import.meta.globEager('./pages/*.tsx')
+import loadable from '@loadable/component';
 
-const routes = Object.keys(pages).sort((a, b) => /Home.tsx$/.test(a) ? -1 : 1).map((path) => {
-  const name = path.match(/\.\/pages\/(.*)\.tsx$/)![1]
-  return {
-    name:
-      name === 'Home'
-        ? '首页'
-        : name === 'Articles'
-        ? '文稿'
-        : name === 'Music'
-        ? '音乐'
-        : name,
-    path:
-      name === 'Home'
-        ? '/'
-        : name === 'Article'
-        ? `/${name.toLowerCase()}/:id`
-        : `/${name.toLowerCase()}`,
-    component: pages[path].default,
-  };
-})
+const LoadableArticle = loadable(() => import('./components/Article'), {
+  fallback: <></>
+});
+
+const routes = [
+  {
+    name: '首页',
+    path: '/',
+    component: Home,
+  },
+  {
+    name: '文稿',
+    path: '/articles',
+    component: Articles,
+  },
+  {
+    name: '音乐',
+    path: '/music',
+    component: Music,
+  },
+];
 
 export default function App() {
   const navigate = useNavigate();
@@ -47,13 +45,26 @@ export default function App() {
       <AppBar position="static">
         <Container maxWidth="xl">
           <Toolbar disableGutters>
-            <BlockIcon sx={{ mr: 1 }} />
+            <div style={{ position: 'relative' }}>
+              <BlockIcon
+                sx={{
+                  width: 20,
+                  position: 'absolute',
+
+                  bottom: '50%',
+                  left: '50%',
+                  transform: 'translateX(-50%)',
+                }}
+              />
+              <MenuBookIcon />
+            </div>
             <Typography
               variant="h6"
               noWrap
               component="a"
               href="/"
               sx={{
+                ml: 1,
                 mr: 2,
                 fontWeight: 700,
                 letterSpacing: '.3rem',
@@ -85,7 +96,7 @@ export default function App() {
           if (path == '/articles') {
             return (
               <Route key={path} path={path} element={<RouteComp />}>
-                <Route path=":id" element={<ArticleComponent />} />
+                <Route path=":id" element={<LoadableArticle />} />
               </Route>
             );
           }

@@ -5,7 +5,7 @@ import Stack from '@mui/material/Stack';
 
 export default function About() {
   return (
-    <Stack p={2}>
+    <Stack p={2} sx={{overflow: 'scroll'}}>
       <ReactMarkdown
         children={txt}
         remarkPlugins={[remarkGfm]}

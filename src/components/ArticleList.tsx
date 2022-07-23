@@ -22,8 +22,6 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import { ArticleType } from '../../types';
 import Typography from '@mui/material/Typography';
 
-import ArticleViewer from './Article';
-
 function ensure_two_digits(a?: number) {
   if (!a && a!== 0) {
     return '';
