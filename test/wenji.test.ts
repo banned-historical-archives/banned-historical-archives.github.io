@@ -130,6 +130,9 @@ describe('wenji7', async () => {
   it('comments & pivots', () => {
     expect(n_comments_equals_n_pivots(res)).toBe(true);
   });
+  it('alignment', () => {
+    expect(res.filter((i) => i.title === '关于国际形势问题')).toMatchSnapshot();
+  });
 });
 
 describe('wenji8', async () => {
