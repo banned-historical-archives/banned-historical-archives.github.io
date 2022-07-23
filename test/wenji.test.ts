@@ -148,4 +148,7 @@ describe('wenji8', async () => {
   it('comments & pivots', () => {
     expect(n_comments_equals_n_pivots(res)).toBe(true);
   });
+  it('alignment', () => {
+    expect(res.filter((i) => i.title === '大兴调查研究之风')).toMatchSnapshot();
+  });
 });
