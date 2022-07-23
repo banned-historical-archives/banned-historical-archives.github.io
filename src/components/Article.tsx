@@ -319,6 +319,7 @@ export default function ArticleViewer() {
         top: 0,
         left: 0,
       }}
+      p={2}
     >
       <Stack direction="row">
         <Stack>选择来源：</Stack>
