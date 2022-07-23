@@ -200,9 +200,7 @@ export default function Articles() {
   const [loading, setLoading] = useState(true);
   const [dateFilter, setDateFilter] =
     useState<DateFilter>(default_date_filter);
-  const [typeFilters, setTypeFilters] = useState<ArticleType[]>([
-    ArticleType.writings,
-  ]);
+  const [typeFilters, setTypeFilters] = useState<ArticleType[]>([]);
   const [dateFilterDialog, setDateFilterDialog] = useState<
     {
       show: boolean;
@@ -360,7 +358,7 @@ export default function Articles() {
           </Button>
         </DialogActions>
       </Dialog>
-      <Stack spacing={1} sx={{ position: 'relative', flex: 1 }} direction="column">
+      <Stack p={2} spacing={2} sx={{ position: 'relative', flex: 1 }} direction="column">
         <Outlet/>
         <Stack direction="row">
           <Stack>时间范围：</Stack>

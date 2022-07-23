@@ -28,8 +28,8 @@ export const AppDataSource = new DataSource({
   migrations: [],
   subscribers: [],
   host: process.env.GITLAB_CI ? 'mysql' : 'localhost',
-  port: 3306,
-  username: 'root',
-  password: 'root_password',
-  database: 'banned_history',
+  port: parseInt(process.env.DB_PORT || '3306'),
+  username: process.env.DB_USER || 'root',
+  password: process.env.DB_PASSWORD || 'root_password',
+  database: process.env.DB_NAME || 'banned_history',
 });
