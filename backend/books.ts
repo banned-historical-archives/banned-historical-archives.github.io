@@ -196,7 +196,7 @@ const books: Book[] = [
     parser_option: {
       page_limits: [[15, 527]],
       page_width: 449.5,
-      content_min_x: 77.28,
+      content_min_x: 72.28,
     },
     parser: wenji_parser.parse,
     path: join(__dirname, '../public/books/wenji6.pdf'),
