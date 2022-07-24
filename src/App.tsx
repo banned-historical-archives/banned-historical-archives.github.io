@@ -51,7 +51,6 @@ export default function App() {
                 sx={{
                   width: 20,
                   position: 'absolute',
-
                   bottom: '50%',
                   left: '50%',
                   transform: 'translateX(-50%)',

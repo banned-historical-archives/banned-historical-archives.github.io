@@ -194,12 +194,14 @@ const default_date_filter = {
   day_a: 1,
   day_b: 31,
 };
+const authors = ['毛泽东', '江青', '王洪文', '张春桥', '姚文元'];
 export default function Articles() {
   const [articles, setArticles] = useState<Article[]>([]);
   const [loading, setLoading] = useState(true);
   const [dateFilter, setDateFilter] =
     useState<DateFilter>(default_date_filter);
   const [typeFilters, setTypeFilters] = useState<ArticleType[]>([]);
+  const [authorFilters, setAuthorFilters] = useState<string[]>([]);
   const [dateFilterDialog, setDateFilterDialog] = useState<
     {
       show: boolean;
@@ -213,6 +215,14 @@ export default function Articles() {
     return articles
       .filter((i) => date_include(i, dateFilter))
       .filter((i) =>
+        authorFilters.length
+          ? authorFilters.reduce<boolean>(
+              (m, j) => m || !!i.authors.find((k) => k.name === j),
+              false,
+            )
+          : true,
+      )
+      .filter((i) =>
         typeFilters.length
           ? typeFilters.reduce<boolean>(
               (m, j) => m || !!i.types.find((k) => k.type === j),
@@ -220,7 +230,7 @@ export default function Articles() {
             )
           : true,
       );
-  }, [articles, dateFilter, typeFilters]);
+  }, [articles, dateFilter, typeFilters, authorFilters]);
 
   useEffect(() => {
     (async () => {
@@ -413,6 +423,34 @@ export default function Articles() {
                       return;
                     }
                     setTypeFilters((f) => [...f, ArticleType[i]]);
+                  }}
+                />
+              );
+            })}
+          </Stack>
+        </Stack>
+        <Stack direction="row">
+          <Stack>作者：</Stack>
+          <Stack direction="row" spacing={1}>
+            {authors.map((i) => {
+              const found = authorFilters.find((j) => j === i);
+              return (
+                <Chip
+                  key={i}
+                  label={i}
+                  variant={found ? 'filled' : 'outlined'}
+                  color={found ? 'primary' : 'default'}
+                  onDelete={
+                    found
+                      ? () => setAuthorFilters((f) => f.filter((j) => j !== i))
+                      : undefined
+                  }
+                  onClick={(e) => {
+                    if (found) {
+                      setAuthorFilters((f) => f.filter((j) => j !== i));
+                      return;
+                    }
+                    setAuthorFilters((f) => [...f, i]);
                   }}
                 />
               );

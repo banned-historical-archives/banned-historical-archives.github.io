@@ -3,6 +3,7 @@ import {Book, ParserOption} from '../types';
 import * as jinghuo_parser from './parser/jinghuo_parser';
 import * as wansui_parser from './parser/wansui_parser';
 import * as wenji_parser from './parser/wenji_parser';
+import * as jqjianghua_parser from './parser/jqjianghua_parser';
 
 const books: Book[] = [
   {
@@ -234,6 +235,21 @@ const books: Book[] = [
     },
     parser: wenji_parser.parse,
     path: join(__dirname, '../public/books/wenji8.pdf'),
+  },
+  {
+    entity: {
+      id: 'jqjianghua',
+      name: '江青十年讲话汇编',
+      internal: false,
+      official: false,
+      author: '',
+      pdf: '/books/jqjianghua.pdf',
+    },
+    parser_option: {
+      page_limits: [[7, 730], [736, 752]],
+    },
+    parser: jqjianghua_parser.parse,
+    path: join(__dirname, '../public/books/jqjianghua.pdf'),
   },
 ];
 export default books;
