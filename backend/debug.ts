@@ -1,9 +1,9 @@
 import books from './books';
-import { AppDataSource } from './data-source';
-import { join } from 'path';
-import ocr from './ocr';
-import lac from './lac';
-import { LACResult } from '../types';
+// import { AppDataSource } from './data-source';
+// import { join } from 'path';
+// import ocr from './ocr';
+// import lac from './lac';
+// import { LACResult } from '../types';
 
 (async () => {
   // const r = await ocr(join(__dirname, '../public/x.png'));
@@ -31,7 +31,7 @@ import { LACResult } from '../types';
       .sort((a, b) => (a.count < b.count ? 1 : -1)),
   );
   */
-  const book = books.find(i => i.entity.id === 'wenji5');
+  const book = books.find(i => i.entity.id === 'jqjianghua');
   const res = await book.parser(book.path, book.parser_option);
   /*
   const lac_res: LACResult[][] = [];

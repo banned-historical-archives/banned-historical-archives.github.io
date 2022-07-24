@@ -1,6 +1,7 @@
 import type Publication from '../backend/entity/publication';
 
 export enum ContentType {
+  authors = 'authors',
   appellation = 'appellation',
   title = 'title',
   subtitle = 'subtitle',
