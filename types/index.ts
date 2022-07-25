@@ -108,6 +108,7 @@ export type ParserOption = {
   page_width?: number;
   content_min_x?: number;
   name?: string;
+  header_min_height?: number;
 };
 
 export type Book = {

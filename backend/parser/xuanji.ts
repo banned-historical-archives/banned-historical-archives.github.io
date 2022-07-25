@@ -19,7 +19,7 @@ const opt = {
   page_header_min_y: 630,
   noramal_char_width: 9,
   main_title_min_height: 14,
-  main_title_max_height: 20,
+  main_title_max_height: 30,
   header_min_height: 12,
   title_threshold: 20,
   align_center_threshold: 20,
@@ -182,6 +182,29 @@ function fix_before_parsing(s: pdfjsLib.ContentObj[], start_page: number, name: 
       }
       p++;
     }
+  } else if (name === 'xuanji5') {
+    for (const i of s) {
+      i.items.forEach((j) => {
+        j.str = j.str
+          .replace(/\[/g, '〔')
+          .replace(/\]/g, '〕')
+          .replace(/［/g, '〔');
+      });
+      if (p === 230) {
+        i.items.forEach((j) => {
+          j.str = j.str.replace(/（/g, '〔').replace(/）/g, '〕');
+        });
+      } else if (p === 272) {
+        i.items.forEach((j) => {
+          j.str = j.str.replace(/（1）/g, '〔1〕').replace(/（2）/g, '〔2〕').replace(/（3）/g, '〔3〕');
+        });
+      } else if (p === 468) {
+        i.items.forEach((j) => {
+          j.str = j.str.replace(/〔1）/g, '〔1〕').replace(/〔2）/g, '〔2〕');
+        });
+      }
+      p++;
+    }
   }
   return s;
 }
@@ -208,8 +231,12 @@ type Line = {
 
 function is_title(line: Line) {
   return (
-    line.str !== '序' &&
-    line.str !== '跋' &&
+    line.str.replace(/ /g, '') !== '序' &&
+    line.str.replace(/ /g, '') !== '序言' &&
+    line.str.replace(/ /g, '') !== '序言一' &&
+    line.str.replace(/ /g, '') !== '序言二' &&
+    line.str.replace(/ /g, '') !== '按语（选辑）' &&
+    line.str.replace(/ /g, '') !== '跋' &&
     line.items[0].height > opt.main_title_min_height &&
     line.items[0].height < opt.main_title_max_height &&
     !/^（[一二三四五六七八九十]+）/.test(line.str) &&
@@ -332,6 +359,7 @@ function extract_parts(
         let j = i;
         let s = '';
         while (
+          lines[j] &&
           lines[j].items[0].height > opt.header_min_height &&
           !is_date(lines[j].str)
         ) {
@@ -532,6 +560,10 @@ export async function parse(
   pdfPath: string,
   parser_opt: ParserOption,
 ): Promise<ParserResult[]> {
+  if (parser_opt.header_min_height) {
+    opt.header_min_height = parser_opt.header_min_height;
+  }
+
   const doc = await pdfjsLib.getDocument({
     url: pdfPath,
     cMapPacked: true,

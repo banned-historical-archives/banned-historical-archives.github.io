@@ -316,5 +316,24 @@ const books: Book[] = [
     parser: xuanji_parser.parse,
     path: join(__dirname, '../public/books/毛泽东选集(1967)4.pdf'),
   },
+  {
+    entity: {
+      id: 'xuanji5',
+      name: '毛泽东选集第五卷(1977)',
+      internal: false,
+      official: true,
+      author: '毛泽东',
+      pdf: '/books/毛泽东选集(1977)5.pdf',
+    },
+    parser_option: {
+      page_limits: [[16, 513]],
+      page_width: 602,
+      content_min_x: 90,
+      header_min_height: 17,
+      name: 'xuanji5',
+    },
+    parser: xuanji_parser.parse,
+    path: join(__dirname, '../public/books/毛泽东选集(1977)5.pdf'),
+  },
 ];
 export default books;
