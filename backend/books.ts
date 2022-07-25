@@ -4,6 +4,7 @@ import * as jinghuo_parser from './parser/jinghuo_parser';
 import * as wansui_parser from './parser/wansui_parser';
 import * as wenji_parser from './parser/wenji_parser';
 import * as jqjianghua_parser from './parser/jqjianghua_parser';
+import * as xuanji_parser from './parser/xuanji';
 
 const books: Book[] = [
   {
@@ -250,6 +251,89 @@ const books: Book[] = [
     },
     parser: jqjianghua_parser.parse,
     path: join(__dirname, '../public/books/jqjianghua.pdf'),
+  },
+  {
+    entity: {
+      id: 'xuanji1',
+      name: '毛泽东选集第一卷(1967)',
+      internal: false,
+      official: true,
+      author: '毛泽东',
+      pdf: '/books/毛泽东选集(1967)1.pdf',
+    },
+    parser_option: {
+      page_limits: [[12, 321]],
+      name: 'xuanji1',
+    },
+    parser: xuanji_parser.parse,
+    path: join(__dirname, '../public/books/毛泽东选集(1967)1.pdf'),
+  },
+  {
+    entity: {
+      id: 'xuanji2',
+      name: '毛泽东选集第二卷(1967)',
+      internal: false,
+      official: true,
+      author: '毛泽东',
+      pdf: '/books/毛泽东选集(1967)2.pdf',
+    },
+    parser_option: {
+      page_limits: [[12, 441]],
+      name: 'xuanji2',
+    },
+    parser: xuanji_parser.parse,
+    path: join(__dirname, '../public/books/毛泽东选集(1967)2.pdf'),
+  },
+  {
+    entity: {
+      id: 'xuanji3',
+      name: '毛泽东选集第三卷(1967)',
+      internal: false,
+      official: true,
+      author: '毛泽东',
+      pdf: '/books/毛泽东选集(1967)3.pdf',
+    },
+    parser_option: {
+      page_limits: [[10, 329]],
+      name: 'xuanji3',
+    },
+    parser: xuanji_parser.parse,
+    path: join(__dirname, '../public/books/毛泽东选集(1967)3.pdf'),
+  },
+  {
+    entity: {
+      id: 'xuanji4',
+      name: '毛泽东选集第四卷(1967)',
+      internal: false,
+      official: true,
+      author: '毛泽东',
+      pdf: '/books/毛泽东选集(1967)4.pdf',
+    },
+    parser_option: {
+      page_limits: [[10, 395]],
+      name: 'xuanji4',
+    },
+    parser: xuanji_parser.parse,
+    path: join(__dirname, '../public/books/毛泽东选集(1967)4.pdf'),
+  },
+  {
+    entity: {
+      id: 'xuanji5',
+      name: '毛泽东选集第五卷(1977)',
+      internal: false,
+      official: true,
+      author: '毛泽东',
+      pdf: '/books/毛泽东选集(1977)5.pdf',
+    },
+    parser_option: {
+      page_limits: [[16, 513]],
+      page_width: 602,
+      content_min_x: 90,
+      header_min_height: 17,
+      name: 'xuanji5',
+    },
+    parser: xuanji_parser.parse,
+    path: join(__dirname, '../public/books/毛泽东选集(1977)5.pdf'),
   },
 ];
 export default books;
