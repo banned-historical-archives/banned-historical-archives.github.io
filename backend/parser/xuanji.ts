@@ -233,8 +233,11 @@ function is_title(line: Line) {
   return (
     line.str.replace(/ /g, '') !== '序' &&
     line.str.replace(/ /g, '') !== '序言' &&
+    line.str.replace(/ /g, '') !== '引言' &&
+    line.str.replace(/ /g, '') !== '结论' &&
     line.str.replace(/ /g, '') !== '序言一' &&
     line.str.replace(/ /g, '') !== '序言二' &&
+    line.str.replace(/ /g, '') !== '开幕词' &&
     line.str.replace(/ /g, '') !== '按语（选辑）' &&
     line.str.replace(/ /g, '') !== '跋' &&
     line.items[0].height > opt.main_title_min_height &&
@@ -758,6 +761,9 @@ export async function parse(
       const article = articles[i];
       if (!article.dates.length) {
         console.warn('日期丢失', article.title, article.page_start, article.page_end);
+      }
+      if (article.page_end == Infinity || article.page_start == Infinity) {
+        console.warn('页码丢失', article.title, article.page_start, article.page_end);
       }
       const temp: {[key:string]:boolean} = {};
       article.comment_pivots.forEach(j => {
