@@ -175,6 +175,13 @@ function fix_before_parsing(s: pdfjsLib.ContentObj[], start_page: number, name: 
       }
       p++;
     }
+  } else if (name === 'xuanji4') {
+    for (const i of s) {
+      if (p === 383) {
+        i.items.forEach((j) => (j.str = j.str.replace(/\(1\)/, '〔1〕')));
+      }
+      p++;
+    }
   }
   return s;
 }

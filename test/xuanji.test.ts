@@ -50,3 +50,15 @@ describe('xuanji3', async () => {
     expect(n_comments_equals_n_pivots(res)).toBe(true);
   });
 });
+
+describe('xuanji4', async () => {
+  const book = books.find((i) => i.entity.id === 'xuanji4')!;
+  const res = await book.parser(book.path, book.parser_option);
+  it('title & dates', () => {
+    expect(res.map((i) => i.title)).toMatchSnapshot();
+    expect(res.map((i) => i.dates)).toMatchSnapshot();
+  });
+  it('comments & pivots', () => {
+    expect(n_comments_equals_n_pivots(res)).toBe(true);
+  });
+});
