@@ -25,6 +25,9 @@ describe('xuanji1', async () => {
   it('comments & pivots', () => {
     expect(n_comments_equals_n_pivots(res)).toBe(true);
   });
+  it('alignment', () => {
+    expect(res[1]).toMatchSnapshot();
+  });
 });
 
 describe('xuanji2', async () => {

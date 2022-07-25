@@ -340,7 +340,7 @@ function extract_parts(
       }
     }
 
-    // if (str.indexOf('（三）平浏的农民') >= 0) debugger
+    // if (str.indexOf('*') >= 0) debugger
 
     if (str.startsWith('*') && title_has_star) {
       let j = i;
@@ -369,13 +369,13 @@ function extract_parts(
           s += lines[j].str;
           ++j;
         }
-        title_has_star = s.indexOf('*') >= 0;
         let temp = Array.from(s);
         for (const x of s.matchAll(/\(\d+\)/g)) {
           temp[x.index] = '〔';
           temp[x.index + x[0].length - 1] = '〕';
         }
         s = temp.join('');
+        title_has_star = is_date(lines[j].str) ? s.indexOf('*') >= 0 : title_has_star;
         parts.push([s, is_date(lines[j].str) ? ContentType.title : ContentType.subtitle, line.items[0]]);
         i = j - 1;
       } else {
@@ -416,29 +416,43 @@ function extract_parts(
       ]);
       continue;
     }
-    const prev_offset = last_one_is_comment ? 2 : 1;
+    let prev_offset = last_one_is_comment ? 2 : 1;
+    const prev_idx = parts[i-1][1] === ContentType.description ? i - 2 : i - 1;
+    const final_prev_idx =
+      final_parts[final_parts.length - 1] &&
+      final_parts[final_parts.length - 1][1] === ContentType.description
+        ? final_parts.length - 2
+        : final_parts.length - 1;
+
+        if (
+
+      final_parts[final_parts.length - 1] &&
+      final_parts[final_parts.length - 1][1] === ContentType.description
+        ){
+          // debugger
+        }
     // 段落碎片合并
     // 标题碎片合并
     // 角注向前合并
     if (/^〔\d+〕$/.test(parts[i][0])) {
-      final_parts[final_parts.length - 1][0] += parts[i][0];
+      final_parts[final_parts.length - prev_offset][0] += parts[i][0];
       continue;
     }
     if (
-      parts[i][1] == parts[i - prev_offset][1] &&
+      parts[i][1] == parts[prev_idx][1] &&
       (parts[i][1] == ContentType.paragraph
         ? parts[i][2].transform[4] < opt.content_min_x + opt.no_indent_threshold
         : true) &&
       (parts[i][1] == ContentType.subdate ? false : true)
     ) {
-      if (parts[i][0]) final_parts[final_parts.length - 1][0] += parts[i][0];
-      final_parts[final_parts.length - 1][3] = item_to_page.get(parts[i][2]);
+      if (parts[i][0]) final_parts[final_prev_idx][0] += parts[i][0];
+      final_parts[final_prev_idx][3] = item_to_page.get(parts[i][2]);
     } else if (
       parts[i][1] === ContentType.subtitle &&
       parts[i - prev_offset][1] === ContentType.title
     ) {
-      if (parts[i][0]) final_parts[final_parts.length - 1][0] += parts[i][0];
-      final_parts[final_parts.length - 1][3] = item_to_page.get(parts[i][2]);
+      if (parts[i][0]) final_parts[final_prev_idx][0] += parts[i][0];
+      final_parts[final_prev_idx][3] = item_to_page.get(parts[i][2]);
     } else {
       final_parts.push([
         parts[i][0],
@@ -772,6 +786,7 @@ export async function parse(
       if (Object.keys(temp).length !== article.comments.length) {
         console.warn('注释不匹配', article.title, article.page_start, article.page_end);
       }
+      article.parts = article.parts.filter(x => x.type !== ContentType.description);
     }
 
     // TODO origin
