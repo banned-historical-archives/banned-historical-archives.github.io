@@ -3,12 +3,7 @@ on: [push]
 
 jobs:
   container-job:
-    runs-on: ubuntu-latest
-
-    # runs all of the steps inside the specified container rather than on the VM host.
-    # Because of this the network configuration changes from host based network to a container network.
-    container:
-      image:  node:10.16-jessie
+    runs-on: node:latest
 
     services:
       mysql:
@@ -26,7 +21,7 @@ jobs:
         # use mysql for the host here because we have specified a container for the job.
         # If we were running the job on the VM this would be localhost
         MYSQL_HOST: mysql
-        MYSQL_PORT: ${{ job.services.mysql.ports[3306] }}
+        MYSQL_PORT: 3306
     - run: apt-get update -y -qq
     - run: apt-get install -y -qq --no-install-recommends default-mysql-client
     - run: mysql --user=root --password="root_password" --host=mysql --execute "CREATE DATABASE banned_history CHARACTER SET utf8 COLLATE utf8_general_ci;"
