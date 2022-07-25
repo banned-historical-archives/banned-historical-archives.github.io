@@ -164,6 +164,17 @@ function fix_before_parsing(s: pdfjsLib.ContentObj[], start_page: number, name: 
       }
       p++;
     }
+  } else if (name === 'xuanji3') {
+    for (const i of s) {
+      if (p === 25 || p === 327) {
+        i.items.forEach((j) => (j.str = j.str.replace(/\(1\)/, '〔1〕')));
+      } else if (p === 167) {
+        i.items[0].str = '';
+        i.items[3].str = '（一九四五年四月二十日）';
+        i.items[4].str = '';
+      }
+      p++;
+    }
   }
   return s;
 }
@@ -190,6 +201,8 @@ type Line = {
 
 function is_title(line: Line) {
   return (
+    line.str !== '序' &&
+    line.str !== '跋' &&
     line.items[0].height > opt.main_title_min_height &&
     line.items[0].height < opt.main_title_max_height &&
     !/^（[一二三四五六七八九十]+）/.test(line.str) &&
@@ -661,12 +674,19 @@ export async function parse(
         description = '';
         articles.push({
           title,
-          description,
+          description:
+            parser_opt.name === 'xuanji3' && title === '关于若干历史问题的决议'
+              ? '一九四五年四月二十日中国共产党第六届中央委员会扩大的第七次全体会议通过'
+              : '',
           dates: [],
           parts,
           comment_pivots: [...cur_pivots],
           is_range_date: false,
-          authors: ['毛泽东'],
+          authors: [
+            parser_opt.name === 'xuanji3' && title === '关于若干历史问题的决议'
+              ? '中央'
+              : '毛泽东',
+          ],
           comments: [],
           page_start: Infinity,
           page_end: Infinity,

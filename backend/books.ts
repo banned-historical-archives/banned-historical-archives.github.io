@@ -284,5 +284,21 @@ const books: Book[] = [
     parser: xuanji_parser.parse,
     path: join(__dirname, '../public/books/毛泽东选集(1967)2.pdf'),
   },
+  {
+    entity: {
+      id: 'xuanji3',
+      name: '毛泽东选集第三卷(1967)',
+      internal: false,
+      official: true,
+      author: '毛泽东',
+      pdf: '/books/毛泽东选集(1967)3.pdf',
+    },
+    parser_option: {
+      page_limits: [[10, 329]],
+      name: 'xuanji3',
+    },
+    parser: xuanji_parser.parse,
+    path: join(__dirname, '../public/books/毛泽东选集(1967)3.pdf'),
+  },
 ];
 export default books;
