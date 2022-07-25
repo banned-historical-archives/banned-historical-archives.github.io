@@ -4,6 +4,7 @@ import * as jinghuo_parser from './parser/jinghuo_parser';
 import * as wansui_parser from './parser/wansui_parser';
 import * as wenji_parser from './parser/wenji_parser';
 import * as jqjianghua_parser from './parser/jqjianghua_parser';
+import * as xuanji_parser from './parser/xuanji';
 
 const books: Book[] = [
   {
@@ -250,6 +251,22 @@ const books: Book[] = [
     },
     parser: jqjianghua_parser.parse,
     path: join(__dirname, '../public/books/jqjianghua.pdf'),
+  },
+  {
+    entity: {
+      id: 'xuanji1',
+      name: '毛泽东选集第一卷(1967)',
+      internal: false,
+      official: true,
+      author: '毛泽东',
+      pdf: '/books/毛泽东选集(1967)1.pdf',
+    },
+    parser_option: {
+      page_limits: [[12, 321]],
+      name: 'xuanji1',
+    },
+    parser: xuanji_parser.parse,
+    path: join(__dirname, '../public/books/毛泽东选集(1967)1.pdf'),
   },
 ];
 export default books;
