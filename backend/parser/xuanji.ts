@@ -136,8 +136,35 @@ function fix_before_parsing(s: pdfjsLib.ContentObj[], start_page: number, name: 
       }
       p++;
     }
+  } else if (name === 'xuanji2') {
+    for (const i of s) {
+      if (p === 40) {
+        i.items[36].str = i.items[36].str.replace('〔', '');
+        i.items[39].str =
+          '〔' + i.items[37].str + i.items[38].str + i.items[39].str;
+        i.items[37].str = '';
+        i.items[38].str = '';
+      } else if (p === 67) {
+        i.items[3].str = i.items[0].str + i.items[1].str + i.items[3].str;
+        i.items[0].str = '';
+        i.items[1].str = '';
+      } else if (p === 157) {
+        i.items.forEach((j) => (j.str = j.str.replace(/\(20\)/, '〔20〕')));
+      } else if (p === 315) {
+        i.items.forEach((j) => (j.str = j.str.replace(/\(1\)/, '〔1〕')));
+      } else if (p === 344) {
+        i.items.forEach((j) => (j.str = j.str.replace(/\(11\)/, '〔11〕')));
+      } else if (p === 419) {
+        i.items.forEach((j) => (j.str = j.str.replace(/\(2\)/, '〔2〕')));
+      } else if (p === 441) {
+        i.items[25].str = '';
+        i.items[26].str = '';
+        i.items[27].str = '';
+        i.items[29].str = '8';
+      }
+      p++;
+    }
   }
-
   return s;
 }
 
