@@ -1,6 +1,5 @@
 import { Entity, PrimaryColumn, Column, PrimaryGeneratedColumn, ManyToMany, ManyToOne } from 'typeorm';
-import Publication from './publication';
-import Article from './article';
+import { Publication, Article } from './index';
 
 @Entity()
 export default class Comment {

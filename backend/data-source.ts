@@ -10,7 +10,7 @@ import Date from './entity/date';
 import Type from './entity/type';
 import Page from './entity/page';
 
-export const AppDataSource = new DataSource({
+const instance = new DataSource({
   type: 'mysql',
   synchronize: true,
   logging: false,
@@ -33,3 +33,11 @@ export const AppDataSource = new DataSource({
   password: process.env.DB_PASSWORD || 'root_password',
   database: process.env.DB_NAME || 'banned_history',
 });
+
+export const init = async () => {
+  if (instance.isInitialized) {
+    return instance;
+  }
+  await instance.initialize();
+  return instance;
+};

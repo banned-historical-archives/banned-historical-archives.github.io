@@ -1,4 +1,5 @@
 import { useState, useEffect, ReactElement, useMemo } from 'react';
+import Head from 'next/head'
 
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import Menu from '@mui/material/Menu';
@@ -8,18 +9,96 @@ import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
-import { useParams } from 'react-router-dom';
-import * as service from '../service';
 import { ContentType } from '../../types';
 import { Document, Page, pdfjs  } from 'react-pdf';
+import Layout from '../../components/Layout';
 import * as Diff from 'diff';
 
-import type Content from '../../backend/entity/content';
-import type Article from '../../backend/entity/article';
-import type Comment from '../../backend/entity/comment';
-import Loading from './Loading';
+import Content from '../../backend/entity/content';
+import Article from '../../backend/entity/article';
+import Comment from '../../backend/entity/comment';
+import PageEntity from '../../backend/entity/page';
+import { GetStaticProps,GetServerSideProps, GetServerSidePropsContext, GetStaticPropsContext } from 'next'
+import { init } from "../../backend/data-source"
 
 pdfjs.GlobalWorkerOptions.workerSrc = `/pdfjs-dist/legacy/build/pdf.worker.min.js`;
+
+type PublicationDetails = {
+  [key: string]: {
+    comments: Comment[];
+    contents: Content[];
+    page: PageEntity;
+  };
+};
+export async function getStaticPaths() {
+  const AppDataSource = await init();
+  const articles = await AppDataSource.manager.find(Article, {
+    relations: {},
+  });
+  return {
+    paths: articles.map((i) => ({
+      params: {
+        id: i.id,
+      },
+    })),
+    fallback: false, // can also be true or 'blocking'
+  };
+}
+
+export const getStaticProps: GetStaticProps = async (
+  context: GetStaticPropsContext,
+) => {
+  const AppDataSource = await init();
+  const { id } = context.params as {
+    id: string
+  };
+  const articleId = id;
+  const article = await AppDataSource.manager.findOne(Article, {
+    where: {
+      id,
+    },
+    relations: {
+      authors: true,
+      types: true,
+      publications: true,
+      tags: true,
+      dates: true,
+    }
+  });
+  const publication_details: PublicationDetails = {};
+  for (const publication of article!.publications) {
+    const publicationId = publication.id!;
+    const comments = await AppDataSource.manager.find(Comment, {
+      where: {
+        publicationId,
+        articleId,
+      },
+    });
+    const contents = await AppDataSource.manager.find(Content, {
+      where: {
+        publicationId,
+        articleId,
+      },
+    });
+    const page = (await AppDataSource.manager.findOne(PageEntity, {
+      where: {
+        publicationId,
+        articleId,
+      },
+    }))!;
+    publication_details[publicationId] = {
+      comments,
+      contents,
+      page,
+    };
+  }
+  return {
+    props: {
+      article: JSON.parse(JSON.stringify(article)),
+      publication_details: JSON.parse(JSON.stringify(publication_details)),
+    },
+  };
+};
 
 enum CompareType {
   none = 'none',
@@ -70,7 +149,6 @@ function ArticleComponent({
               const p = text.substr(t, part_comment.offset - t);
               texts.push(p);
               t += p.length;
-              if (part.index === 3) console.log(p);
             }
             if (t < text.length) {
               texts.push(text.substr(t));
@@ -156,49 +234,23 @@ enum CompareMode {
   line = '逐行对比',
   literal = '逐字对比',
 }
-export default function ArticleViewer() {
-  const [article, setArticle] = useState<Article>();
-  const [loading, setLoading] = useState(true);
-  const { id } = useParams();
+export default function ArticleViewer({ article, publication_details }: { article: Article, publication_details: PublicationDetails }) {
+  const id = article.id;
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [compareType, setCompareType] = useState<CompareType>(CompareType.none);
-  const [comparePublication, setComparePublication] = useState<string>();
+  const [comparePublication, setComparePublication] = useState<string>(article.publications[article.publications.length - 1].id);
   const [compareMode, setCompareMode] = useState(CompareMode.line);
-  const [selectedPublication, setSelectedPublication] = useState<string>();
-
-  useEffect(() => {
-    (async () => {
-      const a = await service.get_article(id!);
-      setArticle(a);
-      setSelectedPublication(a.publications[0].id);
-      setLoading(false);
-    })();
-  }, []);
+  const [selectedPublication, setSelectedPublication] = useState<string>(article.publications[0].id);
 
   const article_diff: ArticleDiff | undefined = useMemo(() => {
     if (compareType !== CompareType.version || !article) return;
     let i = 0;
 
-    const { contents } = article.publications.find(
-      (i) => i.id === selectedPublication,
-    )!;
-    const comparePub = article.publications.find(
-      (i) => i.id === comparePublication,
-    )!;
-    let contents_a;
-    let contents_b;
-    if (compareMode === CompareMode.line) {
-      contents_a = contents.sort((a, b) => (a.index > b.index ? 1 : -1));
-      contents_b = comparePub!.contents.sort((a, b) =>
-        a.index > b.index ? 1 : -1,
-      );
-    } else {
-      contents_a = [{ text: join_text(contents) }];
-      contents_b = [
-        {
-          text: join_text(comparePub!.contents),
-        },
-      ];
+    let contents_a: {text: string}[] = publication_details[selectedPublication].contents.sort((a, b) => (a.index > b.index ? 1 : -1));
+    let contents_b: {text: string}[] = publication_details[comparePublication!].contents.sort((a, b) => (a.index > b.index ? 1 : -1));
+    if (compareMode === CompareMode.literal) {
+      contents_a = [{ text: join_text(contents_a) }];
+      contents_b = [{ text: join_text(contents_b) }];
     }
     const a_diff: ArticleDiff = [];
     while (i < contents_a.length && i < contents_b.length) {
@@ -238,14 +290,11 @@ export default function ArticleViewer() {
   }, [
     compareType,
     compareMode,
+    publication_details,
     comparePublication,
     selectedPublication,
     article,
   ]);
-
-  if (!article || !selectedPublication) {
-    return <Loading/>;
-  }
 
   const showCompareMenu = !!anchorEl;
 
@@ -253,16 +302,7 @@ export default function ArticleViewer() {
     (i) => i.id === selectedPublication,
   )!;
 
-  const compareArticleDetails: { comments: Comment[]; contents: Content[] } = {
-    comments: [],
-    contents: [],
-  };
-  if (comparePublication) {
-    const x = article.publications.find((i) => i.id === comparePublication)!;
-    compareArticleDetails!.contents = x.contents;
-    compareArticleDetails!.comments = x.comments;
-  }
-  const { contents, comments } = publication;
+  const { contents, comments } = publication_details[selectedPublication];
 
   const compare_elements: ReactElement[] = [
     <Stack
@@ -284,7 +324,10 @@ export default function ArticleViewer() {
       <Stack key="origin" sx={{ flex: 1, overflowY: 'scroll' }}>
         <Typography variant="subtitle1">
           来源文件(页码{publication.pages[0]!.start}-{publication.pages[0]!.end}
-          )：
+          )
+          <a href={publication.pdf} target="__blank">
+            [下载]
+          </a>
         </Typography>
         <Document
           file={publication.pdf}
@@ -323,8 +366,8 @@ export default function ArticleViewer() {
         <Stack sx={{ overflowY: 'scroll', p: 1 }}>
           <ArticleComponent
             article={article}
-            comments={compareArticleDetails!.comments}
-            contents={compareArticleDetails!.contents}
+            comments={publication_details[comparePublication!]!.comments}
+            contents={publication_details[comparePublication!]!.contents}
           />
         </Stack>
       </Stack>,
@@ -337,115 +380,124 @@ export default function ArticleViewer() {
             setCompareMode(e.target.value as CompareMode);
           }}
         >
-          <MenuItem value={CompareMode.line}>
-            {CompareMode.line}
-          </MenuItem>
-          <MenuItem value={CompareMode.literal}>
-            {CompareMode.literal}
-          </MenuItem>
+          <MenuItem value={CompareMode.line}>{CompareMode.line}</MenuItem>
+          <MenuItem value={CompareMode.literal}>{CompareMode.literal}</MenuItem>
         </Select>
         <Stack sx={{ overflowY: 'scroll' }}>
-          {article_diff ? article_diff!.map((i) => (
-            <p key={i.id}>
-              {i.line_diffs.map((j) => (
-                <span
-                  key={j.id}
-                  style={{
-                    color: j.added ? 'green' : j.removed ? 'red' : 'auto',
-                  }}
-                >
-                  {j.value}
-                </span>
-              ))}
-            </p>
-          )) : null}
+          {article_diff
+            ? article_diff!.map((i) => (
+                <p key={i.id}>
+                  {i.line_diffs.map((j) => (
+                    <span
+                      key={j.id}
+                      style={{
+                        color: j.added ? 'green' : j.removed ? 'red' : 'auto',
+                      }}
+                    >
+                      {j.value}
+                    </span>
+                  ))}
+                </p>
+              ))
+            : null}
         </Stack>
       </Stack>,
     );
   }
   return (
-    <Stack
-      sx={{
-        height: '100%',
-        boxSizing: 'border-box',
-        background: 'white',
-        position: 'absolute',
-        zIndex: 1,
-        top: 0,
-        left: 0,
-      }}
-      p={2}
-      pb={0}
-      spacing={1}
-    >
-      <Stack direction="row">
-        <Stack>选择来源：</Stack>
-        <Stack direction="row" spacing={1} sx={{ flex: 1 }}>
-          {article.publications.map((i) => (
-            <Chip
-              key={i.id}
-              label={i.name}
-              variant={selectedPublication === i.id ? 'filled' : 'outlined'}
-              color={selectedPublication === i.id ? 'primary' : 'default'}
-              onClick={(e) => {
-                setSelectedPublication(i.id);
-              }}
-            />
-          ))}
-        </Stack>
-
-        <Button
-          variant="outlined"
-          aria-controls={showCompareMenu ? 'basic-menu' : undefined}
-          aria-haspopup="true"
-          size="small"
-          aria-expanded={showCompareMenu ? 'true' : undefined}
-          onClick={(event) => setAnchorEl(event.currentTarget)}
-        >
-          对比
-        </Button>
-        <Menu
-          id="basic-menu"
-          anchorEl={anchorEl}
-          open={showCompareMenu}
-          onClose={() => setAnchorEl(null)}
-          MenuListProps={{
-            'aria-labelledby': 'basic-button',
-          }}
-        >
-          <MenuItem
-            onClick={() => {
-              setCompareType(CompareType.origin);
-              setAnchorEl(null);
-            }}
-          >
-            对比原始文件(pdf)
-          </MenuItem>
-          <MenuItem
-            onClick={() => {
-              setLoading(true);
-              setComparePublication(
-                article.publications.length === 1
-                  ? article.publications[0].id
-                  : article.publications.find((i) => i.id !== publication.id)!
-                      .id,
-              );
-              setCompareType(CompareType.version);
-              setAnchorEl(null);
-            }}
-          >
-            对比不同来源解析后的文本
-          </MenuItem>
-        </Menu>
-      </Stack>
+    <>
       <Stack
-        direction="row"
-        divider={<Divider orientation="vertical" flexItem />}
-        spacing={2}
-        style={{ flex: 1, overflow: 'auto' }}
+        sx={{
+          height: '100%',
+          boxSizing: 'border-box',
+          background: 'white',
+          zIndex: 1,
+          top: 0,
+          left: 0,
+        }}
+        pb={0}
       >
-        {compare_elements}
+        <Stack direction="row" p={2}>
+          <Stack>选择来源：</Stack>
+          <Stack direction="row" spacing={1} sx={{ flex: 1 }}>
+            {article.publications.map((i) => (
+              <Chip
+                key={i.id}
+                label={i.name}
+                variant={selectedPublication === i.id ? 'filled' : 'outlined'}
+                color={selectedPublication === i.id ? 'primary' : 'default'}
+                onClick={(e) => {
+                  setSelectedPublication(i.id);
+                }}
+              />
+            ))}
+          </Stack>
+
+          <Button
+            variant="outlined"
+            aria-controls={showCompareMenu ? 'basic-menu' : undefined}
+            aria-haspopup="true"
+            size="small"
+            aria-expanded={showCompareMenu ? 'true' : undefined}
+            onClick={(event) => setAnchorEl(event.currentTarget)}
+          >
+            对比
+          </Button>
+          <Menu
+            id="basic-menu"
+            anchorEl={anchorEl}
+            open={showCompareMenu}
+            onClose={() => setAnchorEl(null)}
+            MenuListProps={{
+              'aria-labelledby': 'basic-button',
+            }}
+          >
+            <MenuItem
+              onClick={() => {
+                setCompareType(CompareType.origin);
+                setAnchorEl(null);
+              }}
+            >
+              对比原始文件(pdf)
+            </MenuItem>
+            <MenuItem
+              onClick={() => {
+                setComparePublication(
+                  article.publications.length === 1
+                    ? article.publications[0].id
+                    : article.publications.find((i) => i.id !== publication.id)!
+                        .id,
+                );
+                setCompareType(CompareType.version);
+                setAnchorEl(null);
+              }}
+            >
+              对比不同来源解析后的文本
+            </MenuItem>
+            <MenuItem
+              onClick={() => {
+                setCompareType(CompareType.none);
+                setAnchorEl(null);
+              }}
+            >
+              取消
+            </MenuItem>
+          </Menu>
+        </Stack>
+        <Stack
+          direction="row"
+          divider={<Divider orientation="vertical" flexItem />}
+          spacing={2}
+          style={{ flex: 1, overflow: 'auto' }}
+        >
+          {compare_elements}
+        </Stack>
       </Stack>
-    </Stack>
+      <Head>
+        <title>{article.title}</title>
+      </Head>
+    </>
   );
 }
+
+ArticleViewer.getLayout = (page: ReactElement) => <Layout>{page}</Layout>;

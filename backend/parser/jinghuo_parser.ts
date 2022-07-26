@@ -169,7 +169,7 @@ function extract_parts(raw_items: Item[]): ContentPartRaw[] {
     // 段落碎片合并
     if (
       parts[i][1] == parts[i - 1][1] &&
-      (parts[i][2] ? parts[i][2].transform[4] == opt.content_min_x : true)
+      (parts[i][2] ? parts[i][2]!.transform[4] == opt.content_min_x : true)
     ) {
       final_parts[final_parts.length - 1][0] += parts[i][0];
     } else {
@@ -272,7 +272,7 @@ function extract_pivots(s: string, part_idx: number): [Pivot[], string] {
     if (idx == -1) {
       break;
     }
-    const index = parseInt(s.match(/〔\d+〕/)[0].substr(1));
+    const index = parseInt(s.match(/〔\d+〕/)![0].substr(1));
     s = s.replace(/〔\d+〕/, '');
     res.push({ part_idx, offset: idx, index });
   }
@@ -426,7 +426,7 @@ export async function parse(pdfPath: string, opt: ParserOption): Promise<ParserR
   };
 
   if (opt.page_limits.length === 1) {
-    return [await parse_article(opt.page_limits[0])];
+    return [(await parse_article(opt.page_limits[0]))!];
   }
   async function split_by_article(doc: pdfjsLib.Doc) {
     const res = [];

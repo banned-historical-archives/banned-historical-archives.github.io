@@ -1,5 +1,5 @@
 import * as jinghuo_parser from './parser/jinghuo_parser';
-import { AppDataSource } from './data-source';
+import { init } from './data-source';
 import books from './books';
 import { join } from 'path';
 
@@ -19,8 +19,8 @@ function hash(s: string[]) {
   return createHmac('sha256', s.join('^')).digest('hex').substr(0, 10);
 }
 
-AppDataSource.initialize()
-  .then(async () => {
+init()
+  .then(async (AppDataSource) => {
     try {
       for (const entity of await AppDataSource.entityMetadatas) {
         const repository = await AppDataSource.getRepository(entity.name);
@@ -35,7 +35,7 @@ AppDataSource.initialize()
     for (const book of books) {
       const res = await book.parser(book.path, book.parser_option);
 
-      const publication_id = book.entity.id;
+      const publication_id = book.entity.id!;
       await AppDataSource.manager.upsert(Publication, book.entity, ['id']);
 
       for (const r of res) {
@@ -111,6 +111,7 @@ AppDataSource.initialize()
         }
 
         // TODO
+        /*
         const tags = [];
         for (const t of tags) {
           const id = hash([article_id, t]);
@@ -128,6 +129,7 @@ AppDataSource.initialize()
             .add(id)
             .catch((e) => {});
         }
+        */
 
         for (let idx = 0; idx < r.parts.length; ++idx) {
           const part = r.parts[idx];

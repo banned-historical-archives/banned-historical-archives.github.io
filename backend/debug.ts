@@ -31,7 +31,7 @@ import books from './books';
       .sort((a, b) => (a.count < b.count ? 1 : -1)),
   );
   */
-  const book = books.find(i => i.entity.id === 'xuanji1');
+  const book = books.find(i => i.entity.id === 'xuanji1')!;
   const res = await book.parser(book.path, book.parser_option);
   /*
   const lac_res: LACResult[][] = [];

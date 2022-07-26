@@ -26,15 +26,24 @@ jobs:
         # use mysql for the host here because we have specified a container for the job.
         # If we were running the job on the VM this would be localhost
         MYSQL_HOST: mysql
-        MYSQL_PORT: ${{ job.services.mysql.ports[3306] }}
-    - run: apt-get update -y -qq
-    - run: apt-get install -y -qq --no-install-recommends default-mysql-client
-    - run: mysql --user=root --password="root_password" --host=mysql --execute "CREATE DATABASE banned_history CHARACTER SET utf8 COLLATE utf8_general_ci;"
+        MYSQL_PORT: 3306
+    - name: Set up MySQL
+      run: |
+        apt-get update
+        apt-get install -y mysql-client
+        mysql --host mysql -e 'CREATE DATABASE banned_history CHARACTER SET utf8 COLLATE utf8_general_ci;' -uroot -proot_password
+    - name: Use Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: 17.9
+    - run: npm install
     - run: GITLAB_CI=true npm run init-db
     - run: GITLAB_CI=true npm run build
-    - name: Archive production artifacts
-      uses: actions/upload-artifact@v3
+    - name: Deploy to GitHub Pages
+      uses: crazy-max/ghaction-github-pages@v3
       with:
-        name: dist
-        path: dist
+        target_branch: gh-pages
+        build_dir: out
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
