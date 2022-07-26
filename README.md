@@ -69,7 +69,9 @@
 
 ## 贡献资源/纠错/讨论
 
-https://gitlab.com/banned-historical-archives/banned-historical-archives.gitlab.io/-/issues
+[\[Github\]](https://github.com/banned-historical-archives/banned-historical-archives.github.io/issues)
+
+[\[Gitlab\]备用地址](https://gitlab.com/banned-historical-archives/banned-historical-archives.gitlab.io/-/issues)
 
 ## 标准化加工
 ### 文稿
@@ -166,7 +168,8 @@ https://gitlab.com/banned-historical-archives/banned-historical-archives.gitlab.
 
 ## 开发
 
-源代码：https://gitlab.com/banned-historical-archives/banned-historical-archives.gitlab.io
+[\[Github\]](https://github.com/banned-historical-archives/banned-historical-archives.gitlab.io)
+[\[Gitlab\]](https://gitlab.com/banned-historical-archives/banned-historical-archives.gitlab.io)
 
 ### 0.安装依赖并创建数据库
 docker, nodejs, mysql

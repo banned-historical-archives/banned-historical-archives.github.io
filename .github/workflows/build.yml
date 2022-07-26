@@ -9,7 +9,6 @@ jobs:
     # Because of this the network configuration changes from host based network to a container network.
     container:
       image:  node:10.16-jessie
-      options: --user root
 
     services:
       mysql:
@@ -39,7 +38,7 @@ jobs:
         node-version: 17.9
     - run: npm install
     - run: GITLAB_CI=true npm run init-db
-    - run: GITLAB_CI=true npm run build
+    - run: GITLAB_CI=true sudo npm run build
     - name: Deploy to GitHub Pages
       uses: crazy-max/ghaction-github-pages@v3
       with:
