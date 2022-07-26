@@ -1,8 +1,7 @@
-import * as jinghuo_parser from './parser/jinghuo_parser';
+import "reflect-metadata"
 import { init } from './data-source';
-import books from './books';
-import { join } from 'path';
 
+import books from './books';
 import Article from './entity/article';
 import Author from './entity/author';
 import Date from './entity/date';

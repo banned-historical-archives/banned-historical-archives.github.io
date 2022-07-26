@@ -1,6 +1,12 @@
 import { Entity, PrimaryColumn, Column, PrimaryGeneratedColumn, ManyToMany, OneToMany } from 'typeorm';
 import { ArticleType } from '../../types';
-import { Article, Author, Comment, Page, Content } from './index';
+import {
+  Article,
+  Publication,
+  Comment,
+  Page,
+  Content,
+} from '../entities';
 
 @Entity()
 export default class Type {
