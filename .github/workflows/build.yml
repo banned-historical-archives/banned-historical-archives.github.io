@@ -40,8 +40,10 @@ jobs:
     - run: GITLAB_CI=true npm run init-db
     - run: GITLAB_CI=true npm run build
     - name: Archive production artifacts
-      uses: actions/upload-artifact@v3
+      uses: crazy-max/ghaction-github-pages@v1
       with:
-        name: dist
-        path: dist
+        target_branch: gh-pages
+        build_dir: dist
+      env:
+        GITHUB_TOKEN: ${{ secrets.REPO_TOKEN }}
 
