@@ -36,9 +36,7 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: 17.9
-        cmd: npm install
-        cmd: GITLAB_CI=true npm run init-db
-        cmd: GITLAB_CI=true npm run build
+        cmd: GITLAB_CI=true npm install && npm run init-db && npm run build
     - name: Deploy to GitHub Pages
       uses: crazy-max/ghaction-github-pages@v3
       with:
