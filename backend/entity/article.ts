@@ -1,5 +1,15 @@
 import { Entity, PrimaryColumn, Column, PrimaryGeneratedColumn, ManyToMany, OneToMany, JoinTable } from 'typeorm';
-import { Tag, Publication, Author, Date, Type } from './index';
+
+import {
+  Author,
+  Comment,
+  Publication,
+  Tag,
+  Content,
+  Date,
+  Type,
+  Page,
+} from '../entities';
 
 @Entity()
 export default class Article {

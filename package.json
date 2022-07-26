@@ -1,9 +1,9 @@
 {
   "name": "x",
   "version": "0.1.0",
-  "private": true,
   "scripts": {
     "dev": "next dev",
+    "init-db": "ts-node --project ./tsconfig.build.json ./backend/init-db.ts",
     "build": "npm run cp-pdfjs && next build && next export",
     "cp-pdfjs": "cp -r ./node_modules/pdfjs-dist ./public/",
     "test": "vitest",
@@ -43,6 +43,10 @@
     "web-streams-polyfill": "^3.2.1"
   },
   "devDependencies": {
+    "@babel/cli": "^7.18.9",
+    "@babel/core": "^7.18.9",
+    "@babel/plugin-syntax-export-default-from": "^7.18.6",
+    "@babel/preset-typescript": "^7.18.6",
     "@types/node": "18.6.1",
     "@types/react": "18.0.15",
     "@types/react-dom": "18.0.6",
