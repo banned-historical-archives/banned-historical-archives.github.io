@@ -39,8 +39,8 @@ jobs:
     - run: npm install
     - run: GITLAB_CI=true npm run init-db
     - run: GITLAB_CI=true npm run build
-    - name: Archive production artifacts
-      uses: crazy-max/ghaction-github-pages@v1
+    - name: Deploy to GitHub Pages
+      uses: crazy-max/ghaction-github-pages@v3
       with:
         target_branch: gh-pages
         build_dir: dist
