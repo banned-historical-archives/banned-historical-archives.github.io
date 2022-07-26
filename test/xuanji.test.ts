@@ -64,6 +64,11 @@ describe('xuanji4', async () => {
   it('comments & pivots', () => {
     expect(n_comments_equals_n_pivots(res)).toBe(true);
   });
+  it('description merge', () => {
+    expect(
+      res.filter((i) => i.title === '第十八集团军总司令给蒋介石的两个电报'),
+    ).toMatchSnapshot();
+  });
 });
 
 describe('xuanji5', async () => {

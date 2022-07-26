@@ -180,6 +180,13 @@ function fix_before_parsing(s: pdfjsLib.ContentObj[], start_page: number, name: 
       if (p === 383) {
         i.items.forEach((j) => (j.str = j.str.replace(/\(1\)/, '〔1〕')));
       }
+      if (p === 29) {
+        i.items.forEach((j) => {
+          if (j.str.startsWith('关于制止内战的六项主张')) {
+            j.str = '*'+j.str;
+          }
+        });
+      }
       p++;
     }
   } else if (name === 'xuanji5') {
