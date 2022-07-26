@@ -14,7 +14,6 @@ jobs:
       mysql:
         image: mysql:5.7
         env:
-          MYSQL_DATABASE: banned_history
           MYSQL_ROOT_PASSWORD: root_password
         ports:
         - 3306:3306
@@ -28,6 +27,10 @@ jobs:
         # If we were running the job on the VM this would be localhost
         MYSQL_HOST: mysql
         MYSQL_PORT: 3306
+    - name: Set up MySQL
+      run: |
+        sudo /etc/init.d/mysql start
+        mysql -e 'CREATE DATABASE banned_history CHARACTER SET utf8 COLLATE utf8_general_ci;' -u root -p root_password
     - name: Use Node.js
       uses: actions/setup-node@v3
       with:
