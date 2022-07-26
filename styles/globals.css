@@ -5,10 +5,16 @@ body {
 }
 
 a {
-  color: inherit;
   text-decoration: none;
 }
 
+a:link {
+  color: #cc0000;
+}
+
+a:visited {
+  color: #aa0000;
+}
 * {
   box-sizing: border-box;
 }

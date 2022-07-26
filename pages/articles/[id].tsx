@@ -302,7 +302,7 @@ export default function ArticleViewer({ article, publication_details }: { articl
     (i) => i.id === selectedPublication,
   )!;
 
-  const { contents, comments } = publication_details[selectedPublication];
+  const { contents, comments, page } = publication_details[selectedPublication];
 
   const compare_elements: ReactElement[] = [
     <Stack
@@ -323,7 +323,7 @@ export default function ArticleViewer({ article, publication_details }: { articl
     compare_elements.push(
       <Stack key="origin" sx={{ flex: 1, overflowY: 'scroll' }}>
         <Typography variant="subtitle1">
-          来源文件(页码{publication.pages[0]!.start}-{publication.pages[0]!.end}
+          来源文件(页码{page.start}-{page.end}
           )
           <a href={publication.pdf} target="__blank">
             [下载]
@@ -337,11 +337,11 @@ export default function ArticleViewer({ article, publication_details }: { articl
           }}
         >
           {new Array(
-            publication.pages[0]!.end - publication.pages[0]!.start + 1,
+            page.end - page.start + 1,
           )
             .fill(0)
             .map((i, idx) => (
-              <Page pageNumber={idx + publication.pages[0]!.start} key={idx} />
+              <Page pageNumber={idx + page.start} key={idx} />
             ))}
         </Document>
       </Stack>,
