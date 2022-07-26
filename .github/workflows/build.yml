@@ -39,6 +39,7 @@ jobs:
     - run: cp -r ./node_modules/pdfjs-dist ./public/
     - run: GITLAB_CI=true npm run init-db
     - run: GITLAB_CI=true npm run build
+    - run: touch .nojekyll
     - name: Deploy to GitHub Pages
       uses: crazy-max/ghaction-github-pages@v3
       with:
