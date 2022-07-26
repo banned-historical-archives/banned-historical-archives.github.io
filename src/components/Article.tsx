@@ -284,7 +284,7 @@ export default function ArticleViewer() {
       <Stack key="origin" sx={{ flex: 1, overflowY: 'scroll' }}>
         <Typography variant="subtitle1">
           来源文件(页码{publication.pages[0]!.start}-{publication.pages[0]!.end}
-          )：
+          )<a href={publication.pdf} target="__blank">[下载]</a>
         </Typography>
         <Document
           file={publication.pdf}
@@ -423,7 +423,6 @@ export default function ArticleViewer() {
           </MenuItem>
           <MenuItem
             onClick={() => {
-              setLoading(true);
               setComparePublication(
                 article.publications.length === 1
                   ? article.publications[0].id
@@ -435,6 +434,15 @@ export default function ArticleViewer() {
             }}
           >
             对比不同来源解析后的文本
+          </MenuItem>
+          <MenuItem
+            onClick={() => {
+              setCompareType(CompareType.none);
+              setComparePublication(undefined);
+              setAnchorEl(null);
+            }}
+          >
+            取消
           </MenuItem>
         </Menu>
       </Stack>
