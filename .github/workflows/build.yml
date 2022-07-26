@@ -14,6 +14,9 @@ jobs:
       mysql:
         image: mysql:5.7
         env:
+          MYSQL_DATABASE: banned_history
+          MYSQL_USER: root
+          MYSQL_PASSWORD: root_password
           MYSQL_ROOT_PASSWORD: root_password
         ports:
         - 3306:3306
@@ -27,7 +30,6 @@ jobs:
         # If we were running the job on the VM this would be localhost
         MYSQL_HOST: mysql
         MYSQL_PORT: 3306
-    - run: mysql --user=root --password="root_password" --host=mysql --execute "CREATE DATABASE banned_history CHARACTER SET utf8 COLLATE utf8_general_ci;"
     - run: GITLAB_CI=true npm run init-db
     - run: GITLAB_CI=true npm run build
     - name: Archive production artifacts
