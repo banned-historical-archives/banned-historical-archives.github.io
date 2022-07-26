@@ -28,6 +28,7 @@ jobs:
         # If we were running the job on the VM this would be localhost
         MYSQL_HOST: mysql
         MYSQL_PORT: 3306
+    - run: npm install
     - run: GITLAB_CI=true npm run init-db
     - run: GITLAB_CI=true npm run build
     - name: Archive production artifacts
