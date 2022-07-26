@@ -50,9 +50,11 @@ export default function Navbar() {
               mr: 2,
               fontWeight: 700,
               letterSpacing: '.3rem',
-              color: 'inherit',
               textDecoration: 'none',
               cursor: 'pointer',
+            }}
+            style={{
+              color: 'white',
             }}
             href="/"
             onClick={() => router.replace('/')}
