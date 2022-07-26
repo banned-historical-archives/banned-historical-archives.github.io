@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "npm run prepare && next build && next export",
-    "prepare": "cp -r ./node_modules/pdfjs-dist ./public/",
+    "build": "npm run cp-pdfjs && next build && next export",
+    "cp-pdfjs": "cp -r ./node_modules/pdfjs-dist ./public/",
     "test": "vitest",
     "start": "next start",
     "lint": "next lint"
