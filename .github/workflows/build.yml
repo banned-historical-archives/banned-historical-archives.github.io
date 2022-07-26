@@ -15,8 +15,6 @@ jobs:
         image: mysql:5.7
         env:
           MYSQL_DATABASE: banned_history
-          MYSQL_USER: root
-          MYSQL_PASSWORD: root_password
           MYSQL_ROOT_PASSWORD: root_password
         ports:
         - 3306:3306
