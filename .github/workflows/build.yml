@@ -29,8 +29,9 @@ jobs:
         MYSQL_PORT: 3306
     - name: Set up MySQL
       run: |
-        sudo /etc/init.d/mysql start
-        mysql -e 'CREATE DATABASE banned_history CHARACTER SET utf8 COLLATE utf8_general_ci;' -u root -p root_password
+        apt-get update
+        apt-get install -y mysql-client
+        mysql --host mysql -e 'CREATE DATABASE banned_history CHARACTER SET utf8 COLLATE utf8_general_ci;' -uroot -proot_password
     - name: Use Node.js
       uses: actions/setup-node@v3
       with:
