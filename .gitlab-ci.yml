@@ -25,7 +25,7 @@ pages:
     - GITLAB_CI=true npm run init-db
     - GITLAB_CI=true npm run build
     - rm -rf public
-    - mv dist public
+    - mv out public
   artifacts:  
     paths:
       - public

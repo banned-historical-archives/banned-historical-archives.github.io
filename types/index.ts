@@ -22,7 +22,7 @@ export type ContentPart = {
 };
 
 export type Date = {
-  year: number;
+  year?: number;
   month?: number;
   day?: number;
 };

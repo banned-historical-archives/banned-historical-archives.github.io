@@ -103,7 +103,7 @@ function extract_parts(
         idx: [i, j - 1],
         max_x,
         offset_y,
-        page: item_to_page.get(item),
+        page: item_to_page.get(item)!,
         str,
         min_x: item.transform[4],
         align_center,
@@ -111,7 +111,7 @@ function extract_parts(
     } else {
       lines.push({
         items: [item],
-        page: item_to_page.get(item),
+        page: item_to_page.get(item)!,
         max_x: item.transform[4] + item.width,
         min_x: item.transform[4],
         idx: [i, i],

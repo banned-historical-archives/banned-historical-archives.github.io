@@ -341,7 +341,7 @@ export async function parse(
         }
       } else if (!article.dates[0].year) {
         console.warn('年份缺失，取上一篇文章的年份', article.title);
-        article.dates[0].year = prev_article_year;
+        article.dates[0].year = prev_article_year!;
       } else {
         prev_article_year = article.dates[0].year;
       }

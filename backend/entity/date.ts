@@ -1,5 +1,5 @@
 import { Entity, PrimaryColumn, Column, PrimaryGeneratedColumn, ManyToMany, OneToMany, ManyToOne } from 'typeorm';
-import Article from './article';
+import { Article, Author, Publication, Tag } from './index';
 
 @Entity()
 export default class Date {
@@ -16,5 +16,5 @@ export default class Date {
   @Column({ nullable: true })
   articleId!: string;
   @ManyToOne(() => Article, (article) => article.dates)
-  article: Article;
+  article!: Article;
 }

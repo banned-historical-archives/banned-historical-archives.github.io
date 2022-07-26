@@ -2,17 +2,13 @@ import { existsSync, mkdirSync } from 'fs';
 import { writeFile, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 
-import { AppDataSource } from "./data-source"
+import { init } from "./data-source"
 import Article from './entity/article';
 import Comment from './entity/comment';
 import Content from "./entity/content";
 import Page from './entity/page';
 
-async function init() {
-  await AppDataSource.initialize();
-}
-
-init().then(async () => {
+init().then(async (AppDataSource) => {
   const articles = await AppDataSource.manager.find(Article, {
     relations: {
       authors: true,
@@ -52,12 +48,12 @@ init().then(async () => {
         },
       });
       publication.pages = [
-        await AppDataSource.manager.findOne(Page, {
+        (await AppDataSource.manager.findOne(Page, {
           where: {
             publicationId,
             articleId,
           },
-        }),
+        }))!,
       ];
     }
     promises.push(

@@ -298,7 +298,7 @@ function extract_parts(
         idx: [i, j - 1],
         max_x,
         offset_y,
-        page: item_to_page.get(item),
+        page: item_to_page.get(item)!,
         str,
         min_x: item.transform[4],
         align_center,
@@ -306,7 +306,7 @@ function extract_parts(
     } else {
       lines.push({
         items: [item],
-        page: item_to_page.get(item),
+        page: item_to_page.get(item)!,
         max_x: item.transform[4] + item.width,
         min_x: item.transform[4],
         idx: [i, i],
@@ -377,9 +377,9 @@ function extract_parts(
           ++j;
         }
         let temp = Array.from(s);
-        for (const x of s.matchAll(/\(\d+\)/g)) {
-          temp[x.index] = '〔';
-          temp[x.index + x[0].length - 1] = '〕';
+        for (const x of Array.from(s.matchAll(/\(\d+\)/g))) {
+          temp[(x as any).index] = '〔';
+          temp[(x as any).index + (x as any)[0].length - 1] = '〕';
         }
         s = temp.join('');
         title_has_star = is_date(lines[j].str) ? s.indexOf('*') >= 0 : title_has_star;
@@ -573,7 +573,7 @@ function extract_pivots(s: string, part_idx: number): [Pivot[], string] {
     if (idx == -1) {
       break;
     }
-    const index = parseInt(s.match(/〔 *\d+ *〕/)[0].substr(1));
+    const index = parseInt(s.match(/〔 *\d+ *〕/)![0].substr(1));
     s = s.replace(/〔 *\d+ *〕/, '');
     res.push({ part_idx, offset: idx, index });
   }
@@ -610,7 +610,7 @@ export async function parse(
     const height = viewport.viewBox[3];
     const items: Item[] = [];
     const item_to_page = new Map<Item, number>();
-    content_objs = fix_before_parsing(content_objs, range[0], parser_opt.name);
+    content_objs = fix_before_parsing(content_objs, range[0], parser_opt.name!);
     let page_header_min_y = 0;
     content_objs.forEach((content_obj, page_idx) => {
       content_obj.items.forEach((item, idx) => {

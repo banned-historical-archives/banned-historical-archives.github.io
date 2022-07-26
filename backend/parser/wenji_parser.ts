@@ -110,7 +110,7 @@ function extract_parts(
         idx: [i, j - 1],
         max_x,
         offset_y,
-        page: item_to_page.get(item),
+        page: item_to_page.get(item)!,
         str,
         min_x: item.transform[4],
         align_center,
@@ -118,7 +118,7 @@ function extract_parts(
     } else {
       lines.push({
         items: [item],
-        page: item_to_page.get(item),
+        page: item_to_page.get(item)!,
         max_x: item.transform[4] + item.width,
         min_x: item.transform[4],
         idx: [i, i],
@@ -347,7 +347,7 @@ function extract_pivots(s: string, part_idx: number): [Pivot[], string] {
     if (idx == -1) {
       break;
     }
-    const index = parseInt(s.match(/〔 *\d+ *〕/)[0].substr(1));
+    const index = parseInt(s.match(/〔 *\d+ *〕/)![0].substr(1));
     s = s.replace(/〔 *\d+ *〕/, '');
     res.push({ part_idx, offset: idx, index });
   }
@@ -358,8 +358,8 @@ export async function parse(
   pdfPath: string,
   parser_opt: ParserOption,
 ): Promise<ParserResult[]> {
-  opt.page_width = parser_opt.page_width;
-  opt.content_min_x = parser_opt.content_min_x;
+  opt.page_width = parser_opt.page_width!;
+  opt.content_min_x = parser_opt.content_min_x!;
   const doc = await pdfjsLib.getDocument({
     url: pdfPath,
     cMapPacked: true,

@@ -1,11 +1,17 @@
-import { useState, useEffect, useMemo } from 'react';
-import { Link, useParams, useRoutes, Routes, Route, Outlet } from 'react-router-dom'
+import { ReactElement, useState, useEffect, useMemo } from 'react';
+import Head from 'next/head'
 import FormControlLabel from '@mui/material/FormControlLabel';
-import * as service from '../service';
+import {
+  DataGrid,
+  GridColDef,
+  GridRenderCellParams,
+  GridValueGetterParams,
+  zhCN,
+} from '@mui/x-data-grid';
+import Link from 'next/link'
 
-import { DataGrid, GridColDef, GridRenderCellParams, GridValueGetterParams, zhCN } from '@mui/x-data-grid';
-
-import type Article from '../../backend/entity/article';
+import Layout from '../../components/Layout';
+import Article from '../../backend/entity/article';
 import type Date from '../../backend/entity/date';
 import type Type from '../../backend/entity/type';
 
@@ -21,10 +27,31 @@ import Stack from '@mui/material/Stack';
 import SettingsIcon from '@mui/icons-material/Settings';
 import { ArticleType } from '../../types';
 import Typography from '@mui/material/Typography';
-import Loading from './Loading';
+import { GetStaticProps,GetServerSideProps, GetServerSidePropsContext, GetStaticPropsContext } from 'next'
+import { init } from "../../backend/data-source"
+
+export const getStaticProps: GetStaticProps = async (
+  context: GetStaticPropsContext,
+) => {
+  const AppDataSource = await init();
+  const articles = await AppDataSource.manager.find(Article, {
+    relations: {
+      authors: true,
+      types: true,
+      publications: true,
+      tags: true,
+      dates: true,
+    }
+  });
+  return {
+    props: {
+      articles: JSON.parse(JSON.stringify(articles)),
+    }, // will be passed to the page component as props
+  };
+};
 
 function ensure_two_digits(a?: number) {
-  if (!a && a!== 0) {
+  if (!a && a !== 0) {
     return '';
   }
   return a < 10 ? `0${a}` : a;
@@ -36,9 +63,7 @@ const columns: GridColDef<Article>[] = [
     minWidth: 350,
     flex: 1,
     renderCell: (params: GridRenderCellParams<string, Article>) => (
-      <Link to={`/articles/${params.row.id}`}>
-        {params.row!.title}
-      </Link>
+      <a href={`/articles/${params.row.id}`} rel="noreferrer" target="_blank">{params.row!.title}</a>
     ),
   },
   {
@@ -88,7 +113,11 @@ const columns: GridColDef<Article>[] = [
                 .filter((j) => j)
                 .join('/'),
             )
-            .map((j) => <Typography key={j} variant="caption">{j}</Typography>)
+            .map((j) => (
+              <Typography key={j} variant="caption">
+                {j}
+              </Typography>
+            ))
         )}
       </Stack>
     ),
@@ -144,10 +173,6 @@ const article_types: { [key in ArticleType]: string } = {
   comment: '批示',
   telegram: '通讯',
 };
-enum FilterType {
-  include = 'include',
-  exclude = 'exclude',
-}
 function to_number(s: string) {
   const n = parseInt(s);
   if (!isNaN(n) && n != Infinity && n != -Infinity) {
@@ -195,11 +220,8 @@ const default_date_filter = {
   day_b: 31,
 };
 const authors = ['毛泽东', '江青', '王洪文', '张春桥', '姚文元'];
-export default function Articles() {
-  const [articles, setArticles] = useState<Article[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [dateFilter, setDateFilter] =
-    useState<DateFilter>(default_date_filter);
+export default function Articles({ articles }: { articles: Article[] }) {
+  const [dateFilter, setDateFilter] = useState<DateFilter>(default_date_filter);
   const [typeFilters, setTypeFilters] = useState<ArticleType[]>([]);
   const [authorFilters, setAuthorFilters] = useState<string[]>([]);
   const [dateFilterDialog, setDateFilterDialog] = useState<
@@ -232,15 +254,11 @@ export default function Articles() {
       );
   }, [articles, dateFilter, typeFilters, authorFilters]);
 
-  useEffect(() => {
-    (async () => {
-      setArticles(await service.get_articles());
-      setLoading(false);
-    })();
-  }, []);
   return (
     <>
-      {loading ? <Loading /> : null}
+      <Head>
+        <title>和谐历史档案馆-文稿</title>
+      </Head>
       <Dialog
         onClose={() => setDateFilterDialog((s) => ({ ...s, show: false }))}
         open={dateFilterDialog.show}
@@ -371,10 +389,9 @@ export default function Articles() {
       <Stack
         p={2}
         spacing={2}
-        sx={{ position: 'relative', flex: 1 }}
+        sx={{ position: 'relative', flex: 1, height: '100%' }}
         direction="column"
       >
-        <Outlet />
         <Stack direction="row">
           <Stack>时间范围：</Stack>
           <Stack direction="row" spacing={1}>
@@ -478,3 +495,5 @@ export default function Articles() {
     </>
   );
 }
+
+Articles.getLayout = (page: ReactElement) => <Layout>{page}</Layout>;
