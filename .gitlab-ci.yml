@@ -22,6 +22,7 @@ pages:
     - apt-get install -y -qq --no-install-recommends default-mysql-client
   script:
     - mysql --user=root --password="root_password" --host=mysql --execute "CREATE DATABASE banned_history CHARACTER SET utf8 COLLATE utf8_general_ci;"
+    - cp -r ./node_modules/pdfjs-dist ./public/
     - GITLAB_CI=true npm run init-db
     - GITLAB_CI=true npm run build
     - rm -rf public
