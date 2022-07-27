@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import BlockIcon from '@mui/icons-material/Block';
 import Stack from '@mui/material/Stack';
 import AppBar from '@mui/material/AppBar';
@@ -85,7 +86,7 @@ export default function Navbar() {
             />
             <IconButton onClick={() => {
               window.open(
-                'https://bing.com/search?q=' + encodeURIComponent('site: banned-historical-archives.github.io ' + inputValue),
+                'https://bing.com/search?ensearch=1&q=' + encodeURIComponent('site: banned-historical-archives.github.io ' + inputValue),
                 '_blank',
               );
             }}>
