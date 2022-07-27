@@ -321,6 +321,11 @@
     "@babel/helper-validator-identifier" "^7.18.6"
     "to-fast-properties" "^2.0.0"
 
+"@corex/deepmerge@^4.0.29":
+  "integrity" "sha512-q/yVUnqckA8Do+EvAfpy7RLdumnBy9ZsducMUtZTvpdbJC7azEf1hGtnYYxm0QfphYxjwggv6XtH64prvS1W+A=="
+  "resolved" "https://registry.npmmirror.com/@corex/deepmerge/-/deepmerge-4.0.29.tgz"
+  "version" "4.0.29"
+
 "@cspotcode/source-map-support@^0.8.0":
   "integrity" "sha512-IchNf6dN4tHoMFIn/7OE8LWZ19Y6q/67Bmf6vnGREv8RSbBVb9LPJxEcnwrcwX6ixSvaiGoomAUvu4YSxXrVgw=="
   "resolved" "https://registry.npmmirror.com/@cspotcode/source-map-support/-/source-map-support-0.8.1.tgz"
@@ -604,7 +609,7 @@
     "prop-types" "^15.8.1"
     "reselect" "^4.1.6"
 
-"@next/env@12.2.3":
+"@next/env@*", "@next/env@12.2.3":
   "integrity" "sha512-2lWKP5Xcvnor70NaaROZXBvU8z9mFReePCG8NhZw6NyNGnPvC+8s+Cre/63LAB1LKzWw/e9bZJnQUg0gYFRb2Q=="
   "resolved" "https://registry.npmmirror.com/@next/env/-/env-12.2.3.tgz"
   "version" "12.2.3"
@@ -3386,7 +3391,15 @@
   "resolved" "https://registry.npmmirror.com/neo-async/-/neo-async-2.6.2.tgz"
   "version" "2.6.2"
 
-"next@12.2.3":
+"next-sitemap@^3.1.13":
+  "integrity" "sha512-wMA8WFbFUPwT4uXKlHSjm7a3Gu6NI74E08enN/CYHRh+5HQrGoL4TWOz7JkGBR6k/Pg5trGusIIGMrPkhOhkTQ=="
+  "resolved" "https://registry.npmmirror.com/next-sitemap/-/next-sitemap-3.1.13.tgz"
+  "version" "3.1.13"
+  dependencies:
+    "@corex/deepmerge" "^4.0.29"
+    "minimist" "^1.2.6"
+
+"next@*", "next@12.2.3":
   "integrity" "sha512-TA0tmSA6Dk6S6kfvCNbF7CWYW8468gZUxr/3/30z4KvAQbXnl2ASYZElVe7q/hBW/1F1ee0tSBlHa4/sn+ZIBw=="
   "resolved" "https://registry.npmmirror.com/next/-/next-12.2.3.tgz"
   "version" "12.2.3"

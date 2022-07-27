@@ -37,8 +37,9 @@ jobs:
         node-version: 17.9
     - run: npm install
     - run: cp -r ./node_modules/pdfjs-dist ./public/
-    - run: GITLAB_CI=true npm run init-db
-    - run: GITLAB_CI=true npm run build
+    - run: CI=true npm run init-db
+    - run: SITE_URL='https://banned-historical-archives.github.io' CI=true npm run build
+    - run: touch out/.nojekyll
     - name: Deploy to GitHub Pages
       uses: crazy-max/ghaction-github-pages@v3
       with:

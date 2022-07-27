@@ -29,7 +29,7 @@ const instance = new DataSource({
   ],
   migrations: [],
   subscribers: [],
-  host: process.env.GITLAB_CI ? 'mysql' : 'localhost',
+  host: process.env.CI ? 'mysql' : 'localhost',
   port: parseInt(process.env.DB_PORT || '3306'),
   username: process.env.DB_USER || 'root',
   password: process.env.DB_PASSWORD || 'root_password',
