@@ -254,7 +254,7 @@ async function init_music(AppDataSource: DataSource) {
 init()
   .then(async (AppDataSource) => {
     await init_music(AppDataSource);
-    // await init_articles(AppDataSource);
+    await init_articles(AppDataSource);
     process.exit();
   })
   .catch((error) => console.log(error));
