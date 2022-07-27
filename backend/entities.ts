@@ -7,8 +7,14 @@ import Content from './entity/content';
 import Date from './entity/date';
 import Type from './entity/type';
 import Page from './entity/page';
+import Music from './entity/music';
+import Audio from './entity/audio';
+import Lyric from './entity/lyric';
 
 export {
+  Lyric,
+  Audio,
+  Music,
   Article,
   Author,
   Comment,

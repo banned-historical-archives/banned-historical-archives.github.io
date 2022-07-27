@@ -9,10 +9,9 @@ import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
-import { ContentType } from '../../types';
+import { ContentType, DiffResult } from '../../types';
 import { Document, Page, pdfjs  } from 'react-pdf';
 import Layout from '../../components/Layout';
-import * as Diff from 'diff';
 
 import Content from '../../backend/entity/content';
 import Article from '../../backend/entity/article';
@@ -20,6 +19,8 @@ import Comment from '../../backend/entity/comment';
 import PageEntity from '../../backend/entity/page';
 import { GetStaticProps,GetServerSideProps, GetServerSidePropsContext, GetStaticPropsContext } from 'next'
 import { init } from "../../backend/data-source"
+import { diff } from '../utils';
+import { DiffViewer } from '../../components/DiffViewer';
 
 pdfjs.GlobalWorkerOptions.workerSrc = `/pdfjs-dist/legacy/build/pdf.worker.min.js`;
 
@@ -223,13 +224,6 @@ function join_text(contents: { text: string }[]) {
   return s;
 }
 
-type LineDiff = {
-  id: string;
-  removed?: boolean;
-  added?: boolean;
-  value: string;
-};
-type ArticleDiff = { line_diffs: LineDiff[]; id: string }[];
 enum CompareMode {
   line = '逐行对比',
   literal = '逐字对比',
@@ -242,51 +236,22 @@ export default function ArticleViewer({ article, publication_details }: { articl
   const [compareMode, setCompareMode] = useState(CompareMode.line);
   const [selectedPublication, setSelectedPublication] = useState<string>(article.publications[0].id);
 
-  const article_diff: ArticleDiff | undefined = useMemo(() => {
+  const article_diff: DiffResult | undefined = useMemo(() => {
     if (compareType !== CompareType.version || !article) return;
-    let i = 0;
-
-    let contents_a: {text: string}[] = publication_details[selectedPublication].contents.sort((a, b) => (a.index > b.index ? 1 : -1));
-    let contents_b: {text: string}[] = publication_details[comparePublication!].contents.sort((a, b) => (a.index > b.index ? 1 : -1));
+    let contents_a: { text: string }[] = publication_details[
+      selectedPublication
+    ].contents.sort((a, b) => (a.index > b.index ? 1 : -1));
+    let contents_b: { text: string }[] = publication_details[
+      comparePublication!
+    ].contents.sort((a, b) => (a.index > b.index ? 1 : -1));
     if (compareMode === CompareMode.literal) {
       contents_a = [{ text: join_text(contents_a) }];
       contents_b = [{ text: join_text(contents_b) }];
     }
-    const a_diff: ArticleDiff = [];
-    while (i < contents_a.length && i < contents_b.length) {
-      const line_diffs: LineDiff[] = [];
-      a_diff.push({ line_diffs, id: Math.random().toString() });
-      const line_diff = Diff.diffChars(contents_a[i].text, contents_b[i].text);
-      for (const r of line_diff) {
-        line_diffs.push({
-          id: Math.random().toString(),
-          removed: r.removed,
-          added: r.added,
-          value: r.value,
-        });
-      }
-      ++i;
-    }
-    if (contents_a.length != contents_b.length) {
-      const max_len = Math.max(contents_a.length, contents_b.length);
-      const target =
-        contents_a.length > contents_b.length ? contents_a : contents_b;
-      while (i < max_len) {
-        a_diff.push({
-          line_diffs: [
-            {
-              id: Math.random().toString(),
-              removed: target === contents_a ? false : true,
-              added: target === contents_a ? true : false,
-              value: target[i].text,
-            },
-          ],
-          id: Math.random().toString(),
-        });
-        ++i;
-      }
-    }
-    return a_diff;
+    return diff(
+      contents_a.map((i) => i.text),
+      contents_b.map((i) => i.text),
+    );
   }, [
     compareType,
     compareMode,
@@ -384,22 +349,7 @@ export default function ArticleViewer({ article, publication_details }: { articl
           <MenuItem value={CompareMode.literal}>{CompareMode.literal}</MenuItem>
         </Select>
         <Stack sx={{ overflowY: 'scroll' }}>
-          {article_diff
-            ? article_diff!.map((i) => (
-                <p key={i.id}>
-                  {i.line_diffs.map((j) => (
-                    <span
-                      key={j.id}
-                      style={{
-                        color: j.added ? 'green' : j.removed ? 'red' : 'auto',
-                      }}
-                    >
-                      {j.value}
-                    </span>
-                  ))}
-                </p>
-              ))
-            : null}
+          <DiffViewer diff={article_diff}/>
         </Stack>
       </Stack>,
     );
