@@ -86,7 +86,7 @@ export default function Navbar() {
             />
             <IconButton onClick={() => {
               window.open(
-                'https://bing.com/search?ensearch=1&q=' + encodeURIComponent('site: banned-historical-archives.github.io ' + inputValue),
+                'https://bing.com/search?ensearch=1&q=' + encodeURIComponent('site:banned-historical-archives.github.io ' + inputValue),
                 '_blank',
               );
             }}>

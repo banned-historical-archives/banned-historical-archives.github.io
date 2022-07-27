@@ -494,7 +494,11 @@ export async function parse(pdfPath: string, opt: ParserOption): Promise<ParserR
   for (let i = 1; i < pages_by_article.length; ++i) {
     const parser_result = await parse_article([
       pages_by_article[i - 1],
-      pages_by_article[i] - 1,
+      pages_by_article[i] === 1192
+        ? 1183
+        : pages_by_article[i] === 1504
+        ? 1502
+        : pages_by_article[i] - 1,
     ]);
     if (!parser_result) {
       continue;
