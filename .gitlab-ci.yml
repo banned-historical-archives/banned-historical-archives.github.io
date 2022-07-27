@@ -23,8 +23,8 @@ pages:
   script:
     - mysql --user=root --password="root_password" --host=mysql --execute "CREATE DATABASE banned_history CHARACTER SET utf8 COLLATE utf8_general_ci;"
     - cp -r ./node_modules/pdfjs-dist ./public/
-    - GITLAB_CI=true npm run init-db
-    - GITLAB_CI=true npm run build
+    - CI=true npm run init-db
+    - SITE_URL='https://banned-historical-archives.gitlab.io' CI=true npm run build
     - rm -rf public
     - mv out public
   artifacts:  
