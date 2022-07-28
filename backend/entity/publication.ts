@@ -27,7 +27,7 @@ export default class Publication {
   @Column({type: 'varchar'})
   pdf!: string;
 
-  @OneToMany(() => Article, article => article.tags)
+  @OneToMany(() => Article, article => article.publications)
   articles!: Article[];
 
   @OneToMany(() => Comment, comment => comment.publication)

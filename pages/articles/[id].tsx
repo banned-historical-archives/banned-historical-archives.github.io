@@ -1,5 +1,5 @@
 import { useState, useEffect, ReactElement, useMemo } from 'react';
-import Head from 'next/head'
+import Head from 'next/head';
 
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import Menu from '@mui/material/Menu';
@@ -9,17 +9,23 @@ import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
-import { ContentType } from '../../types';
-import { Document, Page, pdfjs  } from 'react-pdf';
+import { ContentType, DiffResult } from '../../types';
+import { Document, Page, pdfjs } from 'react-pdf';
 import Layout from '../../components/Layout';
-import * as Diff from 'diff';
 
 import Content from '../../backend/entity/content';
 import Article from '../../backend/entity/article';
 import Comment from '../../backend/entity/comment';
 import PageEntity from '../../backend/entity/page';
-import { GetStaticProps,GetServerSideProps, GetServerSidePropsContext, GetStaticPropsContext } from 'next'
-import { init } from "../../backend/data-source"
+import {
+  GetStaticProps,
+  GetServerSideProps,
+  GetServerSidePropsContext,
+  GetStaticPropsContext,
+} from 'next';
+import { init } from '../../backend/data-source';
+import { diff } from '../../utils';
+import { DiffViewer } from '../../components/DiffViewer';
 
 pdfjs.GlobalWorkerOptions.workerSrc = `/pdfjs-dist/legacy/build/pdf.worker.min.js`;
 
@@ -50,7 +56,7 @@ export const getStaticProps: GetStaticProps = async (
 ) => {
   const AppDataSource = await init();
   const { id } = context.params as {
-    id: string
+    id: string;
   };
   const articleId = id;
   const article = await AppDataSource.manager.findOne(Article, {
@@ -63,7 +69,7 @@ export const getStaticProps: GetStaticProps = async (
       publications: true,
       tags: true,
       dates: true,
-    }
+    },
   });
   const publication_details: PublicationDetails = {};
   for (const publication of article!.publications) {
@@ -133,7 +139,11 @@ function ArticleComponent({
           .map((i) =>
             [i.year, i.month || '', i.day || ''].filter((j) => j).join('/'),
           )
-          .map((j) => <h2 key={j} style={{ textAlign: 'center' }}>{j}</h2>)
+          .map((j) => (
+            <h2 key={j} style={{ textAlign: 'center' }}>
+              {j}
+            </h2>
+          ))
       )}
       {contents
         .sort((a, b) => (a.index > b.index ? 1 : -1))
@@ -162,7 +172,9 @@ function ArticleComponent({
               const comment_idx = part_comments.shift()!.index;
               content.push(
                 <span key={Math.random()}>{text}</span>,
-                <span key={Math.random()}>[{comment_idx}]</span>,
+                <a key={Math.random()} href={`#comment${comment_idx}`}>
+                  [{comment_idx}]
+                </a>,
               );
             } else {
               content.push(<span key={Math.random()}>{text}</span>);
@@ -171,7 +183,11 @@ function ArticleComponent({
           const key = part.id;
           if (part.type === ContentType.title) {
             return (
-              <Typography key={key} variant="h3" sx={{ textAlign: 'center', margin: 4 }}>
+              <Typography
+                key={key}
+                variant="h3"
+                sx={{ textAlign: 'center', margin: 4 }}
+              >
                 {content}
               </Typography>
             );
@@ -183,7 +199,11 @@ function ArticleComponent({
             );
           } else if (part.type === ContentType.subtitle) {
             return (
-              <Typography key={key} variant="subtitle1" sx={{ textAlign: 'center' }}>
+              <Typography
+                key={key}
+                variant="subtitle1"
+                sx={{ textAlign: 'center' }}
+              >
                 {content}
               </Typography>
             );
@@ -199,12 +219,24 @@ function ArticleComponent({
             );
           } else if (part.type === ContentType.paragraph) {
             return (
-              <Typography key={key} variant="body1" sx={{ textIndent: '2em', margin: 0.5 }}>
+              <Typography
+                key={key}
+                variant="body1"
+                sx={{ textIndent: '2em', margin: 0.5 }}
+              >
                 {content}
               </Typography>
             );
           }
         })}
+      {comments.filter((i) => i.index !== -1).length ? (
+        <>
+          <Divider sx={{ mt: 2, mb: 2 }} />
+          <Typography variant="h6" sx={{ mb: 2 }}>
+            注释
+          </Typography>
+        </>
+      ) : null}
       {comments
         .filter((i) => i.index !== -1)
         .sort((a, b) => (a.index > b.index ? 1 : -1))
@@ -223,70 +255,44 @@ function join_text(contents: { text: string }[]) {
   return s;
 }
 
-type LineDiff = {
-  id: string;
-  removed?: boolean;
-  added?: boolean;
-  value: string;
-};
-type ArticleDiff = { line_diffs: LineDiff[]; id: string }[];
 enum CompareMode {
   line = '逐行对比',
   literal = '逐字对比',
 }
-export default function ArticleViewer({ article, publication_details }: { article: Article, publication_details: PublicationDetails }) {
+export default function ArticleViewer({
+  article,
+  publication_details,
+}: {
+  article: Article;
+  publication_details: PublicationDetails;
+}) {
   const id = article.id;
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [compareType, setCompareType] = useState<CompareType>(CompareType.none);
-  const [comparePublication, setComparePublication] = useState<string>(article.publications[article.publications.length - 1].id);
+  const [comparePublication, setComparePublication] = useState<string>(
+    article.publications[article.publications.length - 1].id,
+  );
   const [compareMode, setCompareMode] = useState(CompareMode.line);
-  const [selectedPublication, setSelectedPublication] = useState<string>(article.publications[0].id);
+  const [selectedPublication, setSelectedPublication] = useState<string>(
+    article.publications[0].id,
+  );
 
-  const article_diff: ArticleDiff | undefined = useMemo(() => {
+  const article_diff: DiffResult | undefined = useMemo(() => {
     if (compareType !== CompareType.version || !article) return;
-    let i = 0;
-
-    let contents_a: {text: string}[] = publication_details[selectedPublication].contents.sort((a, b) => (a.index > b.index ? 1 : -1));
-    let contents_b: {text: string}[] = publication_details[comparePublication!].contents.sort((a, b) => (a.index > b.index ? 1 : -1));
+    let contents_a: { text: string }[] = publication_details[
+      selectedPublication
+    ].contents.sort((a, b) => (a.index > b.index ? 1 : -1));
+    let contents_b: { text: string }[] = publication_details[
+      comparePublication!
+    ].contents.sort((a, b) => (a.index > b.index ? 1 : -1));
     if (compareMode === CompareMode.literal) {
       contents_a = [{ text: join_text(contents_a) }];
       contents_b = [{ text: join_text(contents_b) }];
     }
-    const a_diff: ArticleDiff = [];
-    while (i < contents_a.length && i < contents_b.length) {
-      const line_diffs: LineDiff[] = [];
-      a_diff.push({ line_diffs, id: Math.random().toString() });
-      const line_diff = Diff.diffChars(contents_a[i].text, contents_b[i].text);
-      for (const r of line_diff) {
-        line_diffs.push({
-          id: Math.random().toString(),
-          removed: r.removed,
-          added: r.added,
-          value: r.value,
-        });
-      }
-      ++i;
-    }
-    if (contents_a.length != contents_b.length) {
-      const max_len = Math.max(contents_a.length, contents_b.length);
-      const target =
-        contents_a.length > contents_b.length ? contents_a : contents_b;
-      while (i < max_len) {
-        a_diff.push({
-          line_diffs: [
-            {
-              id: Math.random().toString(),
-              removed: target === contents_a ? false : true,
-              added: target === contents_a ? true : false,
-              value: target[i].text,
-            },
-          ],
-          id: Math.random().toString(),
-        });
-        ++i;
-      }
-    }
-    return a_diff;
+    return diff(
+      contents_a.map((i) => i.text),
+      contents_b.map((i) => i.text),
+    );
   }, [
     compareType,
     compareMode,
@@ -309,6 +315,7 @@ export default function ArticleViewer({ article, publication_details }: { articl
       sx={{
         flex: 1,
         overflowY: compareType === CompareType.none ? 'none' : 'scroll',
+        p: 1,
       }}
       key="version_a"
     >
@@ -323,8 +330,7 @@ export default function ArticleViewer({ article, publication_details }: { articl
     compare_elements.push(
       <Stack key="origin" sx={{ flex: 1, overflowY: 'scroll' }}>
         <Typography variant="subtitle1">
-          来源文件(页码{page.start}-{page.end}
-          )
+          来源文件(页码{page.start}-{page.end})
           <a href={publication.pdf} target="__blank">
             [下载]
           </a>
@@ -336,13 +342,9 @@ export default function ArticleViewer({ article, publication_details }: { articl
             cMapPacked: true,
           }}
         >
-          {new Array(
-            page.end - page.start + 1,
-          )
-            .fill(0)
-            .map((i, idx) => (
-              <Page pageNumber={idx + page.start} key={idx} />
-            ))}
+          {new Array(page.end - page.start + 1).fill(0).map((i, idx) => (
+            <Page pageNumber={idx + page.start} key={idx} />
+          ))}
         </Document>
       </Stack>,
     );
@@ -384,22 +386,7 @@ export default function ArticleViewer({ article, publication_details }: { articl
           <MenuItem value={CompareMode.literal}>{CompareMode.literal}</MenuItem>
         </Select>
         <Stack sx={{ overflowY: 'scroll' }}>
-          {article_diff
-            ? article_diff!.map((i) => (
-                <p key={i.id}>
-                  {i.line_diffs.map((j) => (
-                    <span
-                      key={j.id}
-                      style={{
-                        color: j.added ? 'green' : j.removed ? 'red' : 'auto',
-                      }}
-                    >
-                      {j.value}
-                    </span>
-                  ))}
-                </p>
-              ))
-            : null}
+          <DiffViewer diff={article_diff} />
         </Stack>
       </Stack>,
     );
@@ -495,6 +482,7 @@ export default function ArticleViewer({ article, publication_details }: { articl
       </Stack>
       <Head>
         <title>{article.title}</title>
+        <meta name="description" content="和谐历史档案馆 Banned Historical Archives"/>
       </Head>
     </>
   );

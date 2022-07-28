@@ -117,3 +117,11 @@ export type Book = {
   parser_option: ParserOption;
   parser: (path: string, opt: ParserOption) => Promise<ParserResult[]>;
 };
+
+export type LineDiff = {
+  id: string;
+  removed?: boolean;
+  added?: boolean;
+  value: string;
+};
+export type DiffResult = { line_diffs: LineDiff[]; id: string }[];

@@ -66,3 +66,12 @@ test('comment pivot', async () => {
   expect(res[0].comment_pivots.length === res[0].comments.length).toBe(false);
   expect(res).toMatchSnapshot();
 });
+
+test('zhilaohu', async () => {
+  const res = await jinghuo_parser.parse(
+    books.find((i) => i.entity.id === 'maoxuan-jinghuo')!.path,
+    { page_limits: [[1183, 1183]] },
+  );
+  expect(res[0].comment_pivots.length === res[0].comments.length).toBe(true);
+  expect(res).toMatchSnapshot();
+});

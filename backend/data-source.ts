@@ -2,6 +2,9 @@ import "reflect-metadata"
 import { DataSource } from 'typeorm';
 import {
   Article,
+  Audio,
+  Lyric,
+  Music,
   Author,
   Comment,
   Publication,
@@ -25,7 +28,10 @@ const instance = new DataSource({
     Content,
     Date,
     Type,
+    Lyric,
+    Music,
     Page,
+    Audio,
   ],
   migrations: [],
   subscribers: [],
