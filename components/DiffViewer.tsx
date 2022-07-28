@@ -1,11 +1,12 @@
 import { DiffResult } from '../types';
+import Typography from '@mui/material/Typography';
 
 export function DiffViewer({ diff }: { diff?: DiffResult }) {
   if (!diff) return null;
   return (
     <>
       {diff!.map((i) => (
-        <p key={i.id}>
+        <Typography key={i.id} variant="body1" sx={{ margin: 0.5 }}>
           {i.line_diffs.map((j) => (
             <span
               key={j.id}
@@ -16,7 +17,7 @@ export function DiffViewer({ diff }: { diff?: DiffResult }) {
               {j.value}
             </span>
           ))}
-        </p>
+        </Typography>
       ))}
     </>
   );
