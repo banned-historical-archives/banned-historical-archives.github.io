@@ -1,4 +1,5 @@
 import React, { ReactElement, useEffect, useRef, useState } from 'react';
+import Head from 'next/head'
 import Popover from '@mui/material/Popover';
 import SkipNextIcon from '@mui/icons-material/SkipNext';
 import SkipPreviousIcon from '@mui/icons-material/SkipPrevious';
@@ -389,6 +390,10 @@ export default function Music({ music }: { music: MusicEntity[] }) {
 
   return (
     <Stack p={2} sx={{ height: '100%', overflow: 'scroll' }}>
+      <Head>
+        <title>和谐历史档案馆 Banned Historical Archives</title>
+        <meta name="description" content="和谐历史档案馆 Banned Historical Archives"/>
+      </Head>
       <Typography variant="h4" sx={{ mb: 1 }}>
         音乐
       </Typography>

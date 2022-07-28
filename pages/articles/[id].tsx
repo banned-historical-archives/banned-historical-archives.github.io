@@ -482,6 +482,7 @@ export default function ArticleViewer({
       </Stack>
       <Head>
         <title>{article.title}</title>
+        <meta name="description" content="和谐历史档案馆 Banned Historical Archives"/>
       </Head>
     </>
   );
