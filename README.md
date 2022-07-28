@@ -11,6 +11,19 @@
 
 同时收录一部分公开的资料用于版本对比和校验。
 
+## 功能简介
+### 文稿版本对比
+![文稿版本对比](/images/comparison.png)
+例如[在扩大的中央工作会议上的讲话](/articles/cc4883b1ab)这篇文章，点击右上角“对比”按钮，选择“对比不同来源解析后的文本”。对比模式默认为“逐行对比”，根据情况可选择“逐字对比”，后者在对比前会合并所有段落。
+
+### 文稿来源对比
+![文稿来源对比](/images/comparison_pdf.png)
+左侧文稿为程序解析后的文稿，如果与原始文稿不符（包括不限于文本遗漏，排版问题，注释定位问题等），欢迎在
+[\[Github\]](https://github.com/banned-historical-archives/banned-historical-archives.github.io/issues)反馈。
+
+### 歌词版本对比
+![歌词版本对比](/images/comparison_lyric.png)
+
 ## 计划收录的文稿
 
 |名称|作者及出版社|内部文件|官方|收录状态|
@@ -169,6 +182,8 @@
 ```
 
 ## 开发
+
+### 源代码
 
 [\[Github\]](https://github.com/banned-historical-archives/banned-historical-archives.gitlab.io)
 [\[Gitlab\]](https://gitlab.com/banned-historical-archives/banned-historical-archives.gitlab.io)
