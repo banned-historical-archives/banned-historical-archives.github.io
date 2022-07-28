@@ -19,7 +19,7 @@ import Comment from '../../backend/entity/comment';
 import PageEntity from '../../backend/entity/page';
 import { GetStaticProps,GetServerSideProps, GetServerSidePropsContext, GetStaticPropsContext } from 'next'
 import { init } from "../../backend/data-source"
-import { diff } from '../utils';
+import { diff } from '../../utils';
 import { DiffViewer } from '../../components/DiffViewer';
 
 pdfjs.GlobalWorkerOptions.workerSrc = `/pdfjs-dist/legacy/build/pdf.worker.min.js`;

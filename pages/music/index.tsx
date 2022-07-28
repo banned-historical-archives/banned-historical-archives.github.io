@@ -37,7 +37,7 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import PauseCircleIcon from '@mui/icons-material/PauseCircle';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { diff } from '../utils';
+import { diff } from '../../utils';
 import { DiffViewer } from '../../components/DiffViewer';
 
 export const getStaticProps: GetStaticProps = async (
@@ -231,6 +231,10 @@ function Player({
               cursor: 'pointer',
               color: i === playingName ? '#cc0000' : 'inherit',
             }}
+            onClick={() => {
+              setPlayingName(i);
+              setPlaying(true);
+            }}
           >
             {i}
           </Typography>
@@ -371,7 +375,7 @@ export default function Music({ music }: { music: MusicEntity[] }) {
     if (!playing) return;
     audioRef.current.src = playlist[playingName];
     audioRef.current.play().catch(() => {});
-  }, [playingName, playing]);
+  }, [playingName, playing, playlist]);
 
   return (
     <Stack p={2} sx={{ height: '100%', overflow: 'scroll' }}>
