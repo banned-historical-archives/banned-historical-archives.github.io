@@ -86,7 +86,7 @@ function Song({
       <AccordionDetails>
         <Divider />
         <Typography variant="h6" sx={{ mt: 2, mb: 2 }}>
-          演奏版本：
+          演唱/演奏版本：
         </Typography>
         <Stack>
           {song.lyrics.map((lyric) => (
@@ -211,7 +211,6 @@ function Player({
         open={!!anchorEl}
         anchorEl={anchorEl}
         disableRestoreFocus
-        onClose={handleClose}
         anchorOrigin={{
           vertical: 'top',
           horizontal: 'right',
@@ -220,7 +219,10 @@ function Player({
           vertical: 'bottom',
           horizontal: 'right',
         }}
-        PaperProps={{ style: { transform: 'translateX(-10px)' } }}
+        PaperProps={{
+          onMouseLeave: () => handleClose(),
+          style: { transform: 'translateX(-10px)' },
+        }}
       >
         {Object.keys(playlist).map((i) => (
           <Typography

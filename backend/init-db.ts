@@ -204,6 +204,12 @@ async function init_articles(AppDataSource: DataSource) {
 }
 
 async function init_music(AppDataSource: DataSource) {
+  for (const table of ['Audio', 'Lyric', 'Music']) {
+    const repository = await AppDataSource.getRepository(table);
+    await repository.query(`SET FOREIGN_KEY_CHECKS=OFF`);
+    await repository.query(`DELETE FROM ${table.toLowerCase()};`);
+    await repository.query(`SET FOREIGN_KEY_CHECKS=ON`);
+  }
   for (const music of musicData) {
     const id = hash([music.name]);
     await AppDataSource.manager.upsert(
@@ -218,12 +224,16 @@ async function init_music(AppDataSource: DataSource) {
     );
     for (const lyric of music.lyrics) {
       const lid = hash([lyric.content]);
-      await AppDataSource.manager.upsert(Lyric, {
-        id: lid,
-        content: lyric.content,
-        lyricist: lyric.lyricist,
-        version: lyric.version,
-      }, ['id']);
+      await AppDataSource.manager.upsert(
+        Lyric,
+        {
+          id: lid,
+          content: lyric.content,
+          lyricist: lyric.lyricist,
+          version: lyric.version,
+        },
+        ['id'],
+      );
       await AppDataSource.createQueryBuilder()
         .relation(Music, 'lyrics')
         .of(id)
@@ -231,21 +241,21 @@ async function init_music(AppDataSource: DataSource) {
         .catch((e) => {});
       for (const audio of lyric.audios) {
         const aid = hash([audio.url]);
-      await AppDataSource.manager.upsert(
-        Audio,
-        {
-          id: aid,
-          artist: audio.artist,
-          source: audio.source,
-          url: audio.url,
-        },
-        ['id'],
-      );
-      await AppDataSource.createQueryBuilder()
-        .relation(Lyric, 'audios')
-        .of(lid)
-        .add(aid)
-        .catch((e) => {});
+        await AppDataSource.manager.upsert(
+          Audio,
+          {
+            id: aid,
+            artist: audio.artist,
+            source: audio.source,
+            url: audio.url,
+          },
+          ['id'],
+        );
+        await AppDataSource.createQueryBuilder()
+          .relation(Lyric, 'audios')
+          .of(lid)
+          .add(aid)
+          .catch((e) => {});
       }
     }
   }
