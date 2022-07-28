@@ -85,7 +85,7 @@ function Song({
       </AccordionSummary>
       <AccordionDetails>
         <Divider />
-        <Typography variant="h6" sx={{ mt: 2, mb: 2 }}>
+        <Typography variant="subtitle1" sx={{ mt: 2, mb: 2 }}>
           演唱/演奏版本：
         </Typography>
         <Stack>
@@ -113,15 +113,18 @@ function Song({
           ))}
         </Stack>
         <Divider sx={{ mt: 2 }} />
-        <Typography variant="h6" sx={{ mt: 2, mb: 2 }}>
-          歌词对比：
-        </Typography>
+        {song.lyrics.length > 1 ? (
+          <Typography variant="subtitle1" sx={{ mt: 2, mb: 2 }}>
+            歌词对比：
+          </Typography>
+        ) : null}
         <Stack direction="row" spacing={2}>
           <Stack sx={{ flex: 1 }}>
             <Select
               size="small"
               value={lyricLeft}
               label="版本"
+              sx={{ mb: 1 }}
               onChange={(e) => {
                 setLyricLeft(e.target.value);
               }}
@@ -138,32 +141,37 @@ function Song({
               ))}
             </Stack>
           </Stack>
-          <Stack sx={{ flex: 1 }}>
-            <Select
-              size="small"
-              value={lyricRight}
-              label="版本"
-              onChange={(e) => {
-                setLyricRight(e.target.value);
-              }}
-            >
-              {song.lyrics.map((lyric) => (
-                <MenuItem key={lyric.id} value={lyric.id}>
-                  {lyric.version}
-                </MenuItem>
-              ))}
-            </Select>
-            <Stack>
-              {rightContents.map((line, idx) => (
-                <Typography key={idx}>{line}</Typography>
-              ))}
-            </Stack>
-          </Stack>
-          <Stack sx={{ flex: 1 }}>
-            <Stack>
-              <DiffViewer diff={diff(leftContents, rightContents)} />
-            </Stack>
-          </Stack>
+          {song.lyrics.length > 1 ? (
+            <>
+              <Stack sx={{ flex: 1 }}>
+                <Select
+                  size="small"
+                  value={lyricRight}
+                  label="版本"
+                  sx={{ mb: 1 }}
+                  onChange={(e) => {
+                    setLyricRight(e.target.value);
+                  }}
+                >
+                  {song.lyrics.map((lyric) => (
+                    <MenuItem key={lyric.id} value={lyric.id}>
+                      {lyric.version}
+                    </MenuItem>
+                  ))}
+                </Select>
+                <Stack>
+                  {rightContents.map((line, idx) => (
+                    <Typography key={idx}>{line}</Typography>
+                  ))}
+                </Stack>
+              </Stack>
+              <Stack sx={{ flex: 1 }}>
+                <Stack>
+                  <DiffViewer diff={diff(leftContents, rightContents)} />
+                </Stack>
+              </Stack>
+            </>
+          ) : null}
         </Stack>
       </AccordionDetails>
     </Accordion>
@@ -383,6 +391,9 @@ export default function Music({ music }: { music: MusicEntity[] }) {
     <Stack p={2} sx={{ height: '100%', overflow: 'scroll' }}>
       <Typography variant="h4" sx={{ mb: 1 }}>
         音乐
+      </Typography>
+      <Typography variant="body1" sx={{ mb: 1 }}>
+        收录无产阶级文化大革命前后创作的音乐，其中一类是文革后被刻意修改歌词的音乐，另一类是歌词或标题敏感的音乐。
       </Typography>
       <audio
         ref={audioRef}
