@@ -31,7 +31,7 @@
       "internalConsoleOptions": "openOnSessionStart",
       "skipFiles": ["<node_internals>/**", "node_modules/**"],
       "env": {
-        "TS_NODE_PROJECT": "tsconfig.node.json"
+        "TS_NODE_PROJECT": "tsconfig.build.json"
       }
     },
     {

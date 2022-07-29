@@ -1,4 +1,5 @@
 import { useState, useEffect, ReactElement, useMemo } from 'react';
+import { diff_match_patch, Diff } from 'diff-match-patch';
 import Head from 'next/head';
 
 import Select, { SelectChangeEvent } from '@mui/material/Select';
@@ -9,7 +10,7 @@ import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
-import { ContentType, DiffResult } from '../../types';
+import { ContentType } from '../../types';
 import { Document, Page, pdfjs } from 'react-pdf';
 import Layout from '../../components/Layout';
 
@@ -24,7 +25,6 @@ import {
   GetStaticPropsContext,
 } from 'next';
 import { init } from '../../backend/data-source';
-import { diff } from '../../utils';
 import { DiffViewer } from '../../components/DiffViewer';
 
 pdfjs.GlobalWorkerOptions.workerSrc = `/pdfjs-dist/legacy/build/pdf.worker.min.js`;
@@ -277,7 +277,7 @@ export default function ArticleViewer({
     article.publications[0].id,
   );
 
-  const article_diff: DiffResult | undefined = useMemo(() => {
+  const article_diff: Diff[][] | undefined = useMemo(() => {
     if (compareType !== CompareType.version || !article) return;
     let contents_a: { text: string }[] = publication_details[
       selectedPublication
@@ -288,11 +288,22 @@ export default function ArticleViewer({
     if (compareMode === CompareMode.literal) {
       contents_a = [{ text: join_text(contents_a) }];
       contents_b = [{ text: join_text(contents_b) }];
+      return [new diff_match_patch().diff_main(
+        join_text(contents_a),
+        join_text(contents_b),
+      )];
     }
-    return diff(
-      contents_a.map((i) => i.text),
-      contents_b.map((i) => i.text),
-    );
+    const max_len = Math.max(contents_a.length, contents_b.length);
+
+    let i = 0;
+    const res: Diff[][] = [];
+    while (i < max_len) {
+      const a = contents_a[i] ? contents_a[i].text : '';
+      const b = contents_b[i] ? contents_b[i].text : '';
+      res.push(new diff_match_patch().diff_main(a, b));
+      ++i;
+    }
+    return res;
   }, [
     compareType,
     compareMode,
@@ -481,8 +492,7 @@ export default function ArticleViewer({
         </Stack>
       </Stack>
       <Head>
-        <title>{article.title}</title>
-        <meta name="description" content="和谐历史档案馆 Banned Historical Archives"/>
+        <title>{article.title} - 和谐历史档案馆 Banned Historical Archives</title>
       </Head>
     </>
   );

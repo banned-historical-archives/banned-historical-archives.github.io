@@ -1,4 +1,5 @@
 import '../styles/globals.css'
+import Head from 'next/head';
 import dynamic from 'next/dynamic';
 import type { AppProps } from 'next/app'
 
@@ -36,6 +37,11 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
 
   return (
     <ThemeProvider theme={theme}>
+      <Head>
+        <meta http-equiv="content-language" content="zh-CN" />
+        <meta name="description" content="和谐历史档案馆 Banned Historical Archives"/>
+      </Head>
+      <h1 style={{ position: 'fixed', left: '100%' }}>和谐历史档案馆</h1>
       {getLayout(<Component {...pageProps} />)}
     </ThemeProvider>
   );

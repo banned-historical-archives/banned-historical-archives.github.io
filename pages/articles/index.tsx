@@ -258,7 +258,6 @@ export default function Articles({ articles }: { articles: Article[] }) {
     <>
       <Head>
         <title>和谐历史档案馆 Banned Historical Archives</title>
-        <meta name="description" content="和谐历史档案馆 Banned Historical Archives"/>
       </Head>
       <Dialog
         onClose={() => setDateFilterDialog((s) => ({ ...s, show: false }))}
