@@ -253,6 +253,7 @@ function Player({
               color: i === playingName ? '#cc0000' : 'inherit',
             }}
             onClick={() => {
+              handleClose();
               setPlayingName(i);
               setPlaying(true);
             }}
@@ -285,9 +286,22 @@ function Player({
             zIndex: 10,
             right: 70,
           }}
+          onClick={handleClick}
           onMouseEnter={handleClick}
         >
-          <Typography sx={{ whiteSpace: 'nowrap' }}>{playingName}</Typography>
+          <Typography
+            sx={{
+              whiteSpace: 'nowrap',
+              textOverflow: 'ellipsis',
+              overflow: 'hidden',
+              width: {
+                xs: '200px',
+                sm: 'auto',
+              },
+            }}
+          >
+            {playingName}
+          </Typography>
         </Paper>
         <SpeedDial
           ariaLabel="player"
@@ -407,7 +421,7 @@ export default function Music({ music }: { music: MusicEntity[] }) {
         音乐
       </Typography>
       <Typography variant="body1" sx={{ mb: 1 }}>
-        收录无产阶级文化大革命前后创作的音乐，其中一类是文革后被刻意修改歌词的音乐，另一类是歌词或标题敏感的音乐。
+        主要收录无产阶级文化大革命前后创作的红色音乐，其中一类是文革后被刻意修改歌词的音乐，另一类是歌词或标题被视为敏感内容的音乐。
       </Typography>
       <audio
         ref={audioRef}
@@ -440,7 +454,12 @@ export default function Music({ music }: { music: MusicEntity[] }) {
         playingName={playingName}
       />
       {music.map((i) => (
-        <Song key={i.id} song={i} setPlayingName={setPlayingName} setPlaying={setPlaying}/>
+        <Song
+          key={i.id}
+          song={i}
+          setPlayingName={setPlayingName}
+          setPlaying={setPlaying}
+        />
       ))}
     </Stack>
   );

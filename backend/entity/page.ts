@@ -22,7 +22,7 @@ export default class Page {
   @ManyToOne(() => Article)
   article!: Article;
 
-  @Column({type: 'int'})
+  @Column({type: 'int', comment: '文稿所在页码，相对于 pdf 而不是实体书籍中的页码'})
   start!: number;
   @Column({type: 'int'})
   end!: number;

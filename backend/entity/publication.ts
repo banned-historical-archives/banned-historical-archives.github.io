@@ -16,15 +16,15 @@ export default class Publication {
   @Column({type: 'varchar'})
   name!: string;
 
-  @Column({type: 'bool'})
+  @Column({type: 'bool', comment: `内部文件`})
   internal!: boolean;
 
-  @Column({type: 'bool'})
+  @Column({type: 'bool', comment: `官方出版`})
   official!: boolean;
 
   @Column({type: 'varchar'})
   author!: string;
-  @Column({type: 'varchar'})
+  @Column({type: 'varchar', comment: '下载地址'})
   pdf!: string;
 
   @OneToMany(() => Article, article => article.publications)

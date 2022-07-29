@@ -22,6 +22,11 @@ a {
   }
 }
 
+.markdown {
+  font-family: "Roboto","Helvetica","Arial",sans-serif;
+}
 .markdown img {
   width: 100%;
+  box-shadow: gray 0px 0 3px;
+  border: 12px solid white;
 }

@@ -46,7 +46,7 @@ export const getStaticProps: GetStaticProps = async (
   return {
     props: {
       articles: JSON.parse(JSON.stringify(articles)),
-    }, // will be passed to the page component as props
+    },
   };
 };
 
