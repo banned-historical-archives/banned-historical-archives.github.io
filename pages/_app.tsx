@@ -40,6 +40,7 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
       <Head>
         <meta httpEquiv="content-language" content="zh-CN" />
         <meta name="description" content="和谐历史档案馆 Banned Historical Archives"/>
+        <meta name="color-scheme" content="light only"></meta>
       </Head>
       <h1 style={{ position: 'fixed', left: '100%' }}>和谐历史档案馆</h1>
       {getLayout(<Component {...pageProps} />)}
