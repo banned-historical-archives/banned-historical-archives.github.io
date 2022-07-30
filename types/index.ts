@@ -8,7 +8,7 @@ export enum ContentType {
   subdate = 'subdate',
   description = 'description',
   paragraph = 'paragraph',
-  cite = 'cite',
+  quotation = 'quotation',
   comment = 'comment',
 }
 

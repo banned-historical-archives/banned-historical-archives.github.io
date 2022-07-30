@@ -158,7 +158,7 @@
     }[];
     contents: { // 文稿内容
       text: string;
-      type: enum; // title(大标题) | subtitle(子标题) | paragraph(段落) | appellation(称谓) | cite(引文)
+      type: enum; // title(大标题) | subtitle(子标题) | paragraph(段落) | appellation(称谓) | quotation(引文)
     }[];
     /**
      * 文稿注释

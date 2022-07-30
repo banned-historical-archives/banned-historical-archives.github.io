@@ -163,7 +163,7 @@ export default function Navbar() {
                 onKeyDown={(e) => {
                   if (e.key === 'Enter') {
                     window.open(
-                      'https://bing.com/search?ensearch=1&q=' +
+                      'https://google.com/search?q=' +
                         encodeURIComponent(
                           'site:banned-historical-archives.github.io ' +
                             inputValue,
