@@ -44,8 +44,14 @@ async function init_articles(AppDataSource: DataSource) {
     for (const r of res) {
       const article_id = hash([
         r.title,
-        JSON.stringify(r.dates),
-        JSON.stringify(r.authors),
+        JSON.stringify(
+          r.dates.sort((a, b) =>
+            `${a.year}-${a.month}-${a.day}` > `${b.year}-${b.month}-${b.day}`
+              ? 1
+              : -1,
+          ),
+        ),
+        JSON.stringify(r.authors.sort((a, b) => (a > b ? 1 : -1))),
         JSON.stringify(r.file_id || ''),
         JSON.stringify(r.is_range_date),
       ]);

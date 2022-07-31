@@ -64,7 +64,7 @@ function ensure_two_digits(a?: number) {
 
 const articleCategoryToCN: { [key in ArticleCategory]: string } = {
   centralFile: '中央文件',
-  editorial: '社论',
+  editorial: '重要报刊和社论',
   keyFigures: '关键人物文稿',
   keyPapersFromTheMasses: '群众运动重要文献',
 };
