@@ -13,7 +13,6 @@ import Link from 'next/link'
 import Layout from '../../components/Layout';
 import Article from '../../backend/entity/article';
 import type Date from '../../backend/entity/date';
-import type Type from '../../backend/entity/type';
 
 import TextField from '@mui/material/TextField';
 import DialogTitle from '@mui/material/DialogTitle';
@@ -25,7 +24,7 @@ import Button from '@mui/material/Button';
 import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
 import SettingsIcon from '@mui/icons-material/Settings';
-import { ArticleType } from '../../types';
+import { ArticleType, TagType } from '../../types';
 import Typography from '@mui/material/Typography';
 import { GetStaticProps,GetServerSideProps, GetServerSidePropsContext, GetStaticPropsContext } from 'next'
 import { init } from "../../backend/data-source"
@@ -62,7 +61,9 @@ const columns: GridColDef<Article>[] = [
     minWidth: 350,
     flex: 1,
     renderCell: (params: GridRenderCellParams<string, Article>) => (
-      <a href={`/articles/${params.row.id}`} rel="noreferrer" target="_blank">{params.row!.title}</a>
+      <a href={`/articles/${params.row.id}`} rel="noreferrer" target="_blank">
+        {params.row!.title}
+      </a>
     ),
   },
   {
@@ -122,29 +123,6 @@ const columns: GridColDef<Article>[] = [
     ),
   },
   {
-    field: 'types',
-    headerName: '文章类型',
-    minWidth: 150,
-    flex: 1,
-    sortComparator: (a: Type[], b: Type[]) => {
-      return a.map((i) => i.type).join(',') > b.map((i) => i.type).join(',')
-        ? 1
-        : -1;
-    },
-    renderCell: (params: GridRenderCellParams<string, Article>) => (
-      <Stack direction="row" spacing={1}>
-        {params.row!.types.map((i) => (
-          <Chip
-            key={i.type}
-            label={article_types[i.type]}
-            variant="outlined"
-            color="default"
-          />
-        ))}
-      </Stack>
-    ),
-  },
-  {
     field: 'publications',
     headerName: '来源',
     flex: 1,
@@ -158,7 +136,7 @@ const columns: GridColDef<Article>[] = [
     minWidth: 150,
     flex: 1,
     valueGetter: (params: GridValueGetterParams<Article, Article>) =>
-      params.row.tags.map((i) => i.name).join(','),
+      params.row.tags.map((i) => `${i.type}:${i.name}`).join(','),
   },
 ];
 
@@ -221,7 +199,12 @@ const default_date_filter = {
 const authors = ['毛泽东', '江青', '王洪文', '张春桥', '姚文元'];
 export default function Articles({ articles }: { articles: Article[] }) {
   const [dateFilter, setDateFilter] = useState<DateFilter>(default_date_filter);
-  const [typeFilters, setTypeFilters] = useState<ArticleType[]>([]);
+  const [tagFilters, setTagFilters] = useState<
+    {
+      name: string;
+      type: TagType;
+    }[]
+  >([]);
   const [authorFilters, setAuthorFilters] = useState<string[]>([]);
   const [dateFilterDialog, setDateFilterDialog] = useState<
     {
@@ -244,14 +227,16 @@ export default function Articles({ articles }: { articles: Article[] }) {
           : true,
       )
       .filter((i) =>
-        typeFilters.length
-          ? typeFilters.reduce<boolean>(
-              (m, j) => m || !!i.types.find((k) => k.type === j),
+        tagFilters.length
+          ? tagFilters.reduce<boolean>(
+              (m, j) =>
+                m ||
+                !!i.tags.find((k) => k.type === j.type && k.name === j.name),
               false,
             )
           : true,
       );
-  }, [articles, dateFilter, typeFilters, authorFilters]);
+  }, [articles, dateFilter, tagFilters, authorFilters]);
 
   return (
     <>
@@ -421,7 +406,7 @@ export default function Articles({ articles }: { articles: Article[] }) {
             {(
               Object.keys(article_types) as Array<keyof typeof ArticleType>
             ).map((i) => {
-              const found = typeFilters.find((j) => j === i);
+              const found = tagFilters.find((j) => j.type === TagType.articleType && j.name === i);
               return (
                 <Chip
                   key={i}
@@ -430,15 +415,18 @@ export default function Articles({ articles }: { articles: Article[] }) {
                   color={found ? 'primary' : 'default'}
                   onDelete={
                     found
-                      ? () => setTypeFilters((f) => f.filter((j) => j !== i))
+                      ? () => setTagFilters((f) => f.filter((j) => !(j.type === TagType.articleType && j.name === i)))
                       : undefined
                   }
                   onClick={(e) => {
                     if (found) {
-                      setTypeFilters((f) => f.filter((j) => j !== i));
+                      setTagFilters((f) => f.filter((j) => !(j.type === TagType.articleType && j.name === i)));
                       return;
                     }
-                    setTypeFilters((f) => [...f, ArticleType[i]]);
+                    setTagFilters((f) => [
+                      ...f,
+                      { name: ArticleType[i], type: TagType.articleType },
+                    ]);
                   }}
                 />
               );
