@@ -418,7 +418,7 @@ export async function parse(
           type: TagType.character,
         }),
       );
-    const content = a.CONTENTS.split('\r\n\r\n')[1] || a.CONTENTS;
+    const content = a.CONTENTS.split('\r\n\r\n').slice(1).join('\r\n') || a.CONTENTS;
     const article: ParserResult = {
       title: a.TITLE,
       tags,
@@ -434,10 +434,20 @@ export async function parse(
         },
       ],
       is_range_date: false,
-      parts: content.split('\r\n').map(i => i.trim()).filter(i => i).map(i => ({
-        text: i,
-        type: ContentType.paragraph,
-      })),
+      parts: [
+        {
+          text: a.TITLE,
+          type: ContentType.title,
+        },
+        ...content
+          .split('\r\n')
+          .map((i) => i.trim())
+          .filter((i) => i)
+          .map((i) => ({ // TODO
+            text: i,
+            type: ContentType.paragraph,
+          })),
+      ],
       comments: [],
       comment_pivots: [],
       file_id: '',

@@ -24,7 +24,7 @@ import Button from '@mui/material/Button';
 import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
 import SettingsIcon from '@mui/icons-material/Settings';
-import { ArticleType, TagType } from '../../types';
+import { ArticleCategory, ArticleType, TagType } from '../../types';
 import Typography from '@mui/material/Typography';
 import { GetStaticProps,GetServerSideProps, GetServerSidePropsContext, GetStaticPropsContext } from 'next'
 import { init } from "../../backend/data-source"
@@ -54,6 +54,34 @@ function ensure_two_digits(a?: number) {
   }
   return a < 10 ? `0${a}` : a;
 }
+
+const articleCategoryToCN: { [key in ArticleCategory]: string } = {
+  centralFile: '中央文件',
+  editorial: '社论',
+  keyFigures: '关键人物文稿',
+  keyPapersFromTheMasses: '群众运动重要文献',
+}
+
+const tagTypeToCN: { [key in TagType]: string } = {
+  articleCategory: '文稿大类',
+  articleType: '文稿类型',
+  place: '地点',
+  character: '人物',
+  issuer: '发行机构',
+  subject: '主题',
+}
+
+const articleTypeToCN: { [key in ArticleType]: string } = {
+  writings: '文章',
+  mail: '书信',
+  lecture: '发言',
+  talk: '对话',
+  declaration: '宣言',
+  instruction: '指示',
+  comment: '批示',
+  telegram: '通讯',
+};
+
 const columns: GridColDef<Article>[] = [
   {
     field: 'title',
@@ -136,20 +164,21 @@ const columns: GridColDef<Article>[] = [
     minWidth: 150,
     flex: 1,
     valueGetter: (params: GridValueGetterParams<Article, Article>) =>
-      params.row.tags.map((i) => `${i.type}:${i.name}`).join(','),
+      params.row.tags
+        .map(
+          (i) =>
+            `${tagTypeToCN[i.type]}:${
+              i.type === TagType.articleType
+                ? articleTypeToCN[i.name as ArticleType]
+              :i.type === TagType.articleCategory?
+              articleCategoryToCN[i.name as ArticleCategory]
+                : i.name
+            }`,
+        )
+        .join(','),
   },
 ];
 
-const article_types: { [key in ArticleType]: string } = {
-  writings: '文章',
-  mail: '书信',
-  lecture: '发言',
-  talk: '对话',
-  declaration: '宣言',
-  instruction: '指示',
-  comment: '批示',
-  telegram: '通讯',
-};
 function to_number(s: string) {
   const n = parseInt(s);
   if (!isNaN(n) && n != Infinity && n != -Infinity) {
@@ -404,13 +433,13 @@ export default function Articles({ articles }: { articles: Article[] }) {
           <Stack>文章类型：</Stack>
           <Stack direction="row" spacing={1}>
             {(
-              Object.keys(article_types) as Array<keyof typeof ArticleType>
+              Object.keys(articleTypeToCN) as Array<keyof typeof ArticleType>
             ).map((i) => {
               const found = tagFilters.find((j) => j.type === TagType.articleType && j.name === i);
               return (
                 <Chip
                   key={i}
-                  label={article_types[i]}
+                  label={articleTypeToCN[i]}
                   variant={found ? 'filled' : 'outlined'}
                   color={found ? 'primary' : 'default'}
                   onDelete={

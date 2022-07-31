@@ -35,7 +35,7 @@ import { join } from 'path';
   // const book = books.find(i => i.entity.id === 'wenku')!;
   // const res = await book.parser(book.path, book.parser_option);
 
-  await parse(join(__dirname, '../public/DBF'), {page_limits:[]});
+  await parse(join(__dirname, '../public/TheGPCRdatabase'), {page_limits:[]});
   /*
   const lac_res: LACResult[][] = [];
   for (const p of res) {
