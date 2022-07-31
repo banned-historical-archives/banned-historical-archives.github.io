@@ -1,5 +1,21 @@
 import type Publication from '../backend/entity/publication';
 
+export enum ArticleCategory {
+  centralFile = 'centralFile',
+  editorial = 'editorial',
+  keyFigures = 'keyFigures',
+  keyPapersFromTheMasses = 'keyPapersFromTheMasses',
+}
+
+export enum TagType {
+  articleCategory = 'articleCategory',
+  articleType = 'articleType',
+  place = 'place',
+  character = 'character',
+  issuer = 'issuer',
+  subject = 'subject',
+}
+
 export enum ContentType {
   authors = 'authors',
   appellation = 'appellation',
@@ -45,6 +61,11 @@ export type ParserResult = {
   page_start: number;
   page_end: number;
   origin?: string; // 起源
+  tags?: {
+    name: string,
+    type: TagType
+  }[];
+  file_id?: string;
 
   title_raw?: string;
   date_raw?: string;

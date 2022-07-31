@@ -1,4 +1,4 @@
-import { Entity, PrimaryColumn, Column, PrimaryGeneratedColumn, ManyToMany } from 'typeorm';
+import { Entity, PrimaryColumn, Column, PrimaryGeneratedColumn, ManyToMany, Index } from 'typeorm';
 import {
   Article,
   Comment,
@@ -6,7 +6,6 @@ import {
   Tag,
   Content,
   Date,
-  Type,
   Page,
 } from '../entities';
 
@@ -15,6 +14,7 @@ export default class Author {
   @PrimaryColumn({ type: 'varchar'})
   id!: string;
 
+  @Index()
   @Column({type: 'varchar'})
   name!: string;
 

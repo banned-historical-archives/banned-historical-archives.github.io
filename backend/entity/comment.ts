@@ -5,7 +5,6 @@ import {
   Tag,
   Content,
   Date,
-  Type,
   Page,
 } from '../entities';
 

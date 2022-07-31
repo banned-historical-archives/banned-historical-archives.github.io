@@ -4,7 +4,6 @@ import {
   Comment,
   Publication,
   Tag,
-  Type,
   Page,
 } from '../entities';
 

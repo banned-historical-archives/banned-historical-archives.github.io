@@ -7,7 +7,6 @@ import {
   Tag,
   Content,
   Date,
-  Type,
   Page,
 } from '../entities';
 
@@ -53,10 +52,4 @@ export default class Article {
   })
   @JoinTable()
   authors!: Author[];
-
-  @ManyToMany(() => Type, (t) => t.articles, {
-    cascade: true
-  })
-  @JoinTable()
-  types!: Type[];
 }

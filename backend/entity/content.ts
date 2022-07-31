@@ -1,4 +1,4 @@
-import { Entity, PrimaryColumn, Column, PrimaryGeneratedColumn, ManyToMany, ManyToOne } from 'typeorm';
+import { Entity, PrimaryColumn, Column, PrimaryGeneratedColumn, ManyToMany, ManyToOne, Index } from 'typeorm';
 import { ArticleType, ContentType } from '../../types';
 import {
   Article,
@@ -6,7 +6,6 @@ import {
   Publication,
   Tag,
   Date,
-  Type,
   Page,
 } from '../entities';
 
@@ -15,18 +14,19 @@ export default class Content {
   @PrimaryColumn()
   id!: string;
 
-  @Column({type: 'enum', enum: ContentType})
+  @Index()
+  @Column({ type: 'enum', enum: ContentType })
   type!: ContentType;
 
-  @Column({type: 'text'})
+  @Column({ type: 'text' })
   text!: string;
 
-  @Column({type: 'int'})
+  @Column({ type: 'int' })
   index!: number;
 
-  @Column({nullable: true})
+  @Column({ nullable: true })
   publicationId!: string;
-  @Column({nullable: true})
+  @Column({ nullable: true })
   articleId!: string;
   @ManyToMany(() => Publication)
   publication!: Publication;

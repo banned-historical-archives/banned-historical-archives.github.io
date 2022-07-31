@@ -1579,6 +1579,20 @@
   "resolved" "https://registry.npmmirror.com/date-fns/-/date-fns-2.29.1.tgz"
   "version" "2.29.1"
 
+"dbffile-fix-decoding@^1.8.1":
+  "integrity" "sha512-hnr3MmzcgVmN3ucJvCOD+96KiyrUY/FP7iSEbi9mxPgC/sPscr6zQmd5DGosN9zbhJtuXHQC8WZDbi3iWXpPCw=="
+  "resolved" "https://registry.npmjs.org/dbffile-fix-decoding/-/dbffile-fix-decoding-1.8.1.tgz"
+  "version" "1.8.1"
+  dependencies:
+    "iconv-lite" "^0.4.24"
+
+"dbffile@^1.8.1":
+  "integrity" "sha512-4qDTmCyFVm+FeGRL86ciw4BquH3q0zYuddNokLokXzg8bSau63rthNHXBEb2aH8mi6LFnXN/HQbytMTLSE7BNw=="
+  "resolved" "https://registry.npmmirror.com/dbffile/-/dbffile-1.8.1.tgz"
+  "version" "1.8.1"
+  dependencies:
+    "iconv-lite" "^0.4.24"
+
 "debug@^2.6.9":
   "integrity" "sha512-bC7ElrdJaJnPbAP+1EotYvqZsb3ecl5wi6Bfi6BJTUcNowp6cvspg0jXznRTKDjm/E7AdgFBVeAPVMNcKGsHMA=="
   "resolved" "https://registry.npmmirror.com/debug/-/debug-2.6.9.tgz"
@@ -2467,6 +2481,20 @@
     "statuses" "2.0.1"
     "toidentifier" "1.0.1"
 
+"iconv-lite@^0.4.24":
+  "integrity" "sha512-v3MXnZAcvnywkTUEZomIActle7RXXeedOR31wwl7VlyoXO4Qi9arvSenNQWne1TcRwhCL1HwLI21bEqdpj8/rA=="
+  "resolved" "https://registry.npmjs.org/iconv-lite/-/iconv-lite-0.4.24.tgz"
+  "version" "0.4.24"
+  dependencies:
+    "safer-buffer" ">= 2.1.2 < 3"
+
+"iconv-lite@^0.6.3":
+  "integrity" "sha512-4fCk79wshMdzMp2rH06qWrJE4iolqLhCUH+OiuIgU++RB0+94NlDL81atO7GX55uUKueo0txHNtvEyI6D7WdMw=="
+  "resolved" "https://registry.npmmirror.com/iconv-lite/-/iconv-lite-0.6.3.tgz"
+  "version" "0.6.3"
+  dependencies:
+    "safer-buffer" ">= 2.1.2 < 3.0.0"
+
 "iconv-lite@0.4.24":
   "integrity" "sha512-v3MXnZAcvnywkTUEZomIActle7RXXeedOR31wwl7VlyoXO4Qi9arvSenNQWne1TcRwhCL1HwLI21bEqdpj8/rA=="
   "resolved" "https://registry.npmmirror.com/iconv-lite/-/iconv-lite-0.4.24.tgz"
@@ -2989,6 +3017,11 @@
   "integrity" "sha512-dq+qelQ9akHpcOl/gUVRTxVIOkAJ1wR3QAvb4RsVjS8oVoFjDGTc679wJYmUmknUF5HwMLOgb5O+a3KxfWapPQ=="
   "resolved" "https://registry.npmmirror.com/media-typer/-/media-typer-0.3.0.tgz"
   "version" "0.3.0"
+
+"memo_file@^1.1.0":
+  "integrity" "sha512-t8Vv98XVajQsiBriSyY+8OG0r4pyP94finOfQSE9KZ/99PZRIfrHMGxLNQjrVDyH6iBulL62aYYzJ2IHAmo9pw=="
+  "resolved" "https://registry.npmmirror.com/memo_file/-/memo_file-1.1.0.tgz"
+  "version" "1.1.0"
 
 "merge-class-names@^1.1.1":
   "integrity" "sha512-bOl98VzwCGi25Gcn3xKxnR5p/WrhWFQB59MS/aGENcmUc6iSm96yrFDF0XSNurX9qN4LbJm0R9kfvsQ17i8zCw=="
@@ -3984,7 +4017,7 @@
   "resolved" "https://registry.npmmirror.com/safe-buffer/-/safe-buffer-5.2.1.tgz"
   "version" "5.2.1"
 
-"safer-buffer@>= 2.1.2 < 3":
+"safer-buffer@>= 2.1.2 < 3", "safer-buffer@>= 2.1.2 < 3.0.0":
   "integrity" "sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg=="
   "resolved" "https://registry.npmmirror.com/safer-buffer/-/safer-buffer-2.1.2.tgz"
   "version" "2.1.2"

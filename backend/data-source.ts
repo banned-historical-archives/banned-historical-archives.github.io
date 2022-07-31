@@ -11,7 +11,6 @@ import {
   Tag,
   Content,
   Date,
-  Type,
   Page,
 } from './entities';
 
@@ -27,7 +26,6 @@ const instance = new DataSource({
     Tag,
     Content,
     Date,
-    Type,
     Lyric,
     Music,
     Page,

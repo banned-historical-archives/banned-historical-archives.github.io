@@ -5,6 +5,7 @@ import * as wansui_parser from './parser/wansui_parser';
 import * as wenji_parser from './parser/wenji_parser';
 import * as jqjianghua_parser from './parser/jqjianghua_parser';
 import * as xuanji_parser from './parser/xuanji';
+import * as wenku_parser from './parser/wenku';
 
 const books: Book[] = [
   {
@@ -334,6 +335,21 @@ const books: Book[] = [
     },
     parser: xuanji_parser.parse,
     path: join(__dirname, '../public/books/毛泽东选集(1977)5.pdf'),
+  },
+  {
+    entity: {
+      id: 'wenku',
+      name: '中国文化大革命文库（第一版）',
+      internal: false,
+      official: false,
+      author: '宋永毅',
+      pdf: '',
+    },
+    parser_option: {
+      page_limits: [],
+    },
+    parser: wenku_parser.parse,
+    path: join(__dirname, '../public/TheGPCRdatabase'),
   },
 ];
 export default books;
