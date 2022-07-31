@@ -4,6 +4,7 @@ import Head from 'next/head';
 
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import Menu from '@mui/material/Menu';
+import Grid from '@mui/material/Grid';
 import MenuItem from '@mui/material/MenuItem';
 import Chip from '@mui/material/Chip';
 import Button from '@mui/material/Button';
@@ -16,6 +17,7 @@ import Layout from '../../components/Layout';
 
 import Content from '../../backend/entity/content';
 import Article from '../../backend/entity/article';
+import Date from '../../backend/entity/date';
 import Comment from '../../backend/entity/comment';
 import PageEntity from '../../backend/entity/page';
 import {
@@ -26,6 +28,7 @@ import {
 } from 'next';
 import { init } from '../../backend/data-source';
 import { DiffViewer } from '../../components/DiffViewer';
+import TagComponent from '../../components/TagComponent';
 
 pdfjs.GlobalWorkerOptions.workerSrc = `/pdfjs-dist/legacy/build/pdf.worker.min.js`;
 
@@ -123,27 +126,6 @@ function ArticleComponent({
   const description = comments.find((i) => i.index === -1)?.text;
   return (
     <>
-      <h3>{description}</h3>
-      {article.is_range_date ? (
-        <h2 style={{ textAlign: 'center' }}>
-          {article.dates
-            .map((i) =>
-              [i.year, i.month || '', i.day || ''].filter((j) => j).join('/'),
-            )
-            .sort((a, b) => (a > b ? 1 : -1))
-            .join('至')}
-        </h2>
-      ) : (
-        article.dates
-          .map((i) =>
-            [i.year, i.month || '', i.day || ''].filter((j) => j).join('/'),
-          )
-          .map((j) => (
-            <h2 key={j} style={{ textAlign: 'center' }}>
-              {j}
-            </h2>
-          ))
-      )}
       {contents
         .sort((a, b) => (a.index > b.index ? 1 : -1))
         .map((part) => {
@@ -184,7 +166,7 @@ function ArticleComponent({
             return (
               <Typography
                 key={key}
-                variant="h3"
+                variant="h5"
                 sx={{ textAlign: 'center', margin: 4 }}
               >
                 {content}
@@ -196,7 +178,7 @@ function ArticleComponent({
                 {content}
               </Typography>
             );
-          } else if (part.type === ContentType.subtitle) {
+          } else if (part.type === ContentType.subdate) {
             return (
               <Typography
                 key={key}
@@ -206,7 +188,7 @@ function ArticleComponent({
                 {content}
               </Typography>
             );
-          } else if (part.type === ContentType.subdate) {
+          } else if (part.type === ContentType.subtitle) {
             return (
               <Typography
                 key={key}
@@ -228,6 +210,15 @@ function ArticleComponent({
             );
           }
         })}
+      {description ? (
+        <>
+          <Divider sx={{ mt: 2, mb: 2 }} />
+          <Typography variant="h6" sx={{ mb: 2 }}>
+            描述
+          </Typography>
+          <Typography variant="body1">{description}</Typography>
+        </>
+      ) : null}
       {comments.filter((i) => i.index !== -1).length ? (
         <>
           <Divider sx={{ mt: 2, mb: 2 }} />
@@ -252,6 +243,9 @@ function join_text(contents: { text: string }[]) {
   let s = '';
   contents.forEach((i) => (s += i.text));
   return s;
+}
+function date_to_string(date: Date) {
+  return [date.year || '', date.month || '', date.day || ''].filter((j) => j).join('.');
 }
 
 enum CompareMode {
@@ -414,84 +408,130 @@ export default function ArticleViewer({
         }}
         pb={0}
       >
-        <Stack direction="row" p={2}>
-          <Stack>选择来源：</Stack>
-          <Stack direction="row" spacing={1} sx={{ flex: 1 }}>
-            {article.publications.map((i) => (
-              <Chip
-                key={i.id}
-                label={i.name}
-                variant={selectedPublication === i.id ? 'filled' : 'outlined'}
-                color={selectedPublication === i.id ? 'primary' : 'default'}
-                onClick={(e) => {
-                  setSelectedPublication(i.id);
-                }}
-              />
-            ))}
-          </Stack>
+        <Typography variant="body1" sx={{ pt: 2, pl: 2, pr: 2 }}>
+          标题：
+          {article.title}
+        </Typography>
+        <Grid container alignItems="center" sx={{ pl: 2, pr: 2 }} spacing={2}>
+          <Grid item xs={12} md={3}>
+            <Typography variant="body1" sx={{ overflowX: 'scroll' }}>
+              时间：
+              {article.is_range_date
+                ? `${date_to_string(article.dates[0])}-${date_to_string(
+                    article.dates[1],
+                  )}`
+                : article.dates.map((i) => date_to_string(i)).join(',')}
+            </Typography>
+          </Grid>
+          <Grid item xs={12} md={3}>
+            <Stack direction="row" alignItems="center">
+              <Typography variant="body1">标签：</Typography>
+              <Stack
+                direction="row"
+                spacing={1}
+                alignItems="center"
+                sx={{ flex: 1, overflowX: 'scroll' }}
+              >
+                {article.tags.map((i) => (
+                  <TagComponent tag={i} key={i.id} />
+                ))}
+              </Stack>
+            </Stack>
+          </Grid>
+          <Grid
+            item
+            xs={12}
+            md={6}
+          >
+            <Stack direction="row" alignItems="center" spacing={1}>
+              <Typography variant="body1">选择来源：</Typography>
+              <Stack
+                direction="row"
+                spacing={1}
+                sx={{ flex: 1, overflowX: 'scroll' }}
+              >
+                {article.publications.map((i) => (
+                  <Chip
+                    key={i.id}
+                    label={i.name}
+                    variant={
+                      selectedPublication === i.id ? 'filled' : 'outlined'
+                    }
+                    color={selectedPublication === i.id ? 'primary' : 'default'}
+                    onClick={(e) => {
+                      setSelectedPublication(i.id);
+                    }}
+                  />
+                ))}
+              </Stack>
 
-          <Button
-            variant="outlined"
-            aria-controls={showCompareMenu ? 'basic-menu' : undefined}
-            aria-haspopup="true"
-            size="small"
-            aria-expanded={showCompareMenu ? 'true' : undefined}
-            onClick={(event) => setAnchorEl(event.currentTarget)}
-          >
-            对比
-          </Button>
-          <Menu
-            id="basic-menu"
-            anchorEl={anchorEl}
-            open={showCompareMenu}
-            onClose={() => setAnchorEl(null)}
-            MenuListProps={{
-              'aria-labelledby': 'basic-button',
-            }}
-          >
-            <MenuItem
-              onClick={() => {
-                setCompareType(CompareType.origin);
-                setAnchorEl(null);
-              }}
-            >
-              对比原始文件(pdf)
-            </MenuItem>
-            <MenuItem
-              onClick={() => {
-                setComparePublication(
-                  article.publications.length === 1
-                    ? article.publications[0].id
-                    : article.publications.find((i) => i.id !== publication.id)!
-                        .id,
-                );
-                setCompareType(CompareType.version);
-                setAnchorEl(null);
-              }}
-            >
-              对比不同来源解析后的文本
-            </MenuItem>
-            <MenuItem
-              onClick={() => {
-                setCompareType(CompareType.none);
-                setAnchorEl(null);
-              }}
-            >
-              取消
-            </MenuItem>
-          </Menu>
-        </Stack>
+              <Button
+                variant="outlined"
+                aria-controls={showCompareMenu ? 'basic-menu' : undefined}
+                aria-haspopup="true"
+                size="small"
+                aria-expanded={showCompareMenu ? 'true' : undefined}
+                onClick={(event) => setAnchorEl(event.currentTarget)}
+              >
+                对比
+              </Button>
+              <Menu
+                id="basic-menu"
+                anchorEl={anchorEl}
+                open={showCompareMenu}
+                onClose={() => setAnchorEl(null)}
+                MenuListProps={{
+                  'aria-labelledby': 'basic-button',
+                }}
+              >
+                <MenuItem
+                  onClick={() => {
+                    setCompareType(CompareType.origin);
+                    setAnchorEl(null);
+                  }}
+                >
+                  对比原始文件(pdf)
+                </MenuItem>
+                <MenuItem
+                  onClick={() => {
+                    setComparePublication(
+                      article.publications.length === 1
+                        ? article.publications[0].id
+                        : article.publications.find(
+                            (i) => i.id !== publication.id,
+                          )!.id,
+                    );
+                    setCompareType(CompareType.version);
+                    setAnchorEl(null);
+                  }}
+                >
+                  对比不同来源解析后的文本
+                </MenuItem>
+                <MenuItem
+                  onClick={() => {
+                    setCompareType(CompareType.none);
+                    setAnchorEl(null);
+                  }}
+                >
+                  取消
+                </MenuItem>
+              </Menu>
+            </Stack>
+          </Grid>
+        </Grid>
         <Stack
           direction="row"
           divider={<Divider orientation="vertical" flexItem />}
           spacing={2}
-          style={{ flex: 1, overflow: 'auto' }}
+          sx={{ flex: 1, overflow: 'auto', p: 2 }}
         >
           {compare_elements}
         </Stack>
       </Stack>
       <Head>
-        <title>{article.title} - 和谐历史档案馆 Banned Historical Archives</title>
+        <title>
+          {article.title} - 和谐历史档案馆 Banned Historical Archives
+        </title>
       </Head>
     </>
   );

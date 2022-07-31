@@ -35,6 +35,9 @@ import {
 } from 'next';
 import { init } from '../../backend/data-source';
 import { Tag } from '../../backend/entities';
+import { tagToString } from '../../utils';
+import TagComponent from '../../components/TagComponent';
+import { articleTypeToCN } from '../../utils/i18n';
 
 export const getStaticProps: GetStaticProps = async (
   context: GetStaticPropsContext,
@@ -61,80 +64,6 @@ function ensure_two_digits(a?: number) {
   }
   return a < 10 ? `0${a}` : a;
 }
-
-const articleCategoryToCN: { [key in ArticleCategory]: string } = {
-  centralFile: '中央文件',
-  editorial: '重要报刊和社论',
-  keyFigures: '关键人物文稿',
-  keyPapersFromTheMasses: '群众运动重要文献',
-};
-
-const tagTypeToCN: { [key in TagType]: string } = {
-  articleCategory: '文稿大类',
-  articleType: '文稿类型',
-  place: '地点',
-  character: '人物',
-  issuer: '发行机构',
-  subject: '主题',
-};
-
-const articleTypeToCN: { [key in ArticleType]: string } = {
-  writings: '文章',
-  mail: '书信',
-  lecture: '发言',
-  talk: '对话',
-  declaration: '宣言',
-  instruction: '指示',
-  comment: '批示',
-  telegram: '通讯',
-};
-
-const tagToString = (tag: Tag) =>
-  tag.type === TagType.articleType
-    ? articleTypeToCN[tag.name as ArticleType]
-    : tag.type === TagType.articleCategory
-    ? articleCategoryToCN[tag.name as ArticleCategory]
-    : tag.name;
-const TagComponent = ({ tag }: { tag: Tag }) => {
-  const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
-
-  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
-  const open = Boolean(anchorEl);
-  const id = open ? 'tag-popover' : undefined;
-
-  return (
-    <>
-      <Popover
-        id={id}
-        open={open}
-        anchorEl={anchorEl}
-        disableRestoreFocus
-        sx={{
-          pointerEvents: 'none',
-        }}
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'center',
-        }}
-      >
-        <Typography sx={{ p: 2 }}>{tagTypeToCN[tag.type]}</Typography>
-      </Popover>
-      <Chip
-        onMouseEnter={handleClick}
-        onMouseLeave={handleClose}
-        sx={{ m: 0.3 }}
-        label={tagToString(tag)}
-      />
-    </>
-  );
-};
 
 const columns: GridColDef<Article>[] = [
   {
