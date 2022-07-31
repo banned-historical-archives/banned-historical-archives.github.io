@@ -1,5 +1,6 @@
 import { ReactElement, useState, useEffect, useMemo } from 'react';
-import Head from 'next/head'
+import Popover from '@mui/material/Popover';
+import Head from 'next/head';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import {
   DataGrid,
@@ -8,12 +9,11 @@ import {
   GridValueGetterParams,
   zhCN,
 } from '@mui/x-data-grid';
-import Link from 'next/link'
+import Link from 'next/link';
 
 import Layout from '../../components/Layout';
 import Article from '../../backend/entity/article';
 import type Date from '../../backend/entity/date';
-import type Type from '../../backend/entity/type';
 
 import TextField from '@mui/material/TextField';
 import DialogTitle from '@mui/material/DialogTitle';
@@ -25,10 +25,16 @@ import Button from '@mui/material/Button';
 import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
 import SettingsIcon from '@mui/icons-material/Settings';
-import { ArticleType } from '../../types';
+import { ArticleCategory, ArticleType, TagType } from '../../types';
 import Typography from '@mui/material/Typography';
-import { GetStaticProps,GetServerSideProps, GetServerSidePropsContext, GetStaticPropsContext } from 'next'
-import { init } from "../../backend/data-source"
+import {
+  GetStaticProps,
+  GetServerSideProps,
+  GetServerSidePropsContext,
+  GetStaticPropsContext,
+} from 'next';
+import { init } from '../../backend/data-source';
+import { Tag } from '../../backend/entities';
 
 export const getStaticProps: GetStaticProps = async (
   context: GetStaticPropsContext,
@@ -37,16 +43,15 @@ export const getStaticProps: GetStaticProps = async (
   const articles = await AppDataSource.manager.find(Article, {
     relations: {
       authors: true,
-      types: true,
       publications: true,
       tags: true,
       dates: true,
-    }
+    },
   });
   return {
     props: {
       articles: JSON.parse(JSON.stringify(articles)),
-    }, // will be passed to the page component as props
+    },
   };
 };
 
@@ -56,6 +61,81 @@ function ensure_two_digits(a?: number) {
   }
   return a < 10 ? `0${a}` : a;
 }
+
+const articleCategoryToCN: { [key in ArticleCategory]: string } = {
+  centralFile: '中央文件',
+  editorial: '重要报刊和社论',
+  keyFigures: '关键人物文稿',
+  keyPapersFromTheMasses: '群众运动重要文献',
+};
+
+const tagTypeToCN: { [key in TagType]: string } = {
+  articleCategory: '文稿大类',
+  articleType: '文稿类型',
+  place: '地点',
+  character: '人物',
+  issuer: '发行机构',
+  subject: '主题',
+};
+
+const articleTypeToCN: { [key in ArticleType]: string } = {
+  writings: '文章',
+  mail: '书信',
+  lecture: '发言',
+  talk: '对话',
+  declaration: '宣言',
+  instruction: '指示',
+  comment: '批示',
+  telegram: '通讯',
+};
+
+const tagToString = (tag: Tag) =>
+  tag.type === TagType.articleType
+    ? articleTypeToCN[tag.name as ArticleType]
+    : tag.type === TagType.articleCategory
+    ? articleCategoryToCN[tag.name as ArticleCategory]
+    : tag.name;
+const TagComponent = ({ tag }: { tag: Tag }) => {
+  const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
+
+  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const open = Boolean(anchorEl);
+  const id = open ? 'tag-popover' : undefined;
+
+  return (
+    <>
+      <Popover
+        id={id}
+        open={open}
+        anchorEl={anchorEl}
+        disableRestoreFocus
+        sx={{
+          pointerEvents: 'none',
+        }}
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'center',
+        }}
+      >
+        <Typography sx={{ p: 2 }}>{tagTypeToCN[tag.type]}</Typography>
+      </Popover>
+      <Chip
+        onMouseEnter={handleClick}
+        onMouseLeave={handleClose}
+        sx={{ m: 0.3 }}
+        label={tagToString(tag)}
+      />
+    </>
+  );
+};
+
 const columns: GridColDef<Article>[] = [
   {
     field: 'title',
@@ -63,7 +143,9 @@ const columns: GridColDef<Article>[] = [
     minWidth: 350,
     flex: 1,
     renderCell: (params: GridRenderCellParams<string, Article>) => (
-      <a href={`/articles/${params.row.id}`} rel="noreferrer" target="_blank">{params.row!.title}</a>
+      <a href={`/articles/${params.row.id}`} rel="noreferrer" target="_blank">
+        {params.row!.title}
+      </a>
     ),
   },
   {
@@ -123,29 +205,6 @@ const columns: GridColDef<Article>[] = [
     ),
   },
   {
-    field: 'types',
-    headerName: '文章类型',
-    minWidth: 150,
-    flex: 1,
-    sortComparator: (a: Type[], b: Type[]) => {
-      return a.map((i) => i.type).join(',') > b.map((i) => i.type).join(',')
-        ? 1
-        : -1;
-    },
-    renderCell: (params: GridRenderCellParams<string, Article>) => (
-      <Stack direction="row" spacing={1}>
-        {params.row!.types.map((i) => (
-          <Chip
-            key={i.type}
-            label={article_types[i.type]}
-            variant="outlined"
-            color="default"
-          />
-        ))}
-      </Stack>
-    ),
-  },
-  {
     field: 'publications',
     headerName: '来源',
     flex: 1,
@@ -158,21 +217,24 @@ const columns: GridColDef<Article>[] = [
     headerName: '标签',
     minWidth: 150,
     flex: 1,
+    sortComparator: (tags_a: Tag[], tags_b: Tag[]) => {
+      return tags_a.map((i) => i.name).join(',') >
+        tags_b.map((i) => i.name).join(',')
+        ? 1
+        : -1;
+    },
     valueGetter: (params: GridValueGetterParams<Article, Article>) =>
-      params.row.tags.map((i) => i.name).join(','),
+      params.row.tags.map((i) => tagToString(i)).join(','),
+    renderCell: (params: GridRenderCellParams<string, Article>) => (
+      <div style={{ overflow: 'visible' }}>
+        {params.row.tags.map((i) => (
+          <TagComponent tag={i} key={i.id} />
+        ))}
+      </div>
+    ),
   },
 ];
 
-const article_types: { [key in ArticleType]: string } = {
-  writings: '文章',
-  mail: '书信',
-  lecture: '发言',
-  talk: '对话',
-  declaration: '宣言',
-  instruction: '指示',
-  comment: '批示',
-  telegram: '通讯',
-};
 function to_number(s: string) {
   const n = parseInt(s);
   if (!isNaN(n) && n != Infinity && n != -Infinity) {
@@ -212,8 +274,8 @@ function date_include(a: Article, b: DateFilter) {
 }
 
 const default_date_filter = {
-  year_a: 1913,
-  year_b: 1976,
+  year_a: 1900,
+  year_b: 1990,
   month_a: 1,
   month_b: 12,
   day_a: 1,
@@ -221,8 +283,14 @@ const default_date_filter = {
 };
 const authors = ['毛泽东', '江青', '王洪文', '张春桥', '姚文元'];
 export default function Articles({ articles }: { articles: Article[] }) {
+  const [tipsAnchorEl, setTipsAnchorEl] = useState<HTMLElement | null>(null);
   const [dateFilter, setDateFilter] = useState<DateFilter>(default_date_filter);
-  const [typeFilters, setTypeFilters] = useState<ArticleType[]>([]);
+  const [tagFilters, setTagFilters] = useState<
+    {
+      name: string;
+      type: TagType;
+    }[]
+  >([]);
   const [authorFilters, setAuthorFilters] = useState<string[]>([]);
   const [dateFilterDialog, setDateFilterDialog] = useState<
     {
@@ -232,6 +300,14 @@ export default function Articles({ articles }: { articles: Article[] }) {
     show: false,
     ...default_date_filter,
   });
+
+  const showTips = (event: React.MouseEvent<HTMLElement>) => {
+    setTipsAnchorEl(event.currentTarget);
+  };
+
+  const hideTips = () => {
+    setTipsAnchorEl(null);
+  };
 
   const filtered_articles = useMemo(() => {
     return articles
@@ -245,20 +321,21 @@ export default function Articles({ articles }: { articles: Article[] }) {
           : true,
       )
       .filter((i) =>
-        typeFilters.length
-          ? typeFilters.reduce<boolean>(
-              (m, j) => m || !!i.types.find((k) => k.type === j),
+        tagFilters.length
+          ? tagFilters.reduce<boolean>(
+              (m, j) =>
+                m ||
+                !!i.tags.find((k) => k.type === j.type && k.name === j.name),
               false,
             )
           : true,
       );
-  }, [articles, dateFilter, typeFilters, authorFilters]);
+  }, [articles, dateFilter, tagFilters, authorFilters]);
 
   return (
     <>
       <Head>
         <title>和谐历史档案馆 Banned Historical Archives</title>
-        <meta name="description" content="和谐历史档案馆 Banned Historical Archives"/>
       </Head>
       <Dialog
         onClose={() => setDateFilterDialog((s) => ({ ...s, show: false }))}
@@ -391,88 +468,142 @@ export default function Articles({ articles }: { articles: Article[] }) {
         p={2}
         spacing={2}
         sx={{ position: 'relative', flex: 1, height: '100%' }}
-        direction="column"
       >
         <Stack direction="row">
-          <Stack>时间范围：</Stack>
-          <Stack direction="row" spacing={1}>
-            <Chip
-              icon={<SettingsIcon fontSize="small" />}
-              onClick={() => setDateFilterDialog((d) => ({ ...d, show: true }))}
-              label={
-                [
-                  `${dateFilter.year_a}年`,
-                  `${dateFilter.month_a}月`,
-                  `${dateFilter.day_a}日`,
-                ].join(' ') +
-                ' - ' +
-                [
-                  `${dateFilter.year_b}年`,
-                  `${dateFilter.month_b}月`,
-                  `${dateFilter.day_b}日`,
-                ].join(' ')
-              }
-              color="primary"
-              variant="filled"
-            />
-          </Stack>
-        </Stack>
-        <Stack direction="row">
-          <Stack>文章类型：</Stack>
-          <Stack direction="row" spacing={1}>
-            {(
-              Object.keys(article_types) as Array<keyof typeof ArticleType>
-            ).map((i) => {
-              const found = typeFilters.find((j) => j === i);
-              return (
+          <Stack direction="column" sx={{ flex: 1 }} spacing={1}>
+            <Stack direction="row">
+              <Stack>时间范围：</Stack>
+              <Stack direction="row" spacing={1}>
                 <Chip
-                  key={i}
-                  label={article_types[i]}
-                  variant={found ? 'filled' : 'outlined'}
-                  color={found ? 'primary' : 'default'}
-                  onDelete={
-                    found
-                      ? () => setTypeFilters((f) => f.filter((j) => j !== i))
-                      : undefined
+                  icon={<SettingsIcon fontSize="small" />}
+                  onClick={() =>
+                    setDateFilterDialog((d) => ({ ...d, show: true }))
                   }
-                  onClick={(e) => {
-                    if (found) {
-                      setTypeFilters((f) => f.filter((j) => j !== i));
-                      return;
-                    }
-                    setTypeFilters((f) => [...f, ArticleType[i]]);
-                  }}
+                  label={
+                    [
+                      `${dateFilter.year_a}年`,
+                      `${dateFilter.month_a}月`,
+                      `${dateFilter.day_a}日`,
+                    ].join(' ') +
+                    ' - ' +
+                    [
+                      `${dateFilter.year_b}年`,
+                      `${dateFilter.month_b}月`,
+                      `${dateFilter.day_b}日`,
+                    ].join(' ')
+                  }
+                  color="primary"
+                  variant="filled"
                 />
-              );
-            })}
+              </Stack>
+            </Stack>
+            <Stack direction="row">
+              <Stack>文章类型：</Stack>
+              <Stack direction="row" spacing={1}>
+                {(
+                  Object.keys(articleTypeToCN) as Array<
+                    keyof typeof ArticleType
+                  >
+                ).map((i) => {
+                  const found = tagFilters.find(
+                    (j) => j.type === TagType.articleType && j.name === i,
+                  );
+                  return (
+                    <Chip
+                      key={i}
+                      label={articleTypeToCN[i]}
+                      variant={found ? 'filled' : 'outlined'}
+                      color={found ? 'primary' : 'default'}
+                      onDelete={
+                        found
+                          ? () =>
+                              setTagFilters((f) =>
+                                f.filter(
+                                  (j) =>
+                                    !(
+                                      j.type === TagType.articleType &&
+                                      j.name === i
+                                    ),
+                                ),
+                              )
+                          : undefined
+                      }
+                      onClick={(e) => {
+                        if (found) {
+                          setTagFilters((f) =>
+                            f.filter(
+                              (j) =>
+                                !(
+                                  j.type === TagType.articleType && j.name === i
+                                ),
+                            ),
+                          );
+                          return;
+                        }
+                        setTagFilters((f) => [
+                          ...f,
+                          { name: ArticleType[i], type: TagType.articleType },
+                        ]);
+                      }}
+                    />
+                  );
+                })}
+              </Stack>
+            </Stack>
+            <Stack direction="row">
+              <Stack>作者：</Stack>
+              <Stack direction="row" spacing={1}>
+                {authors.map((i) => {
+                  const found = authorFilters.find((j) => j === i);
+                  return (
+                    <Chip
+                      key={i}
+                      label={i}
+                      variant={found ? 'filled' : 'outlined'}
+                      color={found ? 'primary' : 'default'}
+                      onDelete={
+                        found
+                          ? () =>
+                              setAuthorFilters((f) => f.filter((j) => j !== i))
+                          : undefined
+                      }
+                      onClick={(e) => {
+                        if (found) {
+                          setAuthorFilters((f) => f.filter((j) => j !== i));
+                          return;
+                        }
+                        setAuthorFilters((f) => [...f, i]);
+                      }}
+                    />
+                  );
+                })}
+              </Stack>
+            </Stack>
           </Stack>
-        </Stack>
-        <Stack direction="row">
-          <Stack>作者：</Stack>
-          <Stack direction="row" spacing={1}>
-            {authors.map((i) => {
-              const found = authorFilters.find((j) => j === i);
-              return (
-                <Chip
-                  key={i}
-                  label={i}
-                  variant={found ? 'filled' : 'outlined'}
-                  color={found ? 'primary' : 'default'}
-                  onDelete={
-                    found
-                      ? () => setAuthorFilters((f) => f.filter((j) => j !== i))
-                      : undefined
-                  }
-                  onClick={(e) => {
-                    if (found) {
-                      setAuthorFilters((f) => f.filter((j) => j !== i));
-                      return;
-                    }
-                    setAuthorFilters((f) => [...f, i]);
-                  }}
-                />
-              );
-            })}
+          <Stack>
+            <Popover
+              id="tips"
+              open={!!tipsAnchorEl}
+              anchorEl={tipsAnchorEl}
+              disableRestoreFocus
+              sx={{
+                pointerEvents: 'none',
+              }}
+              anchorOrigin={{
+                vertical: 'bottom',
+                horizontal: 'center',
+              }}
+            >
+              <img src="/images/filter.png" width="200" />
+              <Typography sx={{ p: 2 }}>可在每一列右上角添加筛选器进行高级检索</Typography>
+            </Popover>
+            <Button
+              onClick={showTips}
+              onMouseEnter={showTips}
+              onMouseLeave={hideTips}
+            >
+              高级检索
+            </Button>
           </Stack>
         </Stack>
         <Stack sx={{ flex: 1, width: '100%' }}>

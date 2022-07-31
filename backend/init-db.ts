@@ -7,7 +7,6 @@ import Author from './entity/author';
 import Date from './entity/date';
 import Music from './entity/music';
 import Lyric from './entity/lyric';
-import Type from './entity/type';
 import Audio from './entity/audio';
 import Content from './entity/content';
 import Comment from './entity/comment';
@@ -15,9 +14,10 @@ import Publication from './entity/publication';
 import Tag from './entity/tag';
 import { createHmac } from 'node:crypto';
 import Page from './entity/page';
-import { get_types } from './classifier';
+import { get_article_types } from './classifier';
 import { DataSource } from "typeorm";
 import { music as musicData } from './music';
+import { ArticleCategory, TagType } from "../types";
 
 function hash(s: string[]) {
   return createHmac('sha256', s.join('^')).digest('hex').substr(0, 10);
@@ -44,7 +44,15 @@ async function init_articles(AppDataSource: DataSource) {
     for (const r of res) {
       const article_id = hash([
         r.title,
-        JSON.stringify(r.dates),
+        JSON.stringify(
+          r.dates.sort((a, b) =>
+            `${a.year}-${a.month}-${a.day}` > `${b.year}-${b.month}-${b.day}`
+              ? 1
+              : -1,
+          ),
+        ),
+        JSON.stringify(r.authors.sort((a, b) => (a > b ? 1 : -1))),
+        JSON.stringify(r.file_id || ''),
         JSON.stringify(r.is_range_date),
       ]);
       await AppDataSource.manager.upsert(
@@ -95,44 +103,33 @@ async function init_articles(AppDataSource: DataSource) {
         );
       }
 
-      const types = await get_types(r);
-      for (const t of types) {
-        const id = hash([article_id, t]);
+      const tags: { name: string; type: TagType }[] = r.tags || [
+        {
+          name: ArticleCategory.keyFigures,
+          type: TagType.articleCategory,
+        },
+      ];
+      const article_types = await get_article_types(r);
+      article_types.forEach((i) =>
+        tags.push({ name: i, type: TagType.articleType }),
+      );
+      for (const t of tags) {
+        const id = hash([t.type, t.name]);
         await AppDataSource.manager.upsert(
-          Type,
+          Tag,
           {
             id,
-            type: t,
+            name: t.name,
+            type: t.type,
           },
           ['id'],
         );
         await AppDataSource.createQueryBuilder()
-          .relation(Article, 'types')
+          .relation(Article, 'tags')
           .of(article_id)
           .add(id)
           .catch((e) => {});
       }
-
-      // TODO
-      /*
-    const tags = [];
-    for (const t of tags) {
-      const id = hash([article_id, t]);
-      await AppDataSource.manager.upsert(
-        Tag,
-        {
-          id,
-          name: t,
-        },
-        ['id'],
-      );
-      await AppDataSource.createQueryBuilder()
-        .relation(Article, 'tags')
-        .of(article_id)
-        .add(id)
-        .catch((e) => {});
-    }
-    */
 
       for (let idx = 0; idx < r.parts.length; ++idx) {
         const part = r.parts[idx];

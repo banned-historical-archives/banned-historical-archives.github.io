@@ -5,22 +5,6 @@
   "version": "0.2.0",
   "configurations": [
      {
-      "name": "update-db",
-      "type": "node",
-      "request": "launch",
-      "runtimeExecutable": "node",
-      "runtimeArgs": ["-r", "ts-node/register"],
-
-      "args": ["${workspaceFolder}/backend/update-db.ts"],
-      
-      "cwd": "${workspaceRoot}",
-      "internalConsoleOptions": "openOnSessionStart",
-      "skipFiles": ["<node_internals>/**", "node_modules/**"],
-      "env": {
-        "TS_NODE_PROJECT": "tsconfig.node.json"
-      }
-    },
-     {
       "name": "parser",
       "type": "node",
       "request": "launch",
@@ -31,7 +15,7 @@
       "internalConsoleOptions": "openOnSessionStart",
       "skipFiles": ["<node_internals>/**", "node_modules/**"],
       "env": {
-        "TS_NODE_PROJECT": "tsconfig.node.json"
+        "TS_NODE_PROJECT": "tsconfig.build.json"
       }
     },
     {

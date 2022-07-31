@@ -1,6 +1,7 @@
-import books from './books';
+// import books from './books';
+  import {parse} from './parser/wenku'
 // import { AppDataSource } from './data-source';
-// import { join } from 'path';
+import { join } from 'path';
 // import ocr from './ocr';
 // import lac from './lac';
 // import { LACResult } from '../types';
@@ -31,8 +32,10 @@ import books from './books';
       .sort((a, b) => (a.count < b.count ? 1 : -1)),
   );
   */
-  const book = books.find(i => i.entity.id === 'xuanji1')!;
-  const res = await book.parser(book.path, book.parser_option);
+  // const book = books.find(i => i.entity.id === 'wenku')!;
+  // const res = await book.parser(book.path, book.parser_option);
+
+  await parse(join(__dirname, '../public/TheGPCRdatabase'), {page_limits:[]});
   /*
   const lac_res: LACResult[][] = [];
   for (const p of res) {

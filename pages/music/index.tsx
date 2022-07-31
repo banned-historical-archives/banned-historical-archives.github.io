@@ -1,5 +1,6 @@
 import React, { ReactElement, useEffect, useRef, useState } from 'react';
 import Head from 'next/head'
+import { diff_match_patch, Diff } from 'diff-match-patch';
 import Popover from '@mui/material/Popover';
 import SkipNextIcon from '@mui/icons-material/SkipNext';
 import SkipPreviousIcon from '@mui/icons-material/SkipPrevious';
@@ -38,7 +39,6 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import PauseCircleIcon from '@mui/icons-material/PauseCircle';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { diff } from '../../utils';
 import { DiffViewer } from '../../components/DiffViewer';
 
 export const getStaticProps: GetStaticProps = async (
@@ -78,6 +78,16 @@ function Song({
   const rightContents = song.lyrics
     .find((i) => i.id === lyricRight)!
     .content.split('\n');
+
+  let i = 0;
+  const max_len = Math.max(leftContents.length, rightContents.length);
+  const diff: Diff[][] = [];
+  while (i < max_len) {
+    const a = leftContents[i] || '';
+    const b = rightContents[i] || '';
+    diff.push(new diff_match_patch().diff_main(a, b));
+    ++i;
+  }
 
   return (
     <Accordion disableGutters>
@@ -168,7 +178,7 @@ function Song({
               </Stack>
               <Stack sx={{ flex: 1 }}>
                 <Stack>
-                  <DiffViewer diff={diff(leftContents, rightContents)} />
+                  <DiffViewer diff={diff} />
                 </Stack>
               </Stack>
             </>
@@ -243,6 +253,7 @@ function Player({
               color: i === playingName ? '#cc0000' : 'inherit',
             }}
             onClick={() => {
+              handleClose();
               setPlayingName(i);
               setPlaying(true);
             }}
@@ -275,9 +286,22 @@ function Player({
             zIndex: 10,
             right: 70,
           }}
+          onClick={handleClick}
           onMouseEnter={handleClick}
         >
-          <Typography sx={{ whiteSpace: 'nowrap' }}>{playingName}</Typography>
+          <Typography
+            sx={{
+              whiteSpace: 'nowrap',
+              textOverflow: 'ellipsis',
+              overflow: 'hidden',
+              width: {
+                xs: '200px',
+                sm: 'auto',
+              },
+            }}
+          >
+            {playingName}
+          </Typography>
         </Paper>
         <SpeedDial
           ariaLabel="player"
@@ -392,13 +416,12 @@ export default function Music({ music }: { music: MusicEntity[] }) {
     <Stack p={2} sx={{ height: '100%', overflow: 'scroll' }}>
       <Head>
         <title>和谐历史档案馆 Banned Historical Archives</title>
-        <meta name="description" content="和谐历史档案馆 Banned Historical Archives"/>
       </Head>
       <Typography variant="h4" sx={{ mb: 1 }}>
         音乐
       </Typography>
       <Typography variant="body1" sx={{ mb: 1 }}>
-        收录无产阶级文化大革命前后创作的音乐，其中一类是文革后被刻意修改歌词的音乐，另一类是歌词或标题敏感的音乐。
+        主要收录无产阶级文化大革命前后创作的红色音乐，其中一类是改开后歌词被官方篡改的音乐，另一类是歌词或标题被视为敏感内容的音乐。
       </Typography>
       <audio
         ref={audioRef}
@@ -431,7 +454,12 @@ export default function Music({ music }: { music: MusicEntity[] }) {
         playingName={playingName}
       />
       {music.map((i) => (
-        <Song key={i.id} song={i} setPlayingName={setPlayingName} setPlaying={setPlaying}/>
+        <Song
+          key={i.id}
+          song={i}
+          setPlayingName={setPlayingName}
+          setPlaying={setPlaying}
+        />
       ))}
     </Stack>
   );

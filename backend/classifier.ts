@@ -7,7 +7,7 @@ function multi_match(a: RegExp[], b: string[]) {
   );
 }
 
-export function get_types(parser_result: ParserResult) {
+export function get_article_types(parser_result: ParserResult) {
   const {title, description} = parser_result;
   const res: ArticleType[] = [];
   if (

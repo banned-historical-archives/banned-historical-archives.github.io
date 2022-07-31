@@ -5,7 +5,6 @@ import Publication from './entity/publication';
 import Tag from './entity/tag';
 import Content from './entity/content';
 import Date from './entity/date';
-import Type from './entity/type';
 import Page from './entity/page';
 import Music from './entity/music';
 import Audio from './entity/audio';
@@ -22,6 +21,5 @@ export {
   Tag,
   Content,
   Date,
-  Type,
   Page,
 };
