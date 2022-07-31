@@ -65,7 +65,6 @@ export const getStaticProps: GetStaticProps = async (
     },
     relations: {
       authors: true,
-      types: true,
       publications: true,
       tags: true,
       dates: true,

@@ -37,7 +37,6 @@ export const getStaticProps: GetStaticProps = async (
   const articles = await AppDataSource.manager.find(Article, {
     relations: {
       authors: true,
-      types: true,
       publications: true,
       tags: true,
       dates: true,
