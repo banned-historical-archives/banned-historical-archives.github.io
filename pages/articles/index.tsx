@@ -274,8 +274,8 @@ function date_include(a: Article, b: DateFilter) {
 }
 
 const default_date_filter = {
-  year_a: 1913,
-  year_b: 1976,
+  year_a: 1900,
+  year_b: 1990,
   month_a: 1,
   month_b: 12,
   day_a: 1,
