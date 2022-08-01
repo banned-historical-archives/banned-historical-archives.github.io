@@ -147,11 +147,8 @@ const columns: GridColDef<Article>[] = [
     headerName: '标签',
     minWidth: 150,
     flex: 1,
-    sortComparator: (tags_a: Tag[], tags_b: Tag[]) => {
-      return tags_a.map((i) => i.name).join(',') >
-        tags_b.map((i) => i.name).join(',')
-        ? 1
-        : -1;
+    sortComparator: (tags_a: string, tags_b: string) => {
+      return tags_a > tags_b ? 1 : -1;
     },
     valueGetter: (params: GridValueGetterParams<Article, Article>) =>
       params.row.tags.map((i) => tagToString(i)).join(','),
