@@ -17,6 +17,7 @@ import type Date from '../../backend/entity/date';
 
 import TextField from '@mui/material/TextField';
 import DialogTitle from '@mui/material/DialogTitle';
+import Grid from '@mui/material/Grid';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import Dialog from '@mui/material/Dialog';
@@ -399,141 +400,161 @@ export default function Articles({ articles }: { articles: Article[] }) {
         sx={{ position: 'relative', flex: 1, height: '100%' }}
       >
         <Stack direction="row">
-          <Stack direction="column" sx={{ flex: 1 }} spacing={1}>
-            <Stack direction="row">
-              <Stack>时间范围：</Stack>
-              <Stack direction="row" spacing={1}>
-                <Chip
-                  icon={<SettingsIcon fontSize="small" />}
-                  onClick={() =>
-                    setDateFilterDialog((d) => ({ ...d, show: true }))
-                  }
-                  label={
-                    [
-                      `${dateFilter.year_a}年`,
-                      `${dateFilter.month_a}月`,
-                      `${dateFilter.day_a}日`,
-                    ].join(' ') +
-                    ' - ' +
-                    [
-                      `${dateFilter.year_b}年`,
-                      `${dateFilter.month_b}月`,
-                      `${dateFilter.day_b}日`,
-                    ].join(' ')
-                  }
-                  color="primary"
-                  variant="filled"
-                />
+          <Grid container spacing={1}>
+            <Grid item>
+              <Stack direction="row" alignItems="center">
+                <Typography variant="body1" sx={{ whiteSpace: 'nowrap' }}>
+                  时间范围：
+                </Typography>
+                <Stack direction="row" spacing={1}>
+                  <Chip
+                    icon={<SettingsIcon fontSize="small" />}
+                    onClick={() =>
+                      setDateFilterDialog((d) => ({ ...d, show: true }))
+                    }
+                    label={
+                      [
+                        `${dateFilter.year_a}年`,
+                        `${dateFilter.month_a}月`,
+                        `${dateFilter.day_a}日`,
+                      ].join(' ') +
+                      ' - ' +
+                      [
+                        `${dateFilter.year_b}年`,
+                        `${dateFilter.month_b}月`,
+                        `${dateFilter.day_b}日`,
+                      ].join(' ')
+                    }
+                    color="primary"
+                    variant="filled"
+                  />
+                </Stack>
               </Stack>
-            </Stack>
-            <Stack direction="row">
-              <Stack>文章类型：</Stack>
-              <Stack direction="row" spacing={1}>
-                {(
-                  Object.keys(articleTypeToCN) as Array<
-                    keyof typeof ArticleType
-                  >
-                ).map((i) => {
-                  const found = tagFilters.find(
-                    (j) => j.type === TagType.articleType && j.name === i,
-                  );
-                  return (
-                    <Chip
-                      key={i}
-                      label={articleTypeToCN[i]}
-                      variant={found ? 'filled' : 'outlined'}
-                      color={found ? 'primary' : 'default'}
-                      onDelete={
-                        found
-                          ? () =>
-                              setTagFilters((f) =>
-                                f.filter(
-                                  (j) =>
-                                    !(
-                                      j.type === TagType.articleType &&
-                                      j.name === i
-                                    ),
-                                ),
-                              )
-                          : undefined
-                      }
-                      onClick={(e) => {
-                        if (found) {
-                          setTagFilters((f) =>
-                            f.filter(
-                              (j) =>
-                                !(
-                                  j.type === TagType.articleType && j.name === i
-                                ),
-                            ),
-                          );
-                          return;
+            </Grid>
+            <Grid item xs={12} md={4}>
+              <Stack direction="row" alignItems="center">
+                <Typography variant="body1" sx={{ whiteSpace: 'nowrap' }}>
+                  文章类型：
+                </Typography>
+                <Stack direction="row" spacing={1}>
+                  {(
+                    Object.keys(articleTypeToCN) as Array<
+                      keyof typeof ArticleType
+                    >
+                  ).map((i) => {
+                    const found = tagFilters.find(
+                      (j) => j.type === TagType.articleType && j.name === i,
+                    );
+                    return (
+                      <Chip
+                        key={i}
+                        label={articleTypeToCN[i]}
+                        variant={found ? 'filled' : 'outlined'}
+                        color={found ? 'primary' : 'default'}
+                        onDelete={
+                          found
+                            ? () =>
+                                setTagFilters((f) =>
+                                  f.filter(
+                                    (j) =>
+                                      !(
+                                        j.type === TagType.articleType &&
+                                        j.name === i
+                                      ),
+                                  ),
+                                )
+                            : undefined
                         }
-                        setTagFilters((f) => [
-                          ...f,
-                          { name: ArticleType[i], type: TagType.articleType },
-                        ]);
-                      }}
-                    />
-                  );
-                })}
+                        onClick={(e) => {
+                          if (found) {
+                            setTagFilters((f) =>
+                              f.filter(
+                                (j) =>
+                                  !(
+                                    j.type === TagType.articleType &&
+                                    j.name === i
+                                  ),
+                              ),
+                            );
+                            return;
+                          }
+                          setTagFilters((f) => [
+                            ...f,
+                            { name: ArticleType[i], type: TagType.articleType },
+                          ]);
+                        }}
+                      />
+                    );
+                  })}
+                </Stack>
               </Stack>
-            </Stack>
-            <Stack direction="row">
-              <Stack>作者：</Stack>
-              <Stack direction="row" spacing={1}>
-                {authors.map((i) => {
-                  const found = authorFilters.find((j) => j === i);
-                  return (
-                    <Chip
-                      key={i}
-                      label={i}
-                      variant={found ? 'filled' : 'outlined'}
-                      color={found ? 'primary' : 'default'}
-                      onDelete={
-                        found
-                          ? () =>
-                              setAuthorFilters((f) => f.filter((j) => j !== i))
-                          : undefined
-                      }
-                      onClick={(e) => {
-                        if (found) {
-                          setAuthorFilters((f) => f.filter((j) => j !== i));
-                          return;
+            </Grid>
+            <Grid item xs={12} md={8}>
+              <Stack direction="row" alignItems="center">
+                <Typography variant="body1">作者：</Typography>
+                <Stack direction="row" spacing={1}>
+                  {authors.map((i) => {
+                    const found = authorFilters.find((j) => j === i);
+                    return (
+                      <Chip
+                        key={i}
+                        label={i}
+                        variant={found ? 'filled' : 'outlined'}
+                        color={found ? 'primary' : 'default'}
+                        onDelete={
+                          found
+                            ? () =>
+                                setAuthorFilters((f) =>
+                                  f.filter((j) => j !== i),
+                                )
+                            : undefined
                         }
-                        setAuthorFilters((f) => [...f, i]);
-                      }}
-                    />
-                  );
-                })}
+                        onClick={(e) => {
+                          if (found) {
+                            setAuthorFilters((f) => f.filter((j) => j !== i));
+                            return;
+                          }
+                          setAuthorFilters((f) => [...f, i]);
+                        }}
+                      />
+                    );
+                  })}
+                  <Chip
+                    label={'更多'}
+                    onClick={(e) => {
+                      alert('使用高级检索，在表格对应列中添加过滤器');
+                    }}
+                  />
+                </Stack>
               </Stack>
-            </Stack>
-          </Stack>
-          <Stack>
-            <Popover
-              id="tips"
-              open={!!tipsAnchorEl}
-              anchorEl={tipsAnchorEl}
-              disableRestoreFocus
-              sx={{
-                pointerEvents: 'none',
-              }}
-              anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'center',
-              }}
-            >
-              <img src="/images/filter.png" width="200" />
-              <Typography sx={{ p: 2 }}>可在每一列右上角添加筛选器进行高级检索</Typography>
-            </Popover>
-            <Button
-              onClick={showTips}
-              onMouseEnter={showTips}
-              onMouseLeave={hideTips}
-            >
-              高级检索
-            </Button>
-          </Stack>
+            </Grid>
+          </Grid>
+          <Popover
+            id="tips"
+            open={!!tipsAnchorEl}
+            anchorEl={tipsAnchorEl}
+            disableRestoreFocus
+            sx={{
+              pointerEvents: 'none',
+            }}
+            anchorOrigin={{
+              vertical: 'bottom',
+              horizontal: 'center',
+            }}
+          >
+            <img src="/images/filter.png" width="200" />
+            <Typography sx={{ p: 2 }}>
+              可在每一列右上角添加筛选器进行高级检索
+            </Typography>
+          </Popover>
+          <Button
+            onClick={showTips}
+            onMouseEnter={showTips}
+            onMouseLeave={hideTips}
+            sx={{ width: 120, display: { xs: 'none', md: 'flex' } }}
+          >
+            高级检索
+          </Button>
         </Stack>
         <Stack sx={{ flex: 1, width: '100%' }}>
           <DataGrid
