@@ -419,11 +419,23 @@ export default function ArticleViewer({
         }}
         pb={0}
       >
-        <Typography variant="body1" sx={{ pt: 2, pl: 2, pr: 2 }}>
-          标题：
-          {article.title}
-        </Typography>
-        <Grid container alignItems="center" sx={{ pl: 2, pr: 2 }} spacing={2}>
+        <Grid
+          container
+          alignItems="center"
+          sx={{ pt: 2, pl: 2, pr: 2 }}
+          spacing={2}
+        >
+          <Grid item xs={12} md={6}>
+            <Typography variant="body1" sx={{ overflowX: 'scroll' }}>
+              标题：
+              {article.title}
+            </Typography>
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <Typography variant="body1" sx={{ overflowX: 'scroll' }}>
+              作者：{article.authors.map((i) => i.name).join(' ')}
+            </Typography>
+          </Grid>
           <Grid item xs={12} md={3}>
             <Typography variant="body1" sx={{ overflowX: 'scroll' }}>
               时间：
@@ -449,11 +461,7 @@ export default function ArticleViewer({
               </Stack>
             </Stack>
           </Grid>
-          <Grid
-            item
-            xs={12}
-            md={6}
-          >
+          <Grid item xs={12} md={6}>
             <Stack direction="row" alignItems="center" spacing={1}>
               <Typography variant="body1">选择来源：</Typography>
               <Stack
