@@ -4,7 +4,10 @@ import Head from 'next/head';
 
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import Menu from '@mui/material/Menu';
+import InputLabel from '@mui/material/InputLabel';
+import FormControl from '@mui/material/FormControl';
 import Grid from '@mui/material/Grid';
+import OutlinedInput from '@mui/material/OutlinedInput';
 import MenuItem from '@mui/material/MenuItem';
 import Chip from '@mui/material/Chip';
 import Button from '@mui/material/Button';
@@ -355,20 +358,23 @@ export default function ArticleViewer({
   } else if (compareType === CompareType.version) {
     compare_elements.push(
       <Stack key="version_b" sx={{ flex: 1 }}>
-        <Select
-          size="small"
-          value={comparePublication}
-          label="来源"
-          onChange={(e) => {
-            setComparePublication(e.target.value);
-          }}
-        >
-          {article.publications.map((i) => (
-            <MenuItem key={i.id} value={i.id}>
-              {i.name}
-            </MenuItem>
-          ))}
-        </Select>
+        <FormControl>
+          <InputLabel>对比目标</InputLabel>
+          <Select
+            size="small"
+            value={comparePublication}
+            input={<OutlinedInput label="对比目标" />}
+            onChange={(e) => {
+              setComparePublication(e.target.value);
+            }}
+          >
+            {article.publications.map((i) => (
+              <MenuItem key={i.id} value={i.id}>
+                {i.name}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
         <Stack sx={{ overflowY: 'scroll', p: 1 }}>
           <ArticleComponent
             article={article}
@@ -378,17 +384,22 @@ export default function ArticleViewer({
         </Stack>
       </Stack>,
       <Stack key="result" sx={{ flex: 1 }}>
-        <Select
-          size="small"
-          value={compareMode}
-          label="对比模式"
-          onChange={(e) => {
-            setCompareMode(e.target.value as CompareMode);
-          }}
-        >
-          <MenuItem value={CompareMode.line}>{CompareMode.line}</MenuItem>
-          <MenuItem value={CompareMode.literal}>{CompareMode.literal}</MenuItem>
-        </Select>
+        <FormControl>
+          <InputLabel>对比模式</InputLabel>
+          <Select
+            size="small"
+            value={compareMode}
+            input={<OutlinedInput label="对比模式" />}
+            onChange={(e) => {
+              setCompareMode(e.target.value as CompareMode);
+            }}
+          >
+            <MenuItem value={CompareMode.line}>{CompareMode.line}</MenuItem>
+            <MenuItem value={CompareMode.literal}>
+              {CompareMode.literal}
+            </MenuItem>
+          </Select>
+        </FormControl>
         <Stack sx={{ overflowY: 'scroll' }}>
           <DiffViewer diff={article_diff} />
         </Stack>

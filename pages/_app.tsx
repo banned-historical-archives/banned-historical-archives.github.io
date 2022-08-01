@@ -14,12 +14,6 @@ const theme = createTheme({
     primary: {
       main: '#cc0000',
     },
-    secondary: {
-      main: '#edf2ff',
-    },
-    warning: {
-      main: '#ff9800',
-    },
   },
   components: {},
 });
