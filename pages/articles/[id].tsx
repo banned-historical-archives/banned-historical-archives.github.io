@@ -308,6 +308,17 @@ export default function ArticleViewer({
     selectedPublication,
     article,
   ]);
+  const diff_id: string | undefined = useMemo(() => {
+    if (compareType !== CompareType.version || !article) return;
+    return Math.random().toString();
+  }, [
+    compareType,
+    compareMode,
+    publication_details,
+    comparePublication,
+    selectedPublication,
+    article,
+  ]);
 
   const showCompareMenu = !!anchorEl;
 
@@ -401,7 +412,7 @@ export default function ArticleViewer({
           </Select>
         </FormControl>
         <Stack sx={{ overflowY: 'scroll' }}>
-          <DiffViewer diff={article_diff} />
+          <DiffViewer diff={article_diff} key={diff_id} />
         </Stack>
       </Stack>,
     );
