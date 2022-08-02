@@ -1,5 +1,6 @@
-// import books from './books';
+import books from './books';
   import {parse} from './parser/wenku'
+  import * as xuanji from './parser/xuanji'
 // import { AppDataSource } from './data-source';
 import { join } from 'path';
 // import ocr from './ocr';
@@ -35,7 +36,10 @@ import { join } from 'path';
   // const book = books.find(i => i.entity.id === 'wenku')!;
   // const res = await book.parser(book.path, book.parser_option);
 
-  await parse(join(__dirname, '../public/TheGPCRdatabase'), {page_limits:[]});
+  const book = books.find(i => i.entity.id === 'xuanji5')!;
+  const res = await xuanji.parse(book.path, book.parser_option);
+  // await parse(join(__dirname, '../public/TheGPCRdatabase'), {page_limits:[]});
+
   /*
   const lac_res: LACResult[][] = [];
   for (const p of res) {

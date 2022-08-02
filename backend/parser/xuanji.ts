@@ -31,11 +31,16 @@ const opt = {
 function ensure10digits(x: number) {
   x *= 100000;
   let s = parseInt(x.toString()).toString();
-  while (s.length < 10) s= '0'+s;
+  while (s.length < 10) s = '0' + s;
   return s;
 }
 
-function insert_comment(items: pdfjsLib.Item[], j: number, insert_idx: number, comment_str: string) {
+function insert_comment(
+  items: pdfjsLib.Item[],
+  j: number,
+  insert_idx: number,
+  comment_str: string,
+) {
   const item = items[j];
   const str_a = item.str.substr(0, insert_idx);
   const str_b = item.str.substr(insert_idx);
@@ -64,7 +69,11 @@ function insert_comment(items: pdfjsLib.Item[], j: number, insert_idx: number, c
     str: str_b,
   });
 }
-function fix_before_parsing(s: pdfjsLib.ContentObj[], start_page: number, name: string) {
+function fix_before_parsing(
+  s: pdfjsLib.ContentObj[],
+  start_page: number,
+  name: string,
+) {
   let p = start_page;
   if (name === 'xuanji1') {
     for (const i of s) {
@@ -183,7 +192,7 @@ function fix_before_parsing(s: pdfjsLib.ContentObj[], start_page: number, name: 
       if (p === 29) {
         i.items.forEach((j) => {
           if (j.str.startsWith('关于制止内战的六项主张')) {
-            j.str = '*'+j.str;
+            j.str = '*' + j.str;
           }
         });
       }
@@ -203,7 +212,10 @@ function fix_before_parsing(s: pdfjsLib.ContentObj[], start_page: number, name: 
         });
       } else if (p === 272) {
         i.items.forEach((j) => {
-          j.str = j.str.replace(/（1）/g, '〔1〕').replace(/（2）/g, '〔2〕').replace(/（3）/g, '〔3〕');
+          j.str = j.str
+            .replace(/（1）/g, '〔1〕')
+            .replace(/（2）/g, '〔2〕')
+            .replace(/（3）/g, '〔3〕');
         });
       } else if (p === 468) {
         i.items.forEach((j) => {
@@ -218,9 +230,7 @@ function fix_before_parsing(s: pdfjsLib.ContentObj[], start_page: number, name: 
 
 function is_date(i: string) {
   return (
-    /^（[一二三四五六七八九至O○〇十年月日—，、初廿卄卅卌春夏秋冬]+）/.test(
-      i,
-    ) &&
+    /^（[一二三四五六七八九至O○〇十年月日—，、初廿卄卅卌春夏秋冬]+）/.test(i) &&
     /^（.*[年月日]+.*）/.test(i)
   );
 }
@@ -280,7 +290,11 @@ function extract_parts(
       }
       offset_x = items[j].transform[4];
       max_x = Math.max(max_x, offset_x + items[j].width);
-      if (j > i && offset_x - (items[j - 1].transform[4] + items[j - 1].width) > opt.noramal_char_width) {
+      if (
+        j > i &&
+        offset_x - (items[j - 1].transform[4] + items[j - 1].width) >
+          opt.noramal_char_width
+      ) {
         items[j].str = ' ' + items[j].str;
       }
       candidates.push(items[j]);
@@ -347,24 +361,25 @@ function extract_parts(
       }
     }
 
-    // if (str.indexOf('*') >= 0) debugger
+    // if (str.indexOf('和西藏军区的指示电，') >= 0) debugger
 
     if (str.startsWith('*') && title_has_star) {
       let j = i;
       let s = '';
-      while (item_to_page.get(lines[j].items[0]) === item_to_page.get(line.items[0])) {
+      while (
+        item_to_page.get(lines[j].items[0]) === item_to_page.get(line.items[0])
+      ) {
         s += lines[j].str;
         ++j;
       }
       parts.push([s, ContentType.description, line.items[0]]);
-      i = j -1;
+      i = j - 1;
       continue;
     }
+
     if (is_date(str)) {
       parts.push([str, ContentType.subdate, line.items[0]]);
-    } else if (
-      line.items[0].height > opt.header_min_height
-    ) {
+    } else if (line.items[0].height > opt.header_min_height) {
       if (is_title(line)) {
         let j = i;
         let s = '';
@@ -382,8 +397,14 @@ function extract_parts(
           temp[(x as any).index + (x as any)[0].length - 1] = '〕';
         }
         s = temp.join('');
-        title_has_star = is_date(lines[j].str) ? s.indexOf('*') >= 0 : title_has_star;
-        parts.push([s, is_date(lines[j].str) ? ContentType.title : ContentType.subtitle, line.items[0]]);
+        title_has_star = is_date(lines[j].str)
+          ? s.indexOf('*') >= 0
+          : title_has_star;
+        parts.push([
+          s,
+          is_date(lines[j].str) ? ContentType.title : ContentType.subtitle,
+          line.items[0],
+        ]);
         i = j - 1;
       } else {
         parts.push([str, ContentType.subtitle, line.items[0]]);
@@ -424,20 +445,20 @@ function extract_parts(
       continue;
     }
     let prev_offset = last_one_is_comment ? 2 : 1;
-    const prev_idx = parts[i-1][1] === ContentType.description ? i - 2 : i - 1;
+    const prev_idx =
+      parts[i - 1][1] === ContentType.description ? i - 2 : i - 1;
     const final_prev_idx =
       final_parts[final_parts.length - 1] &&
       final_parts[final_parts.length - 1][1] === ContentType.description
         ? final_parts.length - 2
         : final_parts.length - 1;
 
-        if (
-
+    if (
       final_parts[final_parts.length - 1] &&
       final_parts[final_parts.length - 1][1] === ContentType.description
-        ){
-          // debugger
-        }
+    ) {
+      // debugger
+    }
     // 段落碎片合并
     // 标题碎片合并
     // 角注向前合并
@@ -445,6 +466,8 @@ function extract_parts(
       final_parts[final_parts.length - prev_offset][0] += parts[i][0];
       continue;
     }
+
+    // if (parts[i][0].indexOf('和西藏军区的指示电，') >= 0) debugger;
     if (
       parts[i][1] == parts[prev_idx][1] &&
       (parts[i][1] == ContentType.paragraph
@@ -587,6 +610,9 @@ export async function parse(
   if (parser_opt.header_min_height) {
     opt.header_min_height = parser_opt.header_min_height;
   }
+  if (parser_opt.content_min_x) {
+    opt.content_min_x = parser_opt.content_min_x;
+  }
 
   const doc = await pdfjsLib.getDocument({
     url: pdfPath,
@@ -605,7 +631,7 @@ export async function parse(
     let content_objs = await Promise.all(
       pages.map((page) => page.getTextContent()),
     );
-    const viewport = pages[0].getViewport({scale:1});
+    const viewport = pages[0].getViewport({ scale: 1 });
     const width = viewport.viewBox[2];
     const height = viewport.viewBox[3];
     const items: Item[] = [];
@@ -645,7 +671,7 @@ export async function parse(
         .sort((a, b) =>
           (a as any).sort_helper > (b as any).sort_helper ? 1 : -1,
         );
-        // if (page_idx+ range[0]=== 71) debugger;
+      // if (page_idx+ range[0]=== 71) debugger;
       if (page_idx === 0) {
         const first_title_idx = sorted.findIndex(
           (i) =>
@@ -668,7 +694,7 @@ export async function parse(
           .replace(/ /g, '')
           .replace(/︹/g, '〔')
           .replace(/︺/g, '〕');
-          /*
+        /*
           .replace(/⑴/g, '〔1〕')
           .replace(/⑵/g, '〔2〕')
           .replace(/⑶/g, '〔3〕')
@@ -689,20 +715,19 @@ export async function parse(
           .replace(/⒅/g, '〔18〕')
           .replace(/⒆/g, '〔19〕')
           .replace(/⒇/g, '〔20〕');*/
-          if (item.height < opt.comment_threshold) {
-            item.str = item.str
-              .replace('(', '〔')
-              .replace(')', '〕')
-              .replace('（', '〔')
-              .replace('）', '〕')
-              .replace('[', '〔')
-              .replace(']', '〕')
-              .replace(/１/g, '1')
-              .replace(/２/g, '2')
-              .replace(/３/g, '3')
-              .replace(/４/g, '4');
-          }
-
+        if (item.height < opt.comment_threshold) {
+          item.str = item.str
+            .replace('(', '〔')
+            .replace(')', '〕')
+            .replace('（', '〔')
+            .replace('）', '〕')
+            .replace('[', '〔')
+            .replace(']', '〕')
+            .replace(/１/g, '1')
+            .replace(/２/g, '2')
+            .replace(/３/g, '3')
+            .replace(/４/g, '4');
+        }
 
         item_to_page.set(item, page_idx + range[0]);
         items.push(item);
@@ -716,8 +741,11 @@ export async function parse(
       const next_part = parts_raw[i + 1];
       if (part.type === ContentType.title) {
         part_idx = 0;
-        let [cur_pivots, title] = extract_pivots(part.text.replace(/ /g, ''), part_idx);
-        const parts:ContentPart[] = [];
+        let [cur_pivots, title] = extract_pivots(
+          part.text.replace(/ /g, ''),
+          part_idx,
+        );
+        const parts: ContentPart[] = [];
         if (/\*/.test(title) && !/\*$/.test(title)) {
           title = title.split('*')[0];
           parts.push(
@@ -732,7 +760,7 @@ export async function parse(
           parts.push({ text: title, type: part.type });
         }
         if (articles.length) {
-          articles[articles.length -1].description = description;
+          articles[articles.length - 1].description = description;
         }
         description = '';
         articles.push({
@@ -762,7 +790,9 @@ export async function parse(
           ++i;
         }
       } else if (part.type === ContentType.comment) {
-        articles[articles.length - 1].comments.push(part.text.replace(/^〔\d+〕 */, ''))
+        articles[articles.length - 1].comments.push(
+          part.text.replace(/^〔\d+〕 */, ''),
+        );
       } else if (part.type === ContentType.description) {
         description += description ? part.text : part.text.substr(1);
       } else {
@@ -781,19 +811,36 @@ export async function parse(
     for (let i = 0; i < articles.length; ++i) {
       const article = articles[i];
       if (!article.dates.length) {
-        console.warn('日期丢失', article.title, article.page_start, article.page_end);
+        console.warn(
+          '日期丢失',
+          article.title,
+          article.page_start,
+          article.page_end,
+        );
       }
       if (article.page_end == Infinity || article.page_start == Infinity) {
-        console.warn('页码丢失', article.title, article.page_start, article.page_end);
+        console.warn(
+          '页码丢失',
+          article.title,
+          article.page_start,
+          article.page_end,
+        );
       }
-      const temp: {[key:string]:boolean} = {};
-      article.comment_pivots.forEach(j => {
-        temp[j.index]=true;
+      const temp: { [key: string]: boolean } = {};
+      article.comment_pivots.forEach((j) => {
+        temp[j.index] = true;
       });
       if (Object.keys(temp).length !== article.comments.length) {
-        console.warn('注释不匹配', article.title, article.page_start, article.page_end);
+        console.warn(
+          '注释不匹配',
+          article.title,
+          article.page_start,
+          article.page_end,
+        );
       }
-      article.parts = article.parts.filter(x => x.type !== ContentType.description);
+      article.parts = article.parts.filter(
+        (x) => x.type !== ContentType.description,
+      );
     }
 
     // TODO origin
