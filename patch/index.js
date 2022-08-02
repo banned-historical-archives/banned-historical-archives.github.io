@@ -17,7 +17,7 @@ const body = `{OCR补丁}
 const body = process.env.BODY;
 const lines = body.split('\n');
 
-if (/^{OCR补丁}$/.test(lines[0])) {
+if (/{OCR补丁}/.test(lines[0])) {
   const final = {
     COMMIT_HASH: process.env.COMMIT_HASH,
   };
@@ -85,6 +85,5 @@ if (/^{OCR补丁}$/.test(lines[0])) {
     writeFileSync(filepath, content);
     console.log(`preview_url="https://banned-historical-archives.github.io/articles/${final.articleId}?patch=${encodeURIComponent(JSON.stringify(final))}"`);
   } catch (e) {
-    console.log(e);
   }
 }
