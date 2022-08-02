@@ -14,7 +14,7 @@ const body = `{OCR补丁}
   "ops": [["replace", 3, "x", "y"], ["delete", 3, "x"], ["insert", 2, 3, "r"]]
 }`
 */
-const body = process.env.BODY;
+const body = process.env.BODY.trim();
 const lines = body.split('\n');
 
 if (/{OCR补丁}/.test(lines[0])) {
