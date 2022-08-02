@@ -105,6 +105,7 @@ export const getStaticProps: GetStaticProps = async (
   }
   return {
     props: {
+      commit_hash: process.env.COMMIT_HASH,
       article: JSON.parse(JSON.stringify(article)),
       publication_details: JSON.parse(JSON.stringify(publication_details)),
     },
@@ -258,7 +259,9 @@ enum CompareMode {
 export default function ArticleViewer({
   article,
   publication_details,
+  commit_hash,
 }: {
+  commit_hash: string;
   article: Article;
   publication_details: PublicationDetails;
 }) {

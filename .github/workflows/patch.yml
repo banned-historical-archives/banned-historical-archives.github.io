@@ -1,0 +1,38 @@
+name: patch
+on:
+  issue_comment:
+    types: [created]
+
+jobs:
+  issue_commented:
+    # This job only runs for issue comments
+    name: Issue comment
+    if: ${{ !github.event.issue.pull_request }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: master
+      - uses: actions/setup-node@v3.4.1
+      - run: COMMIT_HASH="${{ github.sha }}" node patch.js >> $GITHUB_ENV
+        env:
+          BODY: ${{ github.event.comment.body }}
+
+      - name: Create Pull Request
+        id: cpr
+        uses: peter-evans/create-pull-request@v4
+        with:
+          commit-message: ${{ env.preview_url }}
+          committer: GitHub <noreply@github.com>
+          author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
+          signoff: false
+          branch-suffix: random
+          delete-branch: true
+          title: '[BOT] OCR patch'
+          labels: |
+            report
+            automated pr
+          team-reviewers: |
+            owners
+            maintainers
+          draft: false

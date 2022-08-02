@@ -11,7 +11,7 @@ const books: Book[] = [
   {
     entity: {
       id: 'maoxuan-jinghuo',
-      name: '毛泽东选集1-7（静火版）',
+      name: '毛泽东选集1-7(静火版)',
       internal: false,
       official: false,
       author: '静火',
@@ -30,7 +30,7 @@ const books: Book[] = [
   {
     entity: {
       id: 'wansui1',
-      name: '毛泽东思想万岁（1913-1943卷）',
+      name: '毛泽东思想万岁(1913-1943卷)',
       internal: false,
       official: false,
       author: '未知',
@@ -45,7 +45,7 @@ const books: Book[] = [
   {
     entity: {
       id: 'wansui2',
-      name: '毛泽东思想万岁（1943-1949卷）',
+      name: '毛泽东思想万岁(1943-1949卷)',
       internal: false,
       official: false,
       author: '未知',
@@ -60,7 +60,7 @@ const books: Book[] = [
   {
     entity: {
       id: 'wansui3',
-      name: '毛泽东思想万岁（1949-1957卷）',
+      name: '毛泽东思想万岁(1949-1957卷)',
       internal: false,
       official: false,
       author: '未知',
@@ -75,7 +75,7 @@ const books: Book[] = [
   {
     entity: {
       id: 'wansui4',
-      name: '毛泽东思想万岁（1958-1960卷）',
+      name: '毛泽东思想万岁(1958-1960卷)',
       internal: false,
       official: false,
       author: '未知',
@@ -90,7 +90,7 @@ const books: Book[] = [
   {
     entity: {
       id: 'wansui5',
-      name: '毛泽东思想万岁（1961-1968卷）',
+      name: '毛泽东思想万岁(1961-1968卷)',
       internal: false,
       official: false,
       author: '未知',
@@ -105,7 +105,7 @@ const books: Book[] = [
   {
     entity: {
       id: 'wenji1',
-      name: '毛泽东文集第一卷',
+      name: '毛泽东文集第一卷(1999)',
       internal: false,
       official: true,
       author: '中央文献研究室',
@@ -122,7 +122,7 @@ const books: Book[] = [
   {
     entity: {
       id: 'wenji2',
-      name: '毛泽东文集第二卷',
+      name: '毛泽东文集第二卷(1999)',
       internal: false,
       official: true,
       author: '中央文献研究室',
@@ -139,7 +139,7 @@ const books: Book[] = [
   {
     entity: {
       id: 'wenji3',
-      name: '毛泽东文集第三卷',
+      name: '毛泽东文集第三卷(1999)',
       internal: false,
       official: true,
       author: '中央文献研究室',
@@ -156,7 +156,7 @@ const books: Book[] = [
   {
     entity: {
       id: 'wenji4',
-      name: '毛泽东文集第四卷',
+      name: '毛泽东文集第四卷(1999)',
       internal: false,
       official: true,
       author: '中央文献研究室',
@@ -173,7 +173,7 @@ const books: Book[] = [
   {
     entity: {
       id: 'wenji5',
-      name: '毛泽东文集第五卷',
+      name: '毛泽东文集第五卷(1999)',
       internal: false,
       official: true,
       author: '中央文献研究室',
@@ -190,7 +190,7 @@ const books: Book[] = [
   {
     entity: {
       id: 'wenji6',
-      name: '毛泽东文集第六卷',
+      name: '毛泽东文集第六卷(1999)',
       internal: false,
       official: true,
       author: '中央文献研究室',
@@ -207,7 +207,7 @@ const books: Book[] = [
   {
     entity: {
       id: 'wenji7',
-      name: '毛泽东文集第七卷',
+      name: '毛泽东文集第七卷(1999)',
       internal: false,
       official: true,
       author: '中央文献研究室',
@@ -224,7 +224,7 @@ const books: Book[] = [
   {
     entity: {
       id: 'wenji8',
-      name: '毛泽东文集第八卷',
+      name: '毛泽东文集第八卷(1999)',
       internal: false,
       official: true,
       author: '中央文献研究室',
@@ -339,7 +339,7 @@ const books: Book[] = [
   {
     entity: {
       id: 'wenku',
-      name: '中国文化大革命文库（第一版）',
+      name: '中国文化大革命文库(第一版)',
       internal: false,
       official: false,
       author: '宋永毅',
