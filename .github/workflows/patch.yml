@@ -1,7 +1,7 @@
 name: patch
 on:
-  issue_comment:
-    types: [created]
+  issues:
+    types: [opened]
 
 jobs:
   issue_commented:
