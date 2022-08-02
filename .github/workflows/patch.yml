@@ -14,15 +14,12 @@ jobs:
         with:
           ref: master
       - uses: actions/setup-node@v3.4.1
-      - run: COMMIT_HASH="${{ github.sha }}" node patch/index.js
-        env:
-          BODY: ${{ github.event.comment.body }}
-
+      - run: COMMIT_HASH="${{ github.sha }}" BODY="${{ github.event.comment.body }}" node patch/index.js >> $GITHUB_ENV
       - name: Create Pull Request
         id: cpr
         uses: peter-evans/create-pull-request@v4
         with:
-          commit-message: ${{ env.preview_url }}
+          body: ${{ env.preview_url }}
           committer: GitHub <noreply@github.com>
           author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
           signoff: false
