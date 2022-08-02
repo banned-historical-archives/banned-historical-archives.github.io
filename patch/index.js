@@ -1,18 +1,23 @@
-const { existsSync, readFileSync, writeFileSync } = require('fs');
+const { mkdirSync, existsSync, readFileSync, writeFileSync } = require('fs');
 const { join } = require('path');
 
-const body = process.env.BODY;
-const lines = body.split('\n');
+const dir = join(__dirname, 'articles');
+if (!existsSync(dir)){
+  mkdirSync(dir);
+}
+
 /*
-{OCR补丁}
+const body = `{OCR补丁}
 {
   "articleId": "123",
   "publicationId": "xuanji1",
   "ops": [["replace", 3, "x", "y"], ["delete", 3, "x"], ["insert", 2, 3, "r"]]
-}
+}`
 */
+const body = process.env.BODY.trim();
+const lines = body.split('\n');
 
-if (/^{OCR补丁}$/.test(lines[0])) {
+if (/{OCR补丁}/.test(lines[0])) {
   const final = {
     COMMIT_HASH: process.env.COMMIT_HASH,
   };
@@ -27,7 +32,7 @@ if (/^{OCR补丁}$/.test(lines[0])) {
       final.articleId = patch.articleId;
       final.publicationId = patch.publicationId;
       final.ops = [];
-      for (const op of ops) {
+      for (const op of patch.ops) {
         if (
           op[0] === 'replace' &&
           op[1] >= 0 &&
@@ -64,18 +69,21 @@ if (/^{OCR补丁}$/.test(lines[0])) {
     }
     content = content.split('\n').slice(0, -1).join('\n');
     content +=
+      '\n' +
       final.ops
         .map((i) => {
           if (i[0] === 'replace') {
-            `  parts[${i[1]}].text = parts[${i[1]}].text.replace(\`${i[2]}\`, \`${i[3]}\`);`;
+            return `  parts[${i[1]}].text = parts[${i[1]}].text.replace(\`${i[2]}\`, \`${i[3]}\`);`;
           } else if (i[0] === 'delete') {
-            `  parts[${i[1]}].text = parts[${i[1]}].text.replace(\`${i[2]}\`, '');`;
+            return `  parts[${i[1]}].text = parts[${i[1]}].text.replace(\`${i[2]}\`, '');`;
           } else if (i[0] === 'insert') {
-            `  parts[${i[1]}].text = parts[${i[1]}].text.substr(0, ${i[2]}) + \`${i[3]}\` + parts[${i[1]}].text.substr(${i[2]});`;
+            return `  parts[${i[1]}].text = parts[${i[1]}].text.substr(0, ${i[2]}) + \`${i[3]}\` + parts[${i[1]}].text.substr(${i[2]});`;
           }
         })
-        .join('\n') + '}';
+        .join('\n') +
+      '\n}';
     writeFileSync(filepath, content);
     console.log(`preview_url="https://banned-historical-archives.github.io/articles/${final.articleId}?patch=${encodeURIComponent(JSON.stringify(final))}"`);
-  } catch (e) {}
+  } catch (e) {
+  }
 }
