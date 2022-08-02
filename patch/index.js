@@ -85,5 +85,6 @@ if (/^{OCR补丁}$/.test(lines[0])) {
     writeFileSync(filepath, content);
     console.log(`preview_url="https://banned-historical-archives.github.io/articles/${final.articleId}?patch=${encodeURIComponent(JSON.stringify(final))}"`);
   } catch (e) {
+    console.log(e);
   }
 }
