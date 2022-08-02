@@ -14,6 +14,8 @@ jobs:
         with:
           ref: master
       - uses: actions/setup-node@v3.4.1
+        with:
+          node-version: 16
       - run: COMMIT_HASH="${{ github.sha }}" BODY="${{ github.event.comment.body }}" node patch/index.js >> $GITHUB_ENV
       - name: Create Pull Request
         id: cpr
