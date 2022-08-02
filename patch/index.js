@@ -1,5 +1,10 @@
-const { existsSync, readFileSync, writeFileSync } = require('fs');
+const { mkdirSync, existsSync, readFileSync, writeFileSync } = require('fs');
 const { join } = require('path');
+
+const dir = join(__dirname, 'articles');
+if (!existsSync(dir)){
+  mkdirSync(dir);
+}
 
 /*
 const body = `{OCR补丁}
