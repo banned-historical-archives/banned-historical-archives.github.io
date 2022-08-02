@@ -14,7 +14,7 @@ jobs:
         with:
           ref: master
       - uses: actions/setup-node@v3.4.1
-      - run: COMMIT_HASH="${{ github.sha }}" node patch.js >> $GITHUB_ENV
+      - run: COMMIT_HASH="${{ github.sha }}" node patch/index.js >> $GITHUB_ENV
         env:
           BODY: ${{ github.event.comment.body }}
 
