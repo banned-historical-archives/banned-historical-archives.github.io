@@ -17,7 +17,7 @@ import Stack from '@mui/material/Stack';
 import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
-import { ContentType } from '../../types';
+import { ContentType, Patch } from '../../types';
 import { Document, Page, pdfjs } from 'react-pdf';
 import Layout from '../../components/Layout';
 
@@ -36,9 +36,12 @@ import { init } from '../../backend/data-source';
 import { DiffViewer } from '../../components/DiffViewer';
 import TagComponent from '../../components/TagComponent';
 import { Rectangle } from '@mui/icons-material';
-import { bracket_left, bracket_right, md5 } from '../../utils';
+import { bracket_left, bracket_right, extract_pivots, md5 } from '../../utils';
 
 pdfjs.GlobalWorkerOptions.workerSrc = `/pdfjs-dist/legacy/build/pdf.worker.min.js`;
+
+const commit_hash = process.env.COMMIT_HASH;
+const virtual_publication_id = '--preview-patch--';
 
 type PublicationDetails = {
   [key: string]: {
@@ -110,7 +113,6 @@ export const getStaticProps: GetStaticProps = async (
   }
   return {
     props: {
-      commit_hash: process.env.COMMIT_HASH,
       article: JSON.parse(JSON.stringify(article)),
       publication_details: JSON.parse(JSON.stringify(publication_details)),
     },
@@ -128,7 +130,9 @@ function ArticleComponent({
   comments,
   patchBtn,
   contents,
+  publicationId,
 }: {
+  publicationId: string,
   patchBtn?: boolean;
   article: Article;
   comments: Comment[];
@@ -335,9 +339,9 @@ function ArticleComponent({
                         e.target.value,
                       );
                       if (diff.length === 1) {
-                        delete changes.current.comments[idx];
+                        delete changes.current.comments[comment.index];
                       } else {
-                        changes.current.comments[idx] = new diff_match_patch().diff_toDelta(diff);
+                        changes.current.comments[comment.index] = new diff_match_patch().diff_toDelta(diff);
                       }
                     }}
                   />
@@ -345,9 +349,24 @@ function ArticleComponent({
               );
             })}
           <Button variant="contained" size="small" sx={{ width: 80, mt: 1 }} onClick={() => {
+            console.log(
+              `http://localhost:3000/articles/${article.id}?patch=${encodeURIComponent(
+                JSON.stringify({
+                  articleId: article.id,
+                  publicationId: publicationId,
+                  commitHash: commit_hash,
+                  patch: changes.current,
+                }),
+              )}`,
+            );
             const url =
               `https://github.com/banned-historical-archives/banned-historical-archives.github.io/issues/new?body=${encodeURIComponent(`{OCR补丁}
-${JSON.stringify(changes.current)}`)}&title=${encodeURIComponent(
+${JSON.stringify({
+  articleId: article.id,
+  publicationId: publicationId,
+  commitHash: commit_hash,
+  patch: changes.current
+})}`)}&title=${encodeURIComponent(
                 `[OCR patch]${article.title}`,
               )}`;
             window.open(url, '_blank');
@@ -378,29 +397,127 @@ function date_to_string(date: Date) {
 enum CompareMode {
   line = '逐行对比',
   literal = '逐字对比',
+  description_and_comments = '描述和注释',
 }
+
+let patch:{
+    commitHash: string;
+    articleId: string;
+    publicationId: string;
+    patch: Patch;
+} | undefined;
+
+if (process.browser) {
+  if (location.search.startsWith('?patch=')) {
+    patch = JSON.parse(
+      decodeURIComponent(location.search.split('=')[1]),
+    );
+    if (commit_hash !== patch!.commitHash) {
+      if (
+        !confirm(
+          '当前OCR补丁可能已经合并，再次应用补丁并预览可能不符合预期，是否继续？',
+        )
+      ) {
+        patch = undefined;
+      }
+    }
+  }
+}
+
 export default function ArticleViewer({
   article,
   publication_details,
-  commit_hash,
 }: {
-  commit_hash: string;
   article: Article;
   publication_details: PublicationDetails;
 }) {
   const id = article.id;
+  if (patch && process.browser) {
+    if (!publication_details[virtual_publication_id]) {
+      article.publications.push({
+        ...article.publications.find((i) => i.id === patch!.publicationId)!,
+        id: virtual_publication_id,
+        name: '#OCR补丁预览#',
+      });
+      const { page, comments, contents } =
+        publication_details[patch.publicationId];
+      const d = new diff_match_patch();
+      const patched_contents = contents.map((i) => ({
+        ...i,
+        id: Math.random().toString(),
+      }));
+      const patched_comments = comments.map((i) => ({
+        ...i,
+        id: Math.random().toString(),
+      }));
+      contents.sort((a,b) => a.index -b.index).forEach((content, idx) => {
+        if (!patch!.patch.parts[idx]) {
+          return;
+        }
+
+        const text_arr = Array.from(content.text);
+        comments
+          .filter((i) => i.part_index === content.index)
+          .sort((a, b) => b.index - a.index)
+          .forEach((i) => {
+            if (patch!.patch.comments[i.index]) {
+              const diff = new diff_match_patch().diff_fromDelta(
+                i.text,
+                patch!.patch.comments[i.index],
+              );
+              const new_text = diff
+                .filter((i) => i[0] !== -1)
+                .map((i) => i[1])
+                .join('');
+              patched_comments.find(h => h.index === i.index)!.text = new_text;
+            }
+
+            text_arr.splice(
+              i.offset,
+              0,
+              `${bracket_left}${i.index}${bracket_right}`,
+            );
+          });
+        const origin_text = text_arr.join('');
+        const diff = d.diff_fromDelta(origin_text, patch!.patch.parts[idx]);
+        const new_text = diff
+          .filter((i) => i[0] !== -1)
+          .map((i) => i[1])
+          .join('');
+        const [pivots, pure_text] = extract_pivots(new_text, idx);
+        pivots.forEach((x) => {
+          const t = patched_comments.find((i) => x.index === i.index)!;
+          t.offset = x.offset;
+          t.part_index = x.part_idx;
+        });
+        patched_contents[idx].text = pure_text;
+      });
+      publication_details[virtual_publication_id] = {
+        page,
+        comments: patched_comments,
+        contents: patched_contents,
+      };
+    }
+  }
+
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const [compareType, setCompareType] = useState<CompareType>(CompareType.none);
+  const [compareType, setCompareType] = useState<CompareType>(patch ? CompareType.version : CompareType.none);
   const [comparePublication, setComparePublication] = useState<string>(
-    article.publications[article.publications.length - 1].id,
+    patch ? virtual_publication_id : article.publications[article.publications.length - 1].id,
   );
   const [compareMode, setCompareMode] = useState(CompareMode.line);
   const [selectedPublication, setSelectedPublication] = useState<string>(
-    article.publications[0].id,
+    patch ? patch!.publicationId :article.publications[0].id,
   );
 
   const article_diff: Diff[][] | undefined = useMemo(() => {
-    if (compareType !== CompareType.version || !article) return;
+    if (compareType !== CompareType.version || !article || !process.browser) return;
+    let comments_a: { text: string, index: number }[] = publication_details[
+      selectedPublication
+    ].comments.sort((a, b) => (a.index > b.index ? 1 : -1)).filter( i=> i.index !== -1);
+    let comments_b: { text: string, index: number }[] = publication_details[
+      comparePublication!
+    ].comments.sort((a, b) => (a.index > b.index ? 1 : -1)).filter( i=> i.index !== -1);
     let contents_a: { text: string }[] = publication_details[
       selectedPublication
     ].contents.sort((a, b) => (a.index > b.index ? 1 : -1));
@@ -414,6 +531,26 @@ export default function ArticleViewer({
         join_text(contents_a),
         join_text(contents_b),
       )];
+    } else if (compareMode === CompareMode.description_and_comments) {
+      const max_n_comment = Math.max(comments_a.length, comments_b.length);
+      return [
+        new diff_match_patch().diff_main(
+          publication_details[selectedPublication].comments.find(
+            (i) => i.index === -1,
+          )?.text || '',
+          publication_details[comparePublication].comments.find(
+            (i) => i.index === -1,
+          )?.text || '',
+        ),
+        ...new Array(max_n_comment)
+          .fill(0)
+          .map((x, p) =>
+            new diff_match_patch().diff_main(
+              comments_a[p] ? comments_a[p].text : '',
+              comments_b[p] ? comments_b[p].text : '',
+            ),
+          ),
+      ];
     }
     const max_len = Math.max(contents_a.length, contents_b.length);
 
@@ -466,6 +603,7 @@ export default function ArticleViewer({
       >
         <ArticleComponent
           article={article}
+          publicationId={selectedPublication}
           comments={comments}
           contents={contents}
           patchBtn={compareType === CompareType.origin}
@@ -521,6 +659,7 @@ export default function ArticleViewer({
         >
           <ArticleComponent
             article={article}
+            publicationId={comparePublication}
             comments={publication_details[comparePublication!]!.comments}
             contents={publication_details[comparePublication!]!.contents}
           />
@@ -540,6 +679,9 @@ export default function ArticleViewer({
             <MenuItem value={CompareMode.line}>{CompareMode.line}</MenuItem>
             <MenuItem value={CompareMode.literal}>
               {CompareMode.literal}
+            </MenuItem>
+            <MenuItem value={CompareMode.description_and_comments}>
+              {CompareMode.description_and_comments}
             </MenuItem>
           </Select>
         </FormControl>

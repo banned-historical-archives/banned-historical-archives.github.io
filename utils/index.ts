@@ -1,6 +1,6 @@
 import type Tag from "../backend/entity/tag";
 import { diff_match_patch, Diff } from 'diff-match-patch';
-import { ArticleCategory, ArticleType, ParserResult, Pivot, TagType } from "../types";
+import { ArticleCategory, ArticleType, ParserResult, Patch, Pivot, TagType } from "../types";
 import { articleCategoryToCN, articleTypeToCN } from "./i18n";
 
 export const tagToString = (tag: Tag) =>
@@ -186,7 +186,7 @@ export function md5(inputString: string) {
 export const bracket_left = '〔';
 export const bracket_right = '〕';
 
-function extract_pivots(s: string, part_idx: number): [Pivot[], string] {
+export function extract_pivots(s: string, part_idx: number): [Pivot[], string] {
   const res: Pivot[] = [];
   const exp = new RegExp(`${bracket_left}\\d+${bracket_right}`);
   while (true) {
@@ -201,11 +201,7 @@ function extract_pivots(s: string, part_idx: number): [Pivot[], string] {
   return [res, s];
 }
 
-export function apply_patch(parserResult: ParserResult, patch: {
-  parts: {[idx: string]: string},
-  comments: {[idx: string]: string},
-  description: string,
-}) {
+export function apply_patch(parserResult: ParserResult, patch: Patch) {
   const d = new diff_match_patch();
   const { parts, comment_pivots } = parserResult;
   Object.keys(patch.parts).forEach((i) => {

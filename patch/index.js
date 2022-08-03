@@ -11,7 +11,7 @@ const body = `{OCR补丁}
 {
   "articleId": "123",
   "publicationId": "xuanji1",
-  "deltas": {
+  "patch": {
     "parts": {"a": "..."},
     "comments": {"a": "..."},
     "description": ""
@@ -25,16 +25,20 @@ if (/{OCR补丁}/.test(lines[0])) {
   const final = {
     COMMIT_HASH: process.env.COMMIT_HASH,
   };
+  let decoded = '';
   try {
     const patch = JSON.parse(lines.slice(1).join(''));
     if (
       patch.articleId &&
       patch.publicationId &&
-      patch.deltas
+      patch.patch
     ) {
       final.articleId = patch.articleId;
       final.publicationId = patch.publicationId;
-      final.deltas = patch.deltas;
+      final.patch = patch.patch;
+      decoded = decodeURIComponent(final.patch);
+    } else {
+      return;
     }
 
     const filepath = join(__dirname, `./articles/[${final.articleId}][${final.publicationId}].ts`);
@@ -46,7 +50,7 @@ export default [
       content = readFileSync(filepath).toString();
     }
     content = content.split('\n').slice(0, -1).join('\n');
-    content += '\n' + `  ${JSON.stringify(final)},\n]`;
+    content += '\n' + `// ${decoded}\n  ${JSON.stringify(final.deltas)},\n]`;
     writeFileSync(filepath, content);
     console.log(`preview_url="https://banned-historical-archives.github.io/articles/${final.articleId}?patch=${encodeURIComponent(JSON.stringify(final))}"`);
   } catch (e) {

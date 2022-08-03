@@ -138,3 +138,9 @@ export type Book = {
   parser_option: ParserOption;
   parser: (path: string, opt: ParserOption) => Promise<ParserResult[]>;
 };
+
+export type Patch = {
+  parts: {[idx: string]: string},
+  comments: {[idx: string]: string},
+  description: string,
+}
