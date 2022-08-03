@@ -36,7 +36,7 @@ if (/{OCR补丁}/.test(lines[0])) {
       final.articleId = patch.articleId;
       final.publicationId = patch.publicationId;
       final.patch = patch.patch;
-      decoded = decodeURIComponent(final.patch);
+      decoded = decodeURIComponent(JSON.stringify(final.patch));
     } else {
       return;
     }
@@ -50,7 +50,7 @@ export default [
       content = readFileSync(filepath).toString();
     }
     content = content.split('\n').slice(0, -1).join('\n');
-    content += '\n' + `// ${decoded}\n  ${JSON.stringify(final.deltas)},\n]`;
+    content += '\n' + `// ${decoded}\n  ${JSON.stringify(final.patch)},\n]`;
     writeFileSync(filepath, content);
     console.log(`preview_url="https://banned-historical-archives.github.io/articles/${final.articleId}?patch=${encodeURIComponent(JSON.stringify(final))}"`);
   } catch (e) {
