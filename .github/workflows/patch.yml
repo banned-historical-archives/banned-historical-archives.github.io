@@ -1,13 +1,11 @@
 name: patch
 on:
-  issue_comment:
-    types: [created]
+  issues:
+    types: [opened]
 
 jobs:
-  issue_commented:
-    # This job only runs for issue comments
-    name: Issue comment
-    if: ${{ !github.event.issue.pull_request }}
+  issue:
+    name: Issue
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -19,7 +17,7 @@ jobs:
       - run: node patch/index.js >> $GITHUB_ENV
         env:
           COMMIT_HASH: ${{ github.sha }}
-          BODY: ${{ github.event.comment.body }}
+          BODY: ${{ github.event.issue.body }}
       - name: Create Pull Request
         id: cpr
         uses: peter-evans/create-pull-request@v4
