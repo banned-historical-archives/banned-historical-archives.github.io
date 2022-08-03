@@ -36,7 +36,7 @@ import { join } from 'path';
   // const book = books.find(i => i.entity.id === 'wenku')!;
   // const res = await book.parser(book.path, book.parser_option);
 
-  const book = books.find(i => i.entity.id === 'xuanji5')!;
+  const book = books.find(i => i.entity.id === 'xuanji1')!;
   //const res = await xuanji.parse(book.path, book.parser_option);
   const res = await book.parser(book.path, book.parser_option);
   // await parse(join(__dirname, '../public/TheGPCRdatabase'), {page_limits:[]});

@@ -27,7 +27,7 @@ if (/{OCR补丁}/.test(lines[0])) {
   };
   let decoded = '';
   try {
-    const patch = JSON.parse(lines.slice(1).join(''));
+    const patch = JSON.parse(lines.slice(1, -1).join(''));
     if (
       patch.articleId &&
       patch.publicationId &&

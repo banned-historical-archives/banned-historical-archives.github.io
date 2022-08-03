@@ -234,14 +234,14 @@ export function apply_patch(parserResult: ParserResult, patch: Patch) {
   Object.keys(patch.comments).forEach((i) => {
     const idx = parseInt(i);
     const diff = d.diff_fromDelta(
-      parserResult.comments[idx],
+      parserResult.comments[idx - 1],
       patch.comments[i],
     );
     const new_text = diff
       .filter((i) => i[0] !== -1)
       .map((i) => i[1])
       .join('');
-    parserResult.comments[idx] = new_text;
+    parserResult.comments[idx - 1] = new_text;
   });
   if (patch.description) {
     const diff = d.diff_fromDelta(parserResult.description, patch.description);

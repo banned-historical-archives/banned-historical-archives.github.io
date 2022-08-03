@@ -153,6 +153,11 @@ function ArticleComponent({
     comments: {},
     description: '',
   });
+  useEffect(() => {
+    changes.current!.parts = {};
+    changes.current!.comments = {};
+    changes.current!.description = '';
+  }, [article])
   const description = comments.find((i) => i.index === -1)?.text;
   const sorted_contents = contents.sort((a, b) => (a.index > b.index ? 1 : -1));
   const sorted_comments = comments.sort((a, b) => a.index - b.index);
@@ -378,25 +383,15 @@ function ArticleComponent({
             size="small"
             sx={{ width: 80, mt: 1 }}
             onClick={() => {
-              console.log(
-                `http://localhost:3000/articles/${
-                  article.id
-                }?patch=${encodeURIComponent(
-                  JSON.stringify({
-                    articleId: article.id,
-                    publicationId: publicationId,
-                    commitHash: commit_hash,
-                    patch: changes.current,
-                  }),
-                )}`,
-              );
-              const url = `https://github.com/banned-historical-archives/banned-historical-archives.github.io/issues/new?body=${encodeURIComponent(`{OCR补丁}
-${JSON.stringify({
+              const params = JSON.stringify({
   articleId: article.id,
   publicationId: publicationId,
   commitHash: commit_hash,
   patch: changes.current,
-})}`)}&title=${encodeURIComponent(`[OCR patch]${article.title}`)}`;
+});
+              const url = `https://github.com/banned-historical-archives/banned-historical-archives.github.io/issues/new?body=${encodeURIComponent(`{OCR补丁}
+${params}
+预览：https://banned-historical-archives.github.io/articles/${article.id}?patch=${params}`)}&title=${encodeURIComponent(`[OCR patch]${article.title}`)}`;
               window.open(url, '_blank');
             }}
           >
