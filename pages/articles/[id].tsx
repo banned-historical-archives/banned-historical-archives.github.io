@@ -1,9 +1,11 @@
-import { useState, useEffect, ReactElement, useMemo } from 'react';
+import React, { useRef, useState, useEffect, ReactElement, useMemo } from 'react';
 import { diff_match_patch, Diff } from 'diff-match-patch';
 import Head from 'next/head';
+import Popover from '@mui/material/Popover';
 
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import Menu from '@mui/material/Menu';
+import Paper from '@mui/material/Paper';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import Grid from '@mui/material/Grid';
@@ -14,7 +16,8 @@ import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
-import { ContentType } from '../../types';
+import TextField from '@mui/material/TextField';
+import { ContentType, Patch } from '../../types';
 import { Document, Page, pdfjs } from 'react-pdf';
 import Layout from '../../components/Layout';
 
@@ -32,8 +35,13 @@ import {
 import { init } from '../../backend/data-source';
 import { DiffViewer } from '../../components/DiffViewer';
 import TagComponent from '../../components/TagComponent';
+import { Rectangle } from '@mui/icons-material';
+import { bracket_left, bracket_right, extract_pivots, md5 } from '../../utils';
 
 pdfjs.GlobalWorkerOptions.workerSrc = `/pdfjs-dist/legacy/build/pdf.worker.min.js`;
+
+const commit_hash = process.env.COMMIT_HASH;
+const virtual_publication_id = '--preview-patch--';
 
 type PublicationDetails = {
   [key: string]: {
@@ -105,7 +113,6 @@ export const getStaticProps: GetStaticProps = async (
   }
   return {
     props: {
-      commit_hash: process.env.COMMIT_HASH,
       article: JSON.parse(JSON.stringify(article)),
       publication_details: JSON.parse(JSON.stringify(publication_details)),
     },
@@ -121,124 +128,259 @@ enum CompareType {
 function ArticleComponent({
   article,
   comments,
+  patchBtn,
   contents,
+  publicationId,
 }: {
+  publicationId: string,
+  patchBtn?: boolean;
   article: Article;
   comments: Comment[];
   contents: Content[];
 }) {
+  const [patchMode, setPatchMode] = useState(false);
+  const changes = useRef<{
+    parts: {[idx: string]: string},
+    comments: {[idx: string]: string},
+    description: string,
+  }>({
+    parts: {},
+    comments: {},
+    description: '',
+  });
   const description = comments.find((i) => i.index === -1)?.text;
+  const sorted_contents = contents.sort((a, b) => (a.index > b.index ? 1 : -1));
+  const sorted_comments = comments.sort((a, b) => a.index - b.index);
+
+  const contentsComponent = sorted_contents.map((part) => {
+    const part_comments = sorted_comments.filter(
+      (i) => i.part_index === part.index,
+    );
+    let text = part.text;
+    let t = 0;
+    const texts: string[] = [];
+    if (part_comments.length) {
+      for (const part_comment of part_comments) {
+        const p = text.substr(t, part_comment.offset - t);
+        texts.push(p);
+        t += p.length;
+      }
+      if (t < text.length) {
+        texts.push(text.substr(t));
+      }
+    } else {
+      texts.push(text);
+    }
+    const content: (ReactElement | string)[] = [];
+    texts.forEach((text, idx) => {
+      content.push(<span key={`${md5(text)}-${idx}`}>{text}</span>);
+      if (part_comments.length) {
+        const comment_idx = part_comments.shift()!.index;
+        content.push(
+          <a
+            key={Math.random()}
+            href={`#comment${comment_idx}`}
+            style={{ userSelect: 'none' }}
+          >
+            {bracket_left}{comment_idx}{bracket_right}
+          </a>,
+        );
+      }
+    });
+    const key = part.id;
+    if (part.type === ContentType.title) {
+      return (
+        <Typography
+          key={key}
+          variant="h5"
+          sx={{ textAlign: 'center', margin: 4 }}
+        >
+          {content}
+        </Typography>
+      );
+    } else if (part.type === ContentType.appellation) {
+      return (
+        <Typography key={key} variant="body1" sx={{ margin: 0.5 }}>
+          {content}
+        </Typography>
+      );
+    } else if (part.type === ContentType.subdate) {
+      return (
+        <Typography key={key} variant="subtitle1" sx={{ textAlign: 'center' }}>
+          {content}
+        </Typography>
+      );
+    } else if (part.type === ContentType.subtitle) {
+      return (
+        <Typography key={key} variant="subtitle1" sx={{ textAlign: 'center' }}>
+          {content}
+        </Typography>
+      );
+    } else if (part.type === ContentType.paragraph) {
+      return (
+        <Typography
+          key={key}
+          variant="body1"
+          sx={{ textIndent: '2em', margin: 0.5 }}
+        >
+          {content}
+        </Typography>
+      );
+    }
+  });
+  const descriptionComponent = description ? (
+    <>
+      <Divider sx={{ mt: 2, mb: 2 }} />
+      <Typography variant="h6" sx={{ mb: 2 }}>
+        描述
+      </Typography>
+      <Typography variant="body1">{description}</Typography>
+    </>
+  ) : null;
+  const commentsComponent = sorted_comments.filter((i) => i.index !== -1)
+    .length ? (
+    <>
+      <Divider sx={{ mt: 2, mb: 2 }} />
+      <Typography variant="h6" sx={{ mb: 2 }}>
+        注释
+      </Typography>
+      {sorted_comments
+        .filter((i) => i.index !== -1)
+        .map((i) => (
+          <Typography id={`comment${i.index}`} key={i.id} variant="body1">
+            <span style={{ userSelect: 'none' }}>{bracket_left}{i.index}{bracket_right}</span>
+            <span>{i.text}</span>
+          </Typography>
+        ))}
+    </>
+  ) : null;
+
   return (
     <>
-      {contents
-        .sort((a, b) => (a.index > b.index ? 1 : -1))
-        .map((part) => {
-          const part_comments = comments
-            .filter((i) => i.part_index === part.index)
-            .sort((a, b) => (a.index > b.index ? 1 : -1));
-          let text = part.text;
-          let t = 0;
-          const texts: string[] = [];
-          if (part_comments.length) {
-            for (const part_comment of part_comments) {
-              const p = text.substr(t, part_comment.offset - t);
-              texts.push(p);
-              t += p.length;
-            }
-            if (t < text.length) {
-              texts.push(text.substr(t));
-            }
-          } else {
-            texts.push(text);
-          }
-          const content: ReactElement[] = [];
-          texts.forEach((text) => {
-            if (part_comments.length) {
-              const comment_idx = part_comments.shift()!.index;
-              content.push(
-                <span key={Math.random()}>{text}</span>,
-                <a key={Math.random()} href={`#comment${comment_idx}`}>
-                  [{comment_idx}]
-                </a>,
-              );
-            } else {
-              content.push(<span key={Math.random()}>{text}</span>);
-            }
-          });
-          const key = part.id;
-          if (part.type === ContentType.title) {
-            return (
-              <Typography
-                key={key}
-                variant="h5"
-                sx={{ textAlign: 'center', margin: 4 }}
-              >
-                {content}
-              </Typography>
-            );
-          } else if (part.type === ContentType.appellation) {
-            return (
-              <Typography key={key} variant="body1" sx={{ margin: 0.5 }}>
-                {content}
-              </Typography>
-            );
-          } else if (part.type === ContentType.subdate) {
-            return (
-              <Typography
-                key={key}
-                variant="subtitle1"
-                sx={{ textAlign: 'center' }}
-              >
-                {content}
-              </Typography>
-            );
-          } else if (part.type === ContentType.subtitle) {
-            return (
-              <Typography
-                key={key}
-                variant="subtitle1"
-                sx={{ textAlign: 'center' }}
-              >
-                {content}
-              </Typography>
-            );
-          } else if (part.type === ContentType.paragraph) {
-            return (
-              <Typography
-                key={key}
-                variant="body1"
-                sx={{ textIndent: '2em', margin: 0.5 }}
-              >
-                {content}
-              </Typography>
-            );
-          }
-        })}
-      {description ? (
+      {patchBtn ? (
+        <Button
+          sx={{ width: 100, mb: 1 }}
+          variant="outlined"
+          size="small"
+          onClick={() => setPatchMode(!patchMode)}
+        >
+          {patchMode ? '阅读模式' : '校对模式'}
+        </Button>
+      ) : null}
+      {patchMode ? (
         <>
+          {sorted_contents.map((content, idx) => {
+            let text_arr = Array.from(content.text);
+            sorted_comments
+              .filter((i) => i.part_index === idx)
+              .forEach((i) => text_arr.splice(i.offset, 0, `${bracket_left}${i.index}${bracket_right}`));
+            const text = text_arr.join('');
+            return (
+              <TextField
+                key={content.id}
+                onChange={(e) => {
+                  const diff = new diff_match_patch().diff_main(
+                    text,
+                    e.target.value,
+                  );
+                  if (diff.length === 1) {
+                    delete changes.current.parts[idx];
+                  } else {
+                    changes.current.parts[idx] = new diff_match_patch().diff_toDelta(diff);
+                  }
+                }}
+                defaultValue={text}
+                multiline
+              />
+            );
+          })}
           <Divider sx={{ mt: 2, mb: 2 }} />
           <Typography variant="h6" sx={{ mb: 2 }}>
             描述
           </Typography>
-          <Typography variant="body1">{description}</Typography>
-        </>
-      ) : null}
-      {comments.filter((i) => i.index !== -1).length ? (
-        <>
+          {sorted_comments
+            .filter((i) => i.index === -1)
+            .map((comment, idx) => {
+              return (
+                <TextField
+                  defaultValue={comment.text}
+                  multiline
+                  onChange={(e) => {
+                    const diff = new diff_match_patch().diff_main(
+                      comment.text,
+                      e.target.value,
+                    );
+                    if (diff.length === 1) {
+                      changes.current.description = '';
+                    } else {
+                      changes.current.description = new diff_match_patch().diff_toDelta(diff);
+                    }
+                  }}
+                />
+              );
+            })}
           <Divider sx={{ mt: 2, mb: 2 }} />
           <Typography variant="h6" sx={{ mb: 2 }}>
             注释
           </Typography>
+          {sorted_comments
+            .filter((i) => i.index !== -1)
+            .map((comment, idx) => {
+              return (
+                <Stack direction="row" key={comment.id}>
+                  <Typography>{bracket_left}{comment.index}{bracket_right}</Typography>
+                  <TextField
+                    defaultValue={comment.text}
+                    multiline
+                    sx={{ flex: 1 }}
+                    onChange={(e) => {
+                      const diff = new diff_match_patch().diff_main(
+                        comment.text,
+                        e.target.value,
+                      );
+                      if (diff.length === 1) {
+                        delete changes.current.comments[comment.index];
+                      } else {
+                        changes.current.comments[comment.index] = new diff_match_patch().diff_toDelta(diff);
+                      }
+                    }}
+                  />
+                </Stack>
+              );
+            })}
+          <Button variant="contained" size="small" sx={{ width: 80, mt: 1 }} onClick={() => {
+            console.log(
+              `http://localhost:3000/articles/${article.id}?patch=${encodeURIComponent(
+                JSON.stringify({
+                  articleId: article.id,
+                  publicationId: publicationId,
+                  commitHash: commit_hash,
+                  patch: changes.current,
+                }),
+              )}`,
+            );
+            const url =
+              `https://github.com/banned-historical-archives/banned-historical-archives.github.io/issues/new?body=${encodeURIComponent(`{OCR补丁}
+${JSON.stringify({
+  articleId: article.id,
+  publicationId: publicationId,
+  commitHash: commit_hash,
+  patch: changes.current
+})}`)}&title=${encodeURIComponent(
+                `[OCR patch]${article.title}`,
+              )}`;
+            window.open(url, '_blank');
+          }}>
+            提交变更
+          </Button>
         </>
-      ) : null}
-      {comments
-        .filter((i) => i.index !== -1)
-        .sort((a, b) => (a.index > b.index ? 1 : -1))
-        .map((i) => (
-          <Typography id={`comment${i.index}`} key={i.id} variant="body1">
-            [{i.index}]{i.text}
-          </Typography>
-        ))}
+      ) : (
+        <>
+          {contentsComponent}
+          {descriptionComponent}
+          {commentsComponent}
+        </>
+      )}
     </>
   );
 }
@@ -255,29 +397,127 @@ function date_to_string(date: Date) {
 enum CompareMode {
   line = '逐行对比',
   literal = '逐字对比',
+  description_and_comments = '描述和注释',
 }
+
+let patch:{
+    commitHash: string;
+    articleId: string;
+    publicationId: string;
+    patch: Patch;
+} | undefined;
+
+if (process.browser) {
+  if (location.search.startsWith('?patch=')) {
+    patch = JSON.parse(
+      decodeURIComponent(location.search.split('=')[1]),
+    );
+    if (commit_hash !== patch!.commitHash) {
+      if (
+        !confirm(
+          '当前OCR补丁可能已经合并，再次应用补丁并预览可能不符合预期，是否继续？',
+        )
+      ) {
+        patch = undefined;
+      }
+    }
+  }
+}
+
 export default function ArticleViewer({
   article,
   publication_details,
-  commit_hash,
 }: {
-  commit_hash: string;
   article: Article;
   publication_details: PublicationDetails;
 }) {
   const id = article.id;
+  if (patch && process.browser) {
+    if (!publication_details[virtual_publication_id]) {
+      article.publications.push({
+        ...article.publications.find((i) => i.id === patch!.publicationId)!,
+        id: virtual_publication_id,
+        name: '#OCR补丁预览#',
+      });
+      const { page, comments, contents } =
+        publication_details[patch.publicationId];
+      const d = new diff_match_patch();
+      const patched_contents = contents.map((i) => ({
+        ...i,
+        id: Math.random().toString(),
+      }));
+      const patched_comments = comments.map((i) => ({
+        ...i,
+        id: Math.random().toString(),
+      }));
+      contents.sort((a,b) => a.index -b.index).forEach((content, idx) => {
+        if (!patch!.patch.parts[idx]) {
+          return;
+        }
+
+        const text_arr = Array.from(content.text);
+        comments
+          .filter((i) => i.part_index === content.index)
+          .sort((a, b) => b.index - a.index)
+          .forEach((i) => {
+            if (patch!.patch.comments[i.index]) {
+              const diff = new diff_match_patch().diff_fromDelta(
+                i.text,
+                patch!.patch.comments[i.index],
+              );
+              const new_text = diff
+                .filter((i) => i[0] !== -1)
+                .map((i) => i[1])
+                .join('');
+              patched_comments.find(h => h.index === i.index)!.text = new_text;
+            }
+
+            text_arr.splice(
+              i.offset,
+              0,
+              `${bracket_left}${i.index}${bracket_right}`,
+            );
+          });
+        const origin_text = text_arr.join('');
+        const diff = d.diff_fromDelta(origin_text, patch!.patch.parts[idx]);
+        const new_text = diff
+          .filter((i) => i[0] !== -1)
+          .map((i) => i[1])
+          .join('');
+        const [pivots, pure_text] = extract_pivots(new_text, idx);
+        pivots.forEach((x) => {
+          const t = patched_comments.find((i) => x.index === i.index)!;
+          t.offset = x.offset;
+          t.part_index = x.part_idx;
+        });
+        patched_contents[idx].text = pure_text;
+      });
+      publication_details[virtual_publication_id] = {
+        page,
+        comments: patched_comments,
+        contents: patched_contents,
+      };
+    }
+  }
+
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const [compareType, setCompareType] = useState<CompareType>(CompareType.none);
+  const [compareType, setCompareType] = useState<CompareType>(patch ? CompareType.version : CompareType.none);
   const [comparePublication, setComparePublication] = useState<string>(
-    article.publications[article.publications.length - 1].id,
+    patch ? virtual_publication_id : article.publications[article.publications.length - 1].id,
   );
   const [compareMode, setCompareMode] = useState(CompareMode.line);
   const [selectedPublication, setSelectedPublication] = useState<string>(
-    article.publications[0].id,
+    patch ? patch!.publicationId :article.publications[0].id,
   );
 
   const article_diff: Diff[][] | undefined = useMemo(() => {
-    if (compareType !== CompareType.version || !article) return;
+    if (compareType !== CompareType.version || !article || !process.browser) return;
+    let comments_a: { text: string, index: number }[] = publication_details[
+      selectedPublication
+    ].comments.sort((a, b) => (a.index > b.index ? 1 : -1)).filter( i=> i.index !== -1);
+    let comments_b: { text: string, index: number }[] = publication_details[
+      comparePublication!
+    ].comments.sort((a, b) => (a.index > b.index ? 1 : -1)).filter( i=> i.index !== -1);
     let contents_a: { text: string }[] = publication_details[
       selectedPublication
     ].contents.sort((a, b) => (a.index > b.index ? 1 : -1));
@@ -291,6 +531,26 @@ export default function ArticleViewer({
         join_text(contents_a),
         join_text(contents_b),
       )];
+    } else if (compareMode === CompareMode.description_and_comments) {
+      const max_n_comment = Math.max(comments_a.length, comments_b.length);
+      return [
+        new diff_match_patch().diff_main(
+          publication_details[selectedPublication].comments.find(
+            (i) => i.index === -1,
+          )?.text || '',
+          publication_details[comparePublication].comments.find(
+            (i) => i.index === -1,
+          )?.text || '',
+        ),
+        ...new Array(max_n_comment)
+          .fill(0)
+          .map((x, p) =>
+            new diff_match_patch().diff_main(
+              comments_a[p] ? comments_a[p].text : '',
+              comments_b[p] ? comments_b[p].text : '',
+            ),
+          ),
+      ];
     }
     const max_len = Math.max(contents_a.length, contents_b.length);
 
@@ -331,22 +591,25 @@ export default function ArticleViewer({
 
   const { contents, comments, page } = publication_details[selectedPublication];
 
-  const compare_elements: ReactElement[] = [
-    <Stack
-      sx={{
-        flex: 1,
-        overflowY: compareType === CompareType.none ? 'none' : 'scroll',
-        p: 1,
-      }}
-      key="version_a"
-    >
-      <ArticleComponent
-        article={article}
-        comments={comments}
-        contents={contents}
-      />
-    </Stack>,
-  ];
+  const compare_elements: ReactElement[] = [];
+    compare_elements.push(
+      <Stack
+        sx={{
+          flex: 1,
+          overflowY: 'scroll',
+          p: 1,
+        }}
+        key="version_a"
+      >
+        <ArticleComponent
+          article={article}
+          publicationId={selectedPublication}
+          comments={comments}
+          contents={contents}
+          patchBtn={compareType === CompareType.origin}
+        />
+      </Stack>,
+    );
   if (compareType === CompareType.origin) {
     compare_elements.push(
       <Stack key="origin" sx={{ flex: 1, overflowY: 'scroll' }}>
@@ -389,9 +652,14 @@ export default function ArticleViewer({
             ))}
           </Select>
         </FormControl>
-        <Stack sx={{ overflowY: 'scroll', p: 1 }}>
+        <Stack
+          sx={{
+            overflowY: 'scroll',
+          }}
+        >
           <ArticleComponent
             article={article}
+            publicationId={comparePublication}
             comments={publication_details[comparePublication!]!.comments}
             contents={publication_details[comparePublication!]!.contents}
           />
@@ -411,6 +679,9 @@ export default function ArticleViewer({
             <MenuItem value={CompareMode.line}>{CompareMode.line}</MenuItem>
             <MenuItem value={CompareMode.literal}>
               {CompareMode.literal}
+            </MenuItem>
+            <MenuItem value={CompareMode.description_and_comments}>
+              {CompareMode.description_and_comments}
             </MenuItem>
           </Select>
         </FormControl>

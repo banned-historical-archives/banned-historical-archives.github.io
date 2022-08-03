@@ -1586,13 +1586,6 @@
   dependencies:
     "iconv-lite" "^0.4.24"
 
-"dbffile@^1.8.1":
-  "integrity" "sha512-4qDTmCyFVm+FeGRL86ciw4BquH3q0zYuddNokLokXzg8bSau63rthNHXBEb2aH8mi6LFnXN/HQbytMTLSE7BNw=="
-  "resolved" "https://registry.npmmirror.com/dbffile/-/dbffile-1.8.1.tgz"
-  "version" "1.8.1"
-  dependencies:
-    "iconv-lite" "^0.4.24"
-
 "debug@^2.6.9":
   "integrity" "sha512-bC7ElrdJaJnPbAP+1EotYvqZsb3ecl5wi6Bfi6BJTUcNowp6cvspg0jXznRTKDjm/E7AdgFBVeAPVMNcKGsHMA=="
   "resolved" "https://registry.npmmirror.com/debug/-/debug-2.6.9.tgz"
@@ -2701,6 +2694,11 @@
     "@types/node" "*"
     "merge-stream" "^2.0.0"
     "supports-color" "^8.0.0"
+
+"js-sha1@^0.6.0":
+  "integrity" "sha512-01gwBFreYydzmU9BmZxpVk6svJJHrVxEN3IOiGl6VO93bVKYETJ0sIth6DASI6mIFdt7NmfX9UiByRzsYHGU9w=="
+  "resolved" "https://registry.npmjs.org/js-sha1/-/js-sha1-0.6.0.tgz"
+  "version" "0.6.0"
 
 "js-tokens@^3.0.0 || ^4.0.0", "js-tokens@^4.0.0":
   "integrity" "sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ=="

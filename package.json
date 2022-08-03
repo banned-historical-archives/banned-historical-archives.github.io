@@ -2,7 +2,7 @@
   "name": "x",
   "version": "0.1.0",
   "scripts": {
-    "dev": "next dev",
+    "dev": "COMMIT_HASH=$(git rev-parse HEAD) next dev",
     "init-db": "ts-node --project ./tsconfig.build.json ./backend/init-db.ts",
     "build": "next build && next export",
     "cp-pdfjs": "cp -r ./node_modules/pdfjs-dist ./public/",
