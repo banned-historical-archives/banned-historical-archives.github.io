@@ -1,4 +1,10 @@
-import React, { useRef, useState, useEffect, ReactElement, useMemo } from 'react';
+import React, {
+  useRef,
+  useState,
+  useEffect,
+  ReactElement,
+  useMemo,
+} from 'react';
 import { diff_match_patch, Diff } from 'diff-match-patch';
 import Head from 'next/head';
 import Popover from '@mui/material/Popover';
@@ -132,7 +138,7 @@ function ArticleComponent({
   contents,
   publicationId,
 }: {
-  publicationId: string,
+  publicationId: string;
   patchBtn?: boolean;
   article: Article;
   comments: Comment[];
@@ -140,9 +146,9 @@ function ArticleComponent({
 }) {
   const [patchMode, setPatchMode] = useState(false);
   const changes = useRef<{
-    parts: {[idx: string]: string},
-    comments: {[idx: string]: string},
-    description: string,
+    parts: { [idx: string]: string };
+    comments: { [idx: string]: string };
+    description: string;
   }>({
     parts: {},
     comments: {},
@@ -182,7 +188,9 @@ function ArticleComponent({
             href={`#comment${comment_idx}`}
             style={{ userSelect: 'none' }}
           >
-            {bracket_left}{comment_idx}{bracket_right}
+            {bracket_left}
+            {comment_idx}
+            {bracket_right}
           </a>,
         );
       }
@@ -248,7 +256,11 @@ function ArticleComponent({
         .filter((i) => i.index !== -1)
         .map((i) => (
           <Typography id={`comment${i.index}`} key={i.id} variant="body1">
-            <span style={{ userSelect: 'none' }}>{bracket_left}{i.index}{bracket_right}</span>
+            <span style={{ userSelect: 'none' }}>
+              {bracket_left}
+              {i.index}
+              {bracket_right}
+            </span>
             <span>{i.text}</span>
           </Typography>
         ))}
@@ -273,7 +285,13 @@ function ArticleComponent({
             let text_arr = Array.from(content.text);
             sorted_comments
               .filter((i) => i.part_index === idx)
-              .forEach((i) => text_arr.splice(i.offset, 0, `${bracket_left}${i.index}${bracket_right}`));
+              .forEach((i) =>
+                text_arr.splice(
+                  i.offset,
+                  0,
+                  `${bracket_left}${i.index}${bracket_right}`,
+                ),
+              );
             const text = text_arr.join('');
             return (
               <TextField
@@ -286,7 +304,8 @@ function ArticleComponent({
                   if (diff.length === 1) {
                     delete changes.current.parts[idx];
                   } else {
-                    changes.current.parts[idx] = new diff_match_patch().diff_toDelta(diff);
+                    changes.current.parts[idx] =
+                      new diff_match_patch().diff_toDelta(diff);
                   }
                 }}
                 defaultValue={text}
@@ -303,6 +322,7 @@ function ArticleComponent({
             .map((comment, idx) => {
               return (
                 <TextField
+                  key={comment.id}
                   defaultValue={comment.text}
                   multiline
                   onChange={(e) => {
@@ -313,7 +333,8 @@ function ArticleComponent({
                     if (diff.length === 1) {
                       changes.current.description = '';
                     } else {
-                      changes.current.description = new diff_match_patch().diff_toDelta(diff);
+                      changes.current.description =
+                        new diff_match_patch().diff_toDelta(diff);
                     }
                   }}
                 />
@@ -328,7 +349,11 @@ function ArticleComponent({
             .map((comment, idx) => {
               return (
                 <Stack direction="row" key={comment.id}>
-                  <Typography>{bracket_left}{comment.index}{bracket_right}</Typography>
+                  <Typography>
+                    {bracket_left}
+                    {comment.index}
+                    {bracket_right}
+                  </Typography>
                   <TextField
                     defaultValue={comment.text}
                     multiline
@@ -341,36 +366,41 @@ function ArticleComponent({
                       if (diff.length === 1) {
                         delete changes.current.comments[comment.index];
                       } else {
-                        changes.current.comments[comment.index] = new diff_match_patch().diff_toDelta(diff);
+                        changes.current.comments[comment.index] =
+                          new diff_match_patch().diff_toDelta(diff);
                       }
                     }}
                   />
                 </Stack>
               );
             })}
-          <Button variant="contained" size="small" sx={{ width: 80, mt: 1 }} onClick={() => {
-            console.log(
-              `http://localhost:3000/articles/${article.id}?patch=${encodeURIComponent(
-                JSON.stringify({
-                  articleId: article.id,
-                  publicationId: publicationId,
-                  commitHash: commit_hash,
-                  patch: changes.current,
-                }),
-              )}`,
-            );
-            const url =
-              `https://github.com/banned-historical-archives/banned-historical-archives.github.io/issues/new?body=${encodeURIComponent(`{OCR补丁}
+          <Button
+            variant="contained"
+            size="small"
+            sx={{ width: 80, mt: 1 }}
+            onClick={() => {
+              console.log(
+                `http://localhost:3000/articles/${
+                  article.id
+                }?patch=${encodeURIComponent(
+                  JSON.stringify({
+                    articleId: article.id,
+                    publicationId: publicationId,
+                    commitHash: commit_hash,
+                    patch: changes.current,
+                  }),
+                )}`,
+              );
+              const url = `https://github.com/banned-historical-archives/banned-historical-archives.github.io/issues/new?body=${encodeURIComponent(`{OCR补丁}
 ${JSON.stringify({
   articleId: article.id,
   publicationId: publicationId,
   commitHash: commit_hash,
-  patch: changes.current
-})}`)}&title=${encodeURIComponent(
-                `[OCR patch]${article.title}`,
-              )}`;
-            window.open(url, '_blank');
-          }}>
+  patch: changes.current,
+})}`)}&title=${encodeURIComponent(`[OCR patch]${article.title}`)}`;
+              window.open(url, '_blank');
+            }}
+          >
             提交变更
           </Button>
         </>
@@ -391,7 +421,9 @@ function join_text(contents: { text: string }[]) {
   return s;
 }
 function date_to_string(date: Date) {
-  return [date.year || '', date.month || '', date.day || ''].filter((j) => j).join('.');
+  return [date.year || '', date.month || '', date.day || '']
+    .filter((j) => j)
+    .join('.');
 }
 
 enum CompareMode {
@@ -400,18 +432,18 @@ enum CompareMode {
   description_and_comments = '描述和注释',
 }
 
-let patch:{
-    commitHash: string;
-    articleId: string;
-    publicationId: string;
-    patch: Patch;
-} | undefined;
+let patch:
+  | {
+      commitHash: string;
+      articleId: string;
+      publicationId: string;
+      patch: Patch;
+    }
+  | undefined;
 
 if (process.browser) {
   if (location.search.startsWith('?patch=')) {
-    patch = JSON.parse(
-      decodeURIComponent(location.search.split('=')[1]),
-    );
+    patch = JSON.parse(decodeURIComponent(location.search.split('=')[1]));
     if (commit_hash !== patch!.commitHash) {
       if (
         !confirm(
@@ -450,48 +482,51 @@ export default function ArticleViewer({
         ...i,
         id: Math.random().toString(),
       }));
-      contents.sort((a,b) => a.index -b.index).forEach((content, idx) => {
-        if (!patch!.patch.parts[idx]) {
-          return;
-        }
+      contents
+        .sort((a, b) => a.index - b.index)
+        .forEach((content, idx) => {
+          if (!patch!.patch.parts[idx]) {
+            return;
+          }
 
-        const text_arr = Array.from(content.text);
-        comments
-          .filter((i) => i.part_index === content.index)
-          .sort((a, b) => b.index - a.index)
-          .forEach((i) => {
-            if (patch!.patch.comments[i.index]) {
-              const diff = new diff_match_patch().diff_fromDelta(
-                i.text,
-                patch!.patch.comments[i.index],
+          const text_arr = Array.from(content.text);
+          comments
+            .filter((i) => i.part_index === content.index)
+            .sort((a, b) => b.index - a.index)
+            .forEach((i) => {
+              if (patch!.patch.comments[i.index]) {
+                const diff = new diff_match_patch().diff_fromDelta(
+                  i.text,
+                  patch!.patch.comments[i.index],
+                );
+                const new_text = diff
+                  .filter((i) => i[0] !== -1)
+                  .map((i) => i[1])
+                  .join('');
+                patched_comments.find((h) => h.index === i.index)!.text =
+                  new_text;
+              }
+
+              text_arr.splice(
+                i.offset,
+                0,
+                `${bracket_left}${i.index}${bracket_right}`,
               );
-              const new_text = diff
-                .filter((i) => i[0] !== -1)
-                .map((i) => i[1])
-                .join('');
-              patched_comments.find(h => h.index === i.index)!.text = new_text;
-            }
-
-            text_arr.splice(
-              i.offset,
-              0,
-              `${bracket_left}${i.index}${bracket_right}`,
-            );
+            });
+          const origin_text = text_arr.join('');
+          const diff = d.diff_fromDelta(origin_text, patch!.patch.parts[idx]);
+          const new_text = diff
+            .filter((i) => i[0] !== -1)
+            .map((i) => i[1])
+            .join('');
+          const [pivots, pure_text] = extract_pivots(new_text, idx);
+          pivots.forEach((x) => {
+            const t = patched_comments.find((i) => x.index === i.index)!;
+            t.offset = x.offset;
+            t.part_index = x.part_idx;
           });
-        const origin_text = text_arr.join('');
-        const diff = d.diff_fromDelta(origin_text, patch!.patch.parts[idx]);
-        const new_text = diff
-          .filter((i) => i[0] !== -1)
-          .map((i) => i[1])
-          .join('');
-        const [pivots, pure_text] = extract_pivots(new_text, idx);
-        pivots.forEach((x) => {
-          const t = patched_comments.find((i) => x.index === i.index)!;
-          t.offset = x.offset;
-          t.part_index = x.part_idx;
+          patched_contents[idx].text = pure_text;
         });
-        patched_contents[idx].text = pure_text;
-      });
       publication_details[virtual_publication_id] = {
         page,
         comments: patched_comments,
@@ -501,23 +536,32 @@ export default function ArticleViewer({
   }
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const [compareType, setCompareType] = useState<CompareType>(patch ? CompareType.version : CompareType.none);
+  const [compareType, setCompareType] = useState<CompareType>(
+    patch ? CompareType.version : CompareType.none,
+  );
   const [comparePublication, setComparePublication] = useState<string>(
-    patch ? virtual_publication_id : article.publications[article.publications.length - 1].id,
+    patch
+      ? virtual_publication_id
+      : article.publications[article.publications.length - 1].id,
   );
   const [compareMode, setCompareMode] = useState(CompareMode.line);
   const [selectedPublication, setSelectedPublication] = useState<string>(
-    patch ? patch!.publicationId :article.publications[0].id,
+    patch ? patch!.publicationId : article.publications[0].id,
   );
 
   const article_diff: Diff[][] | undefined = useMemo(() => {
-    if (compareType !== CompareType.version || !article || !process.browser) return;
-    let comments_a: { text: string, index: number }[] = publication_details[
+    if (compareType !== CompareType.version || !article || !process.browser)
+      return;
+    let comments_a: { text: string; index: number }[] = publication_details[
       selectedPublication
-    ].comments.sort((a, b) => (a.index > b.index ? 1 : -1)).filter( i=> i.index !== -1);
-    let comments_b: { text: string, index: number }[] = publication_details[
+    ].comments
+      .sort((a, b) => (a.index > b.index ? 1 : -1))
+      .filter((i) => i.index !== -1);
+    let comments_b: { text: string; index: number }[] = publication_details[
       comparePublication!
-    ].comments.sort((a, b) => (a.index > b.index ? 1 : -1)).filter( i=> i.index !== -1);
+    ].comments
+      .sort((a, b) => (a.index > b.index ? 1 : -1))
+      .filter((i) => i.index !== -1);
     let contents_a: { text: string }[] = publication_details[
       selectedPublication
     ].contents.sort((a, b) => (a.index > b.index ? 1 : -1));
@@ -527,10 +571,12 @@ export default function ArticleViewer({
     if (compareMode === CompareMode.literal) {
       contents_a = [{ text: join_text(contents_a) }];
       contents_b = [{ text: join_text(contents_b) }];
-      return [new diff_match_patch().diff_main(
-        join_text(contents_a),
-        join_text(contents_b),
-      )];
+      return [
+        new diff_match_patch().diff_main(
+          join_text(contents_a),
+          join_text(contents_b),
+        ),
+      ];
     } else if (compareMode === CompareMode.description_and_comments) {
       const max_n_comment = Math.max(comments_a.length, comments_b.length);
       return [
@@ -592,24 +638,24 @@ export default function ArticleViewer({
   const { contents, comments, page } = publication_details[selectedPublication];
 
   const compare_elements: ReactElement[] = [];
-    compare_elements.push(
-      <Stack
-        sx={{
-          flex: 1,
-          overflowY: 'scroll',
-          p: 1,
-        }}
-        key="version_a"
-      >
-        <ArticleComponent
-          article={article}
-          publicationId={selectedPublication}
-          comments={comments}
-          contents={contents}
-          patchBtn={compareType === CompareType.origin}
-        />
-      </Stack>,
-    );
+  compare_elements.push(
+    <Stack
+      sx={{
+        flex: 1,
+        overflowY: 'scroll',
+        p: 1,
+      }}
+      key="version_a"
+    >
+      <ArticleComponent
+        article={article}
+        publicationId={selectedPublication}
+        comments={comments}
+        contents={contents}
+        patchBtn={compareType === CompareType.origin}
+      />
+    </Stack>,
+  );
   if (compareType === CompareType.origin) {
     compare_elements.push(
       <Stack key="origin" sx={{ flex: 1, overflowY: 'scroll' }}>
