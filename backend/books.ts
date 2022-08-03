@@ -1,4 +1,5 @@
 import {join} from 'node:path';
+import {existsSync} from 'node:fs';
 import {Book, ParserOption} from '../types';
 import * as jinghuo_parser from './parser/jinghuo_parser';
 import * as wansui_parser from './parser/wansui_parser';
@@ -6,7 +7,9 @@ import * as wenji_parser from './parser/wenji_parser';
 import * as jqjianghua_parser from './parser/jqjianghua_parser';
 import * as xuanji_parser from './parser/xuanji';
 import * as wenku_parser from './parser/wenku';
+import { apply_patch, get_article_id } from '../utils';
 
+const patch_dir = join(__dirname ,'../patch/articles');
 const books: Book[] = [
   {
     entity: {
@@ -248,7 +251,10 @@ const books: Book[] = [
       pdf: '/books/jqjianghua.pdf',
     },
     parser_option: {
-      page_limits: [[7, 730], [736, 752]],
+      page_limits: [
+        [7, 730],
+        [736, 752],
+      ],
     },
     parser: jqjianghua_parser.parse,
     path: join(__dirname, '../public/books/jqjianghua.pdf'),
@@ -351,5 +357,25 @@ const books: Book[] = [
     parser: wenku_parser.parse,
     path: join(__dirname, '../public/TheGPCRdatabase'),
   },
-];
+].map(
+  (i) =>
+    ({
+      ...i,
+      parser: async (path: string, opt: ParserOption) => {
+        const res = await i.parser(path, opt);
+        for (const article of res) {
+          const id = get_article_id(article);
+          const p = join(patch_dir, `[${id}][${i.entity.id}].ts`);
+          if (existsSync(p)) {
+            const x = await import(p);
+            for (const patch of x.default) {
+              apply_patch(article, patch);
+            }
+          }
+        }
+        return res;
+      },
+    } as Book),
+);
+
 export default books;

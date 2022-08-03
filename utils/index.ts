@@ -1,4 +1,5 @@
 import type Tag from "../backend/entity/tag";
+import { createHmac } from 'node:crypto';
 import { diff_match_patch, Diff } from 'diff-match-patch';
 import { ArticleCategory, ArticleType, ParserResult, Patch, Pivot, TagType } from "../types";
 import { articleCategoryToCN, articleTypeToCN } from "./i18n";
@@ -233,14 +234,14 @@ export function apply_patch(parserResult: ParserResult, patch: Patch) {
   Object.keys(patch.comments).forEach((i) => {
     const idx = parseInt(i);
     const diff = d.diff_fromDelta(
-      parserResult.comments[idx],
+      parserResult.comments[idx - 1],
       patch.comments[i],
     );
     const new_text = diff
       .filter((i) => i[0] !== -1)
       .map((i) => i[1])
       .join('');
-    parserResult.comments[idx] = new_text;
+    parserResult.comments[idx - 1] = new_text;
   });
   if (patch.description) {
     const diff = d.diff_fromDelta(parserResult.description, patch.description);
@@ -250,4 +251,24 @@ export function apply_patch(parserResult: ParserResult, patch: Patch) {
       .join('');
     patch.description = new_text;
   }
+}
+
+export function hash_str_arr(s: string[]) {
+  return createHmac('sha256', s.join('^')).digest('hex').substr(0, 10);
+}
+
+export function get_article_id(r: ParserResult) {
+  return hash_str_arr([
+    r.title,
+    JSON.stringify(
+      r.dates.sort((a, b) =>
+        `${a.year}-${a.month}-${a.day}` > `${b.year}-${b.month}-${b.day}`
+          ? 1
+          : -1,
+      ),
+    ),
+    JSON.stringify(r.authors.sort((a, b) => (a > b ? 1 : -1))),
+    JSON.stringify(r.file_id || ''),
+    JSON.stringify(r.is_range_date),
+  ]);
 }
