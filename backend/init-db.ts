@@ -12,16 +12,12 @@ import Content from './entity/content';
 import Comment from './entity/comment';
 import Publication from './entity/publication';
 import Tag from './entity/tag';
-import { createHmac } from 'node:crypto';
 import Page from './entity/page';
 import { get_article_types } from './classifier';
 import { DataSource } from "typeorm";
 import { music as musicData } from './music';
 import { ArticleCategory, TagType } from "../types";
-
-function hash(s: string[]) {
-  return createHmac('sha256', s.join('^')).digest('hex').substr(0, 10);
-}
+import { get_article_id, hash_str_arr } from "../utils";
 
 async function init_articles(AppDataSource: DataSource) {
   try {
@@ -42,19 +38,7 @@ async function init_articles(AppDataSource: DataSource) {
     await AppDataSource.manager.upsert(Publication, book.entity, ['id']);
 
     for (const r of res) {
-      const article_id = hash([
-        r.title,
-        JSON.stringify(
-          r.dates.sort((a, b) =>
-            `${a.year}-${a.month}-${a.day}` > `${b.year}-${b.month}-${b.day}`
-              ? 1
-              : -1,
-          ),
-        ),
-        JSON.stringify(r.authors.sort((a, b) => (a > b ? 1 : -1))),
-        JSON.stringify(r.file_id || ''),
-        JSON.stringify(r.is_range_date),
-      ]);
+      const article_id = get_article_id(r);
       await AppDataSource.manager.upsert(
         Article,
         {
@@ -73,7 +57,7 @@ async function init_articles(AppDataSource: DataSource) {
         .catch((e) => {});
 
       for (const author_name of r.authors) {
-        const author_id = hash([author_name]);
+        const author_id = hash_str_arr([author_name]);
         await AppDataSource.manager.upsert(
           Author,
           {
@@ -93,7 +77,7 @@ async function init_articles(AppDataSource: DataSource) {
         await AppDataSource.manager.upsert(
           Date,
           {
-            id: hash([article_id, JSON.stringify(date)]),
+            id: hash_str_arr([article_id, JSON.stringify(date)]),
             year: date.year,
             month: date.month,
             day: date.day,
@@ -114,7 +98,7 @@ async function init_articles(AppDataSource: DataSource) {
         tags.push({ name: i, type: TagType.articleType }),
       );
       for (const t of tags) {
-        const id = hash([t.type, t.name]);
+        const id = hash_str_arr([t.type, t.name]);
         await AppDataSource.manager.upsert(
           Tag,
           {
@@ -136,7 +120,7 @@ async function init_articles(AppDataSource: DataSource) {
         await AppDataSource.manager.upsert(
           Content,
           {
-            id: hash([article_id, publication_id, idx.toString()]),
+            id: hash_str_arr([article_id, publication_id, idx.toString()]),
             index: idx,
             text: part.text,
             type: part.type,
@@ -152,7 +136,7 @@ async function init_articles(AppDataSource: DataSource) {
         await AppDataSource.manager.upsert(
           Comment,
           {
-            id: hash([article_id, publication_id, (i + 1).toString()]),
+            id: hash_str_arr([article_id, publication_id, (i + 1).toString()]),
             text: r.comments[i],
             index: i + 1,
             part_index: pivot ? pivot.part_idx : -99,
@@ -167,7 +151,7 @@ async function init_articles(AppDataSource: DataSource) {
         await AppDataSource.manager.upsert(
           Comment,
           {
-            id: hash([article_id, publication_id, (-1).toString()]),
+            id: hash_str_arr([article_id, publication_id, (-1).toString()]),
             text: r.description,
             index: -1,
             part_index: -1,
@@ -182,7 +166,7 @@ async function init_articles(AppDataSource: DataSource) {
       await AppDataSource.manager.upsert(
         Page,
         {
-          id: hash([
+          id: hash_str_arr([
             article_id,
             publication_id,
             r.page_start.toString(),
@@ -208,7 +192,7 @@ async function init_music(AppDataSource: DataSource) {
     await repository.query(`SET FOREIGN_KEY_CHECKS=ON`);
   }
   for (const music of musicData) {
-    const id = hash([music.name]);
+    const id = hash_str_arr([music.name]);
     await AppDataSource.manager.upsert(
       Music,
       {
@@ -220,7 +204,7 @@ async function init_music(AppDataSource: DataSource) {
       ['id'],
     );
     for (const lyric of music.lyrics) {
-      const lid = hash([lyric.content]);
+      const lid = hash_str_arr([lyric.content]);
       await AppDataSource.manager.upsert(
         Lyric,
         {
@@ -237,7 +221,7 @@ async function init_music(AppDataSource: DataSource) {
         .add(lid)
         .catch((e) => {});
       for (const audio of lyric.audios) {
-        const aid = hash([audio.url]);
+        const aid = hash_str_arr([audio.url]);
         await AppDataSource.manager.upsert(
           Audio,
           {
