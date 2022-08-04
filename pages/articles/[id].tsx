@@ -803,23 +803,27 @@ export default function ArticleViewer({
           </Grid>
           <Grid item xs={12} md={6}>
             <Stack direction="row" spacing={1}>
-            <Typography variant="body1" sx={{ overflowX: 'scroll', flex:1 }}>
-              作者：{article.authors.map((i) => i.name).join(' ')}
-            </Typography>
-            <img
-              style={{ cursor: 'pointer' }}
-              onClick={() =>
-                window.open(
-                  `https://github.com/banned-historical-archives/banned-historical-archives.github.io/issues?q=+${encodeURIComponent(
-                    `${article.title}[${selectedPublicationName}]`,
-                  )}+`,
-                  '_blank',
-                )
-              }
-              src={`https://img.shields.io/github/issues-search/banned-historical-archives/banned-historical-archives.github.io?style=for-the-badge&color=%23cc0000&label=%E6%A0%A1%E5%AF%B9%E8%AE%B0%E5%BD%95&query=${encodeURIComponent(
-                `${article.title}[${selectedPublicationName}]`,
-              )}`}
-            /></Stack>
+              <Typography variant="body1" sx={{ overflowX: 'scroll', flex: 1 }}>
+                作者：{article.authors.map((i) => i.name).join(' ')}
+              </Typography>
+              {article.publications.map((i) => (
+                <img
+                  style={{ cursor: 'pointer' }}
+                  key={i.id}
+                  onClick={() =>
+                    window.open(
+                      `https://github.com/banned-historical-archives/banned-historical-archives.github.io/issues?q=+${encodeURIComponent(
+                        `${article.title}[${i.name}]`,
+                      )}+`,
+                      '_blank',
+                    )
+                  }
+                  src={`https://img.shields.io/github/issues-search/banned-historical-archives/banned-historical-archives.github.io?style=for-the-badge&color=%23cc0000&label=%E6%A0%A1%E5%AF%B9%E8%AE%B0%E5%BD%95&query=${encodeURIComponent(
+                    `${article.title}[${i.name}]`,
+                  )}`}
+                />
+              ))}
+            </Stack>
           </Grid>
           <Grid item xs={12} md={3}>
             <Typography variant="body1" sx={{ overflowX: 'scroll' }}>
