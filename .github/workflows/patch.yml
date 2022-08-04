@@ -28,7 +28,7 @@ jobs:
           signoff: false
           branch-suffix: random
           delete-branch: true
-          title: '[BOT] OCR patch'
+          title: '[BOT]${{ github.event.issue.title }}'
           labels: |
             report
             automated pr

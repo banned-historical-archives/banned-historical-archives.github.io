@@ -391,7 +391,7 @@ function ArticleComponent({
 });
               const url = `https://github.com/banned-historical-archives/banned-historical-archives.github.io/issues/new?body=${encodeURIComponent(`{OCR补丁}
 ${params}
-预览：https://banned-historical-archives.github.io/articles/${article.id}?patch=${params}`)}&title=${encodeURIComponent(`[OCR patch]${article.title}`)}`;
+预览：https://banned-historical-archives.github.io/articles/${article.id}?patch=${encodeURIComponent(params)}`)}&title=${encodeURIComponent(`[OCR patch]${article.title}`)}`;
               window.open(url, '_blank');
             }}
           >
