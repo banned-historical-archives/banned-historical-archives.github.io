@@ -100,7 +100,7 @@
 
 ## 贡献资源/纠错/讨论
 
-[\[贡献与校对文稿\]](https://github.com/banned-historical-archives/banned-historical-archives.github.io/wiki/%E5%A6%82%E4%BD%95%E8%B4%A1%E7%8C%AE%E4%B8%8E%E6%A0%A1%E5%AF%B9%E6%96%87%E7%A8%BF%EF%BC%9F)
+[\[贡献与校对文稿\]](https://github.com/banned-historical-archives/banned-historical-archives.github.io/wiki/%E5%A6%82%E4%BD%95%E8%B4%A1%E7%8C%AE%E4%B8%8E%E6%A0%A1%E5%AF%B9%E6%96%87%E7%A8%BF)
 [\[Github issues\]](https://github.com/banned-historical-archives/banned-historical-archives.github.io/issues)
 [\[Gitlab issues\]备用地址](https://gitlab.com/banned-historical-archives/banned-historical-archives.gitlab.io/-/issues)
 
