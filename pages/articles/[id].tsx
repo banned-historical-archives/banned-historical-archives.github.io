@@ -136,7 +136,9 @@ function ArticleComponent({
   patchBtn,
   contents,
   publicationId,
+  publicationName,
 }: {
+  publicationName?: string;
   publicationId: string;
   patchBtn?: boolean;
   article: Article;
@@ -157,7 +159,7 @@ function ArticleComponent({
     changes.current!.parts = {};
     changes.current!.comments = {};
     changes.current!.description = '';
-  }, [article])
+  }, [article]);
   const description = comments.find((i) => i.index === -1)?.text;
   const sorted_contents = contents.sort((a, b) => (a.index > b.index ? 1 : -1));
   const sorted_comments = comments.sort((a, b) => a.index - b.index);
@@ -274,14 +276,27 @@ function ArticleComponent({
   return (
     <>
       {patchBtn ? (
-        <Button
-          sx={{ width: 100, mb: 1 }}
-          variant="outlined"
-          size="small"
-          onClick={() => setPatchMode(!patchMode)}
-        >
-          {patchMode ? '阅读模式' : '校对模式'}
-        </Button>
+        <Stack sx={{ mb: 1 }} spacing={1} direction="row">
+          <Button
+            variant="outlined"
+            size="small"
+            onClick={() => setPatchMode(!patchMode)}
+          >
+            {patchMode ? '阅读模式' : '校对模式'}
+          </Button>
+          <Button
+            variant="outlined"
+            size="small"
+            onClick={() =>
+              window.open(
+                'https://github.com/banned-historical-archives/banned-historical-archives.github.io/wiki/%E5%A6%82%E4%BD%95%E8%B4%A1%E7%8C%AE%E4%B8%8E%E6%A0%A1%E5%AF%B9%E6%96%87%E7%A8%BF',
+                '_blank',
+              )
+            }
+          >
+            校对注意事项
+          </Button>
+        </Stack>
       ) : null}
       {patchMode ? (
         <>
@@ -384,19 +399,26 @@ function ArticleComponent({
             sx={{ width: 80, mt: 1 }}
             onClick={() => {
               const params = JSON.stringify({
-  articleId: article.id,
-  publicationId: publicationId,
-  commitHash: commit_hash,
-  patch: changes.current,
-});
+                articleId: article.id,
+                publicationId: publicationId,
+                commitHash: commit_hash,
+                patch: changes.current,
+              });
               const url = `https://github.com/banned-historical-archives/banned-historical-archives.github.io/issues/new?body=${encodeURIComponent(`{OCR补丁}
 ${params}
-预览：https://banned-historical-archives.github.io/articles/${article.id}?patch=${encodeURIComponent(params)}`)}&title=${encodeURIComponent(`[OCR patch]${article.title}`)}`;
+预览：https://banned-historical-archives.github.io/articles/${
+                article.id
+              }?patch=${encodeURIComponent(
+                params,
+              )}`)}&title=${encodeURIComponent(`[OCR patch]${article.title}[${publicationName}]`)}`;
               window.open(url, '_blank');
             }}
           >
             提交变更
           </Button>
+          <Typography>
+            如果核对无误也可以提交变更，这样其他人就知道这篇文章已经核对（可多次提交，表示多次核对）。
+          </Typography>
         </>
       ) : (
         <>
@@ -445,11 +467,9 @@ export default function ArticleViewer({
   >();
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const [compareType, setCompareType] = useState<CompareType>(
-    CompareType.none,
-  );
+  const [compareType, setCompareType] = useState<CompareType>(CompareType.none);
   const [comparePublication, setComparePublication] = useState<string>(
-      article.publications[article.publications.length - 1].id,
+    article.publications[article.publications.length - 1].id,
   );
   const [compareMode, setCompareMode] = useState(CompareMode.line);
   const [selectedPublication, setSelectedPublication] = useState<string>(
@@ -487,7 +507,9 @@ export default function ArticleViewer({
             .forEach((content, idx) => {
               const text_arr = Array.from(content.text);
               comments
-                .filter((i) => i.part_index === content.index || i.part_index === -1)
+                .filter(
+                  (i) => i.part_index === content.index || i.part_index === -1,
+                )
                 .sort((a, b) => b.index - a.index)
                 .forEach((i) => {
                   if (
@@ -559,7 +581,11 @@ export default function ArticleViewer({
       */
 
   const article_diff: Diff[][] | undefined = useMemo(() => {
-    if (compareType !== CompareType.version || !article || !(typeof window !== 'undefined'))
+    if (
+      compareType !== CompareType.version ||
+      !article ||
+      !(typeof window !== 'undefined')
+    )
       return;
     let comments_a: { text: string; index: number }[] = publication_details[
       selectedPublication
@@ -645,6 +671,7 @@ export default function ArticleViewer({
   )!;
 
   const { contents, comments, page } = publication_details[selectedPublication];
+  const selectedPublicationName = article.publications.find((i) => i.id === selectedPublication)?.name;
 
   const compare_elements: ReactElement[] = [];
   compare_elements.push(
@@ -659,6 +686,9 @@ export default function ArticleViewer({
       <ArticleComponent
         article={article}
         publicationId={selectedPublication}
+        publicationName={
+          selectedPublicationName
+        }
         comments={comments}
         contents={contents}
         patchBtn={compareType === CompareType.origin}
@@ -668,23 +698,29 @@ export default function ArticleViewer({
   if (compareType === CompareType.origin) {
     compare_elements.push(
       <Stack key="origin" sx={{ flex: 1, overflowY: 'scroll' }}>
-        <Typography variant="subtitle1">
-          来源文件(页码{page.start}-{page.end})
-          <a href={publication.pdf} target="__blank">
-            [下载]
-          </a>
-        </Typography>
-        <Document
-          file={publication.pdf}
-          options={{
-            cMapUrl: `/pdfjs-dist/cmaps/`,
-            cMapPacked: true,
-          }}
-        >
-          {new Array(page.end - page.start + 1).fill(0).map((i, idx) => (
-            <Page pageNumber={idx + page.start} key={idx} />
-          ))}
-        </Document>
+        {publication.pdf ? (
+          <>
+            <Typography variant="subtitle1">
+              来源文件(页码{page.start}-{page.end})
+              <a href={publication.pdf} target="__blank">
+                [下载]
+              </a>
+            </Typography>
+            <Document
+              file={publication.pdf}
+              options={{
+                cMapUrl: `/pdfjs-dist/cmaps/`,
+                cMapPacked: true,
+              }}
+            >
+              {new Array(page.end - page.start + 1).fill(0).map((i, idx) => (
+                <Page pageNumber={idx + page.start} key={idx} />
+              ))}
+            </Document>
+          </>
+        ) : (
+          '无法预览（可能来自数据库文件）'
+        )}
       </Stack>,
     );
   } else if (compareType === CompareType.version) {
@@ -772,9 +808,28 @@ export default function ArticleViewer({
             </Typography>
           </Grid>
           <Grid item xs={12} md={6}>
-            <Typography variant="body1" sx={{ overflowX: 'scroll' }}>
-              作者：{article.authors.map((i) => i.name).join(' ')}
-            </Typography>
+            <Stack direction="row" spacing={1}>
+              <Typography variant="body1" sx={{ overflowX: 'scroll', flex: 1 }}>
+                作者：{article.authors.map((i) => i.name).join(' ')}
+              </Typography>
+              {article.publications.map((i) => (
+                <img
+                  style={{ cursor: 'pointer' }}
+                  key={i.id}
+                  onClick={() =>
+                    window.open(
+                      `https://github.com/banned-historical-archives/banned-historical-archives.github.io/issues?q=+${encodeURIComponent(
+                        `${article.title}[${i.name}]`,
+                      )}+`,
+                      '_blank',
+                    )
+                  }
+                  src={`https://img.shields.io/github/issues-search/banned-historical-archives/banned-historical-archives.github.io?style=for-the-badge&color=%23cc0000&label=%E6%A0%A1%E5%AF%B9%E8%AE%B0%E5%BD%95&query=${encodeURIComponent(
+                    `${article.title}[${i.name}]`,
+                  )}`}
+                />
+              ))}
+            </Stack>
           </Grid>
           <Grid item xs={12} md={3}>
             <Typography variant="body1" sx={{ overflowX: 'scroll' }}>
