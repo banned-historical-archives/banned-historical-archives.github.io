@@ -560,6 +560,19 @@ export default function Articles({ articles }: { articles: Article[] }) {
               sorting: {
                 sortModel: [{ field: 'dates', sort: 'asc' }],
               },
+              filter: {
+                filterModel: {
+                  items:
+                    typeof location !== 'undefined' && location.search
+                      ? [
+                          {
+                            columnField: 'tags',
+                            value: decodeURIComponent(location.search.split('=')[1]),
+                          },
+                        ]
+                      : [],
+                },
+              },
             }}
             localeText={zhCN.components.MuiDataGrid.defaultProps.localeText}
             getRowHeight={() => 'auto'}
