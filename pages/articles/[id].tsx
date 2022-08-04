@@ -698,23 +698,29 @@ export default function ArticleViewer({
   if (compareType === CompareType.origin) {
     compare_elements.push(
       <Stack key="origin" sx={{ flex: 1, overflowY: 'scroll' }}>
-        <Typography variant="subtitle1">
-          来源文件(页码{page.start}-{page.end})
-          <a href={publication.pdf} target="__blank">
-            [下载]
-          </a>
-        </Typography>
-        <Document
-          file={publication.pdf}
-          options={{
-            cMapUrl: `/pdfjs-dist/cmaps/`,
-            cMapPacked: true,
-          }}
-        >
-          {new Array(page.end - page.start + 1).fill(0).map((i, idx) => (
-            <Page pageNumber={idx + page.start} key={idx} />
-          ))}
-        </Document>
+        {publication.pdf ? (
+          <>
+            <Typography variant="subtitle1">
+              来源文件(页码{page.start}-{page.end})
+              <a href={publication.pdf} target="__blank">
+                [下载]
+              </a>
+            </Typography>
+            <Document
+              file={publication.pdf}
+              options={{
+                cMapUrl: `/pdfjs-dist/cmaps/`,
+                cMapPacked: true,
+              }}
+            >
+              {new Array(page.end - page.start + 1).fill(0).map((i, idx) => (
+                <Page pageNumber={idx + page.start} key={idx} />
+              ))}
+            </Document>
+          </>
+        ) : (
+          '无法预览（可能来自数据库文件）'
+        )}
       </Stack>,
     );
   } else if (compareType === CompareType.version) {
