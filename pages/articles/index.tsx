@@ -37,7 +37,8 @@ import {
 import { init } from '../../backend/data-source';
 import { Tag } from '../../backend/entities';
 import { tagToString } from '../../utils';
-import TagComponent from '../../components/TagComponent';
+import Tags from '../../components/Tags';
+import Authors from '../../components/Authors';
 import { articleTypeToCN } from '../../utils/i18n';
 
 export const getStaticProps: GetStaticProps = async (
@@ -85,6 +86,11 @@ const columns: GridColDef<Article>[] = [
     flex: 1,
     valueGetter: (params: GridValueGetterParams<Article, Article>) =>
       params.row.authors.map((i) => i.name).join(','),
+    renderCell: (params: GridRenderCellParams<string, Article>) => (
+      <div style={{ overflow: 'visible' }}>
+        <Authors authors={params.row.authors} />
+      </div>
+    ),
   },
   {
     field: 'dates',
@@ -154,9 +160,7 @@ const columns: GridColDef<Article>[] = [
       params.row.tags.map((i) => tagToString(i)).join(','),
     renderCell: (params: GridRenderCellParams<string, Article>) => (
       <div style={{ overflow: 'visible' }}>
-        {params.row.tags.map((i) => (
-          <TagComponent tag={i} key={i.id} />
-        ))}
+        <Tags tags={params.row.tags} />
       </div>
     ),
   },
@@ -564,12 +568,25 @@ export default function Articles({ articles }: { articles: Article[] }) {
                 filterModel: {
                   items:
                     typeof location !== 'undefined' && location.search
-                      ? [
-                          {
-                            columnField: 'tags',
-                            value: decodeURIComponent(location.search.split('=')[1]),
-                          },
-                        ]
+                      ? location.search.startsWith('?tag=')
+                        ? [
+                            {
+                              columnField: 'tags',
+                              value: decodeURIComponent(
+                                location.search.split('=')[1],
+                              ),
+                            },
+                          ]
+                        : location.search.startsWith('?author=')
+                        ? [
+                            {
+                              columnField: 'authors',
+                              value: decodeURIComponent(
+                                location.search.split('=')[1],
+                              ),
+                            },
+                          ]
+                        : []
                       : [],
                 },
               },

@@ -115,7 +115,8 @@ function extract_parts(
             : true) &&
           (prev_line
             ? Math.abs(line.offset_y - prev_line.offset_y) > opt.title_threshold
-            : true)))
+            : true)) ||
+        is_date(str))
     ) {
       parts.push([
         str,

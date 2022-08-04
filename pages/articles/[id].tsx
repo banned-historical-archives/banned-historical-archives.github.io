@@ -40,7 +40,8 @@ import {
 } from 'next';
 import { init } from '../../backend/data-source';
 import { DiffViewer } from '../../components/DiffViewer';
-import TagComponent from '../../components/TagComponent';
+import Tags from '../../components/Tags';
+import Authors from '../../components/Authors';
 import { bracket_left, bracket_right, extract_pivots, md5 } from '../../utils';
 
 pdfjs.GlobalWorkerOptions.workerSrc = `/pdfjs-dist/legacy/build/pdf.worker.min.js`;
@@ -410,7 +411,9 @@ ${params}
                 article.id
               }?patch=${encodeURIComponent(
                 params,
-              )}`)}&title=${encodeURIComponent(`[OCR patch]${article.title}[${publicationName}]`)}`;
+              )}`)}&title=${encodeURIComponent(
+                `[OCR patch]${article.title}[${publicationName}]`,
+              )}`;
               window.open(url, '_blank');
             }}
           >
@@ -671,7 +674,9 @@ export default function ArticleViewer({
   )!;
 
   const { contents, comments, page } = publication_details[selectedPublication];
-  const selectedPublicationName = article.publications.find((i) => i.id === selectedPublication)?.name;
+  const selectedPublicationName = article.publications.find(
+    (i) => i.id === selectedPublication,
+  )?.name;
 
   const compare_elements: ReactElement[] = [];
   compare_elements.push(
@@ -686,9 +691,7 @@ export default function ArticleViewer({
       <ArticleComponent
         article={article}
         publicationId={selectedPublication}
-        publicationName={
-          selectedPublicationName
-        }
+        publicationName={selectedPublicationName}
         comments={comments}
         contents={contents}
         patchBtn={compareType === CompareType.origin}
@@ -808,10 +811,11 @@ export default function ArticleViewer({
             </Typography>
           </Grid>
           <Grid item xs={12} md={6}>
-            <Stack direction="row" spacing={1}>
-              <Typography variant="body1" sx={{ overflowX: 'scroll', flex: 1 }}>
-                作者：{article.authors.map((i) => i.name).join(' ')}
-              </Typography>
+            <Stack direction="row" spacing={1} alignItems="center">
+              <Typography variant="body1">作者：</Typography>
+              <Stack direction="row" sx={{ overflowX: 'scroll', flex: 1 }}>
+                <Authors authors={article.authors} />
+              </Stack>
               {article.publications.map((i) => (
                 <img
                   style={{ cursor: 'pointer' }}
@@ -825,7 +829,7 @@ export default function ArticleViewer({
                     )
                   }
                   src={`https://img.shields.io/github/issues-search/banned-historical-archives/banned-historical-archives.github.io?style=for-the-badge&color=%23cc0000&label=%E6%A0%A1%E5%AF%B9%E8%AE%B0%E5%BD%95&query=${encodeURIComponent(
-                    `${article.title}[${i.name}]`,
+                    `is:issue ${article.title}[${i.name}]`,
                   )}`}
                 />
               ))}
@@ -850,9 +854,7 @@ export default function ArticleViewer({
                 alignItems="center"
                 sx={{ flex: 1, overflowX: 'scroll' }}
               >
-                {article.tags.map((i) => (
-                  <TagComponent tag={i} key={i.id} />
-                ))}
+                <Tags tags={article.tags} />
               </Stack>
             </Stack>
           </Grid>

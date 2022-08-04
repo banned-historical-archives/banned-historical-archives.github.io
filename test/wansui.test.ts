@@ -9,6 +9,9 @@ describe('wansui1', async () => {
   it('title', () => {
     expect(res.map((i) => i.title)).toMatchSnapshot();
   });
+  it('date', () => {
+    expect(res.filter((i) => i.title === '在抗大成立三周年纪念大会上的讲话（摘录）')).toMatchSnapshot();
+  });
 });
 
 describe('wansui2', async () => {
