@@ -41,6 +41,7 @@ export default function TagComponent({ tag }: { tag: Tag }) {
       <Chip
         onMouseEnter={handleClick}
         onMouseLeave={handleClose}
+        onClick={() => window.open(`/articles?tag=${encodeURIComponent(tagToString(tag))}`, '_blank')}
         sx={{ m: 0.3 }}
         label={tagToString(tag)}
       />
