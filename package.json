@@ -24,7 +24,6 @@
     "body-parser": "^1.20.0",
     "compression": "^1.7.4",
     "dbffile-fix-decoding": "^1.8.1",
-    "diff": "^5.1.0",
     "diff-match-patch": "^1.0.5",
     "dommatrix": "^1.0.3",
     "express": "^4.18.1",

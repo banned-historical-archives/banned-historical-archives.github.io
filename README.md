@@ -15,7 +15,7 @@
 
 ### 文稿版本对比
 ![文稿版本对比](https://banned-historical-archives.github.io/images/comparison.png)
-例如[在扩大的中央工作会议上的讲话](https://banned-historical-archives.github.io/articles/759da1083e/)这篇文章，点击右上角“对比”按钮，选择“对比不同来源解析后的文本”。对比模式默认为“逐段对比”，根据情况可选择“逐字对比”。
+例如[在扩大的中央工作会议上的讲话](https://banned-historical-archives.github.io/articles/6f36e2e6db/)这篇文章，点击右上角“对比”按钮，选择“对比不同来源解析后的文本”。对比模式默认为“逐段对比”，根据情况可选择“逐字对比”。
 
 ### 文稿来源对比
 ![文稿来源对比](https://banned-historical-archives.github.io/images/comparison_pdf.png)
