@@ -296,20 +296,6 @@ function ArticleComponent({
           >
             校对注意事项
           </Button>
-          <img
-            style={{ cursor: 'pointer' }}
-            onClick={() =>
-              window.open(
-                `https://github.com/banned-historical-archives/banned-historical-archives.github.io/issues?q=+${encodeURIComponent(
-                  `${article.title}[${publicationName}]`,
-                )}+`,
-                '_blank',
-              )
-            }
-            src={`https://img.shields.io/github/issues-search/banned-historical-archives/banned-historical-archives.github.io?style=for-the-badge&color=%23cc0000&label=%E6%A0%A1%E5%AF%B9%E8%AE%B0%E5%BD%95&query=${encodeURIComponent(
-              `${article.title}[${publicationName}]`,
-            )}`}
-          />
         </Stack>
       ) : null}
       {patchMode ? (
@@ -685,6 +671,7 @@ export default function ArticleViewer({
   )!;
 
   const { contents, comments, page } = publication_details[selectedPublication];
+  const selectedPublicationName = article.publications.find((i) => i.id === selectedPublication)?.name;
 
   const compare_elements: ReactElement[] = [];
   compare_elements.push(
@@ -700,7 +687,7 @@ export default function ArticleViewer({
         article={article}
         publicationId={selectedPublication}
         publicationName={
-          article.publications.find((i) => i.id === selectedPublication)!.name
+          selectedPublicationName
         }
         comments={comments}
         contents={contents}
@@ -815,9 +802,24 @@ export default function ArticleViewer({
             </Typography>
           </Grid>
           <Grid item xs={12} md={6}>
-            <Typography variant="body1" sx={{ overflowX: 'scroll' }}>
+            <Stack direction="row" spacing={1}>
+            <Typography variant="body1" sx={{ overflowX: 'scroll', flex:1 }}>
               作者：{article.authors.map((i) => i.name).join(' ')}
             </Typography>
+            <img
+              style={{ cursor: 'pointer' }}
+              onClick={() =>
+                window.open(
+                  `https://github.com/banned-historical-archives/banned-historical-archives.github.io/issues?q=+${encodeURIComponent(
+                    `${article.title}[${selectedPublicationName}]`,
+                  )}+`,
+                  '_blank',
+                )
+              }
+              src={`https://img.shields.io/github/issues-search/banned-historical-archives/banned-historical-archives.github.io?style=for-the-badge&color=%23cc0000&label=%E6%A0%A1%E5%AF%B9%E8%AE%B0%E5%BD%95&query=${encodeURIComponent(
+                `${article.title}[${selectedPublicationName}]`,
+              )}`}
+            /></Stack>
           </Grid>
           <Grid item xs={12} md={3}>
             <Typography variant="body1" sx={{ overflowX: 'scroll' }}>
