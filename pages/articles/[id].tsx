@@ -410,7 +410,9 @@ ${params}
                 article.id
               }?patch=${encodeURIComponent(
                 params,
-              )}`)}&title=${encodeURIComponent(`[OCR patch]${article.title}[${publicationName}]`)}`;
+              )}`)}&title=${encodeURIComponent(
+                `[OCR patch]${article.title}[${publicationName}]`,
+              )}`;
               window.open(url, '_blank');
             }}
           >
@@ -671,7 +673,9 @@ export default function ArticleViewer({
   )!;
 
   const { contents, comments, page } = publication_details[selectedPublication];
-  const selectedPublicationName = article.publications.find((i) => i.id === selectedPublication)?.name;
+  const selectedPublicationName = article.publications.find(
+    (i) => i.id === selectedPublication,
+  )?.name;
 
   const compare_elements: ReactElement[] = [];
   compare_elements.push(
@@ -686,9 +690,7 @@ export default function ArticleViewer({
       <ArticleComponent
         article={article}
         publicationId={selectedPublication}
-        publicationName={
-          selectedPublicationName
-        }
+        publicationName={selectedPublicationName}
         comments={comments}
         contents={contents}
         patchBtn={compareType === CompareType.origin}
