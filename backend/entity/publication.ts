@@ -26,7 +26,7 @@ export default class Publication {
 
   @Column({type: 'varchar'})
   author!: string;
-  @Column({type: 'varchar', comment: '下载地址，如果有多个地址用,分隔'})
+  @Column({type: 'text', comment: '下载地址，如果有多个地址用,分隔'})
   files!: string;
 
   @OneToMany(() => Article, article => article.publications)
