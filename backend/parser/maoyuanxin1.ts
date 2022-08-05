@@ -111,7 +111,7 @@ function extract_dates(s: string): [Date[], boolean] {
     return [[{ year: undefined }], false];
   }
   if (s.search(/[^\d一二三四五六七八九至，—、O○〇十年月日廿（）]/) >= 0) {
-    console.warn('异形日期:', s);
+    // console.warn('异形日期:', s);
   }
   s = s
     .replace(/[^\d一二三四五六七八九至—，、O○〇十年月日廿卅]/g, '')
@@ -257,12 +257,10 @@ export async function parse(
 
   const res: ParserResult[] = articles.map((article) => {
     const merged_parts = merge_parts(article);
-    const raw_title = merged_parts[0].text.replace(/^（[一二三四五六七八九十]+）/, '');
-    let title_has_date = raw_title.indexOf('日');
+    const title = merged_parts[0].text.replace(/^（[一二三四五六七八九十]+）/, '');
+    let title_has_date = title.indexOf('日');
     title_has_date =
-      title_has_date >= 0 ? title_has_date : raw_title.indexOf('月');
-    const title =
-      title_has_date >= 0 ? raw_title.substr(title_has_date + 1) : raw_title;
+      title_has_date >= 0 ? title_has_date : title.indexOf('月');
     merged_parts[0].text = title;
     return {
       title,
@@ -270,7 +268,7 @@ export async function parse(
       authors: ['毛远新'],
       dates:
         title_has_date >= 0
-          ? extract_dates(raw_title.substr(0, title_has_date + 1))[0]
+          ? extract_dates(title.substr(0, title_has_date + 1))[0]
           : [
               {
                 year: 1975,
