@@ -915,7 +915,7 @@ export default function ArticleViewer({
                     setAnchorEl(null);
                   }}
                 >
-                  对比原始文件(pdf)
+                  对比原始文件
                 </MenuItem>
                 <MenuItem
                   onClick={() => {
