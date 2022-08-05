@@ -726,7 +726,7 @@ export default function ArticleViewer({
             publication.files
               .split(',')
               .filter((i, idx) => idx + 1 >= page.start && idx + 1 <= page.end)
-              .map((f) => <img id={f} src={f} />)
+              .map((f) => <img key={f} src={f} />)
           ) : (
             <>未知类型</>
           )
