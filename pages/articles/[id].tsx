@@ -725,7 +725,7 @@ export default function ArticleViewer({
           ) : publication.type === 'img' ? (
             publication.files
               .split(',')
-              .filter((i, idx) => idx + 1 >= page.start && idx + 1 <= page.end)
+              .filter((i, idx) => idx + 1>= page.start && idx + 1 <= page.end)
               .map((f) => <img key={f} src={f} />)
           ) : (
             <>未知类型</>
@@ -915,7 +915,7 @@ export default function ArticleViewer({
                     setAnchorEl(null);
                   }}
                 >
-                  对比原始文件(pdf)
+                  对比原始文件
                 </MenuItem>
                 <MenuItem
                   onClick={() => {

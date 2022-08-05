@@ -400,7 +400,6 @@ const books: Book[] = [
         '/books/maoyuanxin1/10.jpg',
         '/books/maoyuanxin1/11.jpg',
         '/books/maoyuanxin1/12.jpg',
-        '/books/maoyuanxin1/12.jpg',
         '/books/maoyuanxin1/13.jpg',
         '/books/maoyuanxin1/14.jpg',
         '/books/maoyuanxin1/15.jpg',
