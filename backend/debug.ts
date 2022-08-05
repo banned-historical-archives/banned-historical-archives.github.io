@@ -37,7 +37,7 @@ import { join } from 'path';
   // const book = books.find(i => i.entity.id === 'wenku')!;
   // const res = await book.parser(book.path, book.parser_option);
 
-  const book = books.find(i => i.entity.id === 'maoyuanxin1')!;
+  const book = books.find(i => i.entity.id === 'wanghongwen1')!;
   const res = await book.parser(book.path, book.parser_option);
   //const res = await wansui.parse(book.path, book.parser_option);
   // const res = await book.parser(book.path, book.parser_option);

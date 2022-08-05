@@ -15,9 +15,10 @@ try {
 
 app.get('/', async (req, res) => {
   const path = (req.query.img_path as string).split('/books/')[1];
+  const cache = req.query.cache === 'true';
   console.log(path);
 
-  const r = await ocr(path);
+  const r = await ocr(path, cache);
   console.log('done', path);
   res.json({
     ocr_result: r,
