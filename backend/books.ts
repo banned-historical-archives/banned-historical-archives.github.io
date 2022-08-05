@@ -7,6 +7,7 @@ import * as wenji_parser from './parser/wenji_parser';
 import * as jqjianghua_parser from './parser/jqjianghua_parser';
 import * as xuanji_parser from './parser/xuanji';
 import * as wenku_parser from './parser/wenku';
+import * as maoyuanxin1 from './parser/maoyuanxin1';
 import { apply_patch, get_article_id } from '../utils';
 
 const patch_dir = join(__dirname ,'../patch/articles');
@@ -18,7 +19,8 @@ const books: Book[] = [
       internal: false,
       official: false,
       author: '静火',
-      pdf: '/books/maoxuan-jinghuo.pdf',
+      type: 'pdf',
+      files: '/books/maoxuan-jinghuo.pdf',
     },
     parser_option: {
       page_limits: [
@@ -37,7 +39,8 @@ const books: Book[] = [
       internal: false,
       official: false,
       author: '未知',
-      pdf: '/books/wansui1a.pdf',
+      type: 'pdf',
+      files: '/books/wansui1a.pdf',
     },
     parser_option: {
       page_limits: [[9, 569]],
@@ -52,7 +55,8 @@ const books: Book[] = [
       internal: false,
       official: false,
       author: '未知',
-      pdf: '/books/wansui2a.pdf',
+      type: 'pdf',
+      files: '/books/wansui2a.pdf',
     },
     parser_option: {
       page_limits: [[9, 542]],
@@ -64,10 +68,11 @@ const books: Book[] = [
     entity: {
       id: 'wansui3',
       name: '毛泽东思想万岁(1949-1957卷)',
+      type: 'pdf',
       internal: false,
       official: false,
       author: '未知',
-      pdf: '/books/wansui3a.pdf',
+      files: '/books/wansui3a.pdf',
     },
     parser_option: {
       page_limits: [[9, 508]],
@@ -78,11 +83,12 @@ const books: Book[] = [
   {
     entity: {
       id: 'wansui4',
+      type: 'pdf',
       name: '毛泽东思想万岁(1958-1960卷)',
       internal: false,
       official: false,
       author: '未知',
-      pdf: '/books/wansui4a.pdf',
+      files: '/books/wansui4a.pdf',
     },
     parser_option: {
       page_limits: [[11, 674]],
@@ -94,10 +100,11 @@ const books: Book[] = [
     entity: {
       id: 'wansui5',
       name: '毛泽东思想万岁(1961-1968卷)',
+      type: 'pdf',
       internal: false,
       official: false,
       author: '未知',
-      pdf: '/books/wansui5a.pdf',
+      files: '/books/wansui5a.pdf',
     },
     parser_option: {
       page_limits: [[16, 668]],
@@ -108,11 +115,12 @@ const books: Book[] = [
   {
     entity: {
       id: 'wenji1',
+      type: 'pdf',
       name: '毛泽东文集第一卷(1999)',
       internal: false,
       official: true,
       author: '中央文献研究室',
-      pdf: '/books/wenji1.pdf',
+      files: '/books/wenji1.pdf',
     },
     parser_option: {
       page_limits: [[14, 526]],
@@ -126,10 +134,11 @@ const books: Book[] = [
     entity: {
       id: 'wenji2',
       name: '毛泽东文集第二卷(1999)',
+      type: 'pdf',
       internal: false,
       official: true,
       author: '中央文献研究室',
-      pdf: '/books/wenji2.pdf',
+      files: '/books/wenji2.pdf',
     },
     parser_option: {
       page_limits: [[14, 481]],
@@ -142,11 +151,12 @@ const books: Book[] = [
   {
     entity: {
       id: 'wenji3',
+      type: 'pdf',
       name: '毛泽东文集第三卷(1999)',
       internal: false,
       official: true,
       author: '中央文献研究室',
-      pdf: '/books/wenji3.pdf',
+      files: '/books/wenji3.pdf',
     },
     parser_option: {
       page_limits: [[12, 467]],
@@ -158,12 +168,13 @@ const books: Book[] = [
   },
   {
     entity: {
+      type: 'pdf',
       id: 'wenji4',
       name: '毛泽东文集第四卷(1999)',
       internal: false,
       official: true,
       author: '中央文献研究室',
-      pdf: '/books/wenji4.pdf',
+      files: '/books/wenji4.pdf',
     },
     parser_option: {
       page_limits: [[15, 354]],
@@ -175,12 +186,13 @@ const books: Book[] = [
   },
   {
     entity: {
+      type: 'pdf',
       id: 'wenji5',
       name: '毛泽东文集第五卷(1999)',
       internal: false,
       official: true,
       author: '中央文献研究室',
-      pdf: '/books/wenji5.pdf',
+      files: '/books/wenji5.pdf',
     },
     parser_option: {
       page_limits: [[14, 363]],
@@ -193,11 +205,12 @@ const books: Book[] = [
   {
     entity: {
       id: 'wenji6',
+      type: 'pdf',
       name: '毛泽东文集第六卷(1999)',
       internal: false,
       official: true,
       author: '中央文献研究室',
-      pdf: '/books/wenji6.pdf',
+      files: '/books/wenji6.pdf',
     },
     parser_option: {
       page_limits: [[15, 527]],
@@ -210,11 +223,12 @@ const books: Book[] = [
   {
     entity: {
       id: 'wenji7',
+      type: 'pdf',
       name: '毛泽东文集第七卷(1999)',
       internal: false,
       official: true,
       author: '中央文献研究室',
-      pdf: '/books/wenji7.pdf',
+      files: '/books/wenji7.pdf',
     },
     parser_option: {
       page_limits: [[10, 474]],
@@ -227,11 +241,12 @@ const books: Book[] = [
   {
     entity: {
       id: 'wenji8',
+      type: 'pdf',
       name: '毛泽东文集第八卷(1999)',
       internal: false,
       official: true,
       author: '中央文献研究室',
-      pdf: '/books/wenji8.pdf',
+      files: '/books/wenji8.pdf',
     },
     parser_option: {
       page_limits: [[12, 457]],
@@ -244,11 +259,12 @@ const books: Book[] = [
   {
     entity: {
       id: 'jqjianghua',
+      type: 'pdf',
       name: '江青十年讲话汇编',
       internal: false,
       official: false,
       author: '',
-      pdf: '/books/jqjianghua.pdf',
+      files: '/books/jqjianghua.pdf',
     },
     parser_option: {
       page_limits: [
@@ -262,11 +278,12 @@ const books: Book[] = [
   {
     entity: {
       id: 'xuanji1',
+      type: 'pdf',
       name: '毛泽东选集第一卷(1967)',
       internal: false,
       official: true,
       author: '毛泽东',
-      pdf: '/books/毛泽东选集(1967)1.pdf',
+      files: '/books/毛泽东选集(1967)1.pdf',
     },
     parser_option: {
       page_limits: [[12, 321]],
@@ -279,10 +296,11 @@ const books: Book[] = [
     entity: {
       id: 'xuanji2',
       name: '毛泽东选集第二卷(1967)',
+      type: 'pdf',
       internal: false,
       official: true,
       author: '毛泽东',
-      pdf: '/books/毛泽东选集(1967)2.pdf',
+      files: '/books/毛泽东选集(1967)2.pdf',
     },
     parser_option: {
       page_limits: [[12, 441]],
@@ -295,10 +313,11 @@ const books: Book[] = [
     entity: {
       id: 'xuanji3',
       name: '毛泽东选集第三卷(1967)',
+      type: 'pdf',
       internal: false,
       official: true,
       author: '毛泽东',
-      pdf: '/books/毛泽东选集(1967)3.pdf',
+      files: '/books/毛泽东选集(1967)3.pdf',
     },
     parser_option: {
       page_limits: [[10, 329]],
@@ -313,8 +332,9 @@ const books: Book[] = [
       name: '毛泽东选集第四卷(1967)',
       internal: false,
       official: true,
+      type: 'pdf',
       author: '毛泽东',
-      pdf: '/books/毛泽东选集(1967)4.pdf',
+      files: '/books/毛泽东选集(1967)4.pdf',
     },
     parser_option: {
       page_limits: [[10, 395]],
@@ -328,9 +348,10 @@ const books: Book[] = [
       id: 'xuanji5',
       name: '毛泽东选集第五卷(1977)',
       internal: false,
+      type: 'pdf',
       official: true,
       author: '毛泽东',
-      pdf: '/books/毛泽东选集(1977)5.pdf',
+      files: '/books/毛泽东选集(1977)5.pdf',
     },
     parser_option: {
       page_limits: [[16, 513]],
@@ -347,9 +368,10 @@ const books: Book[] = [
       id: 'wenku',
       name: '中国文化大革命文库(第一版)',
       internal: false,
+      type: 'db',
       official: false,
       author: '宋永毅',
-      pdf: '',
+      files: '',
     },
     parser_option: {
       page_limits: [],
@@ -357,25 +379,61 @@ const books: Book[] = [
     parser: wenku_parser.parse,
     path: join(__dirname, '../public/TheGPCRdatabase'),
   },
-].map(
-  (i) =>
-    ({
-      ...i,
-      parser: async (path: string, opt: ParserOption) => {
-        const res = await i.parser(path, opt);
-        for (const article of res) {
-          const id = get_article_id(article);
-          const p = join(patch_dir, `[${id}][${i.entity.id}].ts`);
-          if (existsSync(p)) {
-            const x = await import(p);
-            for (const patch of x.default) {
-              apply_patch(article, patch);
-            }
+  {
+    entity: {
+      id: 'maoyuanxin1',
+      name: '毛远新破坏民兵建设的部分罪行材料',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: [
+        '/books/maoyuanxin1/1.jpg',
+        '/books/maoyuanxin1/2.jpg',
+        '/books/maoyuanxin1/3.jpg',
+        '/books/maoyuanxin1/4.jpg',
+        '/books/maoyuanxin1/5.jpg',
+        '/books/maoyuanxin1/6.jpg',
+        '/books/maoyuanxin1/7.jpg',
+        '/books/maoyuanxin1/8.jpg',
+        '/books/maoyuanxin1/9.jpg',
+        '/books/maoyuanxin1/10.jpg',
+        '/books/maoyuanxin1/11.jpg',
+        '/books/maoyuanxin1/12.jpg',
+        '/books/maoyuanxin1/12.jpg',
+        '/books/maoyuanxin1/13.jpg',
+        '/books/maoyuanxin1/14.jpg',
+        '/books/maoyuanxin1/15.jpg',
+        '/books/maoyuanxin1/16.jpg',
+      ].join(','),
+    },
+    parser_option: {
+      page_limits: [[5, 16]],
+    },
+    parser: maoyuanxin1.parse,
+    path: join(__dirname, '../public/books/maoyuanxin1'),
+  },
+].map((i) => {
+  const book: Book = {
+    entity: i.entity,
+    parser_option: i.parser_option as ParserOption,
+    path: i.path,
+    parser: async (path: string, opt: ParserOption) => {
+      const res = await i.parser(path, opt);
+      for (const article of res) {
+        const id = get_article_id(article);
+        const p = join(patch_dir, `[${id}][${i.entity.id}].ts`);
+        if (existsSync(p)) {
+          const x = await import(p);
+          for (const patch of x.default) {
+            apply_patch(article, patch);
           }
         }
-        return res;
-      },
-    } as Book),
-);
+      }
+      return res;
+    },
+  };
+  return book;
+});
 
 export default books;

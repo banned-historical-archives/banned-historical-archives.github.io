@@ -283,3 +283,7 @@ export function get_article_id(r: ParserResult) {
     JSON.stringify(r.file_id || ''),
   ]);
 }
+
+export async function sleep(t: number) {
+  return new Promise(resolve => setTimeout(resolve, t));
+}

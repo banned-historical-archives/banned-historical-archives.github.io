@@ -21,10 +21,13 @@ export default class Publication {
   @Column({type: 'bool', comment: `官方出版`})
   official!: boolean;
 
+  @Column({type: 'varchar', comment: `pdf, img, db`})
+  type!: string;
+
   @Column({type: 'varchar'})
   author!: string;
-  @Column({type: 'varchar', comment: '下载地址'})
-  pdf!: string;
+  @Column({type: 'varchar', comment: '下载地址，如果有多个地址用,分隔'})
+  files!: string;
 
   @OneToMany(() => Article, article => article.publications)
   articles!: Article[];
