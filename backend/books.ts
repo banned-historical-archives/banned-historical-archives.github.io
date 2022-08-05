@@ -409,7 +409,7 @@ const books: Book[] = [
       author: '',
       files: new Array(8)
         .fill(0)
-        .map((i, idx) => `/books/wanghongwen/${i + 1}.jpg`)
+        .map((i, idx) => `/books/wanghongwen1/${i + 1}.jpg`)
         .join(','),
     },
     parser_option: {
