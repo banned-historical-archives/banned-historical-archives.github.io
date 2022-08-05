@@ -19,8 +19,8 @@
 
 ### 文稿来源对比
 ![文稿来源对比](https://banned-historical-archives.github.io/images/comparison_pdf.png)
-左侧文稿为程序解析后的文稿， 右侧为来源文件。如果与原始文稿不符（包括不限于文本遗漏，排版问题，注释定位问题等），欢迎在
-[\[Github\]](https://github.com/banned-historical-archives/banned-historical-archives.github.io/issues)反馈。
+左侧文稿为程序解析后的文稿， 右侧为来源文件。如果与原始文稿不符（包括不限于文本遗漏，排版问题，注释定位问题等），欢迎使用
+[校对工具](https://github.com/banned-historical-archives/banned-historical-archives.github.io/wiki/%E5%A6%82%E4%BD%95%E8%B4%A1%E7%8C%AE%E4%B8%8E%E6%A0%A1%E5%AF%B9%E6%96%87%E7%A8%BF)给我们反馈。
 
 ### 歌词版本对比
 ![歌词版本对比](https://banned-historical-archives.github.io/images/comparison_lyric.png)
