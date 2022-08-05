@@ -92,6 +92,7 @@ function extract_parts(
     paragraphs
       .filter((x) => x.x < 300)
       .forEach((i) => (i.merge_up = true));
+    paragraphs.filter(x => x.x >= 300 && x.x < min_x + (max_x - min_x) * 0.6).forEach(i => i.merge_up = true);
   } else {
     paragraphs.filter(x => x.x < min_x + (max_x - min_x) * 0.6).forEach(i => i.merge_up = true);
   }
