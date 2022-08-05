@@ -31,8 +31,6 @@ export default async function ocr(img: string, cache = true): Promise<OCRResult[
     });
   });
 
-  if (cache) {
-    writeFileSync(cache_path, JSON.stringify(res));
-  }
+  writeFileSync(cache_path, JSON.stringify(res));
   return res;
 }

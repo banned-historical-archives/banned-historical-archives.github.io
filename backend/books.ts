@@ -8,6 +8,7 @@ import * as jqjianghua_parser from './parser/jqjianghua_parser';
 import * as xuanji_parser from './parser/xuanji';
 import * as wenku_parser from './parser/wenku';
 import * as maoyuanxin1 from './parser/maoyuanxin1';
+import * as wanghongwen1 from './parser/wanghongwen1';
 import { apply_patch, get_article_id } from '../utils';
 
 const patch_dir = join(__dirname ,'../patch/articles');
@@ -387,30 +388,35 @@ const books: Book[] = [
       official: true,
       type: 'img',
       author: '',
-      files: [
-        '/books/maoyuanxin1/1.jpg',
-        '/books/maoyuanxin1/2.jpg',
-        '/books/maoyuanxin1/3.jpg',
-        '/books/maoyuanxin1/4.jpg',
-        '/books/maoyuanxin1/5.jpg',
-        '/books/maoyuanxin1/6.jpg',
-        '/books/maoyuanxin1/7.jpg',
-        '/books/maoyuanxin1/8.jpg',
-        '/books/maoyuanxin1/9.jpg',
-        '/books/maoyuanxin1/10.jpg',
-        '/books/maoyuanxin1/11.jpg',
-        '/books/maoyuanxin1/12.jpg',
-        '/books/maoyuanxin1/13.jpg',
-        '/books/maoyuanxin1/14.jpg',
-        '/books/maoyuanxin1/15.jpg',
-        '/books/maoyuanxin1/16.jpg',
-      ].join(','),
+      files: new Array(16)
+        .fill(0)
+        .map((i, idx) => `/books/maoyuanxin1/${i + 1}.jpg`)
+        .join(','),
     },
     parser_option: {
       page_limits: [[5, 16]],
     },
     parser: maoyuanxin1.parse,
     path: join(__dirname, '../public/books/maoyuanxin1'),
+  },
+  {
+    entity: {
+      id: 'wanghongwen1',
+      name: '王洪文同志在山东重点企业批林批孔汇报会议上的讲话',
+      internal: false,
+      official: false,
+      type: 'img',
+      author: '',
+      files: new Array(8)
+        .fill(0)
+        .map((i, idx) => `/books/wanghongwen/${i + 1}.jpg`)
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [[1, 8]],
+    },
+    parser: wanghongwen1.parse,
+    path: join(__dirname, '../public/books/wanghongwen1'),
   },
 ].map((i) => {
   const book: Book = {
