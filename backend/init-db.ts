@@ -32,7 +32,9 @@ async function init_articles(AppDataSource: DataSource) {
   }
 
   for (const book of books) {
+    console.log(book.entity.name);
     const res = await book.parser(book.path, book.parser_option);
+    console.log('parsed', book.entity.name);
 
     const publication_id = book.entity.id!;
     await AppDataSource.manager.upsert(Publication, book.entity, ['id']);
@@ -180,17 +182,11 @@ async function init_articles(AppDataSource: DataSource) {
         ['id'],
       );
     }
+    console.log('done', book.entity.name);
   }
-  console.log('done');
 }
 
 async function init_music(AppDataSource: DataSource) {
-  for (const table of ['Audio', 'Lyric', 'Music']) {
-    const repository = await AppDataSource.getRepository(table);
-    await repository.query(`SET FOREIGN_KEY_CHECKS=OFF`);
-    await repository.query(`DELETE FROM ${table.toLowerCase()};`);
-    await repository.query(`SET FOREIGN_KEY_CHECKS=ON`);
-  }
   for (const music of musicData) {
     const id = hash_str_arr([music.name]);
     await AppDataSource.manager.upsert(
