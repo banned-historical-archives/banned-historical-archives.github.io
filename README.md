@@ -253,3 +253,6 @@ npm run dev
 ### 其他
 #### 数据库导出
 在第三步以后可以执行 mysqldump 命令导出数据库，使用方法见 mysql 官网
+
+## 友情链接
+[![统一战线公社](https://unitedfront.press/static/img/everylogo/hanzilogo.png)](https://unitedfront.press)
