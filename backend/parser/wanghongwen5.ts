@@ -49,8 +49,8 @@ export async function parse(
       dates: [
         {
           year: 1968,
-          month: 7,
-          day: 5,
+          month: 1,
+          day: 11,
         },
       ],
       is_range_date: false,
