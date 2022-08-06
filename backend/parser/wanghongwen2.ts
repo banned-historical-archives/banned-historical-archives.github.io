@@ -23,34 +23,9 @@ function extract_parts(
   // 去掉页码
   ocr = ocr.filter(i => !/^[-\d—一\.·，]+$/.test(i.text.trim()));
   const res:PartRaw[] = [];
-  for (let i = 0, title_mode = false, title_x = 0; i < ocr.length; ++i) {
+  for (let i = 0; i < ocr.length; ++i) {
     const text = ocr[i].text.trim();
     const x = ocr[i].box[0][0];
-    if (title_mode) {
-      if (x > title_x + 20) {
-        res.push({
-          page,
-          text,
-          merge_up: true,
-          x,
-          type: ContentType.title,
-        });
-        continue;
-      } else {
-        title_mode = false;
-      }
-    }
-    if (/^（[一二三四五六七八九十]+）/.test(text)) {
-      title_mode = true;
-      title_x = x;
-      res.push({
-        page,
-        x,
-        text,
-        type: ContentType.title,
-      });
-      continue;
-    }
     res.push({
       page,
       text,
@@ -59,19 +34,17 @@ function extract_parts(
     });
   }
   const paragraphs = res.filter(i => i.type === ContentType.paragraph);
-  const min_x = paragraphs.reduce(
-    (m, x) => Math.min(m, x.x),
-    Infinity,
-  );
-  const max_x = paragraphs.reduce(
-    (m, x) => Math.max(m, x.x),
-    -Infinity,
-  );
-  // 整页无换行
-  if (page === 4 || page === 6) {
-    paragraphs.forEach((i) => (i.merge_up = true));
-  } else {
-    paragraphs.filter(x => x.x < 114).forEach(i => i.merge_up = true);
+  for (let i = 0; i < paragraphs.length; ++i) {
+    const last = paragraphs[i - 1];
+    const next = paragraphs[i + 1];
+    const t = paragraphs[i];
+    if (last && last.x < t.x && t.x - last.x > 15) {
+      t.merge_up = false;
+    } else if (next && next.x < t.x && t.x - next.x > 15) {
+      t.merge_up = false;
+    } else {
+      t.merge_up = true;
+    }
   }
   return res;
 }
@@ -104,12 +77,13 @@ export async function parse(
     const path = imgPath.split('/public/books/')[1] + '/' + i + '.jpg';
     const ocrResults = (await ocr(path)).sort((a, b) => a.box[0][1] - b.box[0][1]);
 
+    // 去掉标题和日期
     parts.push(...extract_parts(i === 1 ? ocrResults.slice(4) : ocrResults, i));
   }
   
   const articles: PartRaw[][] = [];
   parts.unshift({
-    text: '王洪文同志在山东重点企业批林批孔汇报会议上的讲话',
+    text: '关于无产阶级文化大革命问题',
     type: ContentType.title,
     x: 0,
     page: 1,
@@ -138,9 +112,9 @@ export async function parse(
       authors: ['王洪文'],
       dates: [
         {
-          year: 1974,
-          month: 6,
-          day: 27,
+          year: 1973,
+          month: 12,
+          day: 30,
         },
       ],
       is_range_date: false,

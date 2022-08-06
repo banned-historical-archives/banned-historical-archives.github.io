@@ -9,6 +9,7 @@ import * as xuanji_parser from './parser/xuanji';
 import * as wenku_parser from './parser/wenku';
 import * as maoyuanxin1 from './parser/maoyuanxin1';
 import * as wanghongwen1 from './parser/wanghongwen1';
+import * as wanghongwen2 from './parser/wanghongwen2';
 import { apply_patch, get_article_id } from '../utils';
 
 const patch_dir = join(__dirname ,'../patch/articles');
@@ -406,7 +407,7 @@ const books: Book[] = [
       internal: false,
       official: false,
       type: 'img',
-      author: '',
+      author: '王洪文',
       files: new Array(8)
         .fill(0)
         .map((i, idx) => `/books/wanghongwen1/${idx + 1}.jpg`)
@@ -417,6 +418,25 @@ const books: Book[] = [
     },
     parser: wanghongwen1.parse,
     path: join(__dirname, '../public/books/wanghongwen1'),
+  },
+  {
+    entity: {
+      id: 'wanghongwen2',
+      name: '关于无产阶级文化大革命问题',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '王洪文',
+      files: new Array(10)
+        .fill(0)
+        .map((i, idx) => `/books/wanghongwen2/${idx + 1}.jpg`)
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [[1, 10]],
+    },
+    parser: wanghongwen2.parse,
+    path: join(__dirname, '../public/books/wanghongwen2'),
   },
 ].map((i) => {
   const book: Book = {
