@@ -15,7 +15,8 @@
 ## 功能简介
 
 ### 文稿版本对比
-![文稿版本对比](![image](https://user-images.githubusercontent.com/109972625/183229636-ac9df412-f4fe-48ad-9a8b-4442f942e06d.png))
+![文稿版本对比](https://user-images.githubusercontent.com/109972625/183229751-6e00a481-78a0-4fcc-a203-f73607bdc0c6.jpg)
+
 例如[在扩大的中央工作会议上的讲话](https://banned-historical-archives.github.io/articles/6f36e2e6db/)这篇文章，点击右上角“对比”按钮，选择“对比不同来源解析后的文本”。对比模式默认为“逐段对比”，根据情况可选择“逐字对比”。
 
 ### 文稿来源对比
