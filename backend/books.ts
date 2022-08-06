@@ -10,6 +10,7 @@ import * as wenku_parser from './parser/wenku';
 import * as maoyuanxin1 from './parser/maoyuanxin1';
 import * as wanghongwen1 from './parser/wanghongwen1';
 import * as wanghongwen2 from './parser/wanghongwen2';
+import * as wanghongwen3 from './parser/wanghongwen3';
 import { apply_patch, get_article_id } from '../utils';
 
 const patch_dir = join(__dirname ,'../patch/articles');
@@ -437,6 +438,25 @@ const books: Book[] = [
     },
     parser: wanghongwen2.parse,
     path: join(__dirname, '../public/books/wanghongwen2'),
+  },
+  {
+    entity: {
+      id: 'wanghongwen3',
+      name: '王洪文同志在接见四川大足汽车厂在北京学习班同志的讲话',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '王洪文',
+      files: new Array(4)
+        .fill(0)
+        .map((i, idx) => `/books/wanghongwen3/${idx + 1}.jpg`)
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [[1, 4]],
+    },
+    parser: wanghongwen3.parse,
+    path: join(__dirname, '../public/books/wanghongwen3'),
   },
 ].map((i) => {
   const book: Book = {
