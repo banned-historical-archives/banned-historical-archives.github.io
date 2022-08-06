@@ -3,6 +3,7 @@
 [官网](https://banned-historical-archives.github.io)
 
 和谐历史档案馆收录各类受官方封禁以及半封禁的文稿、报纸、杂志和多媒体资料，并对它们进行标准化加工，通过解析、识别、分类，形成标准化文稿档案和多媒体档案/数据库。
+虽然民间有不少人在做资料收集和校验工作，但分散的工作可能无法避免重复劳动，第二，资料的二次汇编难以保证真实性，第三缺乏统一的版本管理，难以维护。我们已经使用一系列现代化工具解决这些问题，使得每一篇文稿可溯源、可验证。[\[贡献与校对文稿\]](https://github.com/banned-historical-archives/banned-historical-archives.github.io/wiki/%E5%A6%82%E4%BD%95%E8%B4%A1%E7%8C%AE%E4%B8%8E%E6%A0%A1%E5%AF%B9%E6%96%87%E7%A8%BF)
 
 其中文稿包含中央发表的文件，中央高层会议纪要，主要人物的通知、著作、谈话/对话/讲话、宣言/声明、电报、通讯、书信、消息、评论/批语/批注/批示、意见、指示/命令，以及群众运动中重要文献。主要人物包括毛泽东，江青、姚文元、张春桥、王洪文等。
 其中一些书籍中并非所有文稿都受到官方封禁，我们也保留此类文稿。
@@ -14,7 +15,7 @@
 ## 功能简介
 
 ### 文稿版本对比
-![文稿版本对比](https://banned-historical-archives.github.io/images/comparison.png)
+![文稿版本对比](![image](https://user-images.githubusercontent.com/109972625/183229636-ac9df412-f4fe-48ad-9a8b-4442f942e06d.png))
 例如[在扩大的中央工作会议上的讲话](https://banned-historical-archives.github.io/articles/6f36e2e6db/)这篇文章，点击右上角“对比”按钮，选择“对比不同来源解析后的文本”。对比模式默认为“逐段对比”，根据情况可选择“逐字对比”。
 
 ### 文稿来源对比
