@@ -18,7 +18,7 @@ export default function OCR() {
   const [curX, setCurX] = useState(0);
   const [curY, setCurY] = useState(0);
   const [noCache, setNoCache] = useState(false);
-  const [basePath, setBasePath] = useState('/books/wanghongwen1/');
+  const [basePath, setBasePath] = useState('/books/wanghongwen2/');
   const [range, setRange] = useState('1-1');
   const [scale, setScale] = useState(1);
   const [sizes, setSizes] = useState<{ width: number; height: number }[]>([]);
@@ -100,10 +100,11 @@ export default function OCR() {
                     left: res.box[0]![0],
                     background: 'rgba(0, 255, 0, 0.3)',
                     width: res.box[1][0] - res.box[0][0],
-                    top: res.box[0][1] + 20,
-                    // top: res.box[0][1],
+                    // top: res.box[0][1] + 20,
+                    top: res.box[0][1],
                     fontSize: 19,
                     color: 'white',
+                    whiteSpace: 'nowrap',
                     textShadow: '-1px 4px 2px black',
                     height: res.box[2][1] - res.box[0][1],
                   }}
