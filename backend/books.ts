@@ -12,6 +12,7 @@ import * as wanghongwen1 from './parser/wanghongwen1';
 import * as wanghongwen2 from './parser/wanghongwen2';
 import * as wanghongwen3 from './parser/wanghongwen3';
 import * as wanghongwen4 from './parser/wanghongwen4';
+import * as wanghongwen5 from './parser/wanghongwen5';
 import { apply_patch, get_article_id } from '../utils';
 
 const patch_dir = join(__dirname ,'../patch/articles');
@@ -477,6 +478,25 @@ const books: Book[] = [
     },
     parser: wanghongwen4.parse,
     path: join(__dirname, '../public/books/wanghongwen4'),
+  },
+  {
+    entity: {
+      id: 'wanghongwen5',
+      name: '工总司负责人王洪文同志一月十一日在长宁区俱乐部的重要讲话',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '王洪文',
+      files: new Array(4)
+        .fill(0)
+        .map((i, idx) => `/books/wanghongwen5/${idx + 1}.jpg`)
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [[1, 4]],
+    },
+    parser: wanghongwen5.parse,
+    path: join(__dirname, '../public/books/wanghongwen5'),
   },
 ].map((i) => {
   const book: Book = {
