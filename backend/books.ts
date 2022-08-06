@@ -11,6 +11,7 @@ import * as maoyuanxin1 from './parser/maoyuanxin1';
 import * as wanghongwen1 from './parser/wanghongwen1';
 import * as wanghongwen2 from './parser/wanghongwen2';
 import * as wanghongwen3 from './parser/wanghongwen3';
+import * as wanghongwen4 from './parser/wanghongwen4';
 import { apply_patch, get_article_id } from '../utils';
 
 const patch_dir = join(__dirname ,'../patch/articles');
@@ -457,6 +458,25 @@ const books: Book[] = [
     },
     parser: wanghongwen3.parse,
     path: join(__dirname, '../public/books/wanghongwen3'),
+  },
+  {
+    entity: {
+      id: 'wanghongwen4',
+      name: '王洪文在沪东造船厂发动群众对敌斗争现场会上的讲话',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '王洪文',
+      files: new Array(2)
+        .fill(0)
+        .map((i, idx) => `/books/wanghongwen4/${idx + 1}.jpg`)
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [[1, 2]],
+    },
+    parser: wanghongwen4.parse,
+    path: join(__dirname, '../public/books/wanghongwen4'),
   },
 ].map((i) => {
   const book: Book = {
