@@ -16,13 +16,14 @@ export async function parse(
   imgPath: string,
   parser_opt: ParserOption,
 ): Promise<ParserResult[]> {
+  const title = '王洪文同志在接见四川大足汽车厂在北京学习班同志的讲话';
   const parts: ContentPart[] =[{
-    text: '王洪文同志在接见四川大足汽车厂在北京学习班同志的讲话',
+    text: title,
     type: ContentType.title,
   }];
   const res: ParserResult[] = [
     {
-      title: '王洪文同志在接见四川大足汽车厂在北京学习班同志的讲话',
+      title,
       parts: [
         ...parts,
         ...`我没有什么准备，昨天，先念、登奎、江青同志给我讲，大足汽车厂同志要回去了，我觉得再忙也得见了，原因这个厂很重要，是国家的独生子，国家很需要大足汽车厂出的汽车，部队装备特别需要这个车，讲几句话希望有助于问题的解决。
