@@ -102,22 +102,11 @@ const columns: GridColDef<Article>[] = [
     valueGetter: (params: GridValueGetterParams<Article, Article>) =>
       params.row.dates.map(
         (i) =>
-          `${ensure_two_digits(i.year)}/${ensure_two_digits(
-            i.month,
-          )}/${ensure_two_digits(i.day)}`,
-      ),
-    sortComparator: (dates_a: Date[], dates_b: Date[]) => {
-      const a = dates_a[0];
-      const b = dates_b[0];
-      const temp = [a, b].map((i) =>
-        i
-          ? [i.year || '', ensure_two_digits(i.month), ensure_two_digits(i.day)]
+          i ? [i.year || '', ensure_two_digits(i.month), ensure_two_digits(i.day)]
               .filter((j) => j)
               .join('/')
-          : '9',
-      );
-      return temp[0] > temp[1] ? 1 : -1;
-    },
+          : '9'
+      ).join(' '),
     renderCell: (params: GridRenderCellParams<string, Article>) => (
       <Stack spacing={1}>
         {params.row!.is_range_date ? (
