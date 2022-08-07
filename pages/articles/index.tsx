@@ -60,9 +60,9 @@ export const getStaticProps: GetStaticProps = async (
   };
 };
 
-function ensure_two_digits(a?: number) {
+function ensure_two_digits(a?: number, fallback = '') {
   if (!a && a !== 0) {
-    return '';
+    return fallback;
   }
   return a < 10 ? `0${a}` : a;
 }
@@ -102,10 +102,10 @@ const columns: GridColDef<Article>[] = [
     valueGetter: (params: GridValueGetterParams<Article, Article>) =>
       params.row.dates.map(
         (i) =>
-          i ? [i.year || '', ensure_two_digits(i.month), ensure_two_digits(i.day)]
+          i ? [i.year || '----', ensure_two_digits(i.month, '--'), ensure_two_digits(i.day, '--')]
               .filter((j) => j)
               .join('/')
-          : '9'
+          : '----/--/--'
       ).join(' '),
     renderCell: (params: GridRenderCellParams<string, Article>) => (
       <Stack spacing={1}>
