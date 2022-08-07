@@ -135,18 +135,21 @@ function ArticleComponent({
   article,
   comments,
   patchBtn,
+  patchMode,
   contents,
+  setPatchMode,
   publicationId,
   publicationName,
 }: {
   publicationName?: string;
   publicationId: string;
   patchBtn?: boolean;
+  patchMode?: boolean;
+  setPatchMode?: Function;
   article: Article;
   comments: Comment[];
   contents: Content[];
 }) {
-  const [patchMode, setPatchMode] = useState(false);
   const changes = useRef<{
     parts: { [idx: string]: string };
     comments: { [idx: string]: string };
@@ -281,7 +284,7 @@ function ArticleComponent({
           <Button
             variant="outlined"
             size="small"
-            onClick={() => setPatchMode(!patchMode)}
+            onClick={() => setPatchMode!(!patchMode)}
           >
             {patchMode ? '阅读模式' : '校对模式'}
           </Button>
@@ -394,34 +397,62 @@ function ArticleComponent({
                 </Stack>
               );
             })}
-          <Button
-            variant="contained"
-            size="small"
-            sx={{ width: 80, mt: 1 }}
-            onClick={() => {
-              const params = JSON.stringify({
-                articleId: article.id,
-                publicationId: publicationId,
-                commitHash: commit_hash,
-                patch: changes.current,
-              });
-              const url = `https://github.com/banned-historical-archives/banned-historical-archives.github.io/issues/new?body=${encodeURIComponent(`{OCR补丁}
+          <Stack spacing={1}>
+            <Button
+              variant="contained"
+              size="small"
+              sx={{ width: 80, mt: 1 }}
+              onClick={() => {
+                const params = JSON.stringify({
+                  articleId: article.id,
+                  publicationId: publicationId,
+                  commitHash: commit_hash,
+                  patch: changes.current,
+                });
+                const url = `https://github.com/banned-historical-archives/banned-historical-archives.github.io/issues/new?body=${encodeURIComponent(`{OCR补丁}
 ${params}
 预览：https://banned-historical-archives.github.io/articles/${
-                article.id
-              }?patch=${encodeURIComponent(
-                params,
-              )}`)}&title=${encodeURIComponent(
-                `[OCR patch]${article.title}[${publicationName}]`,
-              )}`;
-              window.open(url, '_blank');
-            }}
-          >
-            提交变更
-          </Button>
-          <Typography>
-            如果核对无误也可以提交，使其他人知道此文稿已经被校对（可多次提交，表示多次核对）
-          </Typography>
+                  article.id
+                }?patch=${encodeURIComponent(
+                  params,
+                )}`)}&title=${encodeURIComponent(
+                  `[OCR patch]${article.title}[${publicationName}]`,
+                )}`;
+                window.open(url, '_blank');
+              }}
+            >
+              提交变更
+            </Button>
+            <Typography>
+              如果出现 Your request URL is too long 的错误，请点击
+              <Button
+                size="small"
+                onClick={() => {
+                  const params = JSON.stringify({
+                    articleId: article.id,
+                    publicationId: publicationId,
+                    commitHash: commit_hash,
+                    patch: changes.current,
+                  });
+                  navigator.clipboard.writeText(
+                    `{OCR补丁}
+${params}
+请复制以上代码在对比选项中粘贴并预览：https://banned-historical-archives.github.io/articles/${article.id}`,
+                  );
+                  const url = `https://github.com/banned-historical-archives/banned-historical-archives.github.io/issues/new?title=${encodeURIComponent(
+                    `[OCR patch]${article.title}[${publicationName}]`,
+                  )}`;
+                  window.open(url, '_blank');
+                }}
+              >
+                复制代码并跳转
+              </Button>
+              ，粘贴代码再提交。
+            </Typography>
+            <Typography>
+              如果核对无误也可以提交，使其他人知道此文稿已经被校对（可多次提交，表示多次核对）
+            </Typography>
+          </Stack>
         </>
       ) : (
         <>
@@ -459,6 +490,7 @@ export default function ArticleViewer({
   publication_details: PublicationDetails;
 }) {
   const id = article.id;
+  const [patchMode, setPatchMode] = useState(false);
   const patchWrap = useRef<
     | {
         commitHash: string;
@@ -479,6 +511,82 @@ export default function ArticleViewer({
     article.publications[0].id,
   );
 
+  function addOCRComparisonPublication(publicationId:string,patch: Patch, article: Article) {
+    if (publication_details[virtual_publication_id]) {
+      return;
+    }
+    article.publications.push({
+      ...article.publications.find((i) => i.id === publicationId)!,
+      id: virtual_publication_id,
+      name: '#OCR补丁预览#',
+    });
+    const { page, comments, contents } = publication_details[publicationId];
+    const d = new diff_match_patch();
+    const patched_contents = contents.map((i) => ({
+      ...i,
+      id: Math.random().toString(),
+    }));
+    const patched_comments = comments.map((i) => ({
+      ...i,
+      id: Math.random().toString(),
+    }));
+    contents
+      .sort((a, b) => a.index - b.index)
+      .forEach((content, idx) => {
+        const text_arr = Array.from(content.text);
+        comments
+          .filter((i) => i.part_index === content.index || i.part_index === -1)
+          .sort((a, b) => b.index - a.index)
+          .forEach((i) => {
+            if (
+              patch.comments[i.index] ||
+              (i.index === -1 && patch.description)
+            ) {
+              const diff = new diff_match_patch().diff_fromDelta(
+                i.text,
+                patch.comments[i.index] || patch.description,
+              );
+              const new_text = diff
+                .filter((i) => i[0] !== -1)
+                .map((i) => i[1])
+                .join('');
+              const x = patched_comments.find((h) => h.index === i.index)!;
+              if (x) x.text = new_text;
+            }
+
+            if (i.index !== -1)
+              text_arr.splice(
+                i.offset,
+                0,
+                `${bracket_left}${i.index}${bracket_right}`,
+              );
+          });
+
+        if (!patch.parts[content.index]) {
+          return;
+        }
+
+        const origin_text = text_arr.join('');
+        const diff = d.diff_fromDelta(origin_text, patch.parts[idx]);
+        const new_text = diff
+          .filter((i) => i[0] !== -1)
+          .map((i) => i[1])
+          .join('');
+        const [pivots, pure_text] = extract_pivots(new_text, idx);
+        pivots.forEach((x) => {
+          const t = patched_comments.find((i) => x.index === i.index)!;
+          t.offset = x.offset;
+          t.part_index = x.part_idx;
+        });
+        patched_contents[idx].text = pure_text;
+      });
+    publication_details[virtual_publication_id] = {
+      page,
+      comments: patched_comments,
+      contents: patched_contents,
+    };
+  }
+
   useEffect(() => {
     patchWrap.current = location.search.startsWith('?patch=')
       ? JSON.parse(decodeURIComponent(location.search.split('=')[1]))
@@ -486,102 +594,13 @@ export default function ArticleViewer({
     if (patchWrap.current) {
       const patch = patchWrap.current ? patchWrap.current.patch! : undefined;
       if (patch && typeof window !== 'undefined') {
-        if (!publication_details[virtual_publication_id]) {
-          article.publications.push({
-            ...article.publications.find(
-              (i) => i.id === patchWrap.current!.publicationId,
-            )!,
-            id: virtual_publication_id,
-            name: '#OCR补丁预览#',
-          });
-          const { page, comments, contents } =
-            publication_details[patchWrap.current!.publicationId];
-          const d = new diff_match_patch();
-          const patched_contents = contents.map((i) => ({
-            ...i,
-            id: Math.random().toString(),
-          }));
-          const patched_comments = comments.map((i) => ({
-            ...i,
-            id: Math.random().toString(),
-          }));
-          contents
-            .sort((a, b) => a.index - b.index)
-            .forEach((content, idx) => {
-              const text_arr = Array.from(content.text);
-              comments
-                .filter(
-                  (i) => i.part_index === content.index || i.part_index === -1,
-                )
-                .sort((a, b) => b.index - a.index)
-                .forEach((i) => {
-                  if (
-                    patch.comments[i.index] ||
-                    (i.index === -1 && patch.description)
-                  ) {
-                    const diff = new diff_match_patch().diff_fromDelta(
-                      i.text,
-                      patch.comments[i.index] || patch.description,
-                    );
-                    const new_text = diff
-                      .filter((i) => i[0] !== -1)
-                      .map((i) => i[1])
-                      .join('');
-                    const x = patched_comments.find(
-                      (h) => h.index === i.index,
-                    )!;
-                    if (x) x.text = new_text;
-                  }
-
-                  if (i.index !== -1)
-                    text_arr.splice(
-                      i.offset,
-                      0,
-                      `${bracket_left}${i.index}${bracket_right}`,
-                    );
-                });
-
-              if (!patch.parts[content.index]) {
-                return;
-              }
-
-              const origin_text = text_arr.join('');
-              const diff = d.diff_fromDelta(origin_text, patch.parts[idx]);
-              const new_text = diff
-                .filter((i) => i[0] !== -1)
-                .map((i) => i[1])
-                .join('');
-              const [pivots, pure_text] = extract_pivots(new_text, idx);
-              pivots.forEach((x) => {
-                const t = patched_comments.find((i) => x.index === i.index)!;
-                t.offset = x.offset;
-                t.part_index = x.part_idx;
-              });
-              patched_contents[idx].text = pure_text;
-            });
-          publication_details[virtual_publication_id] = {
-            page,
-            comments: patched_comments,
-            contents: patched_contents,
-          };
-        }
+        addOCRComparisonPublication(patchWrap.current!.publicationId, patch, article);
+        setCompareType(CompareType.version);
+        setComparePublication(virtual_publication_id);
+        setSelectedPublication(patchWrap.current!.publicationId);
       }
-      setCompareType(CompareType.version);
-      setComparePublication(virtual_publication_id);
-      setSelectedPublication(patchWrap.current!.publicationId);
     }
   }, []);
-
-  /*
-    if (commit_hash !== patch!.commitHash) {
-      if (
-        !confirm(
-          '当前OCR补丁可能已经合并，再次应用补丁并预览可能不符合预期，是否继续？',
-        )
-      ) {
-        patch = undefined;
-      }
-      */
 
   const article_diff: Diff[][] | undefined = useMemo(() => {
     if (
@@ -689,6 +708,8 @@ export default function ArticleViewer({
       key="version_a"
     >
       <ArticleComponent
+        patchMode={patchMode}
+        setPatchMode={setPatchMode}
         article={article}
         publicationId={selectedPublication}
         publicationName={selectedPublicationName}
@@ -934,6 +955,33 @@ export default function ArticleViewer({
                 </MenuItem>
                 <MenuItem
                   onClick={() => {
+                    let str = prompt('导入代码') || '';
+                    str = str.replace(/^\{OCR补丁\}/, '');
+                    str = str.substr(0, str.lastIndexOf('}') + 1);
+                    console.log(str);
+                    try {
+                      const patchWrap = JSON.parse(str);
+
+                      addOCRComparisonPublication(
+                        patchWrap.publicationId,
+                        patchWrap.patch,
+                        article,
+                      );
+                      setPatchMode(false);
+                      setComparePublication(virtual_publication_id);
+                      setSelectedPublication(patchWrap.publicationId);
+                      setCompareType(CompareType.version);
+                      setAnchorEl(null);
+                    } catch (e) {
+                      alert('解析错误');
+                    }
+                  }}
+                >
+                  导入代码对比OCR校对结果
+                </MenuItem>
+                <MenuItem
+                  onClick={() => {
+                    setPatchMode(false);
                     setCompareType(CompareType.none);
                     setAnchorEl(null);
                   }}
