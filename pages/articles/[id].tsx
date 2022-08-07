@@ -150,6 +150,8 @@ function ArticleComponent({
   comments: Comment[];
   contents: Content[];
 }) {
+  const [popoverContent, setPopoverContent] = useState('');
+  const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
   const changes = useRef<{
     parts: { [idx: string]: string };
     comments: { [idx: string]: string };
@@ -163,7 +165,7 @@ function ArticleComponent({
     changes.current!.parts = {};
     changes.current!.comments = {};
     changes.current!.description = '';
-  }, [article]);
+  }, [article, patchMode]);
   const description = comments.find((i) => i.index === -1)?.text;
   const sorted_contents = contents.sort((a, b) => (a.index > b.index ? 1 : -1));
   const sorted_comments = comments.sort((a, b) => a.index - b.index);
@@ -279,6 +281,17 @@ function ArticleComponent({
 
   return (
     <>
+      <Popover
+        open={!!anchorEl}
+        anchorEl={anchorEl}
+        onClose={() => setAnchorEl(null)}
+      >
+        <Typography
+          sx={{ p: 2, width: 200, overflow: 'scroll', userSelect: 'all' }}
+        >
+          {popoverContent}
+        </Typography>
+      </Popover>
       {patchBtn ? (
         <Stack sx={{ mb: 1 }} spacing={1} direction="row">
           <Button
@@ -427,22 +440,23 @@ ${params}
               如果出现 Your request URL is too long 的错误，请点击
               <Button
                 size="small"
-                onClick={() => {
+                onClick={(e) => {
                   const params = JSON.stringify({
                     articleId: article.id,
                     publicationId: publicationId,
                     commitHash: commit_hash,
                     patch: changes.current,
                   });
-                  navigator.clipboard.writeText(
-                    `{OCR补丁}
+                  const text = `{OCR补丁}
 ${params}
-请复制以上代码在对比选项中粘贴并预览：https://banned-historical-archives.github.io/articles/${article.id}`,
-                  );
+请复制以上代码在对比选项中粘贴进行预览：https://banned-historical-archives.github.io/articles/${article.id}`;
+                  navigator.clipboard.writeText(text);
                   const url = `https://github.com/banned-historical-archives/banned-historical-archives.github.io/issues/new?title=${encodeURIComponent(
                     `[OCR patch]${article.title}[${publicationName}]`,
                   )}`;
                   window.open(url, '_blank');
+                  setPopoverContent(text);
+                  setAnchorEl(e.currentTarget);
                 }}
               >
                 复制代码并跳转
@@ -511,7 +525,11 @@ export default function ArticleViewer({
     article.publications[0].id,
   );
 
-  function addOCRComparisonPublication(publicationId:string,patch: Patch, article: Article) {
+  function addOCRComparisonPublication(
+    publicationId: string,
+    patch: Patch,
+    article: Article,
+  ) {
     if (publication_details[virtual_publication_id]) {
       return;
     }
@@ -594,7 +612,11 @@ export default function ArticleViewer({
     if (patchWrap.current) {
       const patch = patchWrap.current ? patchWrap.current.patch! : undefined;
       if (patch && typeof window !== 'undefined') {
-        addOCRComparisonPublication(patchWrap.current!.publicationId, patch, article);
+        addOCRComparisonPublication(
+          patchWrap.current!.publicationId,
+          patch,
+          article,
+        );
         setCompareType(CompareType.version);
         setComparePublication(virtual_publication_id);
         setSelectedPublication(patchWrap.current!.publicationId);
@@ -746,7 +768,7 @@ export default function ArticleViewer({
           ) : publication.type === 'img' ? (
             publication.files
               .split(',')
-              .filter((i, idx) => idx + 1>= page.start && idx + 1 <= page.end)
+              .filter((i, idx) => idx + 1 >= page.start && idx + 1 <= page.end)
               .map((f) => <img key={f} src={f} />)
           ) : (
             <>未知类型</>
