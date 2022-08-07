@@ -99,6 +99,13 @@ const columns: GridColDef<Article>[] = [
       '可能包含多个时间点（起草时间，发布时间，子文稿时间等）或时间段',
     minWidth: 150,
     flex: 1,
+    valueGetter: (params: GridValueGetterParams<Article, Article>) =>
+      params.row.dates.map(
+        (i) =>
+          `${ensure_two_digits(i.year)}/${ensure_two_digits(
+            i.month,
+          )}/${ensure_two_digits(i.day)}`,
+      ),
     sortComparator: (dates_a: Date[], dates_b: Date[]) => {
       const a = dates_a[0];
       const b = dates_b[0];
