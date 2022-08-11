@@ -526,6 +526,7 @@ const books: Book[] = [
       internal: true,
       official: true,
       author: '',
+      type: 'pdf',
       files: '/books/zzj1.pdf',
     },
     parser_option: {
