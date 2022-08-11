@@ -14,6 +14,7 @@ import * as wanghongwen3 from './parser/wanghongwen3';
 import * as wanghongwen4 from './parser/wanghongwen4';
 import * as wanghongwen5 from './parser/wanghongwen5';
 import * as wanghongwen6 from './parser/wanghongwen6';
+import * as yaowenyuan1 from './parser/yaowenyuan1';
 import * as zzj1 from './parser/zzj1';
 import { apply_patch, get_article_id } from '../utils';
 import { tranditionalChineseToSimpleChinese } from '../utils/i18n';
@@ -535,6 +536,25 @@ const books: Book[] = [
     },
     parser: zzj1.parse,
     path: join(__dirname, '../public/books/zzj1.pdf'),
+  },
+  {
+    entity: {
+      id: 'yaowenyuan1',
+      name: '姚文元同志在上海市革命委员会报告会上的讲话',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '姚文元',
+      files: new Array(10)
+        .fill(0)
+        .map((i, idx) => `/books/yaowenyuan/${idx + 1}.jpg`)
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [[1, 10]],
+    },
+    parser: yaowenyuan1.parse,
+    path: join(__dirname, '../public/books/yaowenyuan1'),
   },
 ].map((i) => {
   const book: Book = {
