@@ -85,6 +85,7 @@ export enum ArticleType {
 
 export type OCRPosition = [number, number];
 export type OCRResult = {
+  // 左上，右上，右下，左下
   box: [OCRPosition, OCRPosition, OCRPosition, OCRPosition],
   text: string,
 };

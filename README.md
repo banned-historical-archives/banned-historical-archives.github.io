@@ -232,20 +232,18 @@
 
 数据库 charset 需要设为 utf8_general_ci
 
-### 1.（可选）初始化 docker image
-```
-docker build -f ./paddle/docker/DockerFile ./paddle/docker -t paddle-ocr-lac
-```
-### 2.安装 node_modules
+如需运行OCR，依赖: python3.x, cnocr 
+
+### 1.安装 node_modules
 ```
 npm install
 ```
-### 3.解析原始文件并写入数据库
+### 2.解析原始文件并写入数据库
 ```
 npm run init-db
 ```
 可选环境变量：DB_NAME，DB_PORT，DB_USER，DB_PASSWORD
-### 4.本地预览
+### 3.本地预览
 ```
 npm run dev
 ```

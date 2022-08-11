@@ -21,7 +21,7 @@ function extract_parts(
   page: number,
 ): PartRaw[] {
   // 去掉页码
-  ocr = ocr.filter(i => !/^[-\d—一\.·，]+$/.test(i.text.trim()));
+  ocr = ocr.filter(i => !/^[·-\d—一°\.·，]+$/.test(i.text.trim()));
   const res:PartRaw[] = [];
   for (let i = 0, title_mode = false, title_x = 0; i < ocr.length; ++i) {
     const text = ocr[i].text.trim();
@@ -59,19 +59,17 @@ function extract_parts(
     });
   }
   const paragraphs = res.filter(i => i.type === ContentType.paragraph);
-  const min_x = paragraphs.reduce(
-    (m, x) => Math.min(m, x.x),
-    Infinity,
-  );
-  const max_x = paragraphs.reduce(
-    (m, x) => Math.max(m, x.x),
-    -Infinity,
-  );
-  // 整页无换行
-  if (page === 4 || page === 6) {
-    paragraphs.forEach((i) => (i.merge_up = true));
-  } else {
-    paragraphs.filter(x => x.x < 114).forEach(i => i.merge_up = true);
+  for (let i = 0; i < paragraphs.length; ++i) {
+    const last = paragraphs[i - 1];
+    const next = paragraphs[i + 1];
+    const t = paragraphs[i];
+    if (last && last.x < t.x && t.x - last.x > 15) {
+      t.merge_up = false;
+    } else if (next && next.x < t.x && t.x - next.x > 15) {
+      t.merge_up = false;
+    } else {
+      t.merge_up = true;
+    }
   }
   return res;
 }
@@ -91,6 +89,35 @@ function merge_parts(parts: PartRaw[]): ContentPart[] {
   return res;
 }
 
+function merge_to_lines(ocrResults: OCRResult[], threshold = 50) {
+  const next = new Map<OCRResult, OCRResult>();
+  const to_remove = new Map<OCRResult, boolean>();
+  for (const a of ocrResults) {
+    for (const b of ocrResults) {
+      if (a == b) continue;
+      if (next.get(a)) {
+        continue;
+      }
+      const x_diff = Math.abs(b.box[0][0] - a.box[1][0])
+      const y_diff = Math.abs(b.box[0][1] - a.box[1][1])
+      if (x_diff+y_diff < threshold) {
+        next.set(a, b);
+        to_remove.set(b, true);
+      }
+    }
+  }
+  const lines:OCRResult[] = ocrResults.filter(i => !to_remove.get(i)).map(i => {
+    let j = next.get(i);
+    const r = i;
+    while (j) {
+      r.text += j.text;
+      j = next.get(j);
+    }
+    return r;
+  });
+  return lines;
+}
+
 export async function parse(
   imgPath: string,
   parser_opt: ParserOption,
@@ -102,7 +129,9 @@ export async function parse(
     ++i
   ) {
     const path = imgPath.split('/public/books/')[1] + '/' + i + '.jpg';
-    const ocrResults = (await ocr(path)).sort((a, b) => a.box[0][1] - b.box[0][1]);
+    const ocrResults = merge_to_lines(
+      (await ocr({ img: path })).filter((i) => i.text),
+    ).sort((a, b) => a.box[0][1] - b.box[0][1]);
 
     parts.push(...extract_parts(i === 1 ? ocrResults.slice(4) : ocrResults, i));
   }

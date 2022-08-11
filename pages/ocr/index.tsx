@@ -76,7 +76,7 @@ export default function OCR() {
         const n = parseInt(range.split('-')[0]) + idx;
         return (
           <div
-            key={`${basePath}${n}.jpg`}
+            key={`${basePath}${n}.jpg${noCache}`}
             style={{ position: 'relative' }}
             onMouseMove={(e) => {
               setCurX(Math.floor(e.pageX / scale));

@@ -18,7 +18,12 @@ app.get('/', async (req, res) => {
   const cache = req.query.cache === 'true';
   console.log(path);
 
-  const r = await ocr(path, cache);
+  const r = await ocr({ img: path, cache,
+    // det_model: 'db_mobilenet_v3',
+    // det_backend: 'pytorch',
+    // det_model: 'db_mobilenet_v3',
+    // det_backend: 'pytorch',
+  });
   console.log('done', path);
   res.json({
     ocr_result: r,

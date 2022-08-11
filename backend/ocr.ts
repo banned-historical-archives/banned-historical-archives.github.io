@@ -4,32 +4,50 @@ import { existsSync, readFileSync, unlinkSync, writeFileSync } from 'fs';
 import { OCRResult } from '../types';
 import { sleep } from '../utils';
 
-export default async function ocr(img: string, cache = true): Promise<OCRResult[]> {
-  const cache_path = join(process.cwd(), `backend/ocr_cache/${img.split('/').join('.')}.json`);
+/**
+ * db shufflenet v2 py
+ * ppocr v3
+ */
+export default async function ocr({
+  img,
+  rec_model = 'ch_ppocr_mobile_v2.0',
+  rec_backend = 'onnx',
+  det_model = 'ch_PP-OCRv3_det',
+  det_backend = 'onnx',
+  resized_shape = 1496,
+  box_score_thresh = 0.3,
+  min_box_size = 10,
+  cache = true,
+}: {
+  box_score_thresh?: number;
+  min_box_size?: number;
+  resized_shape?: number;
+  rec_model?: string;
+  rec_backend?: string;
+  det_model?: string;
+  det_backend?: string;
+  img: string;
+  cache?: boolean;
+}): Promise<OCRResult[]> {
+  const cache_path = join(
+    process.cwd(),
+    `backend/ocr_cache/${img.split('/').join('.')}.json`,
+  );
   if (cache && existsSync(cache_path)) {
     return JSON.parse(readFileSync(cache_path).toString());
   }
-  const lockFileName = `lock.jpg`;
-  const lockFilePath = join(process.cwd(), `./paddle/temp/${lockFileName}`);
-  while (existsSync(lockFilePath)) {
-    console.log('waiting');
-    await sleep(5000);
-  }
-  const ocr_command = `docker run --rm --name dev -v $PWD/paddle:/paddle -t paddle-ocr-lac paddleocr --image_dir /paddle/temp/${lockFileName} --lang ch --rec_model_dir /paddle/ch_PP-OCRv3_rec_infer --det_model_dir /paddle/ch_PP-OCRv3_det_infer --cls_model_dir /paddle/ch_ppocr_mobile_v2_cls_infer`;
-  execSync(`cp ${join(process.cwd(), `public/books/${img}`)} ${lockFilePath}`);
+  const abs_img_path = join(process.cwd(), `public/books/${img}`);
+  const ocr_command = `python3 backend/ocr.py ${abs_img_path} ${rec_model} ${rec_backend} ${det_model} ${det_backend} ${resized_shape} ${box_score_thresh} ${min_box_size}`;
   const raw = execSync(ocr_command).toString();
-  unlinkSync(lockFilePath);
 
-  const candidates: string[] = raw.split('\n').filter(i => /^\[[1234567890\/\ :]+\] ppocr INFO: \[/.test(i))
-  const res: OCRResult[] = [];
-  candidates.forEach((i) => {
-    const box_a = i.indexOf('[[') + 1;
-    const text_a = i.indexOf("'") + 1;
-    res.push({
-      box: JSON.parse(i.substr(box_a, i.indexOf(', (') - box_a)),
-      text: i.substr(text_a, i.lastIndexOf("'") - text_a),
-    });
-  });
+  const candidates: string[] = raw.split('\n');
+  const t = JSON.parse(
+    candidates[candidates.length - 2].replace(/"score": NaN\,/g, '"score": 0,'),
+  );
+  const res: OCRResult[] = t.map((i: any) => ({
+    text: i.text,
+    box: i.position,
+  }));
 
   writeFileSync(cache_path, JSON.stringify(res));
   return res;

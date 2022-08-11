@@ -41,7 +41,7 @@ function extract_parts(
   page: number,
 ): PartRaw[] {
   // 去掉页码
-  ocr = ocr.filter(i => !/^[-\d—一]+$/.test(i.text.trim()));
+  ocr = ocr.filter(i => !/^[-\d—三一\.]+$/.test(i.text.trim()));
   const res:PartRaw[] = [];
   for (let i = 0, title_mode = false, title_x = 0; i < ocr.length; ++i) {
     const text = ocr[i].text.trim();
@@ -87,14 +87,21 @@ function extract_parts(
     (m, x) => Math.max(m, x.x),
     -Infinity,
   );
-  // 11页左侧整页无换行
-  if (page === 11) {
-    paragraphs
-      .filter((x) => x.x < 300)
-      .forEach((i) => (i.merge_up = true));
-    paragraphs.filter(x => x.x >= 300 && x.x < min_x + (max_x - min_x) * 0.6).forEach(i => i.merge_up = true);
-  } else {
-    paragraphs.filter(x => x.x < min_x + (max_x - min_x) * 0.6).forEach(i => i.merge_up = true);
+  for (let i = 0; i < paragraphs.length; ++i) {
+    const last = paragraphs[i - 1];
+    const next = paragraphs[i + 1];
+    const t = paragraphs[i];
+    if (last && last.x < t.x && t.x - last.x > 25) {
+      t.merge_up = false;
+    } else if (next && next.x < t.x && t.x - next.x > 25) {
+      t.merge_up = false;
+    } else {
+      if (last && !last.merge_up && Math.abs(t.x - last.x) < 25) {
+        t.merge_up = false;
+      } else {
+        t.merge_up = t.x - min_x < 50;
+      }
+    }
   }
   return res;
 }
@@ -210,7 +217,7 @@ export async function parse(
     ++i
   ) {
     const path = imgPath.split('/public/books/')[1] + '/' + i + '.jpg';
-    const ocrResults = await ocr(path);
+    const ocrResults = (await ocr({img: path})).filter(i => i.text);
 
     if (i === parser_opt.page_limits[0][1]) {
       // 取左边
