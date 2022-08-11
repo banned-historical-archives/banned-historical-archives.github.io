@@ -14,6 +14,7 @@ import * as wanghongwen3 from './parser/wanghongwen3';
 import * as wanghongwen4 from './parser/wanghongwen4';
 import * as wanghongwen5 from './parser/wanghongwen5';
 import * as wanghongwen6 from './parser/wanghongwen6';
+import * as zzj1 from './parser/zzj1';
 import { apply_patch, get_article_id } from '../utils';
 
 const patch_dir = join(__dirname ,'../patch/articles');
@@ -517,6 +518,21 @@ const books: Book[] = [
     },
     parser: wanghongwen6.parse,
     path: join(__dirname, '../public/books/wanghongwen6'),
+  },
+  {
+    entity: {
+      id: 'zzj1',
+      name: '中共中央政治局同志7月30日晚接见全国计划工作座谈会全体同志时的讲话',
+      internal: true,
+      official: true,
+      author: '',
+      files: '/books/zzj1.pdf',
+    },
+    parser_option: {
+      page_limits: [[1, 6]],
+    },
+    parser: zzj1.parse,
+    path: join(__dirname, '../public/books/zzj1.pdf'),
   },
 ].map((i) => {
   const book: Book = {
