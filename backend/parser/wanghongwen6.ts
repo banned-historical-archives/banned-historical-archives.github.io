@@ -85,7 +85,7 @@ export async function parse(
   
   const articles: PartRaw[][] = [];
   parts.unshift({
-    text: '市革会领导成员、工总司主要负责人王洪文通知一九六七年十二月廿二日下午在铁路文化宫大会上的重要讲话',
+    text: '市革会领导成员、工总司主要负责人王洪文同志一九六七年十二月廿二日下午在铁路文化宫大会上的重要讲话',
     type: ContentType.title,
     x: 0,
     page: 1,
