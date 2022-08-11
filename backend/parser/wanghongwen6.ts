@@ -114,9 +114,9 @@ export async function parse(
       authors: ['王洪文'],
       dates: [
         {
-          year: 1973,
+          year: 1967,
           month: 12,
-          day: 30,
+          day: 22,
         },
       ],
       is_range_date: false,
