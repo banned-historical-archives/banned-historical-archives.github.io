@@ -329,7 +329,11 @@ export async function parse(
         articles.push({
           title,
           description: '',
-          dates: [],
+          dates: [{
+            year: 1976,
+            month: 7,
+            day: 30,
+          }],
           parts: [{ text: title, type: part.type }],
           comment_pivots: [],
           is_range_date: false,
