@@ -137,7 +137,7 @@ const patch: Patch = {
   }
 }
 */
-  const book = books.find(i => i.entity.id === 'zzj1')!;
+  const book = books.find(i => i.entity.id === 'wanghongwen6')!;
   const res = await book.parser(book.path, book.parser_option);
   debugger;
 })();

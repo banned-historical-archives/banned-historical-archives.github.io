@@ -52,8 +52,8 @@ function extract_parts(
 function merge_parts(parts: PartRaw[]): ContentPart[] {
   const res: ContentPart[] = [];
   for (let i = 0; i < parts.length; ++i) {
-    if (parts[i].merge_up) {
-      res[res.length - 1].text+=parts[i].text;
+    if (parts[i].merge_up && res[res.length - 1].type === parts[i].type) {
+      res[res.length - 1].text += parts[i].text;
     } else {
       res.push({
         type: parts[i].type,
