@@ -18,9 +18,9 @@ export default function OCR() {
   const [curX, setCurX] = useState(0);
   const [curY, setCurY] = useState(0);
   const [noCache, setNoCache] = useState(false);
-  const [basePath, setBasePath] = useState('/books/wanghongwen2/');
+  const [basePath, setBasePath] = useState('/books/wanghongwen6/');
   const [range, setRange] = useState('1-1');
-  const [scale, setScale] = useState(1);
+  const [resize, setResize] = useState(1496);
   const [sizes, setSizes] = useState<{ width: number; height: number }[]>([]);
   useEffect(() => {
     (async () => {
@@ -39,7 +39,7 @@ export default function OCR() {
             }),
         );
         const r = await axios.get(
-          `http://localhost:8099?cache=${
+          `http://localhost:8099?resize=${resize}&cache=${
             !noCache ? 'true' : 'false'
           }&img_path=` + encodeURIComponent(`${basePath}${i}.jpg`),
         );
@@ -48,7 +48,7 @@ export default function OCR() {
       setSizes(s);
       setOCRResults(res);
     })();
-  }, [basePath, range, noCache]);
+  }, [basePath, range, noCache, resize]);
 
   return (
     <Stack sx={{ height: '100%', overflow: 'scroll' }}>
@@ -72,6 +72,13 @@ export default function OCR() {
         }}
         style={{ position: 'fixed', bottom: 10, left: 300, zIndex: 3 }}
       />
+      <input
+        defaultValue={resize}
+        onBlur={(e) => {
+          setResize(parseInt(e.target.value));
+        }}
+        style={{ position: 'fixed', bottom: 10, left: 400, zIndex: 3 }}
+      />
       {sizes.map((i, idx) => {
         const n = parseInt(range.split('-')[0]) + idx;
         return (
@@ -79,8 +86,8 @@ export default function OCR() {
             key={`${basePath}${n}.jpg${noCache}`}
             style={{ position: 'relative' }}
             onMouseMove={(e) => {
-              setCurX(Math.floor(e.pageX / scale));
-              setCurY(Math.floor(e.pageY / scale));
+              setCurX(Math.floor(e.pageX));
+              setCurY(Math.floor(e.pageY));
             }}
           >
             <div style={{ position: 'absolute', left: curX + 20, top: curY }}>

@@ -13,6 +13,7 @@ import * as wanghongwen2 from './parser/wanghongwen2';
 import * as wanghongwen3 from './parser/wanghongwen3';
 import * as wanghongwen4 from './parser/wanghongwen4';
 import * as wanghongwen5 from './parser/wanghongwen5';
+import * as wanghongwen6 from './parser/wanghongwen6';
 import { apply_patch, get_article_id } from '../utils';
 
 const patch_dir = join(__dirname ,'../patch/articles');
@@ -497,6 +498,25 @@ const books: Book[] = [
     },
     parser: wanghongwen5.parse,
     path: join(__dirname, '../public/books/wanghongwen5'),
+  },
+  {
+    entity: {
+      id: 'wanghongwen6',
+      name: '市革会领导成员、工总司主要负责人王洪文通知一九六七年十二月廿二日下午在铁路文化宫大会上的重要讲话',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '王洪文',
+      files: new Array(6)
+        .fill(0)
+        .map((i, idx) => `/books/wanghongwen6/${idx + 1}.jpg`)
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [[1, 6]],
+    },
+    parser: wanghongwen6.parse,
+    path: join(__dirname, '../public/books/wanghongwen6'),
   },
 ].map((i) => {
   const book: Book = {

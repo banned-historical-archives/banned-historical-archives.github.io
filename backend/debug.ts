@@ -42,6 +42,7 @@ type PublicationDetails = {
   //const publicationId = 'wanghongwen2';
   //const parser = wanghongwen2.parse;
 
+  /*
   const mao = [
     'c958997bf3',
     '462857973c',
@@ -135,7 +136,8 @@ const patch: Patch = {
     );
   }
 }
-  // const book_after = books.find(i => i.entity.id === publicationId)!;
-  // const res_after = await book_after.parser(book.path, book.parser_option);
+*/
+  const book = books.find(i => i.entity.id === 'wanghongwen6')!;
+  const res = await book.parser(book.path, book.parser_option);
   debugger;
 })();
