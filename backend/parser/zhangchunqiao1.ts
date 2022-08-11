@@ -21,7 +21,7 @@ function extract_parts(
   page: number,
 ): PartRaw[] {
   // 去掉页码
-  ocr = ocr.filter(i => !/^[-\d—新名中一\.·，]+$/.test(i.text.trim()));
+  ocr = ocr.filter(i => !/^[-\d—一\.·，]+$/.test(i.text.trim()));
   const res:PartRaw[] = [];
   for (let i = 0; i < ocr.length; ++i) {
     const text = ocr[i].text.trim();
@@ -41,6 +41,8 @@ function extract_parts(
     if (last && last.x < t.x && t.x - last.x > 50) {
       t.merge_up = false;
     } else if (next && next.x < t.x && t.x - next.x > 50) {
+      t.merge_up = false;
+    } else if (last && /[:：]$/.test(last.text)) {
       t.merge_up = false;
     } else {
       t.merge_up = true;
@@ -75,17 +77,17 @@ export async function parse(
     ++i
   ) {
     const path = imgPath.split('/public/books/')[1] + '/' + i + '.jpg';
-    const ocrResults = (await ocr({ img: path, resized_shape: i === 5 ? 1500 : 2388 }))
+    const ocrResults = (await ocr({ img: path, resized_shape: 1500 }))
       .filter((i) => i.text)
       .sort((a, b) => a.box[0][1] - b.box[0][1]);
 
     // 去掉标题和日期
-    parts.push(...extract_parts(i === 1 ? ocrResults.slice(4) : ocrResults, i));
+    parts.push(...extract_parts(i === 2 ? ocrResults.slice(3) : ocrResults, i));
   }
   
   const articles: PartRaw[][] = [];
   parts.unshift({
-    text: '姚文元同志在上海市革命委员会报告会上的讲话',
+    text: '张春桥一九七三年一月三十日在作战部关于处理于会泳、浩亮、刘庆棠等人参观问题的检查报告上的批注',
     type: ContentType.title,
     x: 0,
     page: 1,
@@ -111,12 +113,12 @@ export async function parse(
     return {
       title,
       parts: merged_parts,
-      authors: ['姚文元'],
+      authors: ['张春桥'],
       dates: [
         {
-          year: 1967,
-          month: 6,
-          day: 3,
+          year: 1973,
+          month: 1,
+          day: 30,
         },
       ],
       is_range_date: false,

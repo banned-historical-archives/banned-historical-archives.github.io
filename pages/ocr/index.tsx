@@ -18,9 +18,9 @@ export default function OCR() {
   const [curX, setCurX] = useState(0);
   const [curY, setCurY] = useState(0);
   const [noCache, setNoCache] = useState(false);
-  const [basePath, setBasePath] = useState('/books/yaowenyuan1/');
+  const [basePath, setBasePath] = useState('/books/zhangchunqiao1/');
   const [range, setRange] = useState('1-1');
-  const [resize, setResize] = useState(2388);
+  const [resize, setResize] = useState(1500);
   const [sizes, setSizes] = useState<{ width: number; height: number }[]>([]);
   useEffect(() => {
     (async () => {

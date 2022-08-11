@@ -15,6 +15,7 @@ import * as wanghongwen4 from './parser/wanghongwen4';
 import * as wanghongwen5 from './parser/wanghongwen5';
 import * as wanghongwen6 from './parser/wanghongwen6';
 import * as yaowenyuan1 from './parser/yaowenyuan1';
+import * as zhangchunqiao1 from './parser/zhangchunqiao1';
 import * as zzj1 from './parser/zzj1';
 import { apply_patch, get_article_id } from '../utils';
 import { tranditionalChineseToSimpleChinese } from '../utils/i18n';
@@ -556,6 +557,25 @@ const books: Book[] = [
     parser: yaowenyuan1.parse,
     path: join(__dirname, '../public/books/yaowenyuan1'),
   },
+  {
+    entity: {
+      id: 'zhangchunqiao1',
+      name: '“四人帮”罪行材料（六）',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '姚文元',
+      files: new Array(4)
+        .fill(0)
+        .map((i, idx) => `/books/zhangchunqiao1/${idx + 1}.jpg`)
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [[2, 4]],
+    },
+    parser: zhangchunqiao1.parse,
+    path: join(__dirname, '../public/books/zhangchunqiao1'),
+  },
 ].map((i) => {
   const book: Book = {
     entity: i.entity,
@@ -568,9 +588,13 @@ const books: Book[] = [
           part.text = tranditionalChineseToSimpleChinese(part.text);
         }
         for (let i = 0; i < article.comments.length; ++i) {
-          article.comments[i] = tranditionalChineseToSimpleChinese(article.comments[i]);
+          article.comments[i] = tranditionalChineseToSimpleChinese(
+            article.comments[i],
+          );
         }
-        article.description = tranditionalChineseToSimpleChinese(article.description);
+        article.description = tranditionalChineseToSimpleChinese(
+          article.description,
+        );
         const id = get_article_id(article);
         const p = join(patch_dir, `[${id}][${i.entity.id}].ts`);
         if (existsSync(p)) {
