@@ -21,7 +21,7 @@ function extract_parts(
   page: number,
 ): PartRaw[] {
   // 去掉页码
-  ocr = ocr.filter(i => !/^[-\d—多一\.·，]+$/.test(i.text.trim()));
+  ocr = ocr.filter(i => !/^[-\d—多中一\.·，]+$/.test(i.text.trim()));
   const res:PartRaw[] = [];
   for (let i = 0; i < ocr.length; ++i) {
     const text = ocr[i].text.trim();

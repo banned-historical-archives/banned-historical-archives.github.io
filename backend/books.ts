@@ -16,6 +16,7 @@ import * as wanghongwen5 from './parser/wanghongwen5';
 import * as wanghongwen6 from './parser/wanghongwen6';
 import * as zzj1 from './parser/zzj1';
 import { apply_patch, get_article_id } from '../utils';
+import { tranditionalChineseToSimpleChinese } from '../utils/i18n';
 
 const patch_dir = join(__dirname ,'../patch/articles');
 const books: Book[] = [
@@ -543,6 +544,13 @@ const books: Book[] = [
     parser: async (path: string, opt: ParserOption) => {
       const res = await i.parser(path, opt);
       for (const article of res) {
+        for (const part of article.parts) {
+          part.text = tranditionalChineseToSimpleChinese(part.text);
+        }
+        for (let i = 0; i < article.comments.length; ++i) {
+          article.comments[i] = tranditionalChineseToSimpleChinese(article.comments[i]);
+        }
+        article.description = tranditionalChineseToSimpleChinese(article.description);
         const id = get_article_id(article);
         const p = join(patch_dir, `[${id}][${i.entity.id}].ts`);
         if (existsSync(p)) {
