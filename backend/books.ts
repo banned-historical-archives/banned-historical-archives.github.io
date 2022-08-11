@@ -16,6 +16,7 @@ import * as wanghongwen5 from './parser/wanghongwen5';
 import * as wanghongwen6 from './parser/wanghongwen6';
 import * as yaowenyuan1 from './parser/yaowenyuan1';
 import * as zhangchunqiao1 from './parser/zhangchunqiao1';
+import * as zhangchunqiao2 from './parser/zhangchunqiao2';
 import * as zzj1 from './parser/zzj1';
 import { apply_patch, get_article_id } from '../utils';
 import { tranditionalChineseToSimpleChinese } from '../utils/i18n';
@@ -564,7 +565,7 @@ const books: Book[] = [
       internal: true,
       official: true,
       type: 'img',
-      author: '姚文元',
+      author: '张春桥',
       files: new Array(4)
         .fill(0)
         .map((i, idx) => `/books/zhangchunqiao1/${idx + 1}.jpg`)
@@ -575,6 +576,25 @@ const books: Book[] = [
     },
     parser: zhangchunqiao1.parse,
     path: join(__dirname, '../public/books/zhangchunqiao1'),
+  },
+  {
+    entity: {
+      id: 'zhangchunqiao2',
+      name: '“四人帮”罪行材料（二）',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '张春桥',
+      files: new Array(10)
+        .fill(0)
+        .map((i, idx) => `/books/zhangchunqiao2/${idx + 1}.jpg`)
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [[2, 10]],
+    },
+    parser: zhangchunqiao2.parse,
+    path: join(__dirname, '../public/books/zhangchunqiao2'),
   },
 ].map((i) => {
   const book: Book = {
