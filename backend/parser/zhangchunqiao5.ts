@@ -37,6 +37,10 @@ function extract_parts(ocr: OCRResult[], page: number): PartRaw[] {
     const last = paragraphs[i - 1];
     const next = paragraphs[i + 1];
     const t = paragraphs[i];
+    if (page === 5 && t.x > 200) {
+      t.merge_up = false;
+      continue;
+    }
     if (last && last.x < t.x && t.x - last.x > 30) {
       t.merge_up = false;
     } else if (next && next.x < t.x && t.x - next.x > 30) {
@@ -53,7 +57,11 @@ function extract_parts(ocr: OCRResult[], page: number): PartRaw[] {
 function merge_parts(parts: PartRaw[]): ContentPart[] {
   const res: ContentPart[] = [];
   for (let i = 0; i < parts.length; ++i) {
-    if (parts[i].merge_up && res[res.length - 1].type === parts[i].type) {
+    if (
+      parts[i].merge_up &&
+      res[res.length - 1].type === parts[i].type &&
+      !/[:：]$/.test(res[res.length - 1].text)
+    ) {
       res[res.length - 1].text += parts[i].text;
     } else {
       res.push({
@@ -87,7 +95,7 @@ export async function parse(
     ).sort((a, b) => a.box[0][1] - b.box[0][1]);
 
     // 去掉标题和日期
-    parts.push(...extract_parts(i === 1 ? ocrResults.slice(1) : ocrResults, i));
+    parts.push(...extract_parts(i === 3 ? ocrResults.slice(1) : ocrResults, i));
   }
 
   const articles: PartRaw[][] = [];
