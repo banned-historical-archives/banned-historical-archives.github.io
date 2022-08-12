@@ -129,7 +129,7 @@ export async function parse(
       authors: ['张春桥'],
       dates: [
         {
-          year: 1976,
+          year: 1967,
           month: 10,
           day: 16,
         },
