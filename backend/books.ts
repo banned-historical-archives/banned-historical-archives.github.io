@@ -17,6 +17,7 @@ import * as wanghongwen6 from './parser/wanghongwen6';
 import * as yaowenyuan1 from './parser/yaowenyuan1';
 import * as zhangchunqiao1 from './parser/zhangchunqiao1';
 import * as zhangchunqiao2 from './parser/zhangchunqiao2';
+import * as zhangchunqiao3 from './parser/zhangchunqiao3';
 import * as piliu1 from './parser/piliu1';
 import * as zzj1 from './parser/zzj1';
 import { apply_patch, get_article_id } from '../utils';
@@ -615,6 +616,25 @@ const books: Book[] = [
     },
     parser: piliu1.parse,
     path: join(__dirname, '../public/books/piliu1'),
+  },
+  {
+    entity: {
+      id: 'zhangchunqiao3',
+      name: '张春桥主任一九七五年三月一日在全军各大单位政治部主任座谈会上的讲话',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '张春桥',
+      files: new Array(21)
+        .fill(0)
+        .map((i, idx) => `/books/zhangchunqiao3/${idx + 1}.jpg`)
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [[1, 21]],
+    },
+    parser: zhangchunqiao3.parse,
+    path: join(__dirname, '../public/books/zhangchunqiao3'),
   },
 ].map((i) => {
   const book: Book = {

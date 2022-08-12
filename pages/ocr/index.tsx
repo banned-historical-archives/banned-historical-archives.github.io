@@ -18,8 +18,8 @@ export default function OCR() {
   const [curX, setCurX] = useState(0);
   const [curY, setCurY] = useState(0);
   const [noCache, setNoCache] = useState(false);
-  const [basePath, setBasePath] = useState('/books/piliu1/');
-  const [range, setRange] = useState('2-13');
+  const [basePath, setBasePath] = useState('/books/zhangchunqiao3/');
+  const [range, setRange] = useState('1-21');
   const [resize, setResize] = useState(1500);
   const [sizes, setSizes] = useState<{ width: number; height: number }[]>([]);
   useEffect(() => {
@@ -51,7 +51,13 @@ export default function OCR() {
   }, [basePath, range, noCache, resize]);
 
   return (
-    <Stack sx={{ height: '100%', overflow: 'scroll' }}>
+    <Stack
+      sx={{ height: '100%', overflow: 'scroll' }}
+      onMouseMove={(e) => {
+        setCurX(Math.floor(e.clientX));
+        setCurY(Math.floor(e.clientY));
+      }}
+    >
       <input
         type="checkbox"
         checked={noCache}
@@ -79,20 +85,16 @@ export default function OCR() {
         }}
         style={{ position: 'fixed', bottom: 10, left: 400, zIndex: 3 }}
       />
+      <div style={{ position: 'fixed', left: curX + 20, top: curY, zIndex: 4 }}>
+        {curX},{curY}
+      </div>
       {sizes.map((i, idx) => {
         const n = parseInt(range.split('-')[0]) + idx;
         return (
           <div
             key={`${basePath}${n}.jpg${noCache}`}
             style={{ position: 'relative' }}
-            onMouseMove={(e) => {
-              setCurX(Math.floor(e.pageX));
-              setCurY(Math.floor(e.pageY));
-            }}
           >
-            <div style={{ position: 'absolute', left: curX + 20, top: curY }}>
-              {curX},{curY}
-            </div>
             <img
               src={`${basePath}${n}.jpg`}
               width={i.width}
