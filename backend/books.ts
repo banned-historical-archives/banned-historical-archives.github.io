@@ -18,6 +18,7 @@ import * as yaowenyuan1 from './parser/yaowenyuan1';
 import * as zhangchunqiao1 from './parser/zhangchunqiao1';
 import * as zhangchunqiao2 from './parser/zhangchunqiao2';
 import * as zhangchunqiao3 from './parser/zhangchunqiao3';
+import * as zhangchunqiao4 from './parser/zhangchunqiao4';
 import * as piliu1 from './parser/piliu1';
 import * as zzj1 from './parser/zzj1';
 import { apply_patch, get_article_id } from '../utils';
@@ -635,6 +636,25 @@ const books: Book[] = [
     },
     parser: zhangchunqiao3.parse,
     path: join(__dirname, '../public/books/zhangchunqiao3'),
+  },
+  {
+    entity: {
+      id: 'zhangchunqiao4',
+      name: '关于日本问题的报告',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '张春桥',
+      files: new Array(6)
+        .fill(0)
+        .map((i, idx) => `/books/zhangchunqiao4/${idx + 1}.jpg`)
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [[1, 6]],
+    },
+    parser: zhangchunqiao4.parse,
+    path: join(__dirname, '../public/books/zhangchunqiao4'),
   },
 ].map((i) => {
   const book: Book = {
