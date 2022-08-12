@@ -18,8 +18,8 @@ export default function OCR() {
   const [curX, setCurX] = useState(0);
   const [curY, setCurY] = useState(0);
   const [noCache, setNoCache] = useState(false);
-  const [basePath, setBasePath] = useState('/books/zhangchunqiao5/');
-  const [range, setRange] = useState('3-19');
+  const [basePath, setBasePath] = useState('/books/zhangchunqiao1/');
+  const [range, setRange] = useState('2-2');
   const [resize, setResize] = useState(1500);
   const [sizes, setSizes] = useState<{ width: number; height: number }[]>([]);
   useEffect(() => {

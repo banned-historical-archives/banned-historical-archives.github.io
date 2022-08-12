@@ -42,7 +42,7 @@ function extract_parts(
       t.merge_up = false;
     } else if (next && next.x < t.x && t.x - next.x > 50) {
       t.merge_up = false;
-    } else if (last && /[:：]$/.test(last.text)) {
+    } else if (last && /[:：]$/.test(last.text) && Math.abs(t.x - last.x) <= 50) {
       t.merge_up = false;
     } else {
       t.merge_up = true;
