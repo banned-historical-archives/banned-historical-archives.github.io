@@ -29,9 +29,7 @@ function extract_parts(ocr: OCRResult[], page: number): PartRaw[] {
       // type: /[:：]$/.test(text)
       //   ? ContentType.appellation
       //   : ContentType.paragraph,
-      type: /^[一二三四五六七八九十]+、/.test(text)
-        ? ContentType.subtitle
-        : ContentType.paragraph,
+      type: ContentType.paragraph,
     });
   }
   const paragraphs = res.filter((i) => i.type === ContentType.paragraph);
@@ -82,19 +80,19 @@ export async function parse(
       (await ocr({ img: path, resized_shape: 2388 })).filter(
         (i) =>
           i.text.trim() &&
-          !/^[-\w\d—“"一京个单乐生:：\.·，]+$/.test(i.text.trim()),
+          !/^[-\w\d—“"一行发卡\.·，]+$/.test(i.text.trim()),
           // 去页码
       ),
       30
     ).sort((a, b) => a.box[0][1] - b.box[0][1]);
 
     // 去掉标题和日期
-    parts.push(...extract_parts(i === 1 ? ocrResults.slice(3) : ocrResults, i));
+    parts.push(...extract_parts(i === 1 ? ocrResults.slice(1) : ocrResults, i));
   }
 
   const articles: PartRaw[][] = [];
   parts.unshift({
-    text: '关于日本问题的报告',
+    text: '张春桥同志十月十六日的重要报告',
     type: ContentType.title,
     x: 0,
     page: 1,
@@ -123,8 +121,9 @@ export async function parse(
       authors: ['张春桥'],
       dates: [
         {
-          year: 1956,
-          month: 11,
+          year: 1976,
+          month: 10,
+          day: 16,
         },
       ],
       is_range_date: false,

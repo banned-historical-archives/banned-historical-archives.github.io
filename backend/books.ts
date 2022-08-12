@@ -19,6 +19,7 @@ import * as zhangchunqiao1 from './parser/zhangchunqiao1';
 import * as zhangchunqiao2 from './parser/zhangchunqiao2';
 import * as zhangchunqiao3 from './parser/zhangchunqiao3';
 import * as zhangchunqiao4 from './parser/zhangchunqiao4';
+import * as zhangchunqiao5 from './parser/zhangchunqiao5';
 import * as piliu1 from './parser/piliu1';
 import * as zzj1 from './parser/zzj1';
 import { apply_patch, get_article_id } from '../utils';
@@ -655,6 +656,25 @@ const books: Book[] = [
     },
     parser: zhangchunqiao4.parse,
     path: join(__dirname, '../public/books/zhangchunqiao4'),
+  },
+  {
+    entity: {
+      id: 'zhangchunqiao5',
+      name: '张春桥同志重要报告',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(19)
+        .fill(0)
+        .map((i, idx) => `/books/zhangchunqiao5/${idx + 1}.jpg`)
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [[3, 19]],
+    },
+    parser: zhangchunqiao5.parse,
+    path: join(__dirname, '../public/books/zhangchunqiao5'),
   },
 ].map((i) => {
   const book: Book = {
