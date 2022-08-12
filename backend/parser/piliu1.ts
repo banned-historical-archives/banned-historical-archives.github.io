@@ -1,5 +1,5 @@
-import {join} from 'path';
-import {existsSync, writeFileSync, readFileSync} from 'fs';
+import { join } from 'path';
+import { existsSync, writeFileSync, readFileSync } from 'fs';
 import ocr from '../ocr';
 import {
   ContentPart,
@@ -10,63 +10,60 @@ import {
   ParserOption,
   ParserResult,
   Pivot,
+  TagType,
 } from '../../types';
 import { merge_to_lines } from './utils';
 
-const opt = {
-};
+const opt = {};
 
-type PartRaw = ({ page: number, x: number, merge_up?: boolean } & ContentPartRaw);
-function extract_parts(
-  ocr: OCRResult[],
-  page: number,
-): PartRaw[] {
-  // 去掉页码
-  ocr = ocr.filter(i => !/^[·-\d—一°\.·，]+$/.test(i.text.trim()));
-  const res:PartRaw[] = [];
-  for (let i = 0, title_mode = false, title_x = 0; i < ocr.length; ++i) {
-    const text = ocr[i].text.trim();
+type PartRaw = { page: number; x: number; merge_up?: boolean } & ContentPartRaw;
+function extract_parts(ocr: OCRResult[], page: number): PartRaw[] {
+  const res: PartRaw[] = [];
+  for (let i = 0; i < ocr.length; ++i) {
+    let text = ocr[i].text.trim();
     const x = ocr[i].box[0][0];
-    if (title_mode) {
-      if (x > title_x + 20) {
-        res.push({
+    if (text === '张春桥同志') text += '：';
+    if (text === '威本寓同志饼') text += '：';
+    if (/供你们参考$/.test(text)) {
+      res.push(
+        {
           page,
-          text,
-          merge_up: true,
+          text: text.split('：')[0] + '：',
           x,
-          type: ContentType.title,
-        });
-        continue;
-      } else {
-        title_mode = false;
-      }
-    }
-    if (/^（[一二三四五六七八九十]+）/.test(text)) {
-      title_mode = true;
-      title_x = x;
-      res.push({
-        page,
-        x,
-        text,
-        type: ContentType.title,
-      });
+          type: ContentType.appellation,
+        },
+        {
+          page,
+          text: text.split('：')[1],
+          x,
+          type: ContentType.paragraph,
+        },
+      );
       continue;
     }
     res.push({
       page,
       text,
       x,
-      type: ContentType.paragraph,
+      type: /[:：]$/.test(text)
+        ? ContentType.appellation
+        : ContentType.paragraph,
     });
   }
-  const paragraphs = res.filter(i => i.type === ContentType.paragraph);
+  const paragraphs = res.filter((i) => i.type === ContentType.paragraph);
   for (let i = 0; i < paragraphs.length; ++i) {
     const last = paragraphs[i - 1];
     const next = paragraphs[i + 1];
     const t = paragraphs[i];
-    if (last && last.x < t.x && t.x - last.x > 15) {
+    if (page == 3) {
+      t.merge_up = true;
+      continue;
+    }
+    if (last && last.x < t.x && t.x - last.x > 50) {
       t.merge_up = false;
-    } else if (next && next.x < t.x && t.x - next.x > 15) {
+    } else if (next && next.x < t.x && t.x - next.x > 50) {
+      t.merge_up = false;
+    } else if (last && /[:：]$/.test(last.text)) {
       t.merge_up = false;
     } else {
       t.merge_up = true;
@@ -78,8 +75,8 @@ function extract_parts(
 function merge_parts(parts: PartRaw[]): ContentPart[] {
   const res: ContentPart[] = [];
   for (let i = 0; i < parts.length; ++i) {
-    if (parts[i].merge_up) {
-      res[res.length - 1].text+=parts[i].text;
+    if (parts[i].merge_up && res[res.length - 1].type === parts[i].type) {
+      res[res.length - 1].text += parts[i].text;
     } else {
       res.push({
         type: parts[i].type,
@@ -102,15 +99,22 @@ export async function parse(
   ) {
     const path = imgPath.split('/public/books/')[1] + '/' + i + '.jpg';
     const ocrResults = merge_to_lines(
-      (await ocr({ img: path })).filter((i) => i.text),
+      (await ocr({ img: path, resized_shape: 2000 })).filter(
+        (i) =>
+          i.text.trim() &&
+          !/^[-\w\d—“"名全告吃工一\.·，]+$/.test(i.text.trim()),
+          // 去页码
+      ),
+      30
     ).sort((a, b) => a.box[0][1] - b.box[0][1]);
 
-    parts.push(...extract_parts(i === 1 ? ocrResults.slice(4) : ocrResults, i));
+    // 去掉标题和日期
+    parts.push(...extract_parts(i === 2 ? ocrResults.slice(4) : ocrResults, i));
   }
-  
+
   const articles: PartRaw[][] = [];
   parts.unshift({
-    text: '王洪文同志在山东重点企业批林批孔汇报会议上的讲话',
+    text: '陈伯达、张春桥、关峰、戚本禹接见红代会及人民日报、解放军报、红旗杂志负责人的讲话',
     type: ContentType.title,
     x: 0,
     page: 1,
@@ -136,14 +140,15 @@ export async function parse(
     return {
       title,
       parts: merged_parts,
-      authors: ['王洪文'],
+      authors: ['陈伯达', '张春桥', '关峰', '戚本禹'],
       dates: [
         {
-          year: 1974,
-          month: 6,
-          day: 27,
+          year: 1967,
+          month: 7,
+          day: 16,
         },
       ],
+      tags: [{ type: TagType.place, name: '旧中宣部礼堂' }],
       is_range_date: false,
       comments: [],
       comment_pivots: [],
