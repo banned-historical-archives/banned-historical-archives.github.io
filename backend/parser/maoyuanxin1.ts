@@ -289,7 +289,7 @@ export async function parse(
                 year: 1975,
                 month: 3,
               },
-              { year: 1975, month: 4, dat: 10 },
+              { year: 1975, month: 4, day: 10 },
               { year: 1975, month: 7, day: 25 },
             ],
       is_range_date: false,
