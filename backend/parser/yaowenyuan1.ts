@@ -108,6 +108,7 @@ export async function parse(
     const merged_parts = merge_parts(article);
     const title = merged_parts[0].text;
     merged_parts[0].text = title;
+    merged_parts[1].type = ContentType.appellation;
     return {
       title,
       parts: merged_parts,

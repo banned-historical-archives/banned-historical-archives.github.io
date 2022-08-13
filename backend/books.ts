@@ -554,7 +554,7 @@ const books: Book[] = [
       author: '姚文元',
       files: new Array(10)
         .fill(0)
-        .map((i, idx) => `/books/yaowenyuan/${idx + 1}.jpg`)
+        .map((i, idx) => `/books/yaowenyuan1/${idx + 1}.jpg`)
         .join(','),
     },
     parser_option: {
