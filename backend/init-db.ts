@@ -45,6 +45,7 @@ async function init_articles(AppDataSource: DataSource) {
         Article,
         {
           id: article_id,
+          alias: r.alias || '',
           title: r.title,
           is_range_date: r.is_range_date,
           origin: r.origin || '',

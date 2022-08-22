@@ -20,6 +20,7 @@ import * as zhangchunqiao2 from './parser/zhangchunqiao2';
 import * as zhangchunqiao3 from './parser/zhangchunqiao3';
 import * as zhangchunqiao4 from './parser/zhangchunqiao4';
 import * as zhangchunqiao5 from './parser/zhangchunqiao5';
+import * as zhangchunqiao6 from './parser/zhangchunqiao6';
 import * as note1 from './parser/note1';
 import * as piliu1 from './parser/piliu1';
 import * as zzj1 from './parser/zzj1';
@@ -695,6 +696,25 @@ const books: Book[] = [
     },
     parser: note1.parse,
     path: join(__dirname, '../public/books/note1'),
+  },
+  {
+    entity: {
+      id: 'zhangchunqiao6',
+      name: '张春桥同志在上海市革命委员会报告会上的讲话',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(16)
+        .fill(0)
+        .map((i, idx) => `/books/zhangchunqiao5/${idx + 1}.jpg`)
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [[1, 16]],
+    },
+    parser: zhangchunqiao6.parse,
+    path: join(__dirname, '../public/books/zhangchunqiao6'),
   },
 ].map((i) => {
   const book: Book = {

@@ -51,6 +51,7 @@ export type Pivot = {
 
 export type ParserResult = {
   title: string;
+  alias?: string;
   dates: Date[];
   is_range_date: boolean;
   authors: string[];

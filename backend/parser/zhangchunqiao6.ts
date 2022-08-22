@@ -19,25 +19,32 @@ const opt = {};
 type PartRaw = { page: number; x: number; merge_up?: boolean } & ContentPartRaw;
 function extract_parts(ocr: OCRResult[], page: number): PartRaw[] {
   const res: PartRaw[] = [];
-  for (let i = 0; i < ocr.length; ++i) {
+  for (let i = 0, last_x = 0; i < ocr.length; ++i) {
     let text = ocr[i].text.trim();
     const x = ocr[i].box[0][0];
     res.push({
       page,
       text,
       x,
-      // type: /[:：]$/.test(text)
-      //   ? ContentType.appellation
-      //   : ContentType.paragraph,
-      type: ContentType.paragraph,
+      type:
+        (i !== 0 && x - last_x > 100 && /^[一二三四五]/.test(text)) ||
+        (/^[一二三四五]、/.test(text) &&
+          !/^[一二三四五]、[一二三四五]、/.test(text))
+          ? ContentType.subtitle
+          : ContentType.paragraph,
     });
+    last_x = x;
   }
   const paragraphs = res.filter((i) => i.type === ContentType.paragraph);
   for (let i = 0; i < paragraphs.length; ++i) {
     const last = paragraphs[i - 1];
     const next = paragraphs[i + 1];
     const t = paragraphs[i];
-    if (page === 5 && t.x > 200) {
+    if (page === 3 && i == 0) {
+      t.merge_up = false;
+      continue;
+    }
+    if (page == 13 && i == paragraphs.length - 1) {
       t.merge_up = false;
       continue;
     }
@@ -85,22 +92,24 @@ export async function parse(
   ) {
     const path = imgPath.split('/public/books/')[1] + '/' + i + '.jpg';
     const ocrResults = merge_to_lines(
-      (await ocr({ img: path, resized_shape: 2388 })).filter(
-        (i) =>
-          i.text.trim() &&
-          !/^[-\w\d—“"一行发卡\.·，]+$/.test(i.text.trim()),
+      (await ocr({ img: path })).filter(
+        (i) => {
+
+          const x = i.text.trim();
+          return x.length > 1 && !/^[-\w\d—一'“"\.·，]+$/.test(i.text.trim());
           // 去页码
+        }
       ),
       30
     ).sort((a, b) => a.box[0][1] - b.box[0][1]);
 
     // 去掉标题和日期
-    parts.push(...extract_parts(i === 3 ? ocrResults.slice(1) : ocrResults, i));
+    parts.push(...extract_parts(i === 1 ? ocrResults.slice(3) : ocrResults, i));
   }
 
   const articles: PartRaw[][] = [];
   parts.unshift({
-    text: '张春桥同志十月十六日的重要报告',
+    text: '张春桥同志在上海市革命委员会报告会上的讲话',
     type: ContentType.title,
     x: 0,
     page: 1,
