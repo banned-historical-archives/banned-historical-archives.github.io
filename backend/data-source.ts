@@ -5,6 +5,7 @@ import {
   Audio,
   Lyric,
   Music,
+  Alias,
   Author,
   Comment,
   Publication,
@@ -21,6 +22,7 @@ const instance = new DataSource({
   entities: [
     Article,
     Author,
+    Alias,
     Comment,
     Publication,
     Tag,

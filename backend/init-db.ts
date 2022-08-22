@@ -8,6 +8,7 @@ import Date from './entity/date';
 import Music from './entity/music';
 import Lyric from './entity/lyric';
 import Audio from './entity/audio';
+import Alias from './entity/alias';
 import Content from './entity/content';
 import Comment from './entity/comment';
 import Publication from './entity/publication';
@@ -45,7 +46,6 @@ async function init_articles(AppDataSource: DataSource) {
         Article,
         {
           id: article_id,
-          alias: r.alias || '',
           title: r.title,
           is_range_date: r.is_range_date,
           origin: r.origin || '',
@@ -84,6 +84,18 @@ async function init_articles(AppDataSource: DataSource) {
             year: date.year,
             month: date.month,
             day: date.day,
+            articleId: article_id,
+          },
+          ['id'],
+        );
+      }
+
+      if (r.alias) {
+        await AppDataSource.manager.upsert(
+          Alias,
+          {
+            id: hash_str_arr([article_id, r.alias]),
+            name: r.alias!,
             articleId: article_id,
           },
           ['id'],

@@ -7,6 +7,7 @@ import {
   Tag,
   Content,
   Date,
+  Alias,
   Page,
 } from '../entities';
 
@@ -17,9 +18,6 @@ export default class Article {
 
   @Column({ type: 'varchar' })
   title!: string;
-
-  @Column({ type: 'varchar', default: '' })
-  alias?: string;
 
   @Column({ type: 'varchar' ,comment:`
 初始来源
@@ -43,6 +41,11 @@ export default class Article {
   })
   @JoinTable()
   tags!: Tag[];
+
+  @OneToMany(() => Alias, (alias) => alias.article, {
+    cascade: true
+  })
+  aliases!: Alias[];
 
   @ManyToMany(() => Publication, (publication) => publication.articles, {
     cascade: true,

@@ -9,9 +9,11 @@ import Page from './entity/page';
 import Music from './entity/music';
 import Audio from './entity/audio';
 import Lyric from './entity/lyric';
+import Alias from './entity/alias';
 
 export {
   Lyric,
+  Alias,
   Audio,
   Music,
   Article,

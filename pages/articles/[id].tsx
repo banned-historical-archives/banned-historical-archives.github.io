@@ -85,6 +85,7 @@ export const getStaticProps: GetStaticProps = async (
     },
     relations: {
       authors: true,
+      aliases: true,
       publications: true,
       tags: true,
       dates: true,
@@ -837,6 +838,7 @@ export default function ArticleViewer({
       </Stack>,
     );
   }
+
   return (
     <>
       <Stack
@@ -859,7 +861,7 @@ export default function ArticleViewer({
           <Grid item xs={12} md={6}>
             <Typography variant="body1" sx={{ overflowX: 'scroll' }}>
               标题：
-              {article.title}
+              {article.title}{article.aliases.length ? `(别名:${article.aliases.map(x => x.name).join(',')})` : ''}
             </Typography>
           </Grid>
           <Grid item xs={12} md={6}>
