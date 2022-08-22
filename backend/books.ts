@@ -8,6 +8,7 @@ import * as jqjianghua_parser from './parser/jqjianghua_parser';
 import * as xuanji_parser from './parser/xuanji';
 import * as wenku_parser from './parser/wenku';
 import * as maoyuanxin1 from './parser/maoyuanxin1';
+import * as maoyuanxin3 from './parser/maoyuanxin3';
 import * as wanghongwen1 from './parser/wanghongwen1';
 import * as wanghongwen2 from './parser/wanghongwen2';
 import * as wanghongwen3 from './parser/wanghongwen3';
@@ -775,6 +776,25 @@ const books: Book[] = [
     },
     parser: maoyuanxin2.parse,
     path: join(__dirname, '../public/books/maoyuanxin2'),
+  },
+  {
+    entity: {
+      id: 'maoyuanxin3',
+      name: '毛远新同志在辽革站赴京代表团揭发批判宋任穷会议上的讲话纪要',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(1)
+        .fill(0)
+        .map((i, idx) => `/books/maoyuanxin3/${idx + 1}.jpg`)
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [[1, 1]],
+    },
+    parser: maoyuanxin3.parse,
+    path: join(__dirname, '../public/books/maoyuanxin3'),
   },
 ].map((i) => {
   const book: Book = {
