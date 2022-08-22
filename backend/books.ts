@@ -707,7 +707,7 @@ const books: Book[] = [
       author: '',
       files: new Array(16)
         .fill(0)
-        .map((i, idx) => `/books/zhangchunqiao5/${idx + 1}.jpg`)
+        .map((i, idx) => `/books/zhangchunqiao6/${idx + 1}.jpg`)
         .join(','),
     },
     parser_option: {
