@@ -9,6 +9,7 @@ import * as xuanji_parser from './parser/xuanji';
 import * as wenku_parser from './parser/wenku';
 import * as maoyuanxin1 from './parser/maoyuanxin1';
 import * as maoyuanxin3 from './parser/maoyuanxin3';
+import * as maoyuanxin4 from './parser/maoyuanxin4';
 import * as wanghongwen1 from './parser/wanghongwen1';
 import * as wanghongwen2 from './parser/wanghongwen2';
 import * as wanghongwen3 from './parser/wanghongwen3';
@@ -795,6 +796,25 @@ const books: Book[] = [
     },
     parser: maoyuanxin3.parse,
     path: join(__dirname, '../public/books/maoyuanxin3'),
+  },
+  {
+    entity: {
+      id: 'maoyuanxin4',
+      name: '毛远新一九七四年一月在团省委召开的“学习吴献忠座谈会”上的讲话（节录）',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(9)
+        .fill(0)
+        .map((i, idx) => `/books/maoyuanxin4/${idx + 1}.jpg`)
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [[2, 9]],
+    },
+    parser: maoyuanxin4.parse,
+    path: join(__dirname, '../public/books/maoyuanxin4'),
   },
 ].map((i) => {
   const book: Book = {
