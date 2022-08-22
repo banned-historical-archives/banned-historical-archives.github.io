@@ -22,6 +22,7 @@ import * as zhangchunqiao4 from './parser/zhangchunqiao4';
 import * as zhangchunqiao5 from './parser/zhangchunqiao5';
 import * as zhangchunqiao6 from './parser/zhangchunqiao6';
 import * as zhangchunqiao7 from './parser/zhangchunqiao7';
+import * as zhangchunqiao8 from './parser/zhangchunqiao8';
 import * as note1 from './parser/note1';
 import * as piliu1 from './parser/piliu1';
 import * as zzj1 from './parser/zzj1';
@@ -735,6 +736,25 @@ const books: Book[] = [
     },
     parser: zhangchunqiao7.parse,
     path: join(__dirname, '../public/books/zhangchunqiao7'),
+  },
+  {
+    entity: {
+      id: 'zhangchunqiao8',
+      name: '内部参考',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(5)
+        .fill(0)
+        .map((i, idx) => `/books/zhangchunqiao8/${idx + 1}.jpg`)
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [[1, 5]],
+    },
+    parser: zhangchunqiao8.parse,
+    path: join(__dirname, '../public/books/zhangchunqiao8'),
   },
 ].map((i) => {
   const book: Book = {
