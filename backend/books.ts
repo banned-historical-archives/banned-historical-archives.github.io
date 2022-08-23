@@ -25,6 +25,7 @@ import * as zhangchunqiao5 from './parser/zhangchunqiao5';
 import * as zhangchunqiao6 from './parser/zhangchunqiao6';
 import * as zhangchunqiao7 from './parser/zhangchunqiao7';
 import * as zhangchunqiao8 from './parser/zhangchunqiao8';
+import * as zhangchunqiao9 from './parser/zhangchunqiao9';
 import * as maoyuanxin2 from './parser/maoyuanxin2';
 import * as note1 from './parser/note1';
 import * as piliu1 from './parser/piliu1';
@@ -758,6 +759,25 @@ const books: Book[] = [
     },
     parser: zhangchunqiao8.parse,
     path: join(__dirname, '../public/books/zhangchunqiao8'),
+  },
+  {
+    entity: {
+      id: 'zhangchunqiao9',
+      name: '张春桥同志接见福建部分赴京革命同学的讲话',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(3)
+        .fill(0)
+        .map((i, idx) => `/books/zhangchunqiao9/${idx + 1}.jpg`)
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [[1, 3]],
+    },
+    parser: zhangchunqiao9.parse,
+    path: join(__dirname, '../public/books/zhangchunqiao9'),
   },
   {
     entity: {
