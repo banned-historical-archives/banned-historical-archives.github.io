@@ -7,6 +7,7 @@ import * as wenji_parser from './parser/wenji_parser';
 import * as jqjianghua_parser from './parser/jqjianghua_parser';
 import * as xuanji_parser from './parser/xuanji';
 import * as wenku_parser from './parser/wenku';
+import * as zhangchunqiao from './parser/zhangchunqiao';
 import * as maoyuanxin1 from './parser/maoyuanxin1';
 import * as maoyuanxin3 from './parser/maoyuanxin3';
 import * as maoyuanxin4 from './parser/maoyuanxin4';
@@ -385,6 +386,22 @@ const books: Book[] = [
     },
     parser: xuanji_parser.parse,
     path: join(__dirname, '../public/books/毛泽东选集(1977)5.pdf'),
+  },
+  {
+    entity: {
+      id: 'zhangchunqiao',
+      name: '春桥文录',
+      internal: false,
+      type: 'pdf',
+      official: true,
+      author: '张春桥',
+      files: '/books/zhangchunqiao.pdf',
+    },
+    parser_option: {
+      page_limits: [[5, 290]],
+    },
+    parser: zhangchunqiao.parse,
+    path: join(__dirname, '../public/books/zhangchunqiao.pdf'),
   },
   {
     entity: {
