@@ -18,6 +18,7 @@ import * as wanghongwen4 from './parser/wanghongwen4';
 import * as wanghongwen5 from './parser/wanghongwen5';
 import * as wanghongwen6 from './parser/wanghongwen6';
 import * as yaowenyuan1 from './parser/yaowenyuan1';
+import * as yaowenyuan from './parser/yaowenyuan';
 import * as zhangchunqiao1 from './parser/zhangchunqiao1';
 import * as zhangchunqiao2 from './parser/zhangchunqiao2';
 import * as zhangchunqiao3 from './parser/zhangchunqiao3';
@@ -386,6 +387,22 @@ const books: Book[] = [
     },
     parser: xuanji_parser.parse,
     path: join(__dirname, '../public/books/毛泽东选集(1977)5.pdf'),
+  },
+  {
+    entity: {
+      id: 'yaowenyuan',
+      name: '姚文元文录',
+      internal: false,
+      type: 'pdf',
+      official: true,
+      author: '姚文元',
+      files: '/books/yaowenyuan.pdf',
+    },
+    parser_option: {
+      page_limits: [[12, 876]],
+    },
+    parser: yaowenyuan.parse,
+    path: join(__dirname, '../public/books/姚文元文录.pdf'),
   },
   {
     entity: {
