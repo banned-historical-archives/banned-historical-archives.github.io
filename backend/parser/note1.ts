@@ -16,7 +16,7 @@ export async function parse(
   imgPath: string,
   parser_opt: ParserOption,
 ): Promise<ParserResult[]> {
-  const title = '张春桥接见福建部分赴京革命同学的讲话';
+  const title = '张春桥同志接见福建部分赴京革命同学的讲话';
   const title2 = '关锋在北京地质学院同学座谈会上的讲话';
   const parts: ContentPart[] =[{
     text: title,
