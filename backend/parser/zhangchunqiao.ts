@@ -33,7 +33,13 @@ function extract_parts(ocr: OCRResult[], page: number, latest_part?: PartRaw): P
       x1: ocr[i].box[0][0],
       x2: ocr[i].box[1][0],
       type:
-        ocr[i].box[3][1] - ocr[i].box[0][1] > 13
+        i == 0 && ocr[i].box[3][1] - ocr[i].box[0][1] > 13
+          ? ContentType.title
+          : res[res.length - 1]?.type === ContentType.title &&
+            ocr[i].box[0][1] - res[res.length - 1].y2 < 10 &&
+            !text.startsWith('附：') &&
+            !Array.from(text.matchAll(/\d+\.\d+(\.\d+)?/g))[0] &&
+            !Array.from(text.matchAll(/\d+年\d+(月\d+)?/g))[0]
           ? ContentType.title
           : ContentType.paragraph,
     });
@@ -44,13 +50,19 @@ function extract_parts(ocr: OCRResult[], page: number, latest_part?: PartRaw): P
     const next = paragraphs[i + 1];
     const t = paragraphs[i];
     if (
-      i == 0 &&
-      latest_part &&
-      latest_part.type === ContentType.paragraph &&
-      t.type === ContentType.paragraph
+      i == 0
     ) {
-      t.merge_up = Math.abs(latest_part.x2 - 528) < 10;
-      continue;
+      if (
+        latest_part &&
+        latest_part.type === ContentType.paragraph &&
+        t.type === ContentType.paragraph
+      ) {
+        t.merge_up = Math.abs(latest_part.x2 - 528) < 10;
+        continue;
+      } else if (t.type == ContentType.title) {
+        t.merge_up = false;
+        continue;
+      }
     }
     if (last && t.y1 - last.y2 > 10) {
       t.merge_up = false;
