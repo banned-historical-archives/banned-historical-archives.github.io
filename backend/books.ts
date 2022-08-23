@@ -389,7 +389,7 @@ const books: Book[] = [
     parser: xuanji_parser.parse,
     path: join(__dirname, '../public/books/毛泽东选集(1977)5.pdf'),
   },
-  {
+  /*{
     entity: {
       id: 'yaowenyuan',
       name: '姚文元文录',
@@ -404,7 +404,7 @@ const books: Book[] = [
     },
     parser: yaowenyuan.parse,
     path: join(__dirname, '../public/books/姚文元文录.pdf'),
-  },
+  },*/
   {
     entity: {
       id: 'wanghongwen',
