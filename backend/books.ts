@@ -11,6 +11,7 @@ import * as zhangchunqiao from './parser/zhangchunqiao';
 import * as maoyuanxin1 from './parser/maoyuanxin1';
 import * as maoyuanxin3 from './parser/maoyuanxin3';
 import * as maoyuanxin4 from './parser/maoyuanxin4';
+import * as wanghongwen from './parser/wanghongwen';
 import * as wanghongwen1 from './parser/wanghongwen1';
 import * as wanghongwen2 from './parser/wanghongwen2';
 import * as wanghongwen3 from './parser/wanghongwen3';
@@ -403,6 +404,22 @@ const books: Book[] = [
     },
     parser: yaowenyuan.parse,
     path: join(__dirname, '../public/books/姚文元文录.pdf'),
+  },
+  {
+    entity: {
+      id: 'wanghongwen',
+      name: '',
+      internal: false,
+      type: 'pdf',
+      official: true,
+      author: '王洪文',
+      files: '/books/王洪文文集.pdf',
+    },
+    parser_option: {
+      page_limits: [[4, 66]],
+    },
+    parser: wanghongwen.parse,
+    path: join(__dirname, '../public/books/王洪文文集.pdf'),
   },
   {
     entity: {
