@@ -398,7 +398,7 @@ const books: Book[] = [
       type: 'pdf',
       official: true,
       author: '姚文元',
-      files: '/books/yaowenyuan.pdf',
+      files: '/books/姚文元文录.pdf',
     },
     parser_option: {
       page_limits: [[12, 876]],
