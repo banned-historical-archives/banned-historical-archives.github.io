@@ -33,7 +33,10 @@ export function merge_to_lines(ocrResults: OCRResult[], threshold = 50) {
   return lines;
 }
 
-export function pdfjsContentToOCRResult(obj: ContentObj, height: number):OCRResult[] {
+export function pdfjsContentToOCRResult(
+  obj: ContentObj,
+  height: number,
+): OCRResult[] {
   return obj.items
     .map((i) => {
       const x = i.transform[4];
@@ -50,4 +53,19 @@ export function pdfjsContentToOCRResult(obj: ContentObj, height: number):OCRResu
       return r;
     })
     .filter((i) => i.text.length);
+}
+
+export function toChineseSymbols(str: string) {
+  let p = 1;
+  const s = Array.from(str);
+  while (true) {
+    const f = s.indexOf('"');
+    if (f > -1) {
+      s[f] = p % 2 ? '“' : '”';
+    } else {
+      break;
+    }
+    ++p;
+  }
+  return s.join('');
 }

@@ -11,7 +11,7 @@ import {
   ParserResult,
   Pivot,
 } from '../../types';
-import { merge_to_lines, pdfjsContentToOCRResult } from './utils';
+import { merge_to_lines, pdfjsContentToOCRResult, toChineseSymbols } from './utils';
 
 type PartRaw = {
   page: number;
@@ -190,6 +190,7 @@ export async function parse(
 
     return articles.map((article) => {
       const merged_parts = merge_parts(article);
+      merged_parts.forEach(i => i.text = toChineseSymbols(i.text));
       merged_parts[0].text = merged_parts[0].text.replace(/^\d+\)/, '');
       const title = merged_parts[0].text;
       let date = extract_date(merged_parts[1]);
