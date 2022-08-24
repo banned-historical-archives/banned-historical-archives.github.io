@@ -81,7 +81,11 @@ function extract_parts(ocr: OCRResult[], page: number, latest_part?: PartRaw): P
 
 function extract_date(part: ContentPart): Date | void {
   const format1 = Array.from(part.text.matchAll(/\d+\.\d+(\.\d+)?/g))[0];
-  const format2 = Array.from(part.text.matchAll(/\d+年\d+(月\d+)?/g))[0];
+  const format2 = Array.from(
+    part.text.matchAll(
+      /[\d一二三四五六七八九○〇]+年[\d一二三四五六七八九○〇十]+(月[\d一二三四五六七八九○〇十]+[日]?)?/g,
+    ),
+  )[0];
   if (format1) {
     const s = format1[0].split('.').map(i => parseInt(i));
     return {
@@ -92,6 +96,23 @@ function extract_date(part: ContentPart): Date | void {
   }
   if (format2) {
     const s = format2[0]
+      .replace(/十月/g, '10月')
+      .replace(/二十日/g, '20日')
+      .replace(/三十日/g, '30日')
+      .replace(/十日/g, '10日')
+      .replace(/二十/g, '2')
+      .replace(/三十/g, '3')
+      .replace(/十/g, '1')
+      .replace(/一/g, '1')
+      .replace(/二/g, '2')
+      .replace(/三/g, '3')
+      .replace(/四/g, '4')
+      .replace(/五/g, '5')
+      .replace(/六/g, '6')
+      .replace(/七/g, '7')
+      .replace(/八/g, '8')
+      .replace(/九/g, '9')
+      .replace(/[O○〇]+/g, '0')
       .replace(/[年月日]/g, '.')
       .split('.')
       .map((i) => parseInt(i));
@@ -188,16 +209,22 @@ export async function parse(
       merged_parts[0].text = merged_parts[0].text.replace(/^\d+/, '');
       const title = merged_parts[0].text;
       let date = extract_date(merged_parts[1]);
-      let authors = [];
+      let authors: string[] = [];
       if (date) {
         authors = extract_authors(merged_parts[1]);
         merged_parts.splice(1, 1);
-      } else {
+      } else if (extract_date(merged_parts[2])) {
         date = extract_date(merged_parts[2]);
         const a = extract_authors(merged_parts[1]);
         const b = extract_authors(merged_parts[2]);
         authors = a.length > b.length ? a : b;
         merged_parts.splice(1, 2);
+      } else if (extract_date(merged_parts[merged_parts.length - 1])) {
+        date = extract_date(merged_parts[merged_parts.length-1]);
+        authors = extract_authors(merged_parts[merged_parts.length-1]);
+      } else if (extract_date(merged_parts[0])) {
+        date = extract_date(merged_parts[0]);
+        authors = extract_authors(merged_parts[0]);
       }
       return {
         title,
