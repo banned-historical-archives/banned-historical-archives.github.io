@@ -6,6 +6,7 @@ import * as wansui_parser from './parser/wansui_parser';
 import * as wenji_parser from './parser/wenji_parser';
 import * as jqjianghua_parser from './parser/jqjianghua_parser';
 import * as xuanji_parser from './parser/xuanji';
+import * as jimi from './parser/jimi';
 import * as wenku_parser from './parser/wenku';
 import * as zhangchunqiao from './parser/zhangchunqiao';
 import * as maoyuanxin1 from './parser/maoyuanxin1';
@@ -471,6 +472,22 @@ const books: Book[] = [
     },
     parser: maoyuanxin1.parse,
     path: join(__dirname, '../public/books/maoyuanxin1'),
+  },
+  {
+    entity: {
+      id: 'jimi',
+      name: '机密档案中新发现的毛泽东讲话',
+      internal: false,
+      official: false,
+      type: 'epub',
+      author: '',
+      files: `/books/机密档案中新发现的毛泽东讲话.epub`,
+    },
+    parser_option: {
+      page_limits: [],
+    },
+    parser: jimi.parse,
+    path: join(__dirname, '../public/books/机密档案中新发现的毛泽东讲话.epub'),
   },
   {
     entity: {

@@ -76,11 +76,13 @@ async function init_articles(AppDataSource: DataSource) {
           .catch((e) => {});
       }
 
+      let date_index = 0;
       for (const date of r.dates) {
         await AppDataSource.manager.upsert(
           Date,
           {
             id: hash_str_arr([article_id, JSON.stringify(date)]),
+            index: date_index,
             year: date.year,
             month: date.month,
             day: date.day,
@@ -88,6 +90,7 @@ async function init_articles(AppDataSource: DataSource) {
           },
           ['id'],
         );
+        date_index++;
       }
 
       if (r.alias) {

@@ -13,6 +13,8 @@ export default class Date {
   id!: string;
 
   @Column({ type: 'int' })
+  index!: number;
+  @Column({ type: 'int' })
   year!: number;
   @Column({ type: 'int', nullable: true })
   month?: number;
