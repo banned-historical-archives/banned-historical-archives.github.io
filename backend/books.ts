@@ -408,7 +408,7 @@ const books: Book[] = [
   {
     entity: {
       id: 'wanghongwen',
-      name: '',
+      name: '王洪文文集',
       internal: false,
       type: 'pdf',
       official: true,
