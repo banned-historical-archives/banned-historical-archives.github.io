@@ -234,30 +234,12 @@
 [\[Github\]](https://github.com/banned-historical-archives/banned-historical-archives.gitlab.io)
 [\[Gitlab\]](https://gitlab.com/banned-historical-archives/banned-historical-archives.gitlab.io)
 
-### 0.安装依赖并创建数据库
-依赖： docker, nodejs, mysql
-
-数据库 charset 需要设为 utf8_general_ci
-
-如需运行OCR，依赖: python3.x, cnocr 
-
-### 1.安装 node_modules
-```
-npm install
-```
-### 2.解析原始文件并写入数据库
-```
-npm run init-db
-```
-可选环境变量：DB_NAME，DB_PORT，DB_USER，DB_PASSWORD
-### 3.本地预览
-```
-npm run dev
-```
+[\[开发者如何贡献代码\]](https://github.com/banned-historical-archives/banned-historical-archives.github.io/wiki/%E5%A6%82%E4%BD%95%E8%B4%A1%E7%8C%AE%E4%B8%8E%E6%A0%A1%E5%AF%B9%E6%96%87%E7%A8%BF)
 
 ### 其他
 #### 数据库导出
-在第三步以后可以执行 mysqldump 命令导出数据库，使用方法见 mysql 官网
+可以执行 mysqldump 命令导出数据库，使用方法见 mysql 官网
+
 
 ## 友情链接
 [![统一战线公社](https://unitedfront.press/static/img/everylogo/hanzilogo.png)](https://unitedfront.press)
