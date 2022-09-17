@@ -30,13 +30,13 @@ export default async function ocr({
   cache?: boolean;
 }): Promise<OCRResult[]> {
   const cache_path = join(
-    process.cwd(),
+    process.cwd().replace(/\\/g, '/'),
     `backend/ocr_cache/${img.split('/').join('.')}.json`,
   );
   if (cache && existsSync(cache_path)) {
     return JSON.parse(readFileSync(cache_path).toString());
   }
-  const abs_img_path = join(process.cwd(), `public/books/${img}`);
+  const abs_img_path = join(process.cwd().replace(/\\/g, '/'), `public/books/${img}`);
   const ocr_command = `python3 backend/ocr.py ${abs_img_path} ${rec_model} ${rec_backend} ${det_model} ${det_backend} ${resized_shape} ${box_score_thresh} ${min_box_size}`;
   const raw = execSync(ocr_command).toString();
 

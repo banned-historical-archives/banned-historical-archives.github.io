@@ -8,7 +8,7 @@ const app = express();
 app.use(cors());
 app.use(timeout('500s'));
 
-const tempFile = join(process.cwd(), './paddle/temp/lock.jpg');
+const tempFile = join(process.cwd().replace(/\\/g, '/'), './paddle/temp/lock.jpg');
 try {
   unlinkSync(tempFile);
 } catch (e) {}
