@@ -70,6 +70,7 @@ export async function parse(
   parser_opt: ParserOption,
 ): Promise<ParserResult[]> {
   const parts: PartRaw[] = [];
+  // TODO 目录
   for (const j of parser_opt.page_limits) {
     for (let page = j[0]; page <= j[1]; ++page) {
       const image_path = await pdf2image({

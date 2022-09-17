@@ -419,10 +419,10 @@ const books: Book[] = [
       files: '/books/archives0/mao-quanji/27-OCR.pdf',
     },
     parser_option: {
-      page_limits: [[32, 537]],
+      page_limits: [[11, 31], [32, 537]],
     },
     parser: maoquanji.parse,
-    path: join(__dirname, '../public/books/archives0/mao-quanji/27-OCR.pdf'),
+    path: join(get_dirname(), '../public/books/archives0/mao-quanji/27-OCR.pdf'),
   },
   {
     entity: {
