@@ -1,6 +1,6 @@
 import { exec, execSync } from 'node:child_process'
-import { join } from 'node:path';
-import { existsSync, readFileSync, unlinkSync, writeFileSync } from 'fs';
+import { join, isAbsolute, basename, dirname, extname } from 'node:path';
+import fs from 'fs-extra';
 import { OCRResult } from '../types';
 import { sleep } from '../utils';
 
@@ -18,6 +18,7 @@ export default async function ocr({
   box_score_thresh = 0.3,
   min_box_size = 10,
   cache = true,
+  cache_path,
 }: {
   box_score_thresh?: number;
   min_box_size?: number;
@@ -28,15 +29,26 @@ export default async function ocr({
   det_backend?: string;
   img: string;
   cache?: boolean;
+  cache_path?: string;
 }): Promise<OCRResult[]> {
-  const cache_path = join(
-    process.cwd(),
-    `backend/ocr_cache/${img.split('/').join('.')}.json`,
-  );
-  if (cache && existsSync(cache_path)) {
-    return JSON.parse(readFileSync(cache_path).toString());
+  cache_path = cache_path
+    ? cache_path!
+    : (join(
+        process.cwd(),
+        `backend/ocr_cache/${img.split('/')[0]}/${basename(img).replace(
+          /[^\d]/g,
+          '',
+        )}.${extname(img).substring(1)}.json`,
+      ) as string);
+  if (cache && (await fs.pathExists(cache_path!))) {
+    return JSON.parse((await fs.readFile(cache_path)).toString());
   }
-  const abs_img_path = join(process.cwd(), `public/books/${img}`);
+  if (!(await fs.pathExists(dirname(cache_path)))) {
+    await fs.ensureDir(dirname(cache_path));
+  }
+  const abs_img_path = isAbsolute(img)
+    ? img
+    : join(process.cwd(), `public/books/${img}`);
   const ocr_command = `python3 backend/ocr.py ${abs_img_path} ${rec_model} ${rec_backend} ${det_model} ${det_backend} ${resized_shape} ${box_score_thresh} ${min_box_size}`;
   const raw = execSync(ocr_command).toString();
 
@@ -49,6 +61,6 @@ export default async function ocr({
     box: i.position,
   }));
 
-  writeFileSync(cache_path, JSON.stringify(res));
+  await fs.writeFile(cache_path!, JSON.stringify(res));
   return res;
 }

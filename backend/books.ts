@@ -9,6 +9,7 @@ import * as xuanji_parser from './parser/xuanji';
 import * as jimi from './parser/jimi';
 import * as wenku_parser from './parser/wenku';
 import * as zhangchunqiao from './parser/zhangchunqiao';
+import * as maoquanji from './parser/maoquanji';
 import * as maoyuanxin1 from './parser/maoyuanxin1';
 import * as maoyuanxin3 from './parser/maoyuanxin3';
 import * as maoyuanxin4 from './parser/maoyuanxin4';
@@ -405,6 +406,22 @@ const books: Book[] = [
     },
     parser: yaowenyuan.parse,
     path: join(__dirname, '../public/books/姚文元文录.pdf'),
+  },
+  {
+    entity: {
+      id: 'maoquanji27',
+      name: '毛泽东全集第27卷',
+      internal: false,
+      type: 'pdf',
+      official: true,
+      author: '张迪杰',
+      files: '/books/archives0/mao-quanji/27-OCR.pdf',
+    },
+    parser_option: {
+      page_limits: [[32, 537]],
+    },
+    parser: maoquanji.parse,
+    path: join(__dirname, '../public/books/archives0/mao-quanji/27-OCR.pdf'),
   },
   {
     entity: {
@@ -904,7 +921,7 @@ const books: Book[] = [
     parser: maoyuanxin4.parse,
     path: join(__dirname, '../public/books/maoyuanxin4'),
   },
-].map((i) => {
+].filter(i => i.entity.type === 'img').map((i) => {
   const book: Book = {
     entity: i.entity,
     parser_option: i.parser_option as ParserOption,
