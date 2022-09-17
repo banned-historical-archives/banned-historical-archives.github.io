@@ -2,13 +2,14 @@ import { exec, execSync } from 'node:child_process'
 import { join } from 'node:path';
 import { writeFileSync } from 'node:fs';
 import { LACResult, LACType } from '../types';
+import { get_dirname } from './utils';
 
 export default async function lac(text: string, dict?: string): Promise<LACResult[]> {
   text = text.replace(/\n/g, '');
   if (dict) {
-    writeFileSync(join(__dirname, '../paddle/temp/temp.dict'), dict);
+    writeFileSync(join(get_dirname(), '../paddle/temp/temp.dict'), dict);
   }
-  writeFileSync(join(__dirname, '../paddle/temp/temp.txt'), text);
+  writeFileSync(join(get_dirname(), '../paddle/temp/temp.txt'), text);
   const lac_command = `docker run --rm --name dev -v $PWD/paddle:/paddle -t paddle-ocr-lac python /lac.py /paddle/temp/temp.txt ${
     dict ? '/paddle/temp/temp.dict' : ''
   }`;

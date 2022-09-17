@@ -37,8 +37,9 @@ import * as piliu1 from './parser/piliu1';
 import * as zzj1 from './parser/zzj1';
 import { apply_patch, get_article_id } from '../utils';
 import { tranditionalChineseToSimpleChinese } from '../utils/i18n';
+import { get_dirname } from './utils';
 
-const patch_dir = join(__dirname ,'../patch/articles');
+const patch_dir = join(get_dirname() ,'../patch/articles');
 const books: Book[] = [
   {
     entity: {
@@ -58,7 +59,7 @@ const books: Book[] = [
       ],
     },
     parser: jinghuo_parser.parse,
-    path: join(__dirname, '../public/books/maoxuan-jinghuo.pdf'),
+    path: join(get_dirname(), '../public/books/maoxuan-jinghuo.pdf'),
   },
   {
     entity: {
@@ -74,7 +75,7 @@ const books: Book[] = [
       page_limits: [[9, 569]],
     },
     parser: wansui_parser.parse,
-    path: join(__dirname, '../public/books/wansui1a.pdf'),
+    path: join(get_dirname(), '../public/books/wansui1a.pdf'),
   },
   {
     entity: {
@@ -90,7 +91,7 @@ const books: Book[] = [
       page_limits: [[9, 542]],
     },
     parser: wansui_parser.parse,
-    path: join(__dirname, '../public/books/wansui2a.pdf'),
+    path: join(get_dirname(), '../public/books/wansui2a.pdf'),
   },
   {
     entity: {
@@ -106,7 +107,7 @@ const books: Book[] = [
       page_limits: [[9, 508]],
     },
     parser: wansui_parser.parse,
-    path: join(__dirname, '../public/books/wansui3a.pdf'),
+    path: join(get_dirname(), '../public/books/wansui3a.pdf'),
   },
   {
     entity: {
@@ -122,7 +123,7 @@ const books: Book[] = [
       page_limits: [[11, 674]],
     },
     parser: wansui_parser.parse,
-    path: join(__dirname, '../public/books/wansui4a.pdf'),
+    path: join(get_dirname(), '../public/books/wansui4a.pdf'),
   },
   {
     entity: {
@@ -138,7 +139,7 @@ const books: Book[] = [
       page_limits: [[16, 668]],
     },
     parser: wansui_parser.parse,
-    path: join(__dirname, '../public/books/wansui5a.pdf'),
+    path: join(get_dirname(), '../public/books/wansui5a.pdf'),
   },
   {
     entity: {
@@ -156,7 +157,7 @@ const books: Book[] = [
       content_min_x: 74.5,
     },
     parser: wenji_parser.parse,
-    path: join(__dirname, '../public/books/wenji1.pdf'),
+    path: join(get_dirname(), '../public/books/wenji1.pdf'),
   },
   {
     entity: {
@@ -174,7 +175,7 @@ const books: Book[] = [
       content_min_x: 44.88,
     },
     parser: wenji_parser.parse,
-    path: join(__dirname, '../public/books/wenji2.pdf'),
+    path: join(get_dirname(), '../public/books/wenji2.pdf'),
   },
   {
     entity: {
@@ -192,7 +193,7 @@ const books: Book[] = [
       content_min_x: 74.28,
     },
     parser: wenji_parser.parse,
-    path: join(__dirname, '../public/books/wenji3.pdf'),
+    path: join(get_dirname(), '../public/books/wenji3.pdf'),
   },
   {
     entity: {
@@ -210,7 +211,7 @@ const books: Book[] = [
       content_min_x: 74.28,
     },
     parser: wenji_parser.parse,
-    path: join(__dirname, '../public/books/wenji4.pdf'),
+    path: join(get_dirname(), '../public/books/wenji4.pdf'),
   },
   {
     entity: {
@@ -228,7 +229,7 @@ const books: Book[] = [
       content_min_x: 45.84,
     },
     parser: wenji_parser.parse,
-    path: join(__dirname, '../public/books/wenji5.pdf'),
+    path: join(get_dirname(), '../public/books/wenji5.pdf'),
   },
   {
     entity: {
@@ -246,7 +247,7 @@ const books: Book[] = [
       content_min_x: 72.28,
     },
     parser: wenji_parser.parse,
-    path: join(__dirname, '../public/books/wenji6.pdf'),
+    path: join(get_dirname(), '../public/books/wenji6.pdf'),
   },
   {
     entity: {
@@ -264,7 +265,7 @@ const books: Book[] = [
       content_min_x: 43.24,
     },
     parser: wenji_parser.parse,
-    path: join(__dirname, '../public/books/wenji7.pdf'),
+    path: join(get_dirname(), '../public/books/wenji7.pdf'),
   },
   {
     entity: {
@@ -282,7 +283,7 @@ const books: Book[] = [
       content_min_x: 43.24,
     },
     parser: wenji_parser.parse,
-    path: join(__dirname, '../public/books/wenji8.pdf'),
+    path: join(get_dirname(), '../public/books/wenji8.pdf'),
   },
   {
     entity: {
@@ -301,7 +302,7 @@ const books: Book[] = [
       ],
     },
     parser: jqjianghua_parser.parse,
-    path: join(__dirname, '../public/books/jqjianghua.pdf'),
+    path: join(get_dirname(), '../public/books/jqjianghua.pdf'),
   },
   {
     entity: {
@@ -318,7 +319,7 @@ const books: Book[] = [
       name: 'xuanji1',
     },
     parser: xuanji_parser.parse,
-    path: join(__dirname, '../public/books/毛泽东选集(1967)1.pdf'),
+    path: join(get_dirname(), '../public/books/毛泽东选集(1967)1.pdf'),
   },
   {
     entity: {
@@ -335,7 +336,7 @@ const books: Book[] = [
       name: 'xuanji2',
     },
     parser: xuanji_parser.parse,
-    path: join(__dirname, '../public/books/毛泽东选集(1967)2.pdf'),
+    path: join(get_dirname(), '../public/books/毛泽东选集(1967)2.pdf'),
   },
   {
     entity: {
@@ -352,7 +353,7 @@ const books: Book[] = [
       name: 'xuanji3',
     },
     parser: xuanji_parser.parse,
-    path: join(__dirname, '../public/books/毛泽东选集(1967)3.pdf'),
+    path: join(get_dirname(), '../public/books/毛泽东选集(1967)3.pdf'),
   },
   {
     entity: {
@@ -369,7 +370,7 @@ const books: Book[] = [
       name: 'xuanji4',
     },
     parser: xuanji_parser.parse,
-    path: join(__dirname, '../public/books/毛泽东选集(1967)4.pdf'),
+    path: join(get_dirname(), '../public/books/毛泽东选集(1967)4.pdf'),
   },
   {
     entity: {
@@ -389,7 +390,7 @@ const books: Book[] = [
       name: 'xuanji5',
     },
     parser: xuanji_parser.parse,
-    path: join(__dirname, '../public/books/毛泽东选集(1977)5.pdf'),
+    path: join(get_dirname(), '../public/books/毛泽东选集(1977)5.pdf'),
   },
   {
     entity: {
@@ -405,7 +406,7 @@ const books: Book[] = [
       page_limits: [[12, 876]],
     },
     parser: yaowenyuan.parse,
-    path: join(__dirname, '../public/books/姚文元文录.pdf'),
+    path: join(get_dirname(), '../public/books/姚文元文录.pdf'),
   },
   {
     entity: {
@@ -437,7 +438,7 @@ const books: Book[] = [
       page_limits: [[4, 66]],
     },
     parser: wanghongwen.parse,
-    path: join(__dirname, '../public/books/王洪文文集.pdf'),
+    path: join(get_dirname(), '../public/books/王洪文文集.pdf'),
   },
   {
     entity: {
@@ -453,7 +454,7 @@ const books: Book[] = [
       page_limits: [[5, 290]],
     },
     parser: zhangchunqiao.parse,
-    path: join(__dirname, '../public/books/zhangchunqiao.pdf'),
+    path: join(get_dirname(), '../public/books/zhangchunqiao.pdf'),
   },
   {
     entity: {
@@ -469,7 +470,7 @@ const books: Book[] = [
       page_limits: [],
     },
     parser: wenku_parser.parse,
-    path: join(__dirname, '../public/TheGPCRdatabase'),
+    path: join(get_dirname(), '../public/TheGPCRdatabase'),
   },
   {
     entity: {
@@ -488,7 +489,7 @@ const books: Book[] = [
       page_limits: [[5, 16]],
     },
     parser: maoyuanxin1.parse,
-    path: join(__dirname, '../public/books/maoyuanxin1'),
+    path: join(get_dirname(), '../public/books/maoyuanxin1'),
   },
   {
     entity: {
@@ -504,7 +505,7 @@ const books: Book[] = [
       page_limits: [],
     },
     parser: jimi.parse,
-    path: join(__dirname, '../public/books/机密档案中新发现的毛泽东讲话.epub'),
+    path: join(get_dirname(), '../public/books/机密档案中新发现的毛泽东讲话.epub'),
   },
   {
     entity: {
@@ -523,7 +524,7 @@ const books: Book[] = [
       page_limits: [[1, 8]],
     },
     parser: wanghongwen1.parse,
-    path: join(__dirname, '../public/books/wanghongwen1'),
+    path: join(get_dirname(), '../public/books/wanghongwen1'),
   },
   {
     entity: {
@@ -542,7 +543,7 @@ const books: Book[] = [
       page_limits: [[1, 10]],
     },
     parser: wanghongwen2.parse,
-    path: join(__dirname, '../public/books/wanghongwen2'),
+    path: join(get_dirname(), '../public/books/wanghongwen2'),
   },
   {
     entity: {
@@ -561,7 +562,7 @@ const books: Book[] = [
       page_limits: [[1, 4]],
     },
     parser: wanghongwen3.parse,
-    path: join(__dirname, '../public/books/wanghongwen3'),
+    path: join(get_dirname(), '../public/books/wanghongwen3'),
   },
   {
     entity: {
@@ -580,7 +581,7 @@ const books: Book[] = [
       page_limits: [[1, 2]],
     },
     parser: wanghongwen4.parse,
-    path: join(__dirname, '../public/books/wanghongwen4'),
+    path: join(get_dirname(), '../public/books/wanghongwen4'),
   },
   {
     entity: {
@@ -599,7 +600,7 @@ const books: Book[] = [
       page_limits: [[1, 4]],
     },
     parser: wanghongwen5.parse,
-    path: join(__dirname, '../public/books/wanghongwen5'),
+    path: join(get_dirname(), '../public/books/wanghongwen5'),
   },
   {
     entity: {
@@ -618,7 +619,7 @@ const books: Book[] = [
       page_limits: [[1, 6]],
     },
     parser: wanghongwen6.parse,
-    path: join(__dirname, '../public/books/wanghongwen6'),
+    path: join(get_dirname(), '../public/books/wanghongwen6'),
   },
   {
     entity: {
@@ -634,7 +635,7 @@ const books: Book[] = [
       page_limits: [[1, 6]],
     },
     parser: zzj1.parse,
-    path: join(__dirname, '../public/books/zzj1.pdf'),
+    path: join(get_dirname(), '../public/books/zzj1.pdf'),
   },
   {
     entity: {
@@ -653,7 +654,7 @@ const books: Book[] = [
       page_limits: [[1, 10]],
     },
     parser: yaowenyuan1.parse,
-    path: join(__dirname, '../public/books/yaowenyuan1'),
+    path: join(get_dirname(), '../public/books/yaowenyuan1'),
   },
   {
     entity: {
@@ -672,7 +673,7 @@ const books: Book[] = [
       page_limits: [[2, 4]],
     },
     parser: zhangchunqiao1.parse,
-    path: join(__dirname, '../public/books/zhangchunqiao1'),
+    path: join(get_dirname(), '../public/books/zhangchunqiao1'),
   },
   {
     entity: {
@@ -691,7 +692,7 @@ const books: Book[] = [
       page_limits: [[2, 10]],
     },
     parser: zhangchunqiao2.parse,
-    path: join(__dirname, '../public/books/zhangchunqiao2'),
+    path: join(get_dirname(), '../public/books/zhangchunqiao2'),
   },
   {
     entity: {
@@ -710,7 +711,7 @@ const books: Book[] = [
       page_limits: [[2, 13]],
     },
     parser: piliu1.parse,
-    path: join(__dirname, '../public/books/piliu1'),
+    path: join(get_dirname(), '../public/books/piliu1'),
   },
   {
     entity: {
@@ -729,7 +730,7 @@ const books: Book[] = [
       page_limits: [[1, 21]],
     },
     parser: zhangchunqiao3.parse,
-    path: join(__dirname, '../public/books/zhangchunqiao3'),
+    path: join(get_dirname(), '../public/books/zhangchunqiao3'),
   },
   {
     entity: {
@@ -748,7 +749,7 @@ const books: Book[] = [
       page_limits: [[1, 6]],
     },
     parser: zhangchunqiao4.parse,
-    path: join(__dirname, '../public/books/zhangchunqiao4'),
+    path: join(get_dirname(), '../public/books/zhangchunqiao4'),
   },
   {
     entity: {
@@ -767,7 +768,7 @@ const books: Book[] = [
       page_limits: [[3, 19]],
     },
     parser: zhangchunqiao5.parse,
-    path: join(__dirname, '../public/books/zhangchunqiao5'),
+    path: join(get_dirname(), '../public/books/zhangchunqiao5'),
   },
   {
     entity: {
@@ -786,7 +787,7 @@ const books: Book[] = [
       page_limits: [[1, 8]],
     },
     parser: note1.parse,
-    path: join(__dirname, '../public/books/note1'),
+    path: join(get_dirname(), '../public/books/note1'),
   },
   {
     entity: {
@@ -805,7 +806,7 @@ const books: Book[] = [
       page_limits: [[1, 16]],
     },
     parser: zhangchunqiao6.parse,
-    path: join(__dirname, '../public/books/zhangchunqiao6'),
+    path: join(get_dirname(), '../public/books/zhangchunqiao6'),
   },
   {
     entity: {
@@ -824,7 +825,7 @@ const books: Book[] = [
       page_limits: [[1, 8]],
     },
     parser: zhangchunqiao7.parse,
-    path: join(__dirname, '../public/books/zhangchunqiao7'),
+    path: join(get_dirname(), '../public/books/zhangchunqiao7'),
   },
   {
     entity: {
@@ -843,7 +844,7 @@ const books: Book[] = [
       page_limits: [[1, 5]],
     },
     parser: zhangchunqiao8.parse,
-    path: join(__dirname, '../public/books/zhangchunqiao8'),
+    path: join(get_dirname(), '../public/books/zhangchunqiao8'),
   },
   {
     entity: {
@@ -862,7 +863,7 @@ const books: Book[] = [
       page_limits: [[1, 3]],
     },
     parser: zhangchunqiao9.parse,
-    path: join(__dirname, '../public/books/zhangchunqiao9'),
+    path: join(get_dirname(), '../public/books/zhangchunqiao9'),
   },
   {
     entity: {
@@ -881,7 +882,7 @@ const books: Book[] = [
       page_limits: [[1, 2]],
     },
     parser: maoyuanxin2.parse,
-    path: join(__dirname, '../public/books/maoyuanxin2'),
+    path: join(get_dirname(), '../public/books/maoyuanxin2'),
   },
   {
     entity: {
@@ -900,7 +901,7 @@ const books: Book[] = [
       page_limits: [[1, 1]],
     },
     parser: maoyuanxin3.parse,
-    path: join(__dirname, '../public/books/maoyuanxin3'),
+    path: join(get_dirname(), '../public/books/maoyuanxin3'),
   },
   {
     entity: {
@@ -919,7 +920,7 @@ const books: Book[] = [
       page_limits: [[2, 9]],
     },
     parser: maoyuanxin4.parse,
-    path: join(__dirname, '../public/books/maoyuanxin4'),
+    path: join(get_dirname(), '../public/books/maoyuanxin4'),
   },
 ].map((i) => {
   const book: Book = {
