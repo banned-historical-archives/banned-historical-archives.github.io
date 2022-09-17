@@ -34,7 +34,7 @@ export default async function ocr({
   cache_path = cache_path
     ? cache_path!
     : (join(
-        process.cwd(),
+        process.cwd().replace(/\\/, '/'),
         `backend/ocr_cache/${img.split('/')[0]}/${basename(img).replace(
           /[^\d]/g,
           '',
@@ -48,7 +48,7 @@ export default async function ocr({
   }
   const abs_img_path = isAbsolute(img)
     ? img
-    : join(process.cwd(), `public/books/${img}`);
+    : join(process.cwd().replace(/\\/, '/'), `public/books/${img}`);
   const ocr_command = `python3 backend/ocr.py ${abs_img_path} ${rec_model} ${rec_backend} ${det_model} ${det_backend} ${resized_shape} ${box_score_thresh} ${min_box_size}`;
   const raw = execSync(ocr_command).toString();
 

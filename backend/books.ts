@@ -921,7 +921,7 @@ const books: Book[] = [
     parser: maoyuanxin4.parse,
     path: join(__dirname, '../public/books/maoyuanxin4'),
   },
-].filter(i => i.entity.type === 'img').map((i) => {
+].map((i) => {
   const book: Book = {
     entity: i.entity,
     parser_option: i.parser_option as ParserOption,

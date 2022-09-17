@@ -72,17 +72,19 @@ export async function parse(
   const parts: PartRaw[] = [];
   for (const j of parser_opt.page_limits) {
     for (let page = j[0]; page <= j[1]; ++page) {
-      continue;
       const image_path = await pdf2image({
         pdf_path,
-        page,
+        page: page - 1,
       });
       const ocrResults = (
         await ocr({
           img: image_path,
           cache_path: join(
             __dirname,
-            `../ocr_cache/maoquanji${basename(pdf_path).replace(/[^\d]/g, '')}/${page}.png.json`,
+            `../ocr_cache/maoquanji${basename(pdf_path).replace(
+              /[^\d]/g,
+              '',
+            )}/${page}.png.json`,
           ),
         })
       )
