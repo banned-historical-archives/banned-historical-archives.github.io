@@ -10,7 +10,6 @@ import {
   Pivot,
 } from '../../types';
 import { merge_to_lines, pdfjsContentToOCRResult } from './utils';
-import { join } from 'path';
 import { JSDOM } from 'jsdom';
 
 function extract_dates(str: string): { dates: Date[]; is_range_date: boolean } {

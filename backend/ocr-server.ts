@@ -1,17 +1,11 @@
 import express from 'express';
 import ocr from './ocr';
-import { join } from 'path';
 import { unlinkSync } from 'fs';
 import cors from 'cors';
 import timeout from 'connect-timeout';
 const app = express();
 app.use(cors());
 app.use(timeout('500s'));
-
-const tempFile = join(process.cwd().replace(/\\/g, '/'), './paddle/temp/lock.jpg');
-try {
-  unlinkSync(tempFile);
-} catch (e) {}
 
 app.get('/', async (req, res) => {
   const path = (req.query.img_path as string).split('/books/')[1];
