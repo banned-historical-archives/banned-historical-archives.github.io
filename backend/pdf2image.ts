@@ -1,5 +1,5 @@
 import { exec, execSync } from 'node:child_process'
-import { join, isAbsolute } from 'node:path';
+import { join } from 'node:path/posix';
 
 export default async function pdf2image({
   pdf_path,

@@ -1,5 +1,5 @@
 import { exec, execSync } from 'node:child_process'
-import { join } from 'node:path';
+import { join } from 'node:path/posix';
 import { writeFileSync } from 'node:fs';
 import { LACResult, LACType } from '../types';
 import { normalize } from './utils';

@@ -1,6 +1,6 @@
-import {join} from 'node:path';
-import {existsSync} from 'node:fs';
-import {Book, ParserOption} from '../types';
+import { join } from 'node:path/posix';
+import { existsSync } from 'node:fs';
+import { Book, ParserOption } from '../types';
 import * as jinghuo_parser from './parser/jinghuo_parser';
 import * as wansui_parser from './parser/wansui_parser';
 import * as wenji_parser from './parser/wenji_parser';
@@ -39,7 +39,7 @@ import { apply_patch, get_article_id } from '../utils';
 import { tranditionalChineseToSimpleChinese } from '../utils/i18n';
 import { normalize } from './utils';
 
-const patch_dir = join(normalize(__dirname) ,'../patch/articles');
+const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
@@ -505,7 +505,10 @@ const books: Book[] = [
       page_limits: [],
     },
     parser: jimi.parse,
-    path: join(normalize(__dirname), '../public/books/机密档案中新发现的毛泽东讲话.epub'),
+    path: join(
+      normalize(__dirname),
+      '../public/books/机密档案中新发现的毛泽东讲话.epub',
+    ),
   },
   {
     entity: {

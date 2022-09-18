@@ -1,4 +1,4 @@
-import {join, basename} from 'path';
+import {join, basename} from 'node:path/posix';
 import fs from 'fs-extra';
 import ocr from '../ocr';
 import {
@@ -75,10 +75,6 @@ export async function parse(
   for (let i = 0; i < parser_opt.page_limits.length; ++i) {
     const j = parser_opt.page_limits[i];
     for (let page = j[0]; page <= j[1]; ++page) {
-      console.log(normalize(__dirname),`../ocr_cache/maoquanji${basename(pdf_path).replace(
-              /[^\d]/g,
-              '',
-            )}/${page}.json`);
       const ocrResults = (
         await ocr({
           pdf: pdf_path,
@@ -91,8 +87,8 @@ export async function parse(
             )}/${page}.json`,
           ),
         })
-      )
-        .filter((i) => i.text)
+      ).ocr_results
+        .filter((i) => i.text && !/^[\d]+$/.test(i.text)) // 去页码
         .sort((a, b) => a.box[0][1] - b.box[0][1]);
 
       // 目录，正文中标题含有不能被准确识别的标注，所以以目录的标题为准

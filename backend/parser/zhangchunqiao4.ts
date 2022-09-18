@@ -79,13 +79,13 @@ export async function parse(
   ) {
     const path = imgPath.split('/public/books/')[1] + '/' + i + '.jpg';
     const ocrResults = merge_to_lines(
-      (await ocr({ img: path, resized_shape: 2388 })).filter(
+      (await ocr({ img: path, resized_shape: 2388 })).ocr_results.filter(
         (i) =>
           i.text.trim() &&
           !/^[-\w\d—“"一京个单乐生:：\.·，]+$/.test(i.text.trim()),
-          // 去页码
+        // 去页码
       ),
-      30
+      30,
     ).sort((a, b) => a.box[0][1] - b.box[0][1]);
 
     // 去掉标题和日期

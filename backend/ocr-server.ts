@@ -1,6 +1,6 @@
 import express from 'express';
 import ocr from './ocr';
-import { basename, join } from 'path';
+import { basename, join } from 'node:path/posix';
 import { unlinkSync } from 'fs';
 import cors from 'cors';
 import timeout from 'connect-timeout';
@@ -8,11 +8,6 @@ import { normalize } from './utils';
 const app = express();
 app.use(cors());
 app.use(timeout('500s'));
-
-const tempFile = join(process.cwd().replace(/\\/g, '/'), './paddle/temp/lock.jpg');
-try {
-  unlinkSync(tempFile);
-} catch (e) {}
 
 app.get('/', async (req, res) => {
   const cache = req.query.cache === 'true';
@@ -42,9 +37,7 @@ app.get('/', async (req, res) => {
     // det_backend: 'pytorch',
   });
   console.log('done', req.query);
-  res.json({
-    ocr_result: r,
-  });
+  res.json(r);
 });
 
 const port = 8099;

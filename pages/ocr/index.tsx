@@ -18,7 +18,12 @@ import { Document, Page, pdfjs } from 'react-pdf';
 pdfjs.GlobalWorkerOptions.workerSrc = `/pdfjs-dist/legacy/build/pdf.worker.min.js`;
 
 export default function OCR() {
-  const [OCRResults, setOCRResults] = useState<OCRResult[][]>([]);
+  const [OCRResults, setOCRResults] = useState<
+    {
+      ocr_results: OCRResult[];
+      dimensions: { height: number; width: number };
+    }[]
+  >([]);
   const [pageX, setPageX] = useState(0);
   const [pageY, setPageY] = useState(0);
   const [curX, setCurX] = useState(0);
@@ -28,12 +33,15 @@ export default function OCR() {
   const [id, setId] = useState('maoquanji27');
   const [isPDF, setIsPDF] = useState(true);
   const [PDFPath, setPDFPath] = useState('archives0/mao-quanji/27-OCR.pdf');
-  const [range, setRange] = useState('11-11');
+  const [range, setRange] = useState('11-12');
   const [resize, setResize] = useState(1500);
   const update = useCallback(async () => {
     const a = parseInt(range.split('-')[0]);
     const b = parseInt(range.split('-')[1]);
-    const res: OCRResult[][] = [];
+    const res: {
+      ocr_results: OCRResult[];
+      dimensions: { height: number; width: number };
+    }[] = [];
     for (let i = a; i <= b; ++i) {
       const r = await axios.get(
         `http://localhost:8099?resize=${resize}&cache=${
@@ -42,7 +50,7 @@ export default function OCR() {
           isPDF ? `pdf_path=${encodeURIComponent(PDFPath)}` : `img_ext=${img_ext}`
         }`,
       );
-      res.push(r.data.ocr_result);
+      res.push(r.data);
     }
     setOCRResults(res);
   }, [id, range, noCache, resize, img_ext, isPDF, PDFPath]);
@@ -53,6 +61,62 @@ export default function OCR() {
 
   const range_a = parseInt(range.split('-')[0]);
   const range_b = parseInt(range.split('-')[1]);
+  const imgs_components = new Array(range_b - range_a + 1)
+    .fill(0)
+    .map((i, idx) => (
+      <div
+        key={`${isPDF}-${PDFPath}-${id}-${idx}-${img_ext}${noCache}`}
+        style={{ position: 'relative' }}
+        onMouseMove={(e) => {
+          setCurX(Math.floor(e.clientX));
+          setCurY(Math.floor(e.clientY));
+          setPageX(Math.floor(e.pageX));
+          setPageY(Math.floor(e.pageY));
+        }}
+      >
+        <div
+          style={{
+            position: 'fixed',
+            left: curX + 20,
+            top: curY,
+            zIndex: 4,
+          }}
+        >
+          {pageX},{pageY}
+        </div>
+        {isPDF ? (
+          <Page
+            pageNumber={idx + range_a}
+            height={OCRResults![idx]?.dimensions.height}
+            width={OCRResults![idx]?.dimensions.width}
+          />
+        ) : (
+          <img src={`/books/${id}/${idx + range_a}.${img_ext}`} />
+        )}
+        {OCRResults![idx]?.ocr_results.map((res) => {
+          return (
+            <div
+              key={Math.random()}
+              style={{
+                position: 'absolute',
+                left: res.box[0]![0],
+                background: 'rgba(0, 255, 0, 0.3)',
+                width: res.box[1][0] - res.box[0][0],
+                // top: res.box[0][1] + 20,
+                top: res.box[0][1],
+                fontSize: 19,
+                color: 'white',
+                whiteSpace: 'nowrap',
+                textShadow: '-1px 4px 2px black',
+                height: res.box[2][1] - res.box[0][1],
+              }}
+            >
+              {res.text}
+            </div>
+          );
+        })}
+      </div>
+    ));
   return (
     <Stack sx={{ height: '100%', overflow: 'scroll' }}>
       <div
@@ -121,59 +185,19 @@ export default function OCR() {
         />
         <button onClick={() => update()}>update</button>
       </div>
-      {new Array(range_b - range_a + 1).fill(0).map((i, idx) => (
-        <div
-          key={`${isPDF}-${PDFPath}-${id}-${idx}-${img_ext}${noCache}`}
-          style={{ position: 'relative' }}
-          onMouseMove={(e) => {
-            setCurX(Math.floor(e.clientX));
-            setCurY(Math.floor(e.clientY));
-            setPageX(Math.floor(e.pageX));
-            setPageY(Math.floor(e.pageY));
+      {isPDF ? (
+        <Document
+          file={`/books/${PDFPath}`}
+          options={{
+            cMapUrl: `/pdfjs-dist/cmaps/`,
+            cMapPacked: true,
           }}
         >
-          <div
-            style={{ position: 'fixed', left: curX + 20, top: curY, zIndex: 4 }}
-          >
-            {pageX},{pageY}
-          </div>
-          {isPDF ? (
-            <Document
-              file={`/books/${PDFPath}`}
-              options={{
-                cMapUrl: `/pdfjs-dist/cmaps/`,
-                cMapPacked: true,
-              }}
-            >
-              <Page pageNumber={idx + range_a} height={1500} />
-            </Document>
-          ) : (
-            <img src={`/books/${id}/${idx + range_a}.${img_ext}`} />
-          )}
-          {OCRResults![idx]?.map((res) => {
-            return (
-              <div
-                key={Math.random()}
-                style={{
-                  position: 'absolute',
-                  left: res.box[0]![0],
-                  background: 'rgba(0, 255, 0, 0.3)',
-                  width: res.box[1][0] - res.box[0][0],
-                  // top: res.box[0][1] + 20,
-                  top: res.box[0][1],
-                  fontSize: 19,
-                  color: 'white',
-                  whiteSpace: 'nowrap',
-                  textShadow: '-1px 4px 2px black',
-                  height: res.box[2][1] - res.box[0][1],
-                }}
-              >
-                {res.text}
-              </div>
-            );
-          })}
-        </div>
-      ))}
+          {imgs_components}
+        </Document>
+      ) : (
+        <>{imgs_components}</>
+      )}
     </Stack>
   );
 }

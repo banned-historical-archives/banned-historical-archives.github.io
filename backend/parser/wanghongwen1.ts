@@ -102,7 +102,7 @@ export async function parse(
   ) {
     const path = imgPath.split('/public/books/')[1] + '/' + i + '.jpg';
     const ocrResults = merge_to_lines(
-      (await ocr({ img: path })).filter((i) => i.text),
+      (await ocr({ img: path })).ocr_results.filter((i) => i.text),
     ).sort((a, b) => a.box[0][1] - b.box[0][1]);
 
     parts.push(...extract_parts(i === 1 ? ocrResults.slice(4) : ocrResults, i));
