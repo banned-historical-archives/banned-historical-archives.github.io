@@ -422,7 +422,7 @@ const books: Book[] = [
       page_limits: [[11, 31], [32, 537]],
     },
     parser: maoquanji.parse,
-    path: join(get_dirname(), '../public/books/archives0/mao-quanji/27-OCR.pdf'),
+    path: join(normalize(__dirname), '../public/books/archives0/mao-quanji/27-OCR.pdf'),
   },
   {
     entity: {

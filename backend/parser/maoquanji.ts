@@ -12,6 +12,7 @@ import {
   Pivot,
 } from '../../types';
 import pdf2image from '../pdf2image';
+import { normalize } from '../utils';
 
 const opt = {
 };
@@ -70,28 +71,36 @@ export async function parse(
   parser_opt: ParserOption,
 ): Promise<ParserResult[]> {
   const parts: PartRaw[] = [];
-  // TODO 目录
-  for (const j of parser_opt.page_limits) {
+
+  for (let i = 0; i < parser_opt.page_limits.length; ++i) {
+    const j = parser_opt.page_limits[i];
     for (let page = j[0]; page <= j[1]; ++page) {
-      const image_path = await pdf2image({
-        pdf_path,
-        page: page - 1,
-      });
+      console.log(normalize(__dirname),`../ocr_cache/maoquanji${basename(pdf_path).replace(
+              /[^\d]/g,
+              '',
+            )}/${page}.json`);
       const ocrResults = (
         await ocr({
-          img: image_path,
+          pdf: pdf_path,
+          page,
           cache_path: join(
-            __dirname,
+            normalize(__dirname),
             `../ocr_cache/maoquanji${basename(pdf_path).replace(
               /[^\d]/g,
               '',
-            )}/${page}.png.json`,
+            )}/${page}.json`,
           ),
         })
       )
         .filter((i) => i.text)
         .sort((a, b) => a.box[0][1] - b.box[0][1]);
-      await fs.remove(image_path);
+
+      // 目录，正文中标题含有不能被准确识别的标注，所以以目录的标题为准
+      if (i == 0) {
+
+      } else { // 正文
+
+      }
       console.log(page);
     }
   }
