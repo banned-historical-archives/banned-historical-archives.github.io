@@ -100,7 +100,7 @@ export async function parse(
 
   const articles: PartRaw[][] = [];
   parts.unshift({
-    text: '张春桥同志关于二兵团上三司突然个别夺权的讲话',
+    text: '张春桥同志讲话',
     type: ContentType.title,
     x: 0,
     page: 1,

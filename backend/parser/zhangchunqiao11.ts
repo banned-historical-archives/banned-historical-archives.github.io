@@ -100,7 +100,7 @@ export async function parse(
 
   const articles: PartRaw[][] = [];
   parts.unshift({
-    text: '张春桥同志在上海市革命委员会扩大会议上的讲话纪要',
+    text: '张春桥同志十一月二十五日在市革会扩大会议上的讲话纪要',
     type: ContentType.title,
     x: 0,
     page: 1,

@@ -100,7 +100,7 @@ export async function parse(
 
   const articles: PartRaw[][] = [];
   parts.unshift({
-    text: '张春桥同志与华东局革命造反派座谈纪要',
+    text: '张春桥同志二月二十五日与华东局革命造反派座谈纪要',
     type: ContentType.title,
     x: 0,
     page: 1,
