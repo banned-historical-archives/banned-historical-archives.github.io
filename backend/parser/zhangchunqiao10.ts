@@ -100,7 +100,7 @@ export async function parse(
 
   const articles: PartRaw[][] = [];
   parts.unshift({
-    text: '张春桥同志十月十六日的重要报告',
+    text: '张春桥同志接见上海《红革会》与《工人革命造反总司令部》代表的谈话记录',
     type: ContentType.title,
     x: 0,
     page: 1,
@@ -124,15 +124,15 @@ export async function parse(
     const title = merged_parts[0].text;
     merged_parts[0].text = title;
     return {
-      title: '张春桥在上海市革命委员会报告会上的讲话',
+      title: '张春桥同志接见上海《红革会》与《工人革命造反总司令部》代表的谈话记录',
       alias: title,
       parts: merged_parts,
       authors: ['张春桥'],
       dates: [
         {
-          year: 1967,
-          month: 10,
-          day: 16,
+          year: 1966,
+          month: 12,
+          day: 23,
         },
       ],
       is_range_date: false,
