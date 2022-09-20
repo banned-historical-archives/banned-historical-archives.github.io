@@ -953,7 +953,7 @@ const books: Book[] = [
   {
     entity: {
       id: 'zhangchunqiao12',
-      name: '张春桥同志与华东局革命造反派座谈纪要',
+      name: '张春桥同志关于二兵团上三司突然个别夺权的讲话',
       internal: true,
       official: true,
       type: 'img',
@@ -972,7 +972,7 @@ const books: Book[] = [
   {
     entity: {
       id: 'zhangchunqiao13',
-      name: '张春桥同志关于二兵团上三司突然个别夺权的讲话',
+      name: '张春桥同志与华东局革命造反派座谈纪要',
       internal: true,
       official: true,
       type: 'img',
