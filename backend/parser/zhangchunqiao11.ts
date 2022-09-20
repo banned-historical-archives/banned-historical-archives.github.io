@@ -55,9 +55,9 @@ export async function parse(
       authors: ['张春桥'],
       dates: [
         {
-          year: 1966,
-          month: 12,
-          day: 23,
+          year: 1967,
+          month: 11,
+          day: 25,
         },
       ],
       is_range_date: false,
