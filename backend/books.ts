@@ -35,6 +35,10 @@ import * as maoyuanxin2 from './parser/maoyuanxin2';
 import * as note1 from './parser/note1';
 import * as piliu1 from './parser/piliu1';
 import * as zzj1 from './parser/zzj1';
+import * as zhangchunqiao10 from './parser/zhangchunqiao10';
+import * as zhangchunqiao11 from './parser/zhangchunqiao11';
+import * as zhangchunqiao12 from './parser/zhangchunqiao12';
+import * as zhangchunqiao13 from './parser/zhangchunqiao13';
 import { apply_patch, get_article_id } from '../utils';
 import { tranditionalChineseToSimpleChinese } from '../utils/i18n';
 import { normalize } from './utils';
@@ -924,6 +928,82 @@ const books: Book[] = [
     },
     parser: maoyuanxin4.parse,
     path: join(normalize(__dirname), '../public/books/maoyuanxin4'),
+  },
+  {
+    entity: {
+      id: 'zhangchunqiao10',
+      name: '张春桥同志接见上海《红革会》与《工人革命造反总司令部》代表的谈话记录',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(8)
+        .fill(0)
+        .map((i, idx) => `/books/zhangchunqiao10/${idx + 1}.jpg`)
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [[1, 8]],
+    },
+    parser: zhangchunqiao10.parse,
+    path: join(normalize(__dirname), '../public/books/zhangchunqiao10'),
+  },
+  {
+    entity: {
+      id: 'zhangchunqiao11',
+      name: '张春桥同志在上海市革命委员会扩大会议上的讲话纪要',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(5)
+        .fill(0)
+        .map((i, idx) => `/books/zhangchunqiao11/${idx + 1}.jpg`)
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [[1, 5]],
+    },
+    parser: zhangchunqiao11.parse,
+    path: join(normalize(__dirname), '../public/books/zhangchunqiao11'),
+  },
+  {
+    entity: {
+      id: 'zhangchunqiao12',
+      name: '张春桥同志关于二兵团上三司突然个别夺权的讲话',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(3)
+        .fill(0)
+        .map((i, idx) => `/books/zhangchunqiao12/${idx + 1}.jpg`)
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [[1, 3]],
+    },
+    parser: zhangchunqiao12.parse,
+    path: join(normalize(__dirname), '../public/books/zhangchunqiao12'),
+  },
+  {
+    entity: {
+      id: 'zhangchunqiao13',
+      name: '张春桥同志与华东局革命造反派座谈纪要',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(3)
+        .fill(0)
+        .map((i, idx) => `/books/zhangchunqiao13/${idx + 1}.jpg`)
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [[1, 3]],
+    },
+    parser: zhangchunqiao13.parse,
+    path: join(normalize(__dirname), '../public/books/zhangchunqiao13'),
   },
 ].map((i) => {
   const book: Book = {
