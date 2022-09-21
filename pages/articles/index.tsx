@@ -36,10 +36,10 @@ import {
 } from 'next';
 import { init } from '../../backend/data-source';
 import { Tag } from '../../backend/entities';
-import { tagToString } from '../../utils';
 import Tags from '../../components/Tags';
 import Authors from '../../components/Authors';
-import { articleTypeToCN } from '../../utils/i18n';
+import { DateFilter, useDateFiletrDialog } from './useDateFilterDialog';
+import { useAuthorFilterDialog } from './useAuthorFilterDialog';
 
 export const getStaticProps: GetStaticProps = async (
   context: GetStaticPropsContext,
@@ -153,7 +153,7 @@ const columns: GridColDef<Article>[] = [
       return tags_a > tags_b ? 1 : -1;
     },
     valueGetter: (params: GridValueGetterParams<Article, Article>) =>
-      params.row.tags.map((i) => tagToString(i)).join(','),
+      params.row.tags.map((i) => i.name).join(','),
     renderCell: (params: GridRenderCellParams<string, Article>) => (
       <div style={{ overflow: 'visible' }}>
         <Tags tags={params.row.tags} />
@@ -161,23 +161,6 @@ const columns: GridColDef<Article>[] = [
     ),
   },
 ];
-
-function to_number(s: string) {
-  const n = parseInt(s);
-  if (!isNaN(n) && n != Infinity && n != -Infinity) {
-    return n;
-  }
-  return undefined;
-}
-
-type DateFilter = {
-  year_a?: number;
-  year_b?: number;
-  month_a?: number;
-  month_b?: number;
-  day_a?: number;
-  day_b?: number;
-};
 
 function date_include(a: Article, b: DateFilter) {
   const date_a = b.year_a! * 10000 + b.month_a! * 100 + b.day_a!;
@@ -200,33 +183,42 @@ function date_include(a: Article, b: DateFilter) {
   }
 }
 
-const default_date_filter = {
-  year_a: 1900,
-  year_b: 1990,
-  month_a: 1,
-  month_b: 12,
-  day_a: 1,
-  day_b: 31,
-};
-const authors = ['毛泽东', '江青', '王洪文', '张春桥', '姚文元'];
 export default function Articles({ articles }: { articles: Article[] }) {
+  const tags_all = useMemo(() => {
+    const m = new Map<TagType, Set<string>>();
+    articles.forEach((i) =>
+      i.tags.forEach((j) => {
+        if (!m.get(j.type)) {
+          m.set(j.type, new Set());
+        }
+        m.get(j.type)!.add(j.name);
+      }),
+    );
+    return Array.from(m).map(i => [i[0], Array.from(i[1])]);
+  }, [articles]);
+  const authors_all = useMemo(() => {
+    const set = new Set<string>();
+    articles.forEach((i) =>
+      i.authors.forEach((j) => j.name && set.add(j.name)),
+    );
+    return Array.from(set).sort();
+  }, [articles]);
+  const { DateFilterDialog, dateFilter, showDateFilterDialog } =
+    useDateFiletrDialog();
+  const {
+    authors,
+    authorFilter,
+    setAuthorFilter,
+    AuthorDialog,
+    setAuthorDialog,
+  } = useAuthorFilterDialog(authors_all);
   const [tipsAnchorEl, setTipsAnchorEl] = useState<HTMLElement | null>(null);
-  const [dateFilter, setDateFilter] = useState<DateFilter>(default_date_filter);
   const [tagFilters, setTagFilters] = useState<
     {
       name: string;
       type: TagType;
     }[]
   >([]);
-  const [authorFilters, setAuthorFilters] = useState<string[]>([]);
-  const [dateFilterDialog, setDateFilterDialog] = useState<
-    {
-      show: boolean;
-    } & DateFilter
-  >({
-    show: false,
-    ...default_date_filter,
-  });
 
   const showTips = (event: React.MouseEvent<HTMLElement>) => {
     setTipsAnchorEl(event.currentTarget);
@@ -240,12 +232,7 @@ export default function Articles({ articles }: { articles: Article[] }) {
     return articles
       .filter((i) => date_include(i, dateFilter))
       .filter((i) =>
-        authorFilters.length
-          ? authorFilters.reduce<boolean>(
-              (m, j) => m || !!i.authors.find((k) => k.name === j),
-              false,
-            )
-          : true,
+        authorFilter ? !!i.authors.find((k) => k.name === authorFilter) : true,
       )
       .filter((i) =>
         tagFilters.length
@@ -257,140 +244,15 @@ export default function Articles({ articles }: { articles: Article[] }) {
             )
           : true,
       );
-  }, [articles, dateFilter, tagFilters, authorFilters]);
+  }, [articles, dateFilter, tagFilters, authorFilter]);
 
   return (
     <>
       <Head>
         <title>和谐历史档案馆 Banned Historical Archives</title>
       </Head>
-      <Dialog
-        onClose={() => setDateFilterDialog((s) => ({ ...s, show: false }))}
-        open={dateFilterDialog.show}
-      >
-        <DialogTitle>时间过滤器</DialogTitle>
-        <DialogContent>
-          <Stack spacing={1}>
-            <Typography variant="subtitle1">开始时间</Typography>
-            <TextField
-              label="年"
-              value={dateFilterDialog.year_a}
-              size="small"
-              onChange={(e) =>
-                setDateFilterDialog((d) => ({
-                  ...d,
-                  year_a: to_number(e.target.value),
-                }))
-              }
-            />
-            <TextField
-              label="月"
-              value={dateFilterDialog.month_a}
-              size="small"
-              onChange={(e) =>
-                setDateFilterDialog((d) => ({
-                  ...d,
-                  month_a: to_number(e.target.value),
-                }))
-              }
-            />
-            <TextField
-              label="日"
-              value={dateFilterDialog.day_a}
-              size="small"
-              onChange={(e) =>
-                setDateFilterDialog((d) => ({
-                  ...d,
-                  day_a: to_number(e.target.value),
-                }))
-              }
-            />
-            <Typography variant="subtitle1">结束时间</Typography>
-            <TextField
-              label="年"
-              value={dateFilterDialog.year_b}
-              size="small"
-              onChange={(e) =>
-                setDateFilterDialog((d) => ({
-                  ...d,
-                  year_b: to_number(e.target.value),
-                }))
-              }
-            />
-            <TextField
-              label="月"
-              value={dateFilterDialog.month_b}
-              size="small"
-              onChange={(e) =>
-                setDateFilterDialog((d) => ({
-                  ...d,
-                  month_b: to_number(e.target.value),
-                }))
-              }
-            />
-            <TextField
-              label="日"
-              value={dateFilterDialog.day_b}
-              size="small"
-              onChange={(e) =>
-                setDateFilterDialog((d) => ({
-                  ...d,
-                  day_b: to_number(e.target.value),
-                }))
-              }
-            />
-          </Stack>
-        </DialogContent>
-        <DialogActions>
-          <Button
-            onClick={() => setDateFilterDialog((s) => ({ ...s, show: false }))}
-          >
-            取消
-          </Button>
-          <Button
-            onClick={() => {
-              const d = dateFilterDialog;
-              const filter: DateFilter = {};
-              if (d.year_a && d.year_b && d.year_b >= d.year_a) {
-                filter.year_a = d.year_a;
-                filter.year_b = d.year_b;
-              }
-              if (
-                d.month_a &&
-                d.month_b &&
-                d.month_a >= 1 &&
-                d.month_a <= 12 &&
-                d.month_b >= 1 &&
-                d.month_b <= 12
-              ) {
-                filter.month_a = d.month_a;
-                filter.month_b = d.month_b;
-              }
-              if (
-                d.day_a &&
-                d.day_b &&
-                d.day_a >= 1 &&
-                d.day_a <= 31 &&
-                d.day_b >= 1 &&
-                d.day_b <= 31
-              ) {
-                filter.day_a = d.day_a;
-                filter.day_b = d.day_b;
-              }
-              if (filter.year_a && filter.month_a && filter.day_a) {
-                setDateFilterDialog((s) => ({
-                  ...s,
-                  show: false,
-                }));
-                setDateFilter((d) => filter);
-              }
-            }}
-            autoFocus
-          >
-            确定
-          </Button>
-        </DialogActions>
-      </Dialog>
+      {DateFilterDialog}
+      {AuthorDialog}
       <Stack
         p={2}
         spacing={2}
@@ -406,9 +268,7 @@ export default function Articles({ articles }: { articles: Article[] }) {
                 <Stack direction="row" spacing={1}>
                   <Chip
                     icon={<SettingsIcon fontSize="small" />}
-                    onClick={() =>
-                      setDateFilterDialog((d) => ({ ...d, show: true }))
-                    }
+                    onClick={() => showDateFilterDialog()}
                     label={
                       [
                         `${dateFilter.year_a}年`,
@@ -435,7 +295,7 @@ export default function Articles({ articles }: { articles: Article[] }) {
                 </Typography>
                 <Stack direction="row" spacing={1}>
                   {(
-                    Object.keys(articleTypeToCN) as Array<
+                    Object.keys(ArticleType) as Array<
                       keyof typeof ArticleType
                     >
                   ).map((i) => {
@@ -445,7 +305,7 @@ export default function Articles({ articles }: { articles: Article[] }) {
                     return (
                       <Chip
                         key={i}
-                        label={articleTypeToCN[i]}
+                        label={ArticleType[i]}
                         variant={found ? 'filled' : 'outlined'}
                         color={found ? 'primary' : 'default'}
                         onDelete={
@@ -491,27 +351,19 @@ export default function Articles({ articles }: { articles: Article[] }) {
                 <Typography variant="body1">作者：</Typography>
                 <Stack direction="row" spacing={1}>
                   {authors.map((i) => {
-                    const found = authorFilters.find((j) => j === i);
                     return (
                       <Chip
                         key={i}
                         label={i}
-                        variant={found ? 'filled' : 'outlined'}
-                        color={found ? 'primary' : 'default'}
+                        variant={i == authorFilter ? 'filled' : 'outlined'}
+                        color={i == authorFilter ? 'primary' : 'default'}
                         onDelete={
-                          found
-                            ? () =>
-                                setAuthorFilters((f) =>
-                                  f.filter((j) => j !== i),
-                                )
+                          i == authorFilter
+                            ? () => setAuthorFilter(null)
                             : undefined
                         }
                         onClick={(e) => {
-                          if (found) {
-                            setAuthorFilters((f) => f.filter((j) => j !== i));
-                            return;
-                          }
-                          setAuthorFilters((f) => [...f, i]);
+                          setAuthorFilter(i);
                         }}
                       />
                     );
@@ -519,7 +371,7 @@ export default function Articles({ articles }: { articles: Article[] }) {
                   <Chip
                     label={'更多'}
                     onClick={(e) => {
-                      alert('使用高级检索，在表格对应列中添加过滤器');
+                      setAuthorDialog(true);
                     }}
                   />
                 </Stack>

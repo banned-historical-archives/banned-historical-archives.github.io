@@ -4,12 +4,6 @@ import { ReactElement, useState, useEffect, useMemo } from 'react';
 import Popover from '@mui/material/Popover';
 import { ArticleCategory, ArticleType, TagType } from '../types';
 import { Tag } from '../backend/entities';
-import {
-  articleCategoryToCN,
-  articleTypeToCN,
-  tagTypeToCN,
-} from '../utils/i18n';
-import { tagToString } from '../utils';
 
 export default function Tags({ tags }: { tags: Tag[] }) {
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
@@ -42,18 +36,18 @@ export default function Tags({ tags }: { tags: Tag[] }) {
         <Chip
           key={tag.id}
           onMouseEnter={(event) => {
-            setLabel(tagTypeToCN[tag.type]);
+            setLabel(tag.type);
             setAnchorEl(event.currentTarget);
           }}
           onMouseLeave={handleClose}
           onClick={() =>
             window.open(
-              `/articles?tag=${encodeURIComponent(tagToString(tag))}`,
+              `/articles?tag=${encodeURIComponent(tag.name)}`,
               '_blank',
             )
           }
           sx={{ m: 0.3 }}
-          label={tagToString(tag)}
+          label={tag.name}
         />
       ))}
     </>
