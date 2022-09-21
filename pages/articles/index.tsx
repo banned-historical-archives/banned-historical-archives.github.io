@@ -38,8 +38,9 @@ import { init } from '../../backend/data-source';
 import { Tag } from '../../backend/entities';
 import Tags from '../../components/Tags';
 import Authors from '../../components/Authors';
-import { DateFilter, useDateFiletrDialog } from './useDateFilterDialog';
-import { useAuthorFilterDialog } from './useAuthorFilterDialog';
+import { DateFilter, useDateFiletrDialog } from '../../components/useDateFilterDialog';
+import { useAuthorFilterDialog } from '../../components/useAuthorFilterDialog';
+import { useTagFilterDialog } from '../../components/useTagFilterDialog';
 
 export const getStaticProps: GetStaticProps = async (
   context: GetStaticPropsContext,
@@ -185,16 +186,25 @@ function date_include(a: Article, b: DateFilter) {
 
 export default function Articles({ articles }: { articles: Article[] }) {
   const tags_all = useMemo(() => {
-    const m = new Map<TagType, Set<string>>();
+    const m = new Map<string, Tag>();
+    articles.forEach((i) =>
+      i.tags.forEach((j) => {
+        m.set(j.id, j);
+      }),
+    );
+    return m;
+  }, [articles]);
+  const tags_all_order_by_type = useMemo(() => {
+    const m = new Map<TagType, Map<string, Tag>>();
     articles.forEach((i) =>
       i.tags.forEach((j) => {
         if (!m.get(j.type)) {
-          m.set(j.type, new Set());
+          m.set(j.type, new Map());
         }
-        m.get(j.type)!.add(j.name);
+        m.get(j.type)!.set(j.id, j);
       }),
     );
-    return Array.from(m).map(i => [i[0], Array.from(i[1])]);
+    return m;
   }, [articles]);
   const authors_all = useMemo(() => {
     const set = new Set<string>();
@@ -203,6 +213,14 @@ export default function Articles({ articles }: { articles: Article[] }) {
     );
     return Array.from(set).sort();
   }, [articles]);
+
+  const {
+    TagDialog,
+    tagFilter,
+    setTagDialog,
+    setTagFilter,
+    tags,
+  } = useTagFilterDialog(tags_all, tags_all_order_by_type);
   const { DateFilterDialog, dateFilter, showDateFilterDialog } =
     useDateFiletrDialog();
   const {
@@ -213,12 +231,6 @@ export default function Articles({ articles }: { articles: Article[] }) {
     setAuthorDialog,
   } = useAuthorFilterDialog(authors_all);
   const [tipsAnchorEl, setTipsAnchorEl] = useState<HTMLElement | null>(null);
-  const [tagFilters, setTagFilters] = useState<
-    {
-      name: string;
-      type: TagType;
-    }[]
-  >([]);
 
   const showTips = (event: React.MouseEvent<HTMLElement>) => {
     setTipsAnchorEl(event.currentTarget);
@@ -235,16 +247,9 @@ export default function Articles({ articles }: { articles: Article[] }) {
         authorFilter ? !!i.authors.find((k) => k.name === authorFilter) : true,
       )
       .filter((i) =>
-        tagFilters.length
-          ? tagFilters.reduce<boolean>(
-              (m, j) =>
-                m ||
-                !!i.tags.find((k) => k.type === j.type && k.name === j.name),
-              false,
-            )
-          : true,
+        tagFilter ? !!i.tags.find((k) => k.id === tagFilter) : true,
       );
-  }, [articles, dateFilter, tagFilters, authorFilter]);
+  }, [articles, dateFilter, tagFilter, authorFilter]);
 
   return (
     <>
@@ -253,6 +258,7 @@ export default function Articles({ articles }: { articles: Article[] }) {
       </Head>
       {DateFilterDialog}
       {AuthorDialog}
+      {TagDialog}
       <Stack
         p={2}
         spacing={2}
@@ -291,58 +297,30 @@ export default function Articles({ articles }: { articles: Article[] }) {
             <Grid item xs={12} md={4}>
               <Stack direction="row" alignItems="center">
                 <Typography variant="body1" sx={{ whiteSpace: 'nowrap' }}>
-                  文章类型：
+                  标签：
                 </Typography>
                 <Stack direction="row" spacing={1}>
-                  {(
-                    Object.keys(ArticleType) as Array<
-                      keyof typeof ArticleType
-                    >
-                  ).map((i) => {
-                    const found = tagFilters.find(
-                      (j) => j.type === TagType.articleType && j.name === i,
-                    );
+                  {tags.map((i) => {
+                    const isSelected = i.id == tagFilter;
                     return (
                       <Chip
-                        key={i}
-                        label={ArticleType[i]}
-                        variant={found ? 'filled' : 'outlined'}
-                        color={found ? 'primary' : 'default'}
-                        onDelete={
-                          found
-                            ? () =>
-                                setTagFilters((f) =>
-                                  f.filter(
-                                    (j) =>
-                                      !(
-                                        j.type === TagType.articleType &&
-                                        j.name === i
-                                      ),
-                                  ),
-                                )
-                            : undefined
-                        }
+                        key={i.id}
+                        label={i.name}
+                        variant={isSelected ? 'filled' : 'outlined'}
+                        color={isSelected ? 'primary' : 'default'}
+                        onDelete={isSelected ? () => setTagFilter(null) : undefined}
                         onClick={(e) => {
-                          if (found) {
-                            setTagFilters((f) =>
-                              f.filter(
-                                (j) =>
-                                  !(
-                                    j.type === TagType.articleType &&
-                                    j.name === i
-                                  ),
-                              ),
-                            );
-                            return;
-                          }
-                          setTagFilters((f) => [
-                            ...f,
-                            { name: ArticleType[i], type: TagType.articleType },
-                          ]);
+                          setTagFilter(i.id);
                         }}
                       />
                     );
                   })}
+                  <Chip
+                    label={'更多'}
+                    onClick={(e) => {
+                      setTagDialog(true);
+                    }}
+                  />
                 </Stack>
               </Stack>
             </Grid>
