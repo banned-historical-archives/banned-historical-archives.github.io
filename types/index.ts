@@ -1,19 +1,19 @@
 import type Publication from '../backend/entity/publication';
 
 export enum ArticleCategory {
-  centralFile = 'centralFile',
-  editorial = 'editorial',
-  keyFigures = 'keyFigures',
-  keyPapersFromTheMasses = 'keyPapersFromTheMasses',
+  centralFile = '中央文件',
+  editorial = '重要报刊和社论',
+  keyFigures = '关键人物文稿',
+  keyPapersFromTheMasses = '群众运动重要文献',
 }
 
 export enum TagType {
-  articleCategory = 'articleCategory',
-  articleType = 'articleType',
-  place = 'place',
-  character = 'character',
-  issuer = 'issuer',
-  subject = 'subject',
+  articleCategory = '文稿大类',
+  articleType = '文稿类型',
+  place = '地点',
+  character = '人物',
+  issuer = '发行机构',
+  subject = '主题',
 }
 
 export enum ContentType {
@@ -74,14 +74,14 @@ export type ParserResult = {
 };
 
 export enum ArticleType {
-  writings = 'writings',
-  instruction = 'instruction',
-  talk = 'talk',
-  lecture = 'lecture',
-  declaration = 'declaration',
-  telegram = 'telegram',
-  mail = 'mail',
-  comment = 'comment',
+  writings = '文章',
+  mail = '书信',
+  lecture = '发言',
+  talk = '对话',
+  declaration = '宣言',
+  instruction = '指示',
+  comment = '批示',
+  telegram = '通讯',
 }
 
 export type OCRPosition = [number, number];
