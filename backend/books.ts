@@ -19,6 +19,7 @@ import * as wanghongwen3 from './parser/wanghongwen3';
 import * as wanghongwen4 from './parser/wanghongwen4';
 import * as wanghongwen5 from './parser/wanghongwen5';
 import * as wanghongwen6 from './parser/wanghongwen6';
+import * as wanghongwen7 from './parser/wanghongwen7';
 import * as yaowenyuan1 from './parser/yaowenyuan1';
 import * as yaowenyuan from './parser/yaowenyuan';
 import * as zhangchunqiao1 from './parser/zhangchunqiao1';
@@ -38,6 +39,7 @@ import * as zhangchunqiao10 from './parser/zhangchunqiao10';
 import * as zhangchunqiao11 from './parser/zhangchunqiao11';
 import * as zhangchunqiao12 from './parser/zhangchunqiao12';
 import * as zhangchunqiao13 from './parser/zhangchunqiao13';
+import * as zhangchunqiao14 from './parser/zhangchunqiao14';
 import { apply_patch, get_article_id } from '../utils';
 import { tranditionalChineseToSimpleChinese } from '../utils/i18n';
 import { normalize } from './utils';
@@ -934,7 +936,7 @@ const books: Book[] = [
   {
     entity: {
       id: 'zhangchunqiao11',
-      name: '张春桥同志在上海市革命委员会扩大会议上的讲话纪要',
+      name: '张春桥同志十一月二十五日在市革会扩大会议上的讲话纪要',
       internal: true,
       official: true,
       type: 'img',
@@ -953,7 +955,7 @@ const books: Book[] = [
   {
     entity: {
       id: 'zhangchunqiao12',
-      name: '张春桥同志关于二兵团上三司突然个别夺权的讲话',
+      name: '张春桥同志二月二十五日与华东局革命造反派座谈纪要',
       internal: true,
       official: true,
       type: 'img',
@@ -972,7 +974,7 @@ const books: Book[] = [
   {
     entity: {
       id: 'zhangchunqiao13',
-      name: '张春桥同志与华东局革命造反派座谈纪要',
+      name: '张春桥同志讲话',
       internal: true,
       official: true,
       type: 'img',
@@ -987,6 +989,44 @@ const books: Book[] = [
     },
     parser: zhangchunqiao13.parse,
     path: join(normalize(__dirname), '../public/books/zhangchunqiao13'),
+  },
+  {
+    entity: {
+      id: 'zhangchunqiao14',
+      name: '在工总司召开的“坚决响应毛主席伟大号召，‘斗私批修’誓师大会”上张春桥同志的讲话',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(4)
+        .fill(0)
+        .map((i, idx) => `/books/zhangchunqiao14/${idx + 1}.jpg`)
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [[1, 4]],
+    },
+    parser: zhangchunqiao14.parse,
+    path: join(normalize(__dirname), '../public/books/zhangchunqiao14'),
+  },
+  {
+    entity: {
+      id: 'wanghongwen7',
+      name: '上海市机电一局系统活学活用毛泽东思想积极分子代表大会上市革委会领导成员、工总司负责人王洪文同志的讲话',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '王洪文',
+      files: new Array(5)
+        .fill(0)
+        .map((i, idx) => `/books/wanghongwen7/${idx + 1}.png`)
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [[1, 5]],
+    },
+    parser: wanghongwen7.parse,
+    path: join(normalize(__dirname), '../public/books/wanghongwen7'),
   },
 ].map((i) => {
   const book: Book = {
