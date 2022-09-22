@@ -41,7 +41,7 @@ import * as zhangchunqiao12 from './parser/zhangchunqiao12';
 import * as zhangchunqiao13 from './parser/zhangchunqiao13';
 import { apply_patch, get_article_id } from '../utils';
 import { tranditionalChineseToSimpleChinese } from '../utils/i18n';
-import { normalize } from './utils';
+import { exclude, normalize } from './utils';
 
 const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
@@ -423,10 +423,29 @@ const books: Book[] = [
       files: '/books/archives0/mao-quanji/27-OCR.pdf',
     },
     parser_option: {
-      page_limits: [[11, 31], [32, 537]],
+      page_limits: [
+        [11, 31],
+        ...exclude(
+          [32, 537],
+          [
+            50, 58, 61, 78, 86, 90, 92, 93, 94, 95, 96, 97, 98, 99, 131, 153,
+            159, 163, 170, 176, 178, 187, 188, 198, 222, 231, 255, 256, 257,
+            258, 259, 260, 261, 262, 263, 270, 273, 280, 281, 282, 283, 284,
+            285, 286, 287, 288, 289, 290, 291, 292, 293, 294, 297, 300, 309,
+            310, 312, 314, 316, 319, 323, 324, 325, 326, 328, 329, 332, 336,
+            337, 338, 339, 340, 341, 342, 343, 344, 345, 346, 347, 348, 349,
+            350, 351, 352, 353, 354, 355, 356, 357, 358, 359, 360, 361, 362,
+            363, 364, 365, 366, 367, 369, 399, 400, 409, 413, 416, 422, 426,
+            428, 429, 442, 443, 449, 468, 486, 497, 518, 530,
+          ],
+        ),
+      ],
     },
     parser: maoquanji.parse,
-    path: join(normalize(__dirname), '../public/books/archives0/mao-quanji/27-OCR.pdf'),
+    path: join(
+      normalize(__dirname),
+      '../public/books/archives0/mao-quanji/27-OCR.pdf',
+    ),
   },
   {
     entity: {
