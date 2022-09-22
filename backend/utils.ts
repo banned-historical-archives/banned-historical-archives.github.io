@@ -5,7 +5,8 @@ export function normalize(p: string) {
 }
 
 export function exclude(range: [number, number], n: number[]) {
-  let start = range [0];
+  if (!n.length) return [range];
+  let start = range[0];
   const res: [number, number][] = [];
   for (let i of n) {
     if (start > i - 1) {

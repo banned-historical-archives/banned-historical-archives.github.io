@@ -41,7 +41,7 @@ function extract_parts(
     /^[(（]?\d+年/.test(i.text),
   );
 
-  if (date_idx == -1 || date_idx > 3) {
+  if (date_idx == -1 || date_idx > 4) {
     debugger;
   }
 
@@ -145,6 +145,20 @@ export async function parse(
   pdf_path: string,
   parser_opt: ParserOption,
 ): Promise<ParserResult[]> {
+  const volume = basename(pdf_path).replace(/[^\d]/g, '');
+  const fixtures: {
+    ignore_article: { [volumn: string]: Set<string> };
+    assert_not_title_page: { [volumn: string]: Set<number> };
+  } = {
+    ignore_article: {
+      // TODO
+      // 27卷 答谢萨拉·博斯祝贺中华人民共和国成立的电报 在目录中出现，但在正文中缺失（p495），暂时先屏蔽这篇文章
+      27: new Set(['答谢萨拉·博斯祝贺中华人民共和国成立的电报']),
+    },
+    assert_not_title_page: {
+      30: new Set([125]),
+    },
+  };
 
   let catalogs: {
     title: string;
@@ -179,7 +193,11 @@ export async function parse(
       if (i == 0) {
         const catalogs_raw = ocrResults
           .filter((i) => i.text !== '目录')
-          .map((i) => (i.text = i.text.replace(/[，:·：\.\d]*$/, '')));
+          .map((i) => {
+            i.text = i.text.replace(/[，\-．:·：\.\d]*$/, '');
+            return i.text;
+          })
+          .filter((i) => i);
         for (let i = 0; i < catalogs_raw.length; i += 2) {
           if (!/^（/.test(catalogs_raw[i + 1])) {
             catalogs.push({
@@ -194,29 +212,28 @@ export async function parse(
             });
           }
 
-          // TODO
-          // 27卷 答谢萨拉·博斯祝贺中华人民共和国成立的电报 在目录中出现，但在正文中缺失（p495），暂时先屏蔽这篇文章
           if (
-            catalogs[catalogs.length - 1].title ===
-            '答谢萨拉·博斯祝贺中华人民共和国成立的电报'
+            fixtures.ignore_article[volume]?.has(
+              catalogs[catalogs.length - 1].title,
+            )
           ) {
             catalogs.pop();
           }
         }
       } else {
+        if (!ocrResults.length) continue;
         // 正文
         // 文章可按页码分割（大标题总在一页的最前面）
         const first_letter_height = ocrResults[0].box[3][1] - ocrResults[0].box[0][1];
         if (
           first_letter_height > 28 &&
           ocrResults[0].box[0][1] > 200 &&
-          (catalogs[articles_raw.length]
-            ? ocrResults[0].text[0] === catalogs[articles_raw.length].title[0]
-            : true) &&
           !/^[一二三四五六七八九十]+$/.test(ocrResults[0].text) && // 非子标题
           !/^[（\(]+/.test(ocrResults[0].text)
         ) {
-          articles_raw.push([]);
+          if (!fixtures.assert_not_title_page[volume]?.has(page)) {
+            articles_raw.push([]);
+          }
         }
 
         articles_raw[articles_raw.length - 1].push({
@@ -230,8 +247,8 @@ export async function parse(
   // TODO
   // 27卷 201 页 上下颠倒
 
-  console.log(catalogs, articles_raw);
-  console.log(articles_raw.map(i => i[0].ocr_results[0].text).map((i,idx) => i + ' ## ' + (catalogs[idx] || {}).title));
+  // console.log(catalogs, articles_raw);
+  // console.log(articles_raw.map(i => i[0].ocr_results[0].text).map((i,idx) => i + ' ## ' + (catalogs[idx] || {}).title));
 
   const articles_parts = articles_raw.map(i => extract_parts(i));
   return articles_parts.map((i, idx) => ({

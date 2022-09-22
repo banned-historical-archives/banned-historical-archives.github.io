@@ -15,6 +15,7 @@ app.get('/', async (req, res) => {
   const page = parseInt(req.query.page as string);
   const id = req.query.id as string;
   const img_ext = req.query.img_ext as string;
+  console.log('recv', req.query);
 
   const r = await ocr({
     ...(!req.query.pdf_path

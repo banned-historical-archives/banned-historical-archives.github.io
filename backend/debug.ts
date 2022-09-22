@@ -12,27 +12,9 @@ import { basename } from 'node:path';
 
 (async () => {
   const ds = await init();
-  // const book = books.find(i => i.entity.id === 'maoquanji30')!;
-  // const res = await book.parser(book.path, book.parser_option);
-  // console.log(res);
+  const book = books.find(i => i.entity.id === 'maoquanji31')!;
+  const res = await book.parser(book.path, book.parser_option);
+  console.log(res);
 
-  for (let i = 31;i <= 52; ++i) {
-
-    const pdf_path = join(normalize(__dirname), `../public/books/archives0/mao-quanji/${i}-OCR.pdf`);
-    for (let page = 11; page <= 500; ++page) {
-      await ocr({
-        pdf: pdf_path,
-        page,
-        cache_path: join(
-          normalize(__dirname),
-          `./ocr_cache/maoquanji${basename(pdf_path).replace(
-            /[^\d]/g,
-            '',
-          )}/${page}.json`,
-        ),
-      });
-      console.log(i, page);
-    }
-  }
   debugger;
 })();

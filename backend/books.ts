@@ -557,6 +557,36 @@ const books: Book[] = [
   },
   {
     entity: {
+      id: 'maoquanji31',
+      name: '毛泽东全集第31卷',
+      internal: false,
+      type: 'pdf',
+      official: true,
+      author: '张迪杰',
+      files:
+        'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives0/main/mao-quanji/31-OCR.pdf',
+    },
+    parser_option: {
+      page_limits: [
+        [11, 39],
+        ...exclude(
+          [40, 548],
+          [
+            41, 42, 45, 46, 56, 59, 64, 81, 92, 97, 99, 107, 139, 143, 162, 176,
+            213, 216, 238, 300, 362, 363, 364, 376, 396, 440, 448, 449, 502,
+            504, 505,
+          ],
+        ),
+      ],
+    },
+    parser: maoquanji.parse,
+    path: join(
+      normalize(__dirname),
+      '../public/books/archives0/mao-quanji/31-OCR.pdf',
+    ),
+  },
+  {
+    entity: {
       id: 'wanghongwen',
       name: '王洪文文集',
       internal: false,
