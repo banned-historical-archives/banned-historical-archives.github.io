@@ -1,9 +1,12 @@
 import { exec, execSync } from 'node:child_process'
-import { join } from 'node:path/posix';
-import { existsSync, readFileSync, unlinkSync, writeFileSync } from 'fs';
+import { join, basename, dirname, extname } from 'node:path/posix';
+import { isAbsolute } from 'node:path';
+import fs from 'fs-extra';
 import { OCRResult } from '../types';
 import { sleep } from '../utils';
+import pdf2image from './pdf2image';
 import { normalize } from './utils';
+import sizeOf from 'image-size';
 
 /**
  * db shufflenet v2 py
@@ -19,6 +22,9 @@ export default async function ocr({
   box_score_thresh = 0.3,
   min_box_size = 10,
   cache = true,
+  pdf,
+  page,
+  cache_path,
 }: {
   box_score_thresh?: number;
   min_box_size?: number;
@@ -27,29 +33,64 @@ export default async function ocr({
   rec_backend?: string;
   det_model?: string;
   det_backend?: string;
-  img: string;
   cache?: boolean;
-}): Promise<OCRResult[]> {
-  const cache_path = join(
-    normalize(process.cwd()),
-    `backend/ocr_cache/${img.split('/').join('.')}.json`,
-  );
-  if (cache && existsSync(cache_path)) {
-    return JSON.parse(readFileSync(cache_path).toString());
+  cache_path?: string;
+
+  img?: string;
+
+  pdf?: string;
+  page?: number; // start from 1
+}): Promise<{
+  ocr_results: OCRResult[];
+  dimensions: { height: number; width: number };
+}> {
+  const target = pdf ? await pdf : img!;
+  const abs_target_path = isAbsolute(target)
+    ? target
+    : join(normalize(__dirname), `../public/books/${target}`);
+
+  const last_dirname = dirname(target).split('/').slice(-1);
+  cache_path = cache_path
+    ? cache_path!
+    : (join(
+        normalize(__dirname),
+        `ocr_cache/${last_dirname}/${basename(target).replace(
+          /[^\d]/g,
+          '',
+        )}.json`,
+      ) as string);
+  if (cache && (await fs.pathExists(cache_path!))) {
+    return JSON.parse((await fs.readFile(cache_path)).toString());
   }
-  const abs_img_path = join(normalize(process.cwd()), `public/books/${img}`);
-  const ocr_command = `python backend/ocr.py ${abs_img_path} ${rec_model} ${rec_backend} ${det_model} ${det_backend} ${resized_shape} ${box_score_thresh} ${min_box_size}`;
+  if (!(await fs.pathExists(dirname(cache_path)))) {
+    await fs.ensureDir(dirname(cache_path));
+  }
+  const abs_ocr_target = pdf
+    ? await pdf2image({ pdf_path: abs_target_path, page: page! - 1 })
+    : abs_target_path;
+  const dimensions = sizeOf(abs_ocr_target);
+  const ocr_command = `python3 backend/ocr.py ${abs_ocr_target} ${rec_model} ${rec_backend} ${det_model} ${det_backend} ${resized_shape} ${box_score_thresh} ${min_box_size}`;
   const raw = execSync(ocr_command).toString();
 
   const candidates: string[] = raw.split('\n');
   const t = JSON.parse(
     candidates[candidates.length - 2].replace(/"score": NaN\,/g, '"score": 0,'),
   );
-  const res: OCRResult[] = t.map((i: any) => ({
-    text: i.text,
-    box: i.position,
-  }));
+  const res: {
+    ocr_results: OCRResult[];
+    dimensions: { height: number; width: number };
+  } = {
+    ocr_results: t.map((i: any) => ({
+      text: i.text,
+      box: i.position,
+    })),
+    dimensions: {
+      height: dimensions.height!,
+      width: dimensions.width!,
+    },
+  };
 
-  writeFileSync(cache_path, JSON.stringify(res));
+  pdf && (await fs.remove(abs_ocr_target));
+  await fs.writeFile(cache_path!, JSON.stringify(res));
   return res;
 }

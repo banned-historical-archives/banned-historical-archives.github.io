@@ -99,7 +99,7 @@ export async function parse(
   ) {
     const path = imgPath.split('/public/books/')[1] + '/' + i + '.jpg';
     const ocrResults = merge_to_lines(
-      (await ocr({ img: path, resized_shape: 2000 })).filter(
+      (await ocr({ img: path, resized_shape: 2000 })).ocr_results.filter(
         (i) =>
           i.text.trim() &&
           !/^[-\w\d—“"名全告吃工一\.·，]+$/.test(i.text.trim()),

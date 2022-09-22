@@ -1,0 +1,361 @@
+// Vitest Snapshot v1
+
+exports[`extract_dates > format a 1`] = `
+{
+  "dates": [
+    {
+      "day": 10,
+      "month": 10,
+      "year": 1911,
+    },
+    {
+      "day": 12,
+      "month": 12,
+      "year": 1912,
+    },
+  ],
+  "is_range_date": true,
+}
+`;
+
+exports[`extract_dates > format a 2`] = `
+{
+  "dates": [
+    {
+      "day": 10,
+      "month": 10,
+      "year": 1911,
+    },
+    {
+      "day": 12,
+      "month": 12,
+      "year": 1911,
+    },
+  ],
+  "is_range_date": true,
+}
+`;
+
+exports[`extract_dates > format a 3`] = `
+{
+  "dates": [
+    {
+      "day": 10,
+      "month": 10,
+      "year": 1911,
+    },
+    {
+      "day": 12,
+      "month": 10,
+      "year": 1911,
+    },
+  ],
+  "is_range_date": true,
+}
+`;
+
+exports[`extract_dates > format a 4`] = `
+{
+  "dates": [
+    {
+      "day": undefined,
+      "month": 10,
+      "year": 1911,
+    },
+    {
+      "day": undefined,
+      "month": 12,
+      "year": 1911,
+    },
+  ],
+  "is_range_date": true,
+}
+`;
+
+exports[`extract_dates > format b 1`] = `
+{
+  "dates": [
+    {
+      "day": 10,
+      "month": 10,
+      "year": 1911,
+    },
+    {
+      "day": 11,
+      "month": 10,
+      "year": 1911,
+    },
+    {
+      "day": 12,
+      "month": 10,
+      "year": 1911,
+    },
+  ],
+  "is_range_date": false,
+}
+`;
+
+exports[`extract_dates > format b 2`] = `
+{
+  "dates": [
+    {
+      "day": undefined,
+      "month": 10,
+      "year": 1911,
+    },
+    {
+      "day": undefined,
+      "month": 11,
+      "year": 1911,
+    },
+    {
+      "day": undefined,
+      "month": 12,
+      "year": 1911,
+    },
+  ],
+  "is_range_date": false,
+}
+`;
+
+exports[`extract_dates > format b 3`] = `
+{
+  "dates": [
+    {
+      "day": 21,
+      "month": 10,
+      "year": 1911,
+    },
+    {
+      "day": 22,
+      "month": 10,
+      "year": 1911,
+    },
+    {
+      "day": 23,
+      "month": 11,
+      "year": 1911,
+    },
+  ],
+  "is_range_date": false,
+}
+`;
+
+exports[`extract_dates > format c 1`] = `
+{
+  "dates": [
+    {
+      "day": 12,
+      "month": 10,
+      "year": 1911,
+    },
+  ],
+  "is_range_date": false,
+}
+`;
+
+exports[`extract_dates > format c 2`] = `
+{
+  "dates": [
+    {
+      "day": undefined,
+      "month": 10,
+      "year": 1911,
+    },
+  ],
+  "is_range_date": false,
+}
+`;
+
+exports[`extract_dates > format c 3`] = `
+{
+  "dates": [
+    {
+      "day": undefined,
+      "month": undefined,
+      "year": undefined,
+    },
+  ],
+  "is_range_date": false,
+}
+`;
+
+exports[`extract_dates > format d 1`] = `
+{
+  "dates": [
+    {
+      "day": 20,
+      "month": 10,
+      "year": 1932,
+    },
+    {
+      "day": 20,
+      "month": 10,
+      "year": 1933,
+    },
+  ],
+  "is_range_date": true,
+}
+`;
+
+exports[`extract_dates > format d 2`] = `
+{
+  "dates": [
+    {
+      "day": 20,
+      "month": 10,
+      "year": 1932,
+    },
+    {
+      "day": 20,
+      "month": 12,
+      "year": 1932,
+    },
+  ],
+  "is_range_date": true,
+}
+`;
+
+exports[`extract_dates > format d 3`] = `
+{
+  "dates": [
+    {
+      "day": 20,
+      "month": 10,
+      "year": 1932,
+    },
+    {
+      "day": 12,
+      "month": 10,
+      "year": 1932,
+    },
+  ],
+  "is_range_date": true,
+}
+`;
+
+exports[`extract_dates > format d 4`] = `
+{
+  "dates": [
+    {
+      "day": undefined,
+      "month": 10,
+      "year": 1932,
+    },
+    {
+      "day": undefined,
+      "month": 12,
+      "year": 1932,
+    },
+  ],
+  "is_range_date": true,
+}
+`;
+
+exports[`extract_dates > format e 1`] = `
+{
+  "dates": [
+    {
+      "day": 20,
+      "month": 10,
+      "year": 1932,
+    },
+    {
+      "day": 21,
+      "month": 10,
+      "year": 1932,
+    },
+    {
+      "day": 22,
+      "month": 10,
+      "year": 1932,
+    },
+  ],
+  "is_range_date": false,
+}
+`;
+
+exports[`extract_dates > format e 2`] = `
+{
+  "dates": [
+    {
+      "day": 20,
+      "month": 10,
+      "year": 1932,
+    },
+    {
+      "day": 10,
+      "month": 11,
+      "year": 1932,
+    },
+    {
+      "day": 12,
+      "month": 11,
+      "year": 1932,
+    },
+  ],
+  "is_range_date": false,
+}
+`;
+
+exports[`extract_dates > format e 3`] = `
+{
+  "dates": [
+    {
+      "day": undefined,
+      "month": 10,
+      "year": 1932,
+    },
+    {
+      "day": undefined,
+      "month": 11,
+      "year": 1932,
+    },
+    {
+      "day": undefined,
+      "month": 12,
+      "year": 1932,
+    },
+  ],
+  "is_range_date": false,
+}
+`;
+
+exports[`extract_dates > format f 1`] = `
+{
+  "dates": [
+    {
+      "day": 20,
+      "month": 10,
+      "year": 1932,
+    },
+  ],
+  "is_range_date": false,
+}
+`;
+
+exports[`extract_dates > format f 2`] = `
+{
+  "dates": [
+    {
+      "day": undefined,
+      "month": 10,
+      "year": 1932,
+    },
+  ],
+  "is_range_date": false,
+}
+`;
+
+exports[`extract_dates > format f 3`] = `
+{
+  "dates": [
+    {
+      "day": undefined,
+      "month": undefined,
+      "year": 1932,
+    },
+  ],
+  "is_range_date": false,
+}
+`;

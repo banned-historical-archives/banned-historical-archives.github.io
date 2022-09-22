@@ -217,7 +217,7 @@ export async function parse(
     ++i
   ) {
     const path = imgPath.split('/public/books/')[1] + '/' + i + '.jpg';
-    const ocrResults = (await ocr({img: path})).filter(i => i.text);
+    const ocrResults = (await ocr({img: path})).ocr_results.filter(i => i.text);
 
     if (i === parser_opt.page_limits[0][1]) {
       // 取左边

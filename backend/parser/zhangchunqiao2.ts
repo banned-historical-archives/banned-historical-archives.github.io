@@ -77,7 +77,9 @@ export async function parse(
     ++i
   ) {
     const path = imgPath.split('/public/books/')[1] + '/' + i + '.jpg';
-    const ocrResults = (await ocr({ img: path, resized_shape: 1500 }))
+    const ocrResults = (
+      await ocr({ img: path, resized_shape: 1500 })
+    ).ocr_results
       .filter((i) => i.text)
       .sort((a, b) => a.box[0][1] - b.box[0][1]);
 
