@@ -10,8 +10,11 @@ import * as jimi from './parser/jimi';
 import * as wenku_parser from './parser/wenku';
 import * as zhangchunqiao from './parser/zhangchunqiao';
 import * as maoyuanxin1 from './parser/maoyuanxin1';
+import * as maoyuanxin2 from './parser/maoyuanxin2';
 import * as maoyuanxin3 from './parser/maoyuanxin3';
 import * as maoyuanxin4 from './parser/maoyuanxin4';
+import * as maoyuanxin5 from './parser/maoyuanxin5';
+import * as jiangqing1 from './parser/jiangqing1';
 import * as wanghongwen from './parser/wanghongwen';
 import * as wanghongwen1 from './parser/wanghongwen1';
 import * as wanghongwen2 from './parser/wanghongwen2';
@@ -20,6 +23,7 @@ import * as wanghongwen4 from './parser/wanghongwen4';
 import * as wanghongwen5 from './parser/wanghongwen5';
 import * as wanghongwen6 from './parser/wanghongwen6';
 import * as wanghongwen7 from './parser/wanghongwen7';
+import * as wanghongwen8 from './parser/wanghongwen8';
 import * as yaowenyuan1 from './parser/yaowenyuan1';
 import * as yaowenyuan from './parser/yaowenyuan';
 import * as zhangchunqiao1 from './parser/zhangchunqiao1';
@@ -31,15 +35,15 @@ import * as zhangchunqiao6 from './parser/zhangchunqiao6';
 import * as zhangchunqiao7 from './parser/zhangchunqiao7';
 import * as zhangchunqiao8 from './parser/zhangchunqiao8';
 import * as zhangchunqiao9 from './parser/zhangchunqiao9';
-import * as maoyuanxin2 from './parser/maoyuanxin2';
-import * as note1 from './parser/note1';
-import * as piliu1 from './parser/piliu1';
-import * as zzj1 from './parser/zzj1';
 import * as zhangchunqiao10 from './parser/zhangchunqiao10';
 import * as zhangchunqiao11 from './parser/zhangchunqiao11';
 import * as zhangchunqiao12 from './parser/zhangchunqiao12';
 import * as zhangchunqiao13 from './parser/zhangchunqiao13';
 import * as zhangchunqiao14 from './parser/zhangchunqiao14';
+import * as zhangchunqiao15 from './parser/zhangchunqiao15';
+import * as note1 from './parser/note1';
+import * as piliu1 from './parser/piliu1';
+import * as zzj1 from './parser/zzj1';
 import { apply_patch, get_article_id } from '../utils';
 import { tranditionalChineseToSimpleChinese } from '../utils/i18n';
 import { normalize } from './utils';
@@ -1000,7 +1004,7 @@ const books: Book[] = [
       author: '',
       files: new Array(4)
         .fill(0)
-        .map((i, idx) => `/books/zhangchunqiao14/${idx + 1}.jpg`)
+        .map((i, idx) => `/books/zhangchunqiao14/${idx + 1}.png`)
         .join(','),
     },
     parser_option: {
@@ -1019,7 +1023,7 @@ const books: Book[] = [
       author: '王洪文',
       files: new Array(5)
         .fill(0)
-        .map((i, idx) => `/books/wanghongwen7/${idx + 1}.png`)
+        .map((i, idx) => `/books/wanghongwen7/${idx + 1}.jpg`)
         .join(','),
     },
     parser_option: {
@@ -1027,6 +1031,82 @@ const books: Book[] = [
     },
     parser: wanghongwen7.parse,
     path: join(normalize(__dirname), '../public/books/wanghongwen7'),
+  },
+  {
+    entity: {
+      id: 'zhangchunqiao15',
+      name: '未知出处材料',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(3)
+        .fill(0)
+        .map((i, idx) => `/books/zhangchunqiao15/${idx + 1}.jpg`)
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [[1, 3]],
+    },
+    parser: zhangchunqiao15.parse,
+    path: join(normalize(__dirname), '../public/books/zhangchunqiao15'),
+  },
+  {
+    entity: {
+      id: 'wanghongwen8',
+      name: '王洪文副主席重要电话指示',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '王洪文',
+      files: new Array(1)
+        .fill(0)
+        .map((i, idx) => `/books/wanghongwen8/${idx + 1}.jpg`)
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [[1, 1]],
+    },
+    parser: wanghongwen8.parse,
+    path: join(normalize(__dirname), '../public/books/wanghongwen8'),
+  },
+  {
+    entity: {
+      id: 'jiangqing1',
+      name: '江青同志昨天接见江苏代表团的一段讲话',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '江青',
+      files: new Array(1)
+        .fill(0)
+        .map((i, idx) => `/books/jiangqing1/${idx + 1}.jpg`)
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [[1, 1]],
+    },
+    parser: jiangqing1.parse,
+    path: join(normalize(__dirname), '../public/books/jiangqing1'),
+  },
+  {
+    entity: {
+      id: 'maoyuanxin5',
+      name: '毛远新同志在辽联赴京代表团座谈会上的讲话纪要',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(2)
+        .fill(0)
+        .map((i, idx) => `/books/maoyuanxin5/${idx + 1}.jpg`)
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [[1, 2]],
+    },
+    parser: maoyuanxin5.parse,
+    path: join(normalize(__dirname), '../public/books/maoyuanxin5'),
   },
 ].map((i) => {
   const book: Book = {

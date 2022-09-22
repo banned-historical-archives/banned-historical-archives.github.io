@@ -20,8 +20,6 @@ export async function parse(
       parts: [
         ...parts,
         ...`
-（根据录音整理，未经本人审查）
-
 无产阶级革命派的战友们，革命的同志们：
 
 首先让我们共同祝愿世界革命人民的伟大导师，中国人民的伟大领袖，我们心中最红最红的红太阳毛主席万寿无疆！万寿无疆！！万寿无疆！！！
@@ -71,8 +69,6 @@ export async function parse(
 伟大、光荣、正确的中国共产党万岁！
 光芒四射的毛泽东思想万岁！
 我们伟大领袖毛主席万岁！万岁！万万岁！
-
-一九六八年三月十八日
 `
           .split('\n')
           .map(i => i.trim())
@@ -93,7 +89,8 @@ export async function parse(
       is_range_date: false,
       comments: [],
       comment_pivots: [],
-      description: '',
+      description: `（根据录音整理，未经本人审查）
+      一九六八年三月十八日`,
       page_start: parser_opt.page_limits[0][0],
       page_end: parser_opt.page_limits[0][1],
     },
