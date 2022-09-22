@@ -420,7 +420,7 @@ const books: Book[] = [
       type: 'pdf',
       official: true,
       author: '张迪杰',
-      files: '/books/archives0/mao-quanji/27-OCR.pdf',
+      files: 'https://github.com/banned-historical-archives/banned-historical-archives0/raw/main/mao-quanji/27-OCR.pdf',
     },
     parser_option: {
       page_limits: [
