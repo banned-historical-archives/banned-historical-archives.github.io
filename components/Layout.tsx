@@ -5,7 +5,6 @@ import Navbar from './Navbar';
 import Footer from './Footer';
 
 import Skeleton from '@mui/material/Skeleton';
-import 'nprogress/nprogress.css'
 import { useRouter } from 'next/router';
 
 export default function Layout({ children }: { children: ReactElement }) {
