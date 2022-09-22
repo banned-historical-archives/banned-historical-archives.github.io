@@ -427,7 +427,7 @@ const books: Book[] = [
       official: true,
       author: '张迪杰',
       files:
-        'https://github.com/banned-historical-archives/banned-historical-archives0/raw/main/mao-quanji/27-OCR.pdf',
+        'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives0/main/mao-quanji/27-OCR.pdf',
     },
     parser_option: {
       page_limits: [
@@ -463,7 +463,7 @@ const books: Book[] = [
       official: true,
       author: '张迪杰',
       files:
-        'https://github.com/banned-historical-archives/banned-historical-archives0/raw/main/mao-quanji/28-OCR.pdf',
+        'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives0/main/mao-quanji/28-OCR.pdf',
     },
     parser_option: {
       page_limits: [
@@ -500,7 +500,7 @@ const books: Book[] = [
       official: true,
       author: '张迪杰',
       files:
-        'https://github.com/banned-historical-archives/banned-historical-archives0/raw/main/mao-quanji/29-OCR.pdf',
+        'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives0/main/mao-quanji/29-OCR.pdf',
     },
     parser_option: {
       page_limits: [
@@ -532,7 +532,7 @@ const books: Book[] = [
       official: true,
       author: '张迪杰',
       files:
-        'https://github.com/banned-historical-archives/banned-historical-archives0/raw/main/mao-quanji/30-OCR.pdf',
+        'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives0/main/mao-quanji/30-OCR.pdf',
     },
     parser_option: {
       page_limits: [
