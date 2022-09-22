@@ -193,6 +193,15 @@ export async function parse(
               ...extract_dates(catalogs_raw[i + 1]),
             });
           }
+
+          // TODO
+          // 27卷 答谢萨拉·博斯祝贺中华人民共和国成立的电报 在目录中出现，但在正文中缺失（p495），暂时先屏蔽这篇文章
+          if (
+            catalogs[catalogs.length - 1].title ===
+            '答谢萨拉·博斯祝贺中华人民共和国成立的电报'
+          ) {
+            catalogs.pop();
+          }
         }
       } else {
         // 正文
@@ -201,6 +210,9 @@ export async function parse(
         if (
           first_letter_height > 28 &&
           ocrResults[0].box[0][1] > 200 &&
+          (catalogs[articles_raw.length]
+            ? ocrResults[0].text[0] === catalogs[articles_raw.length].title[0]
+            : true) &&
           !/^[一二三四五六七八九十]+$/.test(ocrResults[0].text) && // 非子标题
           !/^[（\(]+/.test(ocrResults[0].text)
         ) {
@@ -215,16 +227,11 @@ export async function parse(
     }
   }
 
-
-  // TODO
-  // 27卷 答谢萨拉·博斯祝贺中华人民共和国成立的电报 在目录中出现，但在正文中缺失（p495），暂时先屏蔽这篇文章
-  catalogs = catalogs.filter(i => i.title != '答谢萨拉·博斯祝贺中华人民共和国成立的电报');
-
   // TODO
   // 27卷 201 页 上下颠倒
 
-  // console.log(catalogs, articles_raw);
-  // console.log(articles_raw.map(i => i[0].ocr_results[0].text).map((i,idx) => i + ' ## ' + (catalogs[idx] || {}).title));
+  console.log(catalogs, articles_raw);
+  console.log(articles_raw.map(i => i[0].ocr_results[0].text).map((i,idx) => i + ' ## ' + (catalogs[idx] || {}).title));
 
   const articles_parts = articles_raw.map(i => extract_parts(i));
   return articles_parts.map((i, idx) => ({

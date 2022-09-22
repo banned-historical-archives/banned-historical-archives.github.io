@@ -493,6 +493,70 @@ const books: Book[] = [
   },
   {
     entity: {
+      id: 'maoquanji29',
+      name: '毛泽东全集第29卷',
+      internal: false,
+      type: 'pdf',
+      official: true,
+      author: '张迪杰',
+      files:
+        'https://github.com/banned-historical-archives/banned-historical-archives0/raw/main/mao-quanji/29-OCR.pdf',
+    },
+    parser_option: {
+      page_limits: [
+        [11, 37],
+        ...exclude(
+          [38, 547],
+          [
+            39, 44, 54, 56, 74, 76, 79, 93, 109, 124, 129, 150, 169, 171, 175,
+            181, 183, 184, 185, 186, 187, 188, 189, 198, 200, 201, 202, 203,
+            204, 214, 218, 220, 221, 237, 277, 278, 293, 327, 328, 329, 330,
+            333, 369, 394, 400, 402, 411, 439, 448, 462, 473, 477, 479, 490,
+            495, 497, 499, 501, 503, 505, 532, 536, 539, 540, 543,
+          ],
+        ),
+      ],
+    },
+    parser: maoquanji.parse,
+    path: join(
+      normalize(__dirname),
+      '../public/books/archives0/mao-quanji/29-OCR.pdf',
+    ),
+  },
+  {
+    entity: {
+      id: 'maoquanji30',
+      name: '毛泽东全集第30卷',
+      internal: false,
+      type: 'pdf',
+      official: true,
+      author: '张迪杰',
+      files:
+        'https://github.com/banned-historical-archives/banned-historical-archives0/raw/main/mao-quanji/30-OCR.pdf',
+    },
+    parser_option: {
+      page_limits: [
+        [11, 36],
+        ...exclude(
+          [37, 541],
+          [
+            46, 59, 81, 104, 128, 130, 152, 191, 204, 215, 219, 235, 254, 260,
+            263, 265, 267, 270, 275, 296, 298, 314, 330, 331, 332, 333, 348,
+            349, 350, 361, 368, 369, 370, 371, 372, 388, 390, 398, 410, 411,
+            455, 463, 469, 472, 473, 474, 483, 494, 497, 509, 513, 514, 524,
+            530,
+          ],
+        ),
+      ],
+    },
+    parser: maoquanji.parse,
+    path: join(
+      normalize(__dirname),
+      '../public/books/archives0/mao-quanji/30-OCR.pdf',
+    ),
+  },
+  {
+    entity: {
       id: 'wanghongwen',
       name: '王洪文文集',
       internal: false,
