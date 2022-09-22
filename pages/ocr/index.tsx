@@ -30,10 +30,10 @@ export default function OCR() {
   const [curY, setCurY] = useState(0);
   const [noCache, setNoCache] = useState(false);
   const [img_ext, setExt] = useState('jpg');
-  const [id, setId] = useState('maoquanji27');
+  const [id, setId] = useState('maoquanji28');
   const [isPDF, setIsPDF] = useState(true);
-  const [PDFPath, setPDFPath] = useState('archives0/mao-quanji/27-OCR.pdf');
-  const [range, setRange] = useState('11-12');
+  const [PDFPath, setPDFPath] = useState('archives0/mao-quanji/28-OCR.pdf');
+  const [range, setRange] = useState('13-13');
   const [resize, setResize] = useState(1500);
   const update = useCallback(async () => {
     const a = parseInt(range.split('-')[0]);
@@ -141,6 +141,13 @@ export default function OCR() {
           checked={isPDF}
           onChange={() => setIsPDF(!isPDF)}
         />
+        id:
+        <input
+          defaultValue={id}
+          onBlur={(e) => {
+            setId(e.target.value);
+          }}
+        />
         {isPDF ? (
           <>
             pdfPath:
@@ -158,13 +165,6 @@ export default function OCR() {
               defaultValue={img_ext}
               onBlur={(e) => {
                 setExt(e.target.value);
-              }}
-            />
-            id:
-            <input
-              defaultValue={id}
-              onBlur={(e) => {
-                setId(e.target.value);
               }}
             />
           </div>

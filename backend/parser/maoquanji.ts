@@ -181,10 +181,18 @@ export async function parse(
           .filter((i) => i.text !== '目录')
           .map((i) => (i.text = i.text.replace(/[，:·：\.\d]*$/, '')));
         for (let i = 0; i < catalogs_raw.length; i += 2) {
-          catalogs.push({
-            title: catalogs_raw[i],
-            ...extract_dates(catalogs_raw[i + 1]),
-          });
+          if (!/^（/.test(catalogs_raw[i + 1])) {
+            catalogs.push({
+              title: catalogs_raw[i] + catalogs_raw[i + 1],
+              ...extract_dates(catalogs_raw[i + 2]),
+            });
+            ++i;
+          } else {
+            catalogs.push({
+              title: catalogs_raw[i],
+              ...extract_dates(catalogs_raw[i + 1]),
+            });
+          }
         }
       } else {
         // 正文
@@ -192,11 +200,13 @@ export async function parse(
         const first_letter_height = ocrResults[0].box[3][1] - ocrResults[0].box[0][1];
         if (
           first_letter_height > 28 &&
+          ocrResults[0].box[0][1] > 200 &&
           !/^[一二三四五六七八九十]+$/.test(ocrResults[0].text) && // 非子标题
           !/^[（\(]+/.test(ocrResults[0].text)
         ) {
           articles_raw.push([]);
         }
+
         articles_raw[articles_raw.length - 1].push({
           ocr_results: ocrResults,
           page,
@@ -207,11 +217,11 @@ export async function parse(
 
 
   // TODO
-  // 答谢萨拉·博斯祝贺中华人民共和国成立的电报 在目录中出现，但在正文中缺失（p495），暂时先屏蔽这篇文章
+  // 27卷 答谢萨拉·博斯祝贺中华人民共和国成立的电报 在目录中出现，但在正文中缺失（p495），暂时先屏蔽这篇文章
   catalogs = catalogs.filter(i => i.title != '答谢萨拉·博斯祝贺中华人民共和国成立的电报');
 
   // TODO
-  // 201 页 上下颠倒
+  // 27卷 201 页 上下颠倒
 
   // console.log(catalogs, articles_raw);
   // console.log(articles_raw.map(i => i[0].ocr_results[0].text).map((i,idx) => i + ' ## ' + (catalogs[idx] || {}).title));

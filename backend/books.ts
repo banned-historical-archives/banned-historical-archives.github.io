@@ -426,7 +426,8 @@ const books: Book[] = [
       type: 'pdf',
       official: true,
       author: '张迪杰',
-      files: 'https://github.com/banned-historical-archives/banned-historical-archives0/raw/main/mao-quanji/27-OCR.pdf',
+      files:
+        'https://github.com/banned-historical-archives/banned-historical-archives0/raw/main/mao-quanji/27-OCR.pdf',
     },
     parser_option: {
       page_limits: [
@@ -451,6 +452,43 @@ const books: Book[] = [
     path: join(
       normalize(__dirname),
       '../public/books/archives0/mao-quanji/27-OCR.pdf',
+    ),
+  },
+  {
+    entity: {
+      id: 'maoquanji28',
+      name: '毛泽东全集第28卷',
+      internal: false,
+      type: 'pdf',
+      official: true,
+      author: '张迪杰',
+      files:
+        'https://github.com/banned-historical-archives/banned-historical-archives0/raw/main/mao-quanji/28-OCR.pdf',
+    },
+    parser_option: {
+      page_limits: [
+        [11, 34],
+        ...exclude(
+          [35, 540],
+          [
+            42, 51, 55, 57, 61, 72, 85, 89, 90, 91, 92, 93, 94, 95, 96, 102,
+            103, 116, 118, 120, 122, 125, 129, 132, 134, 139, 149, 160, 161,
+            163, 173, 190, 198, 200, 201, 205, 207, 218, 219, 221, 223, 225,
+            227, 228, 231, 237, 239, 241, 246, 257, 262, 265, 267, 268, 273,
+            277, 279, 282, 289, 291, 293, 295, 298, 300, 302, 305, 309, 312,
+            314, 324, 330, 332, 334, 335, 338, 340, 346, 348, 352, 354, 356,
+            366, 375, 377, 379, 383, 393, 394, 399, 401, 407, 409, 412, 416,
+            419, 425, 430, 432, 445, 453, 454, 455, 474, 476, 478, 481, 488,
+            489, 490, 491, 492, 493, 494, 495, 496, 497, 503, 504, 510, 511,
+            512, 513, 516, 517, 519, 525, 526, 530, 533,
+          ],
+        ),
+      ],
+    },
+    parser: maoquanji.parse,
+    path: join(
+      normalize(__dirname),
+      '../public/books/archives0/mao-quanji/28-OCR.pdf',
     ),
   },
   {
