@@ -3,11 +3,12 @@ import Head from 'next/head';
 import dynamic from 'next/dynamic';
 import type { AppProps } from 'next/app'
 
-import type { ReactElement, ReactNode } from 'react'
+import { ReactElement, ReactNode, useEffect, useState } from 'react'
 import type { NextPage } from 'next'
 
 import { createTheme } from '@mui/material/styles';
 import { ThemeProvider } from "@mui/material/styles";
+
 
 const theme = createTheme({
   palette: {
@@ -27,13 +28,16 @@ type AppPropsWithLayout = AppProps & {
 }
 
 function MyApp({ Component, pageProps }: AppPropsWithLayout) {
-  const getLayout = Component.getLayout || ((page) => page)
+  const getLayout = Component.getLayout || ((page) => page);
 
   return (
     <ThemeProvider theme={theme}>
       <Head>
         <meta httpEquiv="content-language" content="zh-CN" />
-        <meta name="description" content="和谐历史档案馆 Banned Historical Archives"/>
+        <meta
+          name="description"
+          content="和谐历史档案馆 Banned Historical Archives"
+        />
         <meta name="color-scheme" content="light only"></meta>
       </Head>
       <h1 style={{ position: 'fixed', left: '100%' }}>和谐历史档案馆</h1>

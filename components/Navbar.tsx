@@ -187,9 +187,8 @@ export default function Navbar() {
                 return (
                   <Button
                     key={path}
-                    href={path}
-                    target="_blank"
                     sx={{ color: 'white' }}
+                    onClick={() => router.push(path)}
                   >
                     {name}
                   </Button>
