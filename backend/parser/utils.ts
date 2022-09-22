@@ -88,7 +88,7 @@ export function extract_dates(str: string): {dates: Date[], is_range_date: boole
   str = str.replace(/ /g, '');
 
   const to = '\\-至—';
-  const seperator = '\\,，';
+  const seperator = '\\,，、';
   const cn_digitals = '\\d一二三四五六七八九○O〇十廿卅卌';
 
   function normalize_date(s: string) {
@@ -148,11 +148,12 @@ export function extract_dates(str: string): {dates: Date[], is_range_date: boole
     ),
   )[0];
   // 1911.10.10,11,12
-  // 1911.10,12
+  // 1911.10.10,11.12,12.23
+  // 1911.10,11,12
   const format_b = Array.from(
     str.matchAll(
       new RegExp(
-        `\\d+\\.\\d+(\\.\\d+)?[${seperator}]+(\\d+${seperator}?)+`,
+        `\\d+\\.\\d+(\\.\\d+)?[${seperator}]+(\\d+(\\.\\d)?[${seperator}]?)+`,
         'g',
       ),
     ),
@@ -176,12 +177,13 @@ export function extract_dates(str: string): {dates: Date[], is_range_date: boole
       ),
     ),
   )[0];
-  // 一九三二年十月二十日，十一月十日
-  // 一九三二年十月，十一月
+  // 一九三二年十月二十日，二十一日，二十二日
+  // 一九三二年十月二十日，十一月十日，十一月十二日
+  // 一九三二年十月，十一月，十二月
   const format_e = Array.from(
     str.matchAll(
       new RegExp(
-        `[${cn_digitals}]+年[${cn_digitals}]+月([${cn_digitals}]+日)?[${seperator}]+[${cn_digitals}]+月([${cn_digitals}]+日)?`,
+        `[${cn_digitals}]+年[${cn_digitals}]+月([${cn_digitals}]+日)?[${seperator}]+([${cn_digitals}]+[月日]+[${seperator}]?)+`,
         'g',
       ),
     ),
@@ -192,7 +194,7 @@ export function extract_dates(str: string): {dates: Date[], is_range_date: boole
   const format_f = Array.from(
     str.matchAll(
       new RegExp(
-        `[${cn_digitals}]+年[${cn_digitals}]+月([${cn_digitals}]+日)?[^${seperator}${to}]`,
+        `[${cn_digitals}]+年([${cn_digitals}]+月)?([${cn_digitals}]+日)?`,
         'g',
       ),
     ),
@@ -202,9 +204,16 @@ export function extract_dates(str: string): {dates: Date[], is_range_date: boole
     const s = normalize_date((format_a || format_d)[0]).split('-');
     let last_year = 0;
     let last_month = 0;
+    let has_day = true;
     return {
       dates: s.map((i, idx) => {
-        const t = i.split(new RegExp(`[\\.年月日]`)).map((j) => parseInt(j));
+        const t: (number | undefined)[] = i
+          .split(new RegExp(`[\\.年月日]`))
+          .map((j) => parseInt(j))
+          .map((i) => (i ? i : undefined));
+        if (idx == 0) {
+          has_day = !!t[2];
+        }
         if (idx == 0 || (t[0] && t[1] && t[2])) {
           last_year = t[0] || last_year;
           last_month = t[1] || last_month;
@@ -222,11 +231,17 @@ export function extract_dates(str: string): {dates: Date[], is_range_date: boole
               day: t[1],
             };
           } else {
-            return {
-              year: last_year,
-              month: last_month,
-              day: t[0],
-            };
+            return has_day
+              ? {
+                  year: last_year,
+                  month: last_month,
+                  day: t[0],
+                }
+              : {
+                  year: last_year,
+                  month: t[0],
+                  day: undefined,
+                };
           }
         }
       }),
@@ -235,12 +250,19 @@ export function extract_dates(str: string): {dates: Date[], is_range_date: boole
   } else if (format_b || format_c || format_e || format_f) {
     const s = normalize_date(
       (format_b || format_c || format_e || format_f)[0],
-    ).split(',');
+    ).split(/[\,]/);
     let last_year = 0;
     let last_month = 0;
+    let has_day = false;
     return {
       dates: s.map((i, idx) => {
-        const t = i.split(new RegExp(`[\\.年月日]`)).map((j) => parseInt(j));
+        const t: (number | undefined)[] = i
+          .split(new RegExp(`[\\.年月日]`))
+          .map((j) => parseInt(j))
+          .map((i) => (i ? i : undefined));
+        if (idx == 0) {
+          has_day = !!t[2];
+        }
         if (idx == 0 || (t[0] && t[1] && t[2])) {
           last_year = t[0] || last_year;
           last_month = t[1] || last_month;
@@ -258,11 +280,17 @@ export function extract_dates(str: string): {dates: Date[], is_range_date: boole
               day: t[1],
             };
           } else {
-            return {
-              year: last_year,
-              month: last_month,
-              day: t[0],
-            };
+            return has_day
+              ? {
+                  year: last_year,
+                  month: last_month,
+                  day: t[0],
+                }
+              : {
+                  year: last_year,
+                  month: t[0],
+                  day: undefined,
+                };
           }
         }
       }),

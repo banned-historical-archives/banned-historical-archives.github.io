@@ -13,6 +13,7 @@ import {
 } from '../../types';
 import pdf2image from '../pdf2image';
 import { normalize } from '../utils';
+import { extract_dates } from './utils';
 
 const opt = {
 };
@@ -88,14 +89,30 @@ export async function parse(
           ),
         })
       ).ocr_results
-        .filter((i) => i.text && !/^[\d]+$/.test(i.text)) // 去页码
+        .filter((i) => i.text && !/^[:·：\.\d]*$/.test(i.text)) // 去页码
+        .filter(i => i.box[3][1] > 125) // 去页眉
         .sort((a, b) => a.box[0][1] - b.box[0][1]);
 
       // 目录，正文中标题含有不能被准确识别的标注，所以以目录的标题为准
       if (i == 0) {
-
-      } else { // 正文
-
+        const catalogs_raw = ocrResults
+          .filter((i) => i.text !== '目录')
+          .map((i) => (i.text = i.text.replace(/[:·：\.\d]*$/, '')));
+        const catalogs: {
+          title: string;
+          dates: Date[];
+          is_range_date: boolean;
+        }[] = [];
+        for (let i = 0; i < catalogs_raw.length; i += 2) {
+          catalogs.push({
+            title: catalogs_raw[i],
+            ...extract_dates(catalogs_raw[i + 1]),
+          });
+        }
+        console.log(catalogs);
+      } else {
+        // 正文
+        console.log(ocrResults);
       }
       console.log(page);
     }
