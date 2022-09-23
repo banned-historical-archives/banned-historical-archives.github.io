@@ -149,20 +149,21 @@ export async function parse(
   const fixtures: {
     scale: { [volumn: string]: Map<number, number> };
     ignored_article: { [volumn: string]: Set<string> };
-    assert_not_title_page: { [volumn: string]: Set<number> };
+    assert_no_title_page: { [volumn: string]: Set<number> };
   } = {
     scale: {
       34: new Map([
         [41, 1.6],
         [398, 1.3],
       ]),
+      48: new Map([[523, 1.3]]),
     },
     ignored_article: {
       // TODO
       // 27卷 答谢萨拉·博斯祝贺中华人民共和国成立的电报 在目录中出现，但在正文中缺失（p495），暂时先屏蔽这篇文章
       27: new Set(['答谢萨拉·博斯祝贺中华人民共和国成立的电报']),
     },
-    assert_not_title_page: {
+    assert_no_title_page: {
       30: new Set([125]),
       33: new Set([123]),
       34: new Set([31, 34, 202]),
@@ -173,6 +174,7 @@ export async function parse(
       43: new Set([260]),
       44: new Set([169, 533]),
       47: new Set([272]),
+      48: new Set([112, 339]),
     },
   };
 
@@ -341,7 +343,7 @@ export async function parse(
           !/^[一二三四五六七八九十]+$/.test(ocrResults[0].text) && // 非子标题
           !/^[（\(]+/.test(ocrResults[0].text)
         ) {
-          if (!fixtures.assert_not_title_page[volume]?.has(page)) {
+          if (!fixtures.assert_no_title_page[volume]?.has(page)) {
             articles_raw.push([]);
           }
         }
