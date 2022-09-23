@@ -4,7 +4,7 @@ import books from '../backend/books';
 import { ContentType, ParserResult } from '../types';
 
 describe('maoquanji-title', async () => {
-  for (let idx = 27; idx <= 32; ++idx) {
+  for (let idx = 27; idx <= 52; ++idx) {
     const book = books.find((i) => i.entity.id === `maoquanji${idx}`)!;
     const res = await book.parser(book.path, book.parser_option);
     it('title', () => {
