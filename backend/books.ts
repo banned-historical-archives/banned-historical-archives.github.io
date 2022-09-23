@@ -965,6 +965,40 @@ const books: Book[] = [
   },
   {
     entity: {
+      id: 'maoquanji43',
+      name: '毛泽东全集第43卷',
+      internal: false,
+      type: 'pdf',
+      official: true,
+      author: '张迪杰',
+      files:
+        'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives0/main/mao-quanji/43-OCR.pdf',
+    },
+    parser_option: {
+      page_limits: [
+        [11, 25],
+        ...exclude(
+          [26, 532],
+          [
+            29, 30, 33, 90, 93, 94, 95, 96, 98, 104, 105, 136, 137, 154, 167,
+            168, 169, 229, 230, 231, 232, 233, 234, 235, 242, 256, 272, 273,
+            278, 279, 283, 291, 293, 294, 295, 296, 301, 302, 303, 304, 305,
+            306, 307, 308, 309, 310, 311, 312, 313, 337, 338, 339, 340, 341,
+            342, 346, 373, 379, 385, 389, 393, 399, 418, 419, 420, 422, 423,
+            424, 428, 429, 430, 431, 432, 433, 434, 435, 445, 465, 472, 473,
+            474, 475, 476, 490, 492, 496, 497, 498, 514, 516, 517, 518, 519,
+          ],
+        ),
+      ],
+    },
+    parser: maoquanji.parse,
+    path: join(
+      normalize(__dirname),
+      '../public/books/archives0/mao-quanji/43-OCR.pdf',
+    ),
+  },
+  {
+    entity: {
       id: 'wanghongwen',
       name: '王洪文文集',
       internal: false,
