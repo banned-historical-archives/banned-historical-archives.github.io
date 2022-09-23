@@ -41,6 +41,7 @@ import Authors from '../../components/Authors';
 import { DateFilter, useDateFiletrDialog } from '../../components/useDateFilterDialog';
 import { useAuthorFilterDialog } from '../../components/useAuthorFilterDialog';
 import { useTagFilterDialog } from '../../components/useTagFilterDialog';
+import { useSourceFilterDialog } from '../../components/useSourceFilterDialog';
 
 export const getStaticProps: GetStaticProps = async (
   context: GetStaticPropsContext,
@@ -206,6 +207,14 @@ export default function Articles({ articles }: { articles: Article[] }) {
     );
     return m;
   }, [articles]);
+  const sources_all = useMemo(() => {
+    const set = new Set<string>();
+    articles.forEach((i) =>
+      i.publications.forEach((j) => j.name && set.add(j.name)),
+    );
+    return Array.from(set).sort();
+  }, [articles]);
+
   const authors_all = useMemo(() => {
     const set = new Set<string>();
     articles.forEach((i) =>
@@ -230,6 +239,13 @@ export default function Articles({ articles }: { articles: Article[] }) {
     AuthorDialog,
     setAuthorDialog,
   } = useAuthorFilterDialog(authors_all);
+  const {
+    sources,
+    sourceFilter,
+    setSourceFilter,
+    SourceDialog,
+    setSourceDialog,
+  } = useSourceFilterDialog(sources_all);
   const [tipsAnchorEl, setTipsAnchorEl] = useState<HTMLElement | null>(null);
 
   const showTips = (event: React.MouseEvent<HTMLElement>) => {
@@ -247,9 +263,12 @@ export default function Articles({ articles }: { articles: Article[] }) {
         authorFilter ? !!i.authors.find((k) => k.name === authorFilter) : true,
       )
       .filter((i) =>
+        sourceFilter ? !!i.publications.find((k) => k.name.indexOf(sourceFilter) > -1) : true,
+      )
+      .filter((i) =>
         tagFilter ? !!i.tags.find((k) => k.id === tagFilter) : true,
       );
-  }, [articles, dateFilter, tagFilter, authorFilter]);
+  }, [articles, dateFilter, tagFilter, authorFilter, sourceFilter]);
 
   return (
     <>
@@ -258,6 +277,7 @@ export default function Articles({ articles }: { articles: Article[] }) {
       </Head>
       {DateFilterDialog}
       {AuthorDialog}
+      {SourceDialog}
       {TagDialog}
       <Stack
         p={2}
@@ -266,7 +286,7 @@ export default function Articles({ articles }: { articles: Article[] }) {
       >
         <Stack direction="row">
           <Grid container spacing={1}>
-            <Grid item>
+            <Grid item xs={12} md={5}>
               <Stack direction="row" alignItems="center">
                 <Typography variant="body1" sx={{ whiteSpace: 'nowrap' }}>
                   时间范围：
@@ -294,7 +314,7 @@ export default function Articles({ articles }: { articles: Article[] }) {
                 </Stack>
               </Stack>
             </Grid>
-            <Grid item xs={12} md={4}>
+            <Grid item xs={12} md={7} sx={{ overflowX: 'scroll' }}>
               <Stack direction="row" alignItems="center">
                 <Typography variant="body1" sx={{ whiteSpace: 'nowrap' }}>
                   标签：
@@ -308,7 +328,9 @@ export default function Articles({ articles }: { articles: Article[] }) {
                         label={i.name}
                         variant={isSelected ? 'filled' : 'outlined'}
                         color={isSelected ? 'primary' : 'default'}
-                        onDelete={isSelected ? () => setTagFilter(null) : undefined}
+                        onDelete={
+                          isSelected ? () => setTagFilter(null) : undefined
+                        }
                         onClick={(e) => {
                           setTagFilter(i.id);
                         }}
@@ -324,7 +346,7 @@ export default function Articles({ articles }: { articles: Article[] }) {
                 </Stack>
               </Stack>
             </Grid>
-            <Grid item xs={12} md={8}>
+            <Grid item xs={12} md={5} sx={{ overflowX: 'scroll' }}>
               <Stack direction="row" alignItems="center">
                 <Typography variant="body1">作者：</Typography>
                 <Stack direction="row" spacing={1}>
@@ -355,33 +377,67 @@ export default function Articles({ articles }: { articles: Article[] }) {
                 </Stack>
               </Stack>
             </Grid>
+            <Grid item xs={12} md={6} sx={{ overflowX: 'scroll' }}>
+              <Stack direction="row" alignItems="center">
+                <Typography variant="body1" sx={{ whiteSpace: 'nowrap' }}>
+                  来源：
+                </Typography>
+                <Stack direction="row" spacing={1}>
+                  {sources.map((i) => {
+                    const isSelected = i == sourceFilter;
+                    return (
+                      <Chip
+                        key={i}
+                        label={i}
+                        variant={isSelected ? 'filled' : 'outlined'}
+                        color={isSelected ? 'primary' : 'default'}
+                        onDelete={
+                          isSelected ? () => setSourceFilter(null) : undefined
+                        }
+                        onClick={(e) => {
+                          setSourceFilter(i);
+                        }}
+                      />
+                    );
+                  })}
+                  <Chip
+                    label={'更多'}
+                    onClick={(e) => {
+                      setSourceDialog(true);
+                    }}
+                  />
+                </Stack>
+              </Stack>
+            </Grid>
+            <Grid item xs={1} md={1}>
+              <Popover
+                id="tips"
+                open={!!tipsAnchorEl}
+                anchorEl={tipsAnchorEl}
+                disableRestoreFocus
+                sx={{
+                  pointerEvents: 'none',
+                }}
+                anchorOrigin={{
+                  vertical: 'bottom',
+                  horizontal: 'center',
+                }}
+              >
+                <img src="/images/filter.png" width="200" />
+                <Typography sx={{ p: 2 }}>
+                  可在每一列右上角添加筛选器进行高级检索
+                </Typography>
+              </Popover>
+              <Button
+                onClick={showTips}
+                onMouseEnter={showTips}
+                onMouseLeave={hideTips}
+                sx={{ fontSize: 11, width: '100%' }}
+              >
+                高级检索
+              </Button>
+            </Grid>
           </Grid>
-          <Popover
-            id="tips"
-            open={!!tipsAnchorEl}
-            anchorEl={tipsAnchorEl}
-            disableRestoreFocus
-            sx={{
-              pointerEvents: 'none',
-            }}
-            anchorOrigin={{
-              vertical: 'bottom',
-              horizontal: 'center',
-            }}
-          >
-            <img src="/images/filter.png" width="200" />
-            <Typography sx={{ p: 2 }}>
-              可在每一列右上角添加筛选器进行高级检索
-            </Typography>
-          </Popover>
-          <Button
-            onClick={showTips}
-            onMouseEnter={showTips}
-            onMouseLeave={hideTips}
-            sx={{ width: 120, display: { xs: 'none', md: 'flex' } }}
-          >
-            高级检索
-          </Button>
         </Stack>
         <Stack sx={{ flex: 1, width: '100%' }}>
           <DataGrid
