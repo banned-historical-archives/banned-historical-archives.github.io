@@ -1070,6 +1070,39 @@ const books: Book[] = [
   },
   {
     entity: {
+      id: 'maoquanji46',
+      name: '毛泽东全集第46卷',
+      internal: false,
+      type: 'pdf',
+      official: true,
+      author: '张迪杰',
+      files:
+        'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives0/main/mao-quanji/46-OCR.pdf',
+    },
+    parser_option: {
+      page_limits: [
+        [11, 24],
+        ...exclude(
+          [25, 525],
+          [
+            30, 31, 45, 48, 49, 54, 59, 60, 61, 62, 63, 64, 65, 69, 73, 84, 94,
+            95, 96, 97, 98, 118, 130, 143, 157, 160, 173, 178, 179, 180, 181,
+            187, 190, 191, 197, 199, 202, 203, 223, 258, 288, 289, 292, 294,
+            332, 335, 344, 350, 367, 381, 388, 389, 390, 391, 392, 393, 394,
+            395, 401, 402, 403, 404, 405, 406, 407, 408, 409, 410, 411, 412,
+            462, 466, 475, 477, 514, 515, 519, 520,
+          ],
+        ),
+      ],
+    },
+    parser: maoquanji.parse,
+    path: join(
+      normalize(__dirname),
+      '../public/books/archives0/mao-quanji/46-OCR.pdf',
+    ),
+  },
+  {
+    entity: {
       id: 'wanghongwen',
       name: '王洪文文集',
       internal: false,
