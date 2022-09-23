@@ -930,6 +930,41 @@ const books: Book[] = [
   },
   {
     entity: {
+      id: 'maoquanji42',
+      name: '毛泽东全集第42卷',
+      internal: false,
+      type: 'pdf',
+      official: true,
+      author: '张迪杰',
+      files:
+        'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives0/main/mao-quanji/42-OCR.pdf',
+    },
+    parser_option: {
+      page_limits: [
+        [11, 28],
+        ...exclude(
+          [29, 534],
+          [
+            46, 47, 48, 49, 56, 57, 111, 112, 113, 114, 115, 116, 117, 118, 119,
+            120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132,
+            133, 134, 135, 136, 137, 138, 139, 153, 154, 155, 156, 159, 160,
+            164, 191, 192, 219, 228, 229, 265, 274, 275, 320, 359, 372, 373,
+            374, 375, 376, 377, 384, 385, 387, 388, 389, 390, 391, 392, 393,
+            394, 395, 396, 399, 403, 404, 405, 406, 407, 408, 409, 410, 411,
+            412, 413, 414, 415, 416, 421, 422, 423, 424, 425, 445, 453, 464,
+            465, 466, 467, 468, 480, 481, 507, 508,
+          ],
+        ),
+      ],
+    },
+    parser: maoquanji.parse,
+    path: join(
+      normalize(__dirname),
+      '../public/books/archives0/mao-quanji/42-OCR.pdf',
+    ),
+  },
+  {
+    entity: {
       id: 'wanghongwen',
       name: '王洪文文集',
       internal: false,

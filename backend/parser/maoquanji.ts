@@ -148,7 +148,7 @@ export async function parse(
   const volume = basename(pdf_path).replace(/[^\d]/g, '');
   const fixtures: {
     scale: { [volumn: string]: Map<number, number> };
-    ignore_article: { [volumn: string]: Set<string> };
+    ignored_article: { [volumn: string]: Set<string> };
     assert_not_title_page: { [volumn: string]: Set<number> };
   } = {
     scale: {
@@ -157,7 +157,7 @@ export async function parse(
         [398, 1.3],
       ]),
     },
-    ignore_article: {
+    ignored_article: {
       // TODO
       // 27卷 答谢萨拉·博斯祝贺中华人民共和国成立的电报 在目录中出现，但在正文中缺失（p495），暂时先屏蔽这篇文章
       27: new Set(['答谢萨拉·博斯祝贺中华人民共和国成立的电报']),
@@ -169,6 +169,7 @@ export async function parse(
       37: new Set([294]),
       40: new Set([438]),
       41: new Set([472]),
+      42: new Set([251]),
     },
   };
 
@@ -239,7 +240,7 @@ export async function parse(
           }
 
           if (
-            fixtures.ignore_article[volume]?.has(
+            fixtures.ignored_article[volume]?.has(
               catalogs[catalogs.length - 1].title,
             )
           ) {
