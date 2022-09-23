@@ -792,6 +792,39 @@ const books: Book[] = [
   },
   {
     entity: {
+      id: 'maoquanji38',
+      name: '毛泽东全集第38卷',
+      internal: false,
+      type: 'pdf',
+      official: true,
+      author: '张迪杰',
+      files:
+        'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives0/main/mao-quanji/38-OCR.pdf',
+    },
+    parser_option: {
+      page_limits: [
+        [12, 25],
+        ...exclude(
+          [26, 532],
+          [
+            29, 33, 45, 60, 63, 68, 76, 84, 85, 95, 96, 97, 98, 99, 100, 101,
+            102, 103, 104, 115, 118, 193, 217, 218, 219, 220, 221, 225, 238,
+            239, 241, 264, 267, 294, 297, 298, 299, 300, 301, 302, 304, 314,
+            334, 335, 336, 349, 350, 351, 352, 353, 367, 368, 369, 381, 384,
+            386, 389, 394, 410, 411, 412, 413, 414, 415, 416, 417, 418, 419,
+            420, 421, 438, 455, 456, 457, 458, 511, 512, 523, 531,
+          ],
+        ),
+      ],
+    },
+    parser: maoquanji.parse,
+    path: join(
+      normalize(__dirname),
+      '../public/books/archives0/mao-quanji/38-OCR.pdf',
+    ),
+  },
+  {
+    entity: {
       id: 'wanghongwen',
       name: '王洪文文集',
       internal: false,
