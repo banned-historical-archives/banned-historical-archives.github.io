@@ -1214,6 +1214,39 @@ const books: Book[] = [
   },
   {
     entity: {
+      id: 'maoquanji50',
+      name: '毛泽东全集第50卷',
+      internal: false,
+      type: 'pdf',
+      official: true,
+      author: '张迪杰',
+      files:
+        'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives0/main/mao-quanji/50-OCR.pdf',
+    },
+    parser_option: {
+      page_limits: [
+        [11, 30],
+        ...exclude(
+          [31, 534],
+          [
+            33, 39, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 118,
+            127, 138, 139, 146, 169, 170, 171, 197, 199, 202, 263, 264, 267,
+            285, 303, 314, 317, 318, 319, 320, 327, 328, 382, 392, 401, 402,
+            419, 420, 421, 422, 423, 424, 443, 446, 447, 448, 449, 450, 451,
+            452, 459, 461, 475, 482, 483, 495, 496, 498, 499, 500, 501, 502,
+            503, 511, 519, 524,
+          ],
+        ),
+      ],
+    },
+    parser: maoquanji.parse,
+    path: join(
+      normalize(__dirname),
+      '../public/books/archives0/mao-quanji/50-OCR.pdf',
+    ),
+  },
+  {
+    entity: {
       id: 'wanghongwen',
       name: '王洪文文集',
       internal: false,
