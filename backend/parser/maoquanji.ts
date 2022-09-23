@@ -168,6 +168,7 @@ export async function parse(
       34: new Set([31, 34, 202]),
       37: new Set([294]),
       40: new Set([438]),
+      41: new Set([472]),
     },
   };
 

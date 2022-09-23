@@ -899,6 +899,37 @@ const books: Book[] = [
   },
   {
     entity: {
+      id: 'maoquanji41',
+      name: '毛泽东全集第41卷',
+      internal: false,
+      type: 'pdf',
+      official: true,
+      author: '张迪杰',
+      files:
+        'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives0/main/mao-quanji/41-OCR.pdf',
+    },
+    parser_option: {
+      page_limits: [
+        [11, 26],
+        ...exclude(
+          [27, 532],
+          [
+            53, 54, 60, 71, 98, 99, 100, 101, 125, 126, 127, 128, 129, 130, 136,
+            138, 141, 147, 150, 152, 160, 164, 186, 209, 322, 323, 328, 333,
+            334, 335, 336, 337, 338, 358, 360, 361, 362, 445, 446, 447, 448,
+            455, 456, 463, 503, 504, 505, 506, 507, 527,
+          ],
+        ),
+      ],
+    },
+    parser: maoquanji.parse,
+    path: join(
+      normalize(__dirname),
+      '../public/books/archives0/mao-quanji/41-OCR.pdf',
+    ),
+  },
+  {
+    entity: {
       id: 'wanghongwen',
       name: '王洪文文集',
       internal: false,
