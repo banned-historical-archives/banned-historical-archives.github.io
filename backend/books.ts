@@ -999,6 +999,43 @@ const books: Book[] = [
   },
   {
     entity: {
+      id: 'maoquanji44',
+      name: '毛泽东全集第44卷',
+      internal: false,
+      type: 'pdf',
+      official: true,
+      author: '张迪杰',
+      files:
+        'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives0/main/mao-quanji/44-OCR.pdf',
+    },
+    parser_option: {
+      page_limits: [
+        [11, 25],
+        ...exclude(
+          [26, 534],
+          [
+            32, 59, 60, 65, 66, 76, 87, 95, 96, 97, 98, 103, 121, 130, 141, 143,
+            162, 172, 194, 202, 203, 237, 253, 254, 255, 262, 263, 275, 276,
+            277, 278, 288, 295, 315, 316, 317, 321, 322, 323, 324, 328, 330,
+            340, 342, 343, 344, 349, 351, 352, 353, 354, 355, 356, 357, 358,
+            364, 369, 371, 372, 373, 374, 375, 376, 377, 378, 379, 380, 381,
+            382, 383, 384, 385, 386, 387, 388, 389, 390, 391, 392, 393, 394,
+            395, 396, 397, 398, 399, 400, 401, 425, 428, 429, 433, 438, 439,
+            440, 441, 457, 459, 467, 470, 474, 482, 483, 494, 496, 500, 501,
+            503, 504, 505, 510, 511, 512, 513, 514, 515, 516, 517, 518, 519,
+            520, 529, 530, 531,
+          ],
+        ),
+      ],
+    },
+    parser: maoquanji.parse,
+    path: join(
+      normalize(__dirname),
+      '../public/books/archives0/mao-quanji/44-OCR.pdf',
+    ),
+  },
+  {
+    entity: {
       id: 'wanghongwen',
       name: '王洪文文集',
       internal: false,
