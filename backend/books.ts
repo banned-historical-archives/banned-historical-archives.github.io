@@ -825,6 +825,42 @@ const books: Book[] = [
   },
   {
     entity: {
+      id: 'maoquanji39',
+      name: '毛泽东全集第39卷',
+      internal: false,
+      type: 'pdf',
+      official: true,
+      author: '张迪杰',
+      files:
+        'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives0/main/mao-quanji/39-OCR.pdf',
+    },
+    parser_option: {
+      page_limits: [
+        [11, 24],
+        ...exclude(
+          [25, 529],
+          [
+            26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 45, 59, 60, 85,
+            117, 118, 119, 120, 121, 122, 123, 124, 128, 151, 152, 159, 160,
+            161, 162, 163, 164, 165, 166, 197, 198, 199, 200, 201, 202, 203,
+            204, 223, 224, 225, 226, 227, 233, 234, 235, 241, 242, 243, 244,
+            245, 246, 247, 248, 249, 250, 258, 259, 260, 261, 262, 263, 264,
+            271, 290, 300, 307, 361, 363, 373, 379, 380, 381, 382, 383, 384,
+            385, 420, 421, 422, 434, 443, 444, 445, 456, 457, 460, 466, 468,
+            483, 487, 508, 509, 515, 518, 519, 521, 522, 523, 524, 525,
+            526, 527, 528,
+          ],
+        ),
+      ],
+    },
+    parser: maoquanji.parse,
+    path: join(
+      normalize(__dirname),
+      '../public/books/archives0/mao-quanji/39-OCR.pdf',
+    ),
+  },
+  {
+    entity: {
       id: 'wanghongwen',
       name: '王洪文文集',
       internal: false,
