@@ -157,6 +157,7 @@ export async function parse(
     },
     assert_not_title_page: {
       30: new Set([125]),
+      33: new Set([123]),
     },
   };
 
@@ -202,7 +203,7 @@ export async function parse(
         for (let i = 0; i < catalogs_raw.length; i++) {
           let j = i;
           let title = '';
-          while (!/^（/.test(catalogs_raw[j])) {
+          while (!/^（\d/.test(catalogs_raw[j])) {
             title += catalogs_raw[j];
             ++j;
           }
@@ -252,7 +253,7 @@ export async function parse(
   // 27卷 201 页 上下颠倒
 
   // console.log(catalogs, articles_raw);
-  // console.log(articles_raw.map(i => i[0].ocr_results[0].text).map((i,idx) => i + ' ## ' + (catalogs[idx] || {}).title));
+  console.log(articles_raw.map(i => i[0].ocr_results[0].text).map((i,idx) => i + ' ## ' + (catalogs[idx] || {}).title));
 
   const articles_parts = articles_raw.map(i => extract_parts(i));
   return articles_parts.map((i, idx) => ({
