@@ -157,6 +157,7 @@ export async function parse(
         [398, 1.3],
       ]),
       48: new Map([[523, 1.3]]),
+      49: new Map([[494, 1.3]]),
     },
     ignored_article: {
       // TODO
@@ -175,6 +176,7 @@ export async function parse(
       44: new Set([169, 533]),
       47: new Set([272]),
       48: new Set([112, 339]),
+      49: new Set([270]),
     },
   };
 
