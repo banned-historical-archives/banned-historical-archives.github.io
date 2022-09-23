@@ -587,6 +587,41 @@ const books: Book[] = [
   },
   {
     entity: {
+      id: 'maoquanji32',
+      name: '毛泽东全集第32卷',
+      internal: false,
+      type: 'pdf',
+      official: true,
+      author: '张迪杰',
+      files:
+        'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives0/main/mao-quanji/32-OCR.pdf',
+    },
+    parser_option: {
+      page_limits: [
+        [11, 34],
+        ...exclude(
+          [35, 535],
+          [
+            50, 95, 96, 97, 111, 112, 114, 123, 125, 136, 149, 154, 165, 192,
+            193, 198, 203, 205, 209, 212, 213, 214, 230, 231, 247, 250, 265,
+            270, 272, 273, 274, 279, 282, 290, 309, 313, 314, 315, 316, 317,
+            318, 319, 321, 322, 323, 324, 326, 338, 340, 350, 351, 359, 374,
+            387, 391, 409, 411, 415, 417, 418, 426, 427, 437, 478, 479, 480,
+            481, 482, 500, 501, 502, 503, 505, 506, 507, 508, 509, 510,
+            511, 512, 513, 514, 515, 516, 517, 518, 519, 521, 522, 523, 524,
+            525
+          ],
+        ),
+      ],
+    },
+    parser: maoquanji.parse,
+    path: join(
+      normalize(__dirname),
+      '../public/books/archives0/mao-quanji/32-OCR.pdf',
+    ),
+  },
+  {
+    entity: {
       id: 'wanghongwen',
       name: '王洪文文集',
       internal: false,
