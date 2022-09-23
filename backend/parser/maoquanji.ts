@@ -178,6 +178,7 @@ export async function parse(
       48: new Set([112, 339]),
       49: new Set([270]),
       50: new Set([189, 272]),
+      51: new Set([50, 173]),
     },
   };
 
@@ -337,6 +338,9 @@ export async function parse(
         }
       } else {
         if (!ocrResults.length) continue;
+        if (ocrResults[0].text.startsWith('附录')) {
+          ocrResults.shift();
+        }
         // 正文
         // 文章可按页码分割（大标题总在一页的最前面）
         const first_letter_height = ocrResults[0].box[3][1] - ocrResults[0].box[0][1];
