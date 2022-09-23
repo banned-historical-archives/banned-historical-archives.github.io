@@ -152,7 +152,10 @@ export async function parse(
     assert_not_title_page: { [volumn: string]: Set<number> };
   } = {
     scale: {
-      34: new Map([[41, 1.6], [398, 1.3]]),
+      34: new Map([
+        [41, 1.6],
+        [398, 1.3],
+      ]),
     },
     ignore_article: {
       // TODO
@@ -164,6 +167,7 @@ export async function parse(
       33: new Set([123]),
       34: new Set([31, 34, 202]),
       37: new Set([294]),
+      40: new Set([438]),
     },
   };
 
@@ -329,7 +333,7 @@ export async function parse(
             articles_raw.push([]);
           }
         }
-
+        if (!articles_raw[articles_raw.length - 1]) debugger;
         articles_raw[articles_raw.length - 1].push({
           ocr_results: ocrResults,
           page,
@@ -340,6 +344,8 @@ export async function parse(
 
   // TODO
   // 27卷 201 页 上下颠倒
+  // TODO
+  // 40卷 49页 方向不对
 
   // console.log(catalogs, articles_raw);
   console.log(
