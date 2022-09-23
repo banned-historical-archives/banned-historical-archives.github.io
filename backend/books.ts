@@ -1276,7 +1276,7 @@ const books: Book[] = [
     parser: maoyuanxin5.parse,
     path: join(normalize(__dirname), '../public/books/maoyuanxin5'),
   },
-].map((i) => {
+].filter(i => i.entity.id.startsWith('maoquanji')).map((i) => {
   const book: Book = {
     entity: i.entity,
     parser_option: i.parser_option as ParserOption,

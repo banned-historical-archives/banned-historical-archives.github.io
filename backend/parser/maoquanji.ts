@@ -194,22 +194,26 @@ export async function parse(
         const catalogs_raw = ocrResults
           .filter((i) => i.text !== '目录')
           .map((i) => {
-            i.text = i.text.replace(/[，\-．:·：\.\d]*$/, '');
+            i.text = i.text.replace(/[…，\=\-．:·：\+\.\d]*$/, '');
+            i.text = i.text.replace(/^[…，\-．:·：\+\.]*/, '');
             return i.text;
           })
           .filter((i) => i);
-        for (let i = 0; i < catalogs_raw.length; i += 2) {
-          if (!/^（/.test(catalogs_raw[i + 1])) {
-            catalogs.push({
-              title: catalogs_raw[i] + catalogs_raw[i + 1],
-              ...extract_dates(catalogs_raw[i + 2]),
-            });
-            ++i;
-          } else {
-            catalogs.push({
-              title: catalogs_raw[i],
-              ...extract_dates(catalogs_raw[i + 1]),
-            });
+        for (let i = 0; i < catalogs_raw.length; i++) {
+          let j = i;
+          let title = '';
+          while (!/^（/.test(catalogs_raw[j])) {
+            title += catalogs_raw[j];
+            ++j;
+          }
+          catalogs.push({
+            title,
+            ...extract_dates(catalogs_raw[j]),
+          });
+          i = j;
+
+          if (!catalogs[catalogs.length - 1].dates[0].year) {
+            debugger
           }
 
           if (
