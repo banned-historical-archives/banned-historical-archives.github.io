@@ -147,9 +147,13 @@ export async function parse(
 ): Promise<ParserResult[]> {
   const volume = basename(pdf_path).replace(/[^\d]/g, '');
   const fixtures: {
+    scale: { [volumn: string]: Map<number, number> };
     ignore_article: { [volumn: string]: Set<string> };
     assert_not_title_page: { [volumn: string]: Set<number> };
   } = {
+    scale: {
+      34: new Map([[41, 1.6], [398, 1.3]]),
+    },
     ignore_article: {
       // TODO
       // 27卷 答谢萨拉·博斯祝贺中华人民共和国成立的电报 在目录中出现，但在正文中缺失（p495），暂时先屏蔽这篇文章
@@ -158,6 +162,7 @@ export async function parse(
     assert_not_title_page: {
       30: new Set([125]),
       33: new Set([123]),
+      34: new Set([31, 34, 202]),
     },
   };
 
@@ -186,6 +191,16 @@ export async function parse(
           ),
         })
       ).ocr_results
+        .map((i) =>
+          fixtures.scale[volume]?.has(page)
+            ? {
+                ...i,
+                box: i.box.map((j) =>
+                  j.map((k) => k * fixtures.scale[volume]!.get(page)!),
+                ),
+              } as OCRResult
+            : i,
+        )
         .filter((i) => i.text && !/^[:·：\.\d]*$/.test(i.text)) // 去页码
         .filter((i) => i.box[3][1] > 125) // 去页眉
         .sort((a, b) => a.box[0][1] - b.box[0][1]);
@@ -225,6 +240,79 @@ export async function parse(
             catalogs.pop();
           }
         }
+        // 34卷目录22页缺失（对应原书12页）
+        if (volume === '34' && page == 21) {
+          catalogs.push(
+            ...[
+              {
+                title: '祝贺捷克斯洛伐克总统萨波托斯基七十寿辰的电报',
+                dates: [{ year: 1954, month: 12, day: 16 }],
+                is_range_date: false,
+              },
+              {
+                title: '给黄炎培的信',
+                dates: [{ year: 1954, month: 12, day: 17 }],
+                is_range_date: false,
+              },
+              {
+                title: '给章士钊的信',
+                dates: [{ year: 1954, month: 12, day: 17 }],
+                is_range_date: false,
+              },
+              {
+                title: '给毛泽荣的信',
+                dates: [{ year: 1954, month: 12, day: 18 }],
+                is_range_date: false,
+              },
+              {
+                title: '给郭耿光的信',
+                dates: [{ year: 1954, month: 12, day: 18 }],
+                is_range_date: false,
+              },
+              {
+                title: '关于政协的性质和任务的谈话提纲',
+                dates: [{ year: 1954, month: 12, day: 19 }],
+                is_range_date: false,
+              },
+              {
+                title: '关于政协的性质和任务',
+                dates: [{ year: 1954, month: 12, day: 19 }],
+                is_range_date: false,
+              },
+              {
+                title: '给李济深的信',
+                dates: [{ year: 1954, month: 12, day: 24 }],
+                is_range_date: false,
+              },
+              {
+                title: '给李达的信',
+                dates: [{ year: 1954, month: 12, day: 28 }],
+                is_range_date: false,
+              },
+              {
+                title: '对韶山全体农民来信的批语和复信',
+                dates: [{ year: 1954, month: 12 }],
+                is_range_date: false,
+              },
+              {
+                title:
+                  '对中央农村工作部关于全国第四次互助合作会议的报告的批语和修改',
+                dates: [{ year: 1954, month: 12, day: 30 }],
+                is_range_date: false,
+              },
+              {
+                title: '关于阅看冯雪峰的诗和寓言的批语',
+                dates: [{ year: 1954, month: 12, day: 31 }],
+                is_range_date: false,
+              },
+              {
+                title: '毛泽东、周恩来祝贺越南政府还都河内的电报',
+                dates: [{ year: 1954, month: 12, day: 31 }],
+                is_range_date: false,
+              },
+            ],
+          );
+        }
       } else {
         if (!ocrResults.length) continue;
         // 正文
@@ -240,6 +328,7 @@ export async function parse(
             articles_raw.push([]);
           }
         }
+        if (page == 398)debugger
 
         articles_raw[articles_raw.length - 1].push({
           ocr_results: ocrResults,
@@ -253,7 +342,13 @@ export async function parse(
   // 27卷 201 页 上下颠倒
 
   // console.log(catalogs, articles_raw);
-  console.log(articles_raw.map(i => i[0].ocr_results[0].text).map((i,idx) => i + ' ## ' + (catalogs[idx] || {}).title));
+  console.log(
+    articles_raw
+      .map((i) => [i[0].ocr_results[0].text, i[0].page])
+      .map(
+        (i, idx) => i[0] + '##' + i[1] + ' ## ' + (catalogs[idx] || {}).title,
+      ),
+  );
 
   const articles_parts = articles_raw.map(i => extract_parts(i));
   return articles_parts.map((i, idx) => ({
