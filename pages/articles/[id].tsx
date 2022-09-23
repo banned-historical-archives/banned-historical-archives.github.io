@@ -516,6 +516,7 @@ export default function ArticleViewer({
     | undefined
   >();
 
+  const [showMore, setShowMore] = useState(true);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [compareType, setCompareType] = useState<CompareType>(CompareType.none);
   const [comparePublication, setComparePublication] = useState<string>(
@@ -858,163 +859,175 @@ export default function ArticleViewer({
           sx={{ pt: 2, pl: 2, pr: 2 }}
           spacing={2}
         >
-          <Grid item xs={12} md={6}>
+          <Grid item xs={10} md={6}>
             <Typography variant="body1" sx={{ overflowX: 'scroll' }}>
               标题：
-              {article.title}{article.aliases.length ? `(别名:${article.aliases.map(x => x.name).join(',')})` : ''}
+              {article.title}
+              {article.aliases.length
+                ? `(别名:${article.aliases.map((x) => x.name).join(',')})`
+                : ''}
             </Typography>
           </Grid>
-          <Grid item xs={12} md={6}>
-            <Stack direction="row" spacing={1} alignItems="center">
-              <Typography variant="body1">作者：</Typography>
-              <Stack direction="row" sx={{ overflowX: 'scroll', flex: 1 }}>
-                <Authors authors={article.authors} />
-              </Stack>
-              {article.publications.map((i) => (
-                <img
-                  style={{ cursor: 'pointer' }}
-                  key={i.id}
-                  onClick={() =>
-                    window.open(
-                      `https://github.com/banned-historical-archives/banned-historical-archives.github.io/issues?q=+${encodeURIComponent(
+          <Grid item xs={2} sx={{ display: { md: 'none', xs: 'flex' } }}>
+            <Button onClick={() => setShowMore(!showMore)}>{showMore ? '隐藏' : '展开'}</Button>
+          </Grid>
+          {showMore ? (
+            <>
+              <Grid item xs={12} md={6}>
+                <Stack direction="row" spacing={1} alignItems="center">
+                  <Typography variant="body1">作者：</Typography>
+                  <Stack direction="row" sx={{ overflowX: 'scroll', flex: 1 }}>
+                    <Authors authors={article.authors} />
+                  </Stack>
+                  {article.publications.map((i) => (
+                    <img
+                      style={{ cursor: 'pointer' }}
+                      key={i.id}
+                      onClick={() =>
+                        window.open(
+                          `https://github.com/banned-historical-archives/banned-historical-archives.github.io/issues?q=+${encodeURIComponent(
+                            `is:issue [OCR patch]${article.title}[${i.name}]`,
+                          )}+`,
+                          '_blank',
+                        )
+                      }
+                      src={`https://img.shields.io/github/issues-search/banned-historical-archives/banned-historical-archives.github.io?style=for-the-badge&color=%23cc0000&label=%E6%A0%A1%E5%AF%B9%E8%AE%B0%E5%BD%95&query=${encodeURIComponent(
                         `is:issue [OCR patch]${article.title}[${i.name}]`,
-                      )}+`,
-                      '_blank',
-                    )
-                  }
-                  src={`https://img.shields.io/github/issues-search/banned-historical-archives/banned-historical-archives.github.io?style=for-the-badge&color=%23cc0000&label=%E6%A0%A1%E5%AF%B9%E8%AE%B0%E5%BD%95&query=${encodeURIComponent(
-                    `is:issue [OCR patch]${article.title}[${i.name}]`,
-                  )}`}
-                />
-              ))}
-            </Stack>
-          </Grid>
-          <Grid item xs={12} md={3}>
-            <Typography variant="body1" sx={{ overflowX: 'scroll' }}>
-              时间：
-              {article.is_range_date
-                ? `${date_to_string(article.dates[0])}-${date_to_string(
-                    article.dates[1],
-                  )}`
-                : article.dates.map((i) => date_to_string(i)).join(',')}
-            </Typography>
-          </Grid>
-          <Grid item xs={12} md={3}>
-            <Stack direction="row" alignItems="center">
-              <Typography variant="body1">标签：</Typography>
-              <Stack
-                direction="row"
-                spacing={1}
-                alignItems="center"
-                sx={{ flex: 1, overflowX: 'scroll' }}
-              >
-                <Tags tags={article.tags} />
-              </Stack>
-            </Stack>
-          </Grid>
-          <Grid item xs={12} md={6}>
-            <Stack direction="row" alignItems="center" spacing={1}>
-              <Typography variant="body1">选择来源：</Typography>
-              <Stack
-                direction="row"
-                spacing={1}
-                sx={{ flex: 1, overflowX: 'scroll' }}
-              >
-                {article.publications.map((i) => (
-                  <Chip
-                    key={i.id}
-                    label={i.name}
-                    variant={
-                      selectedPublication === i.id ? 'filled' : 'outlined'
-                    }
-                    color={selectedPublication === i.id ? 'primary' : 'default'}
-                    onClick={(e) => {
-                      setSelectedPublication(i.id);
+                      )}`}
+                    />
+                  ))}
+                </Stack>
+              </Grid>
+              <Grid item xs={12} md={3}>
+                <Typography variant="body1" sx={{ overflowX: 'scroll' }}>
+                  时间：
+                  {article.is_range_date
+                    ? `${date_to_string(article.dates[0])}-${date_to_string(
+                        article.dates[1],
+                      )}`
+                    : article.dates.map((i) => date_to_string(i)).join(',')}
+                </Typography>
+              </Grid>
+              <Grid item xs={12} md={3}>
+                <Stack direction="row" alignItems="center">
+                  <Typography variant="body1">标签：</Typography>
+                  <Stack
+                    direction="row"
+                    spacing={1}
+                    alignItems="center"
+                    sx={{ flex: 1, overflowX: 'scroll' }}
+                  >
+                    <Tags tags={article.tags} />
+                  </Stack>
+                </Stack>
+              </Grid>
+              <Grid item xs={12} md={6}>
+                <Stack direction="row" alignItems="center" spacing={1}>
+                  <Typography variant="body1">选择来源：</Typography>
+                  <Stack
+                    direction="row"
+                    spacing={1}
+                    sx={{ flex: 1, overflowX: 'scroll' }}
+                  >
+                    {article.publications.map((i) => (
+                      <Chip
+                        key={i.id}
+                        label={i.name}
+                        variant={
+                          selectedPublication === i.id ? 'filled' : 'outlined'
+                        }
+                        color={
+                          selectedPublication === i.id ? 'primary' : 'default'
+                        }
+                        onClick={(e) => {
+                          setSelectedPublication(i.id);
+                        }}
+                      />
+                    ))}
+                  </Stack>
+
+                  <Button
+                    variant="outlined"
+                    aria-controls={showCompareMenu ? 'basic-menu' : undefined}
+                    aria-haspopup="true"
+                    size="small"
+                    aria-expanded={showCompareMenu ? 'true' : undefined}
+                    onClick={(event) => setAnchorEl(event.currentTarget)}
+                  >
+                    对比
+                  </Button>
+                  <Menu
+                    id="basic-menu"
+                    anchorEl={anchorEl}
+                    open={showCompareMenu}
+                    onClose={() => setAnchorEl(null)}
+                    MenuListProps={{
+                      'aria-labelledby': 'basic-button',
                     }}
-                  />
-                ))}
-              </Stack>
+                  >
+                    <MenuItem
+                      onClick={() => {
+                        setCompareType(CompareType.origin);
+                        setAnchorEl(null);
+                      }}
+                    >
+                      对比原始文件
+                    </MenuItem>
+                    <MenuItem
+                      onClick={() => {
+                        setComparePublication(
+                          article.publications.length === 1
+                            ? article.publications[0].id
+                            : article.publications.find(
+                                (i) => i.id !== publication.id,
+                              )!.id,
+                        );
+                        setCompareType(CompareType.version);
+                        setAnchorEl(null);
+                      }}
+                    >
+                      对比不同来源解析后的文本
+                    </MenuItem>
+                    <MenuItem
+                      onClick={() => {
+                        let str = prompt('导入代码') || '';
+                        str = str.replace(/^\{OCR补丁\}/, '');
+                        str = str.substr(0, str.lastIndexOf('}') + 1);
+                        console.log(str);
+                        try {
+                          const patchWrap = JSON.parse(str);
 
-              <Button
-                variant="outlined"
-                aria-controls={showCompareMenu ? 'basic-menu' : undefined}
-                aria-haspopup="true"
-                size="small"
-                aria-expanded={showCompareMenu ? 'true' : undefined}
-                onClick={(event) => setAnchorEl(event.currentTarget)}
-              >
-                对比
-              </Button>
-              <Menu
-                id="basic-menu"
-                anchorEl={anchorEl}
-                open={showCompareMenu}
-                onClose={() => setAnchorEl(null)}
-                MenuListProps={{
-                  'aria-labelledby': 'basic-button',
-                }}
-              >
-                <MenuItem
-                  onClick={() => {
-                    setCompareType(CompareType.origin);
-                    setAnchorEl(null);
-                  }}
-                >
-                  对比原始文件
-                </MenuItem>
-                <MenuItem
-                  onClick={() => {
-                    setComparePublication(
-                      article.publications.length === 1
-                        ? article.publications[0].id
-                        : article.publications.find(
-                            (i) => i.id !== publication.id,
-                          )!.id,
-                    );
-                    setCompareType(CompareType.version);
-                    setAnchorEl(null);
-                  }}
-                >
-                  对比不同来源解析后的文本
-                </MenuItem>
-                <MenuItem
-                  onClick={() => {
-                    let str = prompt('导入代码') || '';
-                    str = str.replace(/^\{OCR补丁\}/, '');
-                    str = str.substr(0, str.lastIndexOf('}') + 1);
-                    console.log(str);
-                    try {
-                      const patchWrap = JSON.parse(str);
-
-                      addOCRComparisonPublication(
-                        patchWrap.publicationId,
-                        patchWrap.patch,
-                        article,
-                      );
-                      setPatchMode(false);
-                      setComparePublication(virtual_publication_id);
-                      setSelectedPublication(patchWrap.publicationId);
-                      setCompareType(CompareType.version);
-                      setAnchorEl(null);
-                    } catch (e) {
-                      alert('解析错误');
-                    }
-                  }}
-                >
-                  导入代码对比OCR校对结果
-                </MenuItem>
-                <MenuItem
-                  onClick={() => {
-                    setPatchMode(false);
-                    setCompareType(CompareType.none);
-                    setAnchorEl(null);
-                  }}
-                >
-                  取消
-                </MenuItem>
-              </Menu>
-            </Stack>
-          </Grid>
+                          addOCRComparisonPublication(
+                            patchWrap.publicationId,
+                            patchWrap.patch,
+                            article,
+                          );
+                          setPatchMode(false);
+                          setComparePublication(virtual_publication_id);
+                          setSelectedPublication(patchWrap.publicationId);
+                          setCompareType(CompareType.version);
+                          setAnchorEl(null);
+                        } catch (e) {
+                          alert('解析错误');
+                        }
+                      }}
+                    >
+                      导入代码对比OCR校对结果
+                    </MenuItem>
+                    <MenuItem
+                      onClick={() => {
+                        setPatchMode(false);
+                        setCompareType(CompareType.none);
+                        setAnchorEl(null);
+                      }}
+                    >
+                      取消
+                    </MenuItem>
+                  </Menu>
+                </Stack>
+              </Grid>
+            </>
+          ) : null}
         </Grid>
         <Stack
           direction="row"

@@ -409,7 +409,12 @@ export default function Articles({ articles }: { articles: Article[] }) {
                 </Stack>
               </Stack>
             </Grid>
-            <Grid item xs={1} md={1}>
+            <Grid
+              item
+              xs={1}
+              md={1}
+              sx={{ display: { md: 'flex', xs: 'none' } }}
+            >
               <Popover
                 id="tips"
                 open={!!tipsAnchorEl}
