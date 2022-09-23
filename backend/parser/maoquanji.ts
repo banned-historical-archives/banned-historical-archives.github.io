@@ -38,7 +38,7 @@ function extract_parts(
   }));
 
   const date_idx = raw[0].ocr_results.findIndex((i) =>
-    /^[(（]?\d+年/.test(i.text),
+    /^：?[(（]?\d+年/.test(i.text),
   );
 
   if (date_idx == -1 || date_idx > 4) {
@@ -163,6 +163,7 @@ export async function parse(
       30: new Set([125]),
       33: new Set([123]),
       34: new Set([31, 34, 202]),
+      37: new Set([294]),
     },
   };
 

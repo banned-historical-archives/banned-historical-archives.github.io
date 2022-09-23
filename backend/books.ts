@@ -760,6 +760,38 @@ const books: Book[] = [
   },
   {
     entity: {
+      id: 'maoquanji37',
+      name: '毛泽东全集第37卷',
+      internal: false,
+      type: 'pdf',
+      official: true,
+      author: '张迪杰',
+      files:
+        'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives0/main/mao-quanji/37-OCR.pdf',
+    },
+    parser_option: {
+      page_limits: [
+        [11, 19],
+        ...exclude(
+          [20, 522],
+          [
+            25, 26, 27, 28, 30, 37, 38, 39, 40, 41, 42, 45, 46, 76, 88, 89, 90,
+            91, 94, 98, 105, 106, 107, 108, 109, 110, 111, 112, 119, 120, 121,
+            122, 146, 147, 148, 163, 167, 183, 186, 194, 195, 205, 214, 215,
+            217, 218, 226, 228, 271, 275, 301, 351, 352, 356, 357, 358, 359,
+            360, 361, 362, 363, 364, 365, 366, 425, 426, 464,
+          ],
+        ),
+      ],
+    },
+    parser: maoquanji.parse,
+    path: join(
+      normalize(__dirname),
+      '../public/books/archives0/mao-quanji/37-OCR.pdf',
+    ),
+  },
+  {
+    entity: {
       id: 'wanghongwen',
       name: '王洪文文集',
       internal: false,
