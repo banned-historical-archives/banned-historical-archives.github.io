@@ -328,7 +328,6 @@ export async function parse(
             articles_raw.push([]);
           }
         }
-        if (page == 398)debugger
 
         articles_raw[articles_raw.length - 1].push({
           ocr_results: ocrResults,

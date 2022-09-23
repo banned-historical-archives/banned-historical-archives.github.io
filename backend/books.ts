@@ -724,6 +724,42 @@ const books: Book[] = [
   },
   {
     entity: {
+      id: 'maoquanji36',
+      name: '毛泽东全集第36卷',
+      internal: false,
+      type: 'pdf',
+      official: true,
+      author: '张迪杰',
+      files:
+        'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives0/main/mao-quanji/36-OCR.pdf',
+    },
+    parser_option: {
+      page_limits: [
+        [11, 23],
+        ...exclude(
+          [24, 528],
+          [
+            31, 32, 46, 47, 58, 67, 74, 75, 77, 80, 90, 92, 101, 104, 112, 127,
+            128, 130, 132, 133, 139, 140, 142, 143, 144, 145, 146, 147, 148,
+            149, 150, 151, 152, 153, 154, 156, 157, 158, 159, 160, 162, 163,
+            164, 174, 184, 192, 193, 195, 199, 200, 201, 204, 205, 206, 207,
+            219, 222, 223, 224, 225, 226, 227, 228, 229, 230, 231, 241, 247,
+            263, 264, 265, 297, 319, 342, 343, 344, 345, 346, 349, 352, 355,
+            356, 360, 362, 363, 364, 366, 367, 368, 369, 370, 371, 372, 373,
+            375, 376, 379, 381, 382, 388, 391, 392, 393, 394, 395, 419, 447,
+            449, 474, 517, 518,
+          ],
+        ),
+      ],
+    },
+    parser: maoquanji.parse,
+    path: join(
+      normalize(__dirname),
+      '../public/books/archives0/mao-quanji/36-OCR.pdf',
+    ),
+  },
+  {
+    entity: {
       id: 'wanghongwen',
       name: '王洪文文集',
       internal: false,
