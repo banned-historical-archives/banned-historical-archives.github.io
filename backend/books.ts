@@ -1283,6 +1283,42 @@ const books: Book[] = [
   },
   {
     entity: {
+      id: 'maoquanji52',
+      name: '毛泽东全集第52卷',
+      internal: false,
+      type: 'pdf',
+      official: true,
+      author: '张迪杰',
+      files:
+        'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives0/main/mao-quanji/52-OCR.pdf',
+    },
+    parser_option: {
+      page_limits: [
+        [11, 21],
+        ...exclude(
+          [22, 499],
+          [
+            34, 35, 36, 38, 47, 48, 54, 55, 61, 64, 73, 81, 86, 94, 98, 121,
+            122, 128, 130, 133, 142, 146, 150, 163, 164, 165, 166, 167, 168,
+            169, 175, 176, 177, 178, 179, 180, 181, 182, 183, 184, 185, 186,
+            187, 188, 189, 190, 191, 192, 193, 194, 195, 196, 197, 198, 199,
+            200, 201, 202, 203, 204, 205, 206, 207, 208, 209, 210, 235, 237,
+            244, 247, 250, 260, 262, 268, 273, 277, 279, 287, 293, 296, 299,
+            303, 304, 306, 308, 313, 316, 325, 326, 333, 342, 352, 357, 359,
+            370, 373, 376, 378, 388, 393, 397, 400, 406, 409, 414, 418, 422,
+            430, 435, 437, 439, 442, 446, 449, 450, 453, 454, 496,
+          ],
+        ),
+      ],
+    },
+    parser: maoquanji.parse,
+    path: join(
+      normalize(__dirname),
+      '../public/books/archives0/mao-quanji/52-OCR.pdf',
+    ),
+  },
+  {
+    entity: {
       id: 'wanghongwen',
       name: '王洪文文集',
       internal: false,

@@ -42,12 +42,13 @@ function extract_parts(
   );
 
   if (date_idx == -1 || date_idx > 4) {
-    debugger;
+    // debugger;
   }
 
-  const title = raw[0].ocr_results
-    .slice(0, date_idx)
-    .reduce((m, i) => m + i.text, '');
+  const title =
+    date_idx == -1
+      ? raw[0].ocr_results[0].text
+      : raw[0].ocr_results.slice(0, date_idx).reduce((m, i) => m + i.text, '');
   raw[0].ocr_results = raw[0].ocr_results.slice(date_idx + 1);
 
   const comments_raw: OCRResult[] = [];
@@ -179,6 +180,7 @@ export async function parse(
       49: new Set([270]),
       50: new Set([189, 272]),
       51: new Set([50, 173]),
+      52: new Set([275, 317]),
     },
   };
 
@@ -190,6 +192,75 @@ export async function parse(
   let catalog_candidates: string[] = [];
   function consume_catalog_candidates() {
     for (let i = 0; i < catalog_candidates.length; i++) {
+      if (volume === '52' && i >= 143) { // 以下文章无日期
+        catalogs.push(
+          ...[
+            '五绝·咏梅',
+            '七绝·咏菊',
+            '五律·春夜渡海',
+            '水调歌头·归舟迎日出',
+            '沁园春·再访十三陵',
+            '七律·雷电',
+            '七绝·大动荡、大分化、大改组',
+            '西江月·赠天津团市委',
+            '清平乐·赠张志坚',
+            '七律·别友人',
+            '七律·跨东海',
+            '七律·答友人',
+            '七律·捷报',
+            '读《古诗源》批语',
+            '读《初唐四杰集》批语',
+            '读《甲乙集》批语',
+            '读《注释唐诗三百首》批语',
+            '将进酒',
+            '早寒有怀',
+            '读《近三百年名家词选》批语',
+            '苦萨蜜四首',
+            '清平乐',
+            '读《历代诗话》批语',
+            '读《分甘余话》批语',
+            '读《明人百家小说》批语',
+            '读《智囊》批语',
+            '读《绘图增像西游记》批语',
+            '读《聊斋志异》批语',
+            '白莲教',
+            '读《李氏文集》批语',
+            '读《古文辞类集》批语',
+            '读《两般秋雨庵随笔》批语',
+            '读《梳联丛话》批语',
+            '读《更记》批语',
+            '读《汉书》批语',
+            '读《后汉书》批语',
+            '读《三国志集解》批语',
+            '读《晋书》批语',
+            '读《宋书》批语',
+            '读《阶书》批语',
+            '读《南史》批语',
+            '读《北史》批语',
+            '读《旧唐书》批语',
+            '读《新唐书》批语',
+            '读《旧五代史》批语',
+            '读《新五代史》批语',
+            '读《宋史》批语',
+            '读《明史》批语',
+            '读《资治通鉴》批语',
+            '读《通鉴纪事本末》批语',
+            '读《续通鉴纪事本末》批语',
+            '读《宋史纪事本末》批语',
+            '读《元史纪事本末》批语',
+            '读《明史纪事本末》批语',
+            '读《十六国春秋》批语',
+            '读《读通鉴论》批语',
+            '读《王湘绮全集》批语',
+            '毛泽东自传',
+          ].map((x) => ({
+            title: x,
+            dates: [],
+            is_range_date: false,
+          })),
+        );
+        break;
+      }
       let j = i;
       let title = '';
       while (!/^（\d/.test(catalog_candidates[j])) {
