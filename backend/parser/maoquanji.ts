@@ -180,6 +180,35 @@ export async function parse(
     dates: Date[];
     is_range_date: boolean;
   }[] = [];
+  let catalog_candidates: string[] = [];
+  function consume_catalog_candidates() {
+    for (let i = 0; i < catalog_candidates.length; i++) {
+      let j = i;
+      let title = '';
+      while (!/^（\d/.test(catalog_candidates[j])) {
+        title += catalog_candidates[j];
+        ++j;
+      }
+      catalogs.push({
+        title,
+        ...extract_dates(catalog_candidates[j], { remove_unknowns: true }),
+      });
+      i = j;
+
+      if (!catalogs[catalogs.length - 1].dates[0].year) {
+        debugger;
+      }
+
+      if (
+        fixtures.ignored_article[volume]?.has(
+          catalogs[catalogs.length - 1].title,
+        )
+      ) {
+        catalogs.pop();
+      }
+    }
+    catalog_candidates = [];
+  }
   const articles_raw: {
     ocr_results: OCRResult[];
     page: number;
@@ -212,45 +241,23 @@ export async function parse(
         )
         .filter((i) => i.text && !/^[:·：\.\d]*$/.test(i.text)) // 去页码
         .filter((i) => i.box[3][1] > 125) // 去页眉
+        .map((i) => i.text === '西' ? {...i, text: '四'} : i) // 四经常误识别为西
         .sort((a, b) => a.box[0][1] - b.box[0][1]);
 
       // 目录，正文中标题含有不能被准确识别的标注，所以以目录的标题为准
       if (i == 0) {
         const catalogs_raw = ocrResults
-          .filter((i) => i.text !== '目录')
+          .filter((i) => i.text !== '目录' &&  i.text !== '日录')
           .map((i) => {
             i.text = i.text.replace(/[…，\=\-．:·：\+\.\d]*$/, '');
             i.text = i.text.replace(/^[…，\-．:·：\+\.]*/, '');
             return i.text;
           })
           .filter((i) => i);
-        for (let i = 0; i < catalogs_raw.length; i++) {
-          let j = i;
-          let title = '';
-          while (!/^（\d/.test(catalogs_raw[j])) {
-            title += catalogs_raw[j];
-            ++j;
-          }
-          catalogs.push({
-            title,
-            ...extract_dates(catalogs_raw[j]),
-          });
-          i = j;
-
-          if (!catalogs[catalogs.length - 1].dates[0].year) {
-            debugger
-          }
-
-          if (
-            fixtures.ignored_article[volume]?.has(
-              catalogs[catalogs.length - 1].title,
-            )
-          ) {
-            catalogs.pop();
-          }
-        }
+          catalog_candidates.push(...catalogs_raw);
         // 34卷目录22页缺失（对应原书12页）
         if (volume === '34' && page == 21) {
+          consume_catalog_candidates();
           catalogs.push(
             ...[
               {
@@ -345,6 +352,8 @@ export async function parse(
       }
     }
   }
+
+  consume_catalog_candidates();
 
   // TODO
   // 27卷 201 页 上下颠倒

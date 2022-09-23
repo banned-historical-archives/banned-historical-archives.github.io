@@ -14,6 +14,7 @@ describe('extract_dates', async () => {
     expect(extract_dates('1911.10.10,11,12')).toMatchSnapshot();
     expect(extract_dates('1911.10,11,12')).toMatchSnapshot();
     expect(extract_dates('1911.10.21,10.22,11.23')).toMatchSnapshot();
+    expect(extract_dates('1962.1.10,24,2.23')).toMatchSnapshot();
   });
   it('format c', () => {
     expect(extract_dates('1911.10.12')).toMatchSnapshot();
@@ -30,10 +31,16 @@ describe('extract_dates', async () => {
     expect(extract_dates('一九三二年十月二十日，二十一日，二十二日')).toMatchSnapshot();
     expect(extract_dates('一九三二年十月二十日，十一月十日，十一月十二日')).toMatchSnapshot();
     expect(extract_dates('一九三二年十月，十一月，十二月')).toMatchSnapshot();
+    expect(extract_dates('1962年1月10日、24日，2月23日')).toMatchSnapshot();
   });
   it('format f', () => {
     expect(extract_dates('一九三二年十月二十日')).toMatchSnapshot();
     expect(extract_dates('一九三二年十月')).toMatchSnapshot();
     expect(extract_dates('一九三二年')).toMatchSnapshot();
+  });
+  it('format a with remove_unknowns', () => {
+    expect(
+      extract_dates(':191:1.1:0.10-1912.12.1:2', { remove_unknowns: true }),
+    ).toMatchSnapshot();
   });
 });

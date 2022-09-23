@@ -84,12 +84,20 @@ export function toChineseSymbols(str: string) {
  * 1911.10.10,11,12
  * 1911.10,12
  */
-export function extract_dates(str: string): {dates: Date[], is_range_date: boolean} {
+export function extract_dates(str: string, opt: {
+  remove_unknowns: boolean,
+} = {
+  remove_unknowns: false
+}): {dates: Date[], is_range_date: boolean} {
   str = str.replace(/ /g, '');
 
   const to = '\\-至—';
   const seperator = '\\,，、';
   const cn_digitals = '\\d一二三四五六七八九○O〇十廿卅卌';
+
+  if (opt.remove_unknowns) {
+    str = str.replace(new RegExp(`[^${cn_digitals}${to}${seperator}年月日\\.]`, 'g'), '');
+  }
 
   function normalize_date(s: string) {
     s = s
@@ -183,7 +191,7 @@ export function extract_dates(str: string): {dates: Date[], is_range_date: boole
   const format_e = Array.from(
     str.matchAll(
       new RegExp(
-        `[${cn_digitals}]+年[${cn_digitals}]+月([${cn_digitals}]+日)?[${seperator}]+([${cn_digitals}]+[月日]+[${seperator}]?)+`,
+        `[${cn_digitals}]+年[${cn_digitals}]+月([${cn_digitals}]+日)?[${seperator}]+([${cn_digitals}]+[月日]+([${cn_digitals}][月日])?[${seperator}]?)+`,
         'g',
       ),
     ),
@@ -274,6 +282,7 @@ export function extract_dates(str: string): {dates: Date[], is_range_date: boole
         } else {
           if (t[0] && t[1]) {
             last_month = t[0];
+            has_day = true;
             return {
               year: last_year,
               month: t[0],
