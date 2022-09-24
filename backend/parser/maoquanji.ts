@@ -443,7 +443,6 @@ export async function parse(
   // 40卷 49页 方向不对
 
   // console.log(catalogs, articles_raw);
-  /*
   console.log(
     articles_raw
       .map((i) => [i[0].ocr_results[0].text, i[0].page])
@@ -451,7 +450,6 @@ export async function parse(
         (i, idx) => i[0] + '##' + i[1] + ' ## ' + (catalogs[idx] || {}).title,
       ),
   );
-  */
 
   const articles_parts = articles_raw.map(i => extract_parts(i));
   return articles_parts.map((i, idx) => ({
