@@ -1413,7 +1413,7 @@ const books: Book[] = [
       author: '王洪文',
       files: new Array(8)
         .fill(0)
-        .map((i, idx) => `/books/wanghongwen1/${idx + 1}.jpg`)
+        .map((i, idx) => `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/wanghongwen1/${idx + 1}.jpg`)
         .join(','),
     },
     parser_option: {
@@ -1432,7 +1432,7 @@ const books: Book[] = [
       author: '王洪文',
       files: new Array(10)
         .fill(0)
-        .map((i, idx) => `/books/wanghongwen2/${idx + 1}.jpg`)
+        .map((i, idx) => `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/wanghongwen2/${idx + 1}.jpg`)
         .join(','),
     },
     parser_option: {
@@ -1451,7 +1451,7 @@ const books: Book[] = [
       author: '王洪文',
       files: new Array(4)
         .fill(0)
-        .map((i, idx) => `/books/wanghongwen3/${idx + 1}.jpg`)
+        .map((i, idx) => `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/wanghongwen3/${idx + 1}.jpg`)
         .join(','),
     },
     parser_option: {
@@ -1470,7 +1470,7 @@ const books: Book[] = [
       author: '王洪文',
       files: new Array(2)
         .fill(0)
-        .map((i, idx) => `/books/wanghongwen4/${idx + 1}.jpg`)
+        .map((i, idx) => `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/wanghongwen4/${idx + 1}.jpg`)
         .join(','),
     },
     parser_option: {
@@ -1489,7 +1489,7 @@ const books: Book[] = [
       author: '王洪文',
       files: new Array(4)
         .fill(0)
-        .map((i, idx) => `/books/wanghongwen5/${idx + 1}.jpg`)
+        .map((i, idx) => `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/wanghongwen5/${idx + 1}.jpg`)
         .join(','),
     },
     parser_option: {
@@ -1508,7 +1508,7 @@ const books: Book[] = [
       author: '王洪文',
       files: new Array(6)
         .fill(0)
-        .map((i, idx) => `/books/wanghongwen6/${idx + 1}.jpg`)
+        .map((i, idx) => `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/wanghongwen6/${idx + 1}.jpg`)
         .join(','),
     },
     parser_option: {
@@ -1923,7 +1923,7 @@ const books: Book[] = [
       author: '王洪文',
       files: new Array(5)
         .fill(0)
-        .map((i, idx) => `/books/wanghongwen7/${idx + 1}.jpg`)
+        .map((i, idx) => `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/wanghongwen7/${idx + 1}.jpg`)
         .join(','),
     },
     parser_option: {
@@ -1961,7 +1961,7 @@ const books: Book[] = [
       author: '王洪文',
       files: new Array(1)
         .fill(0)
-        .map((i, idx) => `/books/wanghongwen8/${idx + 1}.jpg`)
+        .map((i, idx) => `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/wanghongwen8/${idx + 1}.jpg`)
         .join(','),
     },
     parser_option: {
