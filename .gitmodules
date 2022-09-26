@@ -1,3 +1,6 @@
 [submodule "public/books/archives0"]
 	path = public/books/archives0
 	url = git@github.com-bha:banned-historical-archives/banned-historical-archives0.git
+[submodule "public/books/archives1"]
+	path = public/books/archives1
+	url = https://github.com/banned-historical-archives/banned-historical-archives1.git
