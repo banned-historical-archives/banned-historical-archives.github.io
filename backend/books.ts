@@ -1364,14 +1364,14 @@ const books: Book[] = [
       author: '王洪文',
       files: new Array(8)
         .fill(0)
-        .map((i, idx) => `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/wanghongwen/1/${idx + 1}.jpg`)
+        .map((i, idx) => `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/wanghongwen1/${idx + 1}.jpg`)
         .join(','),
     },
     parser_option: {
       page_limits: [[1, 8]],
     },
     parser: wanghongwen1.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/wanghongwen/1'),
+    path: join(normalize(__dirname), '../public/books/archives1/wanghongwen1'),
   },
   {
     entity: {
@@ -1383,14 +1383,14 @@ const books: Book[] = [
       author: '王洪文',
       files: new Array(10)
         .fill(0)
-        .map((i, idx) => `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/wanghongwen/2/${idx + 1}.jpg`)
+        .map((i, idx) => `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/wanghongwen2/${idx + 1}.jpg`)
         .join(','),
     },
     parser_option: {
       page_limits: [[1, 10]],
     },
     parser: wanghongwen2.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/wanghongwen/2'),
+    path: join(normalize(__dirname), '../public/books/archives1/wanghongwen2'),
   },
   {
     entity: {
@@ -1402,14 +1402,14 @@ const books: Book[] = [
       author: '王洪文',
       files: new Array(4)
         .fill(0)
-        .map((i, idx) => `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/wanghongwen/3/${idx + 1}.jpg`)
+        .map((i, idx) => `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/wanghongwen3/${idx + 1}.jpg`)
         .join(','),
     },
     parser_option: {
       page_limits: [[1, 4]],
     },
     parser: wanghongwen3.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/wanghongwen/3'),
+    path: join(normalize(__dirname), '../public/books/archives1/wanghongwen3'),
   },
   {
     entity: {
@@ -1421,14 +1421,14 @@ const books: Book[] = [
       author: '王洪文',
       files: new Array(2)
         .fill(0)
-        .map((i, idx) => `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/wanghongwen/4/${idx + 1}.jpg`)
+        .map((i, idx) => `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/wanghongwen4/${idx + 1}.jpg`)
         .join(','),
     },
     parser_option: {
       page_limits: [[1, 2]],
     },
     parser: wanghongwen4.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/wanghongwen/4'),
+    path: join(normalize(__dirname), '../public/books/archives1/wanghongwen4'),
   },
   {
     entity: {
@@ -1440,14 +1440,14 @@ const books: Book[] = [
       author: '王洪文',
       files: new Array(4)
         .fill(0)
-        .map((i, idx) => `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/wanghongwen/5/${idx + 1}.jpg`)
+        .map((i, idx) => `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/wanghongwen5/${idx + 1}.jpg`)
         .join(','),
     },
     parser_option: {
       page_limits: [[1, 4]],
     },
     parser: wanghongwen5.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/wanghongwen/5'),
+    path: join(normalize(__dirname), '../public/books/archives1/wanghongwen5'),
   },
   {
     entity: {
@@ -1459,14 +1459,14 @@ const books: Book[] = [
       author: '王洪文',
       files: new Array(6)
         .fill(0)
-        .map((i, idx) => `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/wanghongwen/6/${idx + 1}.jpg`)
+        .map((i, idx) => `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/wanghongwen6/${idx + 1}.jpg`)
         .join(','),
     },
     parser_option: {
       page_limits: [[1, 6]],
     },
     parser: wanghongwen6.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/wanghongwen/6'),
+    path: join(normalize(__dirname), '../public/books/archives1/wanghongwen6'),
   },
   {
     entity: {
@@ -1478,14 +1478,14 @@ const books: Book[] = [
       author: '王洪文',
       files: new Array(5)
         .fill(0)
-        .map((i, idx) => `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/wanghongwen/7/${idx + 1}.jpg`)
+        .map((i, idx) => `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/wanghongwen7/${idx + 1}.jpg`)
         .join(','),
     },
     parser_option: {
       page_limits: [[1, 5]],
     },
     parser: wanghongwen7.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/wanghongwen/7'),
+    path: join(normalize(__dirname), '../public/books/archives1/wanghongwen7'),
   },
   {
     entity: {
@@ -1497,14 +1497,14 @@ const books: Book[] = [
       author: '王洪文',
       files: new Array(1)
         .fill(0)
-        .map((i, idx) => `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/wanghongwen/8/${idx + 1}.jpg`)
+        .map((i, idx) => `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/wanghongwen8/${idx + 1}.jpg`)
         .join(','),
     },
     parser_option: {
       page_limits: [[1, 1]],
     },
     parser: wanghongwen8.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/wanghongwen/8'),
+    path: join(normalize(__dirname), '../public/books/archives1/wanghongwen8'),
   },
   {
     entity: {
@@ -1567,14 +1567,14 @@ const books: Book[] = [
       author: '姚文元',
       files: new Array(10)
         .fill(0)
-        .map((i, idx) => `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/yaowenyuan/1/${idx + 1}.jpg`)
+        .map((i, idx) => `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/yaowenyuan1/${idx + 1}.jpg`)
         .join(','),
     },
     parser_option: {
       page_limits: [[1, 10]],
     },
     parser: yaowenyuan1.parse,
-    path: join(normalize(__dirname), '../public/books/archives/yaowenyuan/1'),
+    path: join(normalize(__dirname), '../public/books/archives/yaowenyuan1'),
   },
   {
     entity: {
@@ -1586,14 +1586,14 @@ const books: Book[] = [
       author: '姚文元',
       files: new Array(4)
         .fill(0)
-        .map((i, idx) => `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/yaowenyuan/2/${idx + 1}.jpg`)
+        .map((i, idx) => `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/yaowenyuan2/${idx + 1}.jpg`)
         .join(','),
     },
     parser_option: {
       page_limits: [[1, 4]],
     },
     parser: yaowenyuan2.parse,
-    path: join(normalize(__dirname), '../public/books/archives/yaowenyuan/2'),
+    path: join(normalize(__dirname), '../public/books/archives/yaowenyuan2'),
   },
   {
     entity: {
@@ -1605,14 +1605,14 @@ const books: Book[] = [
       author: '姚文元',
       files: new Array(15)
         .fill(0)
-        .map((i, idx) => `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/yaowenyuan/3/${idx + 1}.jpg`)
+        .map((i, idx) => `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/yaowenyuan3/${idx + 1}.jpg`)
         .join(','),
     },
     parser_option: {
       page_limits: [[1, 15]],
     },
     parser: yaowenyuan3.parse,
-    path: join(normalize(__dirname), '../public/books/archives/yaowenyuan/3'),
+    path: join(normalize(__dirname), '../public/books/archives/yaowenyuan3'),
   },
   {
     entity: {
@@ -1640,14 +1640,14 @@ const books: Book[] = [
       author: '张春桥',
       files: new Array(4)
         .fill(0)
-        .map((i, idx) => `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/zhangchunqiao/1/${idx + 1}.jpg`)
+        .map((i, idx) => `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/zhangchunqiao1/${idx + 1}.jpg`)
         .join(','),
     },
     parser_option: {
       page_limits: [[2, 4]],
     },
     parser: zhangchunqiao1.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/zhangchunqiao/1'),
+    path: join(normalize(__dirname), '../public/books/archives1/zhangchunqiao1'),
   },
   {
     entity: {
@@ -1659,14 +1659,14 @@ const books: Book[] = [
       author: '张春桥',
       files: new Array(10)
         .fill(0)
-        .map((i, idx) => `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/zhangchunqiao/2/${idx + 1}.jpg`)
+        .map((i, idx) => `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/zhangchunqiao2/${idx + 1}.jpg`)
         .join(','),
     },
     parser_option: {
       page_limits: [[2, 10]],
     },
     parser: zhangchunqiao2.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/zhangchunqiao/2'),
+    path: join(normalize(__dirname), '../public/books/archives1/zhangchunqiao2'),
   },
   
   {
@@ -1679,14 +1679,14 @@ const books: Book[] = [
       author: '张春桥',
       files: new Array(21)
         .fill(0)
-        .map((i, idx) => `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/zhangchunqiao/3/${idx + 1}.jpg`)
+        .map((i, idx) => `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/zhangchunqiao3/${idx + 1}.jpg`)
         .join(','),
     },
     parser_option: {
       page_limits: [[1, 21]],
     },
     parser: zhangchunqiao3.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/zhangchunqiao/3'),
+    path: join(normalize(__dirname), '../public/books/archives1/zhangchunqiao3'),
   },
   {
     entity: {
@@ -1698,14 +1698,14 @@ const books: Book[] = [
       author: '张春桥',
       files: new Array(6)
         .fill(0)
-        .map((i, idx) => `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/zhangchunqiao/4/${idx + 1}.jpg`)
+        .map((i, idx) => `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/zhangchunqiao4/${idx + 1}.jpg`)
         .join(','),
     },
     parser_option: {
       page_limits: [[1, 6]],
     },
     parser: zhangchunqiao4.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/zhangchunqiao/4'),
+    path: join(normalize(__dirname), '../public/books/archives1/zhangchunqiao4'),
   },
   {
     entity: {
@@ -1717,14 +1717,14 @@ const books: Book[] = [
       author: '',
       files: new Array(19)
         .fill(0)
-        .map((i, idx) => `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/zhangchunqiao/5/${idx + 1}.jpg`)
+        .map((i, idx) => `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/zhangchunqiao5/${idx + 1}.jpg`)
         .join(','),
     },
     parser_option: {
       page_limits: [[3, 19]],
     },
     parser: zhangchunqiao5.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/zhangchunqiao/5'),
+    path: join(normalize(__dirname), '../public/books/archives1/zhangchunqiao5'),
   },
   {
     entity: {
@@ -1736,14 +1736,14 @@ const books: Book[] = [
       author: '',
       files: new Array(16)
         .fill(0)
-        .map((i, idx) => `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/zhangchunqiao/6/${idx + 1}.jpg`)
+        .map((i, idx) => `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/zhangchunqiao6/${idx + 1}.jpg`)
         .join(','),
     },
     parser_option: {
       page_limits: [[1, 16]],
     },
     parser: zhangchunqiao6.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/zhangchunqiao/6'),
+    path: join(normalize(__dirname), '../public/books/archives1/zhangchunqiao6'),
   },
   {
     entity: {
@@ -1755,14 +1755,14 @@ const books: Book[] = [
       author: '',
       files: new Array(8)
         .fill(0)
-        .map((i, idx) => `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/zhangchunqiao/7/${idx + 1}.jpg`)
+        .map((i, idx) => `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/zhangchunqiao7/${idx + 1}.jpg`)
         .join(','),
     },
     parser_option: {
       page_limits: [[1, 8]],
     },
     parser: zhangchunqiao7.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/zhangchunqiao/7'),
+    path: join(normalize(__dirname), '../public/books/archives1/zhangchunqiao7'),
   },
   {
     entity: {
@@ -1774,14 +1774,14 @@ const books: Book[] = [
       author: '',
       files: new Array(5)
         .fill(0)
-        .map((i, idx) => `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/zhangchunqiao/8/${idx + 1}.jpg`)
+        .map((i, idx) => `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/zhangchunqiao8/${idx + 1}.jpg`)
         .join(','),
     },
     parser_option: {
       page_limits: [[1, 5]],
     },
     parser: zhangchunqiao8.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/zhangchunqiao/8'),
+    path: join(normalize(__dirname), '../public/books/archives1/zhangchunqiao8'),
   },
   {
     entity: {
@@ -1793,14 +1793,14 @@ const books: Book[] = [
       author: '',
       files: new Array(3)
         .fill(0)
-        .map((i, idx) => `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/zhangchunqiao/9/${idx + 1}.jpg`)
+        .map((i, idx) => `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/zhangchunqiao9/${idx + 1}.jpg`)
         .join(','),
     },
     parser_option: {
       page_limits: [[1, 3]],
     },
     parser: zhangchunqiao9.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/zhangchunqiao/9'),
+    path: join(normalize(__dirname), '../public/books/archives1/zhangchunqiao9'),
   },
   {
     entity: {
@@ -1812,14 +1812,14 @@ const books: Book[] = [
       author: '',
       files: new Array(8)
         .fill(0)
-        .map((i, idx) => `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/zhangchunqiao/10/${idx + 1}.jpg`)
+        .map((i, idx) => `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/zhangchunqiao10/${idx + 1}.jpg`)
         .join(','),
     },
     parser_option: {
       page_limits: [[1, 8]],
     },
     parser: zhangchunqiao10.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/zhangchunqiao/10'),
+    path: join(normalize(__dirname), '../public/books/archives1/zhangchunqiao10'),
   },
   {
     entity: {
@@ -1831,14 +1831,14 @@ const books: Book[] = [
       author: '',
       files: new Array(5)
         .fill(0)
-        .map((i, idx) => `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/zhangchunqiao/11/${idx + 1}.jpg`)
+        .map((i, idx) => `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/zhangchunqiao11/${idx + 1}.jpg`)
         .join(','),
     },
     parser_option: {
       page_limits: [[1, 5]],
     },
     parser: zhangchunqiao11.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/zhangchunqiao/11'),
+    path: join(normalize(__dirname), '../public/books/archives1/zhangchunqiao11'),
   },
   {
     entity: {
@@ -1850,14 +1850,14 @@ const books: Book[] = [
       author: '',
       files: new Array(3)
         .fill(0)
-        .map((i, idx) => `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/zhangchunqiao/12/${idx + 1}.jpg`)
+        .map((i, idx) => `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/zhangchunqiao12/${idx + 1}.jpg`)
         .join(','),
     },
     parser_option: {
       page_limits: [[1, 3]],
     },
     parser: zhangchunqiao12.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/zhangchunqiao/12'),
+    path: join(normalize(__dirname), '../public/books/archives1/zhangchunqiao12'),
   },
   {
     entity: {
@@ -1869,14 +1869,14 @@ const books: Book[] = [
       author: '',
       files: new Array(3)
         .fill(0)
-        .map((i, idx) => `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/zhangchunqiao/13/${idx + 1}.jpg`)
+        .map((i, idx) => `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/zhangchunqiao13/${idx + 1}.jpg`)
         .join(','),
     },
     parser_option: {
       page_limits: [[1, 3]],
     },
     parser: zhangchunqiao13.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/zhangchunqiao/13'),
+    path: join(normalize(__dirname), '../public/books/archives1/zhangchunqiao13'),
   },
   {
     entity: {
@@ -1888,14 +1888,14 @@ const books: Book[] = [
       author: '',
       files: new Array(4)
         .fill(0)
-        .map((i, idx) => `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/zhangchunqiao/14/${idx + 1}.png`)
+        .map((i, idx) => `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/zhangchunqiao14/${idx + 1}.png`)
         .join(','),
     },
     parser_option: {
       page_limits: [[1, 4]],
     },
     parser: zhangchunqiao14.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/zhangchunqiao/14'),
+    path: join(normalize(__dirname), '../public/books/archives1/zhangchunqiao14'),
   },
   {
     entity: {
@@ -1907,14 +1907,14 @@ const books: Book[] = [
       author: '',
       files: new Array(3)
         .fill(0)
-        .map((i, idx) => `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/zhangchunqiao/15/${idx + 1}.jpg`)
+        .map((i, idx) => `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/zhangchunqiao15/${idx + 1}.jpg`)
         .join(','),
     },
     parser_option: {
       page_limits: [[1, 3]],
     },
     parser: zhangchunqiao15.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/zhangchunqiao/15'),
+    path: join(normalize(__dirname), '../public/books/archives1/zhangchunqiao15'),
   },
   {
     entity: {
@@ -1926,14 +1926,14 @@ const books: Book[] = [
       author: '',
       files: new Array(8)
         .fill(0)
-        .map((i, idx) => `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/zhangchunqiao/16/${idx + 1}.jpg`)
+        .map((i, idx) => `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/zhangchunqiao16/${idx + 1}.jpg`)
         .join(','),
     },
     parser_option: {
       page_limits: [[1, 8]],
     },
     parser: zhangchunqiao16.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/zhangchunqiao/16'),
+    path: join(normalize(__dirname), '../public/books/archives1/zhangchunqiao16'),
   },
   {
     entity: {
@@ -1945,14 +1945,14 @@ const books: Book[] = [
       author: '',
       files: new Array(16)
         .fill(0)
-        .map((i, idx) => `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/maoyuanxin/1/${idx + 1}.jpg`)
+        .map((i, idx) => `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/maoyuanxin1/${idx + 1}.jpg`)
         .join(','),
     },
     parser_option: {
       page_limits: [[5, 16]],
     },
     parser: maoyuanxin1.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/maoyuanxin/1'),
+    path: join(normalize(__dirname), '../public/books/archives1/maoyuanxin1'),
   },
   {
     entity: {
@@ -1964,14 +1964,14 @@ const books: Book[] = [
       author: '',
       files: new Array(2)
         .fill(0)
-        .map((i, idx) => `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/maoyuanxin/2/${idx + 1}.jpg`)
+        .map((i, idx) => `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/maoyuanxin2/${idx + 1}.jpg`)
         .join(','),
     },
     parser_option: {
       page_limits: [[1, 2]],
     },
     parser: maoyuanxin2.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/maoyuanxin/2'),
+    path: join(normalize(__dirname), '../public/books/archives1/maoyuanxin2'),
   },
   {
     entity: {
@@ -1983,14 +1983,14 @@ const books: Book[] = [
       author: '',
       files: new Array(1)
         .fill(0)
-        .map((i, idx) => `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/maoyuanxin/3/${idx + 1}.jpg`)
+        .map((i, idx) => `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/maoyuanxin3/${idx + 1}.jpg`)
         .join(','),
     },
     parser_option: {
       page_limits: [[1, 1]],
     },
     parser: maoyuanxin3.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/maoyuanxin/3'),
+    path: join(normalize(__dirname), '../public/books/archives1/maoyuanxin3'),
   },
   {
     entity: {
@@ -2002,14 +2002,14 @@ const books: Book[] = [
       author: '',
       files: new Array(9)
         .fill(0)
-        .map((i, idx) => `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/maoyuanxin/4/${idx + 1}.jpg`)
+        .map((i, idx) => `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/maoyuanxin4/${idx + 1}.jpg`)
         .join(','),
     },
     parser_option: {
       page_limits: [[2, 9]],
     },
     parser: maoyuanxin4.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/maoyuanxin/4'),
+    path: join(normalize(__dirname), '../public/books/archives1/maoyuanxin4'),
   },
   {
     entity: {
@@ -2021,14 +2021,14 @@ const books: Book[] = [
       author: '',
       files: new Array(2)
         .fill(0)
-        .map((i, idx) => `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/maoyuanxin/5/${idx + 1}.jpg`)
+        .map((i, idx) => `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/maoyuanxin5/${idx + 1}.jpg`)
         .join(','),
     },
     parser_option: {
       page_limits: [[1, 2]],
     },
     parser: maoyuanxin5.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/maoyuanxin/5'),
+    path: join(normalize(__dirname), '../public/books/archives1/maoyuanxin5'),
   },
   {
     entity: {
@@ -2040,14 +2040,14 @@ const books: Book[] = [
       author: '江青',
       files: new Array(1)
         .fill(0)
-        .map((i, idx) => `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/jiangqing/1/${idx + 1}.jpg`)
+        .map((i, idx) => `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/jiangqing1/${idx + 1}.jpg`)
         .join(','),
     },
     parser_option: {
       page_limits: [[1, 1]],
     },
     parser: jiangqing1.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/jiangqing/1'),
+    path: join(normalize(__dirname), '../public/books/archives1/jiangqing1'),
   },
 ].map((i) => {
   const book: Book = {
