@@ -45,6 +45,7 @@ import * as zhangchunqiao13 from './parser/zhangchunqiao13';
 import * as zhangchunqiao14 from './parser/zhangchunqiao14';
 import * as zhangchunqiao15 from './parser/zhangchunqiao15';
 import * as zhangchunqiao16 from './parser/zhangchunqiao16';
+import * as kangsheng1 from './parser/kangsheng1';
 import * as piliu1 from './parser/piliu1';
 import * as zzj1 from './parser/zzj1';
 import { apply_patch, get_article_id } from '../utils';
@@ -2048,6 +2049,25 @@ const books: Book[] = [
     },
     parser: jiangqing1.parse,
     path: join(normalize(__dirname), '../public/books/archives1/jiangqing1'),
+  },
+  {
+    entity: {
+      id: 'kangsheng1',
+      name: '中央首长第三次接见安徽代表',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(8)
+        .fill(0)
+        .map((i, idx) => `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/kangsheng1/${idx + 1}.jpg`)
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [[1, 8]],
+    },
+    parser: kangsheng1.parse,
+    path: join(normalize(__dirname), '../public/books/archives1/kangsheng1'),
   },
 ].map((i) => {
   const book: Book = {
