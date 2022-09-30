@@ -24,6 +24,7 @@ import * as wanghongwen5 from './parser/wanghongwen5';
 import * as wanghongwen6 from './parser/wanghongwen6';
 import * as wanghongwen7 from './parser/wanghongwen7';
 import * as wanghongwen8 from './parser/wanghongwen8';
+import * as wanghongwen9 from './parser/wanghongwen9';
 import * as yaowenyuan from './parser/yaowenyuan';
 import * as yaowenyuan1 from './parser/yaowenyuan1';
 import * as yaowenyuan2 from './parser/yaowenyuan2';
@@ -44,16 +45,74 @@ import * as zhangchunqiao12 from './parser/zhangchunqiao12';
 import * as zhangchunqiao13 from './parser/zhangchunqiao13';
 import * as zhangchunqiao14 from './parser/zhangchunqiao14';
 import * as zhangchunqiao15 from './parser/zhangchunqiao15';
-import * as zhangchunqiao16 from './parser/zhangchunqiao16';
-import * as kangsheng1 from './parser/kangsheng1';
 import * as piliu1 from './parser/piliu1';
 import * as zzj1 from './parser/zzj1';
+import * as duoren1 from './parser/duoren1';
+import * as duoren2 from './parser/duoren2';
+import * as duoren3 from './parser/duoren3';
 import { apply_patch, get_article_id } from '../utils';
 import { tranditionalChineseToSimpleChinese } from '../utils/i18n';
 import { exclude, normalize } from './utils';
 
 const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
+  {
+    entity: {
+      id: 'duoren1',
+      name: '“四人帮”罪行材料（三）',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(9)
+        .fill(0)
+        .map((i, idx) => `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/duoren1/${idx + 1}.png`)
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [[1, 9]],
+    },
+    parser: duoren1.parse,
+    path: join(normalize(__dirname), '../public/books/archives1/duoren1'),
+  },
+  {
+    entity: {
+      id: 'duoren2',
+      name: '中央首长第三次接见安徽代表',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(8)
+        .fill(0)
+        .map((i, idx) => `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/duoren2/${idx + 1}.jpg`)
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [[1, 8]],
+    },
+    parser: duoren2.parse,
+    path: join(normalize(__dirname), '../public/books/archives1/duoren2'),
+  },
+  {
+    entity: {
+      id: 'duoren3',
+      name: '张春桥同志接见部分赴京革命同学的讲话',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(8)
+        .fill(0)
+        .map((i, idx) => `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/duoren3/${idx + 1}.jpg`)
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [[1, 8]],
+    },
+    parser: duoren3.parse,
+    path: join(normalize(__dirname), '../public/books/archives1/duoren3'),
+  },
   {
     entity: {
       id: 'piliu1',
@@ -1509,6 +1568,25 @@ const books: Book[] = [
   },
   {
     entity: {
+      id: 'wanghongwen9',
+      name: '“四人帮”罪行材料（八）',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '王洪文',
+      files: new Array(3)
+        .fill(0)
+        .map((i, idx) => `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/wanghongwen9/${idx + 1}.png`)
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [[1, 3]],
+    },
+    parser: wanghongwen9.parse,
+    path: join(normalize(__dirname), '../public/books/archives1/wanghongwen9'),
+  },
+  {
+    entity: {
       id: 'wenku',
       name: '中国文化大革命文库(第一版)',
       internal: false,
@@ -1919,25 +1997,6 @@ const books: Book[] = [
   },
   {
     entity: {
-      id: 'zhangchunqiao16',
-      name: '张春桥同志接见部分赴京革命同学的讲话',
-      internal: true,
-      official: true,
-      type: 'img',
-      author: '',
-      files: new Array(8)
-        .fill(0)
-        .map((i, idx) => `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/zhangchunqiao16/${idx + 1}.jpg`)
-        .join(','),
-    },
-    parser_option: {
-      page_limits: [[1, 8]],
-    },
-    parser: zhangchunqiao16.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/zhangchunqiao16'),
-  },
-  {
-    entity: {
       id: 'maoyuanxin1',
       name: '毛远新破坏民兵建设的部分罪行材料',
       internal: true,
@@ -2049,26 +2108,7 @@ const books: Book[] = [
     },
     parser: jiangqing1.parse,
     path: join(normalize(__dirname), '../public/books/archives1/jiangqing1'),
-  },
-  {
-    entity: {
-      id: 'kangsheng1',
-      name: '中央首长第三次接见安徽代表',
-      internal: true,
-      official: true,
-      type: 'img',
-      author: '',
-      files: new Array(8)
-        .fill(0)
-        .map((i, idx) => `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/kangsheng1/${idx + 1}.jpg`)
-        .join(','),
-    },
-    parser_option: {
-      page_limits: [[1, 8]],
-    },
-    parser: kangsheng1.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/kangsheng1'),
-  },
+  }
 ].map((i) => {
   const book: Book = {
     entity: i.entity,
