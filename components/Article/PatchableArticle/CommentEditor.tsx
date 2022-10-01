@@ -183,6 +183,7 @@ export default function CommentEditor({
         <InsertCommentDialog
           onClose={(text) => {
             if (!text) {
+              setShowInsertBefore(false);
               return;
             }
             const newInsertBefore = [
@@ -203,6 +204,7 @@ export default function CommentEditor({
         <InsertCommentDialog
           onClose={(text) => {
             if (!text) {
+              setShowInsertAfter(false);
               return;
             }
             const newInsertAfter = [
