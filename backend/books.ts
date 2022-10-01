@@ -50,7 +50,7 @@ import * as zzj1 from './parser/zzj1';
 import * as duoren1 from './parser/duoren1';
 import * as duoren2 from './parser/duoren2';
 import * as duoren3 from './parser/duoren3';
-import { apply_patch, get_article_id } from '../utils';
+import { apply_patch, apply_patch_v2, get_article_id } from '../utils';
 import { tranditionalChineseToSimpleChinese } from '../utils/i18n';
 import { exclude, normalize } from './utils';
 
@@ -2116,7 +2116,8 @@ const books: Book[] = [
     path: i.path,
     parser: async (path: string, opt: ParserOption) => {
       const res = await i.parser(path, opt);
-      for (const article of res) {
+      for (const j in res) {
+        const article = res[j];
         for (const part of article.parts) {
           part.text = tranditionalChineseToSimpleChinese(part.text);
         }
@@ -2133,7 +2134,11 @@ const books: Book[] = [
         if (existsSync(p)) {
           const x = await import(p);
           for (const patch of x.default) {
-            apply_patch(article, patch);
+            if (patch.version === 2) {
+              res[j] = apply_patch_v2(article, patch);
+            } else {
+              apply_patch(article, patch);
+            }
           }
         }
       }
