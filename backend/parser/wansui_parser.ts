@@ -5,12 +5,23 @@ import type { Item } from './pdf.js';
 import {
   ContentPart,
   ContentPartRaw,
-  ContentType,
   Date,
   ParserOption,
   ParserResult,
   Pivot,
 } from '../../types';
+
+export enum ContentType {
+  authors = 'authors',
+  appellation = 'appellation',
+  title = 'title',
+  subtitle = 'subtitle',
+  subdate = 'subdate',
+  description = 'description',
+  paragraph = 'paragraph',
+  quotation = 'quotation',
+  comment = 'comment',
+}
 
 const opt = {
   page_width: 419.5,
@@ -301,7 +312,7 @@ export async function parse(
           title: part.text,
           description: '',
           dates: [],
-          parts: [{text: part.text, type: ContentType.title}],
+          parts: [{text: part.text, type: ContentType.title} as ContentPart],
           comment_pivots: [],
           is_range_date: false,
           authors: ['毛泽东'],
