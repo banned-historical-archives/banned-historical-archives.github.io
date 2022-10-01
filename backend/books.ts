@@ -50,6 +50,8 @@ import * as zzj1 from './parser/zzj1';
 import * as duoren1 from './parser/duoren1';
 import * as duoren2 from './parser/duoren2';
 import * as duoren3 from './parser/duoren3';
+import * as duoren4 from './parser/duoren4';
+import * as duoren5 from './parser/duoren5';
 import { apply_patch, apply_patch_v2, get_article_id } from '../utils';
 import { tranditionalChineseToSimpleChinese } from '../utils/i18n';
 import { exclude, normalize } from './utils';
@@ -127,6 +129,54 @@ const books: Book[] = [
     },
     parser: duoren3.parse,
     path: join(normalize(__dirname), '../public/books/archives1/duoren3'),
+  },
+  {
+    entity: {
+      id: 'duoren4',
+      name: '“四人帮”罪行材料（九）',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(3)
+        .fill(0)
+        .map(
+          (i, idx) =>
+            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/duoren4/${
+              idx + 1
+            }.png`,
+        )
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [[1, 3]],
+    },
+    parser: duoren4.parse,
+    path: join(normalize(__dirname), '../public/books/archives1/duoren4'),
+  },
+  {
+    entity: {
+      id: 'duoren5',
+      name: '“四人帮”罪行材料（四）',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(5)
+        .fill(0)
+        .map(
+          (i, idx) =>
+            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/duoren5/${
+              idx + 1
+            }.png`,
+        )
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [[1, 5]],
+    },
+    parser: duoren5.parse,
+    path: join(normalize(__dirname), '../public/books/archives1/duoren5'),
   },
   {
     entity: {
