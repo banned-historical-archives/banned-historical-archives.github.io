@@ -219,7 +219,7 @@ export default function CommentEditor({
           }}
         />
       ) : null}
-      {deleted ? center : <li>{center}</li>}
+      {deleted ? center : <li key="center">{center}</li>}
       {insertAfter.map((i) => (
         <li key={i.id}>
           <Stack direction="row" spacing={1}>
