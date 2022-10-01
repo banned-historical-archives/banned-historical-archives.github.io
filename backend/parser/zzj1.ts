@@ -5,12 +5,23 @@ import type { Item } from './pdf.js';
 import {
   ContentPart,
   ContentPartRaw,
-  ContentType,
   Date,
   ParserOption,
   ParserResult,
   Pivot,
 } from '../../types';
+
+export enum ContentType {
+  authors = 'authors',
+  appellation = 'appellation',
+  title = 'title',
+  subtitle = 'subtitle',
+  subdate = 'subdate',
+  description = 'description',
+  paragraph = 'paragraph',
+  quotation = 'quotation',
+  comment = 'comment',
+}
 
 const opt = {
   content_min_x: 76,
@@ -345,7 +356,7 @@ export async function parse(
           page_start: Infinity,
           page_end: Infinity,
         });
-      } else if (part.type === ContentType.comment) {
+      } else if (part.type as ContentType === ContentType.comment) {
         articles[articles.length - 1].comments.push(part.text.replace(/^〔\d+〕 */, ''))
       } else {
         const article = articles[articles.length - 1];
