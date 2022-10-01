@@ -75,10 +75,10 @@ export default function CommentEditor({
   const [showInsertBefore, setShowInsertBefore] = useState(false);
   const [showInsertAfter, setShowInsertAfter] = useState(false);
   const [insertBefore, setInsertBefore] = useState<
-    { id: string; text: string }[]
+    { id?: string; text: string }[]
   >([]);
   const [insertAfter, setInsertAfter] = useState<
-    { id: string; text: string }[]
+    { id?: string; text: string }[]
   >([]);
   const [deleted, setDeleted] = useState(!content);
   const commentDiff = useRef<CommentDiff>({
@@ -171,7 +171,9 @@ export default function CommentEditor({
               variant="outlined"
               size="small"
               onClick={() => {
-                setInsertBefore(insertBefore.filter((j) => j.id !== i.id));
+                commentDiff.current.insertBefore = insertBefore.filter((j) => j.id !== i.id);
+                setInsertAfter(commentDiff.current.insertBefore);
+                onChange(removeIds(commentDiff.current));
               }}
             >
               删除
@@ -230,7 +232,9 @@ export default function CommentEditor({
               variant="outlined"
               size="small"
               onClick={() => {
-                setInsertAfter(insertAfter.filter((j) => j.id !== i.id));
+                commentDiff.current.insertAfter = insertAfter.filter((j) => j.id !== i.id);
+                setInsertAfter(commentDiff.current.insertAfter);
+                onChange(removeIds(commentDiff.current));
               }}
             >
               删除
