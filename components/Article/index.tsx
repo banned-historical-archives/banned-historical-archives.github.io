@@ -100,6 +100,26 @@ function PureArticle({
           {content}
         </Typography>
       );
+    } else if (part.type === ContentType.quotation) {
+      return (
+        <Typography
+          key={key}
+          variant="body1"
+          sx={{ textIndent: '2em', margin: 0.5, color: 'grey' }}
+        >
+          {content}
+        </Typography>
+      );
+    } else {
+      return (
+        <Typography
+          key={key}
+          variant="body1"
+          sx={{ textIndent: '2em', margin: 0.5 }}
+        >
+          {content}
+        </Typography>
+      );
     }
   });
   const descriptionComponent = description ? (
