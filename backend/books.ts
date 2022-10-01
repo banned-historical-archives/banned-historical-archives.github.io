@@ -2410,7 +2410,7 @@ const books: Book[] = [
           const x = await import(p);
           for (const patch of x.default) {
             if (patch.version === 2) {
-              res[j] = apply_patch_v2(article, patch);
+              res[j] = apply_patch_v2(res[j], patch);
             } else {
               apply_patch(article, patch);
             }
