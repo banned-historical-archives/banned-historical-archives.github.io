@@ -95,10 +95,10 @@ export default function Part({
   const [showInsertBefore, setShowInsertBefore] = useState(false);
   const [showInsertAfter, setShowInsertAfter] = useState(false);
   const [insertBefore, setInsertBefore] = useState<
-    (ContentPart & { id: string })[]
+    (ContentPart & { id?: string })[]
   >([]);
   const [insertAfter, setInsertAfter] = useState<
-    (ContentPart & { id: string })[]
+    (ContentPart & { id?: string })[]
   >([]);
   const [deleted, setDeleted] = useState(false);
   const partDiff = useRef<PartDiff>({
@@ -134,6 +134,11 @@ export default function Part({
             size="small"
             onClick={() => {
               setInsertBefore(insertBefore.filter((j) => j.id !== i.id));
+              partDiff.current.insertBefore = insertBefore.filter(
+                (j) => j.id !== i.id,
+              );
+              setInsertAfter(partDiff.current.insertBefore);
+              onChange(removeIds(partDiff.current));
             }}
           >
             删除
@@ -276,6 +281,11 @@ export default function Part({
             size="small"
             onClick={() => {
               setInsertAfter(insertAfter.filter((j) => j.id !== i.id));
+              partDiff.current.insertAfter = insertAfter.filter(
+                (j) => j.id !== i.id,
+              );
+              setInsertAfter(partDiff.current.insertAfter);
+              onChange(removeIds(partDiff.current));
             }}
           >
             删除
