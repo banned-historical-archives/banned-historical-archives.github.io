@@ -130,60 +130,56 @@ export default function PatchableArticle({
       <Typography variant="h6" sx={{ mb: 2 }}>
         注释
       </Typography>
-      {!comments.filter((i) => i.index !== -1).length ? (
-        <CommentEditor
-          key="virtual"
-          idx={1}
-          content={''}
-          onChange={(diff) => {
-            if (
-              diff.diff ||
-              diff.insertAfter ||
-              diff.insertBefore
-            ) {
-              changes.current.newComments = [
-                ...(diff.insertBefore || []).map((i) => i.text),
-                ...(diff.diff
-                  ? [
-                      new diff_match_patch()
-                        .diff_fromDelta('', diff.diff)
-                        .filter((i) => i[0] !== -1)
-                        .map((i) => i[1])
-                        .join(''),
-                    ]
-                  : []),
-                ...(diff.insertAfter || []).map((i) => i.text),
-              ];
-            } else {
-              delete changes.current.newComments;
-            }
-          }}
-        />
-      ) : (
-        comments
-          .filter((i) => i.index !== -1)
-          .map((comment, idx) => {
-            return (
-              <CommentEditor
-                key={idx}
-                idx={comment.index}
-                content={comment.text}
-                onChange={(commentDiff: CommentDiff) => {
-                  if (
-                    commentDiff.diff ||
-                    commentDiff.delete ||
-                    commentDiff.insertAfter ||
-                    commentDiff.insertBefore
-                  ) {
-                    changes.current.comments[comment.index] = commentDiff;
-                  } else {
-                    delete changes.current.comments[comment.index];
-                  }
-                }}
-              />
-            );
-          })
-      )}
+      <ol>
+        {!comments.filter((i) => i.index !== -1).length ? (
+          <CommentEditor
+            key="virtual"
+            content={''}
+            onChange={(diff) => {
+              if (diff.diff || diff.insertAfter || diff.insertBefore) {
+                changes.current.newComments = [
+                  ...(diff.insertBefore || []).map((i) => i.text),
+                  ...(diff.diff
+                    ? [
+                        new diff_match_patch()
+                          .diff_fromDelta('', diff.diff)
+                          .filter((i) => i[0] !== -1)
+                          .map((i) => i[1])
+                          .join(''),
+                      ]
+                    : []),
+                  ...(diff.insertAfter || []).map((i) => i.text),
+                ];
+              } else {
+                delete changes.current.newComments;
+              }
+            }}
+          />
+        ) : (
+          comments
+            .filter((i) => i.index !== -1)
+            .map((comment, idx) => {
+              return (
+                <CommentEditor
+                  key={idx}
+                  content={comment.text}
+                  onChange={(commentDiff: CommentDiff) => {
+                    if (
+                      commentDiff.diff ||
+                      commentDiff.delete ||
+                      commentDiff.insertAfter ||
+                      commentDiff.insertBefore
+                    ) {
+                      changes.current.comments[comment.index] = commentDiff;
+                    } else {
+                      delete changes.current.comments[comment.index];
+                    }
+                  }}
+                />
+              );
+            })
+        )}
+      </ol>
       <Stack spacing={1}>
         <Button
           variant="contained"

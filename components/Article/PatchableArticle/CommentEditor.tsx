@@ -66,21 +66,19 @@ function InsertCommentDialog(props: InsertCommentDialogProps) {
 }
 
 export default function CommentEditor({
-  idx,
   content,
   onChange,
 }: {
   onChange: (commentDiff: CommentDiff) => void;
-  idx: number;
   content: string;
 }) {
   const [showInsertBefore, setShowInsertBefore] = useState(false);
   const [showInsertAfter, setShowInsertAfter] = useState(false);
   const [insertBefore, setInsertBefore] = useState<
-    { id: string, text: string }[]
+    { id: string; text: string }[]
   >([]);
   const [insertAfter, setInsertAfter] = useState<
-    { id: string, text: string }[]
+    { id: string; text: string }[]
   >([]);
   const [deleted, setDeleted] = useState(!content);
   const commentDiff = useRef<CommentDiff>({
@@ -91,21 +89,95 @@ export default function CommentEditor({
   const originText = content;
   const [text, setText] = useState(originText);
 
+  const center = (
+    <Stack direction="row" sx={{ mt: 1, mb: 1 }} spacing={1}>
+      <TextField
+        sx={{ flex: 1 }}
+        size="small"
+        onChange={(e) => {
+          const newCommentDiff: CommentDiff = { ...commentDiff.current };
+          if (!e.target.value.length) {
+            newCommentDiff.delete = true;
+            setDeleted(true);
+          } else {
+            delete newCommentDiff.delete;
+            setDeleted(false);
+            const diff = new diff_match_patch().diff_main(
+              originText,
+              e.target.value,
+            );
+            if (originText) {
+              if (diff.length !== 1) {
+                newCommentDiff.diff = new diff_match_patch().diff_toDelta(diff);
+              } else {
+                delete newCommentDiff.diff;
+              }
+            } else {
+              newCommentDiff.diff = new diff_match_patch().diff_toDelta(diff);
+            }
+          }
+          commentDiff.current = newCommentDiff;
+          onChange(removeIds(newCommentDiff));
+          setText(e.target.value);
+        }}
+        value={text}
+        multiline
+      />
+      <Stack spacing={1}>
+        <Button
+          size="small"
+          variant="outlined"
+          onClick={() => setShowInsertBefore(true)}
+        >
+          上方插入
+        </Button>
+        <Button
+          size="small"
+          variant="outlined"
+          onClick={() => setShowInsertAfter(true)}
+        >
+          下方插入
+        </Button>
+        <FormControlLabel
+          control={
+            <Checkbox
+              size="small"
+              checked={deleted}
+              onChange={(e) => {
+                if (!text.length) {
+                  return;
+                }
+                setDeleted(e.target.checked);
+                commentDiff.current = {
+                  ...commentDiff.current,
+                  delete: e.target.checked,
+                };
+                onChange(removeIds(commentDiff.current));
+              }}
+            />
+          }
+          label="删除"
+        />
+      </Stack>
+    </Stack>
+  );
   return (
     <>
       {insertBefore.map((i) => (
-        <Stack key={i.id} direction="row" spacing={1}>
-          <TextField disabled multiline sx={{ flex: 1 }} value={i.text} />
-          <Button
-            variant="outlined"
-            size="small"
-            onClick={() => {
-              setInsertBefore(insertBefore.filter((j) => j.id !== i.id));
-            }}
-          >
-            删除
-          </Button>
-        </Stack>
+        <li>
+          <Stack key={i.id} direction="row" spacing={1}>
+            <TextField disabled multiline sx={{ flex: 1 }} value={i.text} />
+            <Button
+              variant="outlined"
+              size="small"
+              onClick={() => {
+                setInsertBefore(insertBefore.filter((j) => j.id !== i.id));
+              }}
+            >
+              删除
+            </Button>
+          </Stack>
+        </li>
       ))}
       {showInsertBefore ? (
         <InsertCommentDialog
@@ -147,96 +219,22 @@ export default function CommentEditor({
           }}
         />
       ) : null}
-      <Stack direction="row" sx={{ mt: 1, mb: 1 }} spacing={1}>
-        <Typography>
-          {bracket_left}
-          {idx}
-          {bracket_right}
-        </Typography>
-        <TextField
-          sx={{ flex: 1 }}
-          size="small"
-          onChange={(e) => {
-            const newCommentDiff: CommentDiff = { ...commentDiff.current };
-            if (!e.target.value.length) {
-              newCommentDiff.delete = true;
-              setDeleted(true);
-            } else {
-              delete newCommentDiff.delete;
-              setDeleted(false);
-              const diff = new diff_match_patch().diff_main(
-                originText,
-                e.target.value,
-              );
-              if (originText) {
-                if (diff.length !== 1) {
-                  newCommentDiff.diff = new diff_match_patch().diff_toDelta(
-                    diff,
-                  );
-                } else {
-                  delete newCommentDiff.diff;
-                }
-              } else {
-                newCommentDiff.diff = new diff_match_patch().diff_toDelta(diff);
-              }
-            }
-            commentDiff.current = newCommentDiff;
-            onChange(removeIds(newCommentDiff));
-            setText(e.target.value);
-          }}
-          value={text}
-          multiline
-        />
-        <Stack spacing={1}>
-          <Button
-            size="small"
-            variant="outlined"
-            onClick={() => setShowInsertBefore(true)}
-          >
-            上方插入
-          </Button>
-          <Button
-            size="small"
-            variant="outlined"
-            onClick={() => setShowInsertAfter(true)}
-          >
-            下方插入
-          </Button>
-          <FormControlLabel
-            control={
-              <Checkbox
-                size="small"
-                checked={deleted}
-                onChange={(e) => {
-                  if (!text.length) {
-                    return;
-                  }
-                  setDeleted(e.target.checked);
-                  commentDiff.current = {
-                    ...commentDiff.current,
-                    delete: e.target.checked,
-                  };
-                  onChange(removeIds(commentDiff.current));
-                }}
-              />
-            }
-            label="删除"
-          />
-        </Stack>
-      </Stack>
+      {deleted ? center : <li>{center}</li>}
       {insertAfter.map((i) => (
-        <Stack key={i.id} direction="row" spacing={1}>
-          <TextField disabled multiline sx={{ flex: 1 }} value={i.text} />
-          <Button
-            variant="outlined"
-            size="small"
-            onClick={() => {
-              setInsertAfter(insertAfter.filter((j) => j.id !== i.id));
-            }}
-          >
-            删除
-          </Button>
-        </Stack>
+        <li>
+          <Stack key={i.id} direction="row" spacing={1}>
+            <TextField disabled multiline sx={{ flex: 1 }} value={i.text} />
+            <Button
+              variant="outlined"
+              size="small"
+              onClick={() => {
+                setInsertAfter(insertAfter.filter((j) => j.id !== i.id));
+              }}
+            >
+              删除
+            </Button>
+          </Stack>
+        </li>
       ))}
     </>
   );
