@@ -357,11 +357,19 @@ export default function ArticleViewer({
     if (patchWrap.current) {
       const patch = patchWrap.current ? patchWrap.current.patch! : undefined;
       if (patch && typeof window !== 'undefined') {
-        addOCRComparisonPublicationV1(
-          patchWrap.current!.publicationId,
-          patch,
-          article,
-        );
+        if (patch.version === 2) {
+          addOCRComparisonPublicationV2(
+            patchWrap.current!.publicationId,
+            patch,
+            article,
+          );
+        } else {
+          addOCRComparisonPublicationV1(
+            patchWrap.current!.publicationId,
+            patch,
+            article,
+          );
+        }
         setCompareType(CompareType.version);
         setComparePublication(virtual_publication_id);
         setSelectedPublication(patchWrap.current!.publicationId);
