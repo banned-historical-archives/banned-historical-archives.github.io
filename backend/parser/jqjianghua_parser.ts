@@ -225,7 +225,7 @@ function extract_parts(
     (i) =>
       ({
         text: i[0] as string,
-        type: i[1],
+        type: i[1] as any,
         page_start: i[2]!,
         page_end: i[3]!,
       } as { page_start: number; page_end: number } & ContentPartRaw),
@@ -411,7 +411,7 @@ export async function parse(
       const part = parts_raw[i];
       const next_part = parts_raw[i + 1];
       const nnext_part = parts_raw[i + 2];
-      if (part.type as ContentType === ContentType.authors) {
+      if (part.type as any === ContentType.authors) {
         const article = articles[articles.length - 1];
         if (part.page_start === 272 && range[0] === 7) {
           article.authors = ['陈伯达', '江青'];
@@ -420,10 +420,10 @@ export async function parse(
         }
         continue;
       }
-      if (part.type === ContentType.subdate) {
+      if (part.type as any === ContentType.subdate) {
         continue;
       }
-      if (part.type === ContentType.title) {
+      if (part.type as any === ContentType.title) {
         part_idx = 0;
         const title = part.text.replace(/^\d+\) */, '').replace(/^补遗 \d\d：?/, '');
         articles.push({
@@ -464,19 +464,19 @@ export async function parse(
           article.authors.push('林彪', '江青')
         }
         if (
-          next_part.type === ContentType.subdate ||
-          nnext_part.type === ContentType.subdate
+          next_part.type as any === ContentType.subdate ||
+          nnext_part.type as any === ContentType.subdate
         ) {
           const article = articles[articles.length - 1];
           const [dates, is_range_date] = extract_dates(
-            nnext_part.type === ContentType.subdate
+            nnext_part.type as any === ContentType.subdate
               ? nnext_part.text
               : next_part.text,
           );
           article.is_range_date = is_range_date;
           article.dates = dates;
         }
-      } else if (part.type as ContentType === ContentType.comment) {
+      } else if (part.type as any === ContentType.comment) {
         articles[articles.length - 1].comments.push(part.text.replace(/^〔\d+〕 */, ''))
       } else {
         const article = articles[articles.length - 1];

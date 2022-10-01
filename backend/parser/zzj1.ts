@@ -249,7 +249,7 @@ function extract_parts(
     (i) =>
       ({
         text: i[0] as string,
-        type: i[1],
+        type: i[1] as any,
         page_start: i[2]!,
         page_end: i[3]!,
       } as { page_start: number; page_end: number } & ContentPartRaw),
@@ -334,7 +334,7 @@ export async function parse(
     for (let i = 0, part_idx = 0; i < parts_raw.length; ++i, ++part_idx) {
       const part = parts_raw[i];
       const next_part = parts_raw[i + 1];
-      if (part.type === ContentType.title) {
+      if (part.type as any === ContentType.title) {
         part_idx = 0;
         const title = part.text;
         articles.push({
@@ -356,7 +356,7 @@ export async function parse(
           page_start: Infinity,
           page_end: Infinity,
         });
-      } else if (part.type as ContentType === ContentType.comment) {
+      } else if (part.type as any === ContentType.comment) {
         articles[articles.length - 1].comments.push(part.text.replace(/^〔\d+〕 */, ''))
       } else {
         const article = articles[articles.length - 1];

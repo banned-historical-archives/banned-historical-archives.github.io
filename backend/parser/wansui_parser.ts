@@ -178,7 +178,7 @@ function extract_parts(
     (i) =>
       ({
         text: i[0] as string,
-        type: i[1],
+        type: i[1] as any,
         page_start: i[2]!,
         page_end: i[3]!,
       } as { page_start: number; page_end: number } & ContentPartRaw),
@@ -307,12 +307,12 @@ export async function parse(
     for (let i = 0; i < parts_raw.length; ++i) {
       const part = parts_raw[i];
       const next_part = parts_raw[i + 1];
-      if (part.type === ContentType.subtitle) {
+      if (part.type as any === ContentType.subtitle) {
         articles.push({
           title: part.text,
           description: '',
           dates: [],
-          parts: [{text: part.text, type: ContentType.title} as ContentPart],
+          parts: [{text: part.text, type: ContentType.title as any} as ContentPart],
           comment_pivots: [],
           is_range_date: false,
           authors: ['毛泽东'],
@@ -320,7 +320,7 @@ export async function parse(
           page_start: Infinity,
           page_end: Infinity,
         });
-        if (next_part && next_part.type === ContentType.subdate) {
+        if (next_part && next_part.type as any === ContentType.subdate) {
           const article = articles[articles.length - 1];
           const [dates, is_range_date] = extract_dates(next_part.text);
           article.is_range_date = is_range_date;
