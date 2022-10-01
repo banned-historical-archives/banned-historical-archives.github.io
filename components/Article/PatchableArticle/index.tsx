@@ -192,7 +192,9 @@ export default function PatchableArticle({
               commitHash: commit_hash,
               patch: changes.current,
             });
-            const url = `https://github.com/banned-historical-archives/banned-historical-archives.github.io/issues/new?body=${encodeURIComponent(`{OCR补丁}
+            const url = `https://github.com/banned-historical-archives/banned-historical-archives.github.io/issues/new?title=${encodeURIComponent(
+                `[OCR patch]${article.title}[${publicationName}]`,
+              )}&body=${encodeURIComponent(`{OCR补丁}
 ${params}`)}`;
             window.open(url, '_blank');
           }}
