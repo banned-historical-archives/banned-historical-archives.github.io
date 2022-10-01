@@ -66,11 +66,7 @@ export default function PatchableArticle({
         anchorEl={anchorEl}
         onClose={() => setAnchorEl(null)}
       >
-        <Typography
-          sx={{ p: 2, width: 200, overflow: 'scroll', userSelect: 'all' }}
-        >
-          {popoverContent}
-        </Typography>
+        <TextField multiline value={popoverContent}/>
       </Popover>
       {contents.map((content, idx) => (
         <Part
@@ -193,8 +189,8 @@ export default function PatchableArticle({
               patch: changes.current,
             });
             const url = `https://github.com/banned-historical-archives/banned-historical-archives.github.io/issues/new?title=${encodeURIComponent(
-                `[OCR patch]${article.title}[${publicationName}]`,
-              )}&body=${encodeURIComponent(`{OCR补丁}
+              `[OCR patch]${article.title}[${publicationName}]`,
+            )}&body=${encodeURIComponent(`{OCR补丁}
 ${params}`)}`;
             window.open(url, '_blank');
           }}
