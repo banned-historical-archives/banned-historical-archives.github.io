@@ -164,8 +164,8 @@ export default function CommentEditor({
   return (
     <>
       {insertBefore.map((i) => (
-        <li>
-          <Stack key={i.id} direction="row" spacing={1}>
+        <li key={i.id}>
+          <Stack direction="row" spacing={1}>
             <TextField disabled multiline sx={{ flex: 1 }} value={i.text} />
             <Button
               variant="outlined"
@@ -221,8 +221,8 @@ export default function CommentEditor({
       ) : null}
       {deleted ? center : <li>{center}</li>}
       {insertAfter.map((i) => (
-        <li>
-          <Stack key={i.id} direction="row" spacing={1}>
+        <li key={i.id}>
+          <Stack direction="row" spacing={1}>
             <TextField disabled multiline sx={{ flex: 1 }} value={i.text} />
             <Button
               variant="outlined"
