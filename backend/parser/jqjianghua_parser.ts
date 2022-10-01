@@ -5,12 +5,23 @@ import type { Item } from './pdf.js';
 import {
   ContentPart,
   ContentPartRaw,
-  ContentType,
   Date,
   ParserOption,
   ParserResult,
   Pivot,
 } from '../../types';
+
+export enum ContentType {
+  authors = 'authors',
+  appellation = 'appellation',
+  title = 'title',
+  subtitle = 'subtitle',
+  subdate = 'subdate',
+  description = 'description',
+  paragraph = 'paragraph',
+  quotation = 'quotation',
+  comment = 'comment',
+}
 
 const opt = {
   content_min_x: 90,
@@ -400,7 +411,7 @@ export async function parse(
       const part = parts_raw[i];
       const next_part = parts_raw[i + 1];
       const nnext_part = parts_raw[i + 2];
-      if (part.type === ContentType.authors) {
+      if (part.type as ContentType === ContentType.authors) {
         const article = articles[articles.length - 1];
         if (part.page_start === 272 && range[0] === 7) {
           article.authors = ['陈伯达', '江青'];
@@ -465,7 +476,7 @@ export async function parse(
           article.is_range_date = is_range_date;
           article.dates = dates;
         }
-      } else if (part.type === ContentType.comment) {
+      } else if (part.type as ContentType === ContentType.comment) {
         articles[articles.length - 1].comments.push(part.text.replace(/^〔\d+〕 */, ''))
       } else {
         const article = articles[articles.length - 1];
