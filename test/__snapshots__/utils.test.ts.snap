@@ -1,5 +1,507 @@
 // Vitest Snapshot v1
 
+exports[`apply_patch_v2 > comment delete 1`] = `
+{
+  "authors": [
+    "test",
+  ],
+  "comment_pivots": [
+    {
+      "index": 1,
+      "offset": 3,
+      "part_idx": 0,
+    },
+    {
+      "index": 2,
+      "offset": 8,
+      "part_idx": 0,
+    },
+    {
+      "index": 3,
+      "offset": 3,
+      "part_idx": 1,
+    },
+  ],
+  "comments": [
+    "MZD",
+    "ZCQ",
+  ],
+  "dates": [],
+  "description": "asdf",
+  "is_range_date": false,
+  "page_end": 0,
+  "page_start": 0,
+  "parts": [
+    {
+      "text": "mzd111jq222ywy",
+      "type": "paragraph",
+    },
+    {
+      "text": "ZCQ",
+      "type": "paragraph",
+    },
+  ],
+  "title": "test",
+}
+`;
+
+exports[`apply_patch_v2 > comment modify + insert before after 1`] = `
+{
+  "authors": [
+    "test",
+  ],
+  "comment_pivots": [
+    {
+      "index": 1,
+      "offset": 3,
+      "part_idx": 0,
+    },
+    {
+      "index": 2,
+      "offset": 8,
+      "part_idx": 0,
+    },
+    {
+      "index": 3,
+      "offset": 3,
+      "part_idx": 1,
+    },
+  ],
+  "comments": [
+    "before1",
+    "MZXXD",
+    "after1",
+    "JQ",
+    "ZCQ",
+  ],
+  "dates": [],
+  "description": "asdf",
+  "is_range_date": false,
+  "page_end": 0,
+  "page_start": 0,
+  "parts": [
+    {
+      "text": "mzd111jq222ywy",
+      "type": "paragraph",
+    },
+    {
+      "text": "ZCQ",
+      "type": "paragraph",
+    },
+  ],
+  "title": "test",
+}
+`;
+
+exports[`apply_patch_v2 > description modification 1`] = `
+{
+  "authors": [
+    "test",
+  ],
+  "comment_pivots": [
+    {
+      "index": 1,
+      "offset": 3,
+      "part_idx": 0,
+    },
+    {
+      "index": 2,
+      "offset": 8,
+      "part_idx": 0,
+    },
+    {
+      "index": 3,
+      "offset": 3,
+      "part_idx": 1,
+    },
+  ],
+  "comments": [
+    "MZD",
+    "JQ",
+    "ZCQ",
+  ],
+  "dates": [],
+  "description": "as111df",
+  "is_range_date": false,
+  "page_end": 0,
+  "page_start": 0,
+  "parts": [
+    {
+      "text": "mzd111jq222ywy",
+      "type": "paragraph",
+    },
+    {
+      "text": "ZCQ",
+      "type": "paragraph",
+    },
+  ],
+  "title": "test",
+}
+`;
+
+exports[`apply_patch_v2 > description remove 1`] = `
+{
+  "authors": [
+    "test",
+  ],
+  "comment_pivots": [
+    {
+      "index": 1,
+      "offset": 3,
+      "part_idx": 0,
+    },
+    {
+      "index": 2,
+      "offset": 8,
+      "part_idx": 0,
+    },
+    {
+      "index": 3,
+      "offset": 3,
+      "part_idx": 1,
+    },
+  ],
+  "comments": [
+    "MZD",
+    "JQ",
+    "ZCQ",
+  ],
+  "dates": [],
+  "description": "",
+  "is_range_date": false,
+  "page_end": 0,
+  "page_start": 0,
+  "parts": [
+    {
+      "text": "mzd111jq222ywy",
+      "type": "paragraph",
+    },
+    {
+      "text": "ZCQ",
+      "type": "paragraph",
+    },
+  ],
+  "title": "test",
+}
+`;
+
+exports[`apply_patch_v2 > new comments 1`] = `
+{
+  "authors": [
+    "test",
+  ],
+  "comment_pivots": [
+    {
+      "index": 1,
+      "offset": 3,
+      "part_idx": 0,
+    },
+    {
+      "index": 2,
+      "offset": 8,
+      "part_idx": 0,
+    },
+    {
+      "index": 3,
+      "offset": 3,
+      "part_idx": 1,
+    },
+  ],
+  "comments": [
+    "a",
+    "b",
+    "c",
+  ],
+  "dates": [],
+  "description": "asdf",
+  "is_range_date": false,
+  "page_end": 0,
+  "page_start": 0,
+  "parts": [
+    {
+      "text": "mzd111jq222ywy",
+      "type": "paragraph",
+    },
+    {
+      "text": "ZCQ",
+      "type": "paragraph",
+    },
+  ],
+  "title": "test",
+}
+`;
+
+exports[`apply_patch_v2 > part insert before + insert after + delete 1`] = `
+{
+  "authors": [
+    "test",
+  ],
+  "comment_pivots": [
+    {
+      "index": 3,
+      "offset": 3,
+      "part_idx": 2,
+    },
+  ],
+  "comments": [
+    "MZD",
+    "JQ",
+    "ZCQ",
+  ],
+  "dates": [],
+  "description": "asdf",
+  "is_range_date": false,
+  "page_end": 0,
+  "page_start": 0,
+  "parts": [
+    {
+      "text": "title",
+      "type": "title",
+    },
+    {
+      "text": "signature",
+      "type": "paragraph",
+    },
+    {
+      "text": "ZCQ",
+      "type": "paragraph",
+    },
+  ],
+  "title": "test",
+}
+`;
+
+exports[`apply_patch_v2 > part insert before + insert after + pivot modification 1`] = `
+{
+  "authors": [
+    "test",
+  ],
+  "comment_pivots": [
+    {
+      "index": 23,
+      "offset": 5,
+      "part_idx": 0,
+    },
+    {
+      "index": 3,
+      "offset": 3,
+      "part_idx": 3,
+    },
+  ],
+  "comments": [
+    "MZD",
+    "JQ",
+    "ZCQ",
+  ],
+  "dates": [],
+  "description": "asdf",
+  "is_range_date": false,
+  "page_end": 0,
+  "page_start": 0,
+  "parts": [
+    {
+      "text": "title",
+      "type": "title",
+    },
+    {
+      "text": "mzd111jq222ywy",
+      "type": "paragraph",
+    },
+    {
+      "text": "signature",
+      "type": "paragraph",
+    },
+    {
+      "text": "ZCQ",
+      "type": "paragraph",
+    },
+  ],
+  "title": "test",
+}
+`;
+
+exports[`apply_patch_v2 > part insert before + insert after 1`] = `
+{
+  "authors": [
+    "test",
+  ],
+  "comment_pivots": [
+    {
+      "index": 3,
+      "offset": 3,
+      "part_idx": 3,
+    },
+  ],
+  "comments": [
+    "MZD",
+    "JQ",
+    "ZCQ",
+  ],
+  "dates": [],
+  "description": "asdf",
+  "is_range_date": false,
+  "page_end": 0,
+  "page_start": 0,
+  "parts": [
+    {
+      "text": "title",
+      "type": "title",
+    },
+    {
+      "text": "mzd111jq222ywy",
+      "type": "paragraph",
+    },
+    {
+      "text": "signature",
+      "type": "paragraph",
+    },
+    {
+      "text": "ZCQ",
+      "type": "paragraph",
+    },
+  ],
+  "title": "test",
+}
+`;
+
+exports[`apply_patch_v2 > part modify 1`] = `
+{
+  "authors": [
+    "test",
+  ],
+  "comment_pivots": [
+    {
+      "index": 1,
+      "offset": 3,
+      "part_idx": 0,
+    },
+    {
+      "index": 2,
+      "offset": 8,
+      "part_idx": 0,
+    },
+    {
+      "index": 3,
+      "offset": 3,
+      "part_idx": 1,
+    },
+  ],
+  "comments": [
+    "MZD",
+    "JQ",
+    "ZCQ",
+  ],
+  "dates": [],
+  "description": "asdf",
+  "is_range_date": false,
+  "page_end": 0,
+  "page_start": 0,
+  "parts": [
+    {
+      "text": "mzd111jq222ywy1",
+      "type": "paragraph",
+    },
+    {
+      "text": "ZCQ",
+      "type": "paragraph",
+    },
+  ],
+  "title": "test",
+}
+`;
+
+exports[`apply_patch_v2 > pivot modify 1`] = `
+{
+  "authors": [
+    "test",
+  ],
+  "comment_pivots": [
+    {
+      "index": 51,
+      "offset": 3,
+      "part_idx": 0,
+    },
+    {
+      "index": 2,
+      "offset": 8,
+      "part_idx": 0,
+    },
+    {
+      "index": 3,
+      "offset": 3,
+      "part_idx": 1,
+    },
+  ],
+  "comments": [
+    "MZD",
+    "JQ",
+    "ZCQ",
+  ],
+  "dates": [],
+  "description": "asdf",
+  "is_range_date": false,
+  "page_end": 0,
+  "page_start": 0,
+  "parts": [
+    {
+      "text": "mzd111jq222ywy",
+      "type": "paragraph",
+    },
+    {
+      "text": "ZCQ",
+      "type": "paragraph",
+    },
+  ],
+  "title": "test",
+}
+`;
+
+exports[`apply_patch_v2 > pivot modify2 1`] = `
+{
+  "authors": [
+    "test",
+  ],
+  "comment_pivots": [
+    {
+      "index": 51,
+      "offset": 3,
+      "part_idx": 0,
+    },
+    {
+      "index": 26,
+      "offset": 8,
+      "part_idx": 0,
+    },
+    {
+      "index": 3,
+      "offset": 3,
+      "part_idx": 1,
+    },
+  ],
+  "comments": [
+    "MZD",
+    "JQ",
+    "ZCQ",
+  ],
+  "dates": [],
+  "description": "asdf",
+  "is_range_date": false,
+  "page_end": 0,
+  "page_start": 0,
+  "parts": [
+    {
+      "text": "mzd111jq222ywy",
+      "type": "paragraph",
+    },
+    {
+      "text": "ZCQ",
+      "type": "paragraph",
+    },
+  ],
+  "title": "test",
+}
+`;
+
 exports[`extract_dates > format a 1`] = `
 {
   "dates": [

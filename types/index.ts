@@ -17,15 +17,12 @@ export enum TagType {
 }
 
 export enum ContentType {
-  authors = 'authors',
   appellation = 'appellation',
   title = 'title',
   subtitle = 'subtitle',
   subdate = 'subdate',
-  description = 'description',
   paragraph = 'paragraph',
   quotation = 'quotation',
-  comment = 'comment',
 }
 
 export type ContentPartRaw = {
@@ -44,9 +41,9 @@ export type Date = {
 };
 
 export type Pivot = {
-  part_idx: number; // -1表示标题
-  index: number; // -1表示标题, -99 表示未知
-  offset: number; // -99 表示未知
+  part_idx: number; // 从 0 开始
+  index: number; // 注释编号
+  offset: number; // 偏移量，从 0 开始，注释应该插入的index，比如'mzd[2]'的offset为3
 }
 
 export type ParserResult = {
@@ -146,4 +143,29 @@ export type Patch = {
   parts: {[idx: string]: string},
   comments: {[idx: string]: string},
   description: string,
+}
+
+export type StringDiff = string;
+
+export type PartDiff = {
+  insertBefore?: ContentPart[];
+  insertAfter?: ContentPart[];
+  delete?: boolean;
+  diff?: StringDiff;
+  type?: ContentType;
+};
+
+export type CommentDiff = {
+  insertBefore?: { id?: string; text: StringDiff }[];
+  insertAfter?: { id?: string; text: StringDiff }[];
+  delete?: boolean;
+  diff?: StringDiff;
+};
+
+export type PatchV2 = {
+  version: 2,
+  parts: {[idx: string]: PartDiff},
+  comments: {[idx: string]: CommentDiff},
+  newComments?: string[],
+  description?: StringDiff, // 如果为空字符串表示无变更，如果不存在，表示删除
 }

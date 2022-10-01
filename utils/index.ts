@@ -1,5 +1,5 @@
 import { diff_match_patch, Diff } from 'diff-match-patch';
-import { ArticleCategory, ArticleType, ParserResult, Patch, Pivot, TagType } from "../types";
+import { ArticleCategory, ArticleType, ContentPart, ParserResult, Patch, PatchV2, Pivot, TagType } from "../types";
 
 //  A formatted version of a popular md5 implementation.
 //  Original copyright (c) Paul Johnston & Greg Holt.
@@ -190,6 +190,118 @@ export function extract_pivots(s: string, part_idx: number): [Pivot[], string] {
     res.push({ part_idx, offset: idx, index });
   }
   return [res, s];
+}
+
+/**
+ * 1) 编辑/删除/插入段落
+ * 2) 编辑/删除/插入注释
+ * 3) 编辑/删除描述
+ */
+export function apply_patch_v2(parserResult: ParserResult, patch: PatchV2): ParserResult {
+  const { parts, comment_pivots, comments } = parserResult;
+  const final_parts: ContentPart[] = [];
+  const final_comments: string[] = [];
+  const final_pivots: Pivot[] =[];
+  for (let i in parts) {
+    const idx = parseInt(i);
+    if (patch.parts[i]) {
+      if (patch.parts[i].insertBefore)
+        for (const j of patch.parts[i].insertBefore!) {
+          const [pivots, k] = extract_pivots(j.text, final_parts.length);
+          final_parts.push({ type: j.type, text: k });
+          final_pivots.push(...pivots);
+        }
+      if (!patch.parts[i].delete) {
+        let final_text = parts[i].text;
+        if (patch.parts[i].diff) {
+          const original_text_arr = Array.from(parts[idx].text);
+          // 恢复bracket
+          comment_pivots
+            .filter((i) => i.part_idx === idx)
+            .sort((a, b) => b.index - a.index)
+            .forEach((i) =>
+              original_text_arr.splice(
+                i.offset,
+                0,
+                `${bracket_left}${i.index}${bracket_right}`,
+              ),
+            );
+          const original_text_with_brackets = original_text_arr.join('');
+          final_text = new diff_match_patch()
+                .diff_fromDelta(original_text_with_brackets, patch.parts[i].diff!)
+                .filter((i) => i[0] !== -1)
+                .map((i) => i[1])
+                .join('')
+        }
+
+        const [pivots, final_text_without_brackets] = extract_pivots(final_text, final_parts.length);
+        final_parts.push({
+          type: patch.parts[i].type || parts[i].type,
+          text: final_text_without_brackets,
+        });
+        final_pivots.push(...pivots);
+      }
+      if (patch.parts[i].insertAfter)
+        for (const j of patch.parts[i].insertAfter!) {
+          const [pivots, k] = extract_pivots(j.text, final_parts.length);
+          final_parts.push({ type: j.type, text: k });
+          final_pivots.push(...pivots);
+        }
+    } else {
+      final_pivots.push(
+        ...comment_pivots
+          .filter((j) => j.part_idx === idx)
+          .map((j) => ({ ...j, part_idx: final_parts.length })),
+      );
+      final_parts.push(parts[i]);
+    }
+  }
+  if (patch.newComments && patch.newComments.length) {
+    final_comments.push(...patch.newComments);
+  } else {
+    for (let idx_from_0 in comments) {
+      const idx_from_1 = parseInt(idx_from_0) + 1;
+      if (patch.comments[idx_from_1]) {
+        if (patch.comments[idx_from_1].insertBefore)
+          final_comments.push(
+            ...patch.comments[idx_from_1].insertBefore!.map((j) => j.text),
+          );
+        if (!patch.comments[idx_from_1].delete) {
+          const final_text = patch.comments[idx_from_1].diff
+            ? new diff_match_patch()
+                .diff_fromDelta(comments[idx_from_0], patch.comments[idx_from_1].diff!)
+                .filter((i) => i[0] !== -1)
+                .map((i) => i[1])
+                .join('')
+            : comments[idx_from_0];
+          final_comments.push(final_text);
+        }
+        if (patch.comments[idx_from_1].insertAfter)
+        final_comments.push(
+          ...patch.comments[idx_from_1].insertAfter!.map((j) => j.text),
+        );
+      } else {
+        final_comments.push(parserResult.comments[idx_from_0]);
+      }
+    }
+  }
+
+  const newResult: ParserResult = {...parserResult};
+  newResult.comments = final_comments;
+  newResult.parts = final_parts;
+  newResult.comment_pivots = final_pivots;
+  if (typeof patch.description === 'string') {
+    if (patch.description.length) {
+      newResult.description = new diff_match_patch()
+        .diff_fromDelta(parserResult.description || '', patch.description)
+        .filter((i) => i[0] !== -1)
+        .map((i) => i[1])
+        .join('');
+    }
+  } else {
+    newResult.description = '';
+  }
+  return newResult;
 }
 
 export function apply_patch(parserResult: ParserResult, patch: Patch) {

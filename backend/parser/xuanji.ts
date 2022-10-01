@@ -5,12 +5,23 @@ import type { Item } from './pdf.js';
 import {
   ContentPart,
   ContentPartRaw,
-  ContentType,
   Date,
   ParserOption,
   ParserResult,
   Pivot,
 } from '../../types';
+
+export enum ContentType {
+  authors = 'authors',
+  appellation = 'appellation',
+  title = 'title',
+  subtitle = 'subtitle',
+  subdate = 'subdate',
+  description = 'description',
+  paragraph = 'paragraph',
+  quotation = 'quotation',
+  comment = 'comment',
+}
 
 const opt = {
   content_min_x: 38,
@@ -753,7 +764,7 @@ export async function parse(
             {
               text: title.split('*')[0].substr(1),
               type: ContentType.subtitle,
-            },
+            } as ContentPart,
           );
         } else {
           title = title.replace(/\*/, '');
@@ -789,11 +800,11 @@ export async function parse(
           article.dates = dates;
           ++i;
         }
-      } else if (part.type === ContentType.comment) {
+      } else if (part.type as ContentType === ContentType.comment) {
         articles[articles.length - 1].comments.push(
           part.text.replace(/^〔\d+〕 */, ''),
         );
-      } else if (part.type === ContentType.description) {
+      } else if (part.type as ContentType === ContentType.description) {
         description += description ? part.text : part.text.substr(1);
       } else {
         const article = articles[articles.length - 1];
@@ -839,7 +850,7 @@ export async function parse(
         );
       }
       article.parts = article.parts.filter(
-        (x) => x.type !== ContentType.description,
+        (x) => x.type as ContentType !== ContentType.description,
       );
     }
 
