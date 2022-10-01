@@ -165,7 +165,7 @@ export default function ArticleViewer({
         commitHash: string;
         articleId: string;
         publicationId: string;
-        patch: Patch;
+        patch: Patch | PatchV2;
       }
     | undefined
   >();
@@ -357,16 +357,16 @@ export default function ArticleViewer({
     if (patchWrap.current) {
       const patch = patchWrap.current ? patchWrap.current.patch! : undefined;
       if (patch && typeof window !== 'undefined') {
-        if (patch.version === 2) {
+        if ((patch as PatchV2).version === 2) {
           addOCRComparisonPublicationV2(
             patchWrap.current!.publicationId,
-            patch,
+            patch as PatchV2,
             article,
           );
         } else {
           addOCRComparisonPublicationV1(
             patchWrap.current!.publicationId,
-            patch,
+            patch as Patch,
             article,
           );
         }
