@@ -21,7 +21,7 @@ const body = `{OCR补丁}
 let body = process.env.BODY.trim();
 
 if (/^\{OCR补丁\}/.test(body)) {
-  body = replace(/^\{OCR补丁\}/, '');
+  body = body.replace(/^\{OCR补丁\}/, '');
   body = body.substr(0, body.lastIndexOf('}') + 1);
   const final = {
     COMMIT_HASH: process.env.COMMIT_HASH,
