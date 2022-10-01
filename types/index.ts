@@ -23,6 +23,7 @@ export enum ContentType {
   subdate = 'subdate',
   paragraph = 'paragraph',
   quotation = 'quotation',
+  signature = 'signature',
 }
 
 export type ContentPartRaw = {
