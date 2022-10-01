@@ -136,7 +136,7 @@ function extract_parts(
           : /^（(节录)|(摘录)|(社论)|(节选)/.test(str)
           ? ContentType.subtitle
           : /^（/.test(str) || /^补遗$/.test(str)
-          ? ContentType.description
+          ? ContentType.paragraph
           : ContentType.subtitle,
         line.items[0],
       ]);
