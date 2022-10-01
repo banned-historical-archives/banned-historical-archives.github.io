@@ -191,7 +191,9 @@ export default function PatchableArticle({
             const url = `https://github.com/banned-historical-archives/banned-historical-archives.github.io/issues/new?title=${encodeURIComponent(
               `[OCR patch]${article.title}[${publicationName}]`,
             )}&body=${encodeURIComponent(`{OCR补丁}
-${params}`)}`;
+${params}
+请复制以上代码在对比选项中粘贴进行预览：https://banned-historical-archives.github.io/articles/${article.id}
+`)}`;
             window.open(url, '_blank');
           }}
         >
