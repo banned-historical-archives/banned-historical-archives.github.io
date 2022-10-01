@@ -18,21 +18,18 @@ const body = `{OCR补丁}
   }
 }`
 */
-const body = process.env.BODY.trim();
-const lines = body.split('\n');
+let body = process.env.BODY.trim();
 
-if (/{OCR补丁}/.test(lines[0])) {
+if (/^\{OCR补丁\}/.test(body)) {
+  body = replace(/^\{OCR补丁\}/, '');
+  body = body.substr(0, body.lastIndexOf('}') + 1);
   const final = {
     COMMIT_HASH: process.env.COMMIT_HASH,
   };
   let decoded = '';
   try {
-    const patch = JSON.parse(lines.slice(1, -1).join(''));
-    if (
-      patch.articleId &&
-      patch.publicationId &&
-      patch.patch
-    ) {
+    const patch = JSON.parse(body);
+    if (patch.articleId && patch.publicationId && patch.patch) {
       final.articleId = patch.articleId;
       final.publicationId = patch.publicationId;
       final.patch = patch.patch;
@@ -41,7 +38,10 @@ if (/{OCR补丁}/.test(lines[0])) {
       return;
     }
 
-    const filepath = join(__dirname, `./articles/[${final.articleId}][${final.publicationId}].ts`);
+    const filepath = join(
+      __dirname,
+      `./articles/[${final.articleId}][${final.publicationId}].ts`,
+    );
 
     let content = `
 export default [
@@ -52,7 +52,10 @@ export default [
     content = content.split('\n').slice(0, -1).join('\n');
     content += '\n' + `// ${decoded}\n  ${JSON.stringify(final.patch)},\n];`;
     writeFileSync(filepath, content);
-    console.log(`preview_url="https://banned-historical-archives.github.io/articles/${final.articleId}?patch=${encodeURIComponent(JSON.stringify(final))}"`);
-  } catch (e) {
-  }
+    console.log(
+      `preview_url="https://banned-historical-archives.github.io/articles/${
+        final.articleId
+      }?patch=${encodeURIComponent(JSON.stringify(final))}"`,
+    );
+  } catch (e) {}
 }
