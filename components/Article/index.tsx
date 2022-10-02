@@ -84,7 +84,13 @@ function PureArticle({
           {content}
         </Typography>
       );
-    } else if (part.type === ContentType.subtitle) {
+    } else if (
+      part.type === ContentType.subtitle ||
+      part.type === ContentType.subtitle2 ||
+      part.type === ContentType.subtitle3 ||
+      part.type === ContentType.subtitle4 ||
+      part.type === ContentType.subtitle5
+    ) {
       return (
         <Typography key={key} variant="subtitle1" sx={{ textAlign: 'center' }}>
           {content}
