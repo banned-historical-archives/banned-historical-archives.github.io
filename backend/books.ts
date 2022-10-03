@@ -25,6 +25,7 @@ import * as wanghongwen6 from './parser/wanghongwen6';
 import * as wanghongwen7 from './parser/wanghongwen7';
 import * as wanghongwen8 from './parser/wanghongwen8';
 import * as wanghongwen9 from './parser/wanghongwen9';
+import * as wanghongwen10 from './parser/wanghongwen10';
 import * as yaowenyuan from './parser/yaowenyuan';
 import * as yaowenyuan1 from './parser/yaowenyuan1';
 import * as yaowenyuan2 from './parser/yaowenyuan2';
@@ -54,6 +55,7 @@ import * as duoren4 from './parser/duoren4';
 import * as duoren5 from './parser/duoren5';
 import * as duoren6 from './parser/duoren6';
 import * as duoren7 from './parser/duoren7';
+import * as duoren8 from './parser/duoren8';
 import { apply_patch, apply_patch_v2, get_article_id } from '../utils';
 import { tranditionalChineseToSimpleChinese } from '../utils/i18n';
 import { exclude, normalize } from './utils';
@@ -227,6 +229,30 @@ const books: Book[] = [
     },
     parser: duoren7.parse,
     path: join(normalize(__dirname), '../public/books/archives1/duoren7'),
+  },
+  {
+    entity: {
+      id: 'duoren8',
+      name: '王洪文、纪登奎同志在省委工作会议召集人和县委书记会议上的讲话',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(7)
+        .fill(0)
+        .map(
+          (i, idx) =>
+            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/duoren8/${
+              idx + 1
+            }.png`,
+        )
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [[1, 7]],
+    },
+    parser: duoren8.parse,
+    path: join(normalize(__dirname), '../public/books/archives1/duoren8'),
   },
   {
     entity: {
@@ -1744,6 +1770,30 @@ const books: Book[] = [
     },
     parser: wanghongwen9.parse,
     path: join(normalize(__dirname), '../public/books/archives1/wanghongwen9'),
+  },
+  {
+    entity: {
+      id: 'wanghongwen10',
+      name: '王洪文付主席和马天水同志的谈话',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '王洪文',
+      files: new Array(1)
+        .fill(0)
+        .map(
+          (i, idx) =>
+            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/wanghongwen10/${
+              idx + 1
+            }.png`,
+        )
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [[1, 1]],
+    },
+    parser: wanghongwen10.parse,
+    path: join(normalize(__dirname), '../public/books/archives1/wanghongwen10'),
   },
   {
     entity: {
