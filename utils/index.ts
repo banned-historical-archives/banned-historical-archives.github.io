@@ -193,7 +193,7 @@ export function extract_pivots(s: string, part_idx: number): [Pivot[], string] {
 }
 
 /**
- * 1) 编辑/删除/插入段落
+ * 1) 编辑/删除/插入段落，修改段落类型
  * 2) 编辑/删除/插入注释
  * 3) 编辑/删除描述
  */

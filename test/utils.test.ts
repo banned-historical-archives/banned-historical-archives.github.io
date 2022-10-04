@@ -238,4 +238,18 @@ describe('apply_patch_v2', async () => {
       }),
     ).toMatchSnapshot();
   });
+  it('type modification', () => {
+    expect(
+      apply_patch_v2(result, {
+        version: 2,
+        parts: {
+          '0': {
+            type: ContentType.subtitle3,
+          },
+        },
+        comments: {},
+        description: '',
+      }),
+    ).toMatchSnapshot();
+  });
 });

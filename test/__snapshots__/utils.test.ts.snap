@@ -502,6 +502,42 @@ exports[`apply_patch_v2 > pivot modify2 1`] = `
 }
 `;
 
+exports[`apply_patch_v2 > type modification 1`] = `
+{
+  "authors": [
+    "test",
+  ],
+  "comment_pivots": [
+    {
+      "index": 3,
+      "offset": 3,
+      "part_idx": 1,
+    },
+  ],
+  "comments": [
+    "MZD",
+    "JQ",
+    "ZCQ",
+  ],
+  "dates": [],
+  "description": "asdf",
+  "is_range_date": false,
+  "page_end": 0,
+  "page_start": 0,
+  "parts": [
+    {
+      "text": "mzd111jq222ywy",
+      "type": "subtitle3",
+    },
+    {
+      "text": "ZCQ",
+      "type": "paragraph",
+    },
+  ],
+  "title": "test",
+}
+`;
+
 exports[`extract_dates > format a 1`] = `
 {
   "dates": [
