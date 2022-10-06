@@ -26,6 +26,7 @@ import * as wanghongwen7 from './parser/wanghongwen7';
 import * as wanghongwen8 from './parser/wanghongwen8';
 import * as wanghongwen9 from './parser/wanghongwen9';
 import * as wanghongwen10 from './parser/wanghongwen10';
+import * as wanghongwen11 from './parser/wanghongwen11';
 import * as yaowenyuan from './parser/yaowenyuan';
 import * as yaowenyuan1 from './parser/yaowenyuan1';
 import * as yaowenyuan2 from './parser/yaowenyuan2';
@@ -56,6 +57,7 @@ import * as duoren5 from './parser/duoren5';
 import * as duoren6 from './parser/duoren6';
 import * as duoren7 from './parser/duoren7';
 import * as duoren8 from './parser/duoren8';
+import * as duoren9 from './parser/duoren9';
 import { apply_patch, apply_patch_v2, get_article_id } from '../utils';
 import { tranditionalChineseToSimpleChinese } from '../utils/i18n';
 import { exclude, normalize } from './utils';
@@ -253,6 +255,30 @@ const books: Book[] = [
     },
     parser: duoren8.parse,
     path: join(normalize(__dirname), '../public/books/archives1/duoren8'),
+  },
+  {
+    entity: {
+      id: 'duoren9',
+      name: '王洪文、叶剑英在接见总参民兵组训工作座谈会议全体同志时的讲话',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(7)
+        .fill(0)
+        .map(
+          (i, idx) =>
+            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/duoren9/${
+              idx + 1
+            }.png`,
+        )
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [[1, 7]],
+    },
+    parser: duoren9.parse,
+    path: join(normalize(__dirname), '../public/books/archives1/duoren9'),
   },
   {
     entity: {
@@ -1794,6 +1820,30 @@ const books: Book[] = [
     },
     parser: wanghongwen10.parse,
     path: join(normalize(__dirname), '../public/books/archives1/wanghongwen10'),
+  },
+  {
+    entity: {
+      id: 'wanghongwen11',
+      name: '王洪文关于学习毛主席理论问题指示的讲话',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '王洪文',
+      files: new Array(8)
+        .fill(0)
+        .map(
+          (i, idx) =>
+            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/wanghongwen11/${
+              idx + 1
+            }.png`,
+        )
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [[1, 8]],
+    },
+    parser: wanghongwen11.parse,
+    path: join(normalize(__dirname), '../public/books/archives1/wanghongwen11'),
   },
   {
     entity: {
