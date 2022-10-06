@@ -65,7 +65,7 @@ export async function parse(
       title: title2,
       parts: [
         {
-          text: title,
+          text: title2,
           type: ContentType.title,
         },
         ...`
