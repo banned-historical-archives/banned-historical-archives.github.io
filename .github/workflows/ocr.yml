@@ -9,8 +9,6 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: breezedeus/cnocr:v2.2
-      volumes:
-        - ${GITHUB_WORKSPACE}:/code
     steps:
       - uses: actions/checkout@v3
         with:
