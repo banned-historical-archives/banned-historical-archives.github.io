@@ -1,0 +1,19 @@
+name: ocr
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  issue:
+    name: Issue
+    runs-on: ubuntu-latest
+    container:
+      image: breezedeus/cnocr:v2.2
+      volumes:
+        - ${GITHUB_WORKSPACE}:/code
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: master
+      - name: ocr test
+        run: python /code/backend/ocr.py /code/public/images/filter.png ch_ppocr_mobile_v2.0 onnx ch_PP-OCRv3_det onnx 1496 0.3 10
