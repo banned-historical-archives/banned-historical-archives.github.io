@@ -13,8 +13,6 @@ import * as maoyuanxin1 from './parser/maoyuanxin1';
 import * as maoyuanxin2 from './parser/maoyuanxin2';
 import * as maoyuanxin3 from './parser/maoyuanxin3';
 import * as maoyuanxin4 from './parser/maoyuanxin4';
-import * as maoyuanxin5 from './parser/maoyuanxin5';
-import * as jiangqing1 from './parser/jiangqing1';
 import * as wanghongwen from './parser/wanghongwen';
 import * as wanghongwen1 from './parser/wanghongwen1';
 import * as wanghongwen2 from './parser/wanghongwen2';
@@ -58,6 +56,7 @@ import * as duoren6 from './parser/duoren6';
 import * as duoren7 from './parser/duoren7';
 import * as duoren8 from './parser/duoren8';
 import * as duoren9 from './parser/duoren9';
+import * as duoren10 from './parser/duoren10';
 import { apply_patch, apply_patch_v2, get_article_id } from '../utils';
 import { tranditionalChineseToSimpleChinese } from '../utils/i18n';
 import { exclude, normalize } from './utils';
@@ -279,6 +278,30 @@ const books: Book[] = [
     },
     parser: duoren9.parse,
     path: join(normalize(__dirname), '../public/books/archives1/duoren9'),
+  },
+  {
+    entity: {
+      id: 'duoren10',
+      name: '毛远新同志在辽联赴京代表团座谈会上的讲话纪要',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(2)
+        .fill(0)
+        .map(
+          (i, idx) =>
+            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/duoren10/${
+              idx + 1
+            }.jpg`,
+        )
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [[1, 2]],
+    },
+    parser: duoren10.parse,
+    path: join(normalize(__dirname), '../public/books/archives1/duoren10'),
   },
   {
     entity: {
@@ -1923,7 +1946,7 @@ const books: Book[] = [
   {
     entity: {
       id: 'yaowenyuan2',
-      name: '姚文元同志在上海市革命委员会报告会上的讲话',
+      name: '姚文元同志在欢庆黄浦区革命委员会成立大会上的讲话',
       internal: true,
       official: true,
       type: 'img',
@@ -2485,55 +2508,7 @@ const books: Book[] = [
     },
     parser: maoyuanxin4.parse,
     path: join(normalize(__dirname), '../public/books/archives1/maoyuanxin4'),
-  },
-  {
-    entity: {
-      id: 'maoyuanxin5',
-      name: '毛远新同志在辽联赴京代表团座谈会上的讲话纪要',
-      internal: true,
-      official: true,
-      type: 'img',
-      author: '',
-      files: new Array(2)
-        .fill(0)
-        .map(
-          (i, idx) =>
-            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/maoyuanxin5/${
-              idx + 1
-            }.jpg`,
-        )
-        .join(','),
-    },
-    parser_option: {
-      page_limits: [[1, 2]],
-    },
-    parser: maoyuanxin5.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/maoyuanxin5'),
-  },
-  {
-    entity: {
-      id: 'jiangqing1',
-      name: '江青同志昨天接见江苏代表团的一段讲话',
-      internal: true,
-      official: true,
-      type: 'img',
-      author: '江青',
-      files: new Array(1)
-        .fill(0)
-        .map(
-          (i, idx) =>
-            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/jiangqing1/${
-              idx + 1
-            }.jpg`,
-        )
-        .join(','),
-    },
-    parser_option: {
-      page_limits: [[1, 1]],
-    },
-    parser: jiangqing1.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/jiangqing1'),
-  },
+  }
 ].map((i) => {
   const book: Book = {
     entity: i.entity,

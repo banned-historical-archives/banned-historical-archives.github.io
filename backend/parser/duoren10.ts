@@ -1,8 +1,15 @@
+import {join} from 'path';
+import {existsSync, writeFileSync, readFileSync} from 'fs';
+import ocr from '../ocr';
 import {
   ContentPart,
+  ContentPartRaw,
   ContentType,
+  Date,
+  OCRResult,
   ParserOption,
   ParserResult,
+  Pivot,
 } from '../../types';
 
 export async function parse(
@@ -10,6 +17,7 @@ export async function parse(
   parser_opt: ParserOption,
 ): Promise<ParserResult[]> {
   const title = '毛远新同志在辽联赴京代表团座谈会上的讲话纪要';
+  const title2 = '江青同志昨天接见江苏代表团的一段讲话';
   const parts: ContentPart[] =[{
     text: title,
     type: ContentType.title,
@@ -48,13 +56,15 @@ export async function parse(
 有了说了，你们看到宋在黑龙江亮相后，才保他的。中央对宋的态度和你们保他是两回事，根本不一样。中央对他的问题很清楚，他跟那些人的关系，中央掌握材料最全，连他到邓小平家去几次都很清楚。对这些人中央都有专案组，为什么中央保他，就是看他能否挽救、启发他自觉，总理就单独找他谈过。但是，作了这么多工作，他还不自觉，无动于衷，你们连他的错误也保了，如“三点意见”，过去在东北所犯的一系列错误，也往好的方面去讲，我看了你们的材料，其中有一份，“我们为什么保宋任穷”，都是评功摆好，你们认为他是毛主席司令部的人，他错的也往好的方面的理解，因此，对他恨不起来，弯子转不过来。问题不在这个，宋还没检查同刘邓关系之前，辽革站、八三一就根据揭发材料把他定为走资派了，并不是看了他的这个检讨，你们还要看揭发出来的东西，他干的那些坏事到底是好的是坏的。过去还有一条支持造反派，实际上是坑害造反派，你们也认为这时对的，这是罪过！有很多问题要翻过来认识。如果你们再恨不起来，再不揭发批判，这就成问题啦。一句话，没有什么再等的啦，越等越被动，还是下定决心，组织群众，发动群众来帮助他。中央对宋是有数的，当然，还没有最后定下来，是通过还是不通过，你们越等越被动，辽联是辽联，是革命群众组织，宋任穷是宋任穷，是刘邓司令部的人。我们让他回来，回不回来，看他自己。我们要抓大方向，是揭、批宋的大方向，还是等宋检查是大方向？还是集中力量揭批宋的问题，这是当前的大方向。
 大家在共同的斗争中联合起来，敌人是清楚的，走资派是马、顾、喻，宋揭发批判看。辽革站、八三一是革命战友，要共同揭发批判，宋任穷打倒不打倒，我们都得走联合起来共同斗争这一条路。希望你们下定决心，把等的思想去掉，勇敢战斗要往前走，不要有其他方面想法，越怕越有鬼，实际上没有鬼，鬼是人怕出来的。
 我讲的这些是我的个人的意见，提供大家考虑，希望对你们能有所帮助。
-`
+        `
           .split('\n')
           .map(i => i.trim())
           .filter((i) => i)
           .map((i) => ({
             text: i,
-            type: ContentType.paragraph,
+            type: /[:：]$/.test(i)
+              ? ContentType.appellation
+              : ContentType.paragraph,
           })),
       ],
       authors: ['毛远新'],
@@ -70,9 +80,43 @@ export async function parse(
       comment_pivots: [],
       description: `
 一九六八年三月二十日
-（根据记录整理，未经本人审阅）`,
-      page_start: parser_opt.page_limits[0][0],
-      page_end: parser_opt.page_limits[0][1],
+（根据记录整理，未经本人审阅）
+      `,
+      page_start: 1,
+      page_end: 2,
+    },
+    {
+      title: title2,
+      parts: [
+        {
+          text: title2,
+          type: ContentType.title,
+        },
+        ...`
+目前，从敌人方面来的干扰，右倾保守主义、右倾分裂主义，这是主导。但是，极左和形“左”实右就没有表现了吗？什么叫二月逆流？从前年冬天到去年二月份，蹦出来的一贯反对毛主席的谭震林，这样的干将之一，把斗争的锋芒针对毛主席、林副主席，以及毛主席为首的无产阶级司令部，否认无产阶级文化大革命的成绩，企图打乱中国人民解放军的阵角，企图动摇新生的革命委员会和形“左”实右一脉相通。
+`
+          .split('\n')
+          .map((i) => ({
+            text: i,
+            type: /[:：]$/.test(i)
+              ? ContentType.appellation
+              : ContentType.paragraph,
+          })),
+      ],
+      authors: ['江青'],
+      dates: [
+        {
+          year: 1968,
+          month: 3,
+          day: 19,
+        },
+      ],
+      is_range_date: false,
+      comments: [],
+      comment_pivots: [],
+      description: ``,
+      page_start: 2,
+      page_end: 2,
     },
   ];
   return res;
