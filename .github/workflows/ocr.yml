@@ -18,7 +18,7 @@ jobs:
         with:
           node-version: 16
       - run: npm i
-      - run: npx ts-node --project ./tsconfig.build.json backend/ocr-gitworkflow.ts >> /parser_results
+      - run: npx ts-node --project ./tsconfig.build.json backend/ocr-gitworkflow.ts
         env:
           BODY: ${{ github.event.issue.body }}
           TITLE: ${{ github.event.issue.title }}
