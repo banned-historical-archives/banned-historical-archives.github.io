@@ -61,7 +61,7 @@ export default async function ocr({
     ? await pdf2image({ pdf_path: abs_target_path, page: page! - 1 })
     : abs_target_path;
   const dimensions = sizeOf(abs_ocr_target);
-  const ocr_command = `python3 backend/ocr.py ${abs_ocr_target} ${rec_model} ${rec_backend} ${det_model} ${det_backend} ${resized_shape} ${box_score_thresh} ${min_box_size}`;
+  const ocr_command = `python backend/ocr.py ${abs_ocr_target} ${rec_model} ${rec_backend} ${det_model} ${det_backend} ${resized_shape} ${box_score_thresh} ${min_box_size}`;
   const raw = execSync(ocr_command).toString();
 
   const candidates: string[] = raw.split('\n');
