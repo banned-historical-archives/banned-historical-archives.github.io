@@ -106,7 +106,7 @@ export async function parse(
         ...(parser_opt.ocr_exceptions ? parser_opt.ocr_exceptions[i] : {}),
       };
       let { ocr_results, dimensions } = await ocr({
-        img: imgPath + '/' + i + '.jpg',
+        img: imgPath + '/' + i + `.${parser_opt.ext}`,
         ...merged_ocr_parameters,
       });
 
