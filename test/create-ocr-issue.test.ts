@@ -6,14 +6,13 @@ import { apply_patch_v2, bracket_left, bracket_right } from '../utils';
 
 describe('create ocr issue', async () => {
   it('test1', async () => {
-    // expect(extract_dates('1911.10-12')).toMatchSnapshot();
     const issue_body = `
 text text
 
 \`\`\`
 {
-  id: 'zhihu1', // 来源文件的唯一标识，必填
-  source_name: '直呼', // 来源文件名称，书籍，数据库，报纸等等
+  id: 'test1', // 来源文件的唯一标识，必填
+  source_name: '测试书籍', // 来源文件名称，书籍，数据库，报纸等等
   articles: [{
     title: '在中央政治局会议上的讲话',
     authors: ['毛泽东', '江青'], // 作者
@@ -75,8 +74,8 @@ text text
 \`\`\`
 
 [此处上传图片]
-![zhihu](https://pic1.zhimg.com/70/v2-57842ef8c82fd128b551c4c01c143738.png)
-![baidu](https://www.baidu.com/img/PCtm_d9c8750bed0b3c7d089fa7d55720d6cf.png)
+![a](https://banned-historical-archives.github.io/images/comparison_pdf.png)
+![b](https://banned-historical-archives.github.io/images/comparison_lyric.png)
 `;
 
     (process.env as any).TEST = 'true';
@@ -84,5 +83,6 @@ text text
     (process.env as any).TITLE = '[自动化文稿录入]test';
     const { start } = await import('../backend/ocr-gitworkflow');
     await start();
+
   }, 1000 * 1000);
 });

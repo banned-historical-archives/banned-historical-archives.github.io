@@ -58,6 +58,7 @@ import * as duoren6 from './parser/duoren6';
 import * as duoren7 from './parser/duoren7';
 import * as duoren8 from './parser/duoren8';
 import * as duoren9 from './parser/duoren9';
+import * as automation from './parser/automation';
 import { apply_patch, apply_patch_v2, get_article_id } from '../utils';
 import { tranditionalChineseToSimpleChinese } from '../utils/i18n';
 import { exclude, normalize } from './utils';

@@ -19,18 +19,45 @@ jobs:
         with:
           node-version: 16
       - run: npm i
-      - run: npx ts-node --project ./tsconfig.build.json backend/ocr-gitworkflow.ts >> $GITHUB_ENV
+      - run: npx ts-node --project ./tsconfig.build.json backend/ocr-gitworkflow.ts >> /parser_results
         env:
           BODY: ${{ github.event.issue.body }}
           TITLE: ${{ github.event.issue.title }}
-      - run: |
-          cd public/books/archives1
-          git config user.name github-actions
-          git config user.email github-actions@github.com
-          git add .
-          git commit -m "feat: ${{ github.event.issue.title }}"
-          git push
-      - run: |
-          git add .
-          git commit -m "feat: ${{ github.event.issue.title }}"
-          git push
+      - name: Create Pull Request For Submodule
+        id: cprs
+        uses: peter-evans/create-pull-request@v4
+        with:
+          body: 'fix https://github.com/banned-historical-archives/banned-historical-archives.github.io/issues/${{ github.event.issue.number }}'
+          committer: GitHub <noreply@github.com>
+          author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
+          signoff: false
+          branch-suffix: random
+          delete-branch: true
+          title: '${{ github.event.issue.title }}'
+          path: 'public/books/archives1'
+          labels: |
+            report
+            automated pr
+          team-reviewers: |
+            owners
+            maintainers
+          draft: false
+      - name: Create Pull Request For Core
+        id: cpr
+        uses: peter-evans/create-pull-request@v4
+        with:
+          body: 'fix #${{ github.event.issue.number }}'
+          committer: GitHub <noreply@github.com>
+          author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
+          signoff: false
+          branch-suffix: random
+          delete-branch: true
+          title: '${{ github.event.issue.title }}'
+          labels: |
+            report
+            automated pr
+          team-reviewers: |
+            owners
+            maintainers
+          draft: false
+

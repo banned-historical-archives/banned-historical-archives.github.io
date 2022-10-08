@@ -45,7 +45,7 @@ export async function start() {
       const imgs = Array.from(body.matchAll(/\!\[.*?\]\(.*?\)/g)).map((i) =>
         (i as any)[0].replace(/^.*\(/, '').replace(/\)/, ''),
       );
-      config.ext = extname(imgs[0]);
+      config.ext = extname(imgs[0]).replace('.', '');
 
       /**
        * 1. 修改 books.ts
@@ -61,13 +61,11 @@ export async function start() {
       });
       const booksts = fs.readFileSync(join(__dirname, 'books.ts')).toString();
       const temp = Array.from(booksts);
-      fs.writeFileSync(
-        join(__dirname, 'books.ts'),
-        temp
-          .splice(
-            booksts.indexOf('[') + 1,
-            0,
-            ` {
+      temp.splice(
+        booksts.indexOf('= [') + 3,
+        0,
+        `
+  {
     entity: {
       id: '${id}',
       name: '${config.source_name!}',
@@ -95,9 +93,8 @@ export async function start() {
     parser: automation.parse,
     path: join(normalize(__dirname), '../public/books/archives${archive_id}/${id}'),
   },`,
-          )
-          .join(''),
       );
+      fs.writeFileSync(join(__dirname, 'books.ts'), temp.join(''));
 
       let idx = 1;
       const targetDir = join(
@@ -121,8 +118,11 @@ export async function start() {
         }),
       );
     } catch (e) {
-      console.log(e)
+      console.log(e);
+      process.exit(1);
     }
+  } else {
+    process.exit(2);
   }
 }
 
