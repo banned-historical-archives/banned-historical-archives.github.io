@@ -129,12 +129,47 @@ export type LACResult = {
   type: LACType;
 };
 
-export type ParserOption = {
+export type ParserOptionV2 = {
+  articles?: {
+    title: string;
+    authors: string[]; // 作者
+    dates: Date[]; // 时间 或者 时间范围 或者 多个时间点
+    is_range_date: boolean; // 如果为 true 表示一段时间，如果为false表示多/单个时间点
+    alias?: string; // 标题别名
+    page_start: number;
+    page_end: number;
+  }[];
+  ocr?: OCRParameter & OCRParameterAdvanced; // ocr 全局参数
+  ocr_exceptions?: {
+    [key: string]: Partial<OCRParameter & OCRParameterAdvanced>;
+  }; // 例外， 比如第三页的ocr参数与其他页面不同，默认为空
+};
+
+export type ParserOption = ParserOptionV2 & {
   page_limits: [number, number][];
+
+  /*legacy*/
   page_width?: number;
   content_min_x?: number;
   name?: string;
   header_min_height?: number;
+};
+
+export type OCRParameter = {
+  rec_model: string;
+  rec_backend: string;
+  det_model: string;
+  det_backend: string;
+  resized_shape: number;
+  box_score_thresh: number;
+  min_box_size: number;
+}
+
+export type OCRParameterAdvanced = {
+  line_merge_threshold: number; // 单位像素，如果小于这个阈值将被视为同一行
+  standard_paragraph_merge_strategy_threshold: number; // 标准段落合并策略，超过 threshold * width 的表示新段落，否则向上合并
+  differential_paragraph_merge_strategy_threshold: number; // 差分段落合并策略，x[i] - x[i-1] > threshold 的表示新段落，否则向上合并，单位像素
+  content_thresholds: [number, number, number, number]; // 通常需要忽略在页面边缘的页眉，页码或者噪声，数组内4个数值分别表示上下左右相对于宽高的比例， 例如 [0.1,0,0,0] 表示忽略顶部占总高度百分之10的内容
 };
 
 export type Book = {

@@ -39,3 +39,6 @@ public/article
 public/articles.json
 public/pdfjs-dist
 dist
+
+.cnocr
+.cnstd
