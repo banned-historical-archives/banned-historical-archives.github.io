@@ -10,12 +10,11 @@ jobs:
     container:
       image: breezedeus/cnocr:v2.2
     steps:
-      - name: Cleaning Operation
-        run : sudo find /opt/actions-runner/_work/${{ github.event.repository.name }}/${{ github.event.repository.name }}/. -name . -o -prune -exec rm -rf -- {} + || true
       - uses: actions/checkout@v3
         with:
           ref: master
           submodule: true
+        run: sudo chown -R $USER:$USER /__w
       - uses: actions/setup-node@v3.4.1
         with:
           node-version: 16
