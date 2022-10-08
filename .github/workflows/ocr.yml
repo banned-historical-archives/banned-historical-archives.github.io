@@ -9,12 +9,12 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: breezedeus/cnocr:v2.2
+      options: --user 1000
     steps:
       - uses: actions/checkout@v3
         with:
           ref: master
           submodule: true
-      - run: sudo chown -R $USER:$USER /__w
       - uses: actions/setup-node@v3.4.1
         with:
           node-version: 16
