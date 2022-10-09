@@ -25,7 +25,7 @@ jobs:
           BODY: ${{ github.event.issue.body }}
           TITLE: ${{ github.event.issue.title }}
       - name: Create Pull Request For Submodule
-        id: cpr
+        id: cprs
         uses: peter-evans/create-pull-request@v4
         with:
           body: 'fix #${{ github.event.issue.number }}'
