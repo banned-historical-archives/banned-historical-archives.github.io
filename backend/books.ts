@@ -66,6 +66,34 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: 'jiangqingqinghua',
+      name: '江青同志在清华的多次讲话',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(18)
+        .fill(0)
+        .map(
+          (i, idx) =>
+            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/jiangqingqinghua/${
+              idx + 1
+            }.jpg`,
+        )
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'png',
+      articles: [{"title":"江青同志在清华农村分校的讲话","page_start":4,"page_end":6,"authors":["江青"],"dates":[{"year":1976,"month":9,"day":27}]},{"title":"江青同志在清华农村分校花生地的讲话","page_start":7,"page_end":11,"authors":["江青"],"dates":[{"year":1976,"month":9,"day":28}]},{"title":"江青同志在清华工程物理系的讲话","page_start":12,"page_end":18,"authors":["江青"],"dates":[{"year":1976,"month":9,"day":29}]}],
+      ocr: undefined,
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives1/jiangqingqinghua'),
+  },
+  {
+    entity: {
       id: 'duoren1',
       name: '“四人帮”罪行材料（三）',
       internal: true,
