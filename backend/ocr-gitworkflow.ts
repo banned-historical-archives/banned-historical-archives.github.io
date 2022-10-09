@@ -79,7 +79,7 @@ export async function start() {
           (i, idx) =>
             \`https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives${archive_id}/main/${id}/\${
               idx + 1
-            }.jpg\`,
+            }.${config.ext}\`,
         )
         .join(','),
     },
