@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: breezedeus/cnocr:v2.2
-      options: --user 1001
+      options: --user root
     steps:
       - run: sudo apt install git -y
       - uses: actions/checkout@v3
