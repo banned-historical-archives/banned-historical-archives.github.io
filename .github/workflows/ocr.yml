@@ -24,6 +24,7 @@ jobs:
       - uses: actions/checkout@v3
         with:
           ref: master
+          token: ${{ secrets.GH_PAT}}
           submodules: true
       - run: git config --global --add safe.directory /__w/banned-historical-archives.github.io/banned-historical-archives.github.io/public/books/archives1
       - run: git config --global --add safe.directory /__w/banned-historical-archives.github.io/banned-historical-archives.github.io
