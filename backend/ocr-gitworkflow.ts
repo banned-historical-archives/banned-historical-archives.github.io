@@ -117,6 +117,8 @@ export async function start() {
             ocr: config.ocr,
             ocr_exceptions: config.ocr_exceptions || {},
           }),
+          null,
+          2,
         ),
       );
     } catch (e) {
