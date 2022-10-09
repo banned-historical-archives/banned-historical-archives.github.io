@@ -109,13 +109,15 @@ export async function start() {
         ++idx;
       }
       console.log(
-        await parse(targetDir, {
-          page_limits: [],
-          ext: config.ext,
-          articles: config.articles!,
-          ocr: config.ocr,
-          ocr_exceptions: config.ocr_exceptions || {},
-        }),
+        JSON.stringify(
+          await parse(targetDir, {
+            page_limits: [],
+            ext: config.ext,
+            articles: config.articles!,
+            ocr: config.ocr,
+            ocr_exceptions: config.ocr_exceptions || {},
+          }),
+        ),
       );
     } catch (e) {
       console.log(e);
