@@ -12,10 +12,9 @@ jobs:
       image: breezedeus/cnocr:v2.2
       options: --user root
     steps:
-      - run: |
-        add-apt-repository -y ppa:git-core/ppa
-        apt update
-        apt install git -y
+      - run: add-apt-repository -y ppa:git-core/ppa
+      - run: apt update
+      - run: apt install git -y
       - uses: actions/checkout@v3
         with:
           ref: master
