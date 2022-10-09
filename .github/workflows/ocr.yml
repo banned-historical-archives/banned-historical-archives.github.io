@@ -22,6 +22,8 @@ jobs:
           ssh-key: ${{ secrets.SSH_KEY }}
           fetch-depth: 0
           submodules: true
+              - name: Checkout submodules
+      - run: git submodule update --init --recursive
       - uses: actions/setup-node@v3.4.1
         with:
           node-version: 16
