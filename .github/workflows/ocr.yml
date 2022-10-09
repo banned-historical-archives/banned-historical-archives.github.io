@@ -24,6 +24,7 @@ jobs:
           BODY: ${{ github.event.issue.body }}
           TITLE: ${{ github.event.issue.title }}
       - name: Create Pull Request For Submodule
+        working-directory: ./public/books/archives1
         id: cprs
         uses: peter-evans/create-pull-request@v4
         with:
@@ -34,7 +35,6 @@ jobs:
           branch-suffix: random
           delete-branch: true
           title: '${{ github.event.issue.title }}'
-          path: 'public/books/archives1'
           labels: |
             report
             automated pr
