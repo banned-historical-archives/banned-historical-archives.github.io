@@ -12,6 +12,7 @@ jobs:
       image: breezedeus/cnocr:v2.2
       options: --user 1001
     steps:
+      - run: apt install sudo -y
       - run: sudo add-apt-repository -y ppa:git-core/ppa
       - run: sudo apt update
       - run: sudo apt install git -y
