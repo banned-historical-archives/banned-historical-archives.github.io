@@ -12,12 +12,15 @@ jobs:
       image: breezedeus/cnocr:v2.2
       options: --user root
     steps:
-      - run: apt install git -y
+      - run: |
+        add-apt-repository -y ppa:git-core/ppa
+        apt update
+        apt install git -y
       - uses: actions/checkout@v3
         with:
           ref: master
           token: ${{ secrets.GH_PAT }}
-      - run: git submodule update --init
+      - run: git submodule update public/books/archives1
       - uses: actions/setup-node@v3.4.1
         with:
           node-version: 16
