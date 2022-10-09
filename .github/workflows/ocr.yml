@@ -20,7 +20,6 @@ jobs:
           ref: master
           token: ${{ secrets.GH_PAT }}
           submodules: true
-      - run: ls public/books/archives1
       - uses: actions/setup-node@v3.4.1
         with:
           node-version: 16
@@ -35,6 +34,7 @@ jobs:
         with:
           body: 'fix #${{ github.event.issue.number }}'
           path: public/books/archives1
+          base: 'main'
           committer: GitHub <noreply@github.com>
           author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
           signoff: false
