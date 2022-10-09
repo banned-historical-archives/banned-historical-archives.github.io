@@ -80,7 +80,7 @@ text text
 
     (process.env as any).TEST = 'true';
     (process.env as any).BODY = issue_body;
-    (process.env as any).TITLE = '[自动化文稿录入]test';
+    (process.env as any).TITLE = '{自动化文稿录入}test';
     const { start } = await import('../backend/ocr-gitworkflow');
     await start();
 
