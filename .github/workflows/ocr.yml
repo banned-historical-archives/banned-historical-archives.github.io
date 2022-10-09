@@ -15,6 +15,7 @@ jobs:
       - run: add-apt-repository -y ppa:git-core/ppa
       - run: apt update
       - run: apt install git -y
+      - run: useradd -u 1001 ci && su ci
       - uses: actions/checkout@v3
         with:
           ref: master
@@ -24,7 +25,6 @@ jobs:
         with:
           node-version: 16
       - run: npm i
-      - run: useradd -u 1001 ci && su ci
       - run: npx ts-node --project ./tsconfig.build.json backend/ocr-gitworkflow.ts
         env:
           BODY: ${{ github.event.issue.body }}
