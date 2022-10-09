@@ -33,7 +33,10 @@ jobs:
           node-version: 16
       - run: npm i
       - run: chown -R ci:ci ./
-      - run: npx ts-node --project ./tsconfig.build.json backend/ocr-gitworkflow.ts
+      - run: |
+          echo 'JSON_RESPONSE<<EOF' >> $GITHUB_ENV
+          npx ts-node --project ./tsconfig.build.json backend/ocr-gitworkflow.ts >> $GITHUB_ENV
+          echo 'EOF' >> $GITHUB_ENV
         env:
           BODY: ${{ github.event.issue.body }}
           TITLE: ${{ github.event.issue.title }}
@@ -54,7 +57,7 @@ jobs:
           -H "Accept: application/vnd.github+json" \
           -H "Authorization: Bearer $GH_TOKEN" \
           https://api.github.com/repos/banned-historical-archives/banned-historical-archives1/pulls \
-          -d '{"title":"${{ github.event.issue.title }}","body":"#${{github.event.issue.number}}","head":"feat-${{ steps.generate-uuid.outputs.uuid }}","base":"main"}'
+          -d '{"title":"${{ github.event.issue.title }}","body":"https://github.com/banned-historical-archives/banned-historical-archives.github.io/issues/${{github.event.issue.number}}","head":"feat-${{ steps.generate-uuid.outputs.uuid }}","base":"main"}'
       - name: Create Pull Request
         id: cpr
         uses: peter-evans/create-pull-request@v4
@@ -73,4 +76,8 @@ jobs:
             owners
             maintainers
           draft: false
-
+      - name: Create comment
+        uses: peter-evans/create-or-update-comment@v2
+        with:
+          issue-number: ${{github.event.issue.number}}
+          body: ${{ env.JSON_RESPONSE }}
