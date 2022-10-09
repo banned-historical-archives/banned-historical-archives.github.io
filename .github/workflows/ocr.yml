@@ -12,6 +12,8 @@ jobs:
       image: breezedeus/cnocr:v2.2
       options: --user 1001
     steps:
+      - run: |
+        pip install git
       - uses: actions/checkout@v3
         with:
           ref: master
