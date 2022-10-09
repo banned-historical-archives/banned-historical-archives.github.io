@@ -30,6 +30,8 @@ jobs:
         env:
           BODY: ${{ github.event.issue.body }}
           TITLE: ${{ github.event.issue.title }}
+      - run: ls -la public/books/archives
+      - run: cd public/books/archives && git status
       - name: Create Pull Request For Submodule
         id: cprs
         uses: peter-evans/create-pull-request@v4

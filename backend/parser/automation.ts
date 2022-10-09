@@ -178,7 +178,7 @@ export async function parse(
       parts: merged_parts,
       authors: article.authors,
       dates: article.dates,
-      is_range_date: article.is_range_date,
+      is_range_date: !!article.is_range_date,
       comments: [],
       comment_pivots: [],
       description: '',
