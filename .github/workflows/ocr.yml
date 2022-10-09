@@ -31,6 +31,7 @@ jobs:
           BODY: ${{ github.event.issue.body }}
           TITLE: ${{ github.event.issue.title }}
       - run: ls -la public/books/archives1
+      - run: git config --global --add safe.directory /__w/banned-historical-archives.github.io/banned-historical-archives.github.io
       - run: cd public/books/archives1 && git status
       - name: Create Pull Request For Submodule
         id: cprs
