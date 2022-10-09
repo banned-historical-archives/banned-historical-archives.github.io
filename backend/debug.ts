@@ -12,7 +12,7 @@ import { basename } from 'node:path';
 
 (async () => {
   const ds = await init();
-  const book = books.find(i => i.entity.id === 'maoquanji27')!;
+  const book = books.find(i => i.entity.id === 'jiangqingqinghua')!;
   const res = await book.parser(book.path, book.parser_option);
   console.log(res);
 

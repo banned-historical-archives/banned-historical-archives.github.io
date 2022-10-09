@@ -91,7 +91,7 @@ export async function parse(
     resized_shape: 1496,
     box_score_thresh: 0.3,
     min_box_size: 10,
-    content_thresholds: [0.1, 0.1, 0.1, 0.1],
+    content_thresholds: [0.0, 0.0, 0.0, 0.0],
     line_merge_threshold: 30,
     standard_paragraph_merge_strategy_threshold: 0,
     differential_paragraph_merge_strategy_threshold: 30,

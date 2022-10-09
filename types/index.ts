@@ -139,7 +139,7 @@ export type ParserOptionV2 = {
     page_start: number;
     page_end: number;
   }[];
-  ext: string;
+  ext?: string;
   ocr?: OCRParameter & OCRParameterAdvanced; // ocr 全局参数
   ocr_exceptions?: {
     [key: string]: Partial<OCRParameter & OCRParameterAdvanced>;
