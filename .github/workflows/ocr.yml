@@ -25,7 +25,7 @@ jobs:
         with:
           node-version: 16
       - run: npm i
-      - run: chmod -R ci:ci ./
+      - run: chown -R ci:ci ./
       - run: npx ts-node --project ./tsconfig.build.json backend/ocr-gitworkflow.ts
         env:
           BODY: ${{ github.event.issue.body }}
