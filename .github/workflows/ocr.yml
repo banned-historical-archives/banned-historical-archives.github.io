@@ -20,7 +20,7 @@ jobs:
         with:
           ref: master
           token: ${{ secrets.GH_PAT }}
-          submodules: true
+          submodules: recursive
       - uses: actions/setup-node@v3.4.1
         with:
           node-version: 16
@@ -32,6 +32,7 @@ jobs:
           TITLE: ${{ github.event.issue.title }}
       - run: ls -la public/books/archives1
       - run: ls -la public/books/archives1/.git
+      - run: cat public/books/archives1/.git
       - run: rm -rf public/books/archives1/.git/shallow
       - run: git config --global --add safe.directory /__w/banned-historical-archives.github.io/banned-historical-archives.github.io/public/books/archives1
       - run: cd public/books/archives1 && git status
