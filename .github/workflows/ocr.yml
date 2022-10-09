@@ -22,6 +22,7 @@ jobs:
           ssh-key: ${{ secrets.SSH_KEY }}
           fetch-depth: 0
           submodules: true
+      - run: git config --global --add safe.directory /__w/banned-historical-archives.github.io/banned-historical-archives.github.io/public/books/archives1
       - run: git submodule update --init --recursive
       - uses: actions/setup-node@v3.4.1
         with:
@@ -36,7 +37,6 @@ jobs:
       - run: ls -la public/books/archives1/.git
       - run: cat public/books/archives1/.git
       - run: rm -rf public/books/archives1/.git/shallow
-      - run: git config --global --add safe.directory /__w/banned-historical-archives.github.io/banned-historical-archives.github.io/public/books/archives1
       - run: cd public/books/archives1 && git status
       - name: Create Pull Request For Submodule
         id: cprs
