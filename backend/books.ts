@@ -78,7 +78,7 @@ const books: Book[] = [
           (i, idx) =>
             `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/jiangqingqinghua/${
               idx + 1
-            }.jpg`,
+            }.png`,
         )
         .join(','),
     },
