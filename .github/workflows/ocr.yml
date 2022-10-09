@@ -10,11 +10,11 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: breezedeus/cnocr:v2.2
-      options: --user root
+      options: --user 1001
     steps:
-      - run: add-apt-repository -y ppa:git-core/ppa
-      - run: apt update
-      - run: apt install git -y
+      - run: sudo add-apt-repository -y ppa:git-core/ppa
+      - run: sudo apt update
+      - run: sudo apt install git -y
       - uses: actions/checkout@v3
         with:
           ref: master
@@ -23,7 +23,7 @@ jobs:
       - uses: actions/setup-node@v3.4.1
         with:
           node-version: 16
-      - run: npm i && chmod -R $USER:$USER ./
+      - run: npm i
       - run: npx ts-node --project ./tsconfig.build.json backend/ocr-gitworkflow.ts
         env:
           BODY: ${{ github.event.issue.body }}
