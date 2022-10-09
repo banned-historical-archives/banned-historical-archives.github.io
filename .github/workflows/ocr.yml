@@ -20,6 +20,7 @@ jobs:
         with:
           ref: master
           ssh-key: ${{ secrets.SSH_KEY }}
+          fetch-depth: 0
           submodules: true
       - uses: actions/setup-node@v3.4.1
         with:
