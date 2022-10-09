@@ -24,9 +24,9 @@ jobs:
           BODY: ${{ github.event.issue.body }}
           TITLE: ${{ github.event.issue.title }}
       - name: Create Pull Request For Submodule
-        working-directory: ./public/books/archives1
         id: cprs
         uses: peter-evans/create-pull-request@v4
+        working-directory: ./public/books/archives1
         with:
           body: 'fix https://github.com/banned-historical-archives/banned-historical-archives.github.io/issues/${{ github.event.issue.number }}'
           committer: GitHub <noreply@github.com>
