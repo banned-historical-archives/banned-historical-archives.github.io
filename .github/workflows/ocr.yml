@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: breezedeus/cnocr:v2.2
-      options: --user root
+      options: --user 1001
     steps:
       - run: add-apt-repository -y ppa:git-core/ppa
       - run: apt update
