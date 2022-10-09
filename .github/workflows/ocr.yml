@@ -12,6 +12,11 @@ jobs:
       image: breezedeus/cnocr:v2.2
       options: --user root
     steps:
+      - name: Set UUID
+        id: generate-uuid
+        uses: filipstefansson/uuid-action@v1
+        with:
+          name: ${{ gihub.sha }}
       - run: add-apt-repository -y ppa:git-core/ppa
       - run: apt update
       - run: apt install git -y
@@ -20,11 +25,9 @@ jobs:
         with:
           ref: master
           ssh-key: ${{ secrets.SSH_KEY }}
-          fetch-depth: 0
-          submodules: true
       - run: git config --global --add safe.directory /__w/banned-historical-archives.github.io/banned-historical-archives.github.io/public/books/archives1
       - run: git config --global --add safe.directory /__w/banned-historical-archives.github.io/banned-historical-archives.github.io
-      - run: git submodule update --init --recursive
+      - run: git submodule update --init public/books/archives1
       - uses: actions/setup-node@v3.4.1
         with:
           node-version: 16
@@ -34,31 +37,24 @@ jobs:
         env:
           BODY: ${{ github.event.issue.body }}
           TITLE: ${{ github.event.issue.title }}
-      - run: ls -la public/books/archives1
-      - run: ls -la public/books/archives1/.git
-      - run: cat public/books/archives1/.git
-      - run: rm -rf public/books/archives1/.git/shallow
-      - run: cd public/books/archives1 && git status
+      
       - name: Create Pull Request For Submodule
-        id: cprs
-        uses: peter-evans/create-pull-request@v4
-        with:
-          body: 'fix #${{ github.event.issue.number }}'
-          path: public/books/archives1
-          base: 'main'
-          committer: GitHub <noreply@github.com>
-          author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
-          signoff: false
-          branch-suffix: random
-          delete-branch: true
-          title: '${{ github.event.issue.title }}'
-          labels: |
-            report
-            automated pr
-          team-reviewers: |
-            owners
-            maintainers
-          draft: false
+        env:
+          GH_TOKEN: ${{ secrets.GH_PAT}}
+        run: |
+          cd public/books/archives1
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git checkout -b feat-${{ steps.generate-uuid.outputs.uuid }}
+          git add .
+          git commit -m 'feat: ${{ github.event.issue.title }}'
+          git push origin feat-${{ steps.generate-uuid.outputs.uuid }}
+          curl \
+          -X POST \
+          -H "Accept: application/vnd.github+json" \
+          -H "Authorization: Bearer $GH_TOKEN" \
+          https://api.github.com/repos/banned-historical-archives/banned-historical-archives1/pulls \
+          -d '{"title":"${{ github.event.issue.title }}","body":"#${{github.event.issue.number}}","head":"feat-${{ steps.generate-uuid.outputs.uuid }}","base":"main"}'
       - name: Create Pull Request
         id: cpr
         uses: peter-evans/create-pull-request@v4
