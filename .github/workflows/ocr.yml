@@ -19,6 +19,7 @@ jobs:
         with:
           ref: master
           token: ${{ secrets.GH_PAT }}
+      - run: git config --global --add safe.directory /__w/banned-historical-archives.github.io/banned-historical-archives.github.io
       - run: git submodule update public/books/archives1
       - uses: actions/setup-node@v3.4.1
         with:
