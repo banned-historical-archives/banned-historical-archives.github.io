@@ -6,7 +6,7 @@ on:
 jobs:
   issue:
     name: Issue
-    if: ${{ startsWith(github.event.issue.title, '{OCR补丁}') }}
+    if: ${{ startsWith(github.event.issue.title, '[OCR补丁]') }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3

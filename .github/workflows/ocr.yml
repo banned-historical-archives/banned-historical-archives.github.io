@@ -6,7 +6,7 @@ on:
 jobs:
   ocr:
     name: OCR
-    if: ${{ startsWith(github.event.issue.title, '{自动化文稿录入}') }}
+    if: ${{ startsWith(github.event.issue.title, '[自动化文稿录入]') }}
     runs-on: ubuntu-latest
     container:
       image: breezedeus/cnocr:v2.2

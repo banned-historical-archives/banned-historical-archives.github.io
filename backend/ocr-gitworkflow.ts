@@ -33,7 +33,7 @@ async function download(url: string, target: string) {
 }
 
 export async function start() {
-  if (raw_title.startsWith('{自动化文稿录入}')) {
+  if (raw_title.startsWith('[自动化文稿录入]')) {
     try {
       const body1 = body.substring(body.lastIndexOf('```'));
       const body2 = body1.substring(body1.lastIndexOf('```' + 3));
