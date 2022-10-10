@@ -66,7 +66,7 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
-      id: 'sirenbang1',
+      id: 'jiangqing1',
       name: '四人帮反党罪行材料选编（一）',
       internal: true,
       official: true,
@@ -76,7 +76,7 @@ const books: Book[] = [
         .fill(0)
         .map(
           (i, idx) =>
-            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/sirenbang1/${
+            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/jiangqing1/${
               idx + 1
             }.png`,
         )
@@ -90,11 +90,11 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/sirenbang1'),
+    path: join(normalize(__dirname), '../public/books/archives1/jiangqing1'),
   },
   {
     entity: {
-      id: 'jiangqingqinghua',
+      id: 'jiangqing2',
       name: '四人帮反党罪行材料选编（二）',
       internal: true,
       official: true,
@@ -104,7 +104,7 @@ const books: Book[] = [
         .fill(0)
         .map(
           (i, idx) =>
-            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/jiangqingqinghua/${
+            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/jiangqing2/${
               idx + 1
             }.png`,
         )
@@ -118,7 +118,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/jiangqingqinghua'),
+    path: join(normalize(__dirname), '../public/books/archives1/jiangqing2'),
   },
   {
     entity: {
