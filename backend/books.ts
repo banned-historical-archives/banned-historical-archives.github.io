@@ -66,6 +66,34 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: 'sirenbang1',
+      name: '四人帮反党罪行材料选编（一）',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(23)
+        .fill(0)
+        .map(
+          (i, idx) =>
+            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/sirenbang1/${
+              idx + 1
+            }.png`,
+        )
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'png',
+      articles: [{"title":"江青同志在新华印刷厂工人座谈会上的讲话","authors":["江青"],"dates":[{"year":1975,"month":4,"day":3}],"page_start":4,"page_end":14},{"title":"江青同志在清华大学大兴农村分校的讲话","authors":["江青"],"dates":[{"year":1976,"month":9}],"page_start":15,"page_end":23}],
+      ocr: undefined,
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives1/sirenbang1'),
+  },
+  {
+    entity: {
       id: 'jiangqingqinghua',
       name: '四人帮反党罪行材料选编（二）',
       internal: true,
