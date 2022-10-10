@@ -35,8 +35,8 @@ async function download(url: string, target: string) {
 export async function start() {
   if (raw_title.startsWith('[自动化文稿录入]')) {
     try {
-      const body1 = body.substring(0, body.lastIndexOf('```'));
-      const body2 = body1.substring(body1.lastIndexOf('```' + 3));
+      const body1: string = body.substring(0, body.lastIndexOf('```'));
+      const body2: string = body1.substring(body1.lastIndexOf('```') + 3);
       const config = JSON5.parse(body2) as ParserOptionV2 & {
         id: string;
         source_name: string;
