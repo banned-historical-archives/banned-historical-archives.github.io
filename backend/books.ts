@@ -66,6 +66,34 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: 'wanghongwen12',
+      name: '揭发“四人帮”王洪文插手控制上影阴谋篡党夺权的罪行',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(9)
+        .fill(0)
+        .map(
+          (i, idx) =>
+            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives2/main/wanghongwen12/${
+              idx + 1
+            }.jpg`,
+        )
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'jpg',
+      articles: [{"title":"王洪文1975年8月31日审查《春苗》9月4日审查《战船台》与在9月3日电影工业会议上讲话","authors":["王洪文"],"dates":[{"year":1975,"month":8,"day":31},{"year":1975,"month":9,"day":3},{"year":1975,"month":9,"day":4}],"page_start":2,"page_end":6},{"title":"王洪文10月14日在上海文艺座谈会上讲话","authors":["王洪文"],"dates":[{"year":1975,"month":10,"day":14}],"page_start":6,"page_end":7},{"title":"1976年5月8日在钓鱼台与张家龙等的讲话","authors":["王洪文"],"dates":[{"year":1975,"month":5,"day":8}],"page_start":8,"page_end":9}],
+      ocr: undefined,
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives2/wanghongwen12'),
+  },
+  {
+    entity: {
       id: 'maoyuanxin5',
       name: '未知出处文稿',
       internal: true,
