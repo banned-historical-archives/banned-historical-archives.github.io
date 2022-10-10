@@ -34,7 +34,7 @@ jobs:
       - run: npm i
       - run: chown -R ci:ci ./
       - id: action_with_json_output
-        run: npx ts-node --project ./tsconfig.build.json backend/ocr-gitworkflow.ts
+        run: echo ::set-output name=data::$(npx ts-node --project ./tsconfig.build.json backend/ocr-gitworkflow.ts)
         env:
           BODY: ${{ github.event.issue.body }}
           TITLE: ${{ github.event.issue.title }}

@@ -132,8 +132,8 @@ export async function start() {
         await download(i, join(targetDir, `${idx}.${config.ext}`));
         ++idx;
       }
-      execSync(
-        `echo ::set-output name=data::${escapeData(
+      console.log(
+        escapeData(
           JSON.stringify(
             await parse(targetDir, {
               page_limits: [],
@@ -145,7 +145,7 @@ export async function start() {
             null,
             2,
           ),
-        )}`,
+        ),
       );
     } catch (e) {
       console.log(e);
