@@ -117,9 +117,7 @@ export async function start() {
             ocr: config.ocr,
             ocr_exceptions: config.ocr_exceptions || {},
           }),
-          null,
-          2,
-        ),
+        ).replace(/ /g, ''),
       );
     } catch (e) {
       console.log(e);
