@@ -33,7 +33,7 @@ if (/^\{OCR补丁\}/.test(body)) {
       final.articleId = patch.articleId;
       final.publicationId = patch.publicationId;
       final.patch = patch.patch;
-      decoded = decodeURIComponent(JSON.stringify(final.patch));
+      decoded = decodeURIComponent(JSON.stringify(final.patch)).replace('\n', '');
     } else {
       return;
     }
