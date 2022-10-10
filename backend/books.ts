@@ -67,7 +67,7 @@ const books: Book[] = [
   {
     entity: {
       id: 'jiangqingqinghua',
-      name: '江青同志在清华的多次讲话',
+      name: '四人帮反党罪行材料选编（二）',
       internal: true,
       official: true,
       type: 'img',
