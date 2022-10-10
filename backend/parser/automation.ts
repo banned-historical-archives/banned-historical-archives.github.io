@@ -66,6 +66,7 @@ function merge_parts(parts: PartRaw[]): ContentPart[] {
   for (let i = 0; i < parts.length; ++i) {
     if (
       parts[i].merge_up &&
+      res.length &&
       res[res.length - 1].type === parts[i].type
     ) {
       res[res.length - 1].text += parts[i].text;
