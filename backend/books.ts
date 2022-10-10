@@ -66,6 +66,34 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: 'maoyuanxin5',
+      name: '未知出处文稿',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(2)
+        .fill(0)
+        .map(
+          (i, idx) =>
+            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/maoyuanxin5/${
+              idx + 1
+            }.jpg`,
+        )
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'jpg',
+      articles: [{"title":"我为什么参加红色造反团","authors":["毛远新"],"dates":[{"year":1966,"month":12,"day":11}],"page_start":1,"page_end":2}],
+      ocr: undefined,
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives1/maoyuanxin5'),
+  },
+  {
+    entity: {
       id: 'sirenbang1',
       name: '四人帮反党罪行材料选编（一）',
       internal: true,
