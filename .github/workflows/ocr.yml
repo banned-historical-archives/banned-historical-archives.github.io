@@ -33,10 +33,8 @@ jobs:
           node-version: 16
       - run: npm i
       - run: chown -R ci:ci ./
-      - run: |
-          echo 'JSON_RESPONSE<<EOF' >> $GITHUB_ENV
-          npx ts-node --project ./tsconfig.build.json backend/ocr-gitworkflow.ts >> $GITHUB_ENV
-          echo 'EOF' >> $GITHUB_ENV
+      - id: action_with_json_output
+        run: npx ts-node --project ./tsconfig.build.json backend/ocr-gitworkflow.ts
         env:
           BODY: ${{ github.event.issue.body }}
           TITLE: ${{ github.event.issue.title }}
@@ -80,4 +78,4 @@ jobs:
         uses: peter-evans/create-or-update-comment@v2
         with:
           issue-number: ${{github.event.issue.number}}
-          body: ${{ env.JSON_RESPONSE }}
+          body: ${{ steps.action_with_json_output.outputs.data }}

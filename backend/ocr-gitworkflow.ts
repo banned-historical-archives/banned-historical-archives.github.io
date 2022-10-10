@@ -8,8 +8,32 @@ import { parse } from './parser/automation';
 import { ParserOptionV2 } from '../types';
 import JSON5 from 'json5';
 
-const archive_id = 1;
+function toCommandValue(input: any): string {
+  if (input === null || input === undefined) {
+    return '';
+  } else if (typeof input === 'string' || input instanceof String) {
+    return input as string;
+  }
+  return JSON.stringify(input);
+}
 
+function escapeData(s: any): string {
+  return toCommandValue(s)
+    .replace(/%/g, '%25')
+    .replace(/\r/g, '%0D')
+    .replace(/\n/g, '%0A');
+}
+
+function escapeProperty(s: any): string {
+  return toCommandValue(s)
+    .replace(/%/g, '%25')
+    .replace(/\r/g, '%0D')
+    .replace(/\n/g, '%0A')
+    .replace(/:/g, '%3A')
+    .replace(/,/g, '%2C');
+}
+
+const archive_id = 1;
 const body = (process.env as any).BODY.trim();
 const raw_title = (process.env as any).TITLE.trim();
 
@@ -108,16 +132,20 @@ export async function start() {
         await download(i, join(targetDir, `${idx}.${config.ext}`));
         ++idx;
       }
-      console.log(
-        JSON.stringify(
-          await parse(targetDir, {
-            page_limits: [],
-            ext: config.ext,
-            articles: config.articles!,
-            ocr: config.ocr,
-            ocr_exceptions: config.ocr_exceptions || {},
-          }),
-        ).replace(/ /g, ''),
+      execSync(
+        `echo ::set-output name=data::${escapeData(
+          JSON.stringify(
+            await parse(targetDir, {
+              page_limits: [],
+              ext: config.ext,
+              articles: config.articles!,
+              ocr: config.ocr,
+              ocr_exceptions: config.ocr_exceptions || {},
+            }),
+            null,
+            2,
+          ),
+        )}`,
       );
     } catch (e) {
       console.log(e);
