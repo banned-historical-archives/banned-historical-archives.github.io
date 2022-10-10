@@ -26,24 +26,33 @@ jobs:
           ref: master
           token: ${{ secrets.GH_PAT}}
           submodules: true
+      - run: git config --global --add safe.directory /__w/banned-historical-archives.github.io/banned-historical-archives.github.io/public/books/archives0
       - run: git config --global --add safe.directory /__w/banned-historical-archives.github.io/banned-historical-archives.github.io/public/books/archives1
+      - run: git config --global --add safe.directory /__w/banned-historical-archives.github.io/banned-historical-archives.github.io/public/books/archives2
+      - run: git config --global --add safe.directory /__w/banned-historical-archives.github.io/banned-historical-archives.github.io/public/books/archives3
+      - run: git config --global --add safe.directory /__w/banned-historical-archives.github.io/banned-historical-archives.github.io/public/books/archives4
+      - run: git config --global --add safe.directory /__w/banned-historical-archives.github.io/banned-historical-archives.github.io/public/books/archives5
       - run: git config --global --add safe.directory /__w/banned-historical-archives.github.io/banned-historical-archives.github.io
       - uses: actions/setup-node@v3.4.1
         with:
           node-version: 16
       - run: npm i
       - run: chown -R ci:ci ./
+      - id: get_archive_id
+        run: echo ::set-output name=archive_id::$(npx ts-node --project ./tsconfig.build.json backend/ocr-gitworkflow-get-archive-id.ts)
+        env:
+          BODY: ${{ github.event.issue.body }}
+          TITLE: ${{ github.event.issue.title }}
       - id: action_with_json_output
         run: echo ::set-output name=data::$(npx ts-node --project ./tsconfig.build.json backend/ocr-gitworkflow.ts)
         env:
           BODY: ${{ github.event.issue.body }}
           TITLE: ${{ github.event.issue.title }}
-      
       - name: Create Pull Request For Submodule
         env:
           GH_TOKEN: ${{ secrets.GH_PAT}}
         run: |
-          cd public/books/archives1
+          cd public/books/archives${{ steps.get_archive_id.outputs.archive_id }}
           git config user.name github-actions
           git config user.email github-actions@github.com
           git checkout -b feat-${{ steps.generate-uuid.outputs.uuid }}
@@ -54,7 +63,7 @@ jobs:
           -X POST \
           -H "Accept: application/vnd.github+json" \
           -H "Authorization: Bearer $GH_TOKEN" \
-          https://api.github.com/repos/banned-historical-archives/banned-historical-archives1/pulls \
+          https://api.github.com/repos/banned-historical-archives/banned-historical-archives${{ steps.get_archive_id.outputs.archive_id }}/pulls \
           -d '{"title":"${{ github.event.issue.title }}","body":"https://github.com/banned-historical-archives/banned-historical-archives.github.io/issues/${{github.event.issue.number}}","head":"feat-${{ steps.generate-uuid.outputs.uuid }}","base":"main"}'
       - name: Create Pull Request
         id: cpr

@@ -4,3 +4,15 @@
 [submodule "public/books/archives1"]
 	path = public/books/archives1
 	url = git@github.com:banned-historical-archives/banned-historical-archives1.git
+[submodule "public/books/archives2"]
+	path = public/books/archives2
+	url = git@github.com:banned-historical-archives/banned-historical-archives2.git
+[submodule "public/books/archives3"]
+	path = public/books/archives3
+	url = git@github.com:banned-historical-archives/banned-historical-archives3.git
+[submodule "public/books/archives4"]
+	path = public/books/archives4
+	url = git@github.com:banned-historical-archives/banned-historical-archives4.git
+[submodule "public/books/archives5"]
+	path = public/books/archives5
+	url = git@github.com:banned-historical-archives/banned-historical-archives5.git

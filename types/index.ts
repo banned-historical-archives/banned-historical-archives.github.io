@@ -130,6 +130,7 @@ export type LACResult = {
 };
 
 export type ParserOptionV2 = {
+  archive_id?: number;
   articles?: {
     title: string;
     authors: string[]; // 作者

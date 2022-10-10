@@ -33,7 +33,6 @@ function escapeProperty(s: any): string {
     .replace(/,/g, '%2C');
 }
 
-const archive_id = 1;
 const body = (process.env as any).BODY.trim();
 const raw_title = (process.env as any).TITLE.trim();
 
@@ -66,6 +65,8 @@ export async function start() {
         source_name: string;
       };
       const id = config.id;
+      config.archive_id =
+        config.archive_id == undefined ? 1 : config.archive_id;
       const imgs = Array.from(body.matchAll(/\!\[.*?\]\(.*?\)/g)).map((i) =>
         (i as any)[0].replace(/^.*\(/, '').replace(/\)/, ''),
       );
@@ -101,7 +102,7 @@ export async function start() {
         .fill(0)
         .map(
           (i, idx) =>
-            \`https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives${archive_id}/main/${id}/\${
+            \`https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives${config.archive_id}/main/${id}/\${
               idx + 1
             }.${config.ext}\`,
         )
@@ -115,7 +116,7 @@ export async function start() {
       ocr_exceptions: ${JSON.stringify(config.ocr_exceptions || {})},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives${archive_id}/${id}'),
+    path: join(normalize(__dirname), '../public/books/archives${config.archive_id}/${id}'),
   },`,
       );
       fs.writeFileSync(join(__dirname, 'books.ts'), temp.join(''));
@@ -123,7 +124,7 @@ export async function start() {
       let idx = 1;
       const targetDir = join(
         __dirname,
-        `../public/books/archives${archive_id}/${id}`,
+        `../public/books/archives${config.archive_id}/${id}`,
       );
       if (!fs.existsSync(targetDir)) {
         fs.mkdirSync(targetDir);
