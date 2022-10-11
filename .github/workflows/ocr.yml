@@ -20,7 +20,7 @@ jobs:
       - run: add-apt-repository -y ppa:git-core/ppa
       - run: apt update
       - run: apt install git -y
-      - run: pip install --user fitz
+      - run: pip install pymupdf
       - run: useradd -u 1001 ci
       - uses: actions/checkout@v3
         with:
