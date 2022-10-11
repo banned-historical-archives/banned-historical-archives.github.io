@@ -81,7 +81,7 @@ function merge_parts(parts: PartRaw[]): ContentPart[] {
 }
 
 export async function parse(
-  imgPath: string,
+  dirPathOrFilePath: string,
   parser_opt: ParserOption,
 ): Promise<ParserResult[]> {
   parser_opt.ocr = {
@@ -106,8 +106,12 @@ export async function parse(
         ...(parser_opt.ocr || {}),
         ...(parser_opt.ocr_exceptions ? parser_opt.ocr_exceptions[i] : {}),
       };
-      let { ocr_results, dimensions } = await ocr({
-        img: imgPath + '/' + i + `.${parser_opt.ext}`,
+      let { ocr_results, dimensions } = await ocr(parser_opt.ext == 'pdf' ? {
+        pdf: dirPathOrFilePath,
+        page: i,
+        ...merged_ocr_parameters,
+      } : {
+        img: dirPathOrFilePath + '/' + i + `.${parser_opt.ext}`,
         ...merged_ocr_parameters,
       });
 

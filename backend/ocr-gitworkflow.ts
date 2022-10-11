@@ -74,7 +74,7 @@ export async function start() {
 
       /**
        * 1. 修改 books.ts
-       * 2. 下载图片到 public/books/archives${n}/${id}/${n}.${ext}
+       * 2. 如果是图片集，下载图片到 public/books/archives${n}/${id}/${n}.${ext}，如果是pdf 下载到 public/books/archives${n}/${id}.pdf
        * 3. 调用 parser，生成ocr_cache
        * 4. [gitworkflow] 在 archives${n} 中创建 pr
        * 5. [gitworkflow] 创建 pr，并在issue中回复 parser result
@@ -102,9 +102,15 @@ export async function start() {
         .fill(0)
         .map(
           (i, idx) =>
-            \`https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives${config.archive_id}/main/${id}/\${
+            \`https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives${
+              config.archive_id
+            }/main/${id}${
+          config.ext == 'pdf'
+            ? ''
+            : `/\${
               idx + 1
-            }.${config.ext}\`,
+            }`
+        }.${config.ext}\`,
         )
         .join(','),
     },
@@ -116,36 +122,43 @@ export async function start() {
       ocr_exceptions: ${JSON.stringify(config.ocr_exceptions || {})},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives${config.archive_id}/${id}'),
+    path: join(normalize(__dirname), '../public/books/archives${
+      config.archive_id
+    }/${id}${config.ext == 'pdf' ? '.pdf' : ''}'),
   },`,
       );
       fs.writeFileSync(join(__dirname, 'books.ts'), temp.join(''));
 
-      let idx = 1;
       const targetDir = join(
         __dirname,
         `../public/books/archives${config.archive_id}/${id}`,
       );
-      if (!fs.existsSync(targetDir)) {
-        fs.mkdirSync(targetDir);
+      if (config.ext !== 'pdf') {
+        let idx = 1;
+        if (!fs.existsSync(targetDir)) {
+          fs.mkdirSync(targetDir);
+        }
+        for (let i of imgs) {
+          await download(i, join(targetDir, `${idx}.${config.ext}`));
+          ++idx;
+        }
       }
-      for (let i of imgs) {
-        await download(i, join(targetDir, `${idx}.${config.ext}`));
-        ++idx;
-      }
+
       console.log(
         escapeData(
-          JSON.stringify(
-            await parse(targetDir, {
-              page_limits: [],
-              ext: config.ext,
-              articles: config.articles!,
-              ocr: config.ocr,
-              ocr_exceptions: config.ocr_exceptions || {},
-            }),
-            null,
-            2,
-          ),
+          '```\n' +
+            JSON.stringify(
+              await parse(targetDir, {
+                page_limits: [],
+                ext: config.ext,
+                articles: config.articles!,
+                ocr: config.ocr,
+                ocr_exceptions: config.ocr_exceptions || {},
+              }),
+              null,
+              2,
+            ) +
+            '\n```',
         ),
       );
     } catch (e) {
