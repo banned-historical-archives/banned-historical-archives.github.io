@@ -117,6 +117,7 @@ export async function parse(
 
       const content_thresholds = merged_ocr_parameters.content_thresholds!;
       const line_merge_threshold = merged_ocr_parameters.line_merge_threshold!;
+      // FIXME: 应该拿经过 OCR resize 后的高度宽度，dimensions是原始高宽
       const content_thresholds_px = [
         content_thresholds[0] * dimensions.height!,
         dimensions.height! - content_thresholds[1] * dimensions.height!,

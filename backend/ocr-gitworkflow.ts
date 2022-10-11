@@ -67,10 +67,10 @@ export async function start() {
       const id = config.id;
       config.archive_id =
         config.archive_id == undefined ? 1 : config.archive_id;
-      const imgs = Array.from(body.matchAll(/\!\[.*?\]\(.*?\)/g)).map((i) =>
+      const imgsOrPDFs = Array.from(body.matchAll(/\[.*?\]\(.*?\)/g)).map((i) =>
         (i as any)[0].replace(/^.*\(/, '').replace(/\)/, ''),
       );
-      config.ext = extname(imgs[0]).replace('.', '');
+      config.ext = extname(imgsOrPDFs[0]).replace('.', '');
 
       /**
        * 1. 修改 books.ts
@@ -82,7 +82,7 @@ export async function start() {
 
       config.articles!.forEach((i) => {
         i.page_start = i.page_start || 1;
-        i.page_end = i.page_end || imgs.length;
+        i.page_end = i.page_end || imgsOrPDFs.length;
       });
       const booksts = fs.readFileSync(join(__dirname, 'books.ts')).toString();
       const temp = Array.from(booksts);
@@ -98,7 +98,7 @@ export async function start() {
       official: true,
       type: 'img',
       author: '',
-      files: new Array(${imgs.length})
+      files: new Array(${imgsOrPDFs.length})
         .fill(0)
         .map(
           (i, idx) =>
@@ -138,13 +138,13 @@ export async function start() {
         `../public/books/archives${config.archive_id}/${id}.pdf`,
       );
       if (config.ext == 'pdf') {
-        await download(imgs[0], pdfFilePath);
+        await download(imgsOrPDFs[0], pdfFilePath);
       } else {
         let idx = 1;
         if (!fs.existsSync(dirPath)) {
           fs.mkdirSync(dirPath);
         }
-        for (let i of imgs) {
+        for (let i of imgsOrPDFs) {
           await download(i, join(dirPath, `${idx}.${config.ext}`));
           ++idx;
         }
