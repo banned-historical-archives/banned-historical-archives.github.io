@@ -131,6 +131,8 @@ export async function parse(
       const content_thresholds = merged_ocr_parameters.content_thresholds!;
       const line_merge_threshold = merged_ocr_parameters.line_merge_threshold!;
 
+      // TODO
+      /*
       const size =
         dimensions.width > dimensions.height
           ? {
@@ -145,6 +147,8 @@ export async function parse(
                 dimensions.height,
               height: parser_opt.ocr.resized_shape,
             };
+            */
+      const size = dimensions;
       const content_thresholds_px = [
         content_thresholds[0] * size.height!,
         size.height! - content_thresholds[1] * size.height!,
