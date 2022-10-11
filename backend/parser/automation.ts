@@ -130,12 +130,26 @@ export async function parse(
 
       const content_thresholds = merged_ocr_parameters.content_thresholds!;
       const line_merge_threshold = merged_ocr_parameters.line_merge_threshold!;
-      // FIXME: 应该拿经过 OCR resize 后的高度宽度，dimensions是原始高宽
+
+      const size =
+        dimensions.width > dimensions.height
+          ? {
+              width: parser_opt.ocr.resized_shape,
+              height:
+                (dimensions.height * parser_opt.ocr.resized_shape) /
+                dimensions.width,
+            }
+          : {
+              width:
+                (dimensions.width * parser_opt.ocr.resized_shape) /
+                dimensions.height,
+              height: parser_opt.ocr.resized_shape,
+            };
       const content_thresholds_px = [
-        content_thresholds[0] * dimensions.height!,
-        dimensions.height! - content_thresholds[1] * dimensions.height!,
-        content_thresholds[2] * dimensions.width!,
-        dimensions.width! - content_thresholds[3] * dimensions.width!,
+        content_thresholds[0] * size.height!,
+        size.height! - content_thresholds[1] * size.height!,
+        content_thresholds[2] * size.width!,
+        size.width! - content_thresholds[3] * size.width!,
       ];
       ocr_results = ocr_results.filter(
         (i: OCRResult) =>
@@ -150,30 +164,30 @@ export async function parse(
       );
 
       // 如果宽大于高，很可能一张图片中包含两页，将OCR结果从中间划开
-      if (dimensions.height < dimensions.width) {
+      if (size.height < size.width) {
         const left = ocr_results.filter((i) => {
           return (
-            i.box[0][0] < dimensions.width / 2 &&
-            i.box[3][0] < dimensions.width / 2
+            i.box[0][0] < size.width / 2 &&
+            i.box[3][0] < size.width / 2
           );
         });
         const right = ocr_results.filter((i) => {
           return (
-            i.box[0][0] >= dimensions.width / 2 &&
-            i.box[3][0] >= dimensions.width / 2
+            i.box[0][0] >= size.width / 2 &&
+            i.box[3][0] >= size.width / 2
           );
         });
         parts.push(
           ...extract_parts(
             merge_to_lines(left, line_merge_threshold).sort((a, b) => a.box[0][1] - b.box[0][1]),
             i,
-            dimensions,
+            size,
             merged_ocr_parameters
           ),
           ...extract_parts(
             merge_to_lines(right, line_merge_threshold).sort((a, b) => a.box[0][1] - b.box[0][1]),
             i,
-            dimensions,
+            size,
             merged_ocr_parameters
           ),
         );
@@ -184,7 +198,7 @@ export async function parse(
               (a, b) => a.box[0][1] - b.box[0][1],
             ),
             i,
-            dimensions,
+            size,
             merged_ocr_parameters
           ),
         );
