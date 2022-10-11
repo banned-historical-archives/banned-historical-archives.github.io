@@ -131,23 +131,7 @@ export async function parse(
       const content_thresholds = merged_ocr_parameters.content_thresholds!;
       const line_merge_threshold = merged_ocr_parameters.line_merge_threshold!;
 
-      // TODO
-      /*
-      const size =
-        dimensions.width > dimensions.height
-          ? {
-              width: parser_opt.ocr.resized_shape,
-              height:
-                (dimensions.height * parser_opt.ocr.resized_shape) /
-                dimensions.width,
-            }
-          : {
-              width:
-                (dimensions.width * parser_opt.ocr.resized_shape) /
-                dimensions.height,
-              height: parser_opt.ocr.resized_shape,
-            };
-            */
+      // 无论resize的值是多少，OCR结果的坐标范围取决于原图像的size
       const size = dimensions;
       const content_thresholds_px = [
         content_thresholds[0] * size.height!,
