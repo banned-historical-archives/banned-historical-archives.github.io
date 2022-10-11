@@ -129,17 +129,23 @@ export async function start() {
       );
       fs.writeFileSync(join(__dirname, 'books.ts'), temp.join(''));
 
-      const targetDir = join(
+      const dirPath = join(
         __dirname,
         `../public/books/archives${config.archive_id}/${id}`,
       );
-      if (config.ext !== 'pdf') {
+      const pdfFilePath = join(
+        __dirname,
+        `../public/books/archives${config.archive_id}/${id}.pdf`,
+      );
+      if (config.ext == 'pdf') {
+        await download(imgs[0], pdfFilePath);
+      } else {
         let idx = 1;
-        if (!fs.existsSync(targetDir)) {
-          fs.mkdirSync(targetDir);
+        if (!fs.existsSync(dirPath)) {
+          fs.mkdirSync(dirPath);
         }
         for (let i of imgs) {
-          await download(i, join(targetDir, `${idx}.${config.ext}`));
+          await download(i, join(dirPath, `${idx}.${config.ext}`));
           ++idx;
         }
       }
@@ -148,7 +154,7 @@ export async function start() {
         escapeData(
           '```\n' +
             JSON.stringify(
-              await parse(targetDir, {
+              await parse(config.ext === 'pdf' ? pdfFilePath : dirPath, {
                 page_limits: [],
                 ext: config.ext,
                 articles: config.articles!,
