@@ -66,6 +66,34 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: 'duoren12',
+      name: '“四人帮”罪行材料（一）',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(16)
+        .fill(0)
+        .map(
+          (i, idx) =>
+            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/duoren12/${
+              idx + 1
+            }.png`,
+        )
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'png',
+      articles: [{"title":"江青给中央军委的信","authors":["江青"],"dates":[{"year":1974,"month":1,"day":24}],"is_range_date":false,"alias":"","page_start":2,"page_end":3},{"title":"迟群、谢静宜在军委直属单位批林批孔报告会上的讲话","authors":["迟群","谢静宜"],"dates":[{"year":1974,"month":1,"day":24}],"is_range_date":false,"alias":"","page_start":3,"page_end":16}],
+      ocr: undefined,
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives1/duoren12'),
+  },
+  {
+    entity: {
       id: 'wanghongwen12',
       name: '揭发“四人帮”王洪文插手控制上影阴谋篡党夺权的罪行',
       internal: true,
