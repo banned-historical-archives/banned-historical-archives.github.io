@@ -66,6 +66,26 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: 'test1',
+      name: '一月革命',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: 'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/test1.pdf',
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'pdf',
+      articles: [{"title":"在中央政治局会议上的讲话","page_start":6,"page_end":7,"authors":["毛泽东","江青"],"dates":[{"year":1949,"month":10,"day":1}]},{"title":"pdf测试2","page_start":9,"page_end":10,"authors":["毛泽东"],"dates":[{"year":1976,"month":1,"day":1}]}],
+      ocr: undefined,
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives1/test1.pdf'),
+  },
+  {
+    entity: {
       id: 'duoren12',
       name: '“四人帮”罪行材料（一）',
       internal: true,
