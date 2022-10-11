@@ -20,6 +20,7 @@ jobs:
       - run: add-apt-repository -y ppa:git-core/ppa
       - run: apt update
       - run: apt install git -y
+      - run: pip install fitz
       - run: useradd -u 1001 ci
       - uses: actions/checkout@v3
         with:

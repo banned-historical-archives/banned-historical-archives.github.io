@@ -12,7 +12,7 @@ export default async function pdf2image({
   dpi?: number,
   output?: string;
 }): Promise<string> {
-  const py_command = `python3 backend/pdf2image.py ${pdf_path} ${page} ${dpi} ${output}`;
+  const py_command = `python backend/pdf2image.py ${pdf_path} ${page} ${dpi} ${output}`;
   execSync(py_command).toString();
   return output;
 }
