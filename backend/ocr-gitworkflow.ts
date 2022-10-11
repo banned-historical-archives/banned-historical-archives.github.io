@@ -1,12 +1,9 @@
-import { exec, execSync } from 'node:child_process'
 import { join, basename, dirname, extname } from 'node:path/posix';
-import { isAbsolute } from 'node:path';
-import https from 'https';
-import { Transform } from 'stream';
 import fs from 'node:fs';
 import { parse } from './parser/automation';
 import { ParserOptionV2 } from '../types';
 import JSON5 from 'json5';
+import axios from 'axios';
 
 function toCommandValue(input: any): string {
   if (input === null || input === undefined) {
@@ -36,23 +33,21 @@ function escapeProperty(s: any): string {
 const body = (process.env as any).BODY.trim();
 const raw_title = (process.env as any).TITLE.trim();
 
-async function download(url: string, target: string) {
-  await new Promise<void>((resolve) =>
-    https
-      .request(url, function (response) {
-        var data = new Transform();
+async function download(url: string, filePath: string) {
+  const writer = fs.createWriteStream(filePath);
 
-        response.on('data', function (chunk) {
-          data.push(chunk);
-        });
+  const response = await axios({
+    url,
+    method: 'GET',
+    responseType: 'stream',
+  });
 
-        response.on('end', function () {
-          fs.writeFileSync(target, data.read());
-          resolve();
-        });
-      })
-      .end(),
-  );
+  response.data.pipe(writer);
+
+  return new Promise((resolve, reject) => {
+    writer.on('finish', resolve);
+    writer.on('error', reject);
+  });
 }
 
 export async function start() {
@@ -98,21 +93,19 @@ export async function start() {
       official: true,
       type: 'img',
       author: '',
-      files: new Array(${imgsOrPDFs.length})
+      files: ${
+        config.ext == 'pdf'
+          ? `'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives${config.archive_id}/${id}.pdf',`
+          : `new Array(${imgsOrPDFs.length})
         .fill(0)
         .map(
           (i, idx) =>
-            \`https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives${
-              config.archive_id
-            }/main/${id}${
-          config.ext == 'pdf'
-            ? ''
-            : `/\${
+            \`https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives${config.archive_id}/main/${id}/\${
               idx + 1
-            }`
-        }.${config.ext}\`,
+            }.${config.ext}\`,
         )
-        .join(','),
+        .join(','),`
+      }
     },
     parser_option: {
       page_limits: [],

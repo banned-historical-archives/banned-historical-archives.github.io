@@ -1,4 +1,5 @@
 import { join } from 'path';
+import { basename} from 'node:path/posix';
 import { existsSync, writeFileSync, readFileSync } from 'fs';
 import ocr from '../ocr';
 import {
@@ -15,6 +16,7 @@ import {
   TagType,
 } from '../../types';
 import { merge_to_lines } from './utils';
+import { normalize } from '../utils';
 
 type PartRaw = { page: number; x: number; merge_up?: boolean } & ContentPartRaw;
 function extract_parts(ocr: OCRResult[], page: number,page_dimensions: {width: number, height: number}, ocr_parameters: Partial<OCRParameter & OCRParameterAdvanced>): PartRaw[] {
@@ -106,14 +108,25 @@ export async function parse(
         ...(parser_opt.ocr || {}),
         ...(parser_opt.ocr_exceptions ? parser_opt.ocr_exceptions[i] : {}),
       };
-      let { ocr_results, dimensions } = await ocr(parser_opt.ext == 'pdf' ? {
-        pdf: dirPathOrFilePath,
-        page: i,
-        ...merged_ocr_parameters,
-      } : {
-        img: dirPathOrFilePath + '/' + i + `.${parser_opt.ext}`,
-        ...merged_ocr_parameters,
-      });
+      let { ocr_results, dimensions } = await ocr(
+        parser_opt.ext == 'pdf'
+          ? {
+              pdf: dirPathOrFilePath,
+              page: i,
+              cache_path: join(
+                normalize(__dirname),
+                `../ocr_cache/${basename(dirPathOrFilePath).replace(
+                  /\.pdf$/,
+                  '',
+                )}/${i}.json`,
+              ),
+              ...merged_ocr_parameters,
+            }
+          : {
+              img: dirPathOrFilePath + '/' + i + `.${parser_opt.ext}`,
+              ...merged_ocr_parameters,
+            },
+      );
 
       const content_thresholds = merged_ocr_parameters.content_thresholds!;
       const line_merge_threshold = merged_ocr_parameters.line_merge_threshold!;

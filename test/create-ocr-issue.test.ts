@@ -78,7 +78,7 @@ describe('create ocr issue', async () => {
         month: 4,
         day: 3,
       },
-    ],page_start:4,page_end:14,
+    ],page_start:6,page_end:7,
   },{
     title: '江青同志在清华大学大兴农村分校的讲话',
     authors: ['江青'], // 作者
@@ -87,14 +87,13 @@ describe('create ocr issue', async () => {
         year: 1976,
         month: 9,
       },
-    ],page_start:15,page_end:23,
+    ],page_start:10,page_end:11,
   }]
 }
 \`\`\`
 
 [此处上传图片]
-![a](https://banned-historical-archives.github.io/images/comparison_pdf.png)
-![b](https://banned-historical-archives.github.io/images/comparison_lyric.png)
+[一月革命胜利万岁1967.pdf](https://github.com/banned-historical-archives/banned-historical-archives.github.io/files/9750804/1967.pdf)
 `;
 
     (process.env as any).TEST = 'true';
