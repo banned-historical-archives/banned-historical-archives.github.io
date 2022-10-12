@@ -66,6 +66,26 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: 'f7af4877-72f9-4732-9c42-8d605a08088e',
+      name: '红旗58-1',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: 'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/f7af4877-72f9-4732-9c42-8d605a08088e.pdf',
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'pdf',
+      articles: [{"title":"发刊词","authors":["毛泽东"],"dates":[],"page_start":3,"page_end":4},{"title":"一个苦战了两年改变了面貌的合作社","authors":["毛泽东"],"dates":[],"page_start":6,"page_end":12}],
+      ocr: {"auto_vsplit":false,"vsplit":0,"content_thresholds":[0,0,0,0.1]},
+      ocr_exceptions: {"6":{"vsplit":0.35},"7":{"vsplit":0.35},"8":{"vsplit":0.35},"9":{"vsplit":0.35},"10":{"vsplit":0.35},"11":{"vsplit":0.35},"12":{"vsplit":0.35}},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives1/f7af4877-72f9-4732-9c42-8d605a08088e.pdf'),
+  },
+  {
+    entity: {
       id: 'ea12100d-1d0d-43a9-a4bc-355af558ae65',
       name: '张春桥同志接见工总司常委时的讲话',
       internal: true,
