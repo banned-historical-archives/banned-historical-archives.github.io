@@ -66,6 +66,34 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: 'b869e58d-b5d5-4e2e-96cb-dc527251a56e',
+      name: '张春桥同志1967年12月10日下午接见文艺界代表讲话',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(6)
+        .fill(0)
+        .map(
+          (i, idx) =>
+            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/b869e58d-b5d5-4e2e-96cb-dc527251a56e/${
+              idx + 1
+            }.jpg`,
+        )
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'jpg',
+      articles: [{"title":"张春桥同志十二月十日下午接见宣传系统代表讲话","authors":["张春桥"],"dates":[{"year":1967,"month":12,"day":10}],"page_start":1,"page_end":6}],
+      ocr: undefined,
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives1/b869e58d-b5d5-4e2e-96cb-dc527251a56e'),
+  },
+  {
+    entity: {
       id: 'b3ca39f5-3154-4c20-8f01-d8ed821d5ea5',
       name: '总理、陈伯达、康生、江青、姚文元等同志在接见全国铁路、交通会议全体代表时的重要讲话',
       internal: true,
