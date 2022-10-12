@@ -152,15 +152,15 @@ function PureArticle({
               {i.index}
               {bracket_right}
             </span>
-            <Stack>
-              <Typography variant="body1">
-                {i.text
-                  .split('\n')
-                  .filter((j) => j)
-                  .map((j, j_idx) => (
-                    <p key={j_idx}>{j}</p>
-                  ))}
-              </Typography>
+            <Stack spacing={1}>
+              {i.text
+                .split('\n')
+                .filter((j) => j)
+                .map((j, j_idx) => (
+                  <Typography variant="body1" key={j_idx}>
+                    {j}
+                  </Typography>
+                ))}
             </Stack>
           </Stack>
         ))}
