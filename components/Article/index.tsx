@@ -146,14 +146,23 @@ function PureArticle({
       {comments
         .filter((i) => i.index !== -1)
         .map((i) => (
-          <Typography id={`comment${i.index}`} key={i.id} variant="body1">
+          <Stack direction="row" id={`comment${i.index}`} key={i.id}>
             <span style={{ userSelect: 'none' }}>
               {bracket_left}
               {i.index}
               {bracket_right}
             </span>
-            <span>{i.text}</span>
-          </Typography>
+            <Stack>
+              <Typography variant="body1">
+                {i.text
+                  .split('\n')
+                  .filter((j) => j)
+                  .map((j, j_idx) => (
+                    <p key={j_idx}>{j}</p>
+                  ))}
+              </Typography>
+            </Stack>
+          </Stack>
         ))}
     </>
   ) : null;
