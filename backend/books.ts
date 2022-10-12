@@ -66,6 +66,34 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: 'gongdaihui',
+      name: '张春桥王洪文同志在上海市革命委员会研究工代会上讲话的会议记录',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(11)
+        .fill(0)
+        .map(
+          (i, idx) =>
+            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/gongdaihui/${
+              idx + 1
+            }.jpg`,
+        )
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'jpg',
+      articles: [{"title":"张春桥王洪文同志在上海市革命委员会研究工代会上讲话的会议记录","authors":["张春桥","王洪文"],"dates":[{"year":1967,"month":11,"day":22}],"page_start":1,"page_end":11}],
+      ocr: undefined,
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives1/gongdaihui'),
+  },
+  {
+    entity: {
       id: 'maoyuanxin5',
       name: '冯金传达毛远新同志在省工农兵干部学习班上的讲话',
       internal: true,
