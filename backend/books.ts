@@ -66,6 +66,34 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: 'maoyuanxin5',
+      name: '冯金传达毛远新同志在省工农兵干部学习班上的讲话',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(5)
+        .fill(0)
+        .map(
+          (i, idx) =>
+            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/maoyuanxin5/${
+              idx + 1
+            }.jpg`,
+        )
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'jpg',
+      articles: [{"title":"毛远新同志在省工农兵干部学习班上的讲话","authors":["毛远新"],"dates":[{"year":1974,"month":2,"day":16}],"page_start":1,"page_end":5}],
+      ocr: undefined,
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives1/maoyuanxin5'),
+  },
+  {
+    entity: {
       id: 'wanghongwen12',
       name: '王洪文副主席在接见总参民兵组训工作座谈会议全体同志时的讲话',
       internal: true,
