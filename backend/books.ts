@@ -67,7 +67,7 @@ const books: Book[] = [
   {
     entity: {
       id: 'b3ca39f5-3154-4c20-8f01-d8ed821d5ea5',
-      name: '周总理陈伯达康生江青姚文元等同志在接见全国铁路、交通会议全体代表时的讲话',
+      name: '总理、陈伯达、康生、江青、姚文元等同志在接见全国铁路、交通会议全体代表时的重要讲话',
       internal: true,
       official: true,
       type: 'img',
@@ -122,7 +122,7 @@ const books: Book[] = [
   },
   {
     entity: {
-      id: 'gongdaihui',
+      id: 'duoren11',
       name: '张春桥王洪文同志在上海市革命委员会研究工代会上讲话的会议记录',
       internal: true,
       official: true,
@@ -132,7 +132,7 @@ const books: Book[] = [
         .fill(0)
         .map(
           (i, idx) =>
-            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/gongdaihui/${
+            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/duoren11/${
               idx + 1
             }.jpg`,
         )
@@ -146,39 +146,11 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/gongdaihui'),
+    path: join(normalize(__dirname), '../public/books/archives1/duoren11'),
   },
   {
     entity: {
-      id: 'wanghongwen12',
-      name: '王洪文副主席在接见总参民兵组训工作座谈会议全体同志时的讲话',
-      internal: true,
-      official: true,
-      type: 'img',
-      author: '',
-      files: new Array(7)
-        .fill(0)
-        .map(
-          (i, idx) =>
-            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/wanghongwen12/${
-              idx + 1
-            }.png`,
-        )
-        .join(','),
-    },
-    parser_option: {
-      page_limits: [],
-      ext: 'png',
-      articles: [{"title":"王洪文副主席在接见总参民兵组训工作座谈会议全体同志时的讲话","authors":["王洪文"],"dates":[{"year":1974,"month":9,"day":22}],"page_start":1,"page_end":7}],
-      ocr: undefined,
-      ocr_exceptions: {},
-    },
-    parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/wanghongwen12'),
-  },
-  {
-    entity: {
-      id: 'zhangchunqiaowangxiaoyu',
+      id: 'duoren13',
       name: '张春桥王效禹在济南军区的讲话',
       internal: true,
       official: true,
@@ -188,7 +160,7 @@ const books: Book[] = [
         .fill(0)
         .map(
           (i, idx) =>
-            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/zhangchunqiaowangxiaoyu/${
+            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/duoren13/${
               idx + 1
             }.jpg`,
         )
@@ -197,12 +169,12 @@ const books: Book[] = [
     parser_option: {
       page_limits: [],
       ext: 'jpg',
-      articles: [{"title":"张春桥同志在济南军区的讲话","page_start":1,"page_end":2,"authors":["张春桥"],"dates":[{"year":1967,"month":5}]},{"title":"王效禹同志在济南军区的讲话","page_start":2,"page_end":9,"authors":["王效禹"],"dates":[{"year":1967,"month":5,"day":29}]}],
+      articles: [{"title":"张春桥同志在济南军区的讲话","page_start":1,"page_end":2,"authors":["张春桥"],"dates":[{"year":1967,"month":5}]},{"title":"王效禹同志在济南军区的讲话","page_start":2,"page_end":4,"authors":["王效禹"],"dates":[{"year":1967,"month":5,"day":29}]},{"title":"王效禹同志在济南军区的讲话","page_start":4,"page_end":9,"authors":["王效禹"],"dates":[{"year":1967,"month":5,"day":28}]}],
       ocr: undefined,
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/zhangchunqiaowangxiaoyu'),
+    path: join(normalize(__dirname), '../public/books/archives1/duoren13'),
   },
   {
     entity: {
