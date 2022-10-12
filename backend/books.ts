@@ -66,6 +66,34 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: 'zhangchunqiaowangxiaoyu',
+      name: '张春桥王效禹在济南军区的讲话',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(9)
+        .fill(0)
+        .map(
+          (i, idx) =>
+            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/zhangchunqiaowangxiaoyu/${
+              idx + 1
+            }.jpg`,
+        )
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'jpg',
+      articles: [{"title":"张春桥同志在济南军区的讲话","page_start":1,"page_end":2,"authors":["张春桥"],"dates":[{"year":1967,"month":5}]},{"title":"王效禹同志在济南军区的讲话","page_start":2,"page_end":9,"authors":["王效禹"],"dates":[{"year":1967,"month":5,"day":29}]}],
+      ocr: undefined,
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives1/zhangchunqiaowangxiaoyu'),
+  },
+  {
+    entity: {
       id: 'zhangchunqiao16',
       name: '张春桥同志最新讲话',
       internal: true,
