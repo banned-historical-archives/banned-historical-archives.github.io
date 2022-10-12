@@ -66,6 +66,34 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: 'zhangchunqiao16',
+      name: '张春桥同志最新讲话',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(4)
+        .fill(0)
+        .map(
+          (i, idx) =>
+            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/zhangchunqiao16/${
+              idx + 1
+            }.png`,
+        )
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'png',
+      articles: [{"title":"张春桥同志与华东局革命造反派座谈纪要","authors":["张春桥"],"dates":[{"year":1967,"month":2,"day":25}],"page_start":1,"page_end":4}],
+      ocr: undefined,
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives1/zhangchunqiao16'),
+  },
+  {
+    entity: {
       id: 'duoren12',
       name: '“四人帮”罪行材料（一）',
       internal: true,
