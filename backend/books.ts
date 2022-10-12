@@ -66,6 +66,34 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: 'wanghongwen12',
+      name: '王洪文副主席在接见总参民兵组训工作座谈会议全体同志时的讲话',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(7)
+        .fill(0)
+        .map(
+          (i, idx) =>
+            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/wanghongwen12/${
+              idx + 1
+            }.png`,
+        )
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'png',
+      articles: [{"title":"王洪文副主席在接见总参民兵组训工作座谈会议全体同志时的讲话","authors":["王洪文"],"dates":[{"year":1974,"month":9,"day":22}],"page_start":1,"page_end":7}],
+      ocr: undefined,
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives1/wanghongwen12'),
+  },
+  {
+    entity: {
       id: 'zhangchunqiaowangxiaoyu',
       name: '张春桥王效禹在济南军区的讲话',
       internal: true,
