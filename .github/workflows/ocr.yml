@@ -12,11 +12,17 @@ jobs:
       image: breezedeus/cnocr:v2.2
       options: --user root
     steps:
+      - name: Get Time
+        id: time
+        uses: nanzm/get-time-action@v1.1
+        with:
+          timeZone: 8
+          format: 'YYYY-MM-DD-HH-mm-ss'
       - name: Set UUID
         id: generate-uuid
         uses: filipstefansson/uuid-action@v1
         with:
-          name: ${{ github.sha }}
+          name: ${{ github.sha + steps.time.outputs.time }}
       - run: add-apt-repository -y ppa:git-core/ppa
       - run: apt update
       - run: apt install git -y
