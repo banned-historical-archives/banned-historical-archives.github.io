@@ -98,6 +98,8 @@ export async function parse(
     line_merge_threshold: 30,
     standard_paragraph_merge_strategy_threshold: 0,
     differential_paragraph_merge_strategy_threshold: 30,
+    auto_vsplit: true,
+    vsplit: 0.5,
     ...parser_opt.ocr,
   };
   const res: ParserResult[] = [];
@@ -151,32 +153,38 @@ export async function parse(
           i.box[3][1] <= content_thresholds_px[1],
       );
 
-      // 如果宽大于高，很可能一张图片中包含两页，将OCR结果从中间划开
-      if (size.height < size.width) {
+      if (
+        (merged_ocr_parameters.auto_vsplit && size.height < size.width) ||
+        (!merged_ocr_parameters.auto_vsplit && merged_ocr_parameters.vsplit)
+      ) {
         const left = ocr_results.filter((i) => {
           return (
-            i.box[0][0] < size.width / 2 &&
-            i.box[3][0] < size.width / 2
+            i.box[0][0] < size.width * merged_ocr_parameters.vsplit &&
+            i.box[3][0] < size.width * merged_ocr_parameters.vsplit
           );
         });
         const right = ocr_results.filter((i) => {
           return (
-            i.box[0][0] >= size.width / 2 &&
-            i.box[3][0] >= size.width / 2
+            i.box[0][0] >= size.width * merged_ocr_parameters.vsplit &&
+            i.box[3][0] >= size.width * merged_ocr_parameters.vsplit
           );
         });
         parts.push(
           ...extract_parts(
-            merge_to_lines(left, line_merge_threshold).sort((a, b) => a.box[0][1] - b.box[0][1]),
+            merge_to_lines(left, line_merge_threshold).sort(
+              (a, b) => a.box[0][1] - b.box[0][1],
+            ),
             i,
             size,
-            merged_ocr_parameters
+            merged_ocr_parameters,
           ),
           ...extract_parts(
-            merge_to_lines(right, line_merge_threshold).sort((a, b) => a.box[0][1] - b.box[0][1]),
+            merge_to_lines(right, line_merge_threshold).sort(
+              (a, b) => a.box[0][1] - b.box[0][1],
+            ),
             i,
             size,
-            merged_ocr_parameters
+            merged_ocr_parameters,
           ),
         );
       } else {
@@ -187,7 +195,7 @@ export async function parse(
             ),
             i,
             size,
-            merged_ocr_parameters
+            merged_ocr_parameters,
           ),
         );
       }
