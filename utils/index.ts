@@ -1,5 +1,6 @@
 import { diff_match_patch, Diff } from 'diff-match-patch';
 import { ArticleCategory, ArticleType, ContentPart, ParserResult, Patch, PatchV2, Pivot, TagType } from "../types";
+import { v4 } from 'uuid';
 
 //  A formatted version of a popular md5 implementation.
 //  Original copyright (c) Paul Johnston & Greg Holt.
@@ -389,4 +390,8 @@ export function get_article_id(r: ParserResult) {
 
 export async function sleep(t: number) {
   return new Promise(resolve => setTimeout(resolve, t));
+}
+
+export function uuid() {
+  return v4();
 }

@@ -4,6 +4,7 @@ import { parse } from './parser/automation';
 import { ParserOptionV2 } from '../types';
 import JSON5 from 'json5';
 import axios from 'axios';
+import { uuid } from '../utils';
 
 function toCommandValue(input: any): string {
   if (input === null || input === undefined) {
@@ -56,10 +57,11 @@ export async function start() {
       const body1: string = body.substring(0, body.lastIndexOf('```'));
       const body2: string = body1.substring(body1.lastIndexOf('```') + 3);
       const config = JSON5.parse(body2) as ParserOptionV2 & {
-        id: string;
+        id?: string;
         source_name: string;
       };
-      const id = config.id;
+      const id = uuid();
+      config.id = id;
       config.archive_id =
         config.archive_id == undefined ? 1 : config.archive_id;
       const imgsOrPDFs = Array.from(body.matchAll(/\[.*?\]\(.*?\)/g)).map((i) =>
