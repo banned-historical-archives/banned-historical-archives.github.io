@@ -66,6 +66,34 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: 'f4596d80-d0b2-4349-91d5-aadaae94aa11',
+      name: '洪文、春桥同志批示',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(15)
+        .fill(0)
+        .map(
+          (i, idx) =>
+            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/f4596d80-d0b2-4349-91d5-aadaae94aa11/${
+              idx + 1
+            }.png`,
+        )
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'png',
+      articles: [{"title":"王洪文、张春桥同志批示","authors":["王洪文","张春桥"],"dates":[{"year":1974,"month":4,"day":7}],"page_start":1,"page_end":1},{"title":"上海市委领导同志在警备区看大字报时讲话","authors":[""],"dates":[{"year":1974,"month":6,"day":28}],"page_start":1,"page_end":2},{"title":"关于许世友的大字报","authors":["曲增言"],"dates":[{"year":1974,"month":6,"day":27}],"page_start":3,"page_end":15}],
+      ocr: undefined,
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives1/f4596d80-d0b2-4349-91d5-aadaae94aa11'),
+  },
+  {
+    entity: {
       id: 'ea12100d-1d0d-43a9-a4bc-355af558ae65',
       name: '张春桥同志接见工总司常委时的讲话',
       internal: true,
