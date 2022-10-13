@@ -23,7 +23,7 @@ jobs:
         id: cpr
         uses: peter-evans/create-pull-request@v4
         with:
-          body: '${{ env.preview_url }} fix #${{ github.event.issue.number }}'
+          body: 'fix #${{ github.event.issue.number }}'
           committer: GitHub <noreply@github.com>
           author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
           signoff: false
