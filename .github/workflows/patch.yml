@@ -15,7 +15,7 @@ jobs:
       - uses: actions/setup-node@v3.4.1
         with:
           node-version: 16
-      - run: node patch/index.js >> $GITHUB_ENV
+      - run: node patch/index.js
         env:
           COMMIT_HASH: ${{ github.sha }}
           BODY: ${{ github.event.issue.body }}

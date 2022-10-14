@@ -52,10 +52,5 @@ export default [
     content = content.split('\n').slice(0, -1).join('\n');
     content += '\n' + `// ${decoded}\n  ${JSON.stringify(final.patch)},\n];`;
     writeFileSync(filepath, content);
-    console.log(
-      `preview_url="https://banned-historical-archives.github.io/articles/${
-        final.articleId
-      }?patch=${encodeURIComponent(JSON.stringify(final))}"`,
-    );
   } catch (e) {}
 }
