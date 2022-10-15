@@ -108,13 +108,16 @@ function PureArticle({
       );
     } else if (part.type === ContentType.quotation) {
       return (
-        <Typography
-          key={key}
-          variant="body1"
-          sx={{ textIndent: '2em', margin: 0.5, color: 'grey' }}
-        >
-          {content}
-        </Typography>
+        <Stack spacing={1} key={key}>
+          {part.text
+            .split('\n')
+            .filter((j) => j)
+            .map((j, j_idx) => (
+              <Typography variant="body1" key={j_idx} sx={{ color: 'grey' }}>
+                {j}
+              </Typography>
+            ))}
+        </Stack>
       );
     } else {
       return (
@@ -134,7 +137,16 @@ function PureArticle({
       <Typography variant="h6" sx={{ mb: 2 }}>
         描述
       </Typography>
-      <Typography variant="body1">{description}</Typography>
+      <Stack spacing={1}>
+        {description
+          .split('\n')
+          .filter((j) => j)
+          .map((j, j_idx) => (
+            <Typography variant="body1" key={j_idx}>
+              {j}
+            </Typography>
+          ))}
+      </Stack>
     </>
   ) : null;
   const commentsComponent = comments.filter((i) => i.index !== -1).length ? (
