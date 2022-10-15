@@ -3,12 +3,12 @@
 [官网](https://banned-historical-archives.github.io)
 
 和谐历史档案馆收录各类受官方封禁以及半封禁的文稿、报纸、杂志和多媒体资料，并对它们进行标准化加工，通过解析、识别、分类，形成标准化文稿档案和多媒体档案/数据库。
-虽然民间有不少人在做资料收集和校验工作，但分散的工作可能无法避免重复劳动，第二，资料的二次汇编难以保证真实性，第三缺乏统一的版本管理，难以维护。我们已经使用一系列现代化工具解决这些问题，使得每一篇文稿可溯源、可验证。[\[贡献与校对文稿\]](https://github.com/banned-historical-archives/banned-historical-archives.github.io/wiki/%E5%A6%82%E4%BD%95%E8%B4%A1%E7%8C%AE%E4%B8%8E%E6%A0%A1%E5%AF%B9%E6%96%87%E7%A8%BF)
+虽然民间有不少人在做资料收集和校验工作，但分散的工作可能无法避免重复劳动，第二，资料的二次汇编难以保证真实性，第三缺乏统一的版本管理，难以维护。我们已经使用一系列自动化工具解决这些问题，使得每一篇文稿可溯源、可验证。[\[贡献与校对文稿\]](https://github.com/banned-historical-archives/banned-historical-archives.github.io/wiki/%E5%A6%82%E4%BD%95%E8%B4%A1%E7%8C%AE%E4%B8%8E%E6%A0%A1%E5%AF%B9%E6%96%87%E7%A8%BF)
 
 其中文稿包含中央发表的文件，中央高层会议纪要，主要人物的通知、著作、谈话/对话/讲话、宣言/声明、电报、通讯、书信、消息、评论/批语/批注/批示、意见、指示/命令，以及群众运动中重要文献。主要人物包括毛泽东，江青、姚文元、张春桥、王洪文等。
 其中一些书籍中并非所有文稿都受到官方封禁，我们也保留此类文稿。
 
-报纸和杂志包括早期的人民日报、红旗杂志、学习与批判、参考消息等。
+报纸和杂志包括人民日报、红旗杂志、学习与批判、参考消息等。
 
 多媒体资料包括音乐及歌词、电影、照片、录音等。主要收录无产阶级文化大革命前后创作的红色音乐，其中一类是改开后歌词被官方篡改的音乐，另一类是歌词或标题被视为敏感内容的音乐。
 
@@ -122,8 +122,10 @@
 
 ### 其他
 #### 数据库导出
-可以执行 mysqldump 命令导出数据库，使用方法见 mysql 官网。
+执行 mysqldump 命令导出数据库，使用方法见 mysql 官网。
 
 ## 友情链接
 [![统一战线公社](https://unitedfront.press/static/img/everylogo/hanzilogo.png)](https://unitedfront.press)
 欢迎提[\[issues\]](https://github.com/banned-historical-archives/banned-historical-archives.github.io/issues)交换链接
+
+（友情链接仅用于推广，不代表本档案馆立场）
