@@ -70,7 +70,7 @@ const books: Book[] = [
       name: '红旗一九五八年第一期',
       internal: true,
       official: true,
-      type: 'img',
+      type: 'pdf',
       author: '',
       files: 'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/a13a4008-5f3a-4f1d-8e0b-940a1c633cd5.pdf',
     },

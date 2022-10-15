@@ -93,7 +93,7 @@ export async function start() {
       name: '${config.source_name!}',
       internal: true,
       official: true,
-      type: 'img',
+      type: '${config.ext == 'pdf' ? 'pdf' : 'img'}',
       author: '',
       files: ${
         config.ext == 'pdf'
