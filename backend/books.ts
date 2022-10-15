@@ -72,7 +72,7 @@ const books: Book[] = [
       official: true,
       type: 'img',
       author: '',
-      files: 'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/a13a4008-5f3a-4f1d-8e0b-940a1c633cd5.pdf',
+      files: 'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/a13a4008-5f3a-4f1d-8e0b-940a1c633cd5.pdf',
     },
     parser_option: {
       page_limits: [],

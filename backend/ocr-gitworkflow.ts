@@ -97,7 +97,7 @@ export async function start() {
       author: '',
       files: ${
         config.ext == 'pdf'
-          ? `'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives${config.archive_id}/${id}.pdf',`
+          ? `'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives${config.archive_id}/main/${id}.pdf',`
           : `new Array(${imgsOrPDFs.length})
         .fill(0)
         .map(
