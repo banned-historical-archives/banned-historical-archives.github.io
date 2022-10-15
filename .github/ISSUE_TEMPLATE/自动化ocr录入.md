@@ -1,6 +1,6 @@
 ---
-name: 自动化文稿录入
-about: 自动化文稿录入
+name: 自动化OCR录入
+about: 自动化OCR录入
 title: "[自动化文稿录入]标题"
 labels: ''
 assignees: ''
