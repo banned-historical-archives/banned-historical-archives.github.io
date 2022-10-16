@@ -5,7 +5,7 @@ import { ContentType, ParserResult } from '../types';
 import { apply_patch_v2, bracket_left, bracket_right } from '../utils';
 
 describe('create ocr issue', async () => {
-  it('test1', async () => {
+  it.skip('test1', async () => {
     const issue_body = `
 **===== 自动化文稿录入使用说明 =====**
 
