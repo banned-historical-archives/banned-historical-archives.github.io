@@ -40,7 +40,7 @@ assignees: ''
     page_end: 5,
     ocr: {
       min_box_size: 20
-    }; // 此参数比全局ocr参数的优先级高，默认为空
+    }; // 此参数将继承全局ocr参数并覆盖（此参数优先级更高），默认为空
   }],
   ocr: { // ocr 参数 以及 默认参数
     rec_model: 'ch_ppocr_mobile_v2.0',
@@ -63,6 +63,7 @@ assignees: ''
       // ...其他ocr参数（可选）
     },
   } // 例外， 比如第三页的ocr参数与其他页面不同，默认为空
+    // 此参数将继承全局ocr参数和article中的ocr参数，并覆盖（此参数优先级更高），默认为空
 }
 ```
 
