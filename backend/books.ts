@@ -66,6 +66,26 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: 'b17805a9-caad-48ee-bcc7-56c96e719bc9',
+      name: '工人阶级必须领导一切',
+      internal: true,
+      official: true,
+      type: 'pdf',
+      author: '',
+      files: 'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives2/main/b17805a9-caad-48ee-bcc7-56c96e719bc9.pdf',
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'pdf',
+      articles: [{"title":"工人阶级必须领导一切","authors":["姚文元"],"dates":[{"year":1968,"month":8,"day":25}],"page_start":1,"page_end":1}],
+      ocr: undefined,
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives2/b17805a9-caad-48ee-bcc7-56c96e719bc9.pdf'),
+  },
+  {
+    entity: {
       id: 'd2a5e884-3341-438b-bf83-439e7346b6f6',
       name: '论林彪反党集团的社会基础',
       internal: true,
