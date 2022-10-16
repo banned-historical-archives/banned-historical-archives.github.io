@@ -70,12 +70,12 @@ assignees: ''
 ```
 {
   source_name: '毛泽东全集第一卷', // 来源文件名称，书籍，数据库，报纸等等
+  archive_id: 1,
   articles: [{
     title: '在中央政治局会议上的讲话',
     authors: ['毛泽东', '江青'], // 作者
     page_start: 1,
     page_end: 5,
-    archive_id: 1,
     dates: [
       {
         year: 1949,
