@@ -59,7 +59,7 @@ import * as duoren9 from './parser/duoren9';
 import * as duoren10 from './parser/duoren10';
 import * as automation from './parser/automation';
 import { apply_patch, apply_patch_v2, get_article_id } from '../utils';
-import { tranditionalChineseToSimpleChinese } from '../utils/i18n';
+import { traditionalChineseToSimpleChinese } from '../utils/i18n';
 import { exclude, normalize } from './utils';
 
 const patch_dir = join(normalize(__dirname), '../patch/articles');
@@ -3065,14 +3065,14 @@ const books: Book[] = [
       for (const j in res) {
         const article = res[j];
         for (const part of article.parts) {
-          part.text = tranditionalChineseToSimpleChinese(part.text);
+          part.text = traditionalChineseToSimpleChinese(part.text);
         }
         for (let i = 0; i < article.comments.length; ++i) {
-          article.comments[i] = tranditionalChineseToSimpleChinese(
+          article.comments[i] = traditionalChineseToSimpleChinese(
             article.comments[i],
           );
         }
-        article.description = tranditionalChineseToSimpleChinese(
+        article.description = traditionalChineseToSimpleChinese(
           article.description,
         );
         const id = get_article_id(article);
