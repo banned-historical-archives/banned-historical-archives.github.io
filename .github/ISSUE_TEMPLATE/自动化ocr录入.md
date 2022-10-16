@@ -38,6 +38,9 @@ assignees: ''
     alias: '', // 标题别名
     page_start: 1, // 从图片集第一张到第五张，如果是图片集不填表示从第一张到最后一张，如果是pdf，必须填写page_start和page_end
     page_end: 5,
+    ocr: {
+      min_box_size: 20
+    }; // 此参数比全局ocr参数的优先级高，默认为空
   }],
   ocr: { // ocr 参数 以及 默认参数
     rec_model: 'ch_ppocr_mobile_v2.0',

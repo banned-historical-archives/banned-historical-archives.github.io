@@ -108,6 +108,7 @@ export async function parse(
     for (let i = article.page_start; i <= article.page_end; ++i) {
       const merged_ocr_parameters = {
         ...(parser_opt.ocr || {}),
+        ...(article.ocr ? article.ocr : {}),
         ...(parser_opt.ocr_exceptions ? parser_opt.ocr_exceptions[i] : {}),
       };
       let { ocr_results, dimensions } = await ocr(
