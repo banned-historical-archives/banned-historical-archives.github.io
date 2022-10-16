@@ -16,6 +16,12 @@
 ## 功能
 
 1. 文稿版本对比——多版本逐字对比、多版本逐行对比和文字原稿对比
+![文稿版本对比](https://user-images.githubusercontent.com/109972625/183229751-6e00a481-78a0-4fcc-a203-f73607bdc0c6.jpg)
+
+例如[在扩大的中央工作会议上的讲话](https://banned-historical-archives.github.io/articles/6f36e2e6db/)这篇文章，点击右上角“对比”按钮，选择“对比不同来源解析后的文本”。
+
+![文稿来源对比](https://banned-historical-archives.github.io/images/comparison_pdf.png)
+
 2. 文稿来源对比
 3. 歌曲歌词版本对比
 4. 前台校对功能
