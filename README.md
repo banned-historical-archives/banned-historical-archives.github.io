@@ -3,7 +3,7 @@
 [官网](https://banned-historical-archives.github.io)
 
 和谐历史档案馆收录各类受官方封禁以及半封禁的文稿、报纸、杂志和多媒体资料，并对它们进行标准化加工，通过解析、识别、分类，形成标准化文稿档案和多媒体档案/数据库。
-虽然民间有不少人在做资料收集和校验工作，但分散的工作可能无法避免重复劳动，第二，资料的二次汇编难以保证真实性，第三缺乏统一的版本管理，难以维护。我们已经使用一系列自动化工具解决这些问题，使得每一篇文稿可溯源、可验证。[\[贡献与校对文稿\]](https://github.com/banned-historical-archives/banned-historical-archives.github.io/wiki/%E5%A6%82%E4%BD%95%E8%B4%A1%E7%8C%AE%E4%B8%8E%E6%A0%A1%E5%AF%B9%E6%96%87%E7%A8%BF)
+虽然民间有不少人在做资料收集和校验工作，但分散的工作可能无法避免重复劳动，第二，资料的二次汇编难以保证真实性，第三缺乏统一的版本管理，难以维护。我们已经使用一系列自动化工具解决这些问题，使得每一篇文稿可溯源、可验证。[\[贡献与校对文稿\]](https://github.com/banned-historical-archives/banned-historical-archives.github.io/wiki/%E6%96%87%E7%A8%BF%E5%BD%95%E5%85%A5%E3%80%81%E6%A0%A1%E5%AF%B9%E4%B8%8E%E5%BC%80%E5%8F%91%E4%BA%BA%E5%91%98%E8%B4%A1%E7%8C%AE%E4%BB%A3%E7%A0%81)
 
 其中文稿包含中央发表的文件，中央高层会议纪要，主要人物的通知、著作、谈话/对话/讲话、宣言/声明、电报、通讯、书信、消息、评论/批语/批注/批示、意见、指示/命令，以及群众运动中重要文献。主要人物包括毛泽东，江青、姚文元、张春桥、王洪文等。
 其中一些书籍中并非所有文稿都受到官方封禁，我们也保留此类文稿。
@@ -109,7 +109,7 @@
 
 ## 贡献资源/纠错/讨论
 
-[\[贡献与校对文稿\]](https://github.com/banned-historical-archives/banned-historical-archives.github.io/wiki/%E5%A6%82%E4%BD%95%E8%B4%A1%E7%8C%AE%E4%B8%8E%E6%A0%A1%E5%AF%B9%E6%96%87%E7%A8%BF)
+[\[贡献与校对文稿\]](https://github.com/banned-historical-archives/banned-historical-archives.github.io/wiki/%E6%96%87%E7%A8%BF%E5%BD%95%E5%85%A5%E3%80%81%E6%A0%A1%E5%AF%B9%E4%B8%8E%E5%BC%80%E5%8F%91%E4%BA%BA%E5%91%98%E8%B4%A1%E7%8C%AE%E4%BB%A3%E7%A0%81)
 [\[Github issues\]](https://github.com/banned-historical-archives/banned-historical-archives.github.io/issues)
 [\[Gitlab issues\]备用地址](https://gitlab.com/banned-historical-archives/banned-historical-archives.gitlab.io/-/issues)
 
