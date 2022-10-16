@@ -128,4 +128,4 @@
 [![统一战线公社](https://unitedfront.press/static/img/everylogo/hanzilogo.png)](https://unitedfront.press)
 欢迎提[\[issues\]](https://github.com/banned-historical-archives/banned-historical-archives.github.io/issues)交换链接
 
-（友情链接仅用于推广，不代表本档案馆立场）
+（友情链接不代表本档案馆立场）
