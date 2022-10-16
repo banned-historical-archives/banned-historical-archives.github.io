@@ -3,9 +3,9 @@
 [官网](https://banned-historical-archives.github.io)
 
 和谐历史档案馆收录各类受官方封禁以及半封禁的文稿、报纸、杂志和多媒体资料，并对它们进行标准化加工，通过解析、识别、分类，形成标准化文稿档案和多媒体档案/数据库。
-虽然民间有不少人在做资料收集和校验工作，但分散的工作可能无法避免重复劳动，第二，资料的二次汇编难以保证真实性，第三缺乏统一的版本管理，难以维护。我们已经使用一系列自动化工具解决这些问题，使得每一篇文稿可溯源、可验证。[\[贡献与校对文稿\]](https://github.com/banned-historical-archives/banned-historical-archives.github.io/wiki/%E6%96%87%E7%A8%BF%E5%BD%95%E5%85%A5%E3%80%81%E6%A0%A1%E5%AF%B9%E4%B8%8E%E5%BC%80%E5%8F%91%E4%BA%BA%E5%91%98%E8%B4%A1%E7%8C%AE%E4%BB%A3%E7%A0%81)
+虽然民间有不少人在做资料收集和校验工作，但分散的工作可能无法避免重复劳动，第二，资料的二次汇编难以保证真实性，第三缺乏统一的版本管理，难以维护。我们已经使用一系列自动化工具解决这些问题，每一篇文稿可溯源、可验证。[\[文稿录入与校对\]](https://github.com/banned-historical-archives/banned-historical-archives.github.io/wiki/文稿录入与校对)
 
-其中文稿包含但不限于中央发表的文件，中央高层会议纪要，主要人物的通知、著作、谈话/对话/讲话、宣言/声明、电报、通讯、书信、消息、评论/批语/批注/批示、意见、指示/命令，以及群众运动中重要文献。主要人物包括毛泽东，江青、姚文元、张春桥、王洪文等。
+其中文稿包含但不限于中央发表的文件，中央高层会议纪要，主要人物的通知、著作、谈话/对话/讲话、宣言/声明、电报、通讯、书信、消息、评论/批语/批注/批示、意见、指示/命令，以及群众运动中重要文献。主要人物包括毛泽东，江青、姚文元、张春桥、王洪文等。其中一些书籍名称或其中文稿的注释中可能表现出鲜明的立场，我们仅仅做收录和校对工作，尽量保持文稿的原貌，其内容不代表我们的立场。
 
 目前资料库已经可以收录书籍，包括但不限于文稿收录的范围。
 
@@ -134,7 +134,7 @@
 
 ## 贡献资源/纠错/讨论
 
-[\[贡献与校对文稿\]](https://github.com/banned-historical-archives/banned-historical-archives.github.io/wiki/%E6%96%87%E7%A8%BF%E5%BD%95%E5%85%A5%E3%80%81%E6%A0%A1%E5%AF%B9%E4%B8%8E%E5%BC%80%E5%8F%91%E4%BA%BA%E5%91%98%E8%B4%A1%E7%8C%AE%E4%BB%A3%E7%A0%81)
+[\[文稿录入与校对\]](https://github.com/banned-historical-archives/banned-historical-archives.github.io/wiki/文稿录入与校对)
 [\[Github issues\]](https://github.com/banned-historical-archives/banned-historical-archives.github.io/issues)
 [\[Gitlab issues\]备用地址](https://gitlab.com/banned-historical-archives/banned-historical-archives.gitlab.io/-/issues)
 
@@ -143,7 +143,7 @@
 [\[Github\]](https://github.com/banned-historical-archives/banned-historical-archives.gitlab.io)
 [\[Gitlab\]](https://gitlab.com/banned-historical-archives/banned-historical-archives.gitlab.io)
 
-[\[开发者如何贡献代码\]](https://github.com/banned-historical-archives/banned-historical-archives.github.io/wiki/%E5%A6%82%E4%BD%95%E8%B4%A1%E7%8C%AE%E4%B8%8E%E6%A0%A1%E5%AF%B9%E6%96%87%E7%A8%BF)
+[\[开发者如何贡献代码\]](https://github.com/banned-historical-archives/banned-historical-archives.github.io/wiki/开发者贡献代码)
 
 ### 其他
 #### 数据库导出
