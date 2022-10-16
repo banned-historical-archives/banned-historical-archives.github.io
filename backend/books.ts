@@ -66,6 +66,26 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: '04c59d5b-921c-491b-8170-059cb797dc89',
+      name: '论林彪反党集团的社会基础',
+      internal: true,
+      official: true,
+      type: 'pdf',
+      author: '',
+      files: 'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/04c59d5b-921c-491b-8170-059cb797dc89.pdf',
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'pdf',
+      articles: [{"title":"论林彪反党集团的社会基础","authors":["姚文元"],"page_start":1,"page_end":6,"archive_id":3,"dates":[{"year":1975,"month":3,"day":1}]}],
+      ocr: undefined,
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives1/04c59d5b-921c-491b-8170-059cb797dc89.pdf'),
+  },
+  {
+    entity: {
       id: '2cec027f-70be-4525-8a87-8da2e7cfa6fc',
       name: '毛远新在省委常委会议上的发言（摘录）',
       internal: true,
