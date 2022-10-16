@@ -66,6 +66,34 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: '2cec027f-70be-4525-8a87-8da2e7cfa6fc',
+      name: '毛远新在省委常委会议上的发言（摘录）',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(4)
+        .fill(0)
+        .map(
+          (i, idx) =>
+            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/2cec027f-70be-4525-8a87-8da2e7cfa6fc/${
+              idx + 1
+            }.png`,
+        )
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'png',
+      articles: [{"title":"毛远新在省委常委会议上的发言","authors":["毛远新"],"page_start":2,"page_end":4,"archive_id":1,"dates":[{"year":1974,"month":2,"day":9}]}],
+      ocr: undefined,
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives1/2cec027f-70be-4525-8a87-8da2e7cfa6fc'),
+  },
+  {
+    entity: {
       id: '31b69dc5-0197-45f9-b432-e090f4f60114',
       name: '中央首长在北京市革命委员会常委扩大会议上的重要讲话',
       internal: true,
