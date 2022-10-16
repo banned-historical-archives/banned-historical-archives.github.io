@@ -66,6 +66,34 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: 'ccc6424c-eb52-4560-83f6-346ca060f9f3',
+      name: '毛远新一九七四年二月九日在省委常委会议上的发言（摘录）',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(4)
+        .fill(0)
+        .map(
+          (i, idx) =>
+            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/ccc6424c-eb52-4560-83f6-346ca060f9f3/${
+              idx + 1
+            }.png`,
+        )
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'png',
+      articles: [{"title":"毛远新一九七四年二月九日在省委常委会议上的发言","authors":["毛远新"],"dates":[{"year":1974,"month":2,"day":9}],"page_start":2,"page_end":4}],
+      ocr: undefined,
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives1/ccc6424c-eb52-4560-83f6-346ca060f9f3'),
+  },
+  {
+    entity: {
       id: 'd2a5e884-3341-438b-bf83-439e7346b6f6',
       name: '论林彪反党集团的社会基础',
       internal: true,
