@@ -73,6 +73,9 @@ assignees: ''
   articles: [{
     title: '在中央政治局会议上的讲话',
     authors: ['毛泽东', '江青'], // 作者
+    page_start: 1,
+    page_end: 5,
+    archive_id: 1,
     dates: [
       {
         year: 1949,
