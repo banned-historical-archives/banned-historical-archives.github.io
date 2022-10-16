@@ -36,7 +36,7 @@ assignees: ''
     ], // 时间 或者 时间范围 或者 多个时间点
     is_range_date: false, // 默认为false，如果为 true 表示一段时间（从49年到76年），如果为false表示多/单个时间点
     alias: '', // 标题别名
-    page_start: 1, // 从图片集第一张到第五张，如果不填表示从第一张到最后一张
+    page_start: 1, // 从图片集第一张到第五张，如果是图片集不填表示从第一张到最后一张，如果是pdf，必须填写page_start和page_end
     page_end: 5,
   }],
   ocr: { // ocr 参数 以及 默认参数
