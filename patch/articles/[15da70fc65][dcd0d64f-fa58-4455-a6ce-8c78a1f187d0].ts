@@ -1,0 +1,5 @@
+
+export default [
+// {"version":2,"parts":{"0":{"delete":true},"1":{"delete":true},"2":{"delete":true},"3":{"diff":"-2\t=11"},"5":{"diff":"=59\t+煽\t=21\t-1\t+扰\t=8\t-1\t+妄\t=14"},"6":{"diff":"=50\t-1\t+狠\t=32"},"7":{"diff":"=24\t-1\t+、\t=34\t-1\t+、\t=106\t+惕\t=2\t-1\t+睁\t=55\t-1\t+央\t=11\t-1\t+辽\t=49\t+活都要做得更好。"},"8":{"delete":true},"9":{"diff":"=24\t-1\t+谣\t=6"},"10":{"delete":true},"11":{"delete":true},"12":{"delete":true},"13":{"delete":true}},"comments":{},"description":""}
+  {"version":2,"parts":{"0":{"delete":true},"1":{"delete":true},"2":{"delete":true},"3":{"diff":"-2\t=11"},"5":{"diff":"=59\t+%E7%85%BD\t=21\t-1\t+%E6%89%B0\t=8\t-1\t+%E5%A6%84\t=14"},"6":{"diff":"=50\t-1\t+%E7%8B%A0\t=32"},"7":{"diff":"=24\t-1\t+%E3%80%81\t=34\t-1\t+%E3%80%81\t=106\t+%E6%83%95\t=2\t-1\t+%E7%9D%81\t=55\t-1\t+%E5%A4%AE\t=11\t-1\t+%E8%BE%BD\t=49\t+%E6%B4%BB%E9%83%BD%E8%A6%81%E5%81%9A%E5%BE%97%E6%9B%B4%E5%A5%BD%E3%80%82"},"8":{"delete":true},"9":{"diff":"=24\t-1\t+%E8%B0%A3\t=6"},"10":{"delete":true},"11":{"delete":true},"12":{"delete":true},"13":{"delete":true}},"comments":{},"description":""},
+];
