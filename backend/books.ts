@@ -66,6 +66,34 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: 'dcd0d64f-fa58-4455-a6ce-8c78a1f187d0',
+      name: '毛远新对当前工作的意见',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(2)
+        .fill(0)
+        .map(
+          (i, idx) =>
+            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/dcd0d64f-fa58-4455-a6ce-8c78a1f187d0/${
+              idx + 1
+            }.png`,
+        )
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'png',
+      articles: [{"title":"毛远新对当前工作的意见","authors":["毛远新"],"page_start":1,"page_end":2,"dates":[{"year":1976,"month":4,"day":19}]}],
+      ocr: undefined,
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives1/dcd0d64f-fa58-4455-a6ce-8c78a1f187d0'),
+  },
+  {
+    entity: {
       id: 'f692a8bf-a640-4079-89e3-c41186cb50ff',
       name: '毛远新的谈话记录',
       internal: true,
