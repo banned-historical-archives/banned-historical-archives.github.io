@@ -66,6 +66,26 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: 'b8079465-9bf6-46cd-9c6c-95208979eed0',
+      name: '工人阶级必须领导一切',
+      internal: true,
+      official: true,
+      type: 'pdf',
+      author: '',
+      files: 'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives3/main/b8079465-9bf6-46cd-9c6c-95208979eed0.pdf',
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'pdf',
+      articles: [{"title":"工人阶级必须领导一切","authors":["姚文元"],"page_start":3,"page_end":10,"dates":[{"year":1968,"month":8,"day":25}]}],
+      ocr: undefined,
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives3/b8079465-9bf6-46cd-9c6c-95208979eed0.pdf'),
+  },
+  {
+    entity: {
       id: 'dcd0d64f-fa58-4455-a6ce-8c78a1f187d0',
       name: '毛远新对当前工作的意见',
       internal: true,
