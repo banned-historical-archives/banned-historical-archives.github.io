@@ -66,6 +66,34 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: '680acdfe-228a-4f53-86ec-bfbc17aff79d',
+      name: '毛远新在鞍山市党员干部会议上的讲话涉及宋江的部分',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(3)
+        .fill(0)
+        .map(
+          (i, idx) =>
+            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/680acdfe-228a-4f53-86ec-bfbc17aff79d/${
+              idx + 1
+            }.png`,
+        )
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'png',
+      articles: [{"title":"毛远新在鞍山市党员干部会议上的讲话（摘录）","authors":["毛远新"],"page_start":2,"page_end":3,"dates":[{"year":1975,"month":7,"day":7}]}],
+      ocr: undefined,
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives1/680acdfe-228a-4f53-86ec-bfbc17aff79d'),
+  },
+  {
+    entity: {
       id: 'b8079465-9bf6-46cd-9c6c-95208979eed0',
       name: '工人阶级必须领导一切',
       internal: true,
