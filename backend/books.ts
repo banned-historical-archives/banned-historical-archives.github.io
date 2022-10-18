@@ -141,7 +141,7 @@ const books: Book[] = [
     parser_option: {
       page_limits: [],
       ext: 'png',
-      articles: [{"title":"毛远新谈话记录","authors":["毛远新"],"page_start":2,"page_end":4,"dates":[{"year":1976,"month":4,"day":12}]}],
+      articles: [{"title":"毛远新谈话记录","authors":["毛远新"],"page_start":2,"page_end":4,"dates":[{"year":1976,"month":4,"day":22}]}],
       ocr: undefined,
       ocr_exceptions: {},
     },
