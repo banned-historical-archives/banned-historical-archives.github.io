@@ -66,6 +66,34 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: '52d8fbe4-965f-4cfc-872b-e6029e3f734d',
+      name: '在北京接见辽革站赴京代表团时毛远新同志的讲话',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(2)
+        .fill(0)
+        .map(
+          (i, idx) =>
+            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/52d8fbe4-965f-4cfc-872b-e6029e3f734d/${
+              idx + 1
+            }.jpg`,
+        )
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'jpg',
+      articles: [{"title":"毛远新同志在北京会见辽革站赴京代表团时的讲话","authors":["毛远新"],"page_start":1,"page_end":2,"dates":[{"year":1968,"month":3,"day":4}]}],
+      ocr: {"auto_vsplit":true,"vsplit":0.5},
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives1/52d8fbe4-965f-4cfc-872b-e6029e3f734d'),
+  },
+  {
+    entity: {
       id: 'fb71dfe8-41f8-40fc-be7e-de81d9bcab90',
       name: '红旗一九六六年第二期',
       internal: true,
