@@ -66,6 +66,34 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: 'b1848c1e-baa9-49fd-abc4-a8b263e4bcf6',
+      name: '毛远新同志在沈阳三派革命群众组织代表座谈会上的讲话',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(3)
+        .fill(0)
+        .map(
+          (i, idx) =>
+            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/b1848c1e-baa9-49fd-abc4-a8b263e4bcf6/${
+              idx + 1
+            }.png`,
+        )
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'png',
+      articles: [{"title":"毛远新同志在沈阳三派革命群众组织代表座谈会上的讲话","authors":["毛远新"],"page_start":1,"page_end":3,"dates":[{"year":1968,"month":4,"day":7}]}],
+      ocr: undefined,
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives1/b1848c1e-baa9-49fd-abc4-a8b263e4bcf6'),
+  },
+  {
+    entity: {
       id: '52d8fbe4-965f-4cfc-872b-e6029e3f734d',
       name: '在北京接见辽革站赴京代表团时毛远新同志的讲话',
       internal: true,
