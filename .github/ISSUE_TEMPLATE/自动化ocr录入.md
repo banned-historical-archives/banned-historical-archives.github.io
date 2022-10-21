@@ -54,8 +54,8 @@ assignees: ''
     vsplit: 0.5, // 如果设置为0.5，ocr结果将从页面宽度的50%处分割，如果为0表示不分割。当auto_vsplit为false且vsplit不为0时，表示任何页面都进行分割。
     content_thresholds: [0.0, 0.0, 0.0, 0.0]; // 通常需要忽略在页面边缘的页眉，页码或者噪声，数组内4个数值分别表示上下左右相对于宽高的比例， 例如 [0.1,0,0,0] 表示忽略顶部占总高度百分之10的内容
     line_merge_threshold: 30; // 单位像素，如果小于这个阈值将被视为同一行
-    standard_paragraph_merge_strategy_threshold: 0; // 标准段落合并策略，超过 threshold * width 的表示新段落，否则向上合并
-    differential_paragraph_merge_strategy_threshold: 30; // 差分段落合并策略，x[i] - x[i-1] > threshold 的表示新段落，否则向上合并，单位像素
+    standard_paragraph_merge_strategy_threshold: 0; // 标准段落合并策略，0表示禁用（请在标准和差分策略中二选一），如果是0.2，当一行中最左侧的x坐标超过页面宽度的20%表示新段落，否则向上一行合并
+    differential_paragraph_merge_strategy_threshold: 30; // 差分段落合并策略，0表示禁用，如果为30，这一行的最左侧的x坐标减去上一行的最左侧的x坐标大于30像素 而且 这一行的最左侧的x坐标减去下一行的最左侧的x坐标大于30像素 时表示这一行是新的段落，否则向上一行合并
   },
   ocr_exceptions: {
     "3": {
