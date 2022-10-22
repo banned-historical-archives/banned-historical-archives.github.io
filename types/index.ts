@@ -138,6 +138,9 @@ export type ParserOptionV2 = {
     is_range_date: boolean; // 如果为 true 表示一段时间，如果为false表示多/单个时间点
     alias?: string; // 标题别名
     ocr?: Partial<OCRParameter & OCRParameterAdvanced>; // 此参数比全局ocr参数的优先级高，默认为空
+    ocr_exceptions?: {
+      [key: string]: Partial<OCRParameter & OCRParameterAdvanced>;
+    };
     page_start: number;
     page_end: number;
   }[];
