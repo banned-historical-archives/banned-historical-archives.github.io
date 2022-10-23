@@ -66,6 +66,34 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: '93482dc4-edc3-4ce3-a6d2-960ec210656a',
+      name: '“四人帮”死党毛远新破坏教育革命言论摘编（初编）',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(9)
+        .fill(0)
+        .map(
+          (i, idx) =>
+            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/93482dc4-edc3-4ce3-a6d2-960ec210656a/${
+              idx + 1
+            }.png`,
+        )
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'png',
+      articles: [{"title":"一、拼命抓教育，为“四人帮”篡党夺权大造反革命舆论","authors":["毛远新"],"page_start":3,"page_end":4,"ocr_exceptions":{"3":{"content_thresholds":[0,0,0.5,0]}},"dates":[{"year":1974},{"year":1975,"month":3,"day":8},{"year":1974,"month":12,"day":28},{"year":1973,"month":10,"day":17},{"year":1973,"month":8,"day":11},{"year":1973},{"year":1974,"month":12,"day":23},{"year":1974,"month":2,"day":19},{"year":1974,"month":8,"day":11}]},{"title":"二、篡改、歪曲毛主席的教育方针，为篡党夺权，复辟资本主义培植力量","authors":["毛远新"],"page_start":5,"page_end":5,"dates":[{"year":1974,"month":4,"day":11},{"year":1973,"month":11,"day":24},{"year":1973,"month":8,"day":11},{"year":1974,"month":12,"day":23},{"year":1973},{"year":1976,"month":6}]},{"title":"三、挑拨工、干，师、生之间的关系，破坏党的知识分子政策","authors":["毛远新"],"page_start":6,"page_end":7,"ocr_exceptions":{"7":{"content_thresholds":[0,0,0,0.5]}},"dates":[{"year":1976,"month":1,"day":1},{"year":1974,"month":2,"day":19},{"year":1974,"month":2,"day":18},{"year":1974,"month":4,"day":9},{"year":1974},{"year":1974,"month":1,"day":18},{"year":1973,"month":12,"day":21},{"year":1973,"month":8,"day":11}]},{"title":"四、破坏党的一元化领导，削弱工宣队的政治作用","authors":["毛远新"],"page_start":7,"page_end":9,"ocr_exceptions":{"9":{"content_thresholds":[0,0,0,0.5]}},"dates":[{"year":1974,"month":2,"day":22},{"year":1974,"month":2,"day":20},{"year":1974,"month":4,"day":11},{"year":1973,"month":12,"day":21},{"year":1974,"month":2,"day":18},{"year":1973,"month":12,"day":1},{"year":1974,"month":4,"day":9},{"year":1974,"month":2,"day":19},{"year":1973}]},{"title":"五、宣扬“天才论”，大搞形而上学，竭力把教育战线搞乱","authors":["毛远新"],"page_start":9,"page_end":9,"dates":[{"year":1972,"month":11,"day":11},{"year":1974,"month":11,"day":28},{"year":1974,"month":12,"day":23},{"year":1974,"month":4,"day":9},{"year":1974,"month":4,"day":11},{"year":1973},{"year":1974,"month":10}]}],
+      ocr: undefined,
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives1/93482dc4-edc3-4ce3-a6d2-960ec210656a'),
+  },
+  {
+    entity: {
       id: '33d26a96-67db-4a35-a4ce-d02beb985e58',
       name: '红旗一九六六年第七期',
       internal: true,
