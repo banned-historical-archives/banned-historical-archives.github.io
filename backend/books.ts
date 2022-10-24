@@ -66,6 +66,34 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: '9000310e-2f60-4711-a81d-a8fd520f6db7',
+      name: '怎样理解资产阶级在党内？——宗明兰同志在辽宁省理论讨论会上的总结发言（记录整理）',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(16)
+        .fill(0)
+        .map(
+          (i, idx) =>
+            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/9000310e-2f60-4711-a81d-a8fd520f6db7/${
+              idx + 1
+            }.jpg`,
+        )
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'jpg',
+      articles: [{"title":"怎样理解资产阶级在党内？——宗明兰同志在辽宁省理论讨论会上的总结发言","authors":["宗明兰"],"page_start":1,"page_end":16,"dates":[{"year":1976,"month":3,"day":1}]}],
+      ocr: {"content_thresholds":[0,0.13,0,0],"standard_paragraph_merge_strategy_threshold":0.13,"differential_paragraph_merge_strategy_threshold":0},
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives1/9000310e-2f60-4711-a81d-a8fd520f6db7'),
+  },
+  {
+    entity: {
       id: '306f36e6-2329-42e8-92d9-ed3f6faad595',
       name: '宗明兰同志的两份揭批查资料',
       internal: true,
