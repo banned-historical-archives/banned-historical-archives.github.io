@@ -66,6 +66,34 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: '306f36e6-2329-42e8-92d9-ed3f6faad595',
+      name: '宗明兰同志的两份揭批查资料',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(7)
+        .fill(0)
+        .map(
+          (i, idx) =>
+            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/306f36e6-2329-42e8-92d9-ed3f6faad595/${
+              idx + 1
+            }.jpg`,
+        )
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'jpg',
+      articles: [{"title":"宗明兰给周忠民的回信的送审稿","authors":["宗明兰"],"page_start":2,"page_end":4,"dates":[{"year":1976,"month":9,"day":30}]},{"title":"宗明兰给周忠民的回信","authors":["宗明兰"],"page_start":2,"page_end":4,"dates":[{"year":1976,"month":9,"day":30}]}],
+      ocr: undefined,
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives1/306f36e6-2329-42e8-92d9-ed3f6faad595'),
+  },
+  {
+    entity: {
       id: '93482dc4-edc3-4ce3-a6d2-960ec210656a',
       name: '“四人帮”死党毛远新破坏教育革命言论摘编（初编）',
       internal: true,
