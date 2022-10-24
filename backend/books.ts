@@ -86,7 +86,7 @@ const books: Book[] = [
       page_limits: [],
       ext: 'jpg',
       articles: [{"title":"怎样理解资产阶级在党内？——宗明兰同志在辽宁省理论讨论会上的总结发言","authors":["宗明兰"],"page_start":1,"page_end":16,"dates":[{"year":1976,"month":3,"day":1}]}],
-      ocr: {"content_thresholds":[0,0.13,0,0],"standard_paragraph_merge_strategy_threshold":0.13,"differential_paragraph_merge_strategy_threshold":0},
+      ocr: {"content_thresholds":[0,0.13,0,0],"standard_paragraph_merge_strategy_threshold":0.16,"differential_paragraph_merge_strategy_threshold":0},
       ocr_exceptions: {},
     },
     parser: automation.parse,
