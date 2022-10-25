@@ -66,6 +66,34 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: '2050e42b-204c-454e-998f-2861413fbbdc',
+      name: '毛远新有关研究“儒法斗争史"的三次谈话（摘编）',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(9)
+        .fill(0)
+        .map(
+          (i, idx) =>
+            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/2050e42b-204c-454e-998f-2861413fbbdc/${
+              idx + 1
+            }.png`,
+        )
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'png',
+      articles: [{"title":"一、毛远新一九七四年七月七日在省委批林批孔汇报会议上的总结（节录）","authors":["毛远新"],"page_start":2,"page_end":4,"ocr_exceptions":{"2":{"content_thresholds":[0,0,0.5,0]}},"dates":[{"year":1974,"month":7,"day":7}]},{"title":"二、毛远新一九七四年八月二十八日在常委扩大会议上的发言（节录）","authors":["毛远新"],"page_start":5,"page_end":5,"dates":[{"year":1974,"month":8,"day":28}]},{"title":"三、毛远新一九七四年十月十二日在沈阳机床一厂汇报运动情况时的讲话（节录）","authors":["毛远新"],"page_start":6,"page_end":9,"ocr_exceptions":{"9":{"content_thresholds":[0,0,0,0.5]}},"dates":[{"year":1974,"month":10,"day":12}]}],
+      ocr: undefined,
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives1/2050e42b-204c-454e-998f-2861413fbbdc'),
+  },
+  {
+    entity: {
       id: 'b0d92e3c-d75b-447f-8e3d-6a80bda133b3',
       name: '毛远新一九七五年挑拨中央与地方关系的几次谈话（摘录）',
       internal: true,
