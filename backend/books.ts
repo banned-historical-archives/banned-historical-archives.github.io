@@ -66,6 +66,34 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: 'b0d92e3c-d75b-447f-8e3d-6a80bda133b3',
+      name: '毛远新一九七五年挑拨中央与地方关系的几次谈话（摘录）',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(3)
+        .fill(0)
+        .map(
+          (i, idx) =>
+            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/b0d92e3c-d75b-447f-8e3d-6a80bda133b3/${
+              idx + 1
+            }.png`,
+        )
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'png',
+      articles: [{"title":"毛远新一九七五年挑拨中央与地方关系的几次谈话（摘录）","authors":["毛远新"],"page_start":1,"page_end":3,"dates":[{"year":1975,"month":3,"day":6},{"year":1975,"month":6,"day":22},{"year":1975,"month":7,"day":12}]}],
+      ocr: undefined,
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives1/b0d92e3c-d75b-447f-8e3d-6a80bda133b3'),
+  },
+  {
+    entity: {
       id: 'c02feeb6-58b4-44b9-9965-47de5504e4b7',
       name: '毛远新在批邓、反击右倾翻案风斗争中的一些言论（摘编）',
       internal: true,
