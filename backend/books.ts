@@ -59,6 +59,34 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: 'cf7e2b8e-9249-4aa3-b0f4-2707aa6e74b0',
+      name: '姚文元同志在上海市革命委员会报告会上的讲话',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(10)
+        .fill(0)
+        .map(
+          (i, idx) =>
+            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/cf7e2b8e-9249-4aa3-b0f4-2707aa6e74b0/${
+              idx + 1
+            }.jpg`,
+        )
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'jpg',
+      articles: [{"title":"姚文元同志在上海市革命委员会报告会上的讲话","authors":["姚文元"],"page_start":1,"page_end":10,"dates":[{"year":1967,"month":6,"day":3}]}],
+      ocr: undefined,
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives1/cf7e2b8e-9249-4aa3-b0f4-2707aa6e74b0'),
+  },
+  {
+    entity: {
       id: 'bb264672-4652-4810-b440-516ae554b3be',
       name: '毛远新有关研究“儒法斗争史"的三次谈话（摘编）',
       internal: true,
