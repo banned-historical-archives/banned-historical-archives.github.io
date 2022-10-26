@@ -9,10 +9,6 @@ import * as xuanji_parser from './parser/xuanji';
 import * as jimi from './parser/jimi';
 import * as wenku_parser from './parser/wenku';
 import * as maoquanji from './parser/maoquanji';
-import * as maoyuanxin1 from './parser/maoyuanxin1';
-import * as maoyuanxin2 from './parser/maoyuanxin2';
-import * as maoyuanxin3 from './parser/maoyuanxin3';
-import * as maoyuanxin4 from './parser/maoyuanxin4';
 import * as wanghongwen from './parser/wanghongwen';
 import * as wanghongwen1 from './parser/wanghongwen1';
 import * as wanghongwen2 from './parser/wanghongwen2';
@@ -1193,34 +1189,6 @@ const books: Book[] = [
   },
   {
     entity: {
-      id: 'maoyuanxin6',
-      name: '冯金传达毛远新同志在省工农兵干部学习班上的讲话',
-      internal: true,
-      official: true,
-      type: 'img',
-      author: '',
-      files: new Array(5)
-        .fill(0)
-        .map(
-          (i, idx) =>
-            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/maoyuanxin6/${
-              idx + 1
-            }.jpg`,
-        )
-        .join(','),
-    },
-    parser_option: {
-      page_limits: [],
-      ext: 'jpg',
-      articles: [{"title":"毛远新同志在省工农兵干部学习班上的讲话","authors":["毛远新"],"dates":[{"year":1974,"month":2,"day":16}],"page_start":1,"page_end":5}],
-      ocr: undefined,
-      ocr_exceptions: {},
-    },
-    parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/maoyuanxin6'),
-  },
-  {
-    entity: {
       id: 'duoren11',
       name: '张春桥王洪文同志在上海市革命委员会研究工代会上讲话的会议记录',
       internal: true,
@@ -1358,90 +1326,6 @@ const books: Book[] = [
     },
     parser: automation.parse,
     path: join(normalize(__dirname), '../public/books/archives1/wanghongwen12'),
-  },
-  {
-    entity: {
-      id: 'maoyuanxin5',
-      name: '未知出处文稿',
-      internal: true,
-      official: true,
-      type: 'img',
-      author: '',
-      files: new Array(2)
-        .fill(0)
-        .map(
-          (i, idx) =>
-            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/maoyuanxin5/${
-              idx + 1
-            }.jpg`,
-        )
-        .join(','),
-    },
-    parser_option: {
-      page_limits: [],
-      ext: 'jpg',
-      articles: [{"title":"我为什么参加红色造反团","authors":["毛远新"],"dates":[{"year":1966,"month":12,"day":11}],"page_start":1,"page_end":2}],
-      ocr: undefined,
-      ocr_exceptions: {},
-    },
-    parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/maoyuanxin5'),
-  },
-  {
-    entity: {
-      id: 'jiangqing1',
-      name: '四人帮反党罪行材料选编（一）',
-      internal: true,
-      official: true,
-      type: 'img',
-      author: '',
-      files: new Array(23)
-        .fill(0)
-        .map(
-          (i, idx) =>
-            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/jiangqing1/${
-              idx + 1
-            }.png`,
-        )
-        .join(','),
-    },
-    parser_option: {
-      page_limits: [],
-      ext: 'png',
-      articles: [{"title":"江青同志在新华印刷厂工人座谈会上的讲话","authors":["江青"],"dates":[{"year":1975,"month":4,"day":3}],"page_start":4,"page_end":14},{"title":"江青同志在清华大学大兴农村分校的讲话","authors":["江青"],"dates":[{"year":1976,"month":9}],"page_start":15,"page_end":23}],
-      ocr: undefined,
-      ocr_exceptions: {},
-    },
-    parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/jiangqing1'),
-  },
-  {
-    entity: {
-      id: 'jiangqing2',
-      name: '四人帮反党罪行材料选编（二）',
-      internal: true,
-      official: true,
-      type: 'img',
-      author: '',
-      files: new Array(18)
-        .fill(0)
-        .map(
-          (i, idx) =>
-            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/jiangqing2/${
-              idx + 1
-            }.png`,
-        )
-        .join(','),
-    },
-    parser_option: {
-      page_limits: [],
-      ext: 'png',
-      articles: [{"title":"江青同志在清华农村分校的讲话","page_start":4,"page_end":6,"authors":["江青"],"dates":[{"year":1976,"month":9,"day":27}]},{"title":"江青同志在清华农村分校花生地的讲话","page_start":7,"page_end":11,"authors":["江青"],"dates":[{"year":1976,"month":9,"day":28}]},{"title":"江青同志在清华工程物理系的讲话","page_start":12,"page_end":18,"authors":["江青"],"dates":[{"year":1976,"month":9,"day":29}]}],
-      ocr: undefined,
-      ocr_exceptions: {},
-    },
-    parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/jiangqing2'),
   },
   {
     entity: {
@@ -3720,102 +3604,6 @@ const books: Book[] = [
       normalize(__dirname),
       '../public/books/archives1/zhangchunqiao15',
     ),
-  },
-  {
-    entity: {
-      id: 'maoyuanxin1',
-      name: '毛远新破坏民兵建设的部分罪行材料',
-      internal: true,
-      official: true,
-      type: 'img',
-      author: '',
-      files: new Array(16)
-        .fill(0)
-        .map(
-          (i, idx) =>
-            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/maoyuanxin1/${
-              idx + 1
-            }.jpg`,
-        )
-        .join(','),
-    },
-    parser_option: {
-      page_limits: [[5, 16]],
-    },
-    parser: maoyuanxin1.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/maoyuanxin1'),
-  },
-  {
-    entity: {
-      id: 'maoyuanxin2',
-      name: '毛远新同志的讲话',
-      internal: true,
-      official: true,
-      type: 'img',
-      author: '',
-      files: new Array(2)
-        .fill(0)
-        .map(
-          (i, idx) =>
-            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/maoyuanxin2/${
-              idx + 1
-            }.jpg`,
-        )
-        .join(','),
-    },
-    parser_option: {
-      page_limits: [[1, 2]],
-    },
-    parser: maoyuanxin2.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/maoyuanxin2'),
-  },
-  {
-    entity: {
-      id: 'maoyuanxin3',
-      name: '毛远新同志在辽革站赴京代表团揭发批判宋任穷会议上的讲话纪要',
-      internal: true,
-      official: true,
-      type: 'img',
-      author: '',
-      files: new Array(1)
-        .fill(0)
-        .map(
-          (i, idx) =>
-            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/maoyuanxin3/${
-              idx + 1
-            }.jpg`,
-        )
-        .join(','),
-    },
-    parser_option: {
-      page_limits: [[1, 1]],
-    },
-    parser: maoyuanxin3.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/maoyuanxin3'),
-  },
-  {
-    entity: {
-      id: 'maoyuanxin4',
-      name: '毛远新一九七四年一月在团省委召开的“学习吴献忠座谈会”上的讲话（节录）',
-      internal: true,
-      official: true,
-      type: 'img',
-      author: '',
-      files: new Array(9)
-        .fill(0)
-        .map(
-          (i, idx) =>
-            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/maoyuanxin4/${
-              idx + 1
-            }.jpg`,
-        )
-        .join(','),
-    },
-    parser_option: {
-      page_limits: [[2, 9]],
-    },
-    parser: maoyuanxin4.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/maoyuanxin4'),
   }
 ].map((i) => {
   const book: Book = {
