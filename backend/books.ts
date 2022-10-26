@@ -26,9 +26,6 @@ import * as wanghongwen9 from './parser/wanghongwen9';
 import * as wanghongwen10 from './parser/wanghongwen10';
 import * as wanghongwen11 from './parser/wanghongwen11';
 import * as yaowenyuan from './parser/yaowenyuan';
-import * as yaowenyuan1 from './parser/yaowenyuan1';
-import * as yaowenyuan2 from './parser/yaowenyuan2';
-import * as yaowenyuan3 from './parser/yaowenyuan3';
 import * as zhangchunqiao from './parser/zhangchunqiao';
 import * as zhangchunqiao1 from './parser/zhangchunqiao1';
 import * as zhangchunqiao2 from './parser/zhangchunqiao2';
@@ -3301,78 +3298,6 @@ const books: Book[] = [
     },
     parser: zzj1.parse,
     path: join(normalize(__dirname), '../public/books/zzj1.pdf'),
-  },
-  {
-    entity: {
-      id: 'yaowenyuan1',
-      name: '姚文元同志在上海市革命委员会报告会上的讲话',
-      internal: true,
-      official: true,
-      type: 'img',
-      author: '姚文元',
-      files: new Array(10)
-        .fill(0)
-        .map(
-          (i, idx) =>
-            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/yaowenyuan1/${
-              idx + 1
-            }.jpg`,
-        )
-        .join(','),
-    },
-    parser_option: {
-      page_limits: [[1, 10]],
-    },
-    parser: yaowenyuan1.parse,
-    path: join(normalize(__dirname), '../public/books/archives/yaowenyuan1'),
-  },
-  {
-    entity: {
-      id: 'yaowenyuan2',
-      name: '姚文元同志在欢庆黄浦区革命委员会成立大会上的讲话',
-      internal: true,
-      official: true,
-      type: 'img',
-      author: '姚文元',
-      files: new Array(4)
-        .fill(0)
-        .map(
-          (i, idx) =>
-            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/yaowenyuan2/${
-              idx + 1
-            }.jpg`,
-        )
-        .join(','),
-    },
-    parser_option: {
-      page_limits: [[1, 4]],
-    },
-    parser: yaowenyuan2.parse,
-    path: join(normalize(__dirname), '../public/books/archives/yaowenyuan2'),
-  },
-  {
-    entity: {
-      id: 'yaowenyuan3',
-      name: '关于国际形势的报告',
-      internal: true,
-      official: true,
-      type: 'img',
-      author: '姚文元',
-      files: new Array(15)
-        .fill(0)
-        .map(
-          (i, idx) =>
-            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/yaowenyuan3/${
-              idx + 1
-            }.jpg`,
-        )
-        .join(','),
-    },
-    parser_option: {
-      page_limits: [[1, 15]],
-    },
-    parser: yaowenyuan3.parse,
-    path: join(normalize(__dirname), '../public/books/archives/yaowenyuan3'),
   },
   {
     entity: {
