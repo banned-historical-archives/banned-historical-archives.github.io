@@ -22,7 +22,7 @@ jobs:
         id: generate-uuid
         uses: filipstefansson/uuid-action@v1
         with:
-          name: ${{ github.sha }}${{ steps.time.outputs.time }}
+          name: ${{ GITHUB_RUN_ID }}${{ GITHUB_RUN_NUMBER }}${{ github.sha }}${{ steps.time.outputs.time }}
       - run: add-apt-repository -y ppa:git-core/ppa
       - run: apt update
       - run: apt install git -y
