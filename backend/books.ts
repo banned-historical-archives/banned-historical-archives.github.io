@@ -59,6 +59,34 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: '1f5a60f6-7d86-4d0e-b8bd-6365704ad695',
+      name: '冯金传达毛远新同志在省工农兵干部学习班上的讲话',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(5)
+        .fill(0)
+        .map(
+          (i, idx) =>
+            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/1f5a60f6-7d86-4d0e-b8bd-6365704ad695/${
+              idx + 1
+            }.jpg`,
+        )
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'jpg',
+      articles: [{"title":"毛远新同志在省工农兵干部学习班上的讲话","authors":["毛远新"],"page_start":1,"page_end":5,"dates":[{"year":1974,"month":2,"day":16}]}],
+      ocr: undefined,
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives1/1f5a60f6-7d86-4d0e-b8bd-6365704ad695'),
+  },
+  {
+    entity: {
       id: '317dfc36-b5df-4092-b9e9-6c1e0c3c0585',
       name: '毛远新一九七四年一月在团省委召开的“学习吴献忠座谈会”上的讲话（节录）',
       internal: true,
