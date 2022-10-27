@@ -59,6 +59,34 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: '06439682-30be-43c0-8fc3-fcd67fd66bec',
+      name: '我为什么参加红色造反团',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(2)
+        .fill(0)
+        .map(
+          (i, idx) =>
+            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/06439682-30be-43c0-8fc3-fcd67fd66bec/${
+              idx + 1
+            }.jpg`,
+        )
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'jpg',
+      articles: [{"title":"我为什么参加红色造反团","authors":["毛远新"],"page_start":1,"page_end":2,"dates":[{"year":1966,"month":12,"day":11}]}],
+      ocr: undefined,
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives1/06439682-30be-43c0-8fc3-fcd67fd66bec'),
+  },
+  {
+    entity: {
       id: '317dfc36-b5df-4092-b9e9-6c1e0c3c0585',
       name: '毛远新一九七四年一月在团省委召开的“学习吴献忠座谈会”上的讲话（节录）',
       internal: true,
