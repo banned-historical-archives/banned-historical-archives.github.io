@@ -59,6 +59,34 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: 'e4beec83-82d8-42b2-845d-fe2f8c163d3d',
+      name: '关于国际形势的报告',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(15)
+        .fill(0)
+        .map(
+          (i, idx) =>
+            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/e4beec83-82d8-42b2-845d-fe2f8c163d3d/${
+              idx + 1
+            }.jpg`,
+        )
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'jpg',
+      articles: [{"title":"姚文元同志关于国际形势的报告","authors":["姚文元"],"page_start":1,"page_end":15,"dates":[{"year":1967,"month":6}]}],
+      ocr: undefined,
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives1/e4beec83-82d8-42b2-845d-fe2f8c163d3d'),
+  },
+  {
+    entity: {
       id: '58499299-cef2-4f20-ad14-90703cd2431a',
       name: '姚文元同志在欢庆黄浦区革命委员会成立大会上的讲话',
       internal: true,
