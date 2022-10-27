@@ -59,6 +59,34 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: '58499299-cef2-4f20-ad14-90703cd2431a',
+      name: '姚文元同志在欢庆黄浦区革命委员会成立大会上的讲话',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(4)
+        .fill(0)
+        .map(
+          (i, idx) =>
+            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/58499299-cef2-4f20-ad14-90703cd2431a/${
+              idx + 1
+            }.jpg`,
+        )
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'jpg',
+      articles: [{"title":"姚文元同志在欢庆黄浦区革命委员会成立大会上的讲话","authors":["姚文元"],"page_start":1,"page_end":4,"dates":[{"year":1967,"month":3,"day":20}]}],
+      ocr: undefined,
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives1/58499299-cef2-4f20-ad14-90703cd2431a'),
+  },
+  {
+    entity: {
       id: 'cf7e2b8e-9249-4aa3-b0f4-2707aa6e74b0',
       name: '姚文元同志在上海市革命委员会报告会上的讲话',
       internal: true,
