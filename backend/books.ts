@@ -59,6 +59,34 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: '2b0f3a68-1cdd-4494-b122-3ed9cb3cb0b7',
+      name: '毛远新同志在辽革站赴京代表团揭发批判宋任穷会议上的讲话纪要',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(1)
+        .fill(0)
+        .map(
+          (i, idx) =>
+            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/2b0f3a68-1cdd-4494-b122-3ed9cb3cb0b7/${
+              idx + 1
+            }.jpg`,
+        )
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'jpg',
+      articles: [{"title":"毛远新同志在辽革站赴京代表团揭发批判宋任穷会议上的讲话纪要","authors":["毛远新"],"page_start":1,"page_end":1,"dates":[{"year":1968,"month":3,"day":7}]}],
+      ocr: undefined,
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives1/2b0f3a68-1cdd-4494-b122-3ed9cb3cb0b7'),
+  },
+  {
+    entity: {
       id: '5551106b-99c0-496b-af47-d8335692e6ca',
       name: '毛远新同志的讲话——四月八日在京沈阳三派代表批斗宋任穷会上的讲话',
       internal: true,
