@@ -59,6 +59,34 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: '317dfc36-b5df-4092-b9e9-6c1e0c3c0585',
+      name: '毛远新一九七四年一月在团省委召开的“学习吴献忠座谈会”上的讲话（节录）',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(9)
+        .fill(0)
+        .map(
+          (i, idx) =>
+            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/317dfc36-b5df-4092-b9e9-6c1e0c3c0585/${
+              idx + 1
+            }.jpg`,
+        )
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'jpg',
+      articles: [{"title":"毛远新一九七四年一月在团省委召开的“学习吴献忠座谈会”上的讲话（节录）","authors":["毛远新"],"page_start":1,"page_end":9,"dates":[{"year":1974,"month":1}]}],
+      ocr: undefined,
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives1/317dfc36-b5df-4092-b9e9-6c1e0c3c0585'),
+  },
+  {
+    entity: {
       id: '2b0f3a68-1cdd-4494-b122-3ed9cb3cb0b7',
       name: '毛远新同志在辽革站赴京代表团揭发批判宋任穷会议上的讲话纪要',
       internal: true,
