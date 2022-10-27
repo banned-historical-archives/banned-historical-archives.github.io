@@ -59,6 +59,34 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: '68d2d72e-cdc1-4871-8acb-fc644774b5e3',
+      name: '冯金传达毛远新同志在省工农兵干部学习班上的讲话',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(5)
+        .fill(0)
+        .map(
+          (i, idx) =>
+            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/68d2d72e-cdc1-4871-8acb-fc644774b5e3/${
+              idx + 1
+            }.jpg`,
+        )
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'jpg',
+      articles: [{"title":"毛远新同志在省工农兵干部学习班上的讲话","authors":["毛远新"],"page_start":1,"page_end":5,"dates":[{"year":1974,"month":2,"day":16}]}],
+      ocr: undefined,
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives1/68d2d72e-cdc1-4871-8acb-fc644774b5e3'),
+  },
+  {
+    entity: {
       id: '06439682-30be-43c0-8fc3-fcd67fd66bec',
       name: '我为什么参加红色造反团',
       internal: true,
