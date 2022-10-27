@@ -59,6 +59,34 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: 'c748a5f5-0b62-433b-b425-a3295b905902',
+      name: '四人帮反党罪行材料选编（一）',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(23)
+        .fill(0)
+        .map(
+          (i, idx) =>
+            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/c748a5f5-0b62-433b-b425-a3295b905902/${
+              idx + 1
+            }.png`,
+        )
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'png',
+      articles: [{"title":"江青一九七五年四月三日找新华印刷厂工人座谈时散布的反党言论","authors":["江青","迟群","谢静宜"],"page_start":4,"page_end":10,"dates":[{"year":1975,"month":4,"day":3}]},{"title":"江青一九七六年九月窜到清华大学大兴农村分校的反党言行","authors":["江青","迟群","谢静宜"],"page_start":15,"page_end":23,"dates":[{"year":1976,"month":9}]}],
+      ocr: {"content_thresholds":[0,0.08,0,0]},
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives1/c748a5f5-0b62-433b-b425-a3295b905902'),
+  },
+  {
+    entity: {
       id: 'e4beec83-82d8-42b2-845d-fe2f8c163d3d',
       name: '关于国际形势的报告',
       internal: true,
