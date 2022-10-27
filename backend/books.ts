@@ -59,6 +59,34 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: '5551106b-99c0-496b-af47-d8335692e6ca',
+      name: '毛远新同志的讲话——四月八日在京沈阳三派代表批斗宋任穷会上的讲话',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(2)
+        .fill(0)
+        .map(
+          (i, idx) =>
+            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/5551106b-99c0-496b-af47-d8335692e6ca/${
+              idx + 1
+            }.jpg`,
+        )
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'jpg',
+      articles: [{"title":"毛远新同志在京沈阳三派代表批斗宋任穷会上的讲话","authors":["毛远新"],"page_start":1,"page_end":2,"dates":[{"year":1968,"month":4,"day":8}]}],
+      ocr: undefined,
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives1/5551106b-99c0-496b-af47-d8335692e6ca'),
+  },
+  {
+    entity: {
       id: '96cdc4a4-0b09-4d57-8277-6dbcbcf6e4e0',
       name: '四人帮反党罪行选编（二）',
       internal: true,
