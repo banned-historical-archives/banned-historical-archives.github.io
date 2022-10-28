@@ -191,7 +191,7 @@ const books: Book[] = [
       page_limits: [],
       ext: 'jpg',
       articles: [{"title":"毛远新同志在京沈阳三派代表批斗宋任穷会上的讲话","authors":["毛远新"],"page_start":1,"page_end":2,"dates":[{"year":1968,"month":4,"day":8}]}],
-      ocr: undefined,
+      ocr: {"content_thresholds":[0.18,0.08,0.09,0.21]},
       ocr_exceptions: {},
     },
     parser: automation.parse,
