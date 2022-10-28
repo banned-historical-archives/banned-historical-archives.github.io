@@ -246,7 +246,7 @@ const books: Book[] = [
     parser_option: {
       page_limits: [],
       ext: 'png',
-      articles: [{"title":"江青一九七五年四月三日找新华印刷厂工人座谈时散布的反党言论","authors":["江青","迟群","谢静宜"],"page_start":4,"page_end":10,"dates":[{"year":1975,"month":4,"day":3}]},{"title":"江青一九七六年九月窜到清华大学大兴农村分校的反党言行","authors":["江青","迟群","谢静宜"],"page_start":15,"page_end":23,"dates":[{"year":1976,"month":9}]}],
+      articles: [{"title":"江青一九七五年四月三日找新华印刷厂工人座谈时散布的反党言论","authors":["江青","迟群","谢静宜"],"page_start":4,"page_end":14,"dates":[{"year":1975,"month":4,"day":3}]},{"title":"江青一九七六年九月窜到清华大学大兴农村分校的反党言行","authors":["江青","迟群","谢静宜"],"page_start":15,"page_end":23,"dates":[{"year":1976,"month":9}]}],
       ocr: {"content_thresholds":[0,0.08,0,0]},
       ocr_exceptions: {},
     },
