@@ -48,6 +48,34 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: 'e51c3cd5-f427-4fce-ad75-da87f2df5195',
+      name: '王洪文同志二月九日在接见四川大足汽车厂在北京学习班同志的讲话',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(4)
+        .fill(0)
+        .map(
+          (i, idx) =>
+            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/e51c3cd5-f427-4fce-ad75-da87f2df5195/${
+              idx + 1
+            }.jpg`,
+        )
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'jpg',
+      articles: [{"title":"王洪文同志在接见四川大足汽车厂在北京学习班同志的讲话","authors":["王洪文"],"page_start":1,"page_end":4,"dates":[{"year":1974,"month":2,"day":9}]}],
+      ocr: undefined,
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives1/e51c3cd5-f427-4fce-ad75-da87f2df5195'),
+  },
+  {
+    entity: {
       id: '72a130d0-a36b-4b75-8e93-f35bf6ff8176',
       name: '关于无产阶级文化大革命问题',
       internal: true,
