@@ -48,6 +48,34 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: '2ac69c65-449e-40a6-b06a-0d62772ab71d',
+      name: '王洪文同志在山东重点企业批林批孔汇报会议上的讲话',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(8)
+        .fill(0)
+        .map(
+          (i, idx) =>
+            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/2ac69c65-449e-40a6-b06a-0d62772ab71d/${
+              idx + 1
+            }.jpg`,
+        )
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'jpg',
+      articles: [{"title":"王洪文同志在山东重点企业批林批孔汇报会议上的讲话","authors":["王洪文"],"page_start":1,"page_end":8,"dates":[{"year":1974,"month":6,"day":27}]}],
+      ocr: undefined,
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives1/2ac69c65-449e-40a6-b06a-0d62772ab71d'),
+  },
+  {
+    entity: {
       id: 'f750c865-cb15-4c03-98b2-aad6e569d88a',
       name: '毛远新破坏民兵建设的部分罪行材料',
       internal: true,
