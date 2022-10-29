@@ -141,7 +141,7 @@ const books: Book[] = [
     parser_option: {
       page_limits: [],
       ext: 'jpg',
-      articles: [{"title":"关于无产阶级文化大革命问题","authors":["王洪文"],"page_start":1,"page_end":8,"dates":[{"year":1973,"month":12,"day":30}]}],
+      articles: [{"title":"关于无产阶级文化大革命问题","authors":["王洪文"],"page_start":1,"page_end":10,"dates":[{"year":1973,"month":12,"day":30}]}],
       ocr: {"content_thresholds":[0,0.1,0,0]},
       ocr_exceptions: {},
     },
