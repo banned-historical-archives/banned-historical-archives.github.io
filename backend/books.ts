@@ -48,6 +48,34 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: '72a130d0-a36b-4b75-8e93-f35bf6ff8176',
+      name: '关于无产阶级文化大革命问题',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(10)
+        .fill(0)
+        .map(
+          (i, idx) =>
+            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/72a130d0-a36b-4b75-8e93-f35bf6ff8176/${
+              idx + 1
+            }.jpg`,
+        )
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'jpg',
+      articles: [{"title":"关于无产阶级文化大革命问题","authors":["王洪文"],"page_start":1,"page_end":8,"dates":[{"year":1973,"month":12,"day":30}]}],
+      ocr: {"content_thresholds":[0,0.1,0,0]},
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives1/72a130d0-a36b-4b75-8e93-f35bf6ff8176'),
+  },
+  {
+    entity: {
       id: '2ac69c65-449e-40a6-b06a-0d62772ab71d',
       name: '王洪文同志在山东重点企业批林批孔汇报会议上的讲话',
       internal: true,
