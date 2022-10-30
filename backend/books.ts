@@ -38,6 +38,34 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: 'ff8206e9-00e6-42aa-bd57-a36d2faa5e49',
+      name: '市革会领导成员、工总司主要负责人王洪文同志一九六七年十二月廿二日下午在铁路文化宫大会上的重要讲话',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(6)
+        .fill(0)
+        .map(
+          (i, idx) =>
+            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/ff8206e9-00e6-42aa-bd57-a36d2faa5e49/${
+              idx + 1
+            }.jpg`,
+        )
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'jpg',
+      articles: [{"title":"市革会领导成员、工总司主要负责人王洪文同志下午在铁路文化宫大会上的重要讲话","authors":["王洪文"],"page_start":1,"page_end":6,"dates":[{"year":1967,"month":12,"day":22}]}],
+      ocr: {"content_thresholds":[0,0.07,0,0]},
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives1/ff8206e9-00e6-42aa-bd57-a36d2faa5e49'),
+  },
+  {
+    entity: {
       id: '416aed01-110d-4f35-af13-f44ee4d11ec3',
       name: '工总司负责人王洪文同志一月十一日在长宁区俱乐部的重要讲话',
       internal: true,
