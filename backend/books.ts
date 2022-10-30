@@ -38,6 +38,34 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: '0f85f67b-fe32-425f-91d4-613f3126705c',
+      name: '王洪文关于学习毛主席理论问题指示的讲话',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(8)
+        .fill(0)
+        .map(
+          (i, idx) =>
+            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/0f85f67b-fe32-425f-91d4-613f3126705c/${
+              idx + 1
+            }.png`,
+        )
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'png',
+      articles: [{"title":"王洪文关于学习毛主席理论问题指示的讲话","authors":["王洪文"],"page_start":1,"page_end":8,"ocr_exceptions":{"1":{"content_thresholds":[0.12,0.12,0,0]}},"dates":[{"year":1975,"month":1,"day":14}]}],
+      ocr: {"content_thresholds":[0,0.12,0,0]},
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives1/0f85f67b-fe32-425f-91d4-613f3126705c'),
+  },
+  {
+    entity: {
       id: '3f502324-0a16-4470-b3fc-3e237f39b604',
       name: '王洪文付主席和马天水同志的谈话',
       internal: true,
