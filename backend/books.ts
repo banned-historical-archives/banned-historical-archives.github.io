@@ -38,6 +38,34 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: '8c1a5316-884e-465a-9775-48338f6cc6b5',
+      name: '揭发“四人帮”王洪文插手控制上影阴谋篡党夺权的罪行',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(9)
+        .fill(0)
+        .map(
+          (i, idx) =>
+            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/8c1a5316-884e-465a-9775-48338f6cc6b5/${
+              idx + 1
+            }.jpg`,
+        )
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'jpg',
+      articles: [{"title":"前言","authors":["中共上海电影制片厂委员会"],"page_start":2,"page_end":2,"ocr_exceptions":{"2":{"content_thresholds":[0,0.2,0,0.5]}},"dates":[{"year":1976,"month":12}]},{"title":"第一部分","authors":["中共上海电影制片厂委员会","王洪文","马天水","徐景贤","黄涛"],"page_start":2,"page_end":6,"ocr_exceptions":{"2":{"content_thresholds":[0,0,0.5,0]},"6":{"content_thresholds":[0,0,0,0.5]}},"dates":[{"year":1975,"month":8,"day":31},{"year":1975,"month":9,"day":3},{"year":1975,"month":9,"day":14}]},{"title":"第二部分","authors":["中共上海电影制片厂委员会","王洪文"],"page_start":6,"page_end":7,"ocr_exceptions":{"6":{"content_thresholds":[0,0,0.5,0]}},"dates":[{"year":1975,"month":10,"day":14}]},{"title":"第二部分","authors":["中共上海电影制片厂委员会","王洪文"],"page_start":8,"page_end":9,"dates":[{"year":1976,"month":5,"day":8}]}],
+      ocr: undefined,
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives1/8c1a5316-884e-465a-9775-48338f6cc6b5'),
+  },
+  {
+    entity: {
       id: '0f85f67b-fe32-425f-91d4-613f3126705c',
       name: '王洪文关于学习毛主席理论问题指示的讲话',
       internal: true,
