@@ -38,6 +38,34 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: '72d4fe45-d0bf-4ce4-afc9-ba7c7ddc6f38',
+      name: '“四人帮”罪行材料（八）',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(3)
+        .fill(0)
+        .map(
+          (i, idx) =>
+            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/72d4fe45-d0bf-4ce4-afc9-ba7c7ddc6f38/${
+              idx + 1
+            }.png`,
+        )
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'png',
+      articles: [{"title":"王洪文对作战部领导同志的讲话","authors":["王洪文"],"page_start":1,"page_end":3,"ocr_exceptions":{"2":{"content_thresholds":[0,0.1,0,0]},"3":{"content_thresholds":[0,0.5,0,0.16]}},"dates":[{"year":1974,"month":5,"day":4}]}],
+      ocr: undefined,
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives1/72d4fe45-d0bf-4ce4-afc9-ba7c7ddc6f38'),
+  },
+  {
+    entity: {
       id: '9172bd1f-5918-4850-820a-b229e2d89b8f',
       name: '王洪文副主席重要电话指示',
       internal: true,
