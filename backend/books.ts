@@ -38,6 +38,34 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: '3f502324-0a16-4470-b3fc-3e237f39b604',
+      name: '王洪文付主席和马天水同志的谈话',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(1)
+        .fill(0)
+        .map(
+          (i, idx) =>
+            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/3f502324-0a16-4470-b3fc-3e237f39b604/${
+              idx + 1
+            }.png`,
+        )
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'png',
+      articles: [{"title":"王洪文付主席和马天水同志的谈话","authors":["王洪文"],"page_start":1,"page_end":1,"ocr_exceptions":{"1":{"content_thresholds":[0,0.1,0,0]}},"dates":[{"year":1974,"month":3}]}],
+      ocr: undefined,
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives1/3f502324-0a16-4470-b3fc-3e237f39b604'),
+  },
+  {
+    entity: {
       id: '72d4fe45-d0bf-4ce4-afc9-ba7c7ddc6f38',
       name: '“四人帮”罪行材料（八）',
       internal: true,
