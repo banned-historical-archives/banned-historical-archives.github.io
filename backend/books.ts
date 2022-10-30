@@ -38,6 +38,34 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: '9172bd1f-5918-4850-820a-b229e2d89b8f',
+      name: '王洪文副主席重要电话指示',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(1)
+        .fill(0)
+        .map(
+          (i, idx) =>
+            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/9172bd1f-5918-4850-820a-b229e2d89b8f/${
+              idx + 1
+            }.jpg`,
+        )
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'jpg',
+      articles: [{"title":"王洪文副主席重要电话指示","authors":["王洪文"],"page_start":1,"page_end":1,"ocr_exceptions":{"1":{"content_thresholds":[0.14,0,0,0]}},"dates":[{"year":1974,"month":3,"day":16}]}],
+      ocr: undefined,
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives1/9172bd1f-5918-4850-820a-b229e2d89b8f'),
+  },
+  {
+    entity: {
       id: '1ce721bb-e004-4708-a437-dde2f92a1a98',
       name: '上海市机电一局系统活学活用毛泽东思想积极分子代表大会上市革会领导成员、工总司负责人王洪文同志的讲话',
       internal: true,
