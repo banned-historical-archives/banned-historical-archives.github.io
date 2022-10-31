@@ -38,6 +38,34 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: 'db61721a-a96f-4ecf-8ec8-dc3d9be7de1d',
+      name: '“四人帮”罪行材料（一〇）',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(8)
+        .fill(0)
+        .map(
+          (i, idx) =>
+            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/db61721a-a96f-4ecf-8ec8-dc3d9be7de1d/${
+              idx + 1
+            }.png`,
+        )
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'png',
+      articles: [{"title":"王洪文、张春桥在中央军委领导同志听取通信兵批林批孔运动情况汇报时的插话","authors":["王洪文","张春桥"],"page_start":2,"page_end":8,"dates":[{"year":1974,"month":3,"day":18}]}],
+      ocr: {"content_thresholds":[0,0.1,0,0]},
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives1/db61721a-a96f-4ecf-8ec8-dc3d9be7de1d'),
+  },
+  {
+    entity: {
       id: 'ba649341-ec2e-4344-bb21-ba1d35fd1cd7',
       name: '“四人帮”罪行材料（四）',
       internal: true,
