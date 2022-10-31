@@ -38,6 +38,34 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: '67b43734-d924-48ac-9e62-359edd11e690',
+      name: '中央首长第三次接见安徽代表',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(8)
+        .fill(0)
+        .map(
+          (i, idx) =>
+            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/67b43734-d924-48ac-9e62-359edd11e690/${
+              idx + 1
+            }.jpg`,
+        )
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'jpg',
+      articles: [{"title":"中央首长第三次接见安徽双方代表团的指示","alias":"中央首长第三次接见安徽代表","authors":["康生","江青"],"page_start":1,"page_end":8,"dates":[{"year":1967,"month":9,"day":5}]}],
+      ocr: undefined,
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives1/67b43734-d924-48ac-9e62-359edd11e690'),
+  },
+  {
+    entity: {
       id: '77a422f8-fc82-4e56-87e4-a6fbd48de6b8',
       name: '“四人帮”罪行材料（三）',
       internal: true,
