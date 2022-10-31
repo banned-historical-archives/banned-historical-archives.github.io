@@ -38,6 +38,34 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: '77a422f8-fc82-4e56-87e4-a6fbd48de6b8',
+      name: '“四人帮”罪行材料（三）',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(9)
+        .fill(0)
+        .map(
+          (i, idx) =>
+            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/77a422f8-fc82-4e56-87e4-a6fbd48de6b8/${
+              idx + 1
+            }.png`,
+        )
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'png',
+      articles: [{"title":"王洪文在总参民兵组训工作座谈会议上的讲话","authors":["王洪文"],"page_start":2,"page_end":5,"ocr_exceptions":{"5":{"content_thresholds":[0,0.09,0,0.5]}},"dates":[{"year":1974,"month":9,"day":22}]},{"title":"王洪文、张春桥在总参民兵组训工作座谈会议汇报会上的插话","authors":["王洪文","张春桥"],"page_start":5,"page_end":9,"ocr_exceptions":{"5":{"content_thresholds":[0,0.09,0.5,0]}},"dates":[{"year":1974,"month":9,"day":22}]}],
+      ocr: {"content_thresholds":[0,0.09,0,0]},
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives1/77a422f8-fc82-4e56-87e4-a6fbd48de6b8'),
+  },
+  {
+    entity: {
       id: '8c1a5316-884e-465a-9775-48338f6cc6b5',
       name: '揭发“四人帮”王洪文插手控制上影阴谋篡党夺权的罪行',
       internal: true,
