@@ -38,6 +38,34 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: 'bd33de67-6641-49bc-a820-870b3a2aa3df',
+      name: '“四人帮”罪行材料（九）',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(3)
+        .fill(0)
+        .map(
+          (i, idx) =>
+            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/bd33de67-6641-49bc-a820-870b3a2aa3df/${
+              idx + 1
+            }.png`,
+        )
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'png',
+      articles: [{"title":"王洪文、张春桥在军委办公会议听取三总部汇报批林批孔运动情况时的插话（摘录）","authors":["王洪文","张春桥"],"page_start":2,"page_end":3,"dates":[{"year":1974,"month":2,"day":8}]}],
+      ocr: {"content_thresholds":[0,0.11,0,0]},
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives1/bd33de67-6641-49bc-a820-870b3a2aa3df'),
+  },
+  {
+    entity: {
       id: 'd1679abc-409f-4eb4-b575-22371b9682c3',
       name: '张春桥同志接见福建部分赴京革命同学的讲话',
       internal: true,
