@@ -38,6 +38,34 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: 'fc38e16e-2075-408b-8a68-e00d7c7fe76f',
+      name: '王洪文、纪登奎同志在省委工作会议召集人和县委书记会议上的讲话',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(7)
+        .fill(0)
+        .map(
+          (i, idx) =>
+            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/fc38e16e-2075-408b-8a68-e00d7c7fe76f/${
+              idx + 1
+            }.png`,
+        )
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'png',
+      articles: [{"title":"王洪文同志讲话","authors":["王洪文"],"page_start":2,"page_end":4,"ocr_exceptions":{"2":{"content_thresholds":[0.5,0.12,0,0]},"4":{"content_thresholds":[0,0.12,0,0.5]}},"dates":[{"year":1975,"month":7,"day":9}]},{"title":"纪登奎同志讲话","authors":["纪登奎"],"page_start":4,"page_end":7,"ocr_exceptions":{"4":{"content_thresholds":[0,0.12,0.5,0]},"7":{"content_thresholds":[0,0.5,0,0]}},"dates":[{"year":1975,"month":7,"day":9}]}],
+      ocr: {"content_thresholds":[0,0.12,0,0]},
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives1/fc38e16e-2075-408b-8a68-e00d7c7fe76f'),
+  },
+  {
+    entity: {
       id: '9206ecb2-3e0a-458f-be99-98532260fd27',
       name: '“四人帮”罪行材料（五）',
       internal: true,
