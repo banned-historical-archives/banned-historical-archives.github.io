@@ -38,6 +38,34 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: 'ba649341-ec2e-4344-bb21-ba1d35fd1cd7',
+      name: '“四人帮”罪行材料（四）',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(5)
+        .fill(0)
+        .map(
+          (i, idx) =>
+            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/ba649341-ec2e-4344-bb21-ba1d35fd1cd7/${
+              idx + 1
+            }.png`,
+        )
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'png',
+      articles: [{"title":"王洪文、张春桥在作战部汇报批林批孔运动情况时的插话","authors":["王洪文","张春桥"],"page_start":2,"page_end":5,"dates":[{"year":1974,"month":3,"day":15}]}],
+      ocr: {"content_thresholds":[0,0.11,0,0]},
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives1/ba649341-ec2e-4344-bb21-ba1d35fd1cd7'),
+  },
+  {
+    entity: {
       id: 'bd33de67-6641-49bc-a820-870b3a2aa3df',
       name: '“四人帮”罪行材料（九）',
       internal: true,
