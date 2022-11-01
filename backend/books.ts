@@ -38,6 +38,34 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: 'db46f9b6-a73c-4531-a3e9-3a2e4c73a8f1',
+      name: '研究“工代会”会议记录',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(11)
+        .fill(0)
+        .map(
+          (i, idx) =>
+            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/db46f9b6-a73c-4531-a3e9-3a2e4c73a8f1/${
+              idx + 1
+            }.jpg`,
+        )
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'jpg',
+      articles: [{"title":"研究“工代会”会议记录","authors":["张春桥","王洪文"],"page_start":1,"page_end":11,"dates":[{"year":1967,"month":11,"day":22}]}],
+      ocr: undefined,
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives1/db46f9b6-a73c-4531-a3e9-3a2e4c73a8f1'),
+  },
+  {
+    entity: {
       id: '7492dacf-eac4-45d3-aecb-6184761f1139',
       name: '毛远新同志在辽联赴京代表团座谈会上的讲话纪要',
       internal: true,
