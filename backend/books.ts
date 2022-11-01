@@ -38,6 +38,34 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: '7492dacf-eac4-45d3-aecb-6184761f1139',
+      name: '毛远新同志在辽联赴京代表团座谈会上的讲话纪要',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(2)
+        .fill(0)
+        .map(
+          (i, idx) =>
+            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/7492dacf-eac4-45d3-aecb-6184761f1139/${
+              idx + 1
+            }.jpg`,
+        )
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'jpg',
+      articles: [{"title":"毛远新同志在辽联赴京代表团座谈会上的讲话纪要","authors":["毛远新"],"page_start":1,"page_end":2,"ocr_exceptions":{"2":{"auto_vsplit":true,"vsplit":0.5,"content_thresholds":[0,0.41,0,0]}},"dates":[{"year":1968,"month":3,"day":20}]},{"title":"江青同志昨天接见江苏代表团的一段讲话","authors":["江青"],"page_start":2,"page_end":2,"ocr_exceptions":{"2":{"auto_vsplit":true,"vsplit":0.5,"content_thresholds":[0.59,0.2,0,0]}},"dates":[{"year":1968,"month":3,"day":19}]}],
+      ocr: {"auto_vsplit":true,"vsplit":0.5},
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives1/7492dacf-eac4-45d3-aecb-6184761f1139'),
+  },
+  {
+    entity: {
       id: '7a1ea3a9-d3ab-4cfe-a417-9cbb73dbc318',
       name: '王洪文副主席在接见总参民兵组训工作座谈会议全体同志时的讲话',
       internal: true,
