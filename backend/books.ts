@@ -22,6 +22,34 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: '0fb5b8d7-6378-4332-9016-a8c17ebf7b99',
+      name: '“四人帮”罪行材料（二）',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(10)
+        .fill(0)
+        .map(
+          (i, idx) =>
+            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/0fb5b8d7-6378-4332-9016-a8c17ebf7b99/${
+              idx + 1
+            }.jpg`,
+        )
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'jpg',
+      articles: [{"title":"张春桥在总参党委扩大会第一次全体会议上的讲话","authors":["张春桥"],"page_start":2,"page_end":10,"dates":[{"year":1973,"month":3,"day":15}]}],
+      ocr: {"content_thresholds":[0,0.1,0,0]},
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives1/0fb5b8d7-6378-4332-9016-a8c17ebf7b99'),
+  },
+  {
+    entity: {
       id: 'd36737e2-811c-4b1d-9c2c-8889eade960c',
       name: '“四人帮”罪行材料（六）',
       internal: true,
