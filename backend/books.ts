@@ -22,6 +22,34 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: 'd36737e2-811c-4b1d-9c2c-8889eade960c',
+      name: '“四人帮”罪行材料（六）',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(4)
+        .fill(0)
+        .map(
+          (i, idx) =>
+            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/d36737e2-811c-4b1d-9c2c-8889eade960c/${
+              idx + 1
+            }.jpg`,
+        )
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'jpg',
+      articles: [{"title":"张春桥在作战部关于处理于会泳、浩亮、刘庆棠等人参观问题的检查报告上的批注","authors":["张春桥"],"page_start":1,"page_end":4,"dates":[{"year":1973,"month":1,"day":30}]}],
+      ocr: {"content_thresholds":[0,0.11,0,0]},
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives1/d36737e2-811c-4b1d-9c2c-8889eade960c'),
+  },
+  {
+    entity: {
       id: '040958d6-6657-414d-9702-8234e7c28625',
       name: '张春桥同志在济南军区的讲话',
       internal: true,
