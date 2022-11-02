@@ -22,6 +22,34 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: '4487f711-d1dc-4c33-a1a9-50a1b7f7d659',
+      name: '关于日本问题的报告',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(6)
+        .fill(0)
+        .map(
+          (i, idx) =>
+            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/4487f711-d1dc-4c33-a1a9-50a1b7f7d659/${
+              idx + 1
+            }.jpg`,
+        )
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'jpg',
+      articles: [{"title":"张春桥同志在中共上海市委宣传部举办的第13次时事政策讲演会上的报告记录稿","authors":["张春桥"],"page_start":1,"page_end":6,"dates":[{"year":1956,"month":11}]}],
+      ocr: {"content_thresholds":[0,0.08,0,0]},
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives1/4487f711-d1dc-4c33-a1a9-50a1b7f7d659'),
+  },
+  {
+    entity: {
       id: '7bbe94bc-b48d-4d7b-b4a6-1325d0b0a2d3',
       name: '张春桥主任一九七五年三月一日在全军各大单位政治部主任座谈会上的讲话',
       internal: true,
