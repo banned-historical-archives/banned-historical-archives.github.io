@@ -22,6 +22,34 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: 'b8cb3468-7dc6-4668-87e8-4fceb1f91d3d',
+      name: '“四人帮”罪行材料（一）',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(16)
+        .fill(0)
+        .map(
+          (i, idx) =>
+            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/b8cb3468-7dc6-4668-87e8-4fceb1f91d3d/${
+              idx + 1
+            }.png`,
+        )
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'png',
+      articles: [{"title":"江青给中央军委的信","authors":["江青"],"page_start":2,"page_end":3,"ocr_exceptions":{"3":{"content_thresholds":[0,0.11,0,0.5]}},"dates":[{"year":1974,"month":1,"day":24}]},{"title":"迟群、谢静宜在军委直属单位批林批孔报告会上的讲话","authors":["迟群","谢静宜"],"page_start":3,"page_end":16,"ocr_exceptions":{"3":{"content_thresholds":[0,0.11,0.5,0]}},"dates":[{"year":1974,"month":1,"day":24}]}],
+      ocr: {"content_thresholds":[0,0.11,0,0]},
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives1/b8cb3468-7dc6-4668-87e8-4fceb1f91d3d'),
+  },
+  {
+    entity: {
       id: 'db46f9b6-a73c-4531-a3e9-3a2e4c73a8f1',
       name: '研究“工代会”会议记录',
       internal: true,
