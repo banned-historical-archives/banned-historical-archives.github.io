@@ -22,6 +22,34 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: '7bbe94bc-b48d-4d7b-b4a6-1325d0b0a2d3',
+      name: '张春桥主任一九七五年三月一日在全军各大单位政治部主任座谈会上的讲话',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(21)
+        .fill(0)
+        .map(
+          (i, idx) =>
+            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/7bbe94bc-b48d-4d7b-b4a6-1325d0b0a2d3/${
+              idx + 1
+            }.jpg`,
+        )
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'jpg',
+      articles: [{"title":"张春桥主任在全军各大单位政治部主任座谈会上的讲话","authors":["张春桥"],"page_start":1,"page_end":21,"dates":[{"year":1975,"month":3,"day":1}]}],
+      ocr: {"content_thresholds":[0,0.13,0,0],"standard_paragraph_merge_strategy_threshold":0.16,"differential_paragraph_merge_strategy_threshold":0},
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives1/7bbe94bc-b48d-4d7b-b4a6-1325d0b0a2d3'),
+  },
+  {
+    entity: {
       id: '0fb5b8d7-6378-4332-9016-a8c17ebf7b99',
       name: '“四人帮”罪行材料（二）',
       internal: true,
