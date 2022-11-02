@@ -22,6 +22,34 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: 'a974022d-7b96-4e81-bc17-767113571fa5',
+      name: '张春桥同志十二月十日下午接见宣传系统代表讲话',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(8)
+        .fill(0)
+        .map(
+          (i, idx) =>
+            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/a974022d-7b96-4e81-bc17-767113571fa5/${
+              idx + 1
+            }.jpg`,
+        )
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'jpg',
+      articles: [{"title":"张春桥同志十二月十日下午接见宣传系统代表讲话","authors":["张春桥"],"page_start":1,"page_end":8,"dates":[{"year":1967,"month":12,"day":10}]}],
+      ocr: {"content_thresholds":[0,0.11,0,0]},
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives1/a974022d-7b96-4e81-bc17-767113571fa5'),
+  },
+  {
+    entity: {
       id: '4487f711-d1dc-4c33-a1a9-50a1b7f7d659',
       name: '关于日本问题的报告',
       internal: true,
