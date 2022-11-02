@@ -22,6 +22,34 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: '040958d6-6657-414d-9702-8234e7c28625',
+      name: '张春桥同志在济南军区的讲话',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(9)
+        .fill(0)
+        .map(
+          (i, idx) =>
+            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/040958d6-6657-414d-9702-8234e7c28625/${
+              idx + 1
+            }.jpg`,
+        )
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'jpg',
+      articles: [{"title":"张春桥同志在济南军区的讲话","authors":["张春桥"],"page_start":1,"page_end":2,"dates":[{"year":1967,"month":5}]},{"title":"王效禹同志讲话","authors":["王效禹"],"page_start":2,"page_end":4,"ocr_exceptions":{"2":{"content_thresholds":[0.25,0.09,0.5,0]},"4":{"content_thresholds":[0,0.09,0,0.5]}},"dates":[{"year":1967,"month":5,"day":29}]},{"title":"王效禹同志讲话","authors":["王效禹"],"page_start":4,"page_end":9,"dates":[{"year":1967,"month":5,"day":28}]}],
+      ocr: {"content_thresholds":[0,0.09,0,0]},
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives1/040958d6-6657-414d-9702-8234e7c28625'),
+  },
+  {
+    entity: {
       id: 'b8cb3468-7dc6-4668-87e8-4fceb1f91d3d',
       name: '“四人帮”罪行材料（一）',
       internal: true,
