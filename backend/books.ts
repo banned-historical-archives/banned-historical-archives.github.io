@@ -22,6 +22,34 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: '8da1b3f4-a862-487f-9c7a-af20178846c8',
+      name: '资料摘编（内部参考）第七期',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(5)
+        .fill(0)
+        .map(
+          (i, idx) =>
+            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/8da1b3f4-a862-487f-9c7a-af20178846c8/${
+              idx + 1
+            }.jpg`,
+        )
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'jpg',
+      articles: [{"title":"张春桥同志在“热烈欢迎中国人民解放军毛泽东思想宣传队进驻市公安局大会”上讲话（摘录）","authors":["张春桥"],"page_start":1,"page_end":5,"ocr_exceptions":{"1":{"content_thresholds":[0.3,0.1,0,0]}},"dates":[{"year":1967,"month":12,"day":19}]}],
+      ocr: {"content_thresholds":[0,0.1,0,0]},
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives1/8da1b3f4-a862-487f-9c7a-af20178846c8'),
+  },
+  {
+    entity: {
       id: 'a974022d-7b96-4e81-bc17-767113571fa5',
       name: '张春桥同志十二月十日下午接见宣传系统代表讲话',
       internal: true,
