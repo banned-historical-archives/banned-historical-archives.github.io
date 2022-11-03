@@ -22,6 +22,34 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: 'c3e84977-6102-42ff-bc79-3e7ceacfead1',
+      name: '张春桥同志十一月二十五日在市革会扩大会议上的讲话纪要',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(5)
+        .fill(0)
+        .map(
+          (i, idx) =>
+            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/c3e84977-6102-42ff-bc79-3e7ceacfead1/${
+              idx + 1
+            }.jpg`,
+        )
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'jpg',
+      articles: [{"title":"张春桥同志在市革会扩大会议上的讲话纪要","authors":["张春桥"],"page_start":1,"page_end":5,"dates":[{"year":1968,"month":11,"day":25}]}],
+      ocr: undefined,
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives1/c3e84977-6102-42ff-bc79-3e7ceacfead1'),
+  },
+  {
+    entity: {
       id: '5af91bc2-3540-46ef-824e-c1e2158c6255',
       name: '张春桥同志接见上海《红革会》与《工人革命造反总司令部》代表的谈话记录',
       internal: true,
