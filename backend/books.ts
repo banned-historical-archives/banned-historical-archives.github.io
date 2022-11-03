@@ -22,6 +22,34 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: '5af91bc2-3540-46ef-824e-c1e2158c6255',
+      name: '张春桥同志接见上海《红革会》与《工人革命造反总司令部》代表的谈话记录',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(8)
+        .fill(0)
+        .map(
+          (i, idx) =>
+            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/5af91bc2-3540-46ef-824e-c1e2158c6255/${
+              idx + 1
+            }.jpg`,
+        )
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'jpg',
+      articles: [{"title":"张春桥同志接见上海红革会与工人革命造反总司令部代表的谈话记录","authors":["张春桥"],"page_start":1,"page_end":8,"dates":[{"year":1966,"month":12,"day":23}]}],
+      ocr: undefined,
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives1/5af91bc2-3540-46ef-824e-c1e2158c6255'),
+  },
+  {
+    entity: {
       id: '8da1b3f4-a862-487f-9c7a-af20178846c8',
       name: '资料摘编（内部参考）第七期',
       internal: true,
