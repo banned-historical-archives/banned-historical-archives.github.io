@@ -22,6 +22,34 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: '6f37606f-a3d5-47bb-b957-b2fa6bcf72fe',
+      name: '张春桥同志二月二十五日与华东局革命造反派座谈纪要',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(3)
+        .fill(0)
+        .map(
+          (i, idx) =>
+            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/6f37606f-a3d5-47bb-b957-b2fa6bcf72fe/${
+              idx + 1
+            }.jpg`,
+        )
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'jpg',
+      articles: [{"title":"张春桥同志与华东局革命造反派座谈纪要","authors":["张春桥"],"page_start":1,"page_end":3,"ocr_exceptions":{"3":{"content_thresholds":[0,0.07,0,0.5]}},"dates":[{"year":1967,"month":2,"day":25}]}],
+      ocr: {"content_thresholds":[0,0.07,0,0]},
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives1/6f37606f-a3d5-47bb-b957-b2fa6bcf72fe'),
+  },
+  {
+    entity: {
       id: 'c3e84977-6102-42ff-bc79-3e7ceacfead1',
       name: '张春桥同志十一月二十五日在市革会扩大会议上的讲话纪要',
       internal: true,
