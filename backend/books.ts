@@ -22,6 +22,34 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: '82069f34-dd44-417e-ba98-b17129bb637c',
+      name: '在工总司召开的“坚决响应毛主席伟大号召，‘斗私批修’誓师大会”上张春桥同志的讲话',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(4)
+        .fill(0)
+        .map(
+          (i, idx) =>
+            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/82069f34-dd44-417e-ba98-b17129bb637c/${
+              idx + 1
+            }.png`,
+        )
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'png',
+      articles: [{"title":"在工总司召开的“坚决响应毛主席伟大号召，‘斗私批修’誓师大会”上张春桥同志的讲话","authors":["张春桥"],"page_start":1,"page_end":4,"dates":[{"year":1967,"month":10,"day":6}]}],
+      ocr: {"content_thresholds":[0,0.09,0,0]},
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives1/82069f34-dd44-417e-ba98-b17129bb637c'),
+  },
+  {
+    entity: {
       id: '8d98ee74-15ee-4e9a-a255-e5997a8a5bde',
       name: '张春桥同志讲话',
       internal: true,
