@@ -22,6 +22,26 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: '5a790475-01ac-4334-9941-63d3ee59c46c',
+      name: '认真学习毛主席重要指示——搞清楚资产阶级就在共产党内',
+      internal: true,
+      official: true,
+      type: 'pdf',
+      author: '',
+      files: 'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives3/main/5a790475-01ac-4334-9941-63d3ee59c46c.pdf',
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'pdf',
+      articles: [{"title":"认真学习毛主席重要指示——搞清楚资产阶级就在共产党内","authors":[],"page_start":2,"page_end":46,"ocr_exceptions":{"2":{"content_thresholds":[0.6,0,0,0],"standard_paragraph_merge_strategy_threshold":0.17,"differential_paragraph_merge_strategy_threshold":0}},"dates":[{"year":1976}]}],
+      ocr: {"standard_paragraph_merge_strategy_threshold":0.17,"differential_paragraph_merge_strategy_threshold":0},
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives3/5a790475-01ac-4334-9941-63d3ee59c46c.pdf'),
+  },
+  {
+    entity: {
       id: '7211a45f-26fb-4355-bd7f-fd025d873813',
       name: '怎样理解资产阶级就在共产党内——北京市第三次理论讨论会的五个发言材料',
       internal: true,
