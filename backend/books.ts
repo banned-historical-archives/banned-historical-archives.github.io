@@ -22,6 +22,34 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: '799f3f6f-d8d1-4181-b6a7-9a9daaf84bb8',
+      name: '宗明兰在省工农干部学习班大会上的发言（提纲）',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(7)
+        .fill(0)
+        .map(
+          (i, idx) =>
+            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/799f3f6f-d8d1-4181-b6a7-9a9daaf84bb8/${
+              idx + 1
+            }.jpg`,
+        )
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'jpg',
+      articles: [{"title":"宗明兰在省工农干部学习班大会上的发言（提纲）","authors":["宗明兰"],"page_start":2,"page_end":7,"dates":[{"year":1974,"month":2}]}],
+      ocr: undefined,
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives1/799f3f6f-d8d1-4181-b6a7-9a9daaf84bb8'),
+  },
+  {
+    entity: {
       id: '1a64a4ed-2bab-4ea1-8b71-c280caca4767',
       name: '宗明兰在各市、地宣传组长座谈会上的讲话',
       internal: true,
