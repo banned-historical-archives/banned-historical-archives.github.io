@@ -22,6 +22,34 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: 'eb1072b3-9057-4142-8fd8-544053ced488',
+      name: '赵辛初同志在全省广播大会上的讲话',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(7)
+        .fill(0)
+        .map(
+          (i, idx) =>
+            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/eb1072b3-9057-4142-8fd8-544053ced488/${
+              idx + 1
+            }.png`,
+        )
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'png',
+      articles: [{"title":"赵辛初同志在全省广播大会上的讲话","authors":["赵辛初"],"page_start":2,"page_end":7,"dates":[{"year":1975,"month":6,"day":4}]}],
+      ocr: {"content_thresholds":[0,0.07,0,0]},
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives1/eb1072b3-9057-4142-8fd8-544053ced488'),
+  },
+  {
+    entity: {
       id: 'fb28741c-20d2-4d76-b35d-5b00cf8fc258',
       name: '张春桥同志接见福建部分赴京革命同学讲话',
       internal: true,
