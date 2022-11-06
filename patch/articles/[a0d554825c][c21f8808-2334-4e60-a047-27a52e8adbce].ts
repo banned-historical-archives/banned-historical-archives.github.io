@@ -1,0 +1,5 @@
+
+export default [
+// {"version":2,"parts":{"0":{"delete":true},"1":{"insertAfter":[{"type":"title","text":"三月十五日朱洪霞在市房地局礼堂集会上的讲话（节录）"}],"delete":true},"2":{"diff":"=20\t-1\t+霞\t=50"},"3":{"diff":"=194\t-1\t+矛\t=49\t-1\t+。\t=12\t-1\t=20\t-1\t+占\t=31\t-1\t+，\t=95\t-1\t+掌\t=61\t+”"},"4":{"delete":true},"5":{"delete":true},"6":{"delete":true},"7":{"delete":true}},"comments":{},"description":""}
+  {"version":2,"parts":{"0":{"delete":true},"1":{"insertAfter":[{"type":"title","text":"三月十五日朱洪霞在市房地局礼堂集会上的讲话（节录）"}],"delete":true},"2":{"diff":"=20\t-1\t+%E9%9C%9E\t=50"},"3":{"diff":"=194\t-1\t+%E7%9F%9B\t=49\t-1\t+%E3%80%82\t=12\t-1\t=20\t-1\t+%E5%8D%A0\t=31\t-1\t+%EF%BC%8C\t=95\t-1\t+%E6%8E%8C\t=61\t+%E2%80%9D"},"4":{"delete":true},"5":{"delete":true},"6":{"delete":true},"7":{"delete":true}},"comments":{},"description":""},
+];
