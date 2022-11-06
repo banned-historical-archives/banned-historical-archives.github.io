@@ -22,6 +22,34 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: '1a64a4ed-2bab-4ea1-8b71-c280caca4767',
+      name: '宗明兰在各市、地宣传组长座谈会上的讲话',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(10)
+        .fill(0)
+        .map(
+          (i, idx) =>
+            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/1a64a4ed-2bab-4ea1-8b71-c280caca4767/${
+              idx + 1
+            }.jpg`,
+        )
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'jpg',
+      articles: [{"title":"宗明兰在各市、地宣传组长座谈会上的讲话","authors":["宗明兰"],"page_start":2,"page_end":10,"dates":[{"year":1976,"month":9,"day":24}]}],
+      ocr: undefined,
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives1/1a64a4ed-2bab-4ea1-8b71-c280caca4767'),
+  },
+  {
+    entity: {
       id: 'eb1072b3-9057-4142-8fd8-544053ced488',
       name: '赵辛初同志在全省广播大会上的讲话',
       internal: true,
