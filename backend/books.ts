@@ -22,6 +22,34 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: 'fb28741c-20d2-4d76-b35d-5b00cf8fc258',
+      name: '张春桥同志接见福建部分赴京革命同学讲话',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(3)
+        .fill(0)
+        .map(
+          (i, idx) =>
+            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/fb28741c-20d2-4d76-b35d-5b00cf8fc258/${
+              idx + 1
+            }.jpg`,
+        )
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'jpg',
+      articles: [{"title":"张春桥同志接见福建部分赴京革命同学的讲话","alias":"张春桥同志接见福建部分赴京革命同学讲话","authors":["张春桥"],"page_start":1,"page_end":3,"dates":[{"year":1977,"month":1}]}],
+      ocr: undefined,
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives1/fb28741c-20d2-4d76-b35d-5b00cf8fc258'),
+  },
+  {
+    entity: {
       id: '982b2747-bdfb-4011-9441-73f04bf9b94f',
       name: '夏邦银、朱洪霞、胡厚民等人罪行材料（街头大字报节录）',
       internal: true,
