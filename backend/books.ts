@@ -22,6 +22,34 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: '0578160b-2db6-4294-8b88-157c133bd0b9',
+      name: '张春桥同志在上海市革命委员会报告会上的讲话',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(9)
+        .fill(0)
+        .map(
+          (i, idx) =>
+            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/0578160b-2db6-4294-8b88-157c133bd0b9/${
+              idx + 1
+            }.jpg`,
+        )
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'jpg',
+      articles: [{"title":"张春桥在上海市革命委员会报告会上的讲话","alias":"张春桥同志在上海市革命委员会报告会上的讲话","authors":["张春桥"],"page_start":1,"page_end":9,"dates":[{"year":1967,"month":10,"day":16}]}],
+      ocr: undefined,
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives1/0578160b-2db6-4294-8b88-157c133bd0b9'),
+  },
+  {
+    entity: {
       id: '5a95e270-13cc-43e2-8bc5-d2c877be5c6a',
       name: '坚决批倒批臭刘少奇反革命修正主义路线',
       internal: true,
