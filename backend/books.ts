@@ -22,6 +22,34 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: '5a95e270-13cc-43e2-8bc5-d2c877be5c6a',
+      name: '坚决批倒批臭刘少奇反革命修正主义路线',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(13)
+        .fill(0)
+        .map(
+          (i, idx) =>
+            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/5a95e270-13cc-43e2-8bc5-d2c877be5c6a/${
+              idx + 1
+            }.jpg`,
+        )
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'jpg',
+      articles: [{"title":"陈伯达、张春桥、关锋、戚本禹接见红代会及人民日报、解放军报、红旗杂志负责人的讲话","authors":["陈伯达","张春桥","关锋","戚本禹"],"page_start":2,"page_end":10,"dates":[{"year":1967,"month":7,"day":16}]}],
+      ocr: undefined,
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives1/5a95e270-13cc-43e2-8bc5-d2c877be5c6a'),
+  },
+  {
+    entity: {
       id: '799f3f6f-d8d1-4181-b6a7-9a9daaf84bb8',
       name: '宗明兰在省工农干部学习班大会上的发言（提纲）',
       internal: true,
