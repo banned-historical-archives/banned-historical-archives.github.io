@@ -22,6 +22,34 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: 'a6fd5977-6216-489a-b746-2fe7689a04d4',
+      name: '夏邦银、朱鸿霞、胡厚民等人配合“四人帮”在湖北大搞篡党夺权阴谋活动的罪行',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(9)
+        .fill(0)
+        .map(
+          (i, idx) =>
+            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/a6fd5977-6216-489a-b746-2fe7689a04d4/${
+              idx + 1
+            }.png`,
+        )
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'png',
+      articles: [{"title":"夏邦银、朱鸿霞、胡厚民等人配合“四人帮”在湖北大搞篡党夺权阴谋活动的罪行","authors":["中共湖北省委材料组"],"page_start":2,"page_end":9,"dates":[{"year":1977,"month":2,"day":16}]}],
+      ocr: {"content_thresholds":[0,0.1,0,0]},
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives1/a6fd5977-6216-489a-b746-2fe7689a04d4'),
+  },
+  {
+    entity: {
       id: '8e9cdddb-b1bb-4984-b926-e8d5725a19da',
       name: '宗明兰在省直机关批判右倾翻案风大会上的讲话',
       internal: true,
