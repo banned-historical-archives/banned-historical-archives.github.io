@@ -22,6 +22,34 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: '6379476a-690e-41d6-9202-58881bad8576',
+      name: '宗明兰在省理论讨论会上的讲话',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(8)
+        .fill(0)
+        .map(
+          (i, idx) =>
+            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/6379476a-690e-41d6-9202-58881bad8576/${
+              idx + 1
+            }.jpg`,
+        )
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'jpg',
+      articles: [{"title":"宗明兰在省理论讨论会上的讲话","authors":["宗明兰"],"page_start":2,"page_end":8,"dates":[{"year":1976,"month":7,"day":4}]}],
+      ocr: undefined,
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives1/6379476a-690e-41d6-9202-58881bad8576'),
+  },
+  {
+    entity: {
       id: '0578160b-2db6-4294-8b88-157c133bd0b9',
       name: '张春桥同志在上海市革命委员会报告会上的讲话',
       internal: true,
