@@ -22,6 +22,34 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: '8e9cdddb-b1bb-4984-b926-e8d5725a19da',
+      name: '宗明兰在省直机关批判右倾翻案风大会上的讲话',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(10)
+        .fill(0)
+        .map(
+          (i, idx) =>
+            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/8e9cdddb-b1bb-4984-b926-e8d5725a19da/${
+              idx + 1
+            }.jpg`,
+        )
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'jpg',
+      articles: [{"title":"宗明兰在省直机关批判右倾翻案风大会上的讲话","authors":["宗明兰"],"page_start":2,"page_end":10,"dates":[{"year":1976,"month":1,"day":21}]}],
+      ocr: undefined,
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives1/8e9cdddb-b1bb-4984-b926-e8d5725a19da'),
+  },
+  {
+    entity: {
       id: '6379476a-690e-41d6-9202-58881bad8576',
       name: '宗明兰在省理论讨论会上的讲话',
       internal: true,
