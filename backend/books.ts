@@ -22,6 +22,34 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: '3484fcc0-93f5-4e1a-b6b5-61a78e2811cf',
+      name: '“四人帮”在湖北的黑干将、现行反革命分子夏邦银、朱鸿霞、胡厚民、张立国、董明会的罪行材料',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(46)
+        .fill(0)
+        .map(
+          (i, idx) =>
+            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/3484fcc0-93f5-4e1a-b6b5-61a78e2811cf/${
+              idx + 1
+            }.png`,
+        )
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'png',
+      articles: [{"title":"“四人帮”在湖北的主要干将、现行反革命分子夏邦银的罪行材料","authors":["中共湖北省委运动办公室"],"page_start":3,"page_end":14,"ocr_exceptions":{"3":{"content_thresholds":[0,0.1,0.5,0]}},"dates":[{"year":1977}]},{"title":"“四人帮”在湖北的黑干将、现行反革命分子朱鸿霞的罪行材料","authors":["中共湖北省委运动办公室"],"page_start":15,"page_end":19,"dates":[{"year":1977}]},{"title":"“四人帮”在湖北的黑干将现行反革命分子胡厚民的罪行材料","authors":["中共湖北省委运动办公室"],"page_start":20,"page_end":29,"ocr_exceptions":{"29":{"content_thresholds":[0,0.1,0,0.5]}},"dates":[{"year":1977}]},{"title":"“四人帮”在湖北的黑干将、现行反革命分子张立国的罪行材料","authors":["中共湖北省委运动办公室"],"page_start":29,"page_end":38,"ocr_exceptions":{"29":{"content_thresholds":[0,0.1,0.5,0]}},"dates":[{"year":1977}]},{"title":"董明会的罪行材料","authors":["中共湖北省委运动办公室"],"page_start":39,"page_end":46,"dates":[{"year":1977}]}],
+      ocr: {"content_thresholds":[0,0.1,0,0]},
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives1/3484fcc0-93f5-4e1a-b6b5-61a78e2811cf'),
+  },
+  {
+    entity: {
       id: 'a6fd5977-6216-489a-b746-2fe7689a04d4',
       name: '夏邦银、朱鸿霞、胡厚民等人配合“四人帮”在湖北大搞篡党夺权阴谋活动的罪行',
       internal: true,
