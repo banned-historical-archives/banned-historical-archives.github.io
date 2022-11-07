@@ -22,6 +22,34 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: '83a811b2-b396-4709-a745-a6d9a36de37a',
+      name: '“四人帮”在湖北的黑干将、现行反革命分子夏邦银、朱鸿霞、胡厚民、张立国、董明会的罪行材料',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(46)
+        .fill(0)
+        .map(
+          (i, idx) =>
+            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/83a811b2-b396-4709-a745-a6d9a36de37a/${
+              idx + 1
+            }.png`,
+        )
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'png',
+      articles: [{"title":"“四人帮”在湖北的主要干将、现行反革命分子夏邦银的罪行材料","authors":["中共湖北省委运动办公室"],"page_start":3,"page_end":14,"ocr_exceptions":{"3":{"content_thresholds":[0,0.1,0.5,0]}},"dates":[{"year":1977}]},{"title":"“四人帮”在湖北的黑干将、现行反革命分子朱鸿霞的罪行材料","authors":["中共湖北省委运动办公室"],"page_start":15,"page_end":19,"dates":[{"year":1977}]},{"title":"“四人帮”在湖北的黑干将现行反革命分子胡厚民的罪行材料","authors":["中共湖北省委运动办公室"],"page_start":20,"page_end":29,"ocr_exceptions":{"29":{"content_thresholds":[0,0.1,0,0.5]}},"dates":[{"year":1977}]},{"title":"“四人帮”在湖北的黑干将、现行反革命分子张立国的罪行材料","authors":["中共湖北省委运动办公室"],"page_start":29,"page_end":38,"ocr_exceptions":{"29":{"content_thresholds":[0,0.1,0.5,0]}},"dates":[{"year":1977}]},{"title":"董明会的罪行材料","authors":["中共湖北省委运动办公室"],"page_start":39,"page_end":46,"dates":[{"year":1977}]}],
+      ocr: {"content_thresholds":[0,0.1,0,0]},
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives1/83a811b2-b396-4709-a745-a6d9a36de37a'),
+  },
+  {
+    entity: {
       id: '8e9cdddb-b1bb-4984-b926-e8d5725a19da',
       name: '宗明兰在省直机关批判右倾翻案风大会上的讲话',
       internal: true,
