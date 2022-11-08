@@ -22,6 +22,34 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: 'c8188f4c-34ac-4468-8b7a-46af942cf862',
+      name: '张春桥同志十一月十九日在上海市革会扩大会议上的讲话',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(15)
+        .fill(0)
+        .map(
+          (i, idx) =>
+            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/c8188f4c-34ac-4468-8b7a-46af942cf862/${
+              idx + 1
+            }.jpg`,
+        )
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'jpg',
+      articles: [{"title":"张春桥同志在上海市革会扩大会议上的讲话","authors":["张春桥"],"page_start":1,"page_end":15,"dates":[{"year":1967,"month":11,"day":19}]}],
+      ocr: {"content_thresholds":[0,0.08,0,0]},
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives1/c8188f4c-34ac-4468-8b7a-46af942cf862'),
+  },
+  {
+    entity: {
       id: '3484fcc0-93f5-4e1a-b6b5-61a78e2811cf',
       name: '“四人帮”在湖北的黑干将、现行反革命分子夏邦银、朱鸿霞、胡厚民、张立国、董明会的罪行材料',
       internal: true,
