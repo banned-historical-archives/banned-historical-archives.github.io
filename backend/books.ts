@@ -22,6 +22,34 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: '1276ea8e-f709-43fb-ae5e-9c9df5a83ee2',
+      name: '张春桥同志讲话',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(2)
+        .fill(0)
+        .map(
+          (i, idx) =>
+            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/1276ea8e-f709-43fb-ae5e-9c9df5a83ee2/${
+              idx + 1
+            }.jpg`,
+        )
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'jpg',
+      articles: [{"title":"张春桥同志讲话","authors":["张春桥"],"page_start":1,"page_end":2,"dates":[{"year":1967,"month":1,"day":10}]}],
+      ocr: undefined,
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives1/1276ea8e-f709-43fb-ae5e-9c9df5a83ee2'),
+  },
+  {
+    entity: {
       id: 'a6af1672-f7d5-4f1d-8fbc-23476e9c0a9e',
       name: '张春桥同志重要报告',
       internal: true,
