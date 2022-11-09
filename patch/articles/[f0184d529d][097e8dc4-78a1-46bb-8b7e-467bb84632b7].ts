@@ -1,0 +1,5 @@
+
+export default [
+// {"version":2,"parts":{"0":{"diff":"-4\t+天下者，我们的天下。"},"1":{"diff":"-2\t+国家者，我们的国家。"},"2":{"diff":"-2\t+社会者，我们的社会。"},"3":{"delete":true},"4":{"delete":true},"5":{"diff":"-9\t=1\t-2\t+命的事\t=4\t+不\t=5\t-1\t+我\t=7"},"6":{"diff":"+《\t=3\t-1\t+论\t=1","type":"signature"}},"comments":{},"description":""}
+  {"version":2,"parts":{"0":{"diff":"-4\t+%E5%A4%A9%E4%B8%8B%E8%80%85%EF%BC%8C%E6%88%91%E4%BB%AC%E7%9A%84%E5%A4%A9%E4%B8%8B%E3%80%82"},"1":{"diff":"-2\t+%E5%9B%BD%E5%AE%B6%E8%80%85%EF%BC%8C%E6%88%91%E4%BB%AC%E7%9A%84%E5%9B%BD%E5%AE%B6%E3%80%82"},"2":{"diff":"-2\t+%E7%A4%BE%E4%BC%9A%E8%80%85%EF%BC%8C%E6%88%91%E4%BB%AC%E7%9A%84%E7%A4%BE%E4%BC%9A%E3%80%82"},"3":{"delete":true},"4":{"delete":true},"5":{"diff":"-9\t=1\t-2\t+%E5%91%BD%E7%9A%84%E4%BA%8B\t=4\t+%E4%B8%8D\t=5\t-1\t+%E6%88%91\t=7"},"6":{"diff":"+%E3%80%8A\t=3\t-1\t+%E8%AE%BA\t=1","type":"signature"}},"comments":{},"description":""},
+];
