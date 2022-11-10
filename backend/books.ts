@@ -22,6 +22,34 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: '4ec0d46d-01c3-4b91-8aba-f44ad4f6af72',
+      name: '张春桥同志讲话',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(13)
+        .fill(0)
+        .map(
+          (i, idx) =>
+            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/4ec0d46d-01c3-4b91-8aba-f44ad4f6af72/${
+              idx + 1
+            }.jpg`,
+        )
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'jpg',
+      articles: [{"title":"张春桥同志在上海市革命委员会“高举毛泽东思想伟大红旗进一步开展三结合夺权斗争誓师大会”上的讲话","alias":"张春桥同志讲话","authors":["张春桥"],"page_start":2,"page_end":13,"dates":[{"year":1967,"month":2,"day":24}]}],
+      ocr: {"standard_paragraph_merge_strategy_threshold":0.5,"differential_paragraph_merge_strategy_threshold":0},
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives1/4ec0d46d-01c3-4b91-8aba-f44ad4f6af72'),
+  },
+  {
+    entity: {
       id: '01ec427d-9e37-4ead-a568-05b3614d4dde',
       name: '张春桥同志在上海市革命委员会“高举毛泽东思想伟大红旗进一步开展三结合夺权斗争誓师大会”上的讲话',
       internal: true,
