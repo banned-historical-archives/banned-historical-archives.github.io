@@ -22,6 +22,34 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: '01ec427d-9e37-4ead-a568-05b3614d4dde',
+      name: '张春桥同志在上海市革命委员会“高举毛泽东思想伟大红旗进一步开展三结合夺权斗争誓师大会”上的讲话',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(15)
+        .fill(0)
+        .map(
+          (i, idx) =>
+            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/01ec427d-9e37-4ead-a568-05b3614d4dde/${
+              idx + 1
+            }.jpg`,
+        )
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'jpg',
+      articles: [{"title":"张春桥同志在上海市革命委员会“高举毛泽东思想伟大红旗进一步开展三结合夺权斗争誓师大会”上的讲话","authors":["张春桥"],"page_start":1,"page_end":15,"dates":[{"year":1967,"month":2,"day":24}]}],
+      ocr: undefined,
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives1/01ec427d-9e37-4ead-a568-05b3614d4dde'),
+  },
+  {
+    entity: {
       id: '1276ea8e-f709-43fb-ae5e-9c9df5a83ee2',
       name: '张春桥同志讲话',
       internal: true,
