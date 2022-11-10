@@ -22,6 +22,34 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: 'f95d1fbe-9826-4ee6-93fe-db430db7c974',
+      name: '张春桥同志在上海市市政交通系统革命派誓师大会上的讲话',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(4)
+        .fill(0)
+        .map(
+          (i, idx) =>
+            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/f95d1fbe-9826-4ee6-93fe-db430db7c974/${
+              idx + 1
+            }.jpg`,
+        )
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'jpg',
+      articles: [{"title":"张春桥同志在上海市市政交通系统革命派誓师大会上的讲话","authors":["张春桥"],"page_start":1,"page_end":4,"dates":[{"year":1967,"month":3,"day":13}]}],
+      ocr: {"content_thresholds":[0,0.07,0,0]},
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives1/f95d1fbe-9826-4ee6-93fe-db430db7c974'),
+  },
+  {
+    entity: {
       id: 'cb43d83a-f293-4e06-a24e-34e3012b7f0c',
       name: '张春桥同志最新讲话——二月二十五日与华东局革命造反派座谈纪要',
       internal: true,
