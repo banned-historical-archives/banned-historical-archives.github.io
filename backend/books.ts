@@ -22,6 +22,34 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: '5c0df172-470f-4b11-8926-4f2dcfbf3e30',
+      name: '张春桥同志讲话',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(12)
+        .fill(0)
+        .map(
+          (i, idx) =>
+            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/5c0df172-470f-4b11-8926-4f2dcfbf3e30/${
+              idx + 1
+            }.jpg`,
+        )
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'jpg',
+      articles: [{"title":"张春桥在上海市革命造反派整风大会上的讲话","alias":"张春桥同志讲话","authors":["张春桥"],"page_start":2,"page_end":12,"dates":[{"year":1967,"month":3,"day":26}]}],
+      ocr: undefined,
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives1/5c0df172-470f-4b11-8926-4f2dcfbf3e30'),
+  },
+  {
+    entity: {
       id: '411e22df-9335-4965-aeb5-a29c1089d733',
       name: '在《上海市市政交通系统革命造反派抓革命、促生产誓师大会》上张春桥同志讲话',
       internal: true,
