@@ -22,6 +22,34 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: '411e22df-9335-4965-aeb5-a29c1089d733',
+      name: '在《上海市市政交通系统革命造反派抓革命、促生产誓师大会》上张春桥同志讲话',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(4)
+        .fill(0)
+        .map(
+          (i, idx) =>
+            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/411e22df-9335-4965-aeb5-a29c1089d733/${
+              idx + 1
+            }.jpg`,
+        )
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'jpg',
+      articles: [{"title":"张春桥同志在上海市市政交通系统革命派誓师大会上的讲话","alias":"张春桥同志在《上海市市政交通系统革命造反派抓革命、促生产誓师大会》上的讲话","authors":["张春桥"],"page_start":2,"page_end":4,"dates":[{"year":1967,"month":3,"day":13}]}],
+      ocr: undefined,
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives1/411e22df-9335-4965-aeb5-a29c1089d733'),
+  },
+  {
+    entity: {
       id: 'f95d1fbe-9826-4ee6-93fe-db430db7c974',
       name: '张春桥同志在上海市市政交通系统革命派誓师大会上的讲话',
       internal: true,
