@@ -22,6 +22,34 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: 'cb43d83a-f293-4e06-a24e-34e3012b7f0c',
+      name: '张春桥同志最新讲话——二月二十五日与华东局革命造反派座谈纪要',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(4)
+        .fill(0)
+        .map(
+          (i, idx) =>
+            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/cb43d83a-f293-4e06-a24e-34e3012b7f0c/${
+              idx + 1
+            }.png`,
+        )
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'png',
+      articles: [{"title":"张春桥同志与华东局革命造反派座谈纪要","alias":"张春桥同志最新讲话——二月二十五日与华东局革命造反派座谈纪要","authors":["张春桥"],"page_start":2,"page_end":4,"dates":[{"year":1967,"month":2,"day":25}]}],
+      ocr: {"content_thresholds":[0,0.07,0,0]},
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives1/cb43d83a-f293-4e06-a24e-34e3012b7f0c'),
+  },
+  {
+    entity: {
       id: '5072b701-c253-4ac0-81e6-3741a490dbfc',
       name: '张春桥同志在上海市革命委员会“高举毛泽东思想伟大红旗进一步开展三结合夺权斗争誓师大会”上的讲话（油印版）',
       internal: true,
