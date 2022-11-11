@@ -22,6 +22,34 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: '6bd01bc2-faec-47ec-9110-720cae195dcc',
+      name: '张春桥同志讲话',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(7)
+        .fill(0)
+        .map(
+          (i, idx) =>
+            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/6bd01bc2-faec-47ec-9110-720cae195dcc/${
+              idx + 1
+            }.jpg`,
+        )
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'jpg',
+      articles: [{"title":"张春桥同志讲话","authors":["张春桥"],"page_start":1,"page_end":7,"dates":[{"year":1967,"month":1,"day":3}]}],
+      ocr: undefined,
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives1/6bd01bc2-faec-47ec-9110-720cae195dcc'),
+  },
+  {
+    entity: {
       id: 'a998d3d5-eabf-4abc-b717-f4dc401f53b3',
       name: '学习文件',
       internal: true,
