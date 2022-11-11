@@ -22,6 +22,34 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: 'f59cc233-3f7b-4a42-9340-05f069e89d7b',
+      name: '在市革会扩大会议上张春桥同志的讲话（记录稿）',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(3)
+        .fill(0)
+        .map(
+          (i, idx) =>
+            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/f59cc233-3f7b-4a42-9340-05f069e89d7b/${
+              idx + 1
+            }.jpg`,
+        )
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'jpg',
+      articles: [{"title":"张春桥同志在上海市革命委员会扩大会议上的讲话","authors":["张春桥"],"page_start":1,"page_end":3,"dates":[{"year":1968,"month":1,"day":11}]}],
+      ocr: {"content_thresholds":[0,0.07,0,0]},
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives1/f59cc233-3f7b-4a42-9340-05f069e89d7b'),
+  },
+  {
+    entity: {
       id: 'd4256afc-a49d-4cc3-bbf3-7a739ce4caa0',
       name: '张春桥同志一月四日讲话',
       internal: true,
