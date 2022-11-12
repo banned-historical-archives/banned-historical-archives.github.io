@@ -22,6 +22,34 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: 'e05ce1c3-89f9-4bd7-b16d-4727a0ddbc93',
+      name: '张春桥、姚文元同志重要讲话',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(28)
+        .fill(0)
+        .map(
+          (i, idx) =>
+            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/e05ce1c3-89f9-4bd7-b16d-4727a0ddbc93/${
+              idx + 1
+            }.png`,
+        )
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'png',
+      articles: [{"title":"张春桥姚文元杜平对江苏和南京地区无产阶级革命派的讲话","authors":["张春桥","姚文元","杜平"],"page_start":1,"page_end":28,"dates":[{"year":1967,"month":5,"day":14}]}],
+      ocr: {"content_thresholds":[0,0.11,0,0]},
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives1/e05ce1c3-89f9-4bd7-b16d-4727a0ddbc93'),
+  },
+  {
+    entity: {
       id: '6cdfc273-6e70-4ae6-8c85-79e273b2f07f',
       name: '张春桥同志对驻沪三军负责人的讲话',
       internal: true,
