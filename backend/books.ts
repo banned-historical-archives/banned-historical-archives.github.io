@@ -22,6 +22,34 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: '6cdfc273-6e70-4ae6-8c85-79e273b2f07f',
+      name: '张春桥同志对驻沪三军负责人的讲话',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(21)
+        .fill(0)
+        .map(
+          (i, idx) =>
+            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/6cdfc273-6e70-4ae6-8c85-79e273b2f07f/${
+              idx + 1
+            }.png`,
+        )
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'png',
+      articles: [{"title":"张春桥同志对驻沪三军负责人的讲话","authors":["张春桥"],"page_start":1,"page_end":21,"dates":[{"year":1967,"month":6,"day":8}]}],
+      ocr: {"content_thresholds":[0,0.1,0,0]},
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives1/6cdfc273-6e70-4ae6-8c85-79e273b2f07f'),
+  },
+  {
+    entity: {
       id: '6f46675c-df6e-49de-ad08-56be55cfba14',
       name: '张春桥同志、姚文元同志在上海市革命委员会教卫小组座谈会上的讲话',
       internal: true,
