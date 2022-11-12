@@ -22,6 +22,34 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: '7b3123c6-00a9-4c92-b554-15d6dfa8e4e2',
+      name: '张春桥、姚文元同志在上海市革命造反派座谈会上的讲话',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(2)
+        .fill(0)
+        .map(
+          (i, idx) =>
+            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/7b3123c6-00a9-4c92-b554-15d6dfa8e4e2/${
+              idx + 1
+            }.png`,
+        )
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'png',
+      articles: [{"title":"张春桥在上海市革命造反派座谈会上的讲话","alias":"张春桥、姚文元同志在上海市革命造反派座谈会上的讲话","authors":["张春桥","姚文元"],"page_start":1,"page_end":2,"dates":[{"year":1967,"month":1,"day":11}]}],
+      ocr: undefined,
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives1/7b3123c6-00a9-4c92-b554-15d6dfa8e4e2'),
+  },
+  {
+    entity: {
       id: 'b72a9ab1-e739-4fe3-a588-4d2d1a59c542',
       name: '张春桥姚文元同志接见上海工人革命造反总司令部赴京代表团的讲话',
       internal: true,
