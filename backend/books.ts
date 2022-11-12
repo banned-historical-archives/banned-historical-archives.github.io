@@ -22,6 +22,34 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: '6f46675c-df6e-49de-ad08-56be55cfba14',
+      name: '张春桥同志、姚文元同志在上海市革命委员会教卫小组座谈会上的讲话',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(2)
+        .fill(0)
+        .map(
+          (i, idx) =>
+            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/6f46675c-df6e-49de-ad08-56be55cfba14/${
+              idx + 1
+            }.jpg`,
+        )
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'jpg',
+      articles: [{"title":"张春桥、姚文元同志在上海市革命委员会教卫小组座谈会上的讲话","authors":["张春桥","姚文元"],"page_start":1,"page_end":2,"dates":[{"year":1967,"month":3}]}],
+      ocr: {"standard_paragraph_merge_strategy_threshold":0.5,"differential_paragraph_merge_strategy_threshold":0},
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives1/6f46675c-df6e-49de-ad08-56be55cfba14'),
+  },
+  {
+    entity: {
       id: '402db3bf-1b65-4a55-9be3-841cdf1a2b55',
       name: '张春桥、姚文元同志在整风报告会上的重要讲话',
       internal: true,
