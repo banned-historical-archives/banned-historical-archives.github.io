@@ -22,6 +22,34 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: '4277f31d-4aaf-4702-87d4-fe80f59bb565',
+      name: '张春桥、姚文元同志在济南军区机关排以上干部会议上的讲话',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(19)
+        .fill(0)
+        .map(
+          (i, idx) =>
+            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/4277f31d-4aaf-4702-87d4-fe80f59bb565/${
+              idx + 1
+            }.png`,
+        )
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'png',
+      articles: [{"title":"张春桥姚文元在济南军区机关以上干部会议上的讲话","alias":"张春桥、姚文元同志在济南军区机关排以上干部会议上的讲话","authors":["张春桥","姚文元"],"page_start":1,"page_end":19,"dates":[{"year":1967,"month":5,"day":5}]}],
+      ocr: {"content_thresholds":[0,0.1,0,0]},
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives1/4277f31d-4aaf-4702-87d4-fe80f59bb565'),
+  },
+  {
+    entity: {
       id: 'e05ce1c3-89f9-4bd7-b16d-4727a0ddbc93',
       name: '张春桥、姚文元同志重要讲话',
       internal: true,
