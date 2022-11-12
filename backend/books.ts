@@ -22,6 +22,34 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: '7522f55b-37cb-41d0-8229-0f0144b823ce',
+      name: '张春桥、姚文元在《社会主义政治经济学》座谈会上的言论',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(16)
+        .fill(0)
+        .map(
+          (i, idx) =>
+            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/7522f55b-37cb-41d0-8229-0f0144b823ce/${
+              idx + 1
+            }.png`,
+        )
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'png',
+      articles: [{"title":"张春桥、姚文元在《社会主义政治经济学》座谈会上的言论","authors":["张春桥","姚文元"],"page_start":1,"page_end":13,"ocr_exceptions":{"13":{"content_thresholds":[0,0.15,0,0.5]}},"dates":[{"year":1972,"month":10,"day":15}]},{"title":"姚文元在《社会主义政治经济学》座谈会第二次会议上的言论","authors":["张春桥","姚文元"],"page_start":13,"page_end":16,"ocr_exceptions":{"13":{"content_thresholds":[0,0.15,0.5,0]}},"dates":[{"year":1972,"month":10,"day":18}]},{"title":"张春桥在上海市委写作组工作计划纲要上的批语","authors":["张春桥"],"page_start":16,"page_end":16,"dates":[{"year":1976,"month":3}]}],
+      ocr: {"content_thresholds":[0,0.15,0,0]},
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives1/7522f55b-37cb-41d0-8229-0f0144b823ce'),
+  },
+  {
+    entity: {
       id: '4277f31d-4aaf-4702-87d4-fe80f59bb565',
       name: '张春桥、姚文元同志在济南军区机关排以上干部会议上的讲话',
       internal: true,
