@@ -22,6 +22,26 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: '3699bc62-2efc-4575-ab3a-e1cb7e50b2bf',
+      name: '张春桥同志接见全国教育工作会议领导小组时的讲话',
+      internal: true,
+      official: true,
+      type: 'pdf',
+      author: '',
+      files: 'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/3699bc62-2efc-4575-ab3a-e1cb7e50b2bf.pdf',
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'pdf',
+      articles: [{"title":"张春桥同志接见全国教育工作会议领导小组时的讲话","authors":["张春桥"],"page_start":1,"page_end":5,"dates":[{"year":1971,"month":7,"day":11}]}],
+      ocr: {"standard_paragraph_merge_strategy_threshold":0.16,"differential_paragraph_merge_strategy_threshold":0,"content_thresholds":[0,0.12,0,0]},
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives1/3699bc62-2efc-4575-ab3a-e1cb7e50b2bf.pdf'),
+  },
+  {
+    entity: {
       id: '11eaecfb-0b66-4a75-8720-50f82c9d0859',
       name: '张春桥同志在上海市革委“活学活用毛泽东思想、‘九大’文献讲用会”上的讲话',
       internal: true,
