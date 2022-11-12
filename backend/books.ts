@@ -22,6 +22,34 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: 'fd6bc233-9bf7-4904-a48b-0bd8a7745def',
+      name: '张春桥、姚文元同志接见上海市革命委员会工作人员（学生、群众组织）时的讲话',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(4)
+        .fill(0)
+        .map(
+          (i, idx) =>
+            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/fd6bc233-9bf7-4904-a48b-0bd8a7745def/${
+              idx + 1
+            }.jpg`,
+        )
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'jpg',
+      articles: [{"title":"张春桥、姚文元同志接见上海市革命委员会工作人员（学生、群众组织）时的讲话","authors":["张春桥","姚文元"],"page_start":1,"page_end":4,"ocr_exceptions":{"1":{"content_thresholds":[0,0,0.5,0]}},"dates":[{"year":1967,"month":3,"day":20}]}],
+      ocr: undefined,
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives1/fd6bc233-9bf7-4904-a48b-0bd8a7745def'),
+  },
+  {
+    entity: {
       id: 'ae99e514-f613-49a6-b3a0-23a0912589cb',
       name: '在“高举毛泽东思想伟大红旗，进一步开展‘三结合’夺权斗争誓师大会”上张春桥、姚文元同志的讲话',
       internal: true,
