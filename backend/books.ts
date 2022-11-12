@@ -22,6 +22,34 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: '11eaecfb-0b66-4a75-8720-50f82c9d0859',
+      name: '张春桥同志在上海市革委“活学活用毛泽东思想、‘九大’文献讲用会”上的讲话',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(10)
+        .fill(0)
+        .map(
+          (i, idx) =>
+            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/11eaecfb-0b66-4a75-8720-50f82c9d0859/${
+              idx + 1
+            }.jpg`,
+        )
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'jpg',
+      articles: [{"title":"张春桥同志在上海市革命委员会“活学活用毛泽东思想、‘九大’文献讲用会”上的讲话","authors":["张春桥"],"page_start":1,"page_end":10,"dates":[{"year":1968,"month":3,"day":27}]}],
+      ocr: {"content_thresholds":[0,0.06,0,0]},
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives1/11eaecfb-0b66-4a75-8720-50f82c9d0859'),
+  },
+  {
+    entity: {
       id: 'a273ff3e-c25e-4dbc-8f19-33651337163e',
       name: '张春桥同志在省市革命委员会座谈会上的讲话',
       internal: true,
