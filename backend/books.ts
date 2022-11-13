@@ -22,6 +22,26 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: 'aadc32a3-a643-4a3e-b27e-4ee6006b03dc',
+      name: '红旗一九六六年第九期',
+      internal: true,
+      official: true,
+      type: 'pdf',
+      author: '',
+      files: 'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives2/main/aadc32a3-a643-4a3e-b27e-4ee6006b03dc.pdf',
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'pdf',
+      articles: [{"title":"在延安文艺座谈会上的讲话","authors":["毛泽东"],"page_start":3,"page_end":26,"dates":[{"year":1942,"month":5}]},{"title":"无产阶级文化大革命的指南针——重新发表《在延安文艺座谈会上的讲话》按语","authors":["《红旗杂志》编辑部"],"page_start":27,"page_end":29,"dates":[{"year":1966}]},{"title":"信任群众 依靠群众","authors":[],"page_start":30,"page_end":32,"dates":[{"year":1966}]},{"title":"彻底批判前北京市委一些主要负责人的修正主义路线","authors":[],"page_start":33,"page_end":36,"dates":[{"year":1966}]},{"title":"周扬颠倒历史的一支暗箭——评《鲁迅全集》第六卷的一条注释","authors":["阮铭","阮若瑛"],"page_start":37,"page_end":46,"dates":[{"year":1966}]},{"title":"“国防文学”是王明右倾机会主义路线的口号","authors":["穆欣"],"page_start":47,"page_end":59,"dates":[{"year":1966}]}],
+      ocr: {"content_thresholds":[0,0.15,0,0.2]},
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives2/aadc32a3-a643-4a3e-b27e-4ee6006b03dc.pdf'),
+  },
+  {
+    entity: {
       id: '79570b44-6e88-4875-8247-b408ad91873d',
       name: '红旗一九六六年第八期',
       internal: true,
