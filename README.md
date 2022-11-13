@@ -188,11 +188,13 @@
 [\[Github\]](https://github.com/banned-historical-archives/banned-historical-archives.gitlab.io)
 [\[Gitlab\]](https://gitlab.com/banned-historical-archives/banned-historical-archives.gitlab.io)
 
+如果以保存为目的fork本仓库，最好同时fork本仓库对应的资源仓库 banned-historical-archives0,banned-historical-archives1,banned-historical-archives2...banned-historical-archives5
+
 [\[开发者如何贡献代码\]](https://github.com/banned-historical-archives/banned-historical-archives.github.io/wiki/开发者贡献代码)
 
 ### 其他
 #### 数据库导出
-执行 mysqldump 命令导出数据库，使用方法见 mysql 官网。
+在初始化项目后，执行 mysqldump 命令导出数据库，使用方法见 mysql 官网。
 
 ## 友情链接
 [![统一战线公社](https://unitedfront.press/static/img/everylogo/hanzilogo.png)](https://unitedfront.press)
