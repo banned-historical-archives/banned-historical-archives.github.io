@@ -1937,7 +1937,7 @@ const books: Book[] = [
     parser_option: {
       page_limits: [],
       ext: 'jpg',
-      articles: [{"title":"毛远新同志在辽联赴京代表团座谈会上的讲话纪要","authors":["毛远新"],"page_start":1,"page_end":2,"ocr_exceptions":{"2":{"auto_vsplit":false,"vsplit":0.5,"content_thresholds":[0,0.41,0,0]}},"dates":[{"year":1968,"month":3,"day":20}]},{"title":"江青同志昨天接见江苏代表团的一段讲话","authors":["江青"],"page_start":2,"page_end":2,"ocr_exceptions":{"2":{"auto_vsplit":false,"vsplit":0.5,"content_thresholds":[0.59,0.2,0,0]}},"dates":[{"year":1968,"month":3,"day":19}]}],
+      articles: [{"title":"毛远新同志在辽联赴京代表团座谈会上的讲话纪要","authors":["毛远新"],"page_start":1,"page_end":2,"ocr_exceptions":{"2":{"auto_vsplit":true,"vsplit":0.5,"content_thresholds":[0,0.41,0,0]}},"dates":[{"year":1968,"month":3,"day":20}]},{"title":"江青同志昨天接见江苏代表团的一段讲话","authors":["江青"],"page_start":2,"page_end":2,"ocr_exceptions":{"2":{"auto_vsplit":true,"vsplit":0.5,"content_thresholds":[0.59,0.2,0,0]}},"dates":[{"year":1968,"month":3,"day":19}]}],
       ocr: {"auto_vsplit":true,"vsplit":0.5},
       ocr_exceptions: {},
     },
