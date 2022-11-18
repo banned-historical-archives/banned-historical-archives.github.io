@@ -22,6 +22,26 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: '563a0188-ee72-4cd8-bd21-734004f80cae',
+      name: '关于社会主义革命时期的阶级关系问题——辽宁省委宣传组理论问题讨论会《关于阶级关系问题的讨论情况汇集》',
+      internal: true,
+      official: true,
+      type: 'pdf',
+      author: '',
+      files: 'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives3/main/563a0188-ee72-4cd8-bd21-734004f80cae.pdf',
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'pdf',
+      articles: [{"title":"关于社会主义革命时期的阶级关系问题——辽宁省委宣传组理论问题讨论会《关于阶级关系问题的讨论情况汇集》","authors":["辽宁省委宣传组"],"page_start":1,"page_end":9,"dates":[{"year":1976,"month":5,"day":15}]}],
+      ocr: {"standard_paragraph_merge_strategy_threshold":0.17,"differential_paragraph_merge_strategy_threshold":0},
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives3/563a0188-ee72-4cd8-bd21-734004f80cae.pdf'),
+  },
+  {
+    entity: {
       id: '77fd62e6-e508-483f-91b3-f5e144115abb',
       name: '社会主义时期的党内资产阶级（谈谈党内资产阶级）',
       internal: true,
