@@ -48,7 +48,7 @@ const books: Book[] = [
       official: true,
       type: 'pdf',
       author: '',
-      files: 'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives3/main/473a6aa4-11e7-4750-b958-17c7a7ebe666.pdf',
+      files: 'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives4/main/473a6aa4-11e7-4750-b958-17c7a7ebe666.pdf',
     },
     parser_option: {
       page_limits: [],
@@ -58,7 +58,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives3/473a6aa4-11e7-4750-b958-17c7a7ebe666.pdf'),
+    path: join(normalize(__dirname), '../public/books/archives4/473a6aa4-11e7-4750-b958-17c7a7ebe666.pdf'),
   },
   {
     entity: {
