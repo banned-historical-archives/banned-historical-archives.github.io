@@ -22,6 +22,26 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: '8a5d13d0-5502-47e3-ba6d-d6366092d4a5',
+      name: '革命国际主义运动宣言',
+      internal: true,
+      official: true,
+      type: 'pdf',
+      author: '',
+      files: 'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives3/main/8a5d13d0-5502-47e3-ba6d-d6366092d4a5.pdf',
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'pdf',
+      articles: [{"title":"革命国际主义运动宣言","authors":["革命国际主义运动"],"page_start":1,"page_end":19,"dates":[{"year":1984,"month":3}]}],
+      ocr: {"standard_paragraph_merge_strategy_threshold":0.161,"differential_paragraph_merge_strategy_threshold":0},
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives3/8a5d13d0-5502-47e3-ba6d-d6366092d4a5.pdf'),
+  },
+  {
+    entity: {
       id: '0d3234ae-8b97-4a0c-b944-a0fc427e1fca',
       name: '高举马克思列宁毛主义的鲜红旗帜',
       internal: true,
