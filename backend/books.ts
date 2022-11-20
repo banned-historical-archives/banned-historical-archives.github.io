@@ -22,6 +22,26 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: '91043fc5-3827-42f1-921b-6ac089edce61',
+      name: '马列毛主义万岁',
+      internal: true,
+      official: true,
+      type: 'pdf',
+      author: '',
+      files: 'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives3/main/91043fc5-3827-42f1-921b-6ac089edce61.pdf',
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'pdf',
+      articles: [{"title":"马列毛主义万岁","authors":["革命国际主义运动"],"page_start":1,"page_end":4,"dates":[{"year":1993,"month":12,"day":26}]}],
+      ocr: undefined,
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives3/91043fc5-3827-42f1-921b-6ac089edce61.pdf'),
+  },
+  {
+    entity: {
       id: '0fcbbaa0-3b65-40fb-902e-678b9fd6e506',
       name: '共产党宣言（人民出版社1963年版）',
       internal: true,
