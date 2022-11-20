@@ -22,6 +22,26 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: '473a6aa4-11e7-4750-b958-17c7a7ebe666',
+      name: '卡尔·马克思',
+      internal: true,
+      official: true,
+      type: 'pdf',
+      author: '',
+      files: 'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives3/main/473a6aa4-11e7-4750-b958-17c7a7ebe666.pdf',
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'pdf',
+      articles: [{"title":"卡尔·马克思","authors":["列宁"],"page_start":1,"page_end":32,"is_range_date":true,"dates":[{"year":1914,"month":7},{"year":1914,"month":11}]}],
+      ocr: {"standard_paragraph_merge_strategy_threshold":0.161,"differential_paragraph_merge_strategy_threshold":0},
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives3/473a6aa4-11e7-4750-b958-17c7a7ebe666.pdf'),
+  },
+  {
+    entity: {
       id: '8a5d13d0-5502-47e3-ba6d-d6366092d4a5',
       name: '革命国际主义运动宣言',
       internal: true,
