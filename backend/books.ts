@@ -22,6 +22,34 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: '2e2e3766-4530-464b-882c-f8b079a63e66',
+      name: '检查交代我和上海黄涛串联的犯罪情况',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(4)
+        .fill(0)
+        .map(
+          (i, idx) =>
+            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/2e2e3766-4530-464b-882c-f8b079a63e66/${
+              idx + 1
+            }.png`,
+        )
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'png',
+      articles: [{"title":"检查交代我和上海黄涛串联的犯罪情况","authors":["杨春甫"],"page_start":2,"page_end":4,"dates":[{"year":1976,"month":12,"day":17}]}],
+      ocr: {"content_thresholds":[0,0.1,0,0]},
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives1/2e2e3766-4530-464b-882c-f8b079a63e66'),
+  },
+  {
+    entity: {
       id: 'aaa61d45-fb7f-40d1-8012-54defb857880',
       name: '马克思主义的三个来源和三个组成部分（人民出版社1974年版）',
       internal: true,
