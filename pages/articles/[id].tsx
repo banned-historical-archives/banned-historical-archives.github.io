@@ -351,8 +351,12 @@ export default function ArticleViewer({
   );
 
   useEffect(() => {
-    patchWrap.current = location.search.startsWith('?patch=')
-      ? JSON.parse(decodeURIComponent(location.search.split('=')[1]))
+    const params = new URLSearchParams(location.search);
+    if (params.get('publication_id')) {
+      setSelectedPublication(params.get('publication_id')!);
+    }
+    patchWrap.current = params.get('patch')
+      ? JSON.parse(decodeURIComponent(params.get('patch')!))
       : undefined;
     if (patchWrap.current) {
       const patch = patchWrap.current ? patchWrap.current.patch! : undefined;

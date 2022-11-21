@@ -20,3 +20,5 @@ a {
   box-shadow: gray 0px 0 3px;
   border: 12px solid white;
 }
+
+em { color: red; }

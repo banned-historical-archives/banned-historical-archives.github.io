@@ -42,3 +42,6 @@ dist
 
 .cnocr
 .cnstd
+
+es_http_ca.crt
+.env

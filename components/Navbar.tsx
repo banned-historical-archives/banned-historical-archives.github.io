@@ -162,8 +162,17 @@ export default function Navbar() {
                 placeholder="全站搜索"
                 onKeyDown={(e) => {
                   if (e.key === 'Enter') {
+                    if (location.hostname === 'localhost') {
+                      router.push({
+                        pathname: '/search/[keyword]',
+                        query: {
+                          keyword: inputValue,
+                        },
+                      });
+                      return;
+                    }
                     window.open(
-                      'https://google.com/search?q=' +
+                      'https://duckduckgo.com?q=' +
                         encodeURIComponent(
                           'site:banned-historical-archives.github.io ' +
                             inputValue,
