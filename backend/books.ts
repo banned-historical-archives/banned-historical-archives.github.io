@@ -22,6 +22,34 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: '289bf08c-009d-4507-a4f4-b9f4a5002e1d',
+      name: '上海工人革命造反总司令部斗争纪要',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(40)
+        .fill(0)
+        .map(
+          (i, idx) =>
+            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives3/main/289bf08c-009d-4507-a4f4-b9f4a5002e1d/${
+              idx + 1
+            }.jpg`,
+        )
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'jpg',
+      articles: [{"title":"上海工人革命造反总司令部斗争纪要","authors":["《工人造反报》编辑部","《一月风暴》编辑部 "],"dates":[{"year":1967}],"page_start":1,"page_end":40}],
+      ocr: {"vsplit":0.4},
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives3/289bf08c-009d-4507-a4f4-b9f4a5002e1d'),
+  },
+  {
+    entity: {
       id: 'e3f95fea-9501-4dd7-8e5a-845a1c7234b3',
       name: '杨春甫在全国计划工作座谈会东北组的发言记录',
       internal: true,
