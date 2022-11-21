@@ -22,6 +22,34 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: 'e3f95fea-9501-4dd7-8e5a-845a1c7234b3',
+      name: '杨春甫在全国计划工作座谈会东北组的发言记录',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(9)
+        .fill(0)
+        .map(
+          (i, idx) =>
+            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/e3f95fea-9501-4dd7-8e5a-845a1c7234b3/${
+              idx + 1
+            }.png`,
+        )
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'png',
+      articles: [{"title":"杨春甫在全国计划工作座谈会东北组的发言记录","authors":["杨春甫"],"page_start":2,"page_end":9,"dates":[{"year":1976,"month":7,"day":19}]}],
+      ocr: {"content_thresholds":[0,0.104,0,0]},
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives1/e3f95fea-9501-4dd7-8e5a-845a1c7234b3'),
+  },
+  {
+    entity: {
       id: '1b577929-8e72-4e52-a897-1388a0b4949c',
       name: '杨春甫在全国计划工作座谈会上的发言（要点）',
       internal: true,
