@@ -22,6 +22,34 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: 'd5aa4730-b778-49c2-af22-093b61025603',
+      name: '检查交代我向党进攻的思想情况',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(4)
+        .fill(0)
+        .map(
+          (i, idx) =>
+            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/d5aa4730-b778-49c2-af22-093b61025603/${
+              idx + 1
+            }.png`,
+        )
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'png',
+      articles: [{"title":"检查交代我向党进攻的思想情况","authors":["杨春甫"],"page_start":2,"page_end":4,"dates":[{"year":1976,"month":12,"day":19}]}],
+      ocr: {"content_thresholds":[0,0.076,0,0]},
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives1/d5aa4730-b778-49c2-af22-093b61025603'),
+  },
+  {
+    entity: {
       id: '2e2e3766-4530-464b-882c-f8b079a63e66',
       name: '检查交代我和上海黄涛串联的犯罪情况',
       internal: true,
