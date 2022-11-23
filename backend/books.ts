@@ -22,6 +22,26 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: '0390c365-6951-4e70-9dc5-9f7aa4c900ab',
+      name: '哥达纲领批判（人民出版社1971年版）（1）',
+      internal: true,
+      official: true,
+      type: 'pdf',
+      author: '',
+      files: 'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives4/main/0390c365-6951-4e70-9dc5-9f7aa4c900ab.pdf',
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'pdf',
+      articles: [{"title":"弗里德里希·恩格斯的序言","authors":["恩格斯"],"page_start":8,"page_end":9,"dates":[{"year":1891,"month":1,"day":6}]},{"title":"马克思致威廉·白拉克","authors":["马克思"],"page_start":10,"page_end":12,"dates":[{"year":1875,"month":5,"day":5}]},{"title":"对德国工人党纲领的几点意见","authors":["马克思"],"page_start":13,"page_end":37,"dates":[{"year":1875,"month":5,"day":5}]}],
+      ocr: {"standard_paragraph_merge_strategy_threshold":0.178,"differential_paragraph_merge_strategy_threshold":0},
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives4/0390c365-6951-4e70-9dc5-9f7aa4c900ab.pdf'),
+  },
+  {
+    entity: {
       id: '15594e62-38a3-46db-b5e7-dc4be1d194fa',
       name: '论列宁主义基础',
       internal: true,
