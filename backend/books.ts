@@ -22,6 +22,26 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: '15594e62-38a3-46db-b5e7-dc4be1d194fa',
+      name: '论列宁主义基础',
+      internal: true,
+      official: true,
+      type: 'pdf',
+      author: '',
+      files: 'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives5/main/15594e62-38a3-46db-b5e7-dc4be1d194fa.pdf',
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'pdf',
+      articles: [{"title":"论列宁主义基础","authors":["斯大林"],"page_start":1,"page_end":49,"dates":[{"year":1926,"month":4,"day":26},{"year":1926,"month":4,"day":30},{"year":1926,"month":5,"day":9},{"year":1926,"month":5,"day":11},{"year":1926,"month":5,"day":14},{"year":1926,"month":5,"day":15},{"year":1926,"month":5,"day":18}]}],
+      ocr: {"standard_paragraph_merge_strategy_threshold":0.178,"differential_paragraph_merge_strategy_threshold":0},
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives5/15594e62-38a3-46db-b5e7-dc4be1d194fa.pdf'),
+  },
+  {
+    entity: {
       id: 'ff7c277a-e54a-4c0f-97f7-f1548d7728b1',
       name: '马克思主义哲学基本知识（政治理论课辅助教材）湖南省衡阳、邵阳地区卫生学校编',
       internal: true,
