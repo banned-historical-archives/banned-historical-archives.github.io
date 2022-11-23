@@ -22,6 +22,26 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: '5a84af78-bb0e-4b06-9927-91920277b267',
+      name: '哥达纲领批判（人民出版社1971年版）（2）',
+      internal: true,
+      official: true,
+      type: 'pdf',
+      author: '',
+      files: 'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives4/main/5a84af78-bb0e-4b06-9927-91920277b267.pdf',
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'pdf',
+      articles: [{"title":"恩格斯致奥古斯特·倍倍尔","authors":["恩格斯"],"page_start":3,"page_end":11,"is_range_date":true,"dates":[{"year":1875,"month":3,"day":18},{"year":1875,"month":3,"day":28}]},{"title":"恩格斯致威廉·白拉克","authors":["恩格斯"],"page_start":12,"page_end":15,"dates":[{"year":1875,"month":10,"day":11}]},{"title":"恩格斯致奥古斯特·倍倍尔","authors":["恩格斯"],"page_start":16,"page_end":18,"dates":[{"year":1875,"month":10,"day":12}]},{"title":"恩格斯致卡尔·考茨基","authors":["恩格斯"],"page_start":19,"page_end":20,"dates":[{"year":1891,"month":1,"day":7}]},{"title":"恩格斯致卡尔·考茨基","authors":["恩格斯"],"page_start":21,"page_end":21,"dates":[{"year":1891,"month":1,"day":15}]},{"title":"恩格斯致卡尔·考茨基","authors":["恩格斯"],"page_start":22,"page_end":24,"dates":[{"year":1891,"month":2,"day":3}]},{"title":"恩格斯致卡尔·考茨基","authors":["恩格斯"],"page_start":25,"page_end":27,"dates":[{"year":1891,"month":2,"day":11}]},{"title":"恩格斯致弗里德里希·阿道夫·左尔格","authors":["恩格斯"],"page_start":28,"page_end":29,"dates":[{"year":1891,"month":2,"day":11}]},{"title":"恩格斯致卡尔·考茨基","authors":["恩格斯"],"page_start":30,"page_end":33,"dates":[{"year":1891,"month":2,"day":23}]},{"title":"恩格斯致弗里德里希·阿道夫·左尔格","authors":["恩格斯"],"page_start":34,"page_end":34,"dates":[{"year":1891,"month":3,"day":4}]},{"title":"恩格斯致奥古斯特·倍倍尔","authors":["恩格斯"],"page_start":35,"page_end":40,"is_range_date":true,"dates":[{"year":1891,"month":5,"day":1},{"year":1891,"month":5,"day":2}]},{"title":"德国社会民主工党纲领","authors":["德国社会民主工党"],"page_start":41,"page_end":43,"dates":[{"year":1869}]},{"title":"德国社会主义工人党纲领","authors":["德国社会民主工党"],"page_start":44,"page_end":46,"dates":[{"year":1875}]},{"title":"注释","authors":[],"page_start":47,"page_end":56,"dates":[]}],
+      ocr: {"standard_paragraph_merge_strategy_threshold":0.178,"differential_paragraph_merge_strategy_threshold":0},
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives4/5a84af78-bb0e-4b06-9927-91920277b267.pdf'),
+  },
+  {
+    entity: {
       id: '0390c365-6951-4e70-9dc5-9f7aa4c900ab',
       name: '哥达纲领批判（人民出版社1971年版）（1）',
       internal: true,
