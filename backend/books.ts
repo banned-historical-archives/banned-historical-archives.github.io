@@ -22,6 +22,26 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: 'f1a4874b-ff59-4524-acd5-b23fac5d81d1',
+      name: '论辩证唯物主义和历史唯物主义',
+      internal: true,
+      official: true,
+      type: 'pdf',
+      author: '',
+      files: 'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives5/main/f1a4874b-ff59-4524-acd5-b23fac5d81d1.pdf',
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'pdf',
+      articles: [{"title":"论辩证唯物主义和历史唯物主义","authors":["斯大林"],"page_start":1,"page_end":32,"dates":[{"year":1938}]}],
+      ocr: {"content_thresholds":[0,0.146,0,0]},
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives5/f1a4874b-ff59-4524-acd5-b23fac5d81d1.pdf'),
+  },
+  {
+    entity: {
       id: '0bbdba91-48e9-4148-9ec2-38bf6792cca7',
       name: '自然辩证法（人民出版社1971年版）',
       internal: true,
