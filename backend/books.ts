@@ -22,6 +22,26 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: '8a563ff2-adac-4454-a821-36ef7e584dd4',
+      name: '我们应该如何看待秘鲁的人民战争？',
+      internal: true,
+      official: true,
+      type: 'pdf',
+      author: '',
+      files: 'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives3/main/8a563ff2-adac-4454-a821-36ef7e584dd4.pdf',
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'pdf',
+      articles: [{"title":"我们应该如何看待秘鲁的人民战争？","authors":["红色文献翻译"],"page_start":1,"page_end":11,"dates":[{"year":2020}]}],
+      ocr: undefined,
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives3/8a563ff2-adac-4454-a821-36ef7e584dd4.pdf'),
+  },
+  {
+    entity: {
       id: '7ca5f98f-3f32-47e2-a382-f82c1c185a61',
       name: '贡萨罗主席虎笼演讲',
       internal: true,
