@@ -22,6 +22,26 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: '0c621503-01d4-4b8f-9cf2-f405bbb14ad9',
+      name: '纪念中国共产党成立一百周年',
+      internal: true,
+      official: true,
+      type: 'pdf',
+      author: '',
+      files: 'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives3/main/0c621503-01d4-4b8f-9cf2-f405bbb14ad9.pdf',
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'pdf',
+      articles: [{"title":"纪念中国共产党成立一百周年","authors":["共产主义小组（毛主义）"],"page_start":1,"page_end":23,"dates":[{"year":2021,"month":7,"day":1}]}],
+      ocr: {"standard_paragraph_merge_strategy_threshold":0.186,"differential_paragraph_merge_strategy_threshold":0},
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives3/0c621503-01d4-4b8f-9cf2-f405bbb14ad9.pdf'),
+  },
+  {
+    entity: {
       id: '01970a4d-895c-4f40-9511-60b51d869906',
       name: '唯物辩证法大纲（人民出版社1978年版）',
       internal: true,
