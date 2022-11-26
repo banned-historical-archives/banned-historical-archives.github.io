@@ -22,6 +22,26 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: '7ca5f98f-3f32-47e2-a382-f82c1c185a61',
+      name: '贡萨罗主席虎笼演讲',
+      internal: true,
+      official: true,
+      type: 'pdf',
+      author: '',
+      files: 'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives3/main/7ca5f98f-3f32-47e2-a382-f82c1c185a61.pdf',
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'pdf',
+      articles: [{"title":"贡萨罗主席虎笼演讲","authors":["贡萨罗"],"page_start":1,"page_end":3,"dates":[{"year":1992,"month":9,"day":24}]}],
+      ocr: undefined,
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives3/7ca5f98f-3f32-47e2-a382-f82c1c185a61.pdf'),
+  },
+  {
+    entity: {
       id: '8df86c6d-7b4e-4d28-8d93-4dfe4cb87a51',
       name: '与贡萨罗主席的访谈',
       internal: true,
