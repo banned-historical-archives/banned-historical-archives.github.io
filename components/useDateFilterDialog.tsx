@@ -9,8 +9,8 @@ import TextField from '@mui/material/TextField';
 import DialogTitle from '@mui/material/DialogTitle';
 
 const default_date_filter = {
-  year_a: 1900,
-  year_b: 1990,
+  year_a: 1800,
+  year_b: 2200,
   month_a: 1,
   month_b: 12,
   day_a: 1,
