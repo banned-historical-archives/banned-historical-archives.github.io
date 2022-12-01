@@ -22,6 +22,26 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: '18e2f682-cab0-46c1-8938-73d651dfe1a9',
+      name: '论贡萨罗的普适贡献',
+      internal: true,
+      official: true,
+      type: 'pdf',
+      author: '',
+      files: 'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives3/main/18e2f682-cab0-46c1-8938-73d651dfe1a9.pdf',
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'pdf',
+      articles: [{"title":"论贡萨罗的普适贡献","authors":["中国革命左派"],"page_start":1,"page_end":24,"dates":[{"year":2022}]}],
+      ocr: {"standard_paragraph_merge_strategy_threshold":0.085,"differential_paragraph_merge_strategy_threshold":0},
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives3/18e2f682-cab0-46c1-8938-73d651dfe1a9.pdf'),
+  },
+  {
+    entity: {
       id: 'b22aa9e7-4513-4f72-b912-17f5d5138bb4',
       name: '家庭、私有制和国家的起源（人民出版社1972年版）',
       internal: true,
