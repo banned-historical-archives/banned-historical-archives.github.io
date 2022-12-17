@@ -217,6 +217,12 @@
 #### 数据库导出
 在初始化项目后，执行 mysqldump 命令导出数据库，使用方法见 mysql 官网。
 
+#### 使用本地搜索引擎(推荐)
+
+谷歌搜索引擎仅收录了一小部分文稿（原因不明），而且搜索效果通常不太让人满意。本地搜索引擎支持模糊匹配和精确匹配等多种模式，更重要的是可以保护你的隐私。
+
+https://github.com/banned-historical-archives/banned-historical-archives.github.io/blob/master/doc/local-search-engine.md
+
 ## 友情链接
 [![统一战线公社](https://unitedfront.press/static/img/everylogo/hanzilogo.png)](https://unitedfront.press)
 欢迎提[\[issues\]](https://github.com/banned-historical-archives/banned-historical-archives.github.io/issues)交换链接
