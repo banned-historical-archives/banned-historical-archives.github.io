@@ -67,7 +67,7 @@ export const music: {
 spirits high and fighting will strong.
 Mao Zedong leads the way before us,
 as we thunder through the strom.
-Onward march!Forward march!
+Onward march!Onward march!
 Revolution rages on!
 Onward march!Forward march!
 On the road to victory!
@@ -75,22 +75,25 @@ Three red banners wave on high,
 millions strong the people rise.
 With the hands and our hearts we will labour,
 to build a paradise.
-Onward march!Forward march!
+Onward march!Onward march!
 Revolution rages on!
 Onward march!Forward march!
+On the road to victory!
 We have friends over all the world,
 our songs ring far and wide.
 Revolution is sweeping the nations,
 oppressors, tremble with fear.
-Forward march!Onward march!
+Onward march!Onward march!
 Revolution rages on!
-Forward march!Onward march!
+Onward march!Forward march!
+On the road to victory!
 How straight and broad our road,
 ahead our way is bright.
 For this cause to work with devotion,
 is our glory and joy.
-Forward march!Onward march!
+Onward march!Onward march!
 Revolution rages on!
+Onward march!Forward march!
 On the road to victory!`,
         version: '英文版',
         audios: [
