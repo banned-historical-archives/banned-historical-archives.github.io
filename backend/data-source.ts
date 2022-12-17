@@ -14,6 +14,8 @@ import {
   Date,
   Page,
 } from './entities';
+import * as dotenv from 'dotenv';
+dotenv.config();
 
 const instance = new DataSource({
   type: 'mysql',
@@ -35,7 +37,7 @@ const instance = new DataSource({
   ],
   migrations: [],
   subscribers: [],
-  host: process.env.CI ? 'mysql' : 'localhost',
+  host: process.env.CI ? 'mysql' : '127.0.0.1',
   port: parseInt(process.env.DB_PORT || '3306'),
   username: process.env.DB_USER || 'root',
   password: process.env.DB_PASSWORD || 'root_password',

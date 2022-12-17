@@ -19,7 +19,7 @@ app.get('/', async (req, res) => {
     index: 'article',
     from,
     size,
-    query: { match: { content: keyword } },
+    query: { match_phrase: { content: keyword } },
     highlight: {
       fields: { content: {} },
     },
