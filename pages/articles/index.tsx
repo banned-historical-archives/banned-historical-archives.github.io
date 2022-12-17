@@ -3,12 +3,13 @@ import Popover from '@mui/material/Popover';
 import Head from 'next/head';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import {
-  DataGrid,
+  DataGridPro,
   GridColDef,
   GridRenderCellParams,
   GridValueGetterParams,
   zhCN,
-} from '@mui/x-data-grid';
+} from '@mui/x-data-grid-pro';
+
 import Link from 'next/link';
 
 import Layout from '../../components/Layout';
@@ -445,7 +446,7 @@ export default function Articles({ articles }: { articles: Article[] }) {
           </Grid>
         </Stack>
         <Stack sx={{ flex: 1, width: '100%' }}>
-          <DataGrid
+          <DataGridPro
             getRowId={(row) => row.id}
             initialState={{
               sorting: {
