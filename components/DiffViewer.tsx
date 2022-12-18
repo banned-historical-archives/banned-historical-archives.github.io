@@ -11,7 +11,7 @@ export function DiffViewer({ diff }: { diff?: Diff[][]}) {
             <span
               key={idx2}
               style={{
-                color: j[0] === 1 ? 'green' : j[0] === -1 ? 'red' : 'auto',
+                color: j[0] === 1 ? 'green' : j[0] === -1 ? 'red' : 'inherit',
               }}
             >
               {j[1]}
