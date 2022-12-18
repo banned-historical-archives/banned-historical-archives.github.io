@@ -55,7 +55,7 @@ export const music: {
         version: '原版',
         audios: [
           {
-            url: '/music/wmzzdls_origin.mp3',
+            url: 'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives6/main/wmzzdls_origin.mp3',
             artist: '沈阳音乐学院附中少年合唱队',
             source: 'http://www.mzdbl.com.cn/yinyue/snet/index.html',
           },
@@ -98,7 +98,7 @@ On the road to victory!`,
         version: '英文版',
         audios: [
           {
-            url: '/music/wmzzdls_english.mp3',
+            url: 'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives6/main/wmzzdls_english.mp3',
             artist: '',
             source: 'https://www.bilibili.com/video/BV1C541117Po',
           },
@@ -141,7 +141,7 @@ On the road to victory!`,
         version: '文革版',
         audios: [
           {
-            url: '/music/wmzzdls_wenge.mp3',
+            url: 'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives6/main/wmzzdls_wenge.mp3',
             artist: '首都革命文艺战士(贾世骏 张振富 尹鸣晨领唱)',
             source: 'http://www.mzdbl.com.cn/yinyue/zhuanji.html',
           },
@@ -184,7 +184,7 @@ On the road to victory!`,
         version: '改开版',
         audios: [
           {
-            url: '/music/wmzzdls_gaikai.mp3',
+            url: 'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives6/main/wmzzdls_gaikai.mp3',
             artist: '中央乐团合唱团',
             source: 'http://www.kuwo.cn/play_detail/40820400',
           },
@@ -224,7 +224,7 @@ On the road to victory!`,
         version: '改开版',
         audios: [
           {
-            url: '/music/gczg_gaikai.aac',
+            url: 'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives6/main/gczg_gaikai.aac',
             artist: '中国广播艺术团合唱团',
             source: 'https://www.bilibili.com/video/BV1gZ4y1o7dt?p=3',
           },
@@ -256,7 +256,7 @@ On the road to victory!`,
         version: '文革版',
         audios: [
           {
-            url: '/music/gczg_wenge.aac',
+            url: 'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives6/main/gczg_wenge.aac',
             artist: '首都革命文艺战士',
             source: 'https://www.bilibili.com/video/BV1yU4y1b7aK',
           },
@@ -288,7 +288,7 @@ On the road to victory!`,
         version: '东方红合唱版',
         audios: [
           {
-            url: '/music/gczg_dfh.aac',
+            url: 'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives6/main/gczg_dfh.aac',
             artist: '中央音乐学院音乐工作团合唱队',
             source: 'https://www.bilibili.com/video/BV1gZ4y1o7dt?p=1',
           },
@@ -357,7 +357,7 @@ On the road to victory!`,
         version: '原版',
         audios: [
           {
-            url: '/music/tyzhmzxzq_origin.mp3',
+            url: 'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives6/main/tyzhmzxzq_origin.mp3',
             artist: '卞小贞',
             source: 'http://www.mzdbl.com.cn/yinyue/songge/index.html',
           },
@@ -393,7 +393,7 @@ On the road to victory!`,
         version: '改开版',
         audios: [
           {
-            url: '/music/tyzhmzxzq_gaikai.mp3',
+            url: 'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives6/main/tyzhmzxzq_gaikai.mp3',
             artist: '卞小贞',
             source: 'http://www.mzdbl.com.cn/yinyue/songge/index.html',
           },
@@ -432,7 +432,7 @@ On the road to victory!`,
         version: '原版',
         audios: [
           {
-            url: '/music/zgsnxfddg_origin.mp3',
+            url: 'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives6/main/zgsnxfddg_origin.mp3',
             artist: '',
             source: 'http://www.mzdbl.com.cn/yinyue/songge/index.html',
           },
@@ -464,7 +464,7 @@ On the road to victory!`,
         version: '革命版',
         audios: [
           {
-            url: '/music/zgsnxfddg_wenge.mp3',
+            url: 'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives6/main/zgsnxfddg_wenge.mp3',
             artist: '北京市少年宫友谊合唱团',
             source: 'http://www.mzdbl.com.cn/yinyue/songge/index.html',
           },
@@ -502,7 +502,7 @@ On the road to victory!`,
         version: '原版',
         audios: [
           {
-            url: '/music/wmsgczyjbr_origin.mp3',
+            url: 'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives6/main/wmsgczyjbr_origin.mp3',
             artist: '',
             source: 'http://www.mzdbl.com.cn/yinyue/snet/index.html',
           },
@@ -533,7 +533,7 @@ On the road to victory!`,
         version: '改开版',
         audios: [
           {
-            url: '/music/wmsgczyjbr_gaikai.mp3',
+            url: 'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives6/main/wmsgczyjbr_gaikai.mp3',
             artist: '中央乐团合唱团',
             source: 'http://www.kuwo.cn/play_detail/40820406',
           },
@@ -577,7 +577,7 @@ On the road to victory!`,
         version: '原版',
         audios: [
           {
-            url: '/music/wcjjgmplhql_origin.mp3',
+            url: 'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives6/main/wcjjgmplhql_origin.mp3',
             artist: '',
             source: 'http://www.mzdbl.com.cn/yinyue/songge/index.html',
           },
@@ -619,7 +619,7 @@ On the road to victory!`,
         version: '原版',
         audios: [
           {
-            url: '/music/gjwcjjzzdqzqj_origin.mp3',
+            url: 'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives6/main/gjwcjjzzdqzqj_origin.mp3',
             artist: '铁道兵政治部文工团',
             source: 'http://www.mzdbl.com.cn/yinyue/songge/index.html',
           },
@@ -638,7 +638,7 @@ On the road to victory!`,
 亚非拉革命像爆发的火山，把五角大楼震得摇摇晃晃。
 同志们，把列宁主义大旗高高举起！
 同志们，国际歌要永远高声唱！
-全世界无产者联合起来，把帝国主义强盗彻底埋葬！
+mp3全世界无产者联合起来，把帝国主义强盗彻底埋葬！
 革命的火焰燃遍了全球，反帝的战鼓越擂越响。
 踢开那绊脚石勇往直前，迎着风暴纵横惊涛骇浪。
 同志们，把列宁主义大旗高高举起！
@@ -652,7 +652,7 @@ On the road to victory!`,
         version: '原版',
         audios: [
           {
-            url: '/music/blnzydqggjq_origin.mp3',
+            url: 'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives6/main/blnzydqggjq_origin.mp3',
             artist: '中央乐团',
             source: 'http://www.mzdbl.com.cn/yinyue/jingxuan246/index.html',
           },
@@ -680,12 +680,12 @@ On the road to victory!`,
         version: '原版',
         audios: [
           {
-            url: '/music/zfyl.mp3',
+            url: 'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives6/main/zfyl.mp3',
             artist: '中央广播文工团',
             source: 'http://www.mzdbl.com.cn/yinyue/yulu/index.html',
           },
           {
-            url: '/music/zfyl_jp.mp3',
+            url: 'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives6/main/zfyl_jp.mp3',
             artist: '日本齿轮座剧团',
             source: 'http://www.mzdbl.com.cn/yinyue/yulu/index.html',
           },
@@ -706,7 +706,7 @@ On the road to victory!`,
         version: '原版',
         audios: [
           {
-            url: '/music/rmsczsjlsddl.mp3',
+            url: 'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives6/main/rmsczsjlsddl.mp3',
             artist: '中央乐团',
             source: 'http://www.mzdbl.com.cn/yinyue/yulu/index.html',
           },
@@ -738,7 +738,7 @@ On the road to victory!`,
         version: '原版',
         audios: [
           {
-            url: '/music/zzdtqtbssm.mp3',
+            url: 'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives6/main/zzdtqtbssm.mp3',
             artist: '中央乐团',
             source: 'http://www.mzdbl.com.cn/yinyue/yulu/index.html',
           },
@@ -762,7 +762,7 @@ On the road to victory!`,
         version: '原版',
         audios: [
           {
-            url: '/music/zqsl.mp3',
+            url: 'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives6/main/zqsl.mp3',
             artist: '中央广播文工团',
             source: 'http://www.mzdbl.com.cn/yinyue/yulu/index.html',
           },
@@ -794,7 +794,7 @@ On the road to victory!`,
         version: '原版',
         audios: [
           {
-            url: '/music/qjzmzxdgmlxs.aac',
+            url: 'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives6/main/qjzmzxdgmlxs.aac',
             artist: '',
             source: 'https://www.bilibili.com/video/BV1Tq4y1q7Ph',
           },
@@ -840,7 +840,7 @@ On the road to victory!`,
         version: '原版',
         audios: [
           {
-            url: '/music/qsjwczlhql.mp3',
+            url: 'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives6/main/qsjwczlhql.mp3',
             artist: '',
             source: 'http://www.mzdbl.com.cn/yinyue/jingxuan246/index.html',
           },
@@ -874,7 +874,7 @@ On the road to victory!`,
         version: '原版',
         audios: [
           {
-            url: '/music/wmdpybtx.mp3',
+            url: 'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives6/main/wmdpybtx.mp3',
             artist: '',
             source: 'http://www.mzdbl.com.cn/yinyue/gequ/index.html',
           },
@@ -906,7 +906,7 @@ On the road to victory!`,
         version: '原版',
         audios: [
           {
-            url: '/music/qsjrmydsl.mp3',
+            url: 'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives6/main/qsjrmydsl.mp3',
             artist: '中央乐团',
             source: 'http://www.mzdbl.com.cn/yinyue/jingxuan246/index.html',
           },
@@ -945,7 +945,7 @@ On the road to victory!`,
         version: '原版',
         audios: [
           {
-            url: '/music/wggwcjjzzfydz.mp3',
+            url: 'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives6/main/wggwcjjzzfydz.mp3',
             artist: '解放军铁道兵歌舞团',
             source: 'http://www.mzdbl.com.cn/yinyue/songge/index.html',
           },
@@ -987,7 +987,7 @@ On the road to victory!`,
         version: '原版',
         audios: [
           {
-            url: '/music/gmzsqnzg.mp3',
+            url: 'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives6/main/gmzsqnzg.mp3',
             artist: '中央乐团',
             source: 'http://www.mzdbl.com.cn/yinyue/songge/index.html',
           },
@@ -1018,7 +1018,7 @@ On the road to victory!`,
         version: '原版',
         audios: [
           {
-            url: '/music/xzgdqn.aac',
+            url: 'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives6/main/xzgdqn.aac',
             artist: '中央音乐学院上海分院音工团唱',
             source: 'https://www.bilibili.com/video/BV1Va4y1i7zm',
           },
@@ -1055,9 +1055,43 @@ On the road to victory!`,
         version: '原版',
         audios: [
           {
-            url: '/music/wmsmzqn.aac',
+            url: 'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives6/main/wmsmzqn.aac',
             artist: '',
             source: 'https://www.bilibili.com/video/BV1t7411c75W',
+          },
+        ],
+      },
+    ],
+  },
+  {
+    name: '我们都是红卫兵',
+    composer: '',
+    description: '',
+    lyrics: [
+      {
+        lyricist: '',
+        content: `红色的袖章火热的心
+        我们都是红卫兵 红卫兵
+        毛主席是统帅
+        我们都是他的小兵
+        扛红旗 打冲锋
+        敢干敢闯敢革命
+        破四旧 立四新
+        横扫一切牛鬼蛇神
+        红色的袖章火热的心
+        我们都是红卫兵 红卫兵
+        用毛泽东思想来武装
+        誓做红色接班人
+        爱集体为人民
+        反帝反修最坚定
+        永远跟著毛主席
+        迎着风雷奋勇前进`,
+        version: '原版',
+        audios: [
+          {
+            url: 'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives6/main/wmdshwb_origin.mp3',
+            artist: '上海革命文工团演唱',
+            source: 'http://www.mzdbl.com.cn/yinyue/songge/index.html',
           },
         ],
       },
