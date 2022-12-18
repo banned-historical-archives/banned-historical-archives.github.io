@@ -42,8 +42,6 @@ jobs:
     - run: CI=true npm run init-db
     - run: SITE_URL='https://banned-historical-archives.github.io' CI=true COMMIT_HASH="${{ github.sha }}" npm run build
     - run: touch out/.nojekyll
-    - run: mv out/BingSiteAuth.github.xml out/BingSiteAuth.xml
-    - run: mv out/googlefd23833910da97f2.github.html out/googlefd23833910da97f2.html
     - run: git config --global http.postBuffer 2097152000
     - name: Deploy to GitHub Pages
       uses: crazy-max/ghaction-github-pages@v3
