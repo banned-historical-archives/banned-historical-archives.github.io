@@ -8,6 +8,8 @@ jobs:
     name: media
     if: ${{ startsWith(github.event.issue.title, '[自动化多媒体录入]') }}
     runs-on: ubuntu-latest
+    permissions:
+      contents: read  # <--- allows to read repo
     container:
       image:  node:10.16-jessie
       options: --user root
@@ -23,8 +25,6 @@ jobs:
         uses: filipstefansson/uuid-action@v1
         with:
           name: media${{ env.GITHUB_ACTION }}${{ env.GITHUB_RUN_NUMBER }}${{ github.sha }}${{ steps.time.outputs.time }}
-      - run: add-apt-repository -y ppa:git-core/ppa
-      - run: apt update
       - run: apt install git -y
       - uses: actions/checkout@v3
         with:
