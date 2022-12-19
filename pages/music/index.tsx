@@ -421,7 +421,7 @@ export default function Music({ music }: { music: MusicEntity[] }) {
         音乐
       </Typography>
       <Typography variant="body1" sx={{ mb: 1 }}>
-        主要收录无产阶级文化大革命前后创作的红色音乐，其中一类是改开后歌词被官方篡改的音乐，另一类是歌词或标题被视为敏感内容的音乐。
+      多媒体资料包括音乐及歌词、电影、照片、录音等。目前主要收录社会主义中国创作的红色音乐。
       </Typography>
       <audio
         ref={audioRef}

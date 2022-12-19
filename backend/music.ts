@@ -473,7 +473,7 @@ On the road to victory!`,
     ],
   },
   {
-    name: '中国少年先锋队队歌（新）/我们是共产主义接班人',
+    name: '我们是共产主义接班人',
     composer: '寄明',
     description: '',
     lyrics: [
@@ -1092,6 +1092,430 @@ mp3全世界无产者联合起来，把帝国主义强盗彻底埋葬！
             url: 'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives6/main/wmdshwb_origin.mp3',
             artist: '上海革命文工团演唱',
             source: 'http://www.mzdbl.com.cn/yinyue/songge/index.html',
+          },
+        ],
+      },
+    ],
+  },
+  {
+    name: '采药',
+    composer: '',
+    description: '',
+    lyrics: [
+      {
+        lyricist: '',
+        content: `脚踩白云头顶天
+        身挎背箩上苍山
+        踏遍青山尝百草
+        悬崖陡壁敢登攀
+        苍山上 采药忙
+        哎咿呀嗬嗬
+        手舞银锄精神爽
+        口尝百草心里甜
+        救死扶伤为人民
+        送医送药到门前
+        我们是公社的红色卫生员
+        毛主席指示牢记在心间
+        踏遍青山尝百草咿哟
+        白族姑娘采药上苍山
+        朝霞映红苍山顶
+        歌声响彻洱海边
+        站在苍山望北京
+        北京苍山紧相连
+        苍山上 采药忙
+        哎咿呀嗬嗬
+        采来草约治百病
+        迎来边疆春满园
+        合作医疗实在好
+        贫下中农笑开颜
+        我们是公社的红色卫生员
+        毛主席指示牢记在心间
+        踏遍青山尝百草咿哟
+        白族姑娘采药上苍山
+        咿哟嗬嗬`,
+        version: '原版',
+        audios: [
+          {
+            url: 'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives6/main/caiyao.mp3',
+            artist: '合唱 张汉举等词 张汉举曲',
+            source: 'http://ip.lidicity.com/hj/cn/hsjd.html#top',
+          },
+        ],
+      },
+    ],
+  },
+  {
+    name: '会昌',
+    composer: '',
+    description: '',
+    lyrics: [
+      {
+        lyricist: '',
+        content: `东方欲晓
+        莫道君行早
+        踏遍青山人未老
+        风景这边独好
+        
+        会昌城外高峰
+        颠连直接东溟
+        战士指看南粤
+        更加郁郁葱葱`,
+        version: '原版',
+        audios: [
+          {
+            url: 'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives6/main/huichang.mp3',
+            artist: '蔡绍序 毛泽东词 羊路由曲',
+            source: 'http://ip.lidicity.com/hj/cn/hsjd.html#top',
+          },
+        ],
+      },
+    ],
+  },
+  {
+    name: '丰收',
+    composer: '',
+    description: '',
+    lyrics: [
+      {
+        lyricist: '',
+        content: `九月里太阳明晃晃
+        秋风吹动了新衣裳
+        站立在山岗望一望
+        山上山下是金黄黄
+        手舞着镰刀口唱歌
+        唱的是秋收人快乐
+        
+        提起个家来家有名
+        家住在西北陕甘宁
+        人人都知道是这逮儿好
+        这逮人民最光荣
+        山丹丹开花山坡坡上红
+        毛主席领导咱闹革命
+        分下了土地咱自己种
+        才有这般好光景
+        三十里明沙二十里的水
+        人民的江山实在是个美
+        自从咱闹开了大生产
+        咱们才能有今天
+        
+        走到了那个田边来呀
+        咿呀子哟
+        不由得好喜欢呀
+        哪哈么咿子哟
+        谷穗穗呀沉甸甸
+        个个赛金鞭呀哈哈哎
+        一望不见边哪
+        哎咿呀哎咳子哟
+        年青青那个小伙子
+        咿呀子哟
+        抡起了月芽镰呀
+        哪哈么咿子哟
+        你看那呀婆姨娃娃
+        谁也不落后呀哈哈哎
+        紧追赶上前哪
+        哎咿呀哎咳子哟
+        
+        一把镰刀么嗬咳
+        快快割呀么嗬咳
+        镰刀下去么齐里里里
+        嚓啦啦啦 嗦啰啰啰得
+        割蜜子呀么嗬咳
+        二把镰刀么嗬咳
+        割的多呀么嗬咳
+        镰刀下去么齐里里里
+        嚓啦啦啦 嗦啰啰啰得
+        割谷子呀么嗬咳
+        三把镰刀么嗬咳
+        割的多呀么嗬咳
+        镰刀下去么齐里里里
+        嚓啦啦啦 嗦啰啰啰得
+        割荞麦呀么嗬咳
+        十把镰刀么嗬咳
+        割的多呀么嗬咳
+        今年丰收么齐里里里
+        嚓啦啦啦 嗦啰啰啰得
+        好生活呀么嗬咳
+        
+        满天的彩霞万道道光
+        庄稼人心里喜洋洋
+        年年的收成堆满仓
+        毛主席恩情不能忘
+        年年的收成堆满仓
+        毛主席恩情不能忘`,
+        version: '原版',
+        audios: [
+          {
+            url: 'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives6/main/fengshou.mp3',
+            artist: '于连生、王作欣 安波词 贺绿汀编曲',
+            source: 'http://ip.lidicity.com/hj/cn/hsjd.html#top',
+          },
+        ],
+      },
+    ],
+  },
+  {
+    name: '赞歌',
+    composer: '',
+    description: '',
+    lyrics: [
+      {
+        lyricist: '',
+        content: `啊……嘿咿耶 啊……
+        从草原来到天安门广场
+        高举金杯把赞歌唱
+        感谢伟大的共产党
+        祝福毛主席万寿无疆
+        英雄的祖国屹立在东方
+        像初升的太阳光芒万丈
+        各民族兄弟欢聚在一起
+        庆贺我们的翻身解放
+        啊……嗬咿……`,
+        version: '原版',
+        audios: [
+          {
+            url: 'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives6/main/zange.mp3',
+            artist: '胡松华 胡松华词 编曲',
+            source: 'http://ip.lidicity.com/hj/cn/hsjd.html#top',
+          },
+        ],
+      },
+    ],
+  },
+  {
+    name: '赞歌',
+    composer: '',
+    description: '',
+    lyrics: [
+      {
+        lyricist: '',
+        content: `啊 嘿咿耶 啊……
+
+        从草原来到毛主席的身旁
+        手捧宝书把赞歌唱
+        感谢伟大的共产党
+        祝福毛主席万寿无疆
+        
+        英雄的祖国屹立在东方
+        像初升的太阳光芒万丈
+        各民族人民跟着毛主席
+        奔向共产主义前方
+        
+        啊 嗬咿……`,
+        version: '原版',
+        audios: [
+          {
+            url: 'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives6/main/zange2.mp3',
+            artist: '内蒙古乌兰牧骑毛泽东思想宣传队 集体改词 胡松华词 编曲',
+            source: 'http://ip.lidicity.com/hj/cn/hsjd.html#top',
+          },
+        ],
+      },
+    ],
+  },
+  {
+    name: '毕业歌',
+    composer: '',
+    description: '',
+    lyrics: [
+      {
+        lyricist: '',
+        content: `同学们 大家起来
+        奔向那抗战的前方
+        听吧 抗战的号角已吹响
+        看吧 战斗的红旗在飘扬
+        我们跟着共产党拿起枪
+        我们誓死保卫祖国的边疆
+        我们决心把侵略者
+        彻底埋葬
+        我们要和工农在一起
+        筑成那铁壁铜墙
+        全国人民团结起来
+        迎接那民族解放
+        胜利的曙光
+        前进 前进 军号已吹响
+        同学们 同学们
+        快行动起来
+        奔向那抗战的前方
+        前进 前进 军号已吹响
+        同学们 同学们
+        快行动起来
+        奔向那抗战的前方`,
+        version: '原版',
+        audios: [
+          {
+            url: 'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives6/main/biyege.mp3',
+            artist: '中央乐团 集体重新填词 聂耳曲',
+            source: 'http://ip.lidicity.com/hj/cn/hsjd.html#top',
+          },
+        ],
+      },
+    ],
+  },
+  {
+    name: '采茶灯',
+    composer: '',
+    description: '',
+    lyrics: [
+      {
+        lyricist: '',
+        content: `正月算来闹匆匆
+        家家户户点灯红
+        茶女翻身做主人
+        感谢共产党大恩人
+        茶女翻身
+        感谢共产党大恩人
+        
+        二月算来春草青
+        毛主席领导真英明
+        帮助茶山来恢复
+        给咱生活得安宁
+        茶山来恢复
+        给咱生活得安宁
+        
+        三月算来是清明
+        政府对咱真照顾
+        借肥贷款整家私
+        发展生产有前途
+        贷款整家私
+        发展生产有前途
+        
+        四月算来日头长
+        当今不比往旧时
+        积极种作来互助
+        自种自收免受苦
+        积极种作
+        自种自收免受苦
+        
+        五月算来闹匆匆是端阳
+        工农联盟力量强
+        大力开展城乡互助
+        发展生产好道路
+        
+        六月算来闹匆匆好收成
+        现今茶山有出息
+        采到好茶拿去卖
+        买吃买穿免欠债
+        
+        七月算来闹匆匆是七夕
+        当今不比是早日
+        过去种茶无人爱
+        现时种茶是自己代
+        
+        八月算来闹匆匆月正圆
+        家家户户过中秋
+        翻身过节真欢喜
+        茶山丰收笑嘻嘻`,
+        version: '原版',
+        audios: [
+          {
+            url: 'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives6/main/caichadeng.mp3',
+            artist: '女声合唱 福建龙岩民歌',
+            source: 'http://ip.lidicity.com/hj/cn/hsjd.html#top',
+          },
+        ],
+      },
+    ],
+  },
+  {
+    name: '打靶歌',
+    composer: '',
+    description: '',
+    lyrics: [
+      {
+        lyricist: '',
+        content: `走向打靶场 高唱打靶歌
+        豪情壮志震山河
+        子弹是战士的铁拳头
+        钢枪是战士的粗胳膊
+        阶级仇 压枪膛
+        民族恨 喷怒火
+        瞄得准来打得狠呐
+        一枪消灭一个侵略者
+        消灭侵略者
+        走向打靶场 高唱打靶歌
+        豪情壮志震山河
+        子弹是战士的铁拳头
+        钢枪是战士的粗胳膊
+        阶级仇 压枪膛
+        民族恨 喷怒火
+        瞄得准来打得狠呐
+        一枪消灭一个侵略者
+        消灭侵略者`,
+        version: '原版',
+        audios: [
+          {
+            url: 'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives6/main/dabage.mp3',
+            artist: '合唱 石祥词 生茂曲',
+            source: 'http://ip.lidicity.com/hj/cn/hsjd.html#top',
+          },
+        ],
+      },
+    ],
+  },
+  {
+    name: '大路歌',
+    composer: '',
+    description: '',
+    lyrics: [
+      {
+        lyricist: '',
+        content: `哼哟咳嗬嗬 咳咳嗬咳
+        哼哟嗬咳咳 哼嗬咳哼
+        哼哟咳嗬嗬 咳咳嗬咳
+        哼哟嗬咳咳 哼嗬咳哼
+        我们大家同心干 嗬嗬咳
+        力量如天
+        拉起铁滚齐向前 嗬咳哼
+        铁滚压碎旧世界 嗬嗬咳
+        修筑大路
+        创造工农新人间 嗬咳哼
+        工农弟兄一齐奋战
+        工农弟兄一齐奋战
+        推倒三座大山
+        填平苦难的深渊
+        跟着中国共产党
+        团结战斗到明天
+        工农弟兄联合起来
+        工农弟兄联合起来
+        披荆斩棘朝前走
+        革命大路宽又宽
+        哼哟咳嗬嗬 咳咳嗬咳
+        哼哟嗬咳咳 哼嗬咳哼
+        哼哟咳嗬嗬 咳咳嗬咳
+        哼哟嗬咳咳哼`,
+        version: '原版',
+        audios: [
+          {
+            url: 'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives6/main/daluge.mp3',
+            artist: '中央乐团 集体重新填词 聂耳曲',
+            source: 'http://ip.lidicity.com/hj/cn/hsjd.html#top',
+          },
+        ],
+      },
+    ],
+  },
+  {
+    name: '蝶恋花',
+    composer: '',
+    description: '',
+    lyrics: [
+      {
+        lyricist: '',
+        content: `我失骄杨君失柳
+        杨柳轻扬直上重霄九
+        问讯吴刚何所有
+        吴刚捧出桂花酒
+        
+        寂寞嫦娥舒广袖
+        万里长空且为忠魂舞
+        忽报人间曾伏虎
+        泪飞顿作倾盆雨`,
+        version: '原版',
+        audios: [
+          {
+            url: 'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives6/main/dielianha.mp3',
+            artist: '张映哲 毛泽东词 劫夫曲',
+            source: 'http://ip.lidicity.com/hj/cn/hsjd.html#top',
           },
         ],
       },
