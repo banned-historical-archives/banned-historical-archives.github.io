@@ -18,7 +18,7 @@ export async function start() {
       const body2: string = body1.substring(body1.lastIndexOf('```') + 3);
       const config = JSON5.parse(body2);
       config.archive_id =
-        config.archive_id == undefined ? 1 : config.archive_id;
+        config.archive_id == undefined ? 7 : config.archive_id;
       console.log(config.archive_id);
     } catch (e) {
       console.log(e);
