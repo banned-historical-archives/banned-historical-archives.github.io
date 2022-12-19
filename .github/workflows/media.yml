@@ -22,7 +22,6 @@ jobs:
         uses: filipstefansson/uuid-action@v1
         with:
           name: media${{ env.GITHUB_ACTION }}${{ env.GITHUB_RUN_NUMBER }}${{ github.sha }}${{ steps.time.outputs.time }}
-      - run: add-apt-repository -y ppa:git-core/ppa
       - run: apt update
       - run: apt install git -y
       - uses: actions/checkout@v3
