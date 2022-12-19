@@ -32,12 +32,12 @@ jobs:
           node-version: 16
       - run: npm i
       - id: get_archive_id
-        run: echo "name=archive_id::$(npx ts-node --project ./tsconfig.build.json backend/media-gitworkflow-get-archive-id.ts)" >> $GITHUB_OUTPUT
+        run: echo "archive_id=$(npx ts-node --project ./tsconfig.build.json backend/media-gitworkflow-get-archive-id.ts)" >> $GITHUB_ENV
         env:
           BODY: ${{ github.event.issue.body }}
           TITLE: ${{ github.event.issue.title }}
       - id: action_with_json_output
-        run: echo "name=data::$(npx ts-node --project ./tsconfig.build.json backend/media-gitworkflow.ts)" >> $GITHUB_OUTPUT
+        run: echo "data=$(npx ts-node --project ./tsconfig.build.json backend/media-gitworkflow.ts)" >> $GITHUB_ENV
         env:
           BODY: ${{ github.event.issue.body }}
           TITLE: ${{ github.event.issue.title }}
@@ -45,7 +45,7 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GH_PAT }}
         run: |
-          cd public/archives${{ steps.get_archive_id.outputs.archive_id }}
+          cd public/archives${{ env.archive_id }}
           git config --global user.name github-actions
           git config --global user.email github-actions@github.com
           git checkout -b feat-${{ steps.generate-uuid.outputs.uuid }}
@@ -56,7 +56,7 @@ jobs:
           -X POST \
           -H "Accept: application/vnd.github+json" \
           -H "Authorization: Bearer $GH_TOKEN" \
-          https://api.github.com/repos/banned-historical-archives/banned-historical-archives${{ steps.get_archive_id.outputs.archive_id }}/pulls \
+          https://api.github.com/repos/banned-historical-archives/banned-historical-archives${{ env.archive_id }}/pulls \
           -d '{"title":"${{ github.event.issue.title }}","body":"https://github.com/banned-historical-archives/banned-historical-archives.github.io/issues/${{github.event.issue.number}}","head":"feat-${{ steps.generate-uuid.outputs.uuid }}","base":"main"}'
           cd ../..
           git add .
@@ -72,4 +72,4 @@ jobs:
         uses: peter-evans/create-or-update-comment@v2
         with:
           issue-number: ${{github.event.issue.number}}
-          body: ${{ steps.action_with_json_output.outputs.data }}
+          body: ${{ env.data }}
