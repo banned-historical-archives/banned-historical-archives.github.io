@@ -22,6 +22,26 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: '356200c1-f3bd-460d-b160-e9b1d6c20060',
+      name: '论个人在历史上的作用问题（生活·读书·新知三联书店1964年版）',
+      internal: true,
+      official: true,
+      type: 'pdf',
+      author: '',
+      files: 'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives5/main/356200c1-f3bd-460d-b160-e9b1d6c20060.pdf',
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'pdf',
+      articles: [{"title":"论个人在历史上的作用问题","authors":["普列汉诺夫"],"page_start":4,"page_end":55,"dates":[{"year":1898}]},{"title":"注释","authors":[],"page_start":56,"page_end":61,"dates":[]},{"title":"人名索引","authors":[],"page_start":62,"page_end":69,"ocr":{"auto_vsplit":false,"vsplit":0.495},"dates":[]}],
+      ocr: {"content_thresholds":[0,0.128,0,0]},
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/books/archives5/356200c1-f3bd-460d-b160-e9b1d6c20060.pdf'),
+  },
+  {
+    entity: {
       id: 'd4e5bc82-4b7e-437b-89ae-e720f47d3d82',
       name: '红旗一九六七年第九期',
       internal: true,
