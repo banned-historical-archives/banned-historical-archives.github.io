@@ -59,23 +59,18 @@ jobs:
           https://api.github.com/repos/banned-historical-archives/banned-historical-archives${{ steps.get_archive_id.outputs.archive_id }}/pulls \
           -d '{"title":"${{ github.event.issue.title }}","body":"https://github.com/banned-historical-archives/banned-historical-archives.github.io/issues/${{github.event.issue.number}}","head":"feat-${{ steps.generate-uuid.outputs.uuid }}","base":"main"}'
       - name: Create Pull Request
-        id: cpr
-        uses: peter-evans/create-pull-request@v4
-        with:
-          body: 'fix #${{ github.event.issue.number }}'
-          committer: GitHub <noreply@github.com>
-          author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
-          signoff: false
-          branch-suffix: random
-          delete-branch: true
-          title: '${{ github.event.issue.title }}'
-          labels: |
-            report
-            automated pr
-          team-reviewers: |
-            owners
-            maintainers
-          draft: false
+        env:
+          GH_TOKEN: ${{ secrets.GH_PAT }}
+        run: |
+          git add .
+          git commit -m 'feat: ${{ github.event.issue.title }}'
+          git push origin feat-${{ steps.generate-uuid.outputs.uuid }}
+          curl \
+          -X POST \
+          -H "Accept: application/vnd.github+json" \
+          -H "Authorization: Bearer $GH_TOKEN" \
+          https://api.github.com/repos/banned-historical-archives/banned-historical-archives.github.io/pulls \
+          -d '{"title":"${{ github.event.issue.title }}","body":"https://github.com/banned-historical-archives/banned-historical-archives.github.io/issues/${{github.event.issue.number}}","head":"feat-${{ steps.generate-uuid.outputs.uuid }}","base":"main"}'
       - name: Create comment
         uses: peter-evans/create-or-update-comment@v2
         with:
