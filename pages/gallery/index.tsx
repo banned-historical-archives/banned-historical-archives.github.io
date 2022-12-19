@@ -40,6 +40,9 @@ import Typography from '@mui/material/Typography';
 import PauseCircleIcon from '@mui/icons-material/PauseCircle';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { DiffViewer } from '../../components/DiffViewer';
+import { DataGridPro, GridColDef, GridRenderCellParams, GridValueGetterParams, zhCN } from '@mui/x-data-grid-pro';
+import { ensure_two_digits } from '../../utils';
+import ImageTags from '../../components/ImageTags';
 
 export const getStaticProps: GetStaticProps = async (
   context: GetStaticPropsContext,
@@ -57,6 +60,82 @@ export const getStaticProps: GetStaticProps = async (
   };
 };
 
+const columns: GridColDef<ImageEntity>[] = [
+  {
+    field: 'url',
+    headerName: '预览',
+    minWidth: 350,
+    flex: 1,
+    renderCell: (params: GridRenderCellParams<string, ImageEntity>) => (
+      <img src={params.row!.url} width="100%"/>
+    ),
+  },
+  {
+    field: 'name',
+    headerName: '名称',
+    minWidth: 350,
+    flex: 1,
+    renderCell: (params: GridRenderCellParams<string, ImageEntity>) => (
+      <div>{params.row!.name}</div>
+    ),
+  },
+  {
+    field: 'description',
+    headerName: '描述',
+    minWidth: 150,
+    flex: 1,
+    renderCell: (params: GridRenderCellParams<string, ImageEntity>) => (
+      <div>{params.row.description}</div>
+    ),
+  },
+  {
+    field: 'dates',
+    headerName: '时间',
+    minWidth: 150,
+    flex: 1,
+    valueGetter: (params: GridValueGetterParams<ImageEntity, ImageEntity>) =>
+      params.row.year
+        ? [
+            params.row.year || '----',
+            ensure_two_digits(params.row.month, '--'),
+            ensure_two_digits(params.row.day, '--'),
+          ]
+            .filter((j) => j)
+            .join('/')
+        : '----/--/--',
+    renderCell: (params: GridRenderCellParams<string, ImageEntity>) => (
+      <Stack spacing={1}>
+        <Typography variant="caption">
+          {params.row.year
+            ? [
+                params.row.year,
+                ensure_two_digits(params.row.month),
+                ensure_two_digits(params.row.day),
+              ]
+                .filter((j) => j)
+                .join('/')
+            : '----/--/--'}
+        </Typography>
+      </Stack>
+    ),
+  },
+  {
+    field: 'tags',
+    headerName: '标签',
+    minWidth: 150,
+    flex: 1,
+    sortComparator: (tags_a: string, tags_b: string) => {
+      return tags_a > tags_b ? 1 : -1;
+    },
+    valueGetter: (params: GridValueGetterParams<ImageEntity, ImageEntity>) =>
+      params.row.tags.map((i) => i.name).join(','),
+    renderCell: (params: GridRenderCellParams<string, ImageEntity>) => (
+      <div style={{ overflow: 'visible' }}>
+        <ImageTags tags={params.row.tags} />
+      </div>
+    ),
+  },
+];
 export default function Gallery({ images }: { images: ImageEntity[] }) {
   return (
     <Stack p={2} sx={{ height: '100%', overflow: 'scroll' }}>
@@ -66,16 +145,18 @@ export default function Gallery({ images }: { images: ImageEntity[] }) {
       <Typography variant="h4" sx={{ mb: 1 }}>
         图库
       </Typography>
-      <Typography variant="body1" sx={{ mb: 1 }}>
-        ...
-      </Typography>
-      {images.map((i) => (
-        <img
-          key={i.id}
-          src={i.url}
-          alt={i.name}
-        />
-      ))}
+        <Stack sx={{ flex: 1, width: '100%' }}>
+          <DataGridPro
+            getRowId={(row) => row.id}
+            localeText={zhCN.components.MuiDataGrid.defaultProps.localeText}
+            getRowHeight={() => 'auto'}
+            rows={images}
+            columns={columns}
+            pageSize={100}
+            rowsPerPageOptions={[100]}
+            disableSelectionOnClick
+          />
+        </Stack>
     </Stack>
   );
 }
