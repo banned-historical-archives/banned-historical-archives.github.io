@@ -62,6 +62,8 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GH_PAT }}
         run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
           git add .
           git commit -m 'feat: ${{ github.event.issue.title }}'
           git push origin feat-${{ steps.generate-uuid.outputs.uuid }}
