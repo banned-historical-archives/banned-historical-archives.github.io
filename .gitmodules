@@ -18,7 +18,7 @@
 	url = git@github.com:banned-historical-archives/banned-historical-archives5.git
 [submodule "public/archives6"]
 	path = public/archives6
-	url = git@github.com:banned-historical-archives/banned-historical-archives6.git
+	url = git@github.com-bha:banned-historical-archives/banned-historical-archives6.git
 [submodule "public/archives7"]
 	path = public/archives7
-	url = git@github.com:banned-historical-archives/banned-historical-archives7.git
+	url = git@github.com-bha:banned-historical-archives/banned-historical-archives7.git
