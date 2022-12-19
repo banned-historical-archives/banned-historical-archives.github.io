@@ -38,7 +38,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives5/1c08350f-94a5-442d-a4b2-8669042a15f3.pdf'),
+    path: join(normalize(__dirname), '../public/archives5/1c08350f-94a5-442d-a4b2-8669042a15f3.pdf'),
   },
   {
     entity: {
@@ -58,7 +58,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives5/1ca028e4-fff4-4082-b7bb-2e7960cb315e.pdf'),
+    path: join(normalize(__dirname), '../public/archives5/1ca028e4-fff4-4082-b7bb-2e7960cb315e.pdf'),
   },
   {
     entity: {
@@ -78,7 +78,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives5/356200c1-f3bd-460d-b160-e9b1d6c20060.pdf'),
+    path: join(normalize(__dirname), '../public/archives5/356200c1-f3bd-460d-b160-e9b1d6c20060.pdf'),
   },
   {
     entity: {
@@ -98,7 +98,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives2/d4e5bc82-4b7e-437b-89ae-e720f47d3d82.pdf'),
+    path: join(normalize(__dirname), '../public/archives2/d4e5bc82-4b7e-437b-89ae-e720f47d3d82.pdf'),
   },
   {
     entity: {
@@ -118,7 +118,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives2/30299295-af23-4582-9bfc-2c78a5f913fa.pdf'),
+    path: join(normalize(__dirname), '../public/archives2/30299295-af23-4582-9bfc-2c78a5f913fa.pdf'),
   },
   {
     entity: {
@@ -138,7 +138,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives2/b47af6ff-5fc5-4226-9320-3bce4c882455.pdf'),
+    path: join(normalize(__dirname), '../public/archives2/b47af6ff-5fc5-4226-9320-3bce4c882455.pdf'),
   },
   {
     entity: {
@@ -158,7 +158,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives2/65b91eb9-585f-4834-9613-dd9e4d4824a9.pdf'),
+    path: join(normalize(__dirname), '../public/archives2/65b91eb9-585f-4834-9613-dd9e4d4824a9.pdf'),
   },
   {
     entity: {
@@ -178,7 +178,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives2/678bf2d4-62a5-482a-ae4b-122bdc1a038c.pdf'),
+    path: join(normalize(__dirname), '../public/archives2/678bf2d4-62a5-482a-ae4b-122bdc1a038c.pdf'),
   },
   {
     entity: {
@@ -198,7 +198,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives3/0aa42889-8ffa-4c59-8328-f5fecb4c8bc5.pdf'),
+    path: join(normalize(__dirname), '../public/archives3/0aa42889-8ffa-4c59-8328-f5fecb4c8bc5.pdf'),
   },
   {
     entity: {
@@ -218,7 +218,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives3/18e2f682-cab0-46c1-8938-73d651dfe1a9.pdf'),
+    path: join(normalize(__dirname), '../public/archives3/18e2f682-cab0-46c1-8938-73d651dfe1a9.pdf'),
   },
   {
     entity: {
@@ -238,7 +238,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives4/b22aa9e7-4513-4f72-b912-17f5d5138bb4.pdf'),
+    path: join(normalize(__dirname), '../public/archives4/b22aa9e7-4513-4f72-b912-17f5d5138bb4.pdf'),
   },
   {
     entity: {
@@ -258,7 +258,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives3/65e1c2e6-7cad-438f-8bfb-fab996595b1c.pdf'),
+    path: join(normalize(__dirname), '../public/archives3/65e1c2e6-7cad-438f-8bfb-fab996595b1c.pdf'),
   },
   {
     entity: {
@@ -278,7 +278,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives3/8a563ff2-adac-4454-a821-36ef7e584dd4.pdf'),
+    path: join(normalize(__dirname), '../public/archives3/8a563ff2-adac-4454-a821-36ef7e584dd4.pdf'),
   },
   {
     entity: {
@@ -298,7 +298,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives3/7ca5f98f-3f32-47e2-a382-f82c1c185a61.pdf'),
+    path: join(normalize(__dirname), '../public/archives3/7ca5f98f-3f32-47e2-a382-f82c1c185a61.pdf'),
   },
   {
     entity: {
@@ -318,7 +318,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives3/8df86c6d-7b4e-4d28-8d93-4dfe4cb87a51.pdf'),
+    path: join(normalize(__dirname), '../public/archives3/8df86c6d-7b4e-4d28-8d93-4dfe4cb87a51.pdf'),
   },
   {
     entity: {
@@ -338,7 +338,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives3/0c621503-01d4-4b8f-9cf2-f405bbb14ad9.pdf'),
+    path: join(normalize(__dirname), '../public/archives3/0c621503-01d4-4b8f-9cf2-f405bbb14ad9.pdf'),
   },
   {
     entity: {
@@ -358,7 +358,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives3/01970a4d-895c-4f40-9511-60b51d869906.pdf'),
+    path: join(normalize(__dirname), '../public/archives3/01970a4d-895c-4f40-9511-60b51d869906.pdf'),
   },
   {
     entity: {
@@ -378,7 +378,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives5/f1a4874b-ff59-4524-acd5-b23fac5d81d1.pdf'),
+    path: join(normalize(__dirname), '../public/archives5/f1a4874b-ff59-4524-acd5-b23fac5d81d1.pdf'),
   },
   {
     entity: {
@@ -398,7 +398,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives4/0bbdba91-48e9-4148-9ec2-38bf6792cca7.pdf'),
+    path: join(normalize(__dirname), '../public/archives4/0bbdba91-48e9-4148-9ec2-38bf6792cca7.pdf'),
   },
   {
     entity: {
@@ -418,7 +418,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives4/5a84af78-bb0e-4b06-9927-91920277b267.pdf'),
+    path: join(normalize(__dirname), '../public/archives4/5a84af78-bb0e-4b06-9927-91920277b267.pdf'),
   },
   {
     entity: {
@@ -438,7 +438,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives4/0390c365-6951-4e70-9dc5-9f7aa4c900ab.pdf'),
+    path: join(normalize(__dirname), '../public/archives4/0390c365-6951-4e70-9dc5-9f7aa4c900ab.pdf'),
   },
   {
     entity: {
@@ -458,7 +458,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives5/15594e62-38a3-46db-b5e7-dc4be1d194fa.pdf'),
+    path: join(normalize(__dirname), '../public/archives5/15594e62-38a3-46db-b5e7-dc4be1d194fa.pdf'),
   },
   {
     entity: {
@@ -478,7 +478,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives3/ff7c277a-e54a-4c0f-97f7-f1548d7728b1.pdf'),
+    path: join(normalize(__dirname), '../public/archives3/ff7c277a-e54a-4c0f-97f7-f1548d7728b1.pdf'),
   },
   {
     entity: {
@@ -498,7 +498,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/5717249f-0249-47cf-9d87-0f960ce7d4b3.pdf'),
+    path: join(normalize(__dirname), '../public/archives1/5717249f-0249-47cf-9d87-0f960ce7d4b3.pdf'),
   },
   {
     entity: {
@@ -518,7 +518,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/187473e3-da31-44f3-95e9-8b7b89c95627.pdf'),
+    path: join(normalize(__dirname), '../public/archives1/187473e3-da31-44f3-95e9-8b7b89c95627.pdf'),
   },
   {
     entity: {
@@ -538,7 +538,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives3/61ae9a00-9153-4e4e-9b79-f8aeb954c7e9.pdf'),
+    path: join(normalize(__dirname), '../public/archives3/61ae9a00-9153-4e4e-9b79-f8aeb954c7e9.pdf'),
   },
   {
     entity: {
@@ -566,7 +566,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives3/289bf08c-009d-4507-a4f4-b9f4a5002e1d'),
+    path: join(normalize(__dirname), '../public/archives3/289bf08c-009d-4507-a4f4-b9f4a5002e1d'),
   },
   {
     entity: {
@@ -594,7 +594,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/e3f95fea-9501-4dd7-8e5a-845a1c7234b3'),
+    path: join(normalize(__dirname), '../public/archives1/e3f95fea-9501-4dd7-8e5a-845a1c7234b3'),
   },
   {
     entity: {
@@ -622,7 +622,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/1b577929-8e72-4e52-a897-1388a0b4949c'),
+    path: join(normalize(__dirname), '../public/archives1/1b577929-8e72-4e52-a897-1388a0b4949c'),
   },
   {
     entity: {
@@ -650,7 +650,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/d5aa4730-b778-49c2-af22-093b61025603'),
+    path: join(normalize(__dirname), '../public/archives1/d5aa4730-b778-49c2-af22-093b61025603'),
   },
   {
     entity: {
@@ -678,7 +678,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/2e2e3766-4530-464b-882c-f8b079a63e66'),
+    path: join(normalize(__dirname), '../public/archives1/2e2e3766-4530-464b-882c-f8b079a63e66'),
   },
   {
     entity: {
@@ -698,7 +698,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives5/aaa61d45-fb7f-40d1-8012-54defb857880.pdf'),
+    path: join(normalize(__dirname), '../public/archives5/aaa61d45-fb7f-40d1-8012-54defb857880.pdf'),
   },
   {
     entity: {
@@ -718,7 +718,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives3/8c040e88-0a79-4c47-8f9c-bb158d7207a2.pdf'),
+    path: join(normalize(__dirname), '../public/archives3/8c040e88-0a79-4c47-8f9c-bb158d7207a2.pdf'),
   },
   {
     entity: {
@@ -738,7 +738,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives4/255cf4cb-cd67-45ab-b5e8-8240fdbad8f8.pdf'),
+    path: join(normalize(__dirname), '../public/archives4/255cf4cb-cd67-45ab-b5e8-8240fdbad8f8.pdf'),
   },
   {
     entity: {
@@ -758,7 +758,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives4/473a6aa4-11e7-4750-b958-17c7a7ebe666.pdf'),
+    path: join(normalize(__dirname), '../public/archives4/473a6aa4-11e7-4750-b958-17c7a7ebe666.pdf'),
   },
   {
     entity: {
@@ -778,7 +778,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives3/8a5d13d0-5502-47e3-ba6d-d6366092d4a5.pdf'),
+    path: join(normalize(__dirname), '../public/archives3/8a5d13d0-5502-47e3-ba6d-d6366092d4a5.pdf'),
   },
   {
     entity: {
@@ -798,7 +798,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives3/0d3234ae-8b97-4a0c-b944-a0fc427e1fca.pdf'),
+    path: join(normalize(__dirname), '../public/archives3/0d3234ae-8b97-4a0c-b944-a0fc427e1fca.pdf'),
   },
   {
     entity: {
@@ -818,7 +818,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives3/91043fc5-3827-42f1-921b-6ac089edce61.pdf'),
+    path: join(normalize(__dirname), '../public/archives3/91043fc5-3827-42f1-921b-6ac089edce61.pdf'),
   },
   {
     entity: {
@@ -838,7 +838,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives4/0fcbbaa0-3b65-40fb-902e-678b9fd6e506.pdf'),
+    path: join(normalize(__dirname), '../public/archives4/0fcbbaa0-3b65-40fb-902e-678b9fd6e506.pdf'),
   },
   {
     entity: {
@@ -858,7 +858,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives2/9396d223-50a3-44f6-990b-88dbf5b0aec8.pdf'),
+    path: join(normalize(__dirname), '../public/archives2/9396d223-50a3-44f6-990b-88dbf5b0aec8.pdf'),
   },
   {
     entity: {
@@ -878,7 +878,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives3/8ee91ddf-1674-4e2a-acdc-3e4feeed9318.pdf'),
+    path: join(normalize(__dirname), '../public/archives3/8ee91ddf-1674-4e2a-acdc-3e4feeed9318.pdf'),
   },
   {
     entity: {
@@ -898,7 +898,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives5/e7f7880a-12b6-4450-992d-72b1be2d1385.pdf'),
+    path: join(normalize(__dirname), '../public/archives5/e7f7880a-12b6-4450-992d-72b1be2d1385.pdf'),
   },
   {
     entity: {
@@ -918,7 +918,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives4/7bad84cf-bf80-4e51-9638-bc219b7eee2c.pdf'),
+    path: join(normalize(__dirname), '../public/archives4/7bad84cf-bf80-4e51-9638-bc219b7eee2c.pdf'),
   },
   {
     entity: {
@@ -938,7 +938,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives3/563a0188-ee72-4cd8-bd21-734004f80cae.pdf'),
+    path: join(normalize(__dirname), '../public/archives3/563a0188-ee72-4cd8-bd21-734004f80cae.pdf'),
   },
   {
     entity: {
@@ -958,7 +958,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives3/77fd62e6-e508-483f-91b3-f5e144115abb.pdf'),
+    path: join(normalize(__dirname), '../public/archives3/77fd62e6-e508-483f-91b3-f5e144115abb.pdf'),
   },
   {
     entity: {
@@ -978,7 +978,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives2/ec092bcb-62c2-4012-8852-e8af817c0656.pdf'),
+    path: join(normalize(__dirname), '../public/archives2/ec092bcb-62c2-4012-8852-e8af817c0656.pdf'),
   },
   {
     entity: {
@@ -998,7 +998,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives2/1402c0cd-2f04-47cb-bce0-12fcb4b03a4f.pdf'),
+    path: join(normalize(__dirname), '../public/archives2/1402c0cd-2f04-47cb-bce0-12fcb4b03a4f.pdf'),
   },
   {
     entity: {
@@ -1018,7 +1018,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives2/5d134b4e-e043-4e82-9c29-b46cc18715c1.pdf'),
+    path: join(normalize(__dirname), '../public/archives2/5d134b4e-e043-4e82-9c29-b46cc18715c1.pdf'),
   },
   {
     entity: {
@@ -1038,7 +1038,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives2/61612ccb-a285-40a9-a563-c70499cdd364.pdf'),
+    path: join(normalize(__dirname), '../public/archives2/61612ccb-a285-40a9-a563-c70499cdd364.pdf'),
   },
   {
     entity: {
@@ -1058,7 +1058,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives2/3a913e40-fb5b-470e-8dfb-423ca1a03da6.pdf'),
+    path: join(normalize(__dirname), '../public/archives2/3a913e40-fb5b-470e-8dfb-423ca1a03da6.pdf'),
   },
   {
     entity: {
@@ -1078,7 +1078,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives2/2ce1c58d-24f9-4cbb-b9c1-7430b717d8a5.pdf'),
+    path: join(normalize(__dirname), '../public/archives2/2ce1c58d-24f9-4cbb-b9c1-7430b717d8a5.pdf'),
   },
   {
     entity: {
@@ -1098,7 +1098,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives2/5ba19c54-124b-4e05-bf76-73e558230021.pdf'),
+    path: join(normalize(__dirname), '../public/archives2/5ba19c54-124b-4e05-bf76-73e558230021.pdf'),
   },
   {
     entity: {
@@ -1118,7 +1118,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives2/9ee7a157-a1ac-450b-b7a3-3c22a9c29eb3.pdf'),
+    path: join(normalize(__dirname), '../public/archives2/9ee7a157-a1ac-450b-b7a3-3c22a9c29eb3.pdf'),
   },
   {
     entity: {
@@ -1138,7 +1138,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives2/78596687-074b-4839-9152-44d820015582.pdf'),
+    path: join(normalize(__dirname), '../public/archives2/78596687-074b-4839-9152-44d820015582.pdf'),
   },
   {
     entity: {
@@ -1158,7 +1158,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives2/963e343d-3662-444a-8c27-1a886eb70f7e.pdf'),
+    path: join(normalize(__dirname), '../public/archives2/963e343d-3662-444a-8c27-1a886eb70f7e.pdf'),
   },
   {
     entity: {
@@ -1178,7 +1178,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives2/79570b44-6e88-4875-8247-b408ad91873d.pdf'),
+    path: join(normalize(__dirname), '../public/archives2/79570b44-6e88-4875-8247-b408ad91873d.pdf'),
   },
   {
     entity: {
@@ -1206,7 +1206,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/7522f55b-37cb-41d0-8229-0f0144b823ce'),
+    path: join(normalize(__dirname), '../public/archives1/7522f55b-37cb-41d0-8229-0f0144b823ce'),
   },
   {
     entity: {
@@ -1234,7 +1234,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/4277f31d-4aaf-4702-87d4-fe80f59bb565'),
+    path: join(normalize(__dirname), '../public/archives1/4277f31d-4aaf-4702-87d4-fe80f59bb565'),
   },
   {
     entity: {
@@ -1262,7 +1262,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/e05ce1c3-89f9-4bd7-b16d-4727a0ddbc93'),
+    path: join(normalize(__dirname), '../public/archives1/e05ce1c3-89f9-4bd7-b16d-4727a0ddbc93'),
   },
   {
     entity: {
@@ -1290,7 +1290,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/6cdfc273-6e70-4ae6-8c85-79e273b2f07f'),
+    path: join(normalize(__dirname), '../public/archives1/6cdfc273-6e70-4ae6-8c85-79e273b2f07f'),
   },
   {
     entity: {
@@ -1318,7 +1318,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/6f46675c-df6e-49de-ad08-56be55cfba14'),
+    path: join(normalize(__dirname), '../public/archives1/6f46675c-df6e-49de-ad08-56be55cfba14'),
   },
   {
     entity: {
@@ -1346,7 +1346,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/402db3bf-1b65-4a55-9be3-841cdf1a2b55'),
+    path: join(normalize(__dirname), '../public/archives1/402db3bf-1b65-4a55-9be3-841cdf1a2b55'),
   },
   {
     entity: {
@@ -1374,7 +1374,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/fd6bc233-9bf7-4904-a48b-0bd8a7745def'),
+    path: join(normalize(__dirname), '../public/archives1/fd6bc233-9bf7-4904-a48b-0bd8a7745def'),
   },
   {
     entity: {
@@ -1402,7 +1402,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/ae99e514-f613-49a6-b3a0-23a0912589cb'),
+    path: join(normalize(__dirname), '../public/archives1/ae99e514-f613-49a6-b3a0-23a0912589cb'),
   },
   {
     entity: {
@@ -1430,7 +1430,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/7b3123c6-00a9-4c92-b554-15d6dfa8e4e2'),
+    path: join(normalize(__dirname), '../public/archives1/7b3123c6-00a9-4c92-b554-15d6dfa8e4e2'),
   },
   {
     entity: {
@@ -1458,7 +1458,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/b72a9ab1-e739-4fe3-a588-4d2d1a59c542'),
+    path: join(normalize(__dirname), '../public/archives1/b72a9ab1-e739-4fe3-a588-4d2d1a59c542'),
   },
   {
     entity: {
@@ -1486,7 +1486,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/5f48d67e-bb91-4d4e-a1a4-149945e2e9d6'),
+    path: join(normalize(__dirname), '../public/archives1/5f48d67e-bb91-4d4e-a1a4-149945e2e9d6'),
   },
   {
     entity: {
@@ -1506,7 +1506,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/3699bc62-2efc-4575-ab3a-e1cb7e50b2bf.pdf'),
+    path: join(normalize(__dirname), '../public/archives1/3699bc62-2efc-4575-ab3a-e1cb7e50b2bf.pdf'),
   },
   {
     entity: {
@@ -1534,7 +1534,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/11eaecfb-0b66-4a75-8720-50f82c9d0859'),
+    path: join(normalize(__dirname), '../public/archives1/11eaecfb-0b66-4a75-8720-50f82c9d0859'),
   },
   {
     entity: {
@@ -1562,7 +1562,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/a273ff3e-c25e-4dbc-8f19-33651337163e'),
+    path: join(normalize(__dirname), '../public/archives1/a273ff3e-c25e-4dbc-8f19-33651337163e'),
   },
   {
     entity: {
@@ -1590,7 +1590,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/f59cc233-3f7b-4a42-9340-05f069e89d7b'),
+    path: join(normalize(__dirname), '../public/archives1/f59cc233-3f7b-4a42-9340-05f069e89d7b'),
   },
   {
     entity: {
@@ -1618,7 +1618,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/d4256afc-a49d-4cc3-bbf3-7a739ce4caa0'),
+    path: join(normalize(__dirname), '../public/archives1/d4256afc-a49d-4cc3-bbf3-7a739ce4caa0'),
   },
   {
     entity: {
@@ -1646,7 +1646,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/3f386526-454c-4e92-a192-fc5920b2c78d'),
+    path: join(normalize(__dirname), '../public/archives1/3f386526-454c-4e92-a192-fc5920b2c78d'),
   },
   {
     entity: {
@@ -1674,7 +1674,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/6bd01bc2-faec-47ec-9110-720cae195dcc'),
+    path: join(normalize(__dirname), '../public/archives1/6bd01bc2-faec-47ec-9110-720cae195dcc'),
   },
   {
     entity: {
@@ -1702,7 +1702,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/a998d3d5-eabf-4abc-b717-f4dc401f53b3'),
+    path: join(normalize(__dirname), '../public/archives1/a998d3d5-eabf-4abc-b717-f4dc401f53b3'),
   },
   {
     entity: {
@@ -1730,7 +1730,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/8800caac-f5a2-417f-aab5-1d6959527fd3'),
+    path: join(normalize(__dirname), '../public/archives1/8800caac-f5a2-417f-aab5-1d6959527fd3'),
   },
   {
     entity: {
@@ -1758,7 +1758,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/ecde42e7-0750-448b-95fe-cdeaf886c53d'),
+    path: join(normalize(__dirname), '../public/archives1/ecde42e7-0750-448b-95fe-cdeaf886c53d'),
   },
   {
     entity: {
@@ -1786,7 +1786,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/507a28b9-7e0c-4164-98a6-16ddc2f5cfce'),
+    path: join(normalize(__dirname), '../public/archives1/507a28b9-7e0c-4164-98a6-16ddc2f5cfce'),
   },
   {
     entity: {
@@ -1814,7 +1814,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/5c0df172-470f-4b11-8926-4f2dcfbf3e30'),
+    path: join(normalize(__dirname), '../public/archives1/5c0df172-470f-4b11-8926-4f2dcfbf3e30'),
   },
   {
     entity: {
@@ -1842,7 +1842,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/411e22df-9335-4965-aeb5-a29c1089d733'),
+    path: join(normalize(__dirname), '../public/archives1/411e22df-9335-4965-aeb5-a29c1089d733'),
   },
   {
     entity: {
@@ -1870,7 +1870,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/f95d1fbe-9826-4ee6-93fe-db430db7c974'),
+    path: join(normalize(__dirname), '../public/archives1/f95d1fbe-9826-4ee6-93fe-db430db7c974'),
   },
   {
     entity: {
@@ -1898,7 +1898,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/cb43d83a-f293-4e06-a24e-34e3012b7f0c'),
+    path: join(normalize(__dirname), '../public/archives1/cb43d83a-f293-4e06-a24e-34e3012b7f0c'),
   },
   {
     entity: {
@@ -1926,7 +1926,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/5072b701-c253-4ac0-81e6-3741a490dbfc'),
+    path: join(normalize(__dirname), '../public/archives1/5072b701-c253-4ac0-81e6-3741a490dbfc'),
   },
   {
     entity: {
@@ -1954,7 +1954,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/4ec0d46d-01c3-4b91-8aba-f44ad4f6af72'),
+    path: join(normalize(__dirname), '../public/archives1/4ec0d46d-01c3-4b91-8aba-f44ad4f6af72'),
   },
   {
     entity: {
@@ -1982,7 +1982,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/01ec427d-9e37-4ead-a568-05b3614d4dde'),
+    path: join(normalize(__dirname), '../public/archives1/01ec427d-9e37-4ead-a568-05b3614d4dde'),
   },
   {
     entity: {
@@ -2010,7 +2010,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/1276ea8e-f709-43fb-ae5e-9c9df5a83ee2'),
+    path: join(normalize(__dirname), '../public/archives1/1276ea8e-f709-43fb-ae5e-9c9df5a83ee2'),
   },
   {
     entity: {
@@ -2038,7 +2038,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/a6af1672-f7d5-4f1d-8fbc-23476e9c0a9e'),
+    path: join(normalize(__dirname), '../public/archives1/a6af1672-f7d5-4f1d-8fbc-23476e9c0a9e'),
   },
   {
     entity: {
@@ -2066,7 +2066,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/2264a81e-a211-453b-bae9-b666c592f08b'),
+    path: join(normalize(__dirname), '../public/archives1/2264a81e-a211-453b-bae9-b666c592f08b'),
   },
   {
     entity: {
@@ -2094,7 +2094,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/c8188f4c-34ac-4468-8b7a-46af942cf862'),
+    path: join(normalize(__dirname), '../public/archives1/c8188f4c-34ac-4468-8b7a-46af942cf862'),
   },
   {
     entity: {
@@ -2122,7 +2122,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/3484fcc0-93f5-4e1a-b6b5-61a78e2811cf'),
+    path: join(normalize(__dirname), '../public/archives1/3484fcc0-93f5-4e1a-b6b5-61a78e2811cf'),
   },
   {
     entity: {
@@ -2150,7 +2150,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/a6fd5977-6216-489a-b746-2fe7689a04d4'),
+    path: join(normalize(__dirname), '../public/archives1/a6fd5977-6216-489a-b746-2fe7689a04d4'),
   },
   {
     entity: {
@@ -2178,7 +2178,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/8e9cdddb-b1bb-4984-b926-e8d5725a19da'),
+    path: join(normalize(__dirname), '../public/archives1/8e9cdddb-b1bb-4984-b926-e8d5725a19da'),
   },
   {
     entity: {
@@ -2206,7 +2206,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/6379476a-690e-41d6-9202-58881bad8576'),
+    path: join(normalize(__dirname), '../public/archives1/6379476a-690e-41d6-9202-58881bad8576'),
   },
   {
     entity: {
@@ -2234,7 +2234,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/0578160b-2db6-4294-8b88-157c133bd0b9'),
+    path: join(normalize(__dirname), '../public/archives1/0578160b-2db6-4294-8b88-157c133bd0b9'),
   },
   {
     entity: {
@@ -2262,7 +2262,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/5a95e270-13cc-43e2-8bc5-d2c877be5c6a'),
+    path: join(normalize(__dirname), '../public/archives1/5a95e270-13cc-43e2-8bc5-d2c877be5c6a'),
   },
   {
     entity: {
@@ -2290,7 +2290,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/799f3f6f-d8d1-4181-b6a7-9a9daaf84bb8'),
+    path: join(normalize(__dirname), '../public/archives1/799f3f6f-d8d1-4181-b6a7-9a9daaf84bb8'),
   },
   {
     entity: {
@@ -2318,7 +2318,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/1a64a4ed-2bab-4ea1-8b71-c280caca4767'),
+    path: join(normalize(__dirname), '../public/archives1/1a64a4ed-2bab-4ea1-8b71-c280caca4767'),
   },
   {
     entity: {
@@ -2346,7 +2346,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/eb1072b3-9057-4142-8fd8-544053ced488'),
+    path: join(normalize(__dirname), '../public/archives1/eb1072b3-9057-4142-8fd8-544053ced488'),
   },
   {
     entity: {
@@ -2374,7 +2374,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/fb28741c-20d2-4d76-b35d-5b00cf8fc258'),
+    path: join(normalize(__dirname), '../public/archives1/fb28741c-20d2-4d76-b35d-5b00cf8fc258'),
   },
   {
     entity: {
@@ -2402,7 +2402,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/982b2747-bdfb-4011-9441-73f04bf9b94f'),
+    path: join(normalize(__dirname), '../public/archives1/982b2747-bdfb-4011-9441-73f04bf9b94f'),
   },
   {
     entity: {
@@ -2430,7 +2430,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/f4520592-1d53-46a5-9853-6406b61945f8'),
+    path: join(normalize(__dirname), '../public/archives1/f4520592-1d53-46a5-9853-6406b61945f8'),
   },
   {
     entity: {
@@ -2458,7 +2458,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/c21f8808-2334-4e60-a047-27a52e8adbce'),
+    path: join(normalize(__dirname), '../public/archives1/c21f8808-2334-4e60-a047-27a52e8adbce'),
   },
   {
     entity: {
@@ -2486,7 +2486,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/097e8dc4-78a1-46bb-8b7e-467bb84632b7'),
+    path: join(normalize(__dirname), '../public/archives1/097e8dc4-78a1-46bb-8b7e-467bb84632b7'),
   },
   {
     entity: {
@@ -2506,7 +2506,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives3/5a790475-01ac-4334-9941-63d3ee59c46c.pdf'),
+    path: join(normalize(__dirname), '../public/archives3/5a790475-01ac-4334-9941-63d3ee59c46c.pdf'),
   },
   {
     entity: {
@@ -2526,7 +2526,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives3/7211a45f-26fb-4355-bd7f-fd025d873813.pdf'),
+    path: join(normalize(__dirname), '../public/archives3/7211a45f-26fb-4355-bd7f-fd025d873813.pdf'),
   },
   {
     entity: {
@@ -2554,7 +2554,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/386e343b-abb3-44d4-8d5f-86ed45cea277'),
+    path: join(normalize(__dirname), '../public/archives1/386e343b-abb3-44d4-8d5f-86ed45cea277'),
   },
   {
     entity: {
@@ -2582,7 +2582,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/c814e28a-6a5d-435e-b402-3c375ab69c97'),
+    path: join(normalize(__dirname), '../public/archives1/c814e28a-6a5d-435e-b402-3c375ab69c97'),
   },
   {
     entity: {
@@ -2610,7 +2610,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/82069f34-dd44-417e-ba98-b17129bb637c'),
+    path: join(normalize(__dirname), '../public/archives1/82069f34-dd44-417e-ba98-b17129bb637c'),
   },
   {
     entity: {
@@ -2638,7 +2638,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/8d98ee74-15ee-4e9a-a255-e5997a8a5bde'),
+    path: join(normalize(__dirname), '../public/archives1/8d98ee74-15ee-4e9a-a255-e5997a8a5bde'),
   },
   {
     entity: {
@@ -2666,7 +2666,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/6f37606f-a3d5-47bb-b957-b2fa6bcf72fe'),
+    path: join(normalize(__dirname), '../public/archives1/6f37606f-a3d5-47bb-b957-b2fa6bcf72fe'),
   },
   {
     entity: {
@@ -2694,7 +2694,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/c3e84977-6102-42ff-bc79-3e7ceacfead1'),
+    path: join(normalize(__dirname), '../public/archives1/c3e84977-6102-42ff-bc79-3e7ceacfead1'),
   },
   {
     entity: {
@@ -2722,7 +2722,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/5af91bc2-3540-46ef-824e-c1e2158c6255'),
+    path: join(normalize(__dirname), '../public/archives1/5af91bc2-3540-46ef-824e-c1e2158c6255'),
   },
   {
     entity: {
@@ -2750,7 +2750,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/8da1b3f4-a862-487f-9c7a-af20178846c8'),
+    path: join(normalize(__dirname), '../public/archives1/8da1b3f4-a862-487f-9c7a-af20178846c8'),
   },
   {
     entity: {
@@ -2778,7 +2778,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/a974022d-7b96-4e81-bc17-767113571fa5'),
+    path: join(normalize(__dirname), '../public/archives1/a974022d-7b96-4e81-bc17-767113571fa5'),
   },
   {
     entity: {
@@ -2806,7 +2806,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/4487f711-d1dc-4c33-a1a9-50a1b7f7d659'),
+    path: join(normalize(__dirname), '../public/archives1/4487f711-d1dc-4c33-a1a9-50a1b7f7d659'),
   },
   {
     entity: {
@@ -2834,7 +2834,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/7bbe94bc-b48d-4d7b-b4a6-1325d0b0a2d3'),
+    path: join(normalize(__dirname), '../public/archives1/7bbe94bc-b48d-4d7b-b4a6-1325d0b0a2d3'),
   },
   {
     entity: {
@@ -2862,7 +2862,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/0fb5b8d7-6378-4332-9016-a8c17ebf7b99'),
+    path: join(normalize(__dirname), '../public/archives1/0fb5b8d7-6378-4332-9016-a8c17ebf7b99'),
   },
   {
     entity: {
@@ -2890,7 +2890,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/d36737e2-811c-4b1d-9c2c-8889eade960c'),
+    path: join(normalize(__dirname), '../public/archives1/d36737e2-811c-4b1d-9c2c-8889eade960c'),
   },
   {
     entity: {
@@ -2918,7 +2918,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/040958d6-6657-414d-9702-8234e7c28625'),
+    path: join(normalize(__dirname), '../public/archives1/040958d6-6657-414d-9702-8234e7c28625'),
   },
   {
     entity: {
@@ -2946,7 +2946,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/b8cb3468-7dc6-4668-87e8-4fceb1f91d3d'),
+    path: join(normalize(__dirname), '../public/archives1/b8cb3468-7dc6-4668-87e8-4fceb1f91d3d'),
   },
   {
     entity: {
@@ -2974,7 +2974,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/db46f9b6-a73c-4531-a3e9-3a2e4c73a8f1'),
+    path: join(normalize(__dirname), '../public/archives1/db46f9b6-a73c-4531-a3e9-3a2e4c73a8f1'),
   },
   {
     entity: {
@@ -3002,7 +3002,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/7492dacf-eac4-45d3-aecb-6184761f1139'),
+    path: join(normalize(__dirname), '../public/archives1/7492dacf-eac4-45d3-aecb-6184761f1139'),
   },
   {
     entity: {
@@ -3030,7 +3030,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/7a1ea3a9-d3ab-4cfe-a417-9cbb73dbc318'),
+    path: join(normalize(__dirname), '../public/archives1/7a1ea3a9-d3ab-4cfe-a417-9cbb73dbc318'),
   },
   {
     entity: {
@@ -3058,7 +3058,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/fc38e16e-2075-408b-8a68-e00d7c7fe76f'),
+    path: join(normalize(__dirname), '../public/archives1/fc38e16e-2075-408b-8a68-e00d7c7fe76f'),
   },
   {
     entity: {
@@ -3086,7 +3086,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/9206ecb2-3e0a-458f-be99-98532260fd27'),
+    path: join(normalize(__dirname), '../public/archives1/9206ecb2-3e0a-458f-be99-98532260fd27'),
   },
   {
     entity: {
@@ -3114,7 +3114,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/db61721a-a96f-4ecf-8ec8-dc3d9be7de1d'),
+    path: join(normalize(__dirname), '../public/archives1/db61721a-a96f-4ecf-8ec8-dc3d9be7de1d'),
   },
   {
     entity: {
@@ -3142,7 +3142,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/ba649341-ec2e-4344-bb21-ba1d35fd1cd7'),
+    path: join(normalize(__dirname), '../public/archives1/ba649341-ec2e-4344-bb21-ba1d35fd1cd7'),
   },
   {
     entity: {
@@ -3170,7 +3170,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/bd33de67-6641-49bc-a820-870b3a2aa3df'),
+    path: join(normalize(__dirname), '../public/archives1/bd33de67-6641-49bc-a820-870b3a2aa3df'),
   },
   {
     entity: {
@@ -3198,7 +3198,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/d1679abc-409f-4eb4-b575-22371b9682c3'),
+    path: join(normalize(__dirname), '../public/archives1/d1679abc-409f-4eb4-b575-22371b9682c3'),
   },
   {
     entity: {
@@ -3226,7 +3226,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/67b43734-d924-48ac-9e62-359edd11e690'),
+    path: join(normalize(__dirname), '../public/archives1/67b43734-d924-48ac-9e62-359edd11e690'),
   },
   {
     entity: {
@@ -3254,7 +3254,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/77a422f8-fc82-4e56-87e4-a6fbd48de6b8'),
+    path: join(normalize(__dirname), '../public/archives1/77a422f8-fc82-4e56-87e4-a6fbd48de6b8'),
   },
   {
     entity: {
@@ -3282,7 +3282,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/8c1a5316-884e-465a-9775-48338f6cc6b5'),
+    path: join(normalize(__dirname), '../public/archives1/8c1a5316-884e-465a-9775-48338f6cc6b5'),
   },
   {
     entity: {
@@ -3310,7 +3310,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/0f85f67b-fe32-425f-91d4-613f3126705c'),
+    path: join(normalize(__dirname), '../public/archives1/0f85f67b-fe32-425f-91d4-613f3126705c'),
   },
   {
     entity: {
@@ -3338,7 +3338,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/3f502324-0a16-4470-b3fc-3e237f39b604'),
+    path: join(normalize(__dirname), '../public/archives1/3f502324-0a16-4470-b3fc-3e237f39b604'),
   },
   {
     entity: {
@@ -3366,7 +3366,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/72d4fe45-d0bf-4ce4-afc9-ba7c7ddc6f38'),
+    path: join(normalize(__dirname), '../public/archives1/72d4fe45-d0bf-4ce4-afc9-ba7c7ddc6f38'),
   },
   {
     entity: {
@@ -3394,7 +3394,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/9172bd1f-5918-4850-820a-b229e2d89b8f'),
+    path: join(normalize(__dirname), '../public/archives1/9172bd1f-5918-4850-820a-b229e2d89b8f'),
   },
   {
     entity: {
@@ -3422,7 +3422,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/1ce721bb-e004-4708-a437-dde2f92a1a98'),
+    path: join(normalize(__dirname), '../public/archives1/1ce721bb-e004-4708-a437-dde2f92a1a98'),
   },
   {
     entity: {
@@ -3450,7 +3450,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/ff8206e9-00e6-42aa-bd57-a36d2faa5e49'),
+    path: join(normalize(__dirname), '../public/archives1/ff8206e9-00e6-42aa-bd57-a36d2faa5e49'),
   },
   {
     entity: {
@@ -3478,7 +3478,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/416aed01-110d-4f35-af13-f44ee4d11ec3'),
+    path: join(normalize(__dirname), '../public/archives1/416aed01-110d-4f35-af13-f44ee4d11ec3'),
   },
   {
     entity: {
@@ -3506,7 +3506,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/b99cafbf-6442-4c20-bd92-45f37dbfdcff'),
+    path: join(normalize(__dirname), '../public/archives1/b99cafbf-6442-4c20-bd92-45f37dbfdcff'),
   },
   {
     entity: {
@@ -3534,7 +3534,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/e51c3cd5-f427-4fce-ad75-da87f2df5195'),
+    path: join(normalize(__dirname), '../public/archives1/e51c3cd5-f427-4fce-ad75-da87f2df5195'),
   },
   {
     entity: {
@@ -3562,7 +3562,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/72a130d0-a36b-4b75-8e93-f35bf6ff8176'),
+    path: join(normalize(__dirname), '../public/archives1/72a130d0-a36b-4b75-8e93-f35bf6ff8176'),
   },
   {
     entity: {
@@ -3590,7 +3590,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/2ac69c65-449e-40a6-b06a-0d62772ab71d'),
+    path: join(normalize(__dirname), '../public/archives1/2ac69c65-449e-40a6-b06a-0d62772ab71d'),
   },
   {
     entity: {
@@ -3618,7 +3618,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/f750c865-cb15-4c03-98b2-aad6e569d88a'),
+    path: join(normalize(__dirname), '../public/archives1/f750c865-cb15-4c03-98b2-aad6e569d88a'),
   },
   {
     entity: {
@@ -3646,7 +3646,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/68d2d72e-cdc1-4871-8acb-fc644774b5e3'),
+    path: join(normalize(__dirname), '../public/archives1/68d2d72e-cdc1-4871-8acb-fc644774b5e3'),
   },
   {
     entity: {
@@ -3674,7 +3674,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/06439682-30be-43c0-8fc3-fcd67fd66bec'),
+    path: join(normalize(__dirname), '../public/archives1/06439682-30be-43c0-8fc3-fcd67fd66bec'),
   },
   {
     entity: {
@@ -3702,7 +3702,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/317dfc36-b5df-4092-b9e9-6c1e0c3c0585'),
+    path: join(normalize(__dirname), '../public/archives1/317dfc36-b5df-4092-b9e9-6c1e0c3c0585'),
   },
   {
     entity: {
@@ -3730,7 +3730,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/2b0f3a68-1cdd-4494-b122-3ed9cb3cb0b7'),
+    path: join(normalize(__dirname), '../public/archives1/2b0f3a68-1cdd-4494-b122-3ed9cb3cb0b7'),
   },
   {
     entity: {
@@ -3758,7 +3758,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/5551106b-99c0-496b-af47-d8335692e6ca'),
+    path: join(normalize(__dirname), '../public/archives1/5551106b-99c0-496b-af47-d8335692e6ca'),
   },
   {
     entity: {
@@ -3786,7 +3786,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/96cdc4a4-0b09-4d57-8277-6dbcbcf6e4e0'),
+    path: join(normalize(__dirname), '../public/archives1/96cdc4a4-0b09-4d57-8277-6dbcbcf6e4e0'),
   },
   {
     entity: {
@@ -3814,7 +3814,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/c748a5f5-0b62-433b-b425-a3295b905902'),
+    path: join(normalize(__dirname), '../public/archives1/c748a5f5-0b62-433b-b425-a3295b905902'),
   },
   {
     entity: {
@@ -3842,7 +3842,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/e4beec83-82d8-42b2-845d-fe2f8c163d3d'),
+    path: join(normalize(__dirname), '../public/archives1/e4beec83-82d8-42b2-845d-fe2f8c163d3d'),
   },
   {
     entity: {
@@ -3870,7 +3870,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/58499299-cef2-4f20-ad14-90703cd2431a'),
+    path: join(normalize(__dirname), '../public/archives1/58499299-cef2-4f20-ad14-90703cd2431a'),
   },
   {
     entity: {
@@ -3898,7 +3898,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/cf7e2b8e-9249-4aa3-b0f4-2707aa6e74b0'),
+    path: join(normalize(__dirname), '../public/archives1/cf7e2b8e-9249-4aa3-b0f4-2707aa6e74b0'),
   },
   {
     entity: {
@@ -3926,7 +3926,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/bb264672-4652-4810-b440-516ae554b3be'),
+    path: join(normalize(__dirname), '../public/archives1/bb264672-4652-4810-b440-516ae554b3be'),
   },
   {
     entity: {
@@ -3954,7 +3954,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/b0d92e3c-d75b-447f-8e3d-6a80bda133b3'),
+    path: join(normalize(__dirname), '../public/archives1/b0d92e3c-d75b-447f-8e3d-6a80bda133b3'),
   },
   {
     entity: {
@@ -3982,7 +3982,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/c02feeb6-58b4-44b9-9965-47de5504e4b7'),
+    path: join(normalize(__dirname), '../public/archives1/c02feeb6-58b4-44b9-9965-47de5504e4b7'),
   },
   {
     entity: {
@@ -4010,7 +4010,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/9000310e-2f60-4711-a81d-a8fd520f6db7'),
+    path: join(normalize(__dirname), '../public/archives1/9000310e-2f60-4711-a81d-a8fd520f6db7'),
   },
   {
     entity: {
@@ -4038,7 +4038,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/306f36e6-2329-42e8-92d9-ed3f6faad595'),
+    path: join(normalize(__dirname), '../public/archives1/306f36e6-2329-42e8-92d9-ed3f6faad595'),
   },
   {
     entity: {
@@ -4066,7 +4066,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/93482dc4-edc3-4ce3-a6d2-960ec210656a'),
+    path: join(normalize(__dirname), '../public/archives1/93482dc4-edc3-4ce3-a6d2-960ec210656a'),
   },
   {
     entity: {
@@ -4086,7 +4086,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives2/33d26a96-67db-4a35-a4ce-d02beb985e58.pdf'),
+    path: join(normalize(__dirname), '../public/archives2/33d26a96-67db-4a35-a4ce-d02beb985e58.pdf'),
   },
   {
     entity: {
@@ -4114,7 +4114,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/becd9f73-f6d4-4f1a-88ac-2fb3b1dfbffa'),
+    path: join(normalize(__dirname), '../public/archives1/becd9f73-f6d4-4f1a-88ac-2fb3b1dfbffa'),
   },
   {
     entity: {
@@ -4134,7 +4134,7 @@ const books: Book[] = [
       ocr_exceptions: {"10":{"vsplit":0.35},"11":{"vsplit":0.35}},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives2/ff69a7c6-9559-4b80-98fa-cfbd3c072a56.pdf'),
+    path: join(normalize(__dirname), '../public/archives2/ff69a7c6-9559-4b80-98fa-cfbd3c072a56.pdf'),
   },
   {
     entity: {
@@ -4154,7 +4154,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives2/b4980847-3787-4b09-b95f-d4bc32199051.pdf'),
+    path: join(normalize(__dirname), '../public/archives2/b4980847-3787-4b09-b95f-d4bc32199051.pdf'),
   },
   {
     entity: {
@@ -4174,7 +4174,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives2/05553c80-edc7-44da-9c04-763802e9f833.pdf'),
+    path: join(normalize(__dirname), '../public/archives2/05553c80-edc7-44da-9c04-763802e9f833.pdf'),
   },
   {
     entity: {
@@ -4198,7 +4198,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives3/d7255791-fc0e-4d11-9391-b5a8c1d3cf8b.pdf'),
+    path: join(normalize(__dirname), '../public/archives3/d7255791-fc0e-4d11-9391-b5a8c1d3cf8b.pdf'),
   },
   {
     entity: {
@@ -4226,7 +4226,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/7c69c3ac-22a8-483f-b7ba-33fb0081f388'),
+    path: join(normalize(__dirname), '../public/archives1/7c69c3ac-22a8-483f-b7ba-33fb0081f388'),
   },
   {
     entity: {
@@ -4254,7 +4254,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/1889b60c-cfab-44db-b430-0af194080c11'),
+    path: join(normalize(__dirname), '../public/archives1/1889b60c-cfab-44db-b430-0af194080c11'),
   },
   {
     entity: {
@@ -4282,7 +4282,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/24ce30a0-4265-4ad5-8743-fc952385a77b'),
+    path: join(normalize(__dirname), '../public/archives1/24ce30a0-4265-4ad5-8743-fc952385a77b'),
   },
   {
     entity: {
@@ -4310,7 +4310,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/b1848c1e-baa9-49fd-abc4-a8b263e4bcf6'),
+    path: join(normalize(__dirname), '../public/archives1/b1848c1e-baa9-49fd-abc4-a8b263e4bcf6'),
   },
   {
     entity: {
@@ -4338,7 +4338,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/52d8fbe4-965f-4cfc-872b-e6029e3f734d'),
+    path: join(normalize(__dirname), '../public/archives1/52d8fbe4-965f-4cfc-872b-e6029e3f734d'),
   },
   {
     entity: {
@@ -4358,7 +4358,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives2/fb71dfe8-41f8-40fc-be7e-de81d9bcab90.pdf'),
+    path: join(normalize(__dirname), '../public/archives2/fb71dfe8-41f8-40fc-be7e-de81d9bcab90.pdf'),
   },
   {
     entity: {
@@ -4378,7 +4378,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives2/7c5acd07-d5d3-4bee-b72f-af92099f6097.pdf'),
+    path: join(normalize(__dirname), '../public/archives2/7c5acd07-d5d3-4bee-b72f-af92099f6097.pdf'),
   },
   {
     entity: {
@@ -4398,7 +4398,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives2/7e25f78e-34c8-4f74-bb66-f25361b2a16a.pdf'),
+    path: join(normalize(__dirname), '../public/archives2/7e25f78e-34c8-4f74-bb66-f25361b2a16a.pdf'),
   },
   {
     entity: {
@@ -4426,7 +4426,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/eaefb094-86e6-4c5f-a190-46818d16ffa2'),
+    path: join(normalize(__dirname), '../public/archives1/eaefb094-86e6-4c5f-a190-46818d16ffa2'),
   },
   {
     entity: {
@@ -4454,7 +4454,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/3bced832-3272-4fe6-b454-b0ef7886081d'),
+    path: join(normalize(__dirname), '../public/archives1/3bced832-3272-4fe6-b454-b0ef7886081d'),
   },
   {
     entity: {
@@ -4482,7 +4482,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/ca52d8a2-4eb3-4da5-b1db-ceebcbf032d2'),
+    path: join(normalize(__dirname), '../public/archives1/ca52d8a2-4eb3-4da5-b1db-ceebcbf032d2'),
   },
   {
     entity: {
@@ -4510,7 +4510,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/c4f4035b-486a-459b-9cb7-4deb00350052'),
+    path: join(normalize(__dirname), '../public/archives1/c4f4035b-486a-459b-9cb7-4deb00350052'),
   },
   {
     entity: {
@@ -4538,7 +4538,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/787c5af3-10c9-40fd-bd3e-6e0a13e7e67c'),
+    path: join(normalize(__dirname), '../public/archives1/787c5af3-10c9-40fd-bd3e-6e0a13e7e67c'),
   },
   {
     entity: {
@@ -4566,7 +4566,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/6959f089-922d-4677-b3cb-eba8636787d0'),
+    path: join(normalize(__dirname), '../public/archives1/6959f089-922d-4677-b3cb-eba8636787d0'),
   },
   {
     entity: {
@@ -4594,7 +4594,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/febb7416-870c-4ca2-85c1-00de96d8a9d0'),
+    path: join(normalize(__dirname), '../public/archives1/febb7416-870c-4ca2-85c1-00de96d8a9d0'),
   },
   {
     entity: {
@@ -4614,7 +4614,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives3/b8079465-9bf6-46cd-9c6c-95208979eed0.pdf'),
+    path: join(normalize(__dirname), '../public/archives3/b8079465-9bf6-46cd-9c6c-95208979eed0.pdf'),
   },
   {
     entity: {
@@ -4642,7 +4642,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/dcd0d64f-fa58-4455-a6ce-8c78a1f187d0'),
+    path: join(normalize(__dirname), '../public/archives1/dcd0d64f-fa58-4455-a6ce-8c78a1f187d0'),
   },
   {
     entity: {
@@ -4670,7 +4670,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/f692a8bf-a640-4079-89e3-c41186cb50ff'),
+    path: join(normalize(__dirname), '../public/archives1/f692a8bf-a640-4079-89e3-c41186cb50ff'),
   },
   {
     entity: {
@@ -4698,7 +4698,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/5c2a93f5-a845-42ca-aeb7-69a6f92fc954'),
+    path: join(normalize(__dirname), '../public/archives1/5c2a93f5-a845-42ca-aeb7-69a6f92fc954'),
   },
   {
     entity: {
@@ -4735,7 +4735,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives2/78256f65-d15b-4800-976e-d4a9e6e7a160.pdf'),
+    path: join(normalize(__dirname), '../public/archives2/78256f65-d15b-4800-976e-d4a9e6e7a160.pdf'),
   },
   {
     entity: {
@@ -4755,7 +4755,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives3/57df1a72-767a-4bb8-8cbe-f09d976eec5a.pdf'),
+    path: join(normalize(__dirname), '../public/archives3/57df1a72-767a-4bb8-8cbe-f09d976eec5a.pdf'),
   },
   {
     entity: {
@@ -4783,7 +4783,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/2cec027f-70be-4525-8a87-8da2e7cfa6fc'),
+    path: join(normalize(__dirname), '../public/archives1/2cec027f-70be-4525-8a87-8da2e7cfa6fc'),
   },
   {
     entity: {
@@ -4811,7 +4811,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/31b69dc5-0197-45f9-b432-e090f4f60114'),
+    path: join(normalize(__dirname), '../public/archives1/31b69dc5-0197-45f9-b432-e090f4f60114'),
   },
   {
     entity: {
@@ -4832,7 +4832,7 @@ const books: Book[] = [
       ocr_exceptions: {"6":{"vsplit":0.35},"7":{"vsplit":0.35},"8":{"vsplit":0.35},"9":{"vsplit":0.35},"10":{"vsplit":0.35},"11":{"vsplit":0.35},"12":{"vsplit":0.35},"35":{"vsplit":0.35},"36":{"vsplit":0.35},"37":{"vsplit":0.35},"38":{"vsplit":0.35},"39":{"vsplit":0.35},"40":{"vsplit":0.35},"48":{"vsplit":0.35},"49":{"vsplit":0.35},"50":{"vsplit":0.35},"51":{"vsplit":0.35}},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives2/a13a4008-5f3a-4f1d-8e0b-940a1c633cd5.pdf'),
+    path: join(normalize(__dirname), '../public/archives2/a13a4008-5f3a-4f1d-8e0b-940a1c633cd5.pdf'),
   },
   {
     entity: {
@@ -4860,7 +4860,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/259053b8-c23b-40e9-95d0-63476a3bc6c8'),
+    path: join(normalize(__dirname), '../public/archives1/259053b8-c23b-40e9-95d0-63476a3bc6c8'),
   },
   {
     entity: {
@@ -4888,7 +4888,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/f4596d80-d0b2-4349-91d5-aadaae94aa11'),
+    path: join(normalize(__dirname), '../public/archives1/f4596d80-d0b2-4349-91d5-aadaae94aa11'),
   },
   {
     entity: {
@@ -4916,7 +4916,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/ea12100d-1d0d-43a9-a4bc-355af558ae65'),
+    path: join(normalize(__dirname), '../public/archives1/ea12100d-1d0d-43a9-a4bc-355af558ae65'),
   },
   {
     entity: {
@@ -4944,7 +4944,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/262825ac-988f-4c65-abb7-03ca63794c98'),
+    path: join(normalize(__dirname), '../public/archives1/262825ac-988f-4c65-abb7-03ca63794c98'),
   },
   {
     entity: {
@@ -4972,7 +4972,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/38d166b6-f2ce-4f65-93a7-3b9bb5794592'),
+    path: join(normalize(__dirname), '../public/archives1/38d166b6-f2ce-4f65-93a7-3b9bb5794592'),
   },
   {
     entity: {
@@ -5000,7 +5000,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/57d74152-648c-41b9-8746-2b76ca7f572f'),
+    path: join(normalize(__dirname), '../public/archives1/57d74152-648c-41b9-8746-2b76ca7f572f'),
   },
   {
     entity: {
@@ -5028,7 +5028,7 @@ const books: Book[] = [
       ocr_exceptions: {},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives1/b3ca39f5-3154-4c20-8f01-d8ed821d5ea5'),
+    path: join(normalize(__dirname), '../public/archives1/b3ca39f5-3154-4c20-8f01-d8ed821d5ea5'),
   },
   {
     entity: {
@@ -5430,7 +5430,7 @@ const books: Book[] = [
     parser: maoquanji.parse,
     path: join(
       normalize(__dirname),
-      '../public/books/archives0/mao-quanji/27-OCR.pdf',
+      '../public/archives0/mao-quanji/27-OCR.pdf',
     ),
   },
   {
@@ -5467,7 +5467,7 @@ const books: Book[] = [
     parser: maoquanji.parse,
     path: join(
       normalize(__dirname),
-      '../public/books/archives0/mao-quanji/28-OCR.pdf',
+      '../public/archives0/mao-quanji/28-OCR.pdf',
     ),
   },
   {
@@ -5499,7 +5499,7 @@ const books: Book[] = [
     parser: maoquanji.parse,
     path: join(
       normalize(__dirname),
-      '../public/books/archives0/mao-quanji/29-OCR.pdf',
+      '../public/archives0/mao-quanji/29-OCR.pdf',
     ),
   },
   {
@@ -5531,7 +5531,7 @@ const books: Book[] = [
     parser: maoquanji.parse,
     path: join(
       normalize(__dirname),
-      '../public/books/archives0/mao-quanji/30-OCR.pdf',
+      '../public/archives0/mao-quanji/30-OCR.pdf',
     ),
   },
   {
@@ -5561,7 +5561,7 @@ const books: Book[] = [
     parser: maoquanji.parse,
     path: join(
       normalize(__dirname),
-      '../public/books/archives0/mao-quanji/31-OCR.pdf',
+      '../public/archives0/mao-quanji/31-OCR.pdf',
     ),
   },
   {
@@ -5595,7 +5595,7 @@ const books: Book[] = [
     parser: maoquanji.parse,
     path: join(
       normalize(__dirname),
-      '../public/books/archives0/mao-quanji/32-OCR.pdf',
+      '../public/archives0/mao-quanji/32-OCR.pdf',
     ),
   },
   {
@@ -5630,7 +5630,7 @@ const books: Book[] = [
     parser: maoquanji.parse,
     path: join(
       normalize(__dirname),
-      '../public/books/archives0/mao-quanji/33-OCR.pdf',
+      '../public/archives0/mao-quanji/33-OCR.pdf',
     ),
   },
   {
@@ -5666,7 +5666,7 @@ const books: Book[] = [
     parser: maoquanji.parse,
     path: join(
       normalize(__dirname),
-      '../public/books/archives0/mao-quanji/34-OCR.pdf',
+      '../public/archives0/mao-quanji/34-OCR.pdf',
     ),
   },
   {
@@ -5698,7 +5698,7 @@ const books: Book[] = [
     parser: maoquanji.parse,
     path: join(
       normalize(__dirname),
-      '../public/books/archives0/mao-quanji/35-OCR.pdf',
+      '../public/archives0/mao-quanji/35-OCR.pdf',
     ),
   },
   {
@@ -5734,7 +5734,7 @@ const books: Book[] = [
     parser: maoquanji.parse,
     path: join(
       normalize(__dirname),
-      '../public/books/archives0/mao-quanji/36-OCR.pdf',
+      '../public/archives0/mao-quanji/36-OCR.pdf',
     ),
   },
   {
@@ -5766,7 +5766,7 @@ const books: Book[] = [
     parser: maoquanji.parse,
     path: join(
       normalize(__dirname),
-      '../public/books/archives0/mao-quanji/37-OCR.pdf',
+      '../public/archives0/mao-quanji/37-OCR.pdf',
     ),
   },
   {
@@ -5799,7 +5799,7 @@ const books: Book[] = [
     parser: maoquanji.parse,
     path: join(
       normalize(__dirname),
-      '../public/books/archives0/mao-quanji/38-OCR.pdf',
+      '../public/archives0/mao-quanji/38-OCR.pdf',
     ),
   },
   {
@@ -5835,7 +5835,7 @@ const books: Book[] = [
     parser: maoquanji.parse,
     path: join(
       normalize(__dirname),
-      '../public/books/archives0/mao-quanji/39-OCR.pdf',
+      '../public/archives0/mao-quanji/39-OCR.pdf',
     ),
   },
   {
@@ -5873,7 +5873,7 @@ const books: Book[] = [
     parser: maoquanji.parse,
     path: join(
       normalize(__dirname),
-      '../public/books/archives0/mao-quanji/40-OCR.pdf',
+      '../public/archives0/mao-quanji/40-OCR.pdf',
     ),
   },
   {
@@ -5904,7 +5904,7 @@ const books: Book[] = [
     parser: maoquanji.parse,
     path: join(
       normalize(__dirname),
-      '../public/books/archives0/mao-quanji/41-OCR.pdf',
+      '../public/archives0/mao-quanji/41-OCR.pdf',
     ),
   },
   {
@@ -5939,7 +5939,7 @@ const books: Book[] = [
     parser: maoquanji.parse,
     path: join(
       normalize(__dirname),
-      '../public/books/archives0/mao-quanji/42-OCR.pdf',
+      '../public/archives0/mao-quanji/42-OCR.pdf',
     ),
   },
   {
@@ -5973,7 +5973,7 @@ const books: Book[] = [
     parser: maoquanji.parse,
     path: join(
       normalize(__dirname),
-      '../public/books/archives0/mao-quanji/43-OCR.pdf',
+      '../public/archives0/mao-quanji/43-OCR.pdf',
     ),
   },
   {
@@ -6010,7 +6010,7 @@ const books: Book[] = [
     parser: maoquanji.parse,
     path: join(
       normalize(__dirname),
-      '../public/books/archives0/mao-quanji/44-OCR.pdf',
+      '../public/archives0/mao-quanji/44-OCR.pdf',
     ),
   },
   {
@@ -6044,7 +6044,7 @@ const books: Book[] = [
     parser: maoquanji.parse,
     path: join(
       normalize(__dirname),
-      '../public/books/archives0/mao-quanji/45-OCR.pdf',
+      '../public/archives0/mao-quanji/45-OCR.pdf',
     ),
   },
   {
@@ -6077,7 +6077,7 @@ const books: Book[] = [
     parser: maoquanji.parse,
     path: join(
       normalize(__dirname),
-      '../public/books/archives0/mao-quanji/46-OCR.pdf',
+      '../public/archives0/mao-quanji/46-OCR.pdf',
     ),
   },
   {
@@ -6110,7 +6110,7 @@ const books: Book[] = [
     parser: maoquanji.parse,
     path: join(
       normalize(__dirname),
-      '../public/books/archives0/mao-quanji/47-OCR.pdf',
+      '../public/archives0/mao-quanji/47-OCR.pdf',
     ),
   },
   {
@@ -6148,7 +6148,7 @@ const books: Book[] = [
     parser: maoquanji.parse,
     path: join(
       normalize(__dirname),
-      '../public/books/archives0/mao-quanji/48-OCR.pdf',
+      '../public/archives0/mao-quanji/48-OCR.pdf',
     ),
   },
   {
@@ -6188,7 +6188,7 @@ const books: Book[] = [
     parser: maoquanji.parse,
     path: join(
       normalize(__dirname),
-      '../public/books/archives0/mao-quanji/49-OCR.pdf',
+      '../public/archives0/mao-quanji/49-OCR.pdf',
     ),
   },
   {
@@ -6221,7 +6221,7 @@ const books: Book[] = [
     parser: maoquanji.parse,
     path: join(
       normalize(__dirname),
-      '../public/books/archives0/mao-quanji/50-OCR.pdf',
+      '../public/archives0/mao-quanji/50-OCR.pdf',
     ),
   },
   {
@@ -6257,7 +6257,7 @@ const books: Book[] = [
     parser: maoquanji.parse,
     path: join(
       normalize(__dirname),
-      '../public/books/archives0/mao-quanji/51-OCR.pdf',
+      '../public/archives0/mao-quanji/51-OCR.pdf',
     ),
   },
   {
@@ -6293,7 +6293,7 @@ const books: Book[] = [
     parser: maoquanji.parse,
     path: join(
       normalize(__dirname),
-      '../public/books/archives0/mao-quanji/52-OCR.pdf',
+      '../public/archives0/mao-quanji/52-OCR.pdf',
     ),
   },
   {

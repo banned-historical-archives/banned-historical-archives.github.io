@@ -71,7 +71,7 @@ export async function start() {
 
       /**
        * 1. 修改 books.ts
-       * 2. 如果是图片集，下载图片到 public/books/archives${n}/${id}/${n}.${ext}，如果是pdf 下载到 public/books/archives${n}/${id}.pdf
+       * 2. 如果是图片集，下载图片到 public/archives${n}/${id}/${n}.${ext}，如果是pdf 下载到 public/archives${n}/${id}.pdf
        * 3. 调用 parser，生成ocr_cache
        * 4. [gitworkflow] 在 archives${n} 中创建 pr
        * 5. [gitworkflow] 创建 pr，并在issue中回复 parser result
@@ -117,7 +117,7 @@ export async function start() {
       ocr_exceptions: ${JSON.stringify(config.ocr_exceptions || {})},
     },
     parser: automation.parse,
-    path: join(normalize(__dirname), '../public/books/archives${
+    path: join(normalize(__dirname), '../public/archives${
       config.archive_id
     }/${id}${config.ext == 'pdf' ? '.pdf' : ''}'),
   },`,
@@ -126,11 +126,11 @@ export async function start() {
 
       const dirPath = join(
         __dirname,
-        `../public/books/archives${config.archive_id}/${id}`,
+        `../public/archives${config.archive_id}/${id}`,
       );
       const pdfFilePath = join(
         __dirname,
-        `../public/books/archives${config.archive_id}/${id}.pdf`,
+        `../public/archives${config.archive_id}/${id}.pdf`,
       );
       if (config.ext == 'pdf') {
         await download(imgsOrPDFs[0], pdfFilePath);

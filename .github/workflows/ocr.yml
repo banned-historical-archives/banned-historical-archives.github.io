@@ -33,12 +33,12 @@ jobs:
           ref: master
           token: ${{ secrets.GH_PAT}}
           submodules: true
-      - run: git config --global --add safe.directory /__w/banned-historical-archives.github.io/banned-historical-archives.github.io/public/books/archives0
-      - run: git config --global --add safe.directory /__w/banned-historical-archives.github.io/banned-historical-archives.github.io/public/books/archives1
-      - run: git config --global --add safe.directory /__w/banned-historical-archives.github.io/banned-historical-archives.github.io/public/books/archives2
-      - run: git config --global --add safe.directory /__w/banned-historical-archives.github.io/banned-historical-archives.github.io/public/books/archives3
-      - run: git config --global --add safe.directory /__w/banned-historical-archives.github.io/banned-historical-archives.github.io/public/books/archives4
-      - run: git config --global --add safe.directory /__w/banned-historical-archives.github.io/banned-historical-archives.github.io/public/books/archives5
+      - run: git config --global --add safe.directory /__w/banned-historical-archives.github.io/banned-historical-archives.github.io/public/archives0
+      - run: git config --global --add safe.directory /__w/banned-historical-archives.github.io/banned-historical-archives.github.io/public/archives1
+      - run: git config --global --add safe.directory /__w/banned-historical-archives.github.io/banned-historical-archives.github.io/public/archives2
+      - run: git config --global --add safe.directory /__w/banned-historical-archives.github.io/banned-historical-archives.github.io/public/archives3
+      - run: git config --global --add safe.directory /__w/banned-historical-archives.github.io/banned-historical-archives.github.io/public/archives4
+      - run: git config --global --add safe.directory /__w/banned-historical-archives.github.io/banned-historical-archives.github.io/public/archives5
       - run: git config --global --add safe.directory /__w/banned-historical-archives.github.io/banned-historical-archives.github.io
       - uses: actions/setup-node@v3.4.1
         with:
@@ -59,7 +59,7 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GH_PAT}}
         run: |
-          cd public/books/archives${{ steps.get_archive_id.outputs.archive_id }}
+          cd public/archives${{ steps.get_archive_id.outputs.archive_id }}
           git config user.name github-actions
           git config user.email github-actions@github.com
           git checkout -b feat-${{ steps.generate-uuid.outputs.uuid }}
