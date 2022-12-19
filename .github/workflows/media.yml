@@ -58,7 +58,10 @@ jobs:
           -H "Authorization: Bearer $GH_TOKEN" \
           https://api.github.com/repos/banned-historical-archives/banned-historical-archives${{ env.archive_id }}/pulls \
           -d '{"title":"${{ github.event.issue.title }}","body":"https://github.com/banned-historical-archives/banned-historical-archives.github.io/issues/${{github.event.issue.number}}","head":"feat-${{ steps.generate-uuid.outputs.uuid }}","base":"main"}'
-          cd ../..
+      - name: Create Pull Request
+        env:
+          GH_TOKEN: ${{ secrets.GH_PAT }}
+        run: |
           git add .
           git commit -m 'feat: ${{ github.event.issue.title }}'
           git push origin HEAD:feat-${{ steps.generate-uuid.outputs.uuid }}
