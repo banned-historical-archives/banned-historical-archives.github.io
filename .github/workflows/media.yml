@@ -32,12 +32,12 @@ jobs:
           node-version: 16
       - run: npm i
       - id: get_archive_id
-        run: echo ::set-output name=archive_id::$(npx ts-node --project ./tsconfig.build.json backend/media-gitworkflow-get-archive-id.ts)
+        run: echo "name=archive_id::$(npx ts-node --project ./tsconfig.build.json backend/media-gitworkflow-get-archive-id.ts)" >> $GITHUB_OUTPUT
         env:
           BODY: ${{ github.event.issue.body }}
           TITLE: ${{ github.event.issue.title }}
       - id: action_with_json_output
-        run: echo ::set-output name=archive_id::$(npx ts-node --project ./tsconfig.build.json backend/media-gitworkflow.ts)
+        run: echo "name=data::$(npx ts-node --project ./tsconfig.build.json backend/media-gitworkflow.ts)" >> $GITHUB_OUTPUT
         env:
           BODY: ${{ github.event.issue.body }}
           TITLE: ${{ github.event.issue.title }}
