@@ -296,7 +296,7 @@ init()
 
     try{
       await init_images(AppDataSource);
-      // await init_articles(AppDataSource);
+      await init_articles(AppDataSource);
       await init_music(AppDataSource);
     } catch(e) {
       console.log(e);
