@@ -24,8 +24,9 @@ jobs:
           name: media${{ env.GITHUB_ACTION }}${{ env.GITHUB_RUN_NUMBER }}${{ github.sha }}${{ steps.time.outputs.time }}
       - name: Checkout repository
         uses: actions/checkout@v2
-      - name: Checkout submodules
-        run: git submodule update --init --recursive
+        with:
+          submodules: 'true'
+          token: ${{ secrets.GH_PAT }}
       - run: git config --global --add safe.directory /__w/banned-historical-archives.github.io/banned-historical-archives.github.io/public/media0
       - run: git config --global --add safe.directory /__w/banned-historical-archives.github.io/banned-historical-archives.github.io/public/media1
       - run: git config --global --add safe.directory /__w/banned-historical-archives.github.io/banned-historical-archives.github.io
