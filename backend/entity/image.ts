@@ -27,6 +27,9 @@ export default class Image {
   @Column({ type: 'varchar' })
   description!: string;
 
+  @Column({ type: 'varchar', default: '' })
+  source?: string;
+
   @Column({ type: 'int', default: 0 })
   year?: number;
   @Column({ type: 'int', default: 0 })

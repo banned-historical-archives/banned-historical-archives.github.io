@@ -89,6 +89,14 @@ const columns: GridColDef<ImageEntity>[] = [
     ),
   },
   {
+    field: 'source',
+    headerName: '来源',
+    flex: 1,
+    renderCell: (params: GridRenderCellParams<string, ImageEntity>) => (
+      <div>{params.row.source}</div>
+    ),
+  },
+  {
     field: 'dates',
     headerName: '时间',
     minWidth: 150,
