@@ -16,6 +16,12 @@ export enum TagType {
   subject = '主题',
 }
 
+export enum ImageTagType {
+  place = 'place',
+  character = 'character',
+  subject = 'subject',
+}
+
 export enum ContentType {
   appellation = 'appellation',
   title = 'title',
@@ -28,6 +34,7 @@ export enum ContentType {
   paragraph = 'paragraph',
   quotation = 'quotation',
   signature = 'signature',
+  image = 'image',
 }
 
 export type ContentPartRaw = {

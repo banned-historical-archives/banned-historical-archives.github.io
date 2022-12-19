@@ -80,6 +80,10 @@ const routes = [
     name: '音乐',
     path: '/music',
   },
+  {
+    name: '图库',
+    path: '/gallery',
+  },
 ];
 
 export default function Navbar() {

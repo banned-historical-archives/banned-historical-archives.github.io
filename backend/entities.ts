@@ -10,6 +10,8 @@ import Music from './entity/music';
 import Audio from './entity/audio';
 import Lyric from './entity/lyric';
 import Alias from './entity/alias';
+import ImageTag from './entity/imageTag';
+import Image from './entity/image';
 
 export {
   Lyric,
@@ -17,6 +19,8 @@ export {
   Audio,
   Music,
   Article,
+  ImageTag,
+  Image,
   Author,
   Comment,
   Publication,

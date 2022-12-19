@@ -2,6 +2,7 @@ import "reflect-metadata"
 import { init } from './data-source';
 
 import books from './books';
+import images from './images';
 import Article from './entity/article';
 import Author from './entity/author';
 import Date from './entity/date';
@@ -18,20 +19,10 @@ import { get_article_types } from './classifier';
 import { DataSource } from "typeorm";
 import { music as musicData } from './music';
 import { ArticleCategory, TagType } from "../types";
-import { get_article_id, hash_str_arr } from "../utils";
+import { get_article_id, hash_str_arr, uuid } from "../utils";
+import { Image, ImageTag } from "./entities";
 
 async function init_articles(AppDataSource: DataSource) {
-  try {
-    for (const entity of await AppDataSource.entityMetadatas) {
-      const repository = await AppDataSource.getRepository(entity.name);
-      await repository.query(`SET FOREIGN_KEY_CHECKS=OFF`);
-      await repository.query(`DELETE FROM ${entity.tableName};`);
-      await repository.query(`SET FOREIGN_KEY_CHECKS=ON`);
-    }
-  } catch (error) {
-    throw new Error(`ERROR: ${error}`);
-  }
-
   for (const book of books) {
     console.log(book.entity.name);
     const res = await book.parser(book.path, book.parser_option);
@@ -254,10 +245,58 @@ async function init_music(AppDataSource: DataSource) {
   }
 }
 
+async function init_images(AppDataSource: DataSource) {
+  for (const image of images) {
+    await AppDataSource.manager.upsert(
+      Image,
+      {
+        id: image.id,
+        name: image.name,
+        description: image.description,
+        show_in_gallery: image.show_in_gallery,
+        url: image.url,
+        year: image.year,
+        month: image.month,
+        day: image.day,
+      },
+      ['id'],
+    );
+    for (const tag of image.tags) {
+      const id = hash_str_arr([tag.type, tag.name]);
+      await AppDataSource.manager.upsert(
+        ImageTag,
+        {
+          id,
+          type: tag.type,
+          name: tag.name,
+        },
+        ['id'],
+      );
+      await AppDataSource.createQueryBuilder()
+        .relation(Image, 'tags')
+        .of(image.id)
+        .add(id)
+        .catch((e) => {});
+    }
+  }
+}
+
 init()
   .then(async (AppDataSource) => {
+  try {
+    for (const entity of await AppDataSource.entityMetadatas) {
+      const repository = await AppDataSource.getRepository(entity.name);
+      await repository.query(`SET FOREIGN_KEY_CHECKS=OFF`);
+      await repository.query(`DELETE FROM ${entity.tableName};`);
+      await repository.query(`SET FOREIGN_KEY_CHECKS=ON`);
+    }
+  } catch (error) {
+    throw new Error(`ERROR: ${error}`);
+  }
+
     try{
-      await init_articles(AppDataSource);
+      await init_images(AppDataSource);
+      // await init_articles(AppDataSource);
       await init_music(AppDataSource);
     } catch(e) {
       console.log(e);
