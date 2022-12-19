@@ -75,4 +75,5 @@ jobs:
         uses: peter-evans/create-or-update-comment@v2
         with:
           issue-number: ${{github.event.issue.number}}
+          token: ${{secrets.GH_PAT}}
           body: ${{ env.data }}
