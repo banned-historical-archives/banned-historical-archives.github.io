@@ -10,9 +10,6 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read  # <--- allows to read repo
-    container:
-      image:  node:10.16-jessie
-      options: --user root
     steps:
       - name: Get Time
         id: time
@@ -25,12 +22,10 @@ jobs:
         uses: filipstefansson/uuid-action@v1
         with:
           name: media${{ env.GITHUB_ACTION }}${{ env.GITHUB_RUN_NUMBER }}${{ github.sha }}${{ steps.time.outputs.time }}
-      - run: apt install git -y
-      - uses: actions/checkout@v3
-        with:
-          ref: master
-          token: ${{ secrets.GH_PAT }}
-          submodules: true
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Checkout submodules
+        run: git submodule update --init --recursive
       - run: git config --global --add safe.directory /__w/banned-historical-archives.github.io/banned-historical-archives.github.io/public/media0
       - run: git config --global --add safe.directory /__w/banned-historical-archives.github.io/banned-historical-archives.github.io/public/media1
       - run: git config --global --add safe.directory /__w/banned-historical-archives.github.io/banned-historical-archives.github.io
