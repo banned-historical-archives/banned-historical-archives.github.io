@@ -16,9 +16,9 @@
 [submodule "public/books/archives5"]
 	path = public/books/archives5
 	url = git@github.com:banned-historical-archives/banned-historical-archives5.git
-[submodule "public/media0"]
-	path = public/media0
+[submodule "public/archives6"]
+	path = public/archives6
 	url = git@github.com:banned-historical-archives/banned-historical-archives6.git
-[submodule "public/media1"]
-	path = public/media1
+[submodule "public/archives7"]
+	path = public/archives7
 	url = git@github.com:banned-historical-archives/banned-historical-archives7.git

@@ -73,24 +73,28 @@ export async function start() {
 
       const promises: Promise<any>[] = [];
       const prepend: string[] = [];
-      config.media.map((i, idx) => {
+      for (const i of config.media) {
         i.id = uuid();
         delete i.type;
+        const url = urls.shift();
         const p =
-          join(__dirname, `../public/media1/${i.id?.substring(0, 2)}/${i.id}`) +
-          extname(urls[idx]);
+          join(
+            __dirname,
+            `../public/archives${config.archive_id}/${i.id?.substring(0, 2)}/${
+              i.id
+            }`,
+          ) + extname(url);
         if (!fs.existsSync(dirname(p))) {
           fs.mkdirSync(dirname(p));
         }
-        promises.push(download(urls[idx], p));
+        promises.push(download(url, p));
 
         i.url = `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives${
           config.archive_id
-        }/main/${i.id?.substring(0, 2)}/${i.id}${extname(urls[idx])}`;
+        }/main/${i.id?.substring(0, 2)}/${i.id}${extname(url)}`;
         prepend.push(`
   ${JSON.stringify(i)},`);
-        return p;
-      });
+      }
 
       const imagests = fs.readFileSync(join(__dirname, 'images.ts')).toString();
       const temp = Array.from(imagests);

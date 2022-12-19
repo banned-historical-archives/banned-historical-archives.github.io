@@ -45,7 +45,7 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GH_PAT }}
         run: |
-          cd public/books/archives${{ steps.get_archive_id.outputs.archive_id }}
+          cd public/archives${{ steps.get_archive_id.outputs.archive_id }}
           git config user.name github-actions
           git config user.email github-actions@github.com
           git checkout -b feat-${{ steps.generate-uuid.outputs.uuid }}
