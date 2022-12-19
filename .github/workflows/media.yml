@@ -41,7 +41,7 @@ jobs:
         env:
           BODY: ${{ github.event.issue.body }}
           TITLE: ${{ github.event.issue.title }}
-      - name: Create Pull Request For Submodule
+      - name: Create Pull Request
         env:
           GH_TOKEN: ${{ secrets.GH_PAT }}
         run: |
@@ -58,14 +58,7 @@ jobs:
           -H "Authorization: Bearer $GH_TOKEN" \
           https://api.github.com/repos/banned-historical-archives/banned-historical-archives${{ steps.get_archive_id.outputs.archive_id }}/pulls \
           -d '{"title":"${{ github.event.issue.title }}","body":"https://github.com/banned-historical-archives/banned-historical-archives.github.io/issues/${{github.event.issue.number}}","head":"feat-${{ steps.generate-uuid.outputs.uuid }}","base":"main"}'
-      - name: Create Pull Request
-        env:
-          GH_TOKEN: ${{ secrets.GH_PAT }}
-        run: |
           cd ../..
-          pwd
-          git config user.name github-actions
-          git config user.email github-actions@github.com
           git add .
           git commit -m 'feat: ${{ github.event.issue.title }}'
           git push origin feat-${{ steps.generate-uuid.outputs.uuid }}
