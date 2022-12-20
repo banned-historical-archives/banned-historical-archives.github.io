@@ -78,6 +78,8 @@ function PureArticle({
           {content}
         </Typography>
       );
+    } else if (part.type === ContentType.image) {
+      return <img key={key} src={part.text}/>
     } else if (part.type === ContentType.subdate) {
       return (
         <Typography key={key} variant="subtitle1" sx={{ textAlign: 'center' }}>
