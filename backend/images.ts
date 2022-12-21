@@ -10,14 +10,6 @@ const images: (Image & {
   {"name":"《上海工人革命造反总司令部斗争纪要》插图四","description":"张春桥同志在苏州为工总司队员题词","source":"《上海工人革命造反总司令部斗争纪要》","show_in_gallery":true,"tags":[{"type":"character","name":"张春桥"},{"type":"character","name":"工总司"}],"id":"6aa98e24-e62e-4e44-a7d1-6a92070c016b","url":"https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives7/main/6a/6aa98e24-e62e-4e44-a7d1-6a92070c016b.png"},
   {"name":"《上海工人革命造反总司令部斗争纪要》插图五","description":"批刻工总司图章和制作袖章的签条原件","source":"《上海工人革命造反总司令部斗争纪要》","show_in_gallery":true,"tags":[{"type":"character","name":"张春桥"},{"type":"character","name":"工总司"}],"id":"4d4d4af5-e085-49ed-9b6c-66dfd14b81be","url":"https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives7/main/4d/4d4d4af5-e085-49ed-9b6c-66dfd14b81be.png"},
   {"name":"《上海工人革命造反总司令部斗争纪要》插图六","description":"告上海全市人民书原稿","source":"《上海工人革命造反总司令部斗争纪要》","show_in_gallery":true,"tags":[{"type":"subject","name":"一月风暴"}],"id":"036575e8-eb6e-4d72-9098-1283f349f448","url":"https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives7/main/03/036575e8-eb6e-4d72-9098-1283f349f448.png"},
-  {
-    name: '红卫兵串联',
-    description: '',
-    show_in_gallery: true,
-    tags: [{ type: 'character', name: '红卫兵' }, { type: 'place', name: '北京' }, { type: 'place', name: '天安门' }],
-    id: '6e0b7e7f-96ab-4ce6-b508-9a56162157e8',
-    url: 'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives7/main/6e/6e0b7e7f-96ab-4ce6-b508-9a56162157e8.jpg',
-  },
 ];
 
 export default images;
