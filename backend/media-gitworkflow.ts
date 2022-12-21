@@ -67,16 +67,35 @@ export async function start() {
       config.archive_id =
         config.archive_id == undefined ? 7 : config.archive_id;
 
-      const urls = Array.from(body.matchAll(/\[.*?\]\(.*?\)/g)).map((i) =>
-        (i as any)[0].replace(/^.*\(/, '').replace(/\)/, ''),
-      );
+      const urls: string[] = [];
+      body
+        .substring(body.lastIndexOf('```') + 3)
+        .split('\n')
+        .forEach((x: string) => {
+          const format1 = Array.from(x.matchAll(/\[.*?\]\(.*?\)/g)).map((i) =>
+            (i as any)[0].replace(/^.*\(/, '').replace(/\)/, ''),
+          );
+          if (format1.length) {
+            urls.push(...format1);
+          }
+          const format2 = Array.from(x.matchAll(/src=".*">/g)).map((i) =>
+            (i as any)[0].substr(5).replace(/">$/g, ''),
+          );
+          if (format2.length) {
+            urls.push(...format2);
+          }
+        });
+
+      if (urls.length !== config.media.length) {
+        process.exit(2);
+      }
 
       const promises: Promise<any>[] = [];
       const prepend: string[] = [];
       for (const i of config.media) {
         i.id = uuid();
         delete i.type;
-        const url = urls.shift();
+        const url = urls.shift()!;
         const p =
           join(
             __dirname,
