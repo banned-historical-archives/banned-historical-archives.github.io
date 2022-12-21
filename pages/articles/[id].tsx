@@ -525,7 +525,7 @@ export default function ArticleViewer({
               .split(',')
               .filter((i, idx) => idx + 1 >= page.start && idx + 1 <= page.end)
               .map((f) => (
-                <img key={f} src={f} width="50%" style={{ margin: 'auto' }} />
+                <img key={f} src={f}/>
               ))
           ) : (
             <>未知类型</>
