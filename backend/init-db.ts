@@ -252,6 +252,7 @@ async function init_images(AppDataSource: DataSource) {
       {
         id: image.id,
         name: image.name,
+        source: image.source,
         description: image.description,
         show_in_gallery: image.show_in_gallery,
         url: image.url,
