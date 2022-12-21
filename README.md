@@ -235,7 +235,7 @@
 https://github.com/banned-historical-archives/banned-historical-archives.github.io/blob/master/doc/local-search-engine.md
 
 ## 友情链接
-[![统一战线公社](https://unitedfront.club/static/img/everylogo/hanzilogo.png)](https://unitedfront.club)
+[统一战线公社](https://unitedfront.club)
 欢迎提[\[issues\]](https://github.com/banned-historical-archives/banned-historical-archives.github.io/issues)交换链接
 
 （友情链接不代表本档案馆立场）
