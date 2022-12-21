@@ -1521,4 +1521,479 @@ mp3全世界无产者联合起来，把帝国主义强盗彻底埋葬！
       },
     ],
   },
+  {
+    name: '丰收歌',
+    composer: '',
+    description: '',
+    lyrics: [
+      {
+        lyricist: '',
+        content: `太阳哎一出哟
+红满天啦哎
+太阳一出红满天
+红光铺满丰收田 丰收田
+哎哟哎哟哎哟
+哎哟哎哟哎哟
+金黄稻穗沉甸甸
+盖满大地照亮天 照亮天
+哎哟哎哟哎哟
+哎哟哎哟哎哟
+盖满大地照亮天
+姐妹挥手舞银镰
+棵棵稻穗把头点 把头点
+哎哟哎哟哎哟
+哎哟哎哟哎哟
+尝尝稻米甜又香
+稻米醉人乐心间 乐心间
+哎哟哎哟哎哟
+哎哟哎哟哎哟
+稻米醉人乐心间
+堆起粮食赛金山
+社员心里乐无疆 乐无疆
+堆起粮食赛金山
+姑娘越干越喜欢 越喜欢
+哎哟哎哟哎哟
+哎哟哎哟哎哟
+水旱灾害算什么
+吓不倒咱们好社员
+哎哟哎哟哎哟
+哎哟哎哟哎哟
+吓不倒咱们好社员
+人民公社万般好
+丰收歌儿唱不完 唱不完
+人民公社万般好
+丰收歌儿唱不完 唱不完`,
+        version: '原版',
+        audios: [
+          {
+            url: 'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives6/main/fengshouge.mp3',
+            artist: '谢琳领唱 黄素嘉词 朱南溪曲',
+            source: 'http://ip.lidicity.com/hj/cn/hsjd.html#top',
+          },
+        ],
+      },
+    ],
+  },
+  {
+    name: '逛新城',
+    composer: '',
+    description: '',
+    lyrics: [
+      {
+        lyricist: '',
+        content: `雪山升起了红太阳
+        拉萨城内闪金光
+        翻身农奴巧梳妆
+        父女双双逛新城呀
+        女儿在前面走呀走得忙
+        老汉我赶得汗呀汗直淌
+        一心想看拉萨的新气象
+        迈开大步紧呀紧跟上呀
+        哎哎 为啥树杆立在路旁
+        上面布满了蜘蛛网呀
+        电线杆子行对行
+        纳金日夜发电忙
+        机器响来家家亮
+        拉萨日夜放光芒呀
+        爸爸呀 啊 快快走 噢
+        看看拉萨新面貌
+        女儿哎 哎 等着我 噢
+        看看拉萨新面貌
+        快快走来快快行呀
+        噢呀呀呀呀呀呀
+        哎哎 藏汉的干部人真多
+        个个拿着铁锹在干什么呀
+        毛主席教养的好干部
+        他和咱们是一家人
+        同吃同住同劳动
+        共同建设繁荣的新西藏呀
+        爸爸呀 啊 快快走 噢
+        看看拉萨新面貌
+        女儿哎 哎 等着我 噢
+        看看拉萨新面貌
+        快快走来快快行呀
+        噢呀呀呀呀呀呀
+        哎哎 这新楼房真奇怪
+        烟囱高呀门口挂个大木牌
+        新建的工厂生产忙
+        拉萨天天在变样
+        为了农业大发展
+        工人大哥决心来支援呀
+        爸爸呀 啊 快快走 噢
+        看看拉萨新面貌
+        女儿哎 哎 等着我 噢
+        看看拉萨新面貌
+        快快走来快快行呀
+        噢呀呀呀呀呀呀
+        哎哎为啥公路上尘土飞扬
+        为啥拉萨城内人来人往呀
+        农牧物资大交换
+        城市乡村紧相连
+        团结一心互相支援
+        发展生产生活好改善呀
+        爸爸呀 啊 快快走 噢
+        看看拉萨新面貌
+        女儿哎 哎 等着我 噢
+        看看拉萨新面貌
+        快快走来快快行呀
+        噢呀呀呀呀呀呀
+        哎哎为啥城内城外歌声响
+        为啥人人脸上放红光呀
+        扩音器传来党的话
+        条条指示记心上
+        千方百计闹生产
+        跃进的歌声响四方呀
+        爸爸呀 啊 快快走 噢
+        看看拉萨新面貌
+        女儿哎 哎 等着我 噢
+        看看拉萨新面貌
+        快快走来快快行呀
+        噢呀呀呀呀呀呀
+        新华书店真漂亮
+        毛主席的彩像买一张呀
+        他领导我们当了家
+        他是东方的红太阳呀
+        照得我们心里暖又亮
+        幸福的生活万年长呀
+        拉萨古城开金花
+        感谢伟大的共产党`,
+        version: '原版',
+        audios: [
+          {
+            url: 'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives6/main/guangxincheng.mp3',
+            artist: '张新民、廖惠清 邓先恺等词 李才生曲',
+            source: 'http://ip.lidicity.com/hj/cn/hsjd.html#top',
+          },
+        ],
+      },
+    ],
+  },
+  {
+    name: '好阿姨',
+    composer: '',
+    description: '',
+    lyrics: [
+      {
+        lyricist: '',
+        content: `好阿姨 好阿姨
+        阿姨像妈妈 宝宝听你话
+        跟你学唱歌 跟你做游戏
+        亲亲热热笑哈哈
+        做个快乐的娃娃家
+        好阿姨 好阿姨
+        跟你在一起 就像在家里
+        
+        好阿姨 好阿姨
+        阿姨像妈妈 宝宝听你话
+        跟你做早操 跟你学礼貌
+        皮球木马大家玩
+        我们都是好娃娃
+        好阿姨 好阿姨
+        我们要跟你 去见毛主席`,
+        version: '原版',
+        audios: [
+          {
+            url: 'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives6/main/haoayi.mp3',
+            artist: '上海少儿广播合唱团 于之词 寄明曲',
+            source: 'http://ip.lidicity.com/hj/cn/hsjd.html#top',
+          },
+        ],
+      },
+    ],
+  },
+  {
+    name: '红旗颂',
+    composer: '',
+    description: '',
+    lyrics: [
+      {
+        lyricist: '',
+        content: `红旗红旗革命的旗
+        烈士的鲜血染红了你
+        高举着红旗前仆后继
+        从胜利走向新的胜利
+        鲜红的旗 革命的旗
+        一代一代一代传下去
+        鲜红的旗 革命的旗
+        伟大的旗手是毛主席
+        
+        红旗红旗战斗的旗
+        指到哪里打到哪里
+        红旗下走着革命队伍
+        南征北战所向无敌
+        鲜红的旗 战斗的旗
+        一代一代一代传下去
+        鲜红的旗 战斗的旗
+        伟大的旗手是毛主席
+        
+        红旗红旗光荣的旗
+        指引着我们长征万里
+        红旗下面庄严宣誓
+        革命的意志坚定不移
+        鲜红的旗 光荣的旗
+        一代一代一代传下去
+        鲜红的旗 光荣的旗
+        伟大的旗手是毛主席
+        
+        红旗红旗胜利的旗
+        马列主义光辉普照大地
+        伟大的中国共产党
+        领导我们奔向共产主义
+        鲜红的旗 胜利的旗
+        一代一代一代传下去
+        鲜红的旗 胜利的旗
+        伟大的旗手是毛主席 毛主席`,
+        version: '原版',
+        audios: [
+          {
+            url: 'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives6/main/hongqisong.mp3',
+            artist: '中央民族乐团合唱队 巩志伟词曲',
+            source: 'http://ip.lidicity.com/hj/cn/hsjd.html#top',
+          },
+        ],
+      },
+    ],
+  },
+  {
+    name: '浏阳河',
+    composer: '',
+    description: '',
+    lyrics: [
+      {
+        lyricist: '',
+        content: `浏阳河 弯过了几道弯
+        几十里水路到湘江
+        江边有个什么县呐
+        出了个什么人
+        领导人民得解放啊
+        依呀依子哟
+        浏阳河 弯过了九道弯
+        五十里水路到湘江
+        江边有个湘潭县呐
+        出了个毛主席
+        领导人民得解放啊
+        依呀依子哟
+        出了个毛主席
+        领导人民得解放啊
+        依呀依子哟
+        浏阳河 弯过了九道弯
+        五十里水路到湘江
+        江水滔滔流不断呐
+        比不过毛主席的恩情长啊
+        依呀依子哟
+        毛主席 像太阳
+        他指引着人民前进的方向
+        我们永远跟着毛主席哎
+        人民江山万年长啊
+        依呀依子哟
+        浏阳河 宽又长
+        两岸歌声响四方
+        幸福歌儿唱不尽哎
+        歌唱敬爱的毛主席
+        我们心中的红太阳啊
+        依呀依子哟
+        歌唱敬爱的毛主席
+        我们心中的红太阳 红太阳`,
+        version: '原版',
+        audios: [
+          {
+            url: 'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives6/main/liuyanghe.mp3',
+            artist: '李小嘉、刘国栋 湖南省文工团歌舞队改词',
+            source: 'http://ip.lidicity.com/hj/cn/hsjd.html#top',
+          },
+        ],
+      },
+    ],
+  },
+  {
+    name: '前进歌',
+    composer: '',
+    description: '',
+    lyrics: [
+      {
+        lyricist: '',
+        content: `同胞们团结在一起
+        奔向抗日的前方
+        前进 快拿起武器
+        打倒日本帝国主义
+        前进 消灭侵略者
+        我们坚决抗战到底
+        紧跟着伟大领袖毛主席
+        高举红旗前进
+        紧跟着伟大领袖毛主席
+        向着解放的路 前进
+        
+        同胞们团结在一起
+        奔向抗日的前方
+        前进 快拿起武器
+        打倒日本帝国主义
+        前进 消灭侵略者
+        我们坚决抗战到底
+        紧跟着伟大领袖毛主席
+        高举红旗前进
+        紧跟着伟大领袖毛主席
+        向着解放的路 前进`,
+        version: '原版',
+        audios: [
+          {
+            url: 'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives6/main/qianjinge.mp3',
+            artist: '中央乐团 集体重新填词 聂耳曲',
+            source: 'http://ip.lidicity.com/hj/cn/hsjd.html#top',
+          },
+        ],
+      },
+    ],
+  },
+  {
+    name: '请茶歌',
+    composer: '',
+    description: '',
+    lyrics: [
+      {
+        lyricist: '',
+        content: `同志哥 请喝一杯茶呀
+        请喝一杯茶
+        井冈山的茶叶甜又香啊
+        甜又香啊
+        当年领袖毛委员啊
+        带领红军上井冈啊
+        茶树本是红军种
+        风里生来雨里长
+        茶树林中战歌响啊
+        军民同心打豺狼
+        打豺狼罗
+        喝了红色故乡的茶
+        同志哥
+        革命传统你永不忘啊
+        同志哥 请喝一杯茶呀
+        请喝一杯茶
+        井冈山的茶叶甜又香啊
+        甜又香啊
+        前人开路后人走啊
+        前人栽茶后人尝啊
+        革命种子发新芽
+        年年生来处处长
+        井冈茶香飘四海啊
+        棵棵茶树向太阳
+        向太阳罗
+        喝了红色故乡的茶
+        同志哥
+        革命意志你坚如钢啊
+        啊 革命意志你坚如钢`,
+        version: '原版',
+        audios: [
+          {
+            url: 'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives6/main/qingchage.mp3',
+            artist: '朱逢博 文莽彦词 解策励曲',
+            source: 'http://ip.lidicity.com/hj/cn/hsjd.html#top',
+          },
+        ],
+      },
+    ],
+  },
+  {
+    name: '生产忙',
+    composer: '',
+    description: '',
+    lyrics: [
+      {
+        lyricist: '',
+        content: `正月呀里来正月正啊哎
+        农会开了会呀
+        大家来订计划呀
+        发展那大生产呀 哎
+        
+        五月呀里来五端阳啊哎
+        变工把地铲啊
+        大家来把活干呀
+        一切那为生产呀 哎
+        
+        八月呀里来中秋节呀
+        老少齐下地呀
+        多种地多打粮
+        支援前线打呀嘛打胜仗啊 哎
+        
+        九月呀里来九重阳呀
+        木铣那个滚子啊一齐哟忙
+        碾的呀碾来扬的扬
+        套上了大车呀
+        送呀么送公粮啊哎 哎
+        
+        套上了大车呀
+        送呀送公粮啊哎 哎
+        增产呀建设大呀大发展呀
+        嘿 军民团结起呀
+        建设咱新中国呀
+        保卫世界和平啊 哎`,
+        version: '原版',
+        audios: [
+          {
+            url: 'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives6/main/shengchanmang.mp3',
+            artist: '中央民族歌舞团 刘金娥领唱 崔琪词 刘炽 解冰编曲',
+            source: 'http://ip.lidicity.com/hj/cn/hsjd.html#top',
+          },
+        ],
+      },
+    ],
+  },
+  {
+    name: '四好歌',
+    composer: '',
+    description: '',
+    lyrics: [
+      {
+        lyricist: '',
+        content: `八一军旗迎风飘
+        进军号声响云霄
+        陆海空军齐动员
+        比学赶帮创四好
+        陆海空军齐动员
+        比学赶帮创四好
+        四个第一是方向
+        政治工作传家宝
+        思想工作要做活
+        阶级立场站的牢
+        主席著作人人学
+        胜利全靠它引导它引导
+        三八作风要发扬
+        艰苦奋斗莫忘掉
+        雷厉风行动作快
+        生龙活虎干劲儿高
+        四大腐败该打倒
+        狂风恶浪要阻挡 要阻挡
+        军事训练为实战
+        从来从严标准高
+        军事苦练硬本领
+        战士基础属优秀
+        革命国家现代化
+        毛主席战士真英豪真英豪
+        生活管理抓得紧
+        七亿人民风尚好
+        唤起军民同甘苦
+        团结友爱心一条
+        三大民主要坚持
+        群众路线最重要最重要
+        人民军队忠于党
+        毛泽东红旗举得高
+        五好战士比铁坚
+        四好连队赛钢刀
+        敌人胆敢来侵犯
+        坚决把它消灭掉 消灭掉
+        八一军旗迎风飘
+        进军号声响云霄
+        陆海空军齐动员
+        比学赶帮创四好
+        陆海空军齐动员
+        比学赶帮创四好`,
+        version: '原版',
+        audios: [
+          {
+            url: 'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives6/main/sihaoge.mp3',
+            artist: '男声齐唱 萧华词 铁源、钊邦曲',
+            source: 'http://ip.lidicity.com/hj/cn/hsjd.html#top',
+          },
+        ],
+      },
+    ],
+  },
 ];
