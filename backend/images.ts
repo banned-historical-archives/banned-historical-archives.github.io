@@ -4,6 +4,7 @@ import { Image } from "./entities";
 const images: (Image & {
   id?: string;
 })[] = [
+  {"name":"全国无产阶级文革大革命形势略图","source":"","description":"","show_in_gallery":true,"tags":[],"year":1967,"month":10,"day":17,"id":"4fc695e6-8b56-4e1d-879d-83f489d82593","url":"https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives7/main/4f/4fc695e6-8b56-4e1d-879d-83f489d82593.jpg"},
   {"name":"《上海工人革命造反总司令部斗争纪要》插图一","description":"我们的伟大领袖毛主席","source":"《上海工人革命造反总司令部斗争纪要》","show_in_gallery":true,"tags":[{"type":"character","name":"毛泽东"}],"id":"e76ea17e-f53a-418c-be68-5a725aad779d","url":"https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives7/main/e7/e76ea17e-f53a-418c-be68-5a725aad779d.png"},
   {"name":"《上海工人革命造反总司令部斗争纪要》插图二","description":"上海工人革命造反总司令部成立宣言原件","source":"《上海工人革命造反总司令部斗争纪要》","show_in_gallery":true,"tags":[{"type":"subject","name":"工总司"}],"id":"a8db5d46-6004-45d5-b22d-dd5a63072008","url":"https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives7/main/a8/a8db5d46-6004-45d5-b22d-dd5a63072008.png"},
   {"name":"《上海工人革命造反总司令部斗争纪要》插图三","description":"1966年11月，毛主席派张春桥同志代表中央文革小组来到安亭","source":"《上海工人革命造反总司令部斗争纪要》","show_in_gallery":true,"tags":[{"type":"subject","name":"安亭事件"},{"type":"character","name":"张春桥"},{"type":"character","name":"工总司"}],"id":"0d8b3e97-c159-4d91-83f4-c199fa6e228a","url":"https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives7/main/0d/0d8b3e97-c159-4d91-83f4-c199fa6e228a.png"},
