@@ -185,6 +185,16 @@
 打靶歌|已收录
 大路歌|已收录
 蝶恋花|已收录
+丰收歌|已收录
+逛新城|已收录
+好阿姨|已收录
+红旗颂|已收录
+老司机|已收录
+浏阳河|已收录
+前进歌|已收录
+请茶歌|已收录
+生产忙|已收录
+四好歌|已收录
 歌唱祖国|已收录
 造反有理|已收录
 争取胜利|已收录
@@ -235,7 +245,7 @@
 https://github.com/banned-historical-archives/banned-historical-archives.github.io/blob/master/doc/local-search-engine.md
 
 ## 友情链接
-[![统一战线公社](https://unitedfront.club/static/img/everylogo/hanzilogo.png)](https://unitedfront.club)
+[统一战线公社](https://unitedfront.club)
 欢迎提[\[issues\]](https://github.com/banned-historical-archives/banned-historical-archives.github.io/issues)交换链接
 
 （友情链接不代表本档案馆立场）
