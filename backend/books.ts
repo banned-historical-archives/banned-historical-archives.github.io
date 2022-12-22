@@ -42,6 +42,26 @@ const books: Book[] = [
   },
   {
     entity: {
+      internal: true,
+      official: true,
+      type: 'pdf',
+      author: '',
+      id: 'd309a3d9-17e8-4491-9602-57b226112aac',
+      name: '帝国主义国家中的人民战争',
+      files: 'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives3/main/d309a3d9-17e8-4491-9602-57b226112aac.pdf',
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'pdf',
+      articles: [{"title":"帝国主义国家中的人民战争","authors":["法国毛主义共产党"],"page_start":1,"page_end":8,"dates":[{"year":2009}]}],
+      ocr: undefined,
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/archives3/d309a3d9-17e8-4491-9602-57b226112aac.pdf'),
+  },
+  {
+    entity: {
       id: '1c08350f-94a5-442d-a4b2-8669042a15f3',
       name: '社会改良还是社会革命（生活·读书·新知三联书店1958年版）',
       internal: true,
