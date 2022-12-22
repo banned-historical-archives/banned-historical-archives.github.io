@@ -22,6 +22,26 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: '33516b88-fb17-4658-85a0-dec017f48efd',
+      name: '持久人民战争：革命的唯一途径',
+      internal: true,
+      official: true,
+      type: 'pdf',
+      author: '',
+      files: 'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives3/main/33516b88-fb17-4658-85a0-dec017f48efd.pdf',
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'pdf',
+      articles: [{"title":"持久人民战争：革命的唯一途径","authors":["加拿大革命共产党"],"page_start":2,"page_end":44,"dates":[{"year":2002}]}],
+      ocr: {"standard_paragraph_merge_strategy_threshold":0.178,"differential_paragraph_merge_strategy_threshold":0},
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/archives3/33516b88-fb17-4658-85a0-dec017f48efd.pdf'),
+  },
+  {
+    entity: {
       id: 'd309a3d9-17e8-4491-9602-57b226112aac',
       name: '帝国主义国家中的人民战争',
       internal: true,
