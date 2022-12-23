@@ -22,6 +22,26 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: '6a87ce7d-2a84-40b5-bc7d-94812cdcfc5e',
+      name: '列宁与军事化共产党',
+      internal: true,
+      official: true,
+      type: 'pdf',
+      author: '',
+      files: 'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives3/main/6a87ce7d-2a84-40b5-bc7d-94812cdcfc5e.pdf',
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'pdf',
+      articles: [{"title":"列宁与军事化共产党","authors":["巴西共产党（红色派）"],"page_start":1,"page_end":34,"dates":[{"year":2017}]}],
+      ocr: {"standard_paragraph_merge_strategy_threshold":0.119,"differential_paragraph_merge_strategy_threshold":0},
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/archives3/6a87ce7d-2a84-40b5-bc7d-94812cdcfc5e.pdf'),
+  },
+  {
+    entity: {
       id: 'f8cf96a9-6162-49d0-818d-7912f2d2eaef',
       name: '堪萨斯城红卫兵新路线',
       internal: true,
