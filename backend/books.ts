@@ -22,6 +22,26 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: 'f9878251-0999-4d57-b968-15d501016a54',
+      name: '论中国的文化大革命及其对未来的遗产',
+      internal: true,
+      official: true,
+      type: 'pdf',
+      author: '',
+      files: 'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives3/main/f9878251-0999-4d57-b968-15d501016a54.pdf',
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'pdf',
+      articles: [{"title":"论中国的文化大革命及其对未来的遗产","authors":["美国马列毛主义革命学习小组"],"page_start":1,"page_end":54,"dates":[{"year":2007,"month":3}]}],
+      ocr: {"standard_paragraph_merge_strategy_threshold":0.178,"differential_paragraph_merge_strategy_threshold":0},
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/archives3/f9878251-0999-4d57-b968-15d501016a54.pdf'),
+  },
+  {
+    entity: {
       id: '49c0e64a-0dd4-4b15-94de-22f754f1c0c0',
       name: '大逆转：中国的私有化 1979-1989',
       internal: true,
