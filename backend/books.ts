@@ -22,6 +22,26 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: 'f8cf96a9-6162-49d0-818d-7912f2d2eaef',
+      name: '堪萨斯城红卫兵新路线',
+      internal: true,
+      official: true,
+      type: 'pdf',
+      author: '',
+      files: 'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives3/main/f8cf96a9-6162-49d0-818d-7912f2d2eaef.pdf',
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'pdf',
+      articles: [{"title":"堪萨斯城红卫兵新路线","authors":["堪萨斯城红卫兵"],"page_start":1,"page_end":7,"dates":[{"year":2019}]}],
+      ocr: {"standard_paragraph_merge_strategy_threshold":0.178,"differential_paragraph_merge_strategy_threshold":0},
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/archives3/f8cf96a9-6162-49d0-818d-7912f2d2eaef.pdf'),
+  },
+  {
+    entity: {
       id: 'd6a83940-c7eb-4a0f-beb3-4c0f08aebaa2',
       name: '人民战争与革命',
       internal: true,
