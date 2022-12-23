@@ -22,6 +22,26 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: '2b76c2fb-c46b-4bc2-a9e7-14a3e76e265e',
+      name: '驳国内某些人对各国马列毛主义者的攻击',
+      internal: true,
+      official: true,
+      type: 'pdf',
+      author: '',
+      files: 'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives3/main/2b76c2fb-c46b-4bc2-a9e7-14a3e76e265e.pdf',
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'pdf',
+      articles: [{"title":"驳国内某些人对各国马列毛主义者的攻击","authors":["龚格晟"],"page_start":1,"page_end":25,"dates":[{"year":2021}]}],
+      ocr: {"standard_paragraph_merge_strategy_threshold":0.093,"differential_paragraph_merge_strategy_threshold":0},
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/archives3/2b76c2fb-c46b-4bc2-a9e7-14a3e76e265e.pdf'),
+  },
+  {
+    entity: {
       id: '6ae42ff8-e381-4c6e-b9c2-6d7da68e716f',
       name: '在毛主义和人民战争下对取消主义斗争和团结国际共运：关于阿共（毛）对2018年五一宣言的批评',
       internal: true,
