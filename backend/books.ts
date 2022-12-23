@@ -22,6 +22,26 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: 'c63dd54f-32f7-4bfb-9c66-d637cc08f85b',
+      name: '保卫贡萨罗主席的生命就是保卫毛主义',
+      internal: true,
+      official: true,
+      type: 'pdf',
+      author: '',
+      files: 'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives3/main/c63dd54f-32f7-4bfb-9c66-d637cc08f85b.pdf',
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'pdf',
+      articles: [{"title":"保卫贡萨罗主席的生命就是保卫毛主义","authors":["法国毛主义共产党"],"page_start":1,"page_end":10,"dates":[{"year":2017}]}],
+      ocr: {"standard_paragraph_merge_strategy_threshold":0.169,"differential_paragraph_merge_strategy_threshold":0},
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/archives3/c63dd54f-32f7-4bfb-9c66-d637cc08f85b.pdf'),
+  },
+  {
+    entity: {
       id: '6a87ce7d-2a84-40b5-bc7d-94812cdcfc5e',
       name: '列宁与军事化共产党',
       internal: true,
