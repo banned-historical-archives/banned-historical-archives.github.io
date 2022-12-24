@@ -22,6 +22,26 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: '561f1d91-74de-49f3-967a-e61cdb36e4f2',
+      name: '反击教条主义者对毛泽东思想的进攻——评恩维尔·霍查的《帝国主义与革命》',
+      internal: true,
+      official: true,
+      type: 'pdf',
+      author: '',
+      files: 'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives3/main/561f1d91-74de-49f3-967a-e61cdb36e4f2.pdf',
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'pdf',
+      articles: [{"title":"反击教条主义者对毛泽东思想的进攻——评恩维尔·霍查的《帝国主义与革命》","authors":["美国革命共产党"],"page_start":1,"page_end":98,"dates":[{"year":1979,"month":5}]}],
+      ocr: undefined,
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/archives3/561f1d91-74de-49f3-967a-e61cdb36e4f2.pdf'),
+  },
+  {
+    entity: {
       id: 'ad036d11-b750-477d-abf0-2eb57649a194',
       name: '帝国主义是资本主义的最高阶段（人民出版社1964年版）',
       internal: true,
