@@ -22,6 +22,26 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: '717295cf-aab7-4c2c-b2a4-234306b3f462',
+      name: '关于第三世界国家的官僚资本主义进程的说明',
+      internal: true,
+      official: true,
+      type: 'pdf',
+      author: '',
+      files: 'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives3/main/717295cf-aab7-4c2c-b2a4-234306b3f462.pdf',
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'pdf',
+      articles: [{"title":"关于第三世界国家的官僚资本主义进程的说明","authors":["秘鲁人民运动"],"page_start":1,"page_end":66,"dates":[{"year":2014,"month":1,"day":14}]}],
+      ocr: {"standard_paragraph_merge_strategy_threshold":0.178,"differential_paragraph_merge_strategy_threshold":0},
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/archives3/717295cf-aab7-4c2c-b2a4-234306b3f462.pdf'),
+  },
+  {
+    entity: {
       id: '08af3418-cd1a-4993-b391-9ace493b3eb6',
       name: '红旗一九六七年第十六期',
       internal: true,
