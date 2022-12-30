@@ -22,6 +22,26 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: '60191974-70c8-4e2a-9aa4-4f11169aa391',
+      name: '土耳其民族问题',
+      internal: true,
+      official: true,
+      type: 'pdf',
+      author: '',
+      files: 'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives3/main/60191974-70c8-4e2a-9aa4-4f11169aa391.pdf',
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'pdf',
+      articles: [{"title":"土耳其民族问题","authors":["易卜拉欣·凯帕喀亚"],"page_start":1,"page_end":31,"dates":[{"year":1971,"month":12}]}],
+      ocr: undefined,
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/archives3/60191974-70c8-4e2a-9aa4-4f11169aa391.pdf'),
+  },
+  {
+    entity: {
       id: '6b120776-ef1f-405c-950d-3f361b18fef0',
       name: '关于国际共产主义运动总路线的论战（人民出版社1965年版）',
       internal: true,
