@@ -22,6 +22,26 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: '42b793be-7c1e-4ef6-8818-de097290aa92',
+      name: '无产阶级专政时代的经济和政治',
+      internal: true,
+      official: true,
+      type: 'pdf',
+      author: '',
+      files: 'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives5/main/42b793be-7c1e-4ef6-8818-de097290aa92.pdf',
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'pdf',
+      articles: [{"title":"无产阶级专政时代的经济和政治","authors":["列宁"],"page_start":1,"page_end":11,"dates":[{"year":1919,"month":10,"day":30}]}],
+      ocr: {"content_thresholds":[0.12,0,0,0]},
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/archives5/42b793be-7c1e-4ef6-8818-de097290aa92.pdf'),
+  },
+  {
+    entity: {
       id: 'a8ea4e1d-af66-4294-8979-618e5faa703e',
       name: '路易·波拿巴的雾月十八日（人民出版社1972年版）',
       internal: true,
