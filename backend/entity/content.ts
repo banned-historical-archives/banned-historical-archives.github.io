@@ -18,7 +18,7 @@ export default class Content {
   @Column({ type: 'enum', enum: ContentType })
   type!: ContentType;
 
-  @Column({ type: 'text' })
+  @Column({ type: 'longtext' })
   text!: string;
 
   @Column({ type: 'int' })
