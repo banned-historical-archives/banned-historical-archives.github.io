@@ -22,6 +22,26 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: 'b1daa337-79a3-40f9-ba73-7cbf948e0091',
+      name: '伟大的创举（人民出版社1973年版）',
+      internal: true,
+      official: true,
+      type: 'pdf',
+      author: '',
+      files: 'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives5/main/b1daa337-79a3-40f9-ba73-7cbf948e0091.pdf',
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'pdf',
+      articles: [{"title":"伟大的创举","authors":["列宁"],"page_start":4,"page_end":28,"dates":[{"year":1919,"month":6,"day":28}]},{"title":"注释","authors":[],"page_start":29,"page_end":30,"dates":[]}],
+      ocr: {"content_thresholds":[0,0.1,0,0]},
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/archives5/b1daa337-79a3-40f9-ba73-7cbf948e0091.pdf'),
+  },
+  {
+    entity: {
       id: '6869e951-bde4-44a1-8348-dc6fc27cc26a',
       name: '青年团的任务（人民出版社1973年版）',
       internal: true,
