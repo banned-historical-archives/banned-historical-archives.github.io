@@ -22,6 +22,26 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: '959447a7-19ca-480b-b042-22c56f4bdb03',
+      name: '国家与革命（人民出版社1976年版）',
+      internal: true,
+      official: true,
+      type: 'pdf',
+      author: '',
+      files: 'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives5/main/959447a7-19ca-480b-b042-22c56f4bdb03.pdf',
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'pdf',
+      articles: [{"title":"国家与革命","authors":["列宁"],"page_start":7,"page_end":121,"is_range_date":true,"dates":[{"year":1917,"month":8},{"year":1917,"month":9}]},{"title":"注释","authors":[],"page_start":123,"page_end":135,"dates":[]}],
+      ocr: {"content_thresholds":[0,0.076,0,0]},
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/archives5/959447a7-19ca-480b-b042-22c56f4bdb03.pdf'),
+  },
+  {
+    entity: {
       id: '30e9a4e4-86b8-4204-b1c0-f68199f133f1',
       name: '政治经济学（社会主义部分）',
       internal: true,
