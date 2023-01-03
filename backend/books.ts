@@ -22,6 +22,26 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: '0926f4bc-4fe1-4cbe-8ae0-ad6a82bfaec3',
+      name: '工资、价格和利润（人民出版社1974年版）',
+      internal: true,
+      official: true,
+      type: 'pdf',
+      author: '',
+      files: 'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives4/main/0926f4bc-4fe1-4cbe-8ae0-ad6a82bfaec3.pdf',
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'pdf',
+      articles: [{"title":"工资、价格和利润","authors":["马克思"],"page_start":10,"page_end":66,"is_range_date":true,"dates":[{"year":1865,"month":5},{"year":1865,"month":6,"day":27}]},{"title":"注释","authors":[],"page_start":67,"page_end":69,"dates":[]}],
+      ocr: {"content_thresholds":[0,0.084,0,0]},
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/archives4/0926f4bc-4fe1-4cbe-8ae0-ad6a82bfaec3.pdf'),
+  },
+  {
+    entity: {
       id: '0aade93c-c356-46d2-9807-b567596b7e45',
       name: '哲学笔记（人民出版社1974年版）',
       internal: true,
