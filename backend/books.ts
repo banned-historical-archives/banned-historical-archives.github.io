@@ -22,6 +22,26 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: 'c7eaace4-1838-4662-90ba-7b703b05d6ff',
+      name: '怎么办？（人民出版社1965年版）',
+      internal: true,
+      official: true,
+      type: 'pdf',
+      author: '',
+      files: 'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives5/main/c7eaace4-1838-4662-90ba-7b703b05d6ff.pdf',
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'pdf',
+      articles: [{"title":"怎么办？","authors":["列宁"],"page_start":6,"page_end":185,"is_range_date":true,"dates":[{"year":1901},{"year":1902,"month":2}]},{"title":"注释","authors":[],"page_start":186,"page_end":193,"dates":[]}],
+      ocr: {"content_thresholds":[0,0.102,0,0]},
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/archives5/c7eaace4-1838-4662-90ba-7b703b05d6ff.pdf'),
+  },
+  {
+    entity: {
       id: 'fcd4f98d-789b-43d7-b468-453e2e756b34',
       name: '进一步，退两步（人民出版社1975年版）',
       internal: true,
