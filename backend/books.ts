@@ -183,7 +183,7 @@ const books: Book[] = [
   {
     entity: {
       id: '25783b07-bb1f-4c6e-9ce7-55196d853a0c',
-      name: '资本卷 第一卷（二）（人民出版社1975年版）',
+      name: '资本论 第一卷（二）（人民出版社1975年版）',
       internal: true,
       official: true,
       type: 'pdf',
@@ -203,7 +203,7 @@ const books: Book[] = [
   {
     entity: {
       id: 'cfa8b5d5-ebd0-441b-9d76-9580abd066b7',
-      name: '资本卷 第一卷（一）（人民出版社1975年版）',
+      name: '资本论 第一卷（一）（人民出版社1975年版）',
       internal: true,
       official: true,
       type: 'pdf',
