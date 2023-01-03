@@ -22,6 +22,26 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: 'cfa8b5d5-ebd0-441b-9d76-9580abd066b7',
+      name: '资本卷 第一卷（一）（人民出版社1975年版）',
+      internal: true,
+      official: true,
+      type: 'pdf',
+      author: '',
+      files: 'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives4/main/cfa8b5d5-ebd0-441b-9d76-9580abd066b7.pdf',
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'pdf',
+      articles: [{"title":"第一版序言","authors":["马克思"],"page_start":16,"page_end":22,"dates":[{"year":1867,"month":7,"day":25}]},{"title":"第二版跋","authors":["马克思"],"page_start":23,"page_end":34,"dates":[{"year":1873,"month":1,"day":24}]},{"title":"法文版序言","authors":["马克思"],"page_start":35,"page_end":35,"dates":[{"year":1872,"month":3,"day":18}]},{"title":"法文版跋","authors":["马克思"],"page_start":38,"page_end":38,"dates":[{"year":1875,"month":4,"day":28}]},{"title":"英文版序言","authors":["恩格斯"],"page_start":42,"page_end":46,"dates":[{"year":1886,"month":11,"day":5}]},{"title":"第四版序言","authors":["恩格斯"],"page_start":47,"page_end":53,"dates":[{"year":1890,"month":6,"day":25}]},{"title":"第一卷 资本的生产过程 第一篇 商品和货币 第一章 商品","authors":["马克思"],"page_start":56,"page_end":110,"dates":[{"year":1867,"month":9}]},{"title":"第一卷 资本的生产过程 第一篇 商品和货币 第二章 交换过程","authors":["马克思"],"page_start":111,"page_end":120,"dates":[{"year":1867,"month":9}]},{"title":"第一卷 资本的生产过程 第一篇 商品和货币 第三章 货币或商品流通","authors":["马克思"],"page_start":121,"page_end":175,"dates":[{"year":1867,"month":9}]},{"title":"第一卷 资本的生产过程 第二篇 货币转化为资本 第四章 货币转化为资本","authors":["马克思"],"page_start":176,"page_end":209,"dates":[{"year":1867,"month":9}]},{"title":"第一卷 资本的生产过程 第三篇 绝对剩余价值的生产 第五章 劳动过程和价值增殖过程","authors":["马克思"],"page_start":210,"page_end":233,"dates":[{"year":1867,"month":9}]},{"title":"第一卷 资本的生产过程 第三篇 绝对剩余价值的生产 第六章 不变资本和可变资本","authors":["马克思"],"page_start":234,"page_end":246,"dates":[{"year":1867,"month":9}]},{"title":"第一卷 资本的生产过程 第三篇 绝对剩余价值的生产 第七章 剩余价值率","authors":["马克思"],"page_start":247,"page_end":266,"dates":[{"year":1867,"month":9}]},{"title":"第一卷 资本的生产过程 第三篇 绝对剩余价值的生产 第八章 工作日","authors":["马克思"],"page_start":267,"page_end":344,"dates":[{"year":1867,"month":9}]},{"title":"第一卷 资本的生产过程 第三篇 绝对剩余价值的生产 第九章 剩余价值率和剩余价值量","authors":["马克思"],"page_start":345,"page_end":354,"dates":[{"year":1867,"month":9}]},{"title":"第一卷 资本的生产过程 第四篇 相对剩余价值的生产 第十章 相对剩余价值的概念","authors":["马克思"],"page_start":356,"page_end":366,"dates":[{"year":1867,"month":9}]},{"title":"第一卷 资本的生产过程 第四篇 相对剩余价值的生产 第十一章 协作","authors":["马克思"],"page_start":367,"page_end":381,"dates":[{"year":1867,"month":9}]},{"title":"第一卷 资本的生产过程 第四篇 相对剩余价值的生产 第十二章 分工和工场手工业","authors":["马克思"],"page_start":382,"page_end":416,"dates":[{"year":1867,"month":9}]},{"title":"第一卷 资本的生产过程 第四篇 相对剩余价值的生产 第十三章 机器和大工业","authors":["马克思"],"page_start":417,"page_end":562,"dates":[{"year":1867,"month":9}]}],
+      ocr: {"content_thresholds":[0.134,0,0,0]},
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/archives4/cfa8b5d5-ebd0-441b-9d76-9580abd066b7.pdf'),
+  },
+  {
+    entity: {
       id: 'fc1f4280-a408-4802-b905-69179daca249',
       name: '雇佣劳动与资本（人民出版社1965年版）',
       internal: true,
