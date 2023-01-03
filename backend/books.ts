@@ -22,6 +22,26 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: '25783b07-bb1f-4c6e-9ce7-55196d853a0c',
+      name: '资本卷 第一卷（二）（人民出版社1975年版）',
+      internal: true,
+      official: true,
+      type: 'pdf',
+      author: '',
+      files: 'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives4/main/25783b07-bb1f-4c6e-9ce7-55196d853a0c.pdf',
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'pdf',
+      articles: [{"title":"第一卷 资本的生产过程 第五篇 绝对剩余价值和相对剩余价值的生产 第十四章 绝对剩余价值和相对剩余价值","authors":["马克思"],"page_start":1,"page_end":12,"dates":[{"year":1867,"month":9}]},{"title":"第一卷 资本的生产过程 第五篇 绝对剩余价值和相对剩余价值的生产 第十五章 劳动力价格和剩余价值的量的变化","authors":["马克思"],"page_start":13,"page_end":25,"dates":[{"year":1867,"month":9}]},{"title":"第一卷 资本的生产过程 第五篇 绝对剩余价值和相对剩余价值的生产 第十六章 剩余价值率的各种公式","authors":["马克思"],"page_start":26,"page_end":30,"dates":[{"year":1867,"month":9}]},{"title":"第一卷 资本的生产过程 第六篇 工资 第十七章 劳动力的价值或价格转化为工资","authors":["马克思"],"page_start":31,"page_end":39,"dates":[{"year":1867,"month":9}]},{"title":"第一卷 资本的生产过程 第六篇 工资 第十八章 计时工资","authors":["马克思"],"page_start":40,"page_end":48,"dates":[{"year":1867,"month":9}]},{"title":"第一卷 资本的生产过程 第六篇 工资 第十九章 计件工资","authors":["马克思"],"page_start":49,"page_end":58,"dates":[{"year":1867,"month":9}]},{"title":"第一卷 资本的生产过程 第六篇 工资 第二十章 工资的国民差异","authors":["马克思"],"page_start":59,"page_end":66,"dates":[{"year":1867,"month":9}]},{"title":"第一卷 资本的生产过程 第七篇 资本的积累过程 第二十一章 简单再生产","authors":["马克思"],"page_start":67,"page_end":80,"dates":[{"year":1867,"month":9}]},{"title":"第一卷 资本的生产过程 第七篇 资本的积累过程 第二十二章 剩余价值转化为资本","authors":["马克思"],"page_start":81,"page_end":117,"dates":[{"year":1867,"month":9}]},{"title":"第一卷 资本的生产过程 第七篇 资本的积累过程 第二十三章 资本主义积累的一般规律","authors":["马克思"],"page_start":118,"page_end":226,"dates":[{"year":1867,"month":9}]},{"title":"第一卷 资本的生产过程 第七篇 资本的积累过程 第二十四章 所谓原始积累","authors":["马克思"],"page_start":227,"page_end":278,"dates":[{"year":1867,"month":9}]},{"title":"第一卷 资本的生产过程 第七篇 资本的积累过程 第二十五章 现代殖民理论","authors":["马克思"],"page_start":279,"page_end":289,"dates":[{"year":1867,"month":9}]},{"title":"注释","authors":[],"page_start":293,"page_end":324,"dates":[]},{"title":"人名索引","authors":[],"page_start":325,"page_end":356,"dates":[]},{"title":"本卷中引用和提到的著作索引","authors":[],"page_start":357,"page_end":406,"dates":[]},{"title":"名目索引","authors":[],"page_start":407,"page_end":428,"dates":[]},{"title":"计量单位和货币名称表","authors":[],"page_start":429,"page_end":430,"dates":[]}],
+      ocr: {"content_thresholds":[0.134,0,0,0]},
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/archives4/25783b07-bb1f-4c6e-9ce7-55196d853a0c.pdf'),
+  },
+  {
+    entity: {
       id: 'cfa8b5d5-ebd0-441b-9d76-9580abd066b7',
       name: '资本卷 第一卷（一）（人民出版社1975年版）',
       internal: true,
