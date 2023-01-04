@@ -22,6 +22,26 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: 'e06f9143-cb53-44ff-8ee0-693133b1388b',
+      name: '无产阶级革命和叛徒考茨基（人民出版社1964年版）',
+      internal: true,
+      official: true,
+      type: 'pdf',
+      author: '',
+      files: 'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives5/main/e06f9143-cb53-44ff-8ee0-693133b1388b.pdf',
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'pdf',
+      articles: [{"title":"无产阶级革命和叛徒考茨基","authors":["列宁"],"page_start":6,"page_end":103,"is_range_date":true,"dates":[{"year":1918,"month":10},{"year":1918,"month":11}]},{"title":"注释","authors":[],"page_start":104,"page_end":109,"dates":[]}],
+      ocr: {"content_thresholds":[0,0.132,0,0]},
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/archives5/e06f9143-cb53-44ff-8ee0-693133b1388b.pdf'),
+  },
+  {
+    entity: {
       id: '9d14c6e6-3c6d-4652-a2ca-61747cd7cd29',
       name: '社会民主党在民主革命中的两种策略（人民出版社1971年版）',
       internal: true,
