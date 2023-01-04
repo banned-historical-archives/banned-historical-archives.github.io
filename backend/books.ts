@@ -22,6 +22,26 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: '9d14c6e6-3c6d-4652-a2ca-61747cd7cd29',
+      name: '社会民主党在民主革命中的两种策略（人民出版社1971年版）',
+      internal: true,
+      official: true,
+      type: 'pdf',
+      author: '',
+      files: 'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives5/main/9d14c6e6-3c6d-4652-a2ca-61747cd7cd29.pdf',
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'pdf',
+      articles: [{"title":"社会民主党在民主革命中的两种策略","authors":["列宁"],"page_start":7,"page_end":124,"is_range_date":true,"dates":[{"year":1905,"month":6},{"year":1905,"month":7}]},{"title":"注释","authors":[],"page_start":125,"page_end":130,"dates":[]}],
+      ocr: {"content_thresholds":[0,0.108,0,0]},
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/archives5/9d14c6e6-3c6d-4652-a2ca-61747cd7cd29.pdf'),
+  },
+  {
+    entity: {
       id: 'da59c86f-1b55-41ef-b159-f2beb5d0ab7b',
       name: '党的基础知识（上海人民出版社1974年版）',
       internal: true,
