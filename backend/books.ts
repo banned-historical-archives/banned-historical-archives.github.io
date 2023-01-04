@@ -22,6 +22,26 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: '5c7acab9-7534-46d4-9f38-7368dfe01557',
+      name: '关于党内资产阶级问题的意见综述',
+      internal: true,
+      official: true,
+      type: 'pdf',
+      author: '',
+      files: 'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives3/main/5c7acab9-7534-46d4-9f38-7368dfe01557.pdf',
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'pdf',
+      articles: [{"title":"关于党内资产阶级问题的意见综述","authors":["中共中山县委宣传部"],"page_start":2,"page_end":14,"dates":[{"year":1976,"month":7,"day":8}]}],
+      ocr: {"content_thresholds":[0,0.082,0,0]},
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/archives3/5c7acab9-7534-46d4-9f38-7368dfe01557.pdf'),
+  },
+  {
+    entity: {
       id: '6b469ced-4f61-48c9-9d0b-550abebe4102',
       name: '简明世界史（现代部分）（北京大学历史系1975年版）',
       internal: true,
