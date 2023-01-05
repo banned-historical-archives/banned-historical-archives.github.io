@@ -22,6 +22,34 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: '706accb6-84d6-4155-a024-db2895a89fa1',
+      name: '上海第一钢铁厂工人队伍状况的调查',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(28)
+        .fill(0)
+        .map(
+          (i, idx) =>
+            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives3/main/706accb6-84d6-4155-a024-db2895a89fa1/${
+              idx + 1
+            }.jpeg`,
+        )
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'jpeg',
+      articles: [{"title":"上海第一钢铁厂发展概貌","authors":[],"page_start":1,"page_end":5,"dates":[{"year":1973,"month":5}]},{"title":"平炉车间老工人情况调查","authors":[],"page_start":5,"page_end":8,"dates":[{"year":1973,"month":5}]},{"title":"四个老工人家庭经济生活的调查","authors":[],"page_start":9,"page_end":12,"dates":[{"year":1973,"month":5}]},{"title":"第二转炉车间五十六个“海塘青年”的情况调查","authors":[],"page_start":12,"page_end":16,"dates":[{"year":1973,"month":5}]},{"title":"如何做好犯错误的人的转化工作","authors":[],"page_start":16,"page_end":19,"dates":[{"year":1973,"month":5}]},{"title":"钢板车间青年工人情况调查","authors":[],"page_start":19,"page_end":22,"dates":[{"year":1973,"month":5}]},{"title":"钢板车间可以教育好的子女情况","authors":[],"page_start":22,"page_end":25,"dates":[{"year":1973,"month":5}]},{"title":"大专毕业的知识分子情况调查","authors":[],"page_start":25,"page_end":28,"dates":[{"year":1973,"month":5}]}],
+      ocr: undefined,
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/archives3/706accb6-84d6-4155-a024-db2895a89fa1'),
+  },
+  {
+    entity: {
       id: '16dd6e1b-5336-447f-9560-9e09dea0b6c8',
       name: '红旗一九六九年第十二期',
       internal: true,
