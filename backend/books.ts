@@ -22,6 +22,34 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: '9b1ca6ac-397b-4cea-9776-82a6dc5af6c5',
+      name: '关于工人队伍基本状况的调查',
+      internal: true,
+      official: true,
+      type: 'img',
+      author: '',
+      files: new Array(25)
+        .fill(0)
+        .map(
+          (i, idx) =>
+            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives3/main/9b1ca6ac-397b-4cea-9776-82a6dc5af6c5/${
+              idx + 1
+            }.jpeg`,
+        )
+        .join(','),
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'jpeg',
+      articles: [{"title":"第二转炉车间五十六个“海塘青年”的情况调查","authors":[],"page_start":1,"page_end":7,"dates":[{"year":1973,"month":8}]},{"title":"钢板车间青年工人情况调查","authors":[],"page_start":8,"page_end":11,"dates":[{"year":1973,"month":8}]},{"title":"钢板车间可以教育好的子女情况","authors":[],"page_start":11,"page_end":14,"dates":[{"year":1973,"month":8}]},{"title":"如何做好犯错误的人的转化工作","authors":[],"page_start":15,"page_end":18,"dates":[{"year":1973,"month":8}]},{"title":"二纺丙班细沙工段青工学技术情况","authors":[],"page_start":19,"page_end":21,"dates":[{"year":1973,"month":8}]},{"title":"二纺甲班青年女工的健康情况","authors":[],"page_start":21,"page_end":25,"dates":[{"year":1973,"month":8}]}],
+      ocr: undefined,
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/archives3/9b1ca6ac-397b-4cea-9776-82a6dc5af6c5'),
+  },
+  {
+    entity: {
       id: '706accb6-84d6-4155-a024-db2895a89fa1',
       name: '上海第一钢铁厂工人队伍状况的调查',
       internal: true,
