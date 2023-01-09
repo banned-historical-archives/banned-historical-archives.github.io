@@ -31,6 +31,44 @@
   * 可溯源，可验证。所有信息均来自对原始文件（如pdf）的解析，可以校验原始文件的摘要确保一致。
   * 文本识别的模型、训练集、代码，以及解析算法公开透明。
   * 包含完整的文稿校对记录。
+  
+  ## 贡献资源/纠错/讨论
+
+[\[文稿录入与校对\]](https://github.com/banned-historical-archives/banned-historical-archives.github.io/wiki/文稿录入与校对)
+[\[Github issues\]](https://github.com/banned-historical-archives/banned-historical-archives.github.io/issues)
+[\[Gitlab issues\]备用地址](https://gitlab.com/banned-historical-archives/banned-historical-archives.gitlab.io/-/issues)
+
+### 源代码
+
+[\[Github\]](https://github.com/banned-historical-archives/banned-historical-archives.github.io)
+[\[Gitlab\]](https://gitlab.com/banned-historical-archives/banned-historical-archives.gitlab.io)
+
+如果以备份为目的fork本仓库，最好同时fork本仓库对应的资源仓库 banned-historical-archives0, banned-historical-archives1, banned-historical-archives2 ... banned-historical-archives7
+
+[\[开发者如何贡献代码\]](https://github.com/banned-historical-archives/banned-historical-archives.github.io/wiki/开发者贡献代码)
+
+### 其他
+#### 数据库导出
+在初始化项目后，执行 mysqldump 命令导出数据库，使用方法见 mysql 官网。
+
+#### 静态html文件导出
+
+https://github.com/banned-historical-archives/banned-historical-archives.github.io/tree/gh-pages
+
+自动构建的html文件在gh-pages分支，可以直接下载该分支的zip压缩包
+
+#### 使用本地搜索引擎(推荐)
+
+谷歌搜索引擎仅收录了很小部分文稿，搜索效果也不太让人满意。
+本地搜索引擎不仅可以精准检索全部文稿，更重要的是保护你的隐私。
+
+https://github.com/banned-historical-archives/banned-historical-archives.github.io/blob/master/doc/local-search-engine.md
+
+## 友情链接
+[统一战线公社](https://unitedfront.club)
+欢迎提[\[issues\]](https://github.com/banned-historical-archives/banned-historical-archives.github.io/issues)交换链接
+
+（友情链接不代表本档案馆立场）
 
 ## 收录的文稿
 
@@ -243,8 +281,9 @@
 |---|---|
 红旗|正在录入
 人民日报|待解析
-学习与批判|待解析
+学习与批判|正在录入
 参考消息|待解析
+自然辩证法|待解析
 
 ## 计划收录的多媒体资料
 
@@ -597,41 +636,3 @@
 中华人民共和国国歌(1978)|已收录
 歌唱伟大、光荣、正确的中国共产党|已收录
 毛主席您是全世界人民心中的红太阳|已收录
-
-## 贡献资源/纠错/讨论
-
-[\[文稿录入与校对\]](https://github.com/banned-historical-archives/banned-historical-archives.github.io/wiki/文稿录入与校对)
-[\[Github issues\]](https://github.com/banned-historical-archives/banned-historical-archives.github.io/issues)
-[\[Gitlab issues\]备用地址](https://gitlab.com/banned-historical-archives/banned-historical-archives.gitlab.io/-/issues)
-
-### 源代码
-
-[\[Github\]](https://github.com/banned-historical-archives/banned-historical-archives.gitlab.io)
-[\[Gitlab\]](https://gitlab.com/banned-historical-archives/banned-historical-archives.gitlab.io)
-
-如果以备份为目的fork本仓库，最好同时fork本仓库对应的资源仓库 banned-historical-archives0,banned-historical-archives1,banned-historical-archives2...banned-historical-archives5
-
-[\[开发者如何贡献代码\]](https://github.com/banned-historical-archives/banned-historical-archives.github.io/wiki/开发者贡献代码)
-
-### 其他
-#### 数据库导出
-在初始化项目后，执行 mysqldump 命令导出数据库，使用方法见 mysql 官网。
-
-#### 静态html文件导出
-
-https://github.com/banned-historical-archives/banned-historical-archives.github.io/tree/gh-pages
-
-自动构建的html文件在gh-pages分支，可以直接下载该分支的zip压缩包
-
-#### 使用本地搜索引擎(推荐)
-
-谷歌搜索引擎仅收录了很小部分文稿，搜索效果也不太让人满意。
-本地搜索引擎不仅可以精准检索全部文稿，更重要的是保护你的隐私。
-
-https://github.com/banned-historical-archives/banned-historical-archives.github.io/blob/master/doc/local-search-engine.md
-
-## 友情链接
-[统一战线公社](https://unitedfront.club)
-欢迎提[\[issues\]](https://github.com/banned-historical-archives/banned-historical-archives.github.io/issues)交换链接
-
-（友情链接不代表本档案馆立场）
