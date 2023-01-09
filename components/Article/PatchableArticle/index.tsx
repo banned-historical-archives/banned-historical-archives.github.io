@@ -60,13 +60,21 @@ export default function PatchableArticle({
         >
           校对注意事项
         </Button>
+        <Button
+          onClick={(e) => {
+            setPopoverContent('〔〕、·、×、〇');
+            setAnchorEl(e.currentTarget);
+          }}
+        >
+          校对常用符号
+        </Button>
       </Stack>
       <Popover
         open={!!anchorEl}
         anchorEl={anchorEl}
         onClose={() => setAnchorEl(null)}
       >
-        <TextField multiline value={popoverContent}/>
+        <TextField multiline value={popoverContent} />
       </Popover>
       {contents.map((content, idx) => (
         <Part
