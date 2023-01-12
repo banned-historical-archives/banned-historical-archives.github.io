@@ -453,8 +453,15 @@ export async function parse(
       file_id: '',
       page_start: 0,
       page_end: 0,
+      ...overwrite[a.TITLE] ? overwrite[a.TITLE] : {},
     };
     res.push(article);
   }
   return res;
 }
+
+const overwrite: { [title: string]: Partial<ParserResult> } = {
+  '中央领导同志在北京工人体育场的讲话': {
+    authors: ['江青', '姚文元', '李雪峰', '康生'],
+  },
+};
