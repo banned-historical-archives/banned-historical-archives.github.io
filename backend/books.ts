@@ -6193,7 +6193,7 @@ const books: Book[] = [
     parser_option: {
       page_limits: [],
       ext: 'jpg',
-      articles: [{"title":"张春桥同志接见福建部分赴京革命同学的讲话","alias":"张春桥同志接见福建部分赴京革命同学讲话","authors":["张春桥"],"page_start":1,"page_end":3,"dates":[{"year":1966,"month":10,"day":7}]}],
+      articles: [{"title":"张春桥关锋同志接见福建部分赴京革命同学的讲话","alias":"张春桥同志接见福建部分赴京革命同学讲话","authors":["张春桥","关锋"],"page_start":1,"page_end":3,"dates":[{"year":1966,"month":10,"day":7}]}],
       ocr: undefined,
       ocr_exceptions: {},
     },
@@ -6305,7 +6305,7 @@ const books: Book[] = [
     parser_option: {
       page_limits: [],
       ext: 'jpg',
-      articles: [{"title":"在关于知识分子问题会议上的讲话","alias":"在中央召开的关于知识分子问题会议上的讲话","authors":["毛泽东"],"page_start":1,"page_end":1,"ocr_exceptions":{"1":{"content_thresholds":[0.15,0.52,0,0]}},"dates":[{"year":1956,"month":1,"day":20}]},{"title":"事情正在起变化","authors":["毛泽东"],"page_start":1,"page_end":1,"ocr_exceptions":{"1":{"content_thresholds":[0.47,0.22,0,0]}},"dates":[{"year":1957,"month":5,"day":15}]},{"title":"湘江评论","authors":[],"page_start":1,"page_end":1,"ocr_exceptions":{"1":{"content_thresholds":[0.81,0,0,0]}},"dates":[]},{"title":"陈伯达等对“赴广州揪王任重革命造反团”的指示","alias":"彻底批判刘、邓、陶资产阶级的反动路线","authors":["江青","陈伯达","康生"],"page_start":2,"page_end":2,"dates":[{"year":1967,"month":1,"day":4}]},{"title":"江青同志在“全国在京革命师生向资产阶级反动路线猛烈开火誓师大会”上的讲话","authors":["江青"],"page_start":3,"page_end":3,"ocr_exceptions":{"3":{"content_thresholds":[0,0.26,0,0]}},"dates":[{"year":1966,"month":10,"day":6}]},{"title":"张春桥同志接见福建部分赴京革命同学的讲话","alias":"张春桥同志接见福建部分赴京革命同学的讲话片段","authors":["张春桥"],"page_start":3,"page_end":4,"ocr_exceptions":{"3":{"content_thresholds":[0.74,0,0,0]},"4":{"content_thresholds":[0,0.73,0,0]}},"dates":[{"year":1966,"month":10,"day":7}]},{"title":"关锋在北京地质学院同学座谈会上的讲话","alias":"关锋同志九月二十八日在地质学院同学座谈会上讲话片段","authors":["关锋"],"page_start":4,"page_end":4,"ocr_exceptions":{"4":{"content_thresholds":[0.27,0,0,0]}},"dates":[{"year":1966,"month":9,"day":28}]}],
+      articles: [{"title":"在关于知识分子问题会议上的讲话","alias":"在中央召开的关于知识分子问题会议上的讲话","authors":["毛泽东"],"page_start":1,"page_end":1,"ocr_exceptions":{"1":{"content_thresholds":[0.15,0.52,0,0]}},"dates":[{"year":1956,"month":1,"day":20}]},{"title":"事情正在起变化","authors":["毛泽东"],"page_start":1,"page_end":1,"ocr_exceptions":{"1":{"content_thresholds":[0.47,0.22,0,0]}},"dates":[{"year":1957,"month":5,"day":15}]},{"title":"湘江评论","authors":[],"page_start":1,"page_end":1,"ocr_exceptions":{"1":{"content_thresholds":[0.81,0,0,0]}},"dates":[]},{"title":"陈伯达等对“赴广州揪王任重革命造反团”的指示","alias":"彻底批判刘、邓、陶资产阶级的反动路线","authors":["江青","陈伯达","康生"],"page_start":2,"page_end":2,"dates":[{"year":1967,"month":1,"day":4}]},{"title":"江青同志在“全国在京革命师生向资产阶级反动路线猛烈开火誓师大会”上的讲话","authors":["江青"],"page_start":3,"page_end":3,"ocr_exceptions":{"3":{"content_thresholds":[0,0.26,0,0]}},"dates":[{"year":1966,"month":10,"day":6}]},{"title":"张春桥关锋同志接见福建部分赴京革命同学的讲话","alias":"张春桥同志接见福建部分赴京革命同学的讲话片段","authors":["张春桥","关锋"],"page_start":3,"page_end":4,"ocr_exceptions":{"3":{"content_thresholds":[0.74,0,0,0]},"4":{"content_thresholds":[0,0.73,0,0]}},"dates":[{"year":1966,"month":10,"day":7}]},{"title":"关锋在北京地质学院同学座谈会上的讲话","alias":"关锋同志九月二十八日在地质学院同学座谈会上讲话片段","authors":["关锋"],"page_start":4,"page_end":4,"ocr_exceptions":{"4":{"content_thresholds":[0.27,0,0,0]}},"dates":[{"year":1966,"month":9,"day":28}]}],
       ocr: undefined,
       ocr_exceptions: {},
     },
@@ -6999,7 +6999,7 @@ const books: Book[] = [
   {
     entity: {
       id: 'd1679abc-409f-4eb4-b575-22371b9682c3',
-      name: '张春桥同志接见福建部分赴京革命同学的讲话',
+      name: '张春桥关锋同志接见福建部分赴京革命同学的讲话',
       internal: true,
       official: true,
       type: 'img',
@@ -7017,7 +7017,7 @@ const books: Book[] = [
     parser_option: {
       page_limits: [],
       ext: 'jpg',
-      articles: [{"title":"张春桥同志接见福建部分赴京革命同学的讲话","authors":["张春桥"],"page_start":1,"page_end":4,"ocr_exceptions":{"2":{"content_thresholds":[0,0,0,0.04]},"3":{"content_thresholds":[0,0,0.06,0]},"4":{"content_thresholds":[0,0.86,0,0]}},"dates":[{"year":1966,"month":10,"day":7}]},{"title":"什么是“大无畏”","authors":["工农兵音乐学院"],"page_start":4,"page_end":4,"ocr_exceptions":{"4":{"content_thresholds":[0.14,0,0,0.06]}},"dates":[{"year":1966}]},{"title":"关锋在北京地质学院同学座谈会上的讲话","alias":"关锋同志在地质学院同学座谈会上讲话","authors":["关锋"],"page_start":5,"page_end":7,"ocr_exceptions":{"7":{"content_thresholds":[0,0.28,0,0]}},"dates":[{"year":1966,"month":9,"day":28}]},{"title":"北京市委书记雍文涛同志在“首都大专院校红卫兵捍卫毛泽东思想捍卫十六条联络委员会”于清华大学召开的“向右倾机会主义路线猛烈开火——彻底批判谭力夫发言大会”上的讲话","authors":["雍文涛"],"page_start":8,"page_end":8,"dates":[{"year":1966,"month":9,"day":28}]}],
+      articles: [{"title":"张春桥关锋同志接见福建部分赴京革命同学的讲话","authors":["张春桥","关锋"],"page_start":1,"page_end":4,"ocr_exceptions":{"2":{"content_thresholds":[0,0,0,0.04]},"3":{"content_thresholds":[0,0,0.06,0]},"4":{"content_thresholds":[0,0.86,0,0]}},"dates":[{"year":1966,"month":10,"day":7}]},{"title":"什么是“大无畏”","authors":["工农兵音乐学院"],"page_start":4,"page_end":4,"ocr_exceptions":{"4":{"content_thresholds":[0.14,0,0,0.06]}},"dates":[{"year":1966}]},{"title":"关锋在北京地质学院同学座谈会上的讲话","alias":"关锋同志在地质学院同学座谈会上讲话","authors":["关锋"],"page_start":5,"page_end":7,"ocr_exceptions":{"7":{"content_thresholds":[0,0.28,0,0]}},"dates":[{"year":1966,"month":9,"day":28}]},{"title":"北京市委书记雍文涛同志在“首都大专院校红卫兵捍卫毛泽东思想捍卫十六条联络委员会”于清华大学召开的“向右倾机会主义路线猛烈开火——彻底批判谭力夫发言大会”上的讲话","authors":["雍文涛"],"page_start":8,"page_end":8,"dates":[{"year":1966,"month":9,"day":28}]}],
       ocr: undefined,
       ocr_exceptions: {},
     },
