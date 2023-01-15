@@ -15,7 +15,7 @@ import Comment from './entity/comment';
 import Publication from './entity/publication';
 import Tag from './entity/tag';
 import Page from './entity/page';
-import { get_article_types } from './classifier';
+import { get_article_types, get_tags } from './classifier';
 import { DataSource } from "typeorm";
 import { music as musicData } from './music';
 import { ArticleCategory, TagType } from "../types";
@@ -96,12 +96,9 @@ async function init_articles(AppDataSource: DataSource) {
         );
       }
 
-      const tags: { name: string; type: TagType }[] = r.tags || [
-        {
-          name: ArticleCategory.keyFigures,
-          type: TagType.articleCategory,
-        },
-      ];
+      const tags: { name: string; type: TagType }[] = (r.tags || []).concat(
+        await get_tags(r),
+      );
       const article_types = await get_article_types(r);
       article_types.forEach((i) =>
         tags.push({ name: i, type: TagType.articleType }),
