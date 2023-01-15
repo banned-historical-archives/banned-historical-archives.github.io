@@ -90,7 +90,7 @@ function extract_date(part: ContentPart): Date | void {
     return {
       year: s[0],
       month: s[1],
-      day: s[2],
+      ...s[2] > 0 ? {day:s[2]} : {}
     };
   }
   if (format2) {
@@ -101,7 +101,7 @@ function extract_date(part: ContentPart): Date | void {
     return {
       year: s[0],
       month: s[1],
-      day: s[2],
+      ...s[2] > 0 ? {day:s[2]} : {}
     };
   }
   return;
@@ -231,6 +231,12 @@ export async function parse(
 }
 
 const overwrite: {[key: string]: Partial<ParserResult>} = {
+  '张春桥戚本禹与北航“红旗”五名战士谈话': {
+    authors: ['张春桥', '戚本禹'],
+  },
+  '张春桥戚本禹接见红卫兵代表时的讲话摘要': {
+    authors: ['张春桥', '戚本禹'],
+  },
   '周恩来对中央广播事业局的电话指示及张春桥姚文元的谈话': {
     authors: ['周恩来', '张春桥', '姚文元'],
   }
