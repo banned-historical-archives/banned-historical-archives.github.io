@@ -218,6 +218,7 @@ export async function parse(
         description: '',
         page_start: article[0].page,
         page_end: article[article.length - 1].page,
+        ...overwrite[title]? overwrite[title] : {},
       };
     });
   };
@@ -227,4 +228,10 @@ export async function parse(
     parser_results.push(...(await parse_all(limit)));
   }
   return parser_results;
+}
+
+const overwrite: {[key: string]: Partial<ParserResult>} = {
+  '周恩来对中央广播事业局的电话指示及张春桥姚文元的谈话': {
+    authors: ['周恩来', '张春桥', '姚文元'],
+  }
 }
