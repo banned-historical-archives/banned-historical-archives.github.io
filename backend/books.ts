@@ -6193,7 +6193,7 @@ const books: Book[] = [
     parser_option: {
       page_limits: [],
       ext: 'jpg',
-      articles: [{"title":"张春桥同志接见福建部分赴京革命同学的讲话","alias":"张春桥同志接见福建部分赴京革命同学讲话","authors":["张春桥"],"page_start":1,"page_end":3,"dates":[{"year":1977,"month":1}]}],
+      articles: [{"title":"张春桥同志接见福建部分赴京革命同学的讲话","alias":"张春桥同志接见福建部分赴京革命同学讲话","authors":["张春桥"],"page_start":1,"page_end":3,"dates":[{"year":1966,"month":10,"day":7}]}],
       ocr: undefined,
       ocr_exceptions: {},
     },
