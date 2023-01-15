@@ -22,6 +22,26 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const books: Book[] = [
   {
     entity: {
+      id: '157c8c41-2ca1-467f-a07b-29906625d51c',
+      name: '中共党史教学参考资料 第27册',
+      internal: true,
+      official: true,
+      type: 'pdf',
+      author: '',
+      files: 'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/157c8c41-2ca1-467f-a07b-29906625d51c.pdf',
+    },
+    parser_option: {
+      page_limits: [],
+      ext: 'pdf',
+      articles: [{"title":"目录","authors":[],"page_start":4,"page_end":11,"dates":[]}],
+      ocr: undefined,
+      ocr_exceptions: {},
+    },
+    parser: automation.parse,
+    path: join(normalize(__dirname), '../public/archives1/157c8c41-2ca1-467f-a07b-29906625d51c.pdf'),
+  },
+  {
+    entity: {
       id: '27104c00-f81c-4a2d-a6b6-1633cd7aa556',
       name: '自然辩证法一九七四年第四期',
       internal: true,
