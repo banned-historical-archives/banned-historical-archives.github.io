@@ -6249,7 +6249,7 @@ const books: Book[] = [
     parser_option: {
       page_limits: [],
       ext: 'jpg',
-      articles: [{"title":"张春桥同志十二月十日下午接见宣传系统代表讲话","authors":["张春桥"],"page_start":1,"page_end":8,"dates":[{"year":1967,"month":12,"day":10}]}],
+      articles: [{"title": "张春桥接见文艺出版界代表的讲话","alias":"张春桥同志十二月十日下午接见宣传系统代表讲话","authors":["张春桥"],"page_start":1,"page_end":8,"dates":[{"year":1967,"month":12,"day":10}]}],
       ocr: {"content_thresholds":[0,0.11,0,0]},
       ocr_exceptions: {},
     },
