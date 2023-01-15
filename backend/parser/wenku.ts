@@ -464,4 +464,7 @@ const overwrite: { [title: string]: Partial<ParserResult> } = {
   '中央领导同志在北京工人体育场的讲话': {
     authors: ['江青', '姚文元', '李雪峰', '康生'],
   },
+  张春桥在上海市革命造反派座谈会上的讲话: {
+    authors: ['张春桥', '姚文元'],
+  },
 };
