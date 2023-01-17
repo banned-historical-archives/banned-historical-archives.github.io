@@ -223,7 +223,7 @@ const books: Book[] = [
   {
     entity: {
       id: '8abcffb2-22fc-4131-bf38-de63da71354c',
-      name: '邓小平全面背叛马克思主义',
+      name: '邓小平全面背叛马克思主义（广东人民出版社1976年版）',
       internal: true,
       official: true,
       type: 'pdf',
@@ -2199,7 +2199,7 @@ const books: Book[] = [
   {
     entity: {
       id: '706accb6-84d6-4155-a024-db2895a89fa1',
-      name: '上海第一钢铁厂工人队伍状况的调查',
+      name: '上海第一钢铁厂工人队伍状况的调查（1973年5月）',
       internal: true,
       official: true,
       type: 'img',
@@ -3147,7 +3147,7 @@ const books: Book[] = [
   {
     entity: {
       id: '30e9a4e4-86b8-4204-b1c0-f68199f133f1',
-      name: '政治经济学（社会主义部分）',
+      name: '政治经济学（社会主义部分）（南开大学1976年版）',
       internal: true,
       official: true,
       type: 'pdf',
@@ -3167,7 +3167,7 @@ const books: Book[] = [
   {
     entity: {
       id: '86b9ca9f-61be-4a2e-b545-8bfb7c6fe4ac',
-      name: '政治经济学（帝国主义部分）',
+      name: '政治经济学（帝国主义部分）（南开大学1976年版）',
       internal: true,
       official: true,
       type: 'pdf',
@@ -3207,7 +3207,7 @@ const books: Book[] = [
   {
     entity: {
       id: 'afbe42bc-f6ab-4d3b-8acc-e0da4e0b7ab2',
-      name: '政治经济学（资本主义部分）',
+      name: '政治经济学（资本主义部分）（南开大学1976年版）',
       internal: true,
       official: true,
       type: 'pdf',
@@ -3227,7 +3227,7 @@ const books: Book[] = [
   {
     entity: {
       id: 'b61f4938-8d62-4c83-97b9-78884ede4724',
-      name: '中国共产党两条路线斗争史讲义',
+      name: '中国共产党两条路线斗争史讲义（安徽师范大学政教系1976年7月）',
       internal: true,
       official: true,
       type: 'pdf',
@@ -3246,28 +3246,8 @@ const books: Book[] = [
   },
   {
     entity: {
-      id: 'a426be33-6310-4446-aa89-95462b693ead',
-      name: '中国共产党两条路线斗争史讲义',
-      internal: true,
-      official: true,
-      type: 'pdf',
-      author: '',
-      files: 'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives3/main/a426be33-6310-4446-aa89-95462b693ead.pdf',
-    },
-    parser_option: {
-      page_limits: [],
-      ext: 'pdf',
-      articles: [{"title":"前言","authors":["安徽师范大学政教系"],"page_start":4,"page_end":8,"dates":[{"year":1976,"month":7}]},{"title":"第一章 中国共产党的成立。毛主席的革命路线同陈独秀右倾机会主义路线的斗争","authors":["安徽师范大学政教系"],"page_start":14,"page_end":54,"dates":[{"year":1976,"month":7}]},{"title":"第二章 毛主席开辟农村包围城市、武装夺取政权的革命道路。反对瞿秋白、李立三、罗章龙、王明、张国焘“左”、右倾机会主义路线的斗争","authors":["安徽师范大学政教系"],"page_start":55,"page_end":119,"dates":[{"year":1976,"month":7}]},{"title":"第三章 毛主席领导全党坚持抗日民族统一战线中的独立自主原则，实行人民战争，建立抗日根据地，打败日本侵略者，反对王明右倾投降主义路线的斗争","authors":["安徽师范大学政教系"],"page_start":120,"page_end":163,"dates":[{"year":1976,"month":7}]},{"title":"第四章 毛主席领导全国人民夺取民主革命胜利，同刘少奇一伙右倾机会主义路线的斗争","authors":["安徽师范大学政教系"],"page_start":164,"page_end":207,"dates":[{"year":1976,"month":7}]},{"title":"第五章 中国社会主义革命的开始。毛主席领导全国人民实现党在过渡时期的总路线，反对刘少奇“巩固新民主主义秩序”的反动纲领和高岗、饶漱石反党联盟的斗争","authors":["安徽师范大学政教系"],"page_start":208,"page_end":249,"dates":[{"year":1976,"month":7}]},{"title":"第六章 毛主席关于无产阶级专政下继续革命的伟大理论。党的社会主义建设总路线。反对彭德怀反党集团和刘少奇反革命修正主义路线的斗争","authors":["安徽师范大学政教系"],"page_start":250,"page_end":281,"dates":[{"year":1976,"month":7}]},{"title":"第七章 党在社会主义历史阶段的基本路线。毛主席亲自发动和领导无产阶级文化大革命，粉碎刘少奇叛徒集团和林彪反党集团的斗争","authors":["安徽师范大学政教系"],"page_start":282,"page_end":337,"dates":[{"year":1976,"month":7}]},{"title":"结束语","authors":["安徽师范大学政教系"],"page_start":338,"page_end":345,"dates":[{"year":1976,"month":7}]},{"title":"附录","authors":["安徽师范大学政教系"],"page_start":346,"page_end":353,"dates":[{"year":1976,"month":7}]}],
-      ocr: {"content_thresholds":[0,0.084,0,0]},
-      ocr_exceptions: {},
-    },
-    parser: automation.parse,
-    path: join(normalize(__dirname), '../public/archives3/a426be33-6310-4446-aa89-95462b693ead.pdf'),
-  },
-  {
-    entity: {
       id: '11a20f6f-7fc7-43fa-acdb-6dc514785157',
-      name: '中国：现代社会帝国主义大国',
+      name: '中国：现代社会帝国主义大国（棱镜杂志社2020年10月）',
       internal: true,
       official: true,
       type: 'pdf',
@@ -3307,7 +3287,7 @@ const books: Book[] = [
   {
     entity: {
       id: '3eb4e189-7183-4ad7-9d14-ef0f958a6e3b',
-      name: '政治经济学讲座（讨论稿供参考）',
+      name: '政治经济学讲座（讨论稿供参考）（1972年）',
       internal: true,
       official: true,
       type: 'pdf',
@@ -3327,7 +3307,7 @@ const books: Book[] = [
   {
     entity: {
       id: 'dac652ea-d810-4c56-bda1-138763d041e3',
-      name: '毛主席读《政治经济学教科书》（第三版）社会主义部分的笔记',
+      name: '毛主席读《政治经济学教科书》（第三版）社会主义部分的笔记（郑州大学文化革命联络委员会1967年）',
       internal: true,
       official: true,
       type: 'pdf',
@@ -3347,7 +3327,7 @@ const books: Book[] = [
   {
     entity: {
       id: '58160986-6729-431e-b547-279b37ed4c32',
-      name: '苏联社会主义经济问题',
+      name: '苏联社会主义经济问题（人民出版社1961年版）',
       internal: true,
       official: true,
       type: 'pdf',
@@ -3363,26 +3343,6 @@ const books: Book[] = [
     },
     parser: automation.parse,
     path: join(normalize(__dirname), '../public/archives5/58160986-6729-431e-b547-279b37ed4c32.pdf'),
-  },
-  {
-    entity: {
-      id: '42b793be-7c1e-4ef6-8818-de097290aa92',
-      name: '无产阶级专政时代的经济和政治',
-      internal: true,
-      official: true,
-      type: 'pdf',
-      author: '',
-      files: 'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives5/main/42b793be-7c1e-4ef6-8818-de097290aa92.pdf',
-    },
-    parser_option: {
-      page_limits: [],
-      ext: 'pdf',
-      articles: [{"title":"无产阶级专政时代的经济和政治","authors":["列宁"],"page_start":1,"page_end":11,"dates":[{"year":1919,"month":10,"day":30}]}],
-      ocr: {"content_thresholds":[0.12,0,0,0]},
-      ocr_exceptions: {},
-    },
-    parser: automation.parse,
-    path: join(normalize(__dirname), '../public/archives5/42b793be-7c1e-4ef6-8818-de097290aa92.pdf'),
   },
   {
     entity: {
@@ -3447,7 +3407,7 @@ const books: Book[] = [
   {
     entity: {
       id: '66c2cc98-f9a7-4ab6-8281-ac69a7c6b5e8',
-      name: '中国的文化大革命与工业组织',
+      name: '中国的文化大革命与工业组织（中国文化传播出版社2009年8月版）',
       internal: true,
       official: true,
       type: 'pdf',
@@ -3467,7 +3427,7 @@ const books: Book[] = [
   {
     entity: {
       id: 'e54c9ef3-79c8-4a5a-95b4-835064b934c1',
-      name: '印度一些革命派的重要文件、文章汇编',
+      name: '印度一些革命派的重要文件、文章汇编（中共中央对外联络部1970年5月）',
       internal: true,
       official: true,
       type: 'pdf',
@@ -3667,7 +3627,7 @@ const books: Book[] = [
   {
     entity: {
       id: 'c9f09747-b2db-423d-a4d9-ef5e75c1e060',
-      name: '中国革命的道路——论解放后两条路线的斗争',
+      name: '中国革命的道路——论解放后两条路线的斗争（批判与再造社2020年6月）',
       internal: true,
       official: true,
       type: 'pdf',
@@ -4247,7 +4207,7 @@ const books: Book[] = [
   {
     entity: {
       id: '8a563ff2-adac-4454-a821-36ef7e584dd4',
-      name: '我们应该如何看待秘鲁的人民战争？',
+      name: '我们应该如何看待秘鲁的人民战争？（红色文献翻译2020年）',
       internal: true,
       official: true,
       type: 'pdf',
@@ -4287,7 +4247,7 @@ const books: Book[] = [
   {
     entity: {
       id: '8df86c6d-7b4e-4d28-8d93-4dfe4cb87a51',
-      name: '与贡萨罗主席的访谈',
+      name: '与贡萨罗主席的访谈（红色文献翻译）',
       internal: true,
       official: true,
       type: 'pdf',
@@ -4343,26 +4303,6 @@ const books: Book[] = [
     },
     parser: automation.parse,
     path: join(normalize(__dirname), '../public/archives3/01970a4d-895c-4f40-9511-60b51d869906.pdf'),
-  },
-  {
-    entity: {
-      id: 'f1a4874b-ff59-4524-acd5-b23fac5d81d1',
-      name: '论辩证唯物主义和历史唯物主义',
-      internal: true,
-      official: true,
-      type: 'pdf',
-      author: '',
-      files: 'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives5/main/f1a4874b-ff59-4524-acd5-b23fac5d81d1.pdf',
-    },
-    parser_option: {
-      page_limits: [],
-      ext: 'pdf',
-      articles: [{"title":"论辩证唯物主义和历史唯物主义","authors":["斯大林"],"page_start":1,"page_end":32,"dates":[{"year":1938}]}],
-      ocr: {"content_thresholds":[0,0.146,0,0]},
-      ocr_exceptions: {},
-    },
-    parser: automation.parse,
-    path: join(normalize(__dirname), '../public/archives5/f1a4874b-ff59-4524-acd5-b23fac5d81d1.pdf'),
   },
   {
     entity: {
@@ -4423,26 +4363,6 @@ const books: Book[] = [
     },
     parser: automation.parse,
     path: join(normalize(__dirname), '../public/archives4/0390c365-6951-4e70-9dc5-9f7aa4c900ab.pdf'),
-  },
-  {
-    entity: {
-      id: '15594e62-38a3-46db-b5e7-dc4be1d194fa',
-      name: '论列宁主义基础',
-      internal: true,
-      official: true,
-      type: 'pdf',
-      author: '',
-      files: 'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives5/main/15594e62-38a3-46db-b5e7-dc4be1d194fa.pdf',
-    },
-    parser_option: {
-      page_limits: [],
-      ext: 'pdf',
-      articles: [{"title":"论列宁主义基础","authors":["斯大林"],"page_start":1,"page_end":49,"dates":[{"year":1926,"month":4,"day":26},{"year":1926,"month":4,"day":30},{"year":1926,"month":5,"day":9},{"year":1926,"month":5,"day":11},{"year":1926,"month":5,"day":14},{"year":1926,"month":5,"day":15},{"year":1926,"month":5,"day":18}]}],
-      ocr: {"standard_paragraph_merge_strategy_threshold":0.178,"differential_paragraph_merge_strategy_threshold":0},
-      ocr_exceptions: {},
-    },
-    parser: automation.parse,
-    path: join(normalize(__dirname), '../public/archives5/15594e62-38a3-46db-b5e7-dc4be1d194fa.pdf'),
   },
   {
     entity: {
@@ -4726,26 +4646,6 @@ const books: Book[] = [
   },
   {
     entity: {
-      id: '473a6aa4-11e7-4750-b958-17c7a7ebe666',
-      name: '卡尔·马克思',
-      internal: true,
-      official: true,
-      type: 'pdf',
-      author: '',
-      files: 'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives4/main/473a6aa4-11e7-4750-b958-17c7a7ebe666.pdf',
-    },
-    parser_option: {
-      page_limits: [],
-      ext: 'pdf',
-      articles: [{"title":"卡尔·马克思","authors":["列宁"],"page_start":1,"page_end":32,"is_range_date":true,"dates":[{"year":1914,"month":7},{"year":1914,"month":11}]}],
-      ocr: {"standard_paragraph_merge_strategy_threshold":0.161,"differential_paragraph_merge_strategy_threshold":0},
-      ocr_exceptions: {},
-    },
-    parser: automation.parse,
-    path: join(normalize(__dirname), '../public/archives4/473a6aa4-11e7-4750-b958-17c7a7ebe666.pdf'),
-  },
-  {
-    entity: {
       id: '8a5d13d0-5502-47e3-ba6d-d6366092d4a5',
       name: '革命国际主义运动宣言',
       internal: true,
@@ -4927,7 +4827,7 @@ const books: Book[] = [
   {
     entity: {
       id: '77fd62e6-e508-483f-91b3-f5e144115abb',
-      name: '社会主义时期的党内资产阶级（谈谈党内资产阶级）',
+      name: '社会主义时期的党内资产阶级（谈谈党内资产阶级）（中共上海市委1976年）',
       internal: true,
       official: true,
       type: 'pdf',
@@ -8163,7 +8063,7 @@ const books: Book[] = [
   {
     entity: {
       id: 'd7255791-fc0e-4d11-9391-b5a8c1d3cf8b',
-      name: '社会主义政治经济学 （未定稿第二版讨论稿）',
+      name: '社会主义政治经济学 （未定稿第二版讨论稿）（1976年）',
       internal: true,
       official: true,
       type: 'pdf',
@@ -8723,26 +8623,6 @@ const books: Book[] = [
   },
   {
     entity: {
-      id: '57df1a72-767a-4bb8-8cbe-f09d976eec5a',
-      name: '论林彪反党集团的社会基础',
-      internal: true,
-      official: true,
-      type: 'pdf',
-      author: '',
-      files: 'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives3/main/57df1a72-767a-4bb8-8cbe-f09d976eec5a.pdf',
-    },
-    parser_option: {
-      page_limits: [],
-      ext: 'pdf',
-      articles: [{"title":"论林彪反党集团的社会基础","authors":["姚文元"],"page_start":1,"page_end":6,"dates":[{"year":1975,"month":3,"day":1}]}],
-      ocr: undefined,
-      ocr_exceptions: {},
-    },
-    parser: automation.parse,
-    path: join(normalize(__dirname), '../public/archives3/57df1a72-767a-4bb8-8cbe-f09d976eec5a.pdf'),
-  },
-  {
-    entity: {
       id: '2cec027f-70be-4525-8a87-8da2e7cfa6fc',
       name: '毛远新在省委常委会议上的发言（摘录）',
       internal: true,
@@ -9017,7 +8897,7 @@ const books: Book[] = [
   {
     entity: {
       id: 'maoxuan-jinghuo',
-      name: '毛泽东选集1-7(静火版)',
+      name: '毛泽东选集1-7（静火版）',
       internal: false,
       official: false,
       author: '静火',
@@ -9037,7 +8917,7 @@ const books: Book[] = [
   {
     entity: {
       id: 'wansui1',
-      name: '毛泽东思想万岁(1913-1943卷)',
+      name: '毛泽东思想万岁（1913-1943卷）（1968年武汉版）',
       internal: false,
       official: false,
       author: '未知',
@@ -9053,7 +8933,7 @@ const books: Book[] = [
   {
     entity: {
       id: 'wansui2',
-      name: '毛泽东思想万岁(1943-1949卷)',
+      name: '毛泽东思想万岁（1943-1949卷）（1968年武汉版）',
       internal: false,
       official: false,
       author: '未知',
@@ -9069,7 +8949,7 @@ const books: Book[] = [
   {
     entity: {
       id: 'wansui3',
-      name: '毛泽东思想万岁(1949-1957卷)',
+      name: '毛泽东思想万岁（1949-1957卷）（1968年武汉版）',
       type: 'pdf',
       internal: false,
       official: false,
@@ -9086,7 +8966,7 @@ const books: Book[] = [
     entity: {
       id: 'wansui4',
       type: 'pdf',
-      name: '毛泽东思想万岁(1958-1960卷)',
+      name: '毛泽东思想万岁（1958-1960卷）（1968年武汉版）',
       internal: false,
       official: false,
       author: '未知',
@@ -9101,7 +8981,7 @@ const books: Book[] = [
   {
     entity: {
       id: 'wansui5',
-      name: '毛泽东思想万岁(1961-1968卷)',
+      name: '毛泽东思想万岁（1961-1968卷）（1968年武汉版）',
       type: 'pdf',
       internal: false,
       official: false,
@@ -9118,7 +8998,7 @@ const books: Book[] = [
     entity: {
       id: 'wenji1',
       type: 'pdf',
-      name: '毛泽东文集第一卷(1999)',
+      name: '毛泽东文集第一卷（1999）',
       internal: false,
       official: true,
       author: '中央文献研究室',
@@ -9135,7 +9015,7 @@ const books: Book[] = [
   {
     entity: {
       id: 'wenji2',
-      name: '毛泽东文集第二卷(1999)',
+      name: '毛泽东文集第二卷（1999）',
       type: 'pdf',
       internal: false,
       official: true,
@@ -9154,7 +9034,7 @@ const books: Book[] = [
     entity: {
       id: 'wenji3',
       type: 'pdf',
-      name: '毛泽东文集第三卷(1999)',
+      name: '毛泽东文集第三卷（1999）',
       internal: false,
       official: true,
       author: '中央文献研究室',
@@ -9172,7 +9052,7 @@ const books: Book[] = [
     entity: {
       type: 'pdf',
       id: 'wenji4',
-      name: '毛泽东文集第四卷(1999)',
+      name: '毛泽东文集第四卷（1999）',
       internal: false,
       official: true,
       author: '中央文献研究室',
@@ -9190,7 +9070,7 @@ const books: Book[] = [
     entity: {
       type: 'pdf',
       id: 'wenji5',
-      name: '毛泽东文集第五卷(1999)',
+      name: '毛泽东文集第五卷（1999）',
       internal: false,
       official: true,
       author: '中央文献研究室',
@@ -9208,7 +9088,7 @@ const books: Book[] = [
     entity: {
       id: 'wenji6',
       type: 'pdf',
-      name: '毛泽东文集第六卷(1999)',
+      name: '毛泽东文集第六卷（1999）',
       internal: false,
       official: true,
       author: '中央文献研究室',
@@ -9226,7 +9106,7 @@ const books: Book[] = [
     entity: {
       id: 'wenji7',
       type: 'pdf',
-      name: '毛泽东文集第七卷(1999)',
+      name: '毛泽东文集第七卷（1999）',
       internal: false,
       official: true,
       author: '中央文献研究室',
@@ -9244,7 +9124,7 @@ const books: Book[] = [
     entity: {
       id: 'wenji8',
       type: 'pdf',
-      name: '毛泽东文集第八卷(1999)',
+      name: '毛泽东文集第八卷（1999）',
       internal: false,
       official: true,
       author: '中央文献研究室',
@@ -9281,7 +9161,7 @@ const books: Book[] = [
     entity: {
       id: 'xuanji1',
       type: 'pdf',
-      name: '毛泽东选集第一卷(1967)',
+      name: '毛泽东选集第一卷（1967）',
       internal: false,
       official: true,
       author: '毛泽东',
@@ -9297,7 +9177,7 @@ const books: Book[] = [
   {
     entity: {
       id: 'xuanji2',
-      name: '毛泽东选集第二卷(1967)',
+      name: '毛泽东选集第二卷（1967）',
       type: 'pdf',
       internal: false,
       official: true,
@@ -9314,7 +9194,7 @@ const books: Book[] = [
   {
     entity: {
       id: 'xuanji3',
-      name: '毛泽东选集第三卷(1967)',
+      name: '毛泽东选集第三卷（1967）',
       type: 'pdf',
       internal: false,
       official: true,
@@ -9331,7 +9211,7 @@ const books: Book[] = [
   {
     entity: {
       id: 'xuanji4',
-      name: '毛泽东选集第四卷(1967)',
+      name: '毛泽东选集第四卷（1967）',
       internal: false,
       official: true,
       type: 'pdf',
@@ -9348,7 +9228,7 @@ const books: Book[] = [
   {
     entity: {
       id: 'xuanji5',
-      name: '毛泽东选集第五卷(1977)',
+      name: '毛泽东选集第五卷（1977）',
       internal: false,
       type: 'pdf',
       official: true,
@@ -10299,7 +10179,7 @@ const books: Book[] = [
   {
     entity: {
       id: 'wenku',
-      name: '中国文化大革命文库(第一版)',
+      name: '中国文化大革命文库（第一版）',
       internal: false,
       type: 'db',
       official: false,
