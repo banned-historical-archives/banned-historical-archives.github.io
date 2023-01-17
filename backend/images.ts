@@ -4,6 +4,8 @@ import { Image } from "./entities";
 const images: (Image & {
   id?: string;
 })[] = [
+  {"name":"《共产党宣言（人民出版社1963年版）》插图一","description":"“共产党宣言”第一版的扉页","source":"共产党宣言（人民出版社1963年版）","show_in_gallery":true,"tags":[],"id":"9a5997dd-7991-460b-b6a9-f9d3921d9d7e","url":"https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives7/main/9a/9a5997dd-7991-460b-b6a9-f9d3921d9d7e.png"},
+  {"name":"《共产党宣言（人民出版社1963年版）》插图二","description":"“共产党宣言”原稿的一页（马克思的手稿，头两行是燕妮·马克思的手迹）","source":"共产党宣言（人民出版社1963年版）","show_in_gallery":true,"tags":[],"id":"08dc2ec6-bbd9-474e-8c6f-5e174a374cce","url":"https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives7/main/08/08dc2ec6-bbd9-474e-8c6f-5e174a374cce.png"},
   {"name":"印度共产党（毛主义）谱系图","description":"红色文献翻译 制","source":"","show_in_gallery":true,"tags":[{"type":"character","name":"印度共产党（毛主义）"}],"id":"6d15bb22-73cb-4489-b504-15b240bbed4c","url":"https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives7/main/6d/6d15bb22-73cb-4489-b504-15b240bbed4c.jpg"},
   {"name":"英国共产主义派别源流图","description":"红色文献翻译 制","source":"","show_in_gallery":true,"tags":[{"type":"character","name":"英国共产主义运动"}],"id":"c06d5698-e21f-44c6-9f59-b51cb6697a24","url":"https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives7/main/c0/c06d5698-e21f-44c6-9f59-b51cb6697a24.jpg"},
   {"name":"群众路线的三种理解","description":"红色文献翻译 制","source":"《群众运动和美国革命运动》，斯考特·H","show_in_gallery":true,"tags":[{"type":"subject","name":"群众路线"}],"id":"fd3829dd-14e6-4380-b3b7-01a7d216990a","url":"https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives7/main/fd/fd3829dd-14e6-4380-b3b7-01a7d216990a.jpg"},
