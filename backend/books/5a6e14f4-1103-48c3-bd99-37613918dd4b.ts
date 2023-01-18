@@ -1610,7 +1610,8 @@ export default {
         page_end: 412,
       },
       {
-        title: '为人民立新功',
+        title: '江青在军委扩大会议上的讲话',
+        alias: '为人民立新功',
         authors: ['江青'],
         dates: [{ year: 1967, month: 4, day: 12 }],
         page_start: 412,
