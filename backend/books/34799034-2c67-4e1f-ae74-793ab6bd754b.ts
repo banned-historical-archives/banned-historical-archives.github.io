@@ -2,7 +2,7 @@ export default {
   entity: {
     id: '34799034-2c67-4e1f-ae74-793ab6bd754b',
     name: '中共党史教学参考资料 第25册 “文化大革命”参考资料 中册（1988年）',
-    internal: true,
+    internal: false,
     official: true,
     type: 'pdf',
     author: '',
