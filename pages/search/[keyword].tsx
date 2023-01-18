@@ -1,5 +1,5 @@
 import React, { ReactElement, useEffect, useRef, useState } from 'react';
-import Head from 'next/head'
+import Head from 'next/head';
 import { diff_match_patch, Diff } from 'diff-match-patch';
 import Popover from '@mui/material/Popover';
 import SkipNextIcon from '@mui/icons-material/SkipNext';
@@ -48,9 +48,9 @@ export default function Search() {
   const router = useRouter();
   const keyword = router.query['keyword'] as string;
   async function update(keyword: string, es_size: number, es_from: number) {
-    const x = await(
+    const x = await (
       await fetch(
-        `http://localhost:8100?keyword=${keyword}&size=${es_size}&from=${es_from}`
+        `http://localhost:8100?keyword=${keyword}&size=${es_size}&from=${es_from}`,
       )
     ).json();
     console.log(x);

@@ -1,5 +1,5 @@
 import React, { ReactElement, useEffect, useRef, useState } from 'react';
-import Head from 'next/head'
+import Head from 'next/head';
 import { diff_match_patch, Diff } from 'diff-match-patch';
 import Popover from '@mui/material/Popover';
 import SkipNextIcon from '@mui/icons-material/SkipNext';
@@ -421,7 +421,7 @@ export default function Music({ music }: { music: MusicEntity[] }) {
         音乐
       </Typography>
       <Typography variant="body1" sx={{ mb: 1 }}>
-      多媒体资料包括音乐及歌词、电影、照片、录音等。目前主要收录社会主义中国创作的红色音乐。
+        多媒体资料包括音乐及歌词、电影、照片、录音等。目前主要收录社会主义中国创作的红色音乐。
       </Typography>
       <audio
         ref={audioRef}

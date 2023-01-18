@@ -43,7 +43,13 @@ import { init } from '../../backend/data-source';
 import { DiffViewer } from '../../components/DiffViewer';
 import Tags from '../../components/Tags';
 import Authors from '../../components/Authors';
-import { apply_patch_v2, bracket_left, bracket_right, extract_pivots, md5 } from '../../utils';
+import {
+  apply_patch_v2,
+  bracket_left,
+  bracket_right,
+  extract_pivots,
+  md5,
+} from '../../utils';
 import ArticleComponent from '../../components/Article';
 
 pdfjs.GlobalWorkerOptions.workerSrc = `/pdfjs-dist/legacy/build/pdf.worker.min.js`;
@@ -496,7 +502,10 @@ export default function ArticleViewer({
       />
     </Stack>,
   );
-  if (compareType === CompareType.origin || compareType === CompareType.originProofread) {
+  if (
+    compareType === CompareType.origin ||
+    compareType === CompareType.originProofread
+  ) {
     compare_elements.push(
       <Stack key="origin" sx={{ flex: 1, overflowY: 'scroll' }}>
         {publication.type !== 'db' ? (
@@ -524,9 +533,7 @@ export default function ArticleViewer({
             publication.files
               .split(',')
               .filter((i, idx) => idx + 1 >= page.start && idx + 1 <= page.end)
-              .map((f) => (
-                <img key={f} src={f}/>
-              ))
+              .map((f) => <img key={f} src={f} />)
           ) : (
             <>未知类型</>
           )

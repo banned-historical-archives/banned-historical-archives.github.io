@@ -1,5 +1,5 @@
 import React, { ReactElement, useEffect, useRef, useState } from 'react';
-import Head from 'next/head'
+import Head from 'next/head';
 import { diff_match_patch, Diff } from 'diff-match-patch';
 import Popover from '@mui/material/Popover';
 import SkipNextIcon from '@mui/icons-material/SkipNext';
@@ -40,7 +40,13 @@ import Typography from '@mui/material/Typography';
 import PauseCircleIcon from '@mui/icons-material/PauseCircle';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { DiffViewer } from '../../components/DiffViewer';
-import { DataGridPro, GridColDef, GridRenderCellParams, GridValueGetterParams, zhCN } from '@mui/x-data-grid-pro';
+import {
+  DataGridPro,
+  GridColDef,
+  GridRenderCellParams,
+  GridValueGetterParams,
+  zhCN,
+} from '@mui/x-data-grid-pro';
 import { ensure_two_digits } from '../../utils';
 import ImageTags from '../../components/ImageTags';
 
@@ -67,7 +73,7 @@ const columns: GridColDef<ImageEntity>[] = [
     minWidth: 350,
     flex: 1,
     renderCell: (params: GridRenderCellParams<string, ImageEntity>) => (
-      <img src={params.row!.url} width="100%"/>
+      <img src={params.row!.url} width="100%" />
     ),
   },
   {
@@ -153,18 +159,18 @@ export default function Gallery({ images }: { images: ImageEntity[] }) {
       <Typography variant="h4" sx={{ mb: 1 }}>
         图库
       </Typography>
-        <Stack sx={{ flex: 1, width: '100%' }}>
-          <DataGridPro
-            getRowId={(row) => row.id}
-            localeText={zhCN.components.MuiDataGrid.defaultProps.localeText}
-            getRowHeight={() => 'auto'}
-            rows={images}
-            columns={columns}
-            pageSize={100}
-            rowsPerPageOptions={[100]}
-            disableSelectionOnClick
-          />
-        </Stack>
+      <Stack sx={{ flex: 1, width: '100%' }}>
+        <DataGridPro
+          getRowId={(row) => row.id}
+          localeText={zhCN.components.MuiDataGrid.defaultProps.localeText}
+          getRowHeight={() => 'auto'}
+          rows={images}
+          columns={columns}
+          pageSize={100}
+          rowsPerPageOptions={[100]}
+          disableSelectionOnClick
+        />
+      </Stack>
     </Stack>
   );
 }

@@ -1,5 +1,11 @@
 // 本地测试使用
-import React, { ReactElement, useCallback, useEffect, useRef, useState } from 'react';
+import React, {
+  ReactElement,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import Layout from '../../components/Layout';
 import {
   GetStaticProps,
@@ -47,7 +53,9 @@ export default function OCR() {
         `http://localhost:8099?resize=${resize}&cache=${
           !noCache ? 'true' : 'false'
         }&id=${id}&page=${i}&${
-          isPDF ? `pdf_path=${encodeURIComponent(PDFPath)}` : `img_ext=${img_ext}`
+          isPDF
+            ? `pdf_path=${encodeURIComponent(PDFPath)}`
+            : `img_ext=${img_ext}`
         }`,
       );
       res.push(r.data);
@@ -57,7 +65,7 @@ export default function OCR() {
 
   useEffect(() => {
     update();
-  }, [])
+  }, []);
 
   const range_a = parseInt(range.split('-')[0]);
   const range_b = parseInt(range.split('-')[1]);

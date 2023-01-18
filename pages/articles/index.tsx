@@ -39,7 +39,10 @@ import { init } from '../../backend/data-source';
 import { Tag } from '../../backend/entities';
 import Tags from '../../components/Tags';
 import Authors from '../../components/Authors';
-import { DateFilter, useDateFiletrDialog } from '../../components/useDateFilterDialog';
+import {
+  DateFilter,
+  useDateFiletrDialog,
+} from '../../components/useDateFilterDialog';
 import { useAuthorFilterDialog } from '../../components/useAuthorFilterDialog';
 import { useTagFilterDialog } from '../../components/useTagFilterDialog';
 import { useSourceFilterDialog } from '../../components/useSourceFilterDialog';
@@ -103,13 +106,19 @@ const columns: GridColDef<Article>[] = [
     minWidth: 150,
     flex: 1,
     valueGetter: (params: GridValueGetterParams<Article, Article>) =>
-      params.row.dates.map(
-        (i) =>
-          i ? [i.year || '----', ensure_two_digits(i.month, '--'), ensure_two_digits(i.day, '--')]
-              .filter((j) => j)
-              .join('/')
-          : '----/--/--'
-      ).join(' '),
+      params.row.dates
+        .map((i) =>
+          i
+            ? [
+                i.year || '----',
+                ensure_two_digits(i.month, '--'),
+                ensure_two_digits(i.day, '--'),
+              ]
+                .filter((j) => j)
+                .join('/')
+            : '----/--/--',
+        )
+        .join(' '),
     renderCell: (params: GridRenderCellParams<string, Article>) => (
       <Stack spacing={1}>
         {params.row!.is_range_date ? (
@@ -224,13 +233,8 @@ export default function Articles({ articles }: { articles: Article[] }) {
     return Array.from(set).sort();
   }, [articles]);
 
-  const {
-    TagDialog,
-    tagFilter,
-    setTagDialog,
-    setTagFilter,
-    tags,
-  } = useTagFilterDialog(tags_all, tags_all_order_by_type);
+  const { TagDialog, tagFilter, setTagDialog, setTagFilter, tags } =
+    useTagFilterDialog(tags_all, tags_all_order_by_type);
   const { DateFilterDialog, dateFilter, showDateFilterDialog } =
     useDateFiletrDialog();
   const {
@@ -264,7 +268,9 @@ export default function Articles({ articles }: { articles: Article[] }) {
         authorFilter ? !!i.authors.find((k) => k.name === authorFilter) : true,
       )
       .filter((i) =>
-        sourceFilter ? !!i.publications.find((k) => k.name.indexOf(sourceFilter) > -1) : true,
+        sourceFilter
+          ? !!i.publications.find((k) => k.name.indexOf(sourceFilter) > -1)
+          : true,
       )
       .filter((i) =>
         tagFilter ? !!i.tags.find((k) => k.id === tagFilter) : true,
