@@ -3,10 +3,10 @@ export default {
   entity: {
     id: '01970a4d-895c-4f40-9511-60b51d869906',
     name: '唯物辩证法大纲（人民出版社1978年版）',
-    internal: true,
+    internal: false,
     official: true,
     type: 'pdf',
-    author: '',
+    author: '李达，人民出版社1978年版',
     files:
       'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives3/main/01970a4d-895c-4f40-9511-60b51d869906.pdf',
   },
