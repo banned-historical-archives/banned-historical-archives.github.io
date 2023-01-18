@@ -55,6 +55,7 @@ jobs:
         env:
           BODY: ${{ github.event.issue.body }}
           TITLE: ${{ github.event.issue.title }}
+      - run: npx npm run prettier
       - name: Create Pull Request For Submodule
         env:
           GH_TOKEN: ${{ secrets.GH_PAT}}

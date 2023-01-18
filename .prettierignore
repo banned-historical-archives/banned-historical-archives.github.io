@@ -1,0 +1,9 @@
+.next
+out
+node_modules
+patch
+backend/ocr_cache
+public
+package-lock.json
+yarn.lock
+*.js
