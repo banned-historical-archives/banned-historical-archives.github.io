@@ -31,7 +31,7 @@ describe('xuanji1', async () => {
 });
 
 describe('xuanji2', async () => {
-  const book = await get_book('xuanji1')!;
+  const book = await get_book('xuanji2')!;
   const res = await book.parser(book.path, book.parser_option);
   it('title & dates', () => {
     expect(res.map((i) => i.title)).toMatchSnapshot();
