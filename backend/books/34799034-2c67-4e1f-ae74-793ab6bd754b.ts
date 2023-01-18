@@ -255,6 +255,7 @@ export default {
           { year: 1968, month: 3, day: 24 },
           { year: 1968, month: 3, day: 25 },
         ],
+        is_range_date: true,
         page_start: 107,
         page_end: 107,
       },
@@ -1100,10 +1101,15 @@ export default {
         page_end: 342,
       },
       {
-        title:
-          '中国共产党章程（中国共产党第九次全国代表大会1969年4月14日通过）',
+        title: '中国共产党章程',
         authors: [],
-        dates: [],
+        dates: [
+          {
+            year: 1969,
+            month: 4,
+            day: 14,
+          },
+        ],
         page_start: 342,
         page_end: 345,
       },
@@ -1541,7 +1547,11 @@ export default {
       {
         title: '毛泽东关于对外宣传工作的批示',
         authors: ['毛泽东'],
-        dates: [{ year: 1967, month: 3, day: null }],
+        dates: [
+          { year: 1967, month: 3 },
+          { year: 1971, month: 3 },
+        ],
+        is_range_date: true,
         page_start: 526,
         page_end: 532,
       },
@@ -1608,7 +1618,11 @@ export default {
       {
         title: '毛主席在外地巡视期间同沿途各地负责同志的谈话纪要',
         authors: ['毛泽东'],
-        dates: [{ year: 1971, month: 8, day: null }],
+        dates: [
+          { year: 1971, month: 8 },
+          { year: 1971, month: 9, day: 12 },
+        ],
+        is_range_date: true,
         page_start: 567,
         page_end: 570,
       },
@@ -1714,7 +1728,11 @@ export default {
       {
         title: '“571工程”纪要',
         authors: [],
-        dates: [{ year: 1971, month: 3, day: 22 }],
+        dates: [
+          { year: 1971, month: 3, day: 22 },
+          { year: 1971, month: 3, day: 24 },
+        ],
+        is_range_date: true,
         page_start: 663,
         page_end: 670,
       },
