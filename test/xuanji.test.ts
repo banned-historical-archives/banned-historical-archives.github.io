@@ -1,6 +1,6 @@
 import { assert, expect, test, it, describe, beforeEach, beforeAll } from 'vitest';
 import { join } from 'node:path';
-import books from '../backend/books';
+import books, { get_book } from '../backend/books';
 import { ContentType, ParserResult } from '../types';
 
 function n_comments_equals_n_pivots(res: ParserResult[]) {
@@ -16,7 +16,7 @@ function n_comments_equals_n_pivots(res: ParserResult[]) {
 }
 
 describe('xuanji1', async () => {
-  const book = books.find((i) => i.entity.id === 'xuanji1')!;
+  const book = await get_book('xuanji1')!;
   const res = await book.parser(book.path, book.parser_option);
   it('title & dates', () => {
     expect(res.map((i) => i.title)).toMatchSnapshot();
@@ -31,7 +31,7 @@ describe('xuanji1', async () => {
 });
 
 describe('xuanji2', async () => {
-  const book = books.find((i) => i.entity.id === 'xuanji2')!;
+  const book = await get_book('xuanji1')!;
   const res = await book.parser(book.path, book.parser_option);
   it('title & dates', () => {
     expect(res.map((i) => i.title)).toMatchSnapshot();
@@ -43,7 +43,7 @@ describe('xuanji2', async () => {
 });
 
 describe('xuanji3', async () => {
-  const book = books.find((i) => i.entity.id === 'xuanji3')!;
+  const book = await get_book('xuanji3')!;
   const res = await book.parser(book.path, book.parser_option);
   it('title & dates', () => {
     expect(res.map((i) => i.title)).toMatchSnapshot();
@@ -55,7 +55,7 @@ describe('xuanji3', async () => {
 });
 
 describe('xuanji4', async () => {
-  const book = books.find((i) => i.entity.id === 'xuanji4')!;
+  const book = await get_book('xuanji4')!;
   const res = await book.parser(book.path, book.parser_option);
   it('title & dates', () => {
     expect(res.map((i) => i.title)).toMatchSnapshot();
@@ -72,7 +72,7 @@ describe('xuanji4', async () => {
 });
 
 describe('xuanji5', async () => {
-  const book = books.find((i) => i.entity.id === 'xuanji5')!;
+  const book = await get_book('xuanji5')!;
   const res = await book.parser(book.path, book.parser_option);
   it('title & dates', () => {
     expect(res.map((i) => i.title)).toMatchSnapshot();

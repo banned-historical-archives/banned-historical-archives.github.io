@@ -1,6 +1,6 @@
 import { assert, expect, test, it, describe, beforeEach, beforeAll } from 'vitest';
 import { join } from 'node:path';
-import books from '../backend/books';
+import books, { get_book } from '../backend/books';
 import { ContentType, ParserResult } from '../types';
 
 function n_comments_equals_n_pivots(res: ParserResult[]) {
@@ -16,7 +16,7 @@ function n_comments_equals_n_pivots(res: ParserResult[]) {
 }
 
 describe('wenji1', async () => {
-  const book = books.find((i) => i.entity.id === 'wenji1')!;
+  const book = await get_book('wenji1')!;
   const res = await book.parser(book.path, book.parser_option);
   it('title & dates', () => {
     expect(res.map((i) => i.title)).toMatchSnapshot();
@@ -34,7 +34,7 @@ describe('wenji1', async () => {
 });
 
 describe('wenji2', async () => {
-  const book = books.find((i) => i.entity.id === 'wenji2')!;
+  const book = await get_book('wenji2')!;
   const res = await book.parser(book.path, book.parser_option);
   it('title & dates', () => {
     expect(res.map((i) => i.title)).toMatchSnapshot();
@@ -55,7 +55,7 @@ describe('wenji2', async () => {
 });
 
 describe('wenji3', async () => {
-  const book = books.find((i) => i.entity.id === 'wenji3')!;
+  const book = await get_book('wenji3')!;
   const res = await book.parser(book.path, book.parser_option);
   it('title & dates', () => {
     expect(res.map((i) => i.title)).toMatchSnapshot();
@@ -70,7 +70,7 @@ describe('wenji3', async () => {
 });
 
 describe('wenji4', async () => {
-  const book = books.find((i) => i.entity.id === 'wenji4')!;
+  const book = await get_book('wenji4')!;
   const res = await book.parser(book.path, book.parser_option);
   it('title & dates', () => {
     expect(res.map((i) => i.title)).toMatchSnapshot();
@@ -85,7 +85,7 @@ describe('wenji4', async () => {
 });
 
 describe('wenji5', async () => {
-  const book = books.find((i) => i.entity.id === 'wenji5')!;
+  const book = await get_book('wenji5')!;
   const res = await book.parser(book.path, book.parser_option);
   it('title & dates', () => {
     expect(res.map((i) => i.title)).toMatchSnapshot();
@@ -100,7 +100,7 @@ describe('wenji5', async () => {
 });
 
 describe('wenji6', async () => {
-  const book = books.find((i) => i.entity.id === 'wenji6')!;
+  const book = await get_book('wenji6')!;
   const res = await book.parser(book.path, book.parser_option);
   it('title & dates', () => {
     expect(res.map((i) => i.title)).toMatchSnapshot();
@@ -119,7 +119,7 @@ describe('wenji6', async () => {
 });
 
 describe('wenji7', async () => {
-  const book = books.find((i) => i.entity.id === 'wenji7')!;
+  const book = await get_book('wenji7')!;
   const res = await book.parser(book.path, book.parser_option);
   it('title & dates', () => {
     expect(res.map((i) => i.title)).toMatchSnapshot();
@@ -137,7 +137,7 @@ describe('wenji7', async () => {
 });
 
 describe('wenji8', async () => {
-  const book = books.find((i) => i.entity.id === 'wenji8')!;
+  const book = await get_book('wenji8')!;
   const res = await book.parser(book.path, book.parser_option);
   it('title & dates', () => {
     expect(res.map((i) => i.title)).toMatchSnapshot();

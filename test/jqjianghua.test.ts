@@ -1,10 +1,10 @@
 import { assert, expect, test, it, describe, beforeEach, beforeAll } from 'vitest';
 import { join } from 'node:path';
-import books from '../backend/books';
+import {get_book} from '../backend/books';
 import { ContentType, ParserResult } from '../types';
 
 describe('jqjianghua', async () => {
-  const book = books.find((i) => i.entity.id === 'jqjianghua')!;
+  const book = await get_book('jqjianghua');
   const res = await book.parser(book.path, book.parser_option);
   it('title & dates & authors', () => {
     expect(res.map((i) => i.title)).toMatchSnapshot();
