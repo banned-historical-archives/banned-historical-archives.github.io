@@ -1,4 +1,3 @@
-
 export default {
   entity: {
     id: '5a6e14f4-1103-48c3-bd99-37613918dd4b',
