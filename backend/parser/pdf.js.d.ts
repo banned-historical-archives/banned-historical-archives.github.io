@@ -5,26 +5,34 @@ type Item = {
   str: string;
   width: number;
   height: number;
-  transform: number[],
-}
+  transform: number[];
+};
 
 type ContentObj = {
-  items: Item[],
-}
+  items: Item[];
+};
 type Page = {
-  cleanup: () => void,
-  getViewport: (opt: {scale: number}) => ({width: number, height: number, viewBox: number[]}),
-  getTextContent: () => ContentObj,
+  cleanup: () => void;
+  getViewport: (opt: { scale: number }) => {
+    width: number;
+    height: number;
+    viewBox: number[];
+  };
+  getTextContent: () => ContentObj;
 };
 type Doc = {
-  getPage: (x: number) => Page,
-}
-export function getDocument(pdfPath: string |{
-  url: string,
-  pdfBug?: boolean,
-  cMapUrl?: string,
-  disableFontFace?: boolean,
-  cMapPacked?: boolean,
-  useSystemFonts?: boolean,
-  standardFontDataUrl?: string,
-}): {promise: Promise<Doc>};
+  getPage: (x: number) => Page;
+};
+export function getDocument(
+  pdfPath:
+    | string
+    | {
+        url: string;
+        pdfBug?: boolean;
+        cMapUrl?: string;
+        disableFontFace?: boolean;
+        cMapPacked?: boolean;
+        useSystemFonts?: boolean;
+        standardFontDataUrl?: string;
+      },
+): { promise: Promise<Doc> };

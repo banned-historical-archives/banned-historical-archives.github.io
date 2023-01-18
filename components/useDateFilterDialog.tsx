@@ -1,4 +1,4 @@
-import { ChangeEvent, useCallback, useState } from "react";
+import { ChangeEvent, useCallback, useState } from 'react';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
@@ -92,7 +92,10 @@ export function useDateFiletrDialog() {
       })),
     [],
   );
-  const onClose = useCallback(() => setDateFilterDialog((s) => ({ ...s, show: false })), []);
+  const onClose = useCallback(
+    () => setDateFilterDialog((s) => ({ ...s, show: false })),
+    [],
+  );
   const onConfirm = useCallback(() => {
     const d = dateFilterDialog;
     const filter: DateFilter = {};
@@ -177,15 +180,8 @@ export function useDateFiletrDialog() {
         </Stack>
       </DialogContent>
       <DialogActions>
-        <Button
-          onClick={onClose}
-        >
-          取消
-        </Button>
-        <Button
-          onClick={onConfirm}
-          autoFocus
-        >
+        <Button onClick={onClose}>取消</Button>
+        <Button onClick={onConfirm} autoFocus>
           确定
         </Button>
       </DialogActions>

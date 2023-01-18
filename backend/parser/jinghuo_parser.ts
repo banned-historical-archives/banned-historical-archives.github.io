@@ -341,7 +341,10 @@ function extract_dates(s: string): [Date[], boolean] {
   return [parts, is_range];
 }
 
-export async function parse(pdfPath: string, opt: ParserOption): Promise<ParserResult[]> {
+export async function parse(
+  pdfPath: string,
+  opt: ParserOption,
+): Promise<ParserResult[]> {
   const doc = await pdfjsLib.getDocument(pdfPath).promise;
 
   const parse_article = async function (

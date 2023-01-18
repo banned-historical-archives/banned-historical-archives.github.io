@@ -1,4 +1,4 @@
-import { exec, execSync } from 'node:child_process'
+import { exec, execSync } from 'node:child_process';
 import { join, basename, dirname, extname } from 'node:path/posix';
 import { isAbsolute } from 'node:path';
 import https from 'https';

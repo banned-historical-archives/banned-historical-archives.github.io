@@ -1,7 +1,7 @@
 import { Diff } from 'diff-match-patch';
 import Typography from '@mui/material/Typography';
 
-export function DiffViewer({ diff }: { diff?: Diff[][]}) {
+export function DiffViewer({ diff }: { diff?: Diff[][] }) {
   if (!diff) return null;
   return (
     <>

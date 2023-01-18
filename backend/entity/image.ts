@@ -21,7 +21,10 @@ export default class Image {
   @Column({ type: 'varchar' })
   url!: string;
 
-  @Column({ type: 'int', comment: '表示图片是否需要展示在图库中，而不仅仅作为插图。' })
+  @Column({
+    type: 'int',
+    comment: '表示图片是否需要展示在图库中，而不仅仅作为插图。',
+  })
   show_in_gallery!: boolean;
 
   @Column({ type: 'varchar' })
@@ -38,8 +41,8 @@ export default class Image {
   day?: number;
 
   @ManyToMany(() => ImageTag, (tag) => tag.image, {
-    cascade: true
+    cascade: true,
   })
   @JoinTable()
   tags!: ImageTag[];
-};
+}

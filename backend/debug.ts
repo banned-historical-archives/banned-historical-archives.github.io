@@ -14,8 +14,8 @@ import { basename } from 'node:path';
   const ds = await init();
   const books = await get_books();
   console.log(books);
-  const book = books.find(i => i.entity.id === 'zhangchunqiao')!;
-  console.log(book)
+  const book = books.find((i) => i.entity.id === 'zhangchunqiao')!;
+  console.log(book);
 
   debugger;
-})();  
+})();

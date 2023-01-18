@@ -1,4 +1,12 @@
-import { assert, expect, test, it, describe, beforeEach, beforeAll } from 'vitest';
+import {
+  assert,
+  expect,
+  test,
+  it,
+  describe,
+  beforeEach,
+  beforeAll,
+} from 'vitest';
 import { join } from 'node:path';
 import books, { get_book } from '../backend/books';
 import { ContentType, ParserResult } from '../types';
@@ -47,7 +55,7 @@ describe('wenji2', async () => {
     expect(n_comments_equals_n_pivots(res)).toBe(true);
   });
   it('aligment', () => {
-    expect(res.find(i => i.title === '关于差别和矛盾问题')).toMatchSnapshot();
+    expect(res.find((i) => i.title === '关于差别和矛盾问题')).toMatchSnapshot();
   });
   it('ensure dates', () => {
     expect(res.reduce((m, i) => m && i.dates.length > 0, true)).toBe(true);
@@ -113,8 +121,12 @@ describe('wenji6', async () => {
     expect(n_comments_equals_n_pivots(res)).toBe(true);
   });
   it('alignment', () => {
-    expect(res.filter((i) => i.title === '青年团的工作要照顾青年的特点')).toMatchSnapshot();
-    expect(res.filter((i) => i.title === '关于中华人民共和国宪法草案')).toMatchSnapshot();
+    expect(
+      res.filter((i) => i.title === '青年团的工作要照顾青年的特点'),
+    ).toMatchSnapshot();
+    expect(
+      res.filter((i) => i.title === '关于中华人民共和国宪法草案'),
+    ).toMatchSnapshot();
   });
 });
 

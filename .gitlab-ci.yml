@@ -29,7 +29,7 @@ pages:
     - mv out/googlefd23833910da97f2.gitlab.html out/googlefd23833910da97f2.html
     - rm -rf public
     - mv out public
-  artifacts:  
+  artifacts:
     paths:
       - public
   rules:

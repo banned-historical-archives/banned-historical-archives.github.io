@@ -21,7 +21,7 @@ import fs from 'fs';
 
 const patch_dir = join(normalize(__dirname), '../patch/articles');
 
-const parsers: {[key: string]: any} = {
+const parsers: { [key: string]: any } = {
   jinghuo,
   wansui,
   wenji,

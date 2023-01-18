@@ -1,4 +1,11 @@
-import { Entity, PrimaryColumn, Column, PrimaryGeneratedColumn, ManyToMany, Index } from 'typeorm';
+import {
+  Entity,
+  PrimaryColumn,
+  Column,
+  PrimaryGeneratedColumn,
+  ManyToMany,
+  Index,
+} from 'typeorm';
 import {
   Article,
   Comment,
@@ -11,13 +18,13 @@ import {
 
 @Entity()
 export default class Author {
-  @PrimaryColumn({ type: 'varchar'})
+  @PrimaryColumn({ type: 'varchar' })
   id!: string;
 
   @Index()
-  @Column({type: 'varchar'})
+  @Column({ type: 'varchar' })
   name!: string;
 
-  @ManyToMany(() => Article, article => article.authors)
+  @ManyToMany(() => Article, (article) => article.authors)
   articles!: Article[];
 }

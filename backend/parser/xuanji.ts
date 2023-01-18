@@ -750,7 +750,7 @@ export async function parse(
     for (let i = 0, part_idx = 0; i < parts_raw.length; ++i, ++part_idx) {
       const part = parts_raw[i];
       const next_part = parts_raw[i + 1];
-      if (part.type as any === ContentType.title) {
+      if ((part.type as any) === ContentType.title) {
         part_idx = 0;
         let [cur_pivots, title] = extract_pivots(
           part.text.replace(/ /g, ''),
@@ -759,13 +759,10 @@ export async function parse(
         const parts: ContentPart[] = [];
         if (/\*/.test(title) && !/\*$/.test(title)) {
           title = title.split('*')[0];
-          parts.push(
-            { text: title, type: part.type },
-            {
-              text: title.split('*')[0].substr(1),
-              type: ContentType.subtitle as any,
-            } as ContentPart,
-          );
+          parts.push({ text: title, type: part.type }, {
+            text: title.split('*')[0].substr(1),
+            type: ContentType.subtitle as any,
+          } as ContentPart);
         } else {
           title = title.replace(/\*/, '');
           parts.push({ text: title, type: part.type });
@@ -793,18 +790,18 @@ export async function parse(
           page_start: Infinity,
           page_end: Infinity,
         });
-        if (next_part && next_part.type as any === ContentType.subdate) {
+        if (next_part && (next_part.type as any) === ContentType.subdate) {
           const article = articles[articles.length - 1];
           const [dates, is_range_date] = extract_dates(next_part.text);
           article.is_range_date = is_range_date;
           article.dates = dates;
           ++i;
         }
-      } else if (part.type as any === ContentType.comment) {
+      } else if ((part.type as any) === ContentType.comment) {
         articles[articles.length - 1].comments.push(
           part.text.replace(/^〔\d+〕 */, ''),
         );
-      } else if (part.type as any === ContentType.description) {
+      } else if ((part.type as any) === ContentType.description) {
         description += description ? part.text : part.text.substr(1);
       } else {
         const article = articles[articles.length - 1];
@@ -850,7 +847,7 @@ export async function parse(
         );
       }
       article.parts = article.parts.filter(
-        (x) => x.type as any !== ContentType.description,
+        (x) => (x.type as any) !== ContentType.description,
       );
     }
 

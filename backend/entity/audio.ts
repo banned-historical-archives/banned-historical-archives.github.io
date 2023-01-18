@@ -1,8 +1,13 @@
-import { OneToMany, ManyToOne, Entity, PrimaryColumn, Column, PrimaryGeneratedColumn, ManyToMany } from 'typeorm';
 import {
-  Music,
-  Lyric,
-} from '../entities';
+  OneToMany,
+  ManyToOne,
+  Entity,
+  PrimaryColumn,
+  Column,
+  PrimaryGeneratedColumn,
+  ManyToMany,
+} from 'typeorm';
+import { Music, Lyric } from '../entities';
 
 @Entity()
 export default class Audio {

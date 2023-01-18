@@ -100,7 +100,11 @@ export default function Navbar() {
       <List>
         {routes.map((item) => (
           <ListItem key={item.name} disablePadding>
-            <ListItemButton sx={{ textAlign: 'center' }} href={item.path} target="_blank">
+            <ListItemButton
+              sx={{ textAlign: 'center' }}
+              href={item.path}
+              target="_blank"
+            >
               <ListItemText primary={item.name} />
             </ListItemButton>
           </ListItem>

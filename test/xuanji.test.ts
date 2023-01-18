@@ -1,4 +1,12 @@
-import { assert, expect, test, it, describe, beforeEach, beforeAll } from 'vitest';
+import {
+  assert,
+  expect,
+  test,
+  it,
+  describe,
+  beforeEach,
+  beforeAll,
+} from 'vitest';
 import { join } from 'node:path';
 import books, { get_book } from '../backend/books';
 import { ContentType, ParserResult } from '../types';
@@ -82,7 +90,11 @@ describe('xuanji5', async () => {
     expect(n_comments_equals_n_pivots(res)).toBe(true);
   });
   it('alignment', () => {
-    expect(res.filter(i => i.title === '中共中央关于西藏工作方针的指示')[0]).toMatchSnapshot();
-    expect(res.filter(i => i.title === '永远保持艰苦奋斗的作风')[0]).toMatchSnapshot();
+    expect(
+      res.filter((i) => i.title === '中共中央关于西藏工作方针的指示')[0],
+    ).toMatchSnapshot();
+    expect(
+      res.filter((i) => i.title === '永远保持艰苦奋斗的作风')[0],
+    ).toMatchSnapshot();
   });
 });

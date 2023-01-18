@@ -1,4 +1,4 @@
-import { ArticleType, ParserResult, TagType } from "../types";
+import { ArticleType, ParserResult, TagType } from '../types';
 
 function multi_match(a: RegExp[], b: string[]) {
   return a.reduce(
@@ -8,7 +8,7 @@ function multi_match(a: RegExp[], b: string[]) {
 }
 
 export function get_article_types(parser_result: ParserResult) {
-  const {title, description} = parser_result;
+  const { title, description } = parser_result;
   const res: ArticleType[] = [];
   if (
     multi_match(
@@ -32,9 +32,7 @@ export function get_article_types(parser_result: ParserResult) {
   ) {
     res.push(ArticleType.instruction);
   }
-  if (
-    multi_match([/评论/, /批语/, /批注/, /批示/], [title, description])
-  ) {
+  if (multi_match([/评论/, /批语/, /批注/, /批示/], [title, description])) {
     res.push(ArticleType.comment);
   }
   if (multi_match([/电报/, /通讯/], [title, description])) {
@@ -222,7 +220,9 @@ export function get_tags(
     parser_result.title +
     parser_result.parts.reduce((m, i) => m + i.text + '\n', '');
   return important_characters
-    .filter((i) => content.indexOf(i) >= 0 || parser_result.authors.indexOf(i) >= 0)
+    .filter(
+      (i) => content.indexOf(i) >= 0 || parser_result.authors.indexOf(i) >= 0,
+    )
     .map((i) => ({
       name: i,
       type: TagType.character,

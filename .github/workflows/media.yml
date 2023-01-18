@@ -9,7 +9,7 @@ jobs:
     if: ${{ startsWith(github.event.issue.title, '[自动化多媒体录入]') }}
     runs-on: ubuntu-latest
     permissions:
-      contents: read  # <--- allows to read repo
+      contents: read # <--- allows to read repo
     steps:
       - name: Get Time
         id: time

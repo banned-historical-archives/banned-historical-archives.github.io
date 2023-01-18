@@ -1,5 +1,14 @@
 import { diff_match_patch, Diff } from 'diff-match-patch';
-import { ArticleCategory, ArticleType, ContentPart, ParserResult, Patch, PatchV2, Pivot, TagType } from "../types";
+import {
+  ArticleCategory,
+  ArticleType,
+  ContentPart,
+  ParserResult,
+  Patch,
+  PatchV2,
+  Pivot,
+  TagType,
+} from '../types';
 import { v4 } from 'uuid';
 
 //  A formatted version of a popular md5 implementation.
@@ -198,11 +207,14 @@ export function extract_pivots(s: string, part_idx: number): [Pivot[], string] {
  * 2) 编辑/删除/插入注释
  * 3) 编辑/删除描述
  */
-export function apply_patch_v2(parserResult: ParserResult, patch: PatchV2): ParserResult {
+export function apply_patch_v2(
+  parserResult: ParserResult,
+  patch: PatchV2,
+): ParserResult {
   const { parts, comment_pivots, comments } = parserResult;
   const final_parts: ContentPart[] = [];
   const final_comments: string[] = [];
-  const final_pivots: Pivot[] =[];
+  const final_pivots: Pivot[] = [];
   for (let i in parts) {
     const idx = parseInt(i);
     if (patch.parts[i]) {
@@ -229,13 +241,16 @@ export function apply_patch_v2(parserResult: ParserResult, patch: PatchV2): Pars
             );
           const original_text_with_brackets = original_text_arr.join('');
           final_text = new diff_match_patch()
-                .diff_fromDelta(original_text_with_brackets, patch.parts[i].diff!)
-                .filter((i) => i[0] !== -1)
-                .map((i) => i[1])
-                .join('')
+            .diff_fromDelta(original_text_with_brackets, patch.parts[i].diff!)
+            .filter((i) => i[0] !== -1)
+            .map((i) => i[1])
+            .join('');
         }
 
-        const [pivots, final_text_without_brackets] = extract_pivots(final_text, final_parts.length);
+        const [pivots, final_text_without_brackets] = extract_pivots(
+          final_text,
+          final_parts.length,
+        );
         final_parts.push({
           type: patch.parts[i].type || parts[i].type,
           text: final_text_without_brackets,
@@ -270,7 +285,10 @@ export function apply_patch_v2(parserResult: ParserResult, patch: PatchV2): Pars
         if (!patch.comments[idx_from_1].delete) {
           const final_text = patch.comments[idx_from_1].diff
             ? new diff_match_patch()
-                .diff_fromDelta(comments[idx_from_0], patch.comments[idx_from_1].diff!)
+                .diff_fromDelta(
+                  comments[idx_from_0],
+                  patch.comments[idx_from_1].diff!,
+                )
                 .filter((i) => i[0] !== -1)
                 .map((i) => i[1])
                 .join('')
@@ -278,16 +296,16 @@ export function apply_patch_v2(parserResult: ParserResult, patch: PatchV2): Pars
           final_comments.push(final_text);
         }
         if (patch.comments[idx_from_1].insertAfter)
-        final_comments.push(
-          ...patch.comments[idx_from_1].insertAfter!.map((j) => j.text),
-        );
+          final_comments.push(
+            ...patch.comments[idx_from_1].insertAfter!.map((j) => j.text),
+          );
       } else {
         final_comments.push(parserResult.comments[idx_from_0]);
       }
     }
   }
 
-  const newResult: ParserResult = {...parserResult};
+  const newResult: ParserResult = { ...parserResult };
   newResult.comments = final_comments;
   newResult.parts = final_parts;
   newResult.comment_pivots = final_pivots;
@@ -389,7 +407,7 @@ export function get_article_id(r: ParserResult) {
 }
 
 export async function sleep(t: number) {
-  return new Promise(resolve => setTimeout(resolve, t));
+  return new Promise((resolve) => setTimeout(resolve, t));
 }
 
 export function uuid() {

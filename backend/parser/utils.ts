@@ -1,4 +1,4 @@
-import { Date, OCRResult } from "../../types";
+import { Date, OCRResult } from '../../types';
 import type { Item, ContentObj } from './pdf.js';
 
 export function merge_to_lines(ocrResults: OCRResult[], threshold = 50) {
@@ -75,7 +75,7 @@ export function toChineseSymbols(str: string) {
  * 中文转换: 一二三四五六七八九十廿卅卌 -> 0-9,10,20,30,40
  * duration转换1： -至— -> -
  * duration转换2： 、，, -> ,
- * 
+ *
  * 支持的格式：
  * 1911.10.10-1912.12.12
  * 1911.10.10-12.12
@@ -84,11 +84,14 @@ export function toChineseSymbols(str: string) {
  * 1911.10.10,11,12
  * 1911.10,12
  */
-export function extract_dates(str: string, opt: {
-  remove_unknowns: boolean,
-} = {
-  remove_unknowns: false
-}): {dates: Date[], is_range_date: boolean} {
+export function extract_dates(
+  str: string,
+  opt: {
+    remove_unknowns: boolean;
+  } = {
+    remove_unknowns: false,
+  },
+): { dates: Date[]; is_range_date: boolean } {
   str = str.replace(/ /g, '');
 
   const to = '\\-至—';
@@ -96,7 +99,10 @@ export function extract_dates(str: string, opt: {
   const cn_digitals = '\\d一二三四五六七八九○O〇十廿卅卌';
 
   if (opt.remove_unknowns) {
-    str = str.replace(new RegExp(`[^${cn_digitals}${to}${seperator}年月日\\.]`, 'g'), '');
+    str = str.replace(
+      new RegExp(`[^${cn_digitals}${to}${seperator}年月日\\.]`, 'g'),
+      '',
+    );
   }
 
   function normalize_date(s: string) {
@@ -307,11 +313,13 @@ export function extract_dates(str: string, opt: {
     };
   }
   return {
-    dates: [{
-      year: undefined,
-      month: undefined,
-      day: undefined,
-    }],
+    dates: [
+      {
+        year: undefined,
+        month: undefined,
+        day: undefined,
+      },
+    ],
     is_range_date: false,
-  }
+  };
 }

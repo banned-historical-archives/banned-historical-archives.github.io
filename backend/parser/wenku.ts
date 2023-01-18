@@ -2,7 +2,14 @@ import { DBFFile } from 'dbffile-fix-decoding';
 import { join } from 'path';
 // const MemoFile =require('memo_file');
 import iconvlite from 'iconv-lite';
-import { ArticleCategory, ContentType, Date, ParserOption, ParserResult, TagType } from '../../types';
+import {
+  ArticleCategory,
+  ContentType,
+  Date,
+  ParserOption,
+  ParserResult,
+  TagType,
+} from '../../types';
 
 import { readSync, openSync, statSync } from 'node:fs';
 import { readFileSync, writeFileSync } from 'fs';
@@ -382,13 +389,25 @@ export async function parse(
       type: TagType;
     }[] = [];
     if (a.PARENTID === 5) {
-      tags.push({ name: ArticleCategory.centralFile, type: TagType.articleCategory });
+      tags.push({
+        name: ArticleCategory.centralFile,
+        type: TagType.articleCategory,
+      });
     } else if (a.PARENTID === 6 || a.PARENTID === 7 || a.PARENTID === 8) {
-      tags.push({ name: ArticleCategory.keyFigures, type: TagType.articleCategory });
+      tags.push({
+        name: ArticleCategory.keyFigures,
+        type: TagType.articleCategory,
+      });
     } else if (a.PARENTID === 9) {
-      tags.push({ name: ArticleCategory.editorial, type: TagType.articleCategory });
+      tags.push({
+        name: ArticleCategory.editorial,
+        type: TagType.articleCategory,
+      });
     } else if (a.PARENTID === 10) {
-      tags.push({ name: ArticleCategory.keyPapersFromTheMasses, type: TagType.articleCategory });
+      tags.push({
+        name: ArticleCategory.keyPapersFromTheMasses,
+        type: TagType.articleCategory,
+      });
     } else if (a.PARENTID === 11) {
       continue;
       // tags.push({ name: '异端思潮重要文献', type: TagType.articleCategory });
@@ -402,15 +421,15 @@ export async function parse(
           type: TagType.issuer,
         }),
       );
-   subjects
-     .filter((i) => sub_ids.includes(i.SUBID))
-     .forEach((i) =>
-       tags.push({
-         name: i.SUBJECT,
-         type: TagType.subject,
-       }),
-     );
-   characters 
+    subjects
+      .filter((i) => sub_ids.includes(i.SUBID))
+      .forEach((i) =>
+        tags.push({
+          name: i.SUBJECT,
+          type: TagType.subject,
+        }),
+      );
+    characters
       .filter((i) => char_ids.includes(i.CHARID))
       .forEach((i) =>
         tags.push({
@@ -418,7 +437,8 @@ export async function parse(
           type: TagType.character,
         }),
       );
-    const content = a.CONTENTS.split('\r\n\r\n').slice(1).join('\r\n') || a.CONTENTS;
+    const content =
+      a.CONTENTS.split('\r\n\r\n').slice(1).join('\r\n') || a.CONTENTS;
     const article: ParserResult = {
       title: a.TITLE,
       tags,
@@ -443,7 +463,8 @@ export async function parse(
           .split('\r\n')
           .map((i) => i.trim())
           .filter((i) => i)
-          .map((i) => ({ // TODO
+          .map((i) => ({
+            // TODO
             text: i,
             type: ContentType.paragraph,
           })),
@@ -453,7 +474,7 @@ export async function parse(
       file_id: '',
       page_start: 0,
       page_end: 0,
-      ...overwrite[a.TITLE] ? overwrite[a.TITLE] : {},
+      ...(overwrite[a.TITLE] ? overwrite[a.TITLE] : {}),
     };
     res.push(article);
   }
@@ -461,7 +482,7 @@ export async function parse(
 }
 
 const overwrite: { [title: string]: Partial<ParserResult> } = {
-  '中央领导同志在北京工人体育场的讲话': {
+  中央领导同志在北京工人体育场的讲话: {
     authors: ['江青', '姚文元', '李雪峰', '康生'],
   },
   张春桥在上海市革命造反派座谈会上的讲话: {

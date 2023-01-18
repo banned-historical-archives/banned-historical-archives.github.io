@@ -171,7 +171,9 @@ export default function CommentEditor({
               variant="outlined"
               size="small"
               onClick={() => {
-                commentDiff.current.insertBefore = insertBefore.filter((j) => j.id !== i.id);
+                commentDiff.current.insertBefore = insertBefore.filter(
+                  (j) => j.id !== i.id,
+                );
                 setInsertAfter(commentDiff.current.insertBefore);
                 onChange(removeIds(commentDiff.current));
               }}
@@ -232,7 +234,9 @@ export default function CommentEditor({
               variant="outlined"
               size="small"
               onClick={() => {
-                commentDiff.current.insertAfter = insertAfter.filter((j) => j.id !== i.id);
+                commentDiff.current.insertAfter = insertAfter.filter(
+                  (j) => j.id !== i.id,
+                );
                 setInsertAfter(commentDiff.current.insertAfter);
                 onChange(removeIds(commentDiff.current));
               }}

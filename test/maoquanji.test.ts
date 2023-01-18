@@ -1,4 +1,12 @@
-import { assert, expect, test, it, describe, beforeEach, beforeAll } from 'vitest';
+import {
+  assert,
+  expect,
+  test,
+  it,
+  describe,
+  beforeEach,
+  beforeAll,
+} from 'vitest';
 import { join } from 'node:path';
 import { get_book } from '../backend/books';
 import { ContentType, ParserResult } from '../types';

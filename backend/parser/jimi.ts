@@ -124,7 +124,7 @@ export async function parse(
   );
 
   return chapters.slice(7, -1).map((article) => {
-    const {dates, is_range_date} = extract_dates(article.title);
+    const { dates, is_range_date } = extract_dates(article.title);
     const title = article.title.replace(/\(.*\)/, '');
     const merged_parts = Array.from(
       new JSDOM(article.text).window.document.querySelectorAll('p'),

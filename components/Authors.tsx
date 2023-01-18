@@ -1,5 +1,5 @@
 import Chip from '@mui/material/Chip';
-import Author from '../backend/entity/author'
+import Author from '../backend/entity/author';
 
 export default function Authors({ authors }: { authors: Author[] }) {
   return (

@@ -1,7 +1,7 @@
 name: build
 on:
   push:
-    branches: [ "master" ]
+    branches: ['master']
 
 jobs:
   container-job:
@@ -10,44 +10,43 @@ jobs:
     # runs all of the steps inside the specified container rather than on the VM host.
     # Because of this the network configuration changes from host based network to a container network.
     container:
-      image:  node:10.16-jessie
+      image: node:10.16-jessie
     services:
       mysql:
         image: mysql:5.7
         env:
           MYSQL_ROOT_PASSWORD: root_password
         ports:
-        - 3306:3306
+          - 3306:3306
         # needed because the mysql container does not provide a healthcheck
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=10s --health-retries=10
 
     steps:
-    - uses: actions/checkout@v2
-      env:
-        # use mysql for the host here because we have specified a container for the job.
-        # If we were running the job on the VM this would be localhost
-        MYSQL_HOST: mysql
-        MYSQL_PORT: 3306
-    - name: Set up MySQL
-      run: |
-        apt-get update
-        apt-get install -y --force-yes mysql-client
-        mysql --host mysql -e 'CREATE DATABASE banned_history CHARACTER SET utf8 COLLATE utf8_general_ci;' -uroot -proot_password
-    - name: Use Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: 17.9
-    - run: npm install
-    - run: cp -r ./node_modules/pdfjs-dist ./public/
-    - run: CI=true npm run init-db
-    - run: SITE_URL='https://banned-historical-archives.github.io' CI=true COMMIT_HASH="${{ github.sha }}" npm run build
-    - run: touch out/.nojekyll
-    - run: git config --global http.postBuffer 2097152000
-    - name: Deploy to GitHub Pages
-      uses: crazy-max/ghaction-github-pages@v3
-      with:
-        target_branch: gh-pages
-        build_dir: out
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
+      - uses: actions/checkout@v2
+        env:
+          # use mysql for the host here because we have specified a container for the job.
+          # If we were running the job on the VM this would be localhost
+          MYSQL_HOST: mysql
+          MYSQL_PORT: 3306
+      - name: Set up MySQL
+        run: |
+          apt-get update
+          apt-get install -y --force-yes mysql-client
+          mysql --host mysql -e 'CREATE DATABASE banned_history CHARACTER SET utf8 COLLATE utf8_general_ci;' -uroot -proot_password
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 17.9
+      - run: npm install
+      - run: cp -r ./node_modules/pdfjs-dist ./public/
+      - run: CI=true npm run init-db
+      - run: SITE_URL='https://banned-historical-archives.github.io' CI=true COMMIT_HASH="${{ github.sha }}" npm run build
+      - run: touch out/.nojekyll
+      - run: git config --global http.postBuffer 2097152000
+      - name: Deploy to GitHub Pages
+        uses: crazy-max/ghaction-github-pages@v3
+        with:
+          target_branch: gh-pages
+          build_dir: out
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

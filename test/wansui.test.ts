@@ -1,4 +1,12 @@
-import { assert, expect, test, it, describe, beforeEach, beforeAll } from 'vitest';
+import {
+  assert,
+  expect,
+  test,
+  it,
+  describe,
+  beforeEach,
+  beforeAll,
+} from 'vitest';
 import { join } from 'node:path';
 import books, { get_book } from '../backend/books';
 import { ContentType, ParserResult } from '../types';
@@ -10,7 +18,9 @@ describe('wansui1', async () => {
     expect(res.map((i) => i.title)).toMatchSnapshot();
   });
   it('date', () => {
-    expect(res.filter((i) => i.title === '在抗大成立三周年纪念大会上的讲话（摘录）')).toMatchSnapshot();
+    expect(
+      res.filter((i) => i.title === '在抗大成立三周年纪念大会上的讲话（摘录）'),
+    ).toMatchSnapshot();
   });
 });
 

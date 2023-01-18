@@ -1,11 +1,13 @@
-import { Entity, PrimaryColumn, Column, PrimaryGeneratedColumn, ManyToMany, OneToMany, ManyToOne } from 'typeorm';
 import {
-  Article,
-  Comment,
-  Publication,
-  Tag,
-  Page,
-} from '../entities';
+  Entity,
+  PrimaryColumn,
+  Column,
+  PrimaryGeneratedColumn,
+  ManyToMany,
+  OneToMany,
+  ManyToOne,
+} from 'typeorm';
+import { Article, Comment, Publication, Tag, Page } from '../entities';
 
 @Entity()
 export default class Alias {

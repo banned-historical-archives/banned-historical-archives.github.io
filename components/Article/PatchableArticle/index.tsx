@@ -15,7 +15,13 @@ import { diff_match_patch, Diff } from 'diff-match-patch';
 import { ReactElement, useEffect, useMemo, useRef, useState } from 'react';
 import { setTextRange } from 'typescript';
 import { Article, Content, Comment } from '../../../backend/entities';
-import { ContentPart, ContentType, PartDiff, CommentDiff, PatchV2 } from '../../../types';
+import {
+  ContentPart,
+  ContentType,
+  PartDiff,
+  CommentDiff,
+  PatchV2,
+} from '../../../types';
 import { bracket_left, bracket_right, md5 } from '../../../utils';
 import CommentEditor from './CommentEditor';
 import Part from './PartEditor';

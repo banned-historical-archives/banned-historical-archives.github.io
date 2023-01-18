@@ -1,4 +1,4 @@
-import { ChangeEvent, useCallback, useState } from "react";
+import { ChangeEvent, useCallback, useState } from 'react';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
@@ -9,19 +9,30 @@ import TextField from '@mui/material/TextField';
 import DialogTitle from '@mui/material/DialogTitle';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
-import { Chip } from "@mui/material";
-import { Tag } from "../backend/entities";
-import { TagType } from "../types";
+import { Chip } from '@mui/material';
+import { Tag } from '../backend/entities';
+import { TagType } from '../types';
 
-export function useTagFilterDialog(tags_all: Map<string, Tag>, tags_all_order_by_type: Map<TagType, Map<string, Tag>>) {
+export function useTagFilterDialog(
+  tags_all: Map<string, Tag>,
+  tags_all_order_by_type: Map<TagType, Map<string, Tag>>,
+) {
   const [show, setTagDialog] = useState(false);
   const [tagFilter, setTagFilter] = useState<string | null>(null);
-  const default_tags = Array.from(tags_all_order_by_type.get(TagType.articleType)!.values());
+  const default_tags = Array.from(
+    tags_all_order_by_type.get(TagType.articleType)!.values(),
+  );
   const [tags, setTags] = useState<Tag[]>(default_tags);
-  const [selected, setSelected] = useState<string>(tags_all[Symbol.iterator]().next().value[1].id);
+  const [selected, setSelected] = useState<string>(
+    tags_all[Symbol.iterator]().next().value[1].id,
+  );
   const onClose = useCallback(() => setTagDialog(false), []);
   const onConfirm = useCallback(() => {
-    setTags(Array.from(new Set([...default_tags.map(i => i.id), selected])).map(i => tags_all.get(i)!));
+    setTags(
+      Array.from(new Set([...default_tags.map((i) => i.id), selected])).map(
+        (i) => tags_all.get(i)!,
+      ),
+    );
     setTagFilter(selected);
     setTagDialog(false);
   }, [tags, selected]);
@@ -63,5 +74,5 @@ export function useTagFilterDialog(tags_all: Map<string, Tag>, tags_all_order_by
     setTagDialog,
     setTagFilter,
     tags,
-  }
+  };
 }

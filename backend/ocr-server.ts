@@ -43,5 +43,5 @@ app.get('/', async (req, res) => {
 
 const port = 8099;
 app.listen(port, () => {
-  console.log(`OCR server listening on port ${port}`)
-})
+  console.log(`OCR server listening on port ${port}`);
+});

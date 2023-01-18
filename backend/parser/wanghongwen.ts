@@ -21,7 +21,11 @@ type PartRaw = {
   y2: number;
   merge_up?: boolean;
 } & ContentPartRaw;
-function extract_parts(ocr: OCRResult[], page: number, latest_part?: PartRaw): PartRaw[] {
+function extract_parts(
+  ocr: OCRResult[],
+  page: number,
+  latest_part?: PartRaw,
+): PartRaw[] {
   const res: PartRaw[] = [];
   for (let i = 0; i < ocr.length; ++i) {
     let text = ocr[i].text.trim();
@@ -46,9 +50,7 @@ function extract_parts(ocr: OCRResult[], page: number, latest_part?: PartRaw): P
     const last = paragraphs[i - 1];
     const next = paragraphs[i + 1];
     const t = paragraphs[i];
-    if (
-      i == 0
-    ) {
+    if (i == 0) {
       if (
         latest_part &&
         latest_part.type === ContentType.paragraph &&
@@ -83,7 +85,7 @@ function extract_date(part: ContentPart): Date | void {
   const format1 = Array.from(part.text.matchAll(/\d+\.\d+(\.\d+)?/g))[0];
   const format2 = Array.from(part.text.matchAll(/\d+年\d+(月\d+)?/g))[0];
   if (format1) {
-    const s = format1[0].split('.').map(i => parseInt(i));
+    const s = format1[0].split('.').map((i) => parseInt(i));
     return {
       year: s[0],
       month: s[1],
@@ -107,9 +109,7 @@ function extract_date(part: ContentPart): Date | void {
 function merge_parts(parts: PartRaw[]): ContentPart[] {
   const res: ContentPart[] = [];
   for (let i = 0; i < parts.length; ++i) {
-    if (
-      parts[i].merge_up
-    ) {
+    if (parts[i].merge_up) {
       res[res.length - 1].text += parts[i].text;
     } else {
       res.push({
@@ -162,11 +162,10 @@ export async function parse(
           })
           .filter((i) => i.text && i.box[0][1] > 70 && i.box[0][1] < 825), // 去掉页眉页脚
         10,
-      ); 
+      );
       const prev = parts[parts.length - 1];
       parts.push(...extract_parts(res, page_idx + range[0], prev));
     });
-
 
     const articles: PartRaw[][] = [];
     for (let i = 0; i < parts.length; ++i) {
@@ -203,9 +202,7 @@ export async function parse(
         title,
         parts: merged_parts,
         authors,
-        dates: [
-          date!
-        ],
+        dates: [date!],
         is_range_date: false,
         comments: [],
         comment_pivots: [],

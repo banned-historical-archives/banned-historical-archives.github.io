@@ -1,4 +1,4 @@
-import { exec, execSync } from 'node:child_process'
+import { exec, execSync } from 'node:child_process';
 import { join, basename, dirname, extname } from 'node:path/posix';
 import { isAbsolute } from 'node:path';
 import fs from 'fs-extra';
@@ -73,11 +73,10 @@ export default async function ocr({
     ocr_results: OCRResult[];
     dimensions: { height: number; width: number };
   } = {
-    ocr_results: t
-      .map((i: any) => ({
-        text: i.text,
-        box: i.position,
-      })),
+    ocr_results: t.map((i: any) => ({
+      text: i.text,
+      box: i.position,
+    })),
     dimensions: {
       height: dimensions.height!,
       width: dimensions.width!,

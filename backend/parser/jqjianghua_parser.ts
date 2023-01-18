@@ -40,7 +40,7 @@ const opt = {
 function ensure10digits(x: number) {
   x *= 100000;
   let s = parseInt(x.toString()).toString();
-  while (s.length < 10) s= '0'+s;
+  while (s.length < 10) s = '0' + s;
   return s;
 }
 
@@ -68,7 +68,7 @@ type Line = {
 };
 
 function is_title(s: string) {
-  return (/^\d+\)/.test(s) || /^补遗/.test(s))
+  return /^\d+\)/.test(s) || /^补遗/.test(s);
 }
 
 function extract_parts(
@@ -96,7 +96,11 @@ function extract_parts(
       }
       offset_x = items[j].transform[4];
       max_x = Math.max(max_x, offset_x + items[j].width);
-      if (j > i && offset_x - (items[j - 1].transform[4] + items[j - 1].width) > opt.min_space_width) {
+      if (
+        j > i &&
+        offset_x - (items[j - 1].transform[4] + items[j - 1].width) >
+          opt.min_space_width
+      ) {
         items[j].str = ' ' + items[j].str;
       }
       candidates.push(items[j]);
@@ -355,7 +359,7 @@ export async function parse(
     let content_objs = await Promise.all(
       pages.map((page) => page.getTextContent()),
     );
-    const viewport = pages[0].getViewport({scale:1});
+    const viewport = pages[0].getViewport({ scale: 1 });
     const width = viewport.viewBox[2];
     const height = viewport.viewBox[3];
     const items: Item[] = [];
@@ -411,7 +415,7 @@ export async function parse(
       const part = parts_raw[i];
       const next_part = parts_raw[i + 1];
       const nnext_part = parts_raw[i + 2];
-      if (part.type as any === ContentType.authors) {
+      if ((part.type as any) === ContentType.authors) {
         const article = articles[articles.length - 1];
         if (part.page_start === 272 && range[0] === 7) {
           article.authors = ['陈伯达', '江青'];
@@ -420,12 +424,14 @@ export async function parse(
         }
         continue;
       }
-      if (part.type as any === ContentType.subdate) {
+      if ((part.type as any) === ContentType.subdate) {
         continue;
       }
-      if (part.type as any === ContentType.title) {
+      if ((part.type as any) === ContentType.title) {
         part_idx = 0;
-        const title = part.text.replace(/^\d+\) */, '').replace(/^补遗 \d\d：?/, '');
+        const title = part.text
+          .replace(/^\d+\) */, '')
+          .replace(/^补遗 \d\d：?/, '');
         articles.push({
           title,
           description: '',
@@ -461,23 +467,25 @@ export async function parse(
               day: 20,
             },
           );
-          article.authors.push('林彪', '江青')
+          article.authors.push('林彪', '江青');
         }
         if (
-          next_part.type as any === ContentType.subdate ||
-          nnext_part.type as any === ContentType.subdate
+          (next_part.type as any) === ContentType.subdate ||
+          (nnext_part.type as any) === ContentType.subdate
         ) {
           const article = articles[articles.length - 1];
           const [dates, is_range_date] = extract_dates(
-            nnext_part.type as any === ContentType.subdate
+            (nnext_part.type as any) === ContentType.subdate
               ? nnext_part.text
               : next_part.text,
           );
           article.is_range_date = is_range_date;
           article.dates = dates;
         }
-      } else if (part.type as any === ContentType.comment) {
-        articles[articles.length - 1].comments.push(part.text.replace(/^〔\d+〕 */, ''))
+      } else if ((part.type as any) === ContentType.comment) {
+        articles[articles.length - 1].comments.push(
+          part.text.replace(/^〔\d+〕 */, ''),
+        );
       } else {
         const article = articles[articles.length - 1];
         article.parts.push({ type: part.type, text: part.text });
@@ -489,17 +497,32 @@ export async function parse(
     for (let i = 0; i < articles.length; ++i) {
       const article = articles[i];
       if (!article.dates.length) {
-        console.warn('日期丢失', article.title, article.page_start, article.page_end);
+        console.warn(
+          '日期丢失',
+          article.title,
+          article.page_start,
+          article.page_end,
+        );
       }
       if (!article.authors.length) {
-        console.warn('作者丢失', article.title, article.page_start, article.page_end);
+        console.warn(
+          '作者丢失',
+          article.title,
+          article.page_start,
+          article.page_end,
+        );
       }
-      const temp: {[key:string]:boolean} = {};
-      article.comment_pivots.forEach(j => {
-        temp[j.index]=true;
+      const temp: { [key: string]: boolean } = {};
+      article.comment_pivots.forEach((j) => {
+        temp[j.index] = true;
       });
       if (Object.keys(temp).length !== article.comments.length) {
-        console.warn('注释不匹配', article.title, article.page_start, article.page_end);
+        console.warn(
+          '注释不匹配',
+          article.title,
+          article.page_start,
+          article.page_end,
+        );
       }
     }
 
@@ -508,8 +531,8 @@ export async function parse(
   };
 
   const parser_results = [
-    ...await parse_all(parser_opt.page_limits[0]),
-    ...await parse_all(parser_opt.page_limits[1]),
+    ...(await parse_all(parser_opt.page_limits[0])),
+    ...(await parse_all(parser_opt.page_limits[1])),
   ];
   return parser_results;
 }

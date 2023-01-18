@@ -1,4 +1,4 @@
-import "reflect-metadata"
+import 'reflect-metadata';
 import { init } from './data-source';
 
 import get_books from './books';
@@ -16,11 +16,11 @@ import Publication from './entity/publication';
 import Tag from './entity/tag';
 import Page from './entity/page';
 import { get_article_types, get_tags } from './classifier';
-import { DataSource } from "typeorm";
+import { DataSource } from 'typeorm';
 import { music as musicData } from './music';
-import { ArticleCategory, TagType } from "../types";
-import { get_article_id, hash_str_arr, uuid } from "../utils";
-import { Image, ImageTag } from "./entities";
+import { ArticleCategory, TagType } from '../types';
+import { get_article_id, hash_str_arr, uuid } from '../utils';
+import { Image, ImageTag } from './entities';
 
 async function init_articles(AppDataSource: DataSource) {
   const books = await get_books();
@@ -282,22 +282,22 @@ async function init_images(AppDataSource: DataSource) {
 
 init()
   .then(async (AppDataSource) => {
-  try {
-    for (const entity of await AppDataSource.entityMetadatas) {
-      const repository = await AppDataSource.getRepository(entity.name);
-      await repository.query(`SET FOREIGN_KEY_CHECKS=OFF`);
-      await repository.query(`DELETE FROM ${entity.tableName};`);
-      await repository.query(`SET FOREIGN_KEY_CHECKS=ON`);
+    try {
+      for (const entity of await AppDataSource.entityMetadatas) {
+        const repository = await AppDataSource.getRepository(entity.name);
+        await repository.query(`SET FOREIGN_KEY_CHECKS=OFF`);
+        await repository.query(`DELETE FROM ${entity.tableName};`);
+        await repository.query(`SET FOREIGN_KEY_CHECKS=ON`);
+      }
+    } catch (error) {
+      throw new Error(`ERROR: ${error}`);
     }
-  } catch (error) {
-    throw new Error(`ERROR: ${error}`);
-  }
 
-    try{
+    try {
       await init_images(AppDataSource);
       await init_articles(AppDataSource);
       await init_music(AppDataSource);
-    } catch(e) {
+    } catch (e) {
       console.log(e);
       process.exit(1);
     }

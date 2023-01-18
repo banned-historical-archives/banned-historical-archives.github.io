@@ -1,12 +1,22 @@
-import { assert, expect, test, it, describe, beforeEach, beforeAll } from 'vitest';
+import {
+  assert,
+  expect,
+  test,
+  it,
+  describe,
+  beforeEach,
+  beforeAll,
+} from 'vitest';
 import { join } from 'node:path';
 import { extract_dates } from '../backend/parser/utils';
 import { ContentType, ParserResult } from '../types';
 import { apply_patch_v2, bracket_left, bracket_right } from '../utils';
 
 describe('create ocr issue', async () => {
-  it.skip('test1', async () => {
-    const issue_body = `
+  it.skip(
+    'test1',
+    async () => {
+      const issue_body = `
 **===== 自动化文稿录入使用说明 =====**
 
 按照以下标准进行自动化文稿录入，随后机器人会生成对应的pull request，通过审核后将会生成对应文稿页面。
@@ -96,11 +106,13 @@ describe('create ocr issue', async () => {
 [一月革命胜利万岁1967.pdf](https://github.com/banned-historical-archives/banned-historical-archives.github.io/files/9750804/1967.pdf)
 `;
 
-    (process.env as any).TEST = 'true';
-    (process.env as any).BODY = issue_body;
-    (process.env as any).TITLE = '[自动化文稿录入]test';
+      (process.env as any).TEST = 'true';
+      (process.env as any).BODY = issue_body;
+      (process.env as any).TITLE = '[自动化文稿录入]test';
 
-    const { start } = await import('../backend/ocr-gitworkflow');
-    await start();
-  }, 1000 * 1000 * 100);
+      const { start } = await import('../backend/ocr-gitworkflow');
+      await start();
+    },
+    1000 * 1000 * 100,
+  );
 });

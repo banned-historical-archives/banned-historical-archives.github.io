@@ -1,4 +1,4 @@
-import { ChangeEvent, useCallback, useState } from "react";
+import { ChangeEvent, useCallback, useState } from 'react';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
@@ -9,7 +9,7 @@ import TextField from '@mui/material/TextField';
 import DialogTitle from '@mui/material/DialogTitle';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
-import { Chip } from "@mui/material";
+import { Chip } from '@mui/material';
 
 const default_authors = ['毛泽东', '江青', '王洪文', '张春桥', '姚文元'];
 export function useAuthorFilterDialog(authors_all: string[]) {
@@ -52,5 +52,5 @@ export function useAuthorFilterDialog(authors_all: string[]) {
     setAuthorDialog,
     setAuthorFilter,
     authors,
-  }
+  };
 }

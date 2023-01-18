@@ -1,20 +1,20 @@
 ---
 name: 自动化OCR录入
 about: 自动化OCR录入
-title: "[自动化文稿录入]标题"
+title: '[自动化文稿录入]标题'
 labels: ''
 assignees: ''
-
 ---
 
 **===== 自动化文稿录入使用说明 =====**
 
-按照以下标准进行自动化文稿录入，随后机器人会生成对应的pull request，通过审核后将会生成对应文稿页面。
+按照以下标准进行自动化文稿录入，随后机器人会生成对应的 pull request，通过审核后将会生成对应文稿页面。
 
-1. 填写标题（注意issue的标题仅用于展示，自动化录入程序以下方参数中的title为准）
-2. 参考完整的例子（）填写issue最下方的参数，可以使用cnocr的在线页面调试不同参数 https://huggingface.co/spaces/breezedeus/cnocr
+1. 填写标题（注意 issue 的标题仅用于展示，自动化录入程序以下方参数中的 title 为准）
+2. 参考完整的例子（）填写 issue 最下方的参数，可以使用 cnocr 的在线页面调试不同参数 https://huggingface.co/spaces/breezedeus/cnocr
 
 完整的例子:
+
 ```
 {
   source_name: '毛泽东全集第一卷', // 来源文件，书籍，数据库，报纸等等
@@ -73,7 +73,7 @@ assignees: ''
 }
 ```
 
-3. 在issue的最后上传图片或pdf。如果上传图片请保持图片格式的统一，全使用jpg或者全使用png。如果上传pdf，目前只能接受单个pdf文件。多个pdf建议合并后再上传。
+3. 在 issue 的最后上传图片或 pdf。如果上传图片请保持图片格式的统一，全使用 jpg 或者全使用 png。如果上传 pdf，目前只能接受单个 pdf 文件。多个 pdf 建议合并后再上传。
 
 **===== 以上为使用说明(建议删除) =====**
 

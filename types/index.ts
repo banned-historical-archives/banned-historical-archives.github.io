@@ -56,7 +56,7 @@ export type Pivot = {
   part_idx: number; // 从 0 开始
   index: number; // 注释编号
   offset: number; // 偏移量，从 0 开始，注释应该插入的index，比如'mzd[2]'的offset为3
-}
+};
 
 export type ParserResult = {
   title: string;
@@ -72,8 +72,8 @@ export type ParserResult = {
   page_end: number;
   origin?: string; // 起源
   tags?: {
-    name: string,
-    type: TagType
+    name: string;
+    type: TagType;
   }[];
   file_id?: string;
 
@@ -97,8 +97,8 @@ export type OCRPosition = [number, number];
 export type OCRResult = {
   // 坐标轴原点在左上角，y轴朝下
   // 左上，右上，右下，左下
-  box: [OCRPosition, OCRPosition, OCRPosition, OCRPosition],
-  text: string,
+  box: [OCRPosition, OCRPosition, OCRPosition, OCRPosition];
+  text: string;
 };
 export type LACType =
   | 'n' // 普通名词
@@ -176,7 +176,7 @@ export type OCRParameter = {
   resized_shape: number;
   box_score_thresh: number;
   min_box_size: number;
-}
+};
 
 export type OCRParameterAdvanced = {
   line_merge_threshold: number; // 单位像素，如果小于这个阈值将被视为同一行
@@ -196,10 +196,10 @@ export type Book = {
 };
 
 export type Patch = {
-  parts: {[idx: string]: string},
-  comments: {[idx: string]: string},
-  description: string,
-}
+  parts: { [idx: string]: string };
+  comments: { [idx: string]: string };
+  description: string;
+};
 
 export type StringDiff = string;
 
@@ -219,9 +219,9 @@ export type CommentDiff = {
 };
 
 export type PatchV2 = {
-  version: 2,
-  parts: {[idx: string]: PartDiff},
-  comments: {[idx: string]: CommentDiff},
-  newComments?: string[],
-  description?: StringDiff, // 如果为空字符串表示无变更，如果不存在，表示删除
-}
+  version: 2;
+  parts: { [idx: string]: PartDiff };
+  comments: { [idx: string]: CommentDiff };
+  newComments?: string[];
+  description?: StringDiff; // 如果为空字符串表示无变更，如果不存在，表示删除
+};

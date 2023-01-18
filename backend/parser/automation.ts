@@ -1,5 +1,5 @@
 import { join } from 'path';
-import { basename} from 'node:path/posix';
+import { basename } from 'node:path/posix';
 import { existsSync, writeFileSync, readFileSync } from 'fs';
 import ocr from '../ocr';
 import {
@@ -19,7 +19,12 @@ import { merge_to_lines } from './utils';
 import { normalize } from '../utils';
 
 type PartRaw = { page: number; x: number; merge_up?: boolean } & ContentPartRaw;
-function extract_parts(ocr: OCRResult[], page: number,page_dimensions: {width: number, height: number}, ocr_parameters: Partial<OCRParameter & OCRParameterAdvanced>): PartRaw[] {
+function extract_parts(
+  ocr: OCRResult[],
+  page: number,
+  page_dimensions: { width: number; height: number },
+  ocr_parameters: Partial<OCRParameter & OCRParameterAdvanced>,
+): PartRaw[] {
   const res: PartRaw[] = [];
   for (let i = 0, last_x = 0; i < ocr.length; ++i) {
     let text = ocr[i].text.trim();

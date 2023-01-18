@@ -41,7 +41,7 @@ const opt = {
 function ensure10digits(x: number) {
   x *= 100000;
   let s = parseInt(x.toString()).toString();
-  while (s.length < 10) s= '0'+s;
+  while (s.length < 10) s = '0' + s;
   return s;
 }
 
@@ -53,8 +53,7 @@ function is_date(i: string) {
   return (
     /^（?[一二三四五六七八九至O○〇十年月日—，、初廿卄卅卌春夏秋冬]+）/.test(
       i,
-    ) &&
-    /^（.*[年月日]+.*）/.test(i)
+    ) && /^（.*[年月日]+.*）/.test(i)
   );
 }
 
@@ -103,7 +102,11 @@ function extract_parts(
       }
       offset_x = items[j].transform[4];
       max_x = Math.max(max_x, offset_x + items[j].width);
-      if (j > i && offset_x - (items[j - 1].transform[4] + items[j - 1].width) > opt.noramal_char_width) {
+      if (
+        j > i &&
+        offset_x - (items[j - 1].transform[4] + items[j - 1].width) >
+          opt.noramal_char_width
+      ) {
         items[j].str = ' ' + items[j].str;
       }
       candidates.push(items[j]);
@@ -192,10 +195,7 @@ function extract_parts(
         }
       }
     } else {
-      if (
-        /[：:]$/.test(str.trim()) &&
-        line.max_x < opt.page_width / 2
-      ) {
+      if (/[：:]$/.test(str.trim()) && line.max_x < opt.page_width / 2) {
         parts.push([str, ContentType.appellation, line.items[0]]);
       } else {
         parts.push([str, ContentType.paragraph, line.items[0]]);
@@ -277,7 +277,7 @@ export async function parse(
     let content_objs = await Promise.all(
       pages.map((page) => page.getTextContent()),
     );
-    const viewport = pages[0].getViewport({scale:1});
+    const viewport = pages[0].getViewport({ scale: 1 });
     const width = viewport.viewBox[2];
     const height = viewport.viewBox[3];
     const items: Item[] = [];
@@ -334,30 +334,31 @@ export async function parse(
     for (let i = 0, part_idx = 0; i < parts_raw.length; ++i, ++part_idx) {
       const part = parts_raw[i];
       const next_part = parts_raw[i + 1];
-      if (part.type as any === ContentType.title) {
+      if ((part.type as any) === ContentType.title) {
         part_idx = 0;
         const title = part.text;
         articles.push({
           title,
           description: '',
-          dates: [{
-            year: 1976,
-            month: 7,
-            day: 30,
-          }],
+          dates: [
+            {
+              year: 1976,
+              month: 7,
+              day: 30,
+            },
+          ],
           parts: [{ text: title, type: part.type }],
           comment_pivots: [],
           is_range_date: false,
-          authors: [
-            '华国峰',
-            '王洪文',
-          ],
+          authors: ['华国峰', '王洪文'],
           comments: [],
           page_start: Infinity,
           page_end: Infinity,
         });
-      } else if (part.type as any === ContentType.comment) {
-        articles[articles.length - 1].comments.push(part.text.replace(/^〔\d+〕 */, ''))
+      } else if ((part.type as any) === ContentType.comment) {
+        articles[articles.length - 1].comments.push(
+          part.text.replace(/^〔\d+〕 */, ''),
+        );
       } else {
         const article = articles[articles.length - 1];
         article.parts.push({ type: part.type, text: part.text });

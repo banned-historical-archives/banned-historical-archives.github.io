@@ -13,7 +13,7 @@ a {
 }
 
 .markdown {
-  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
 }
 .markdown img {
   width: 100%;
@@ -21,4 +21,6 @@ a {
   border: 12px solid white;
 }
 
-em { color: red; }
+em {
+  color: red;
+}

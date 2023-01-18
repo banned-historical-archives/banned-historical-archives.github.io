@@ -1,6 +1,6 @@
 import Stack from '@mui/material/Stack';
 import { ReactElement, useEffect, useState } from 'react';
-import Head from 'next/head'
+import Head from 'next/head';
 import Navbar from './Navbar';
 import Footer from './Footer';
 

@@ -111,9 +111,9 @@ export async function start() {
     ocr_exceptions: ${JSON.stringify(config.ocr_exceptions || {})},
   },
   parser_id: 'automation',
-  path: '/archives${
-    config.archive_id
-  }/${id}${config.ext == 'pdf' ? '.pdf' : ''}',
+  path: '/archives${config.archive_id}/${id}${
+        config.ext == 'pdf' ? '.pdf' : ''
+      }',
 };`;
       fs.writeFileSync(join(__dirname, `books/${id}.ts`), file_content);
 

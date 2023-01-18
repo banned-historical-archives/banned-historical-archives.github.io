@@ -11,7 +11,11 @@ import {
   ParserResult,
   Pivot,
 } from '../../types';
-import { merge_to_lines, pdfjsContentToOCRResult, toChineseSymbols } from './utils';
+import {
+  merge_to_lines,
+  pdfjsContentToOCRResult,
+  toChineseSymbols,
+} from './utils';
 
 type PartRaw = {
   page: number;
@@ -21,7 +25,11 @@ type PartRaw = {
   y2: number;
   merge_up?: boolean;
 } & ContentPartRaw;
-function extract_parts(ocr: OCRResult[], page: number, latest_part?: PartRaw): PartRaw[] {
+function extract_parts(
+  ocr: OCRResult[],
+  page: number,
+  latest_part?: PartRaw,
+): PartRaw[] {
   const res: PartRaw[] = [];
   for (let i = 0; i < ocr.length; ++i) {
     let text = ocr[i].text.trim();
@@ -49,9 +57,7 @@ function extract_parts(ocr: OCRResult[], page: number, latest_part?: PartRaw): P
     const last = paragraphs[i - 1];
     const next = paragraphs[i + 1];
     const t = paragraphs[i];
-    if (
-      i == 0
-    ) {
+    if (i == 0) {
       if (
         latest_part &&
         latest_part.type === ContentType.paragraph &&
@@ -86,11 +92,11 @@ function extract_date(part: ContentPart): Date | void {
   const format1 = Array.from(part.text.matchAll(/\d+\.\d+(\.\d+)?/g))[0];
   const format2 = Array.from(part.text.matchAll(/\d+年\d+(月\d+)?/g))[0];
   if (format1) {
-    const s = format1[0].split('.').map(i => parseInt(i));
+    const s = format1[0].split('.').map((i) => parseInt(i));
     return {
       year: s[0],
       month: s[1],
-      ...s[2] > 0 ? {day:s[2]} : {}
+      ...(s[2] > 0 ? { day: s[2] } : {}),
     };
   }
   if (format2) {
@@ -101,7 +107,7 @@ function extract_date(part: ContentPart): Date | void {
     return {
       year: s[0],
       month: s[1],
-      ...s[2] > 0 ? {day:s[2]} : {}
+      ...(s[2] > 0 ? { day: s[2] } : {}),
     };
   }
   return;
@@ -110,10 +116,7 @@ function extract_date(part: ContentPart): Date | void {
 function merge_parts(parts: PartRaw[]): ContentPart[] {
   const res: ContentPart[] = [];
   for (let i = 0; i < parts.length; ++i) {
-    if (
-      parts[i].merge_up &&
-      res[res.length - 1]?.type === parts[i].type
-    ) {
+    if (parts[i].merge_up && res[res.length - 1]?.type === parts[i].type) {
       res[res.length - 1].text += parts[i].text;
     } else {
       res.push({
@@ -166,7 +169,7 @@ export async function parse(
           })
           .filter((i) => i.text && i.box[0][1] > 70 && i.box[0][1] < 825), // 去掉页眉页脚
         10,
-      ); 
+      );
       const prev = parts[parts.length - 1];
       // if (page_idx + range[0] == 96)debugger;
       parts.push(...extract_parts(res, page_idx + range[0], prev));
@@ -190,7 +193,7 @@ export async function parse(
 
     return articles.map((article) => {
       const merged_parts = merge_parts(article);
-      merged_parts.forEach(i => i.text = toChineseSymbols(i.text));
+      merged_parts.forEach((i) => (i.text = toChineseSymbols(i.text)));
       merged_parts[0].text = merged_parts[0].text.replace(/^\d+\)/, '');
       const title = merged_parts[0].text;
       let date = extract_date(merged_parts[1]);
@@ -209,16 +212,14 @@ export async function parse(
         title,
         parts: merged_parts,
         authors,
-        dates: [
-          date!
-        ],
+        dates: [date!],
         is_range_date: false,
         comments: [],
         comment_pivots: [],
         description: '',
         page_start: article[0].page,
         page_end: article[article.length - 1].page,
-        ...overwrite[title]? overwrite[title] : {},
+        ...(overwrite[title] ? overwrite[title] : {}),
       };
     });
   };
@@ -230,17 +231,17 @@ export async function parse(
   return parser_results;
 }
 
-const overwrite: {[key: string]: Partial<ParserResult>} = {
+const overwrite: { [key: string]: Partial<ParserResult> } = {
   '张春桥戚本禹与北航“红旗”五名战士谈话': {
     authors: ['张春桥', '戚本禹'],
   },
-  '张春桥戚本禹接见红卫兵代表时的讲话摘要': {
+  张春桥戚本禹接见红卫兵代表时的讲话摘要: {
     authors: ['张春桥', '戚本禹'],
   },
   张春桥在上海市革命造反派座谈会上的讲话: {
     authors: ['张春桥', '姚文元'],
   },
-  '周恩来对中央广播事业局的电话指示及张春桥姚文元的谈话': {
+  周恩来对中央广播事业局的电话指示及张春桥姚文元的谈话: {
     authors: ['周恩来', '张春桥', '姚文元'],
-  }
-}
+  },
+};

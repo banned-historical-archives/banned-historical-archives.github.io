@@ -1,4 +1,12 @@
-import { assert, expect, test, it, describe, beforeEach, beforeAll } from 'vitest';
+import {
+  assert,
+  expect,
+  test,
+  it,
+  describe,
+  beforeEach,
+  beforeAll,
+} from 'vitest';
 import { join } from 'node:path';
 import { extract_dates } from '../backend/parser/utils';
 import { ContentType, ParserResult } from '../types';
@@ -23,14 +31,22 @@ describe('extract_dates', async () => {
     expect(extract_dates('1911')).toMatchSnapshot();
   });
   it('format d', () => {
-    expect(extract_dates('一九三二年十月二十日至一九三三年十月二十日')).toMatchSnapshot();
-    expect(extract_dates('一九三二年十月二十日至十二月二十日')).toMatchSnapshot();
+    expect(
+      extract_dates('一九三二年十月二十日至一九三三年十月二十日'),
+    ).toMatchSnapshot();
+    expect(
+      extract_dates('一九三二年十月二十日至十二月二十日'),
+    ).toMatchSnapshot();
     expect(extract_dates('一九三二年十月二十日至十二月')).toMatchSnapshot();
     expect(extract_dates('一九三二年十月至十二月')).toMatchSnapshot();
   });
   it('format e', () => {
-    expect(extract_dates('一九三二年十月二十日，二十一日，二十二日')).toMatchSnapshot();
-    expect(extract_dates('一九三二年十月二十日，十一月十日，十一月十二日')).toMatchSnapshot();
+    expect(
+      extract_dates('一九三二年十月二十日，二十一日，二十二日'),
+    ).toMatchSnapshot();
+    expect(
+      extract_dates('一九三二年十月二十日，十一月十日，十一月十二日'),
+    ).toMatchSnapshot();
     expect(extract_dates('一九三二年十月，十一月，十二月')).toMatchSnapshot();
     expect(extract_dates('1962年1月10日、24日，2月23日')).toMatchSnapshot();
   });
@@ -169,7 +185,12 @@ describe('apply_patch_v2', async () => {
         version: 2,
         parts: {
           '0': {
-            insertBefore: [{ type: ContentType.title, text: `title${bracket_left}23${bracket_right}` }],
+            insertBefore: [
+              {
+                type: ContentType.title,
+                text: `title${bracket_left}23${bracket_right}`,
+              },
+            ],
             insertAfter: [{ type: ContentType.paragraph, text: 'signature' }],
           },
         },
@@ -185,10 +206,10 @@ describe('apply_patch_v2', async () => {
         version: 2,
         comments: {
           '1': {
-            insertAfter: [{text: 'after1'}],
-            insertBefore: [{text: 'before1'}],
+            insertAfter: [{ text: 'after1' }],
+            insertBefore: [{ text: 'before1' }],
             diff: '=2\t+XX\t=1',
-          }
+          },
         },
         description: '',
       }),
@@ -202,7 +223,7 @@ describe('apply_patch_v2', async () => {
         comments: {
           '2': {
             delete: true,
-          }
+          },
         },
         description: '',
       }),
@@ -234,7 +255,7 @@ describe('apply_patch_v2', async () => {
         version: 2,
         parts: {},
         comments: {},
-        description: '=2\t+111\t=2'
+        description: '=2\t+111\t=2',
       }),
     ).toMatchSnapshot();
   });
