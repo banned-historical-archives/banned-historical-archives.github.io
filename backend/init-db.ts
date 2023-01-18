@@ -1,7 +1,7 @@
 import "reflect-metadata"
 import { init } from './data-source';
 
-import books from './books';
+import get_books from './books';
 import images from './images';
 import Article from './entity/article';
 import Author from './entity/author';
@@ -23,6 +23,7 @@ import { get_article_id, hash_str_arr, uuid } from "../utils";
 import { Image, ImageTag } from "./entities";
 
 async function init_articles(AppDataSource: DataSource) {
+  const books = await get_books();
   for (const book of books) {
     console.log(book.entity.name);
     const res = await book.parser(book.path, book.parser_option);

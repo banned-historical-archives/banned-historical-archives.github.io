@@ -142,7 +142,7 @@ export type ParserOptionV2 = {
     title: string;
     authors: string[]; // 作者
     dates: Date[]; // 时间 或者 时间范围 或者 多个时间点
-    is_range_date: boolean; // 如果为 true 表示一段时间，如果为false表示多/单个时间点
+    is_range_date?: boolean; // 如果为 true 表示一段时间，如果为false表示多/单个时间点
     alias?: string; // 标题别名
     ocr?: Partial<OCRParameter & OCRParameterAdvanced>; // 此参数比全局ocr参数的优先级高，默认为空
     ocr_exceptions?: {
@@ -152,7 +152,7 @@ export type ParserOptionV2 = {
     page_end: number;
   }[];
   ext?: string;
-  ocr?: OCRParameter & OCRParameterAdvanced; // ocr 全局参数
+  ocr?: Partial<OCRParameter & OCRParameterAdvanced>; // ocr 全局参数
   ocr_exceptions?: {
     [key: string]: Partial<OCRParameter & OCRParameterAdvanced>;
   }; // 例外， 比如第三页的ocr参数与其他页面不同，默认为空，此参数比articles中的优先级高
@@ -191,6 +191,7 @@ export type Book = {
   entity: Partial<Publication>;
   path: string;
   parser_option: ParserOption;
+  parser_id: string;
   parser: (path: string, opt: ParserOption) => Promise<ParserResult[]>;
 };
 

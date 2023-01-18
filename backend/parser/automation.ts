@@ -161,14 +161,14 @@ export async function parse(
       ) {
         const left = ocr_results.filter((i) => {
           return (
-            i.box[0][0] < size.width * merged_ocr_parameters.vsplit &&
-            i.box[3][0] < size.width * merged_ocr_parameters.vsplit
+            i.box[0][0] < size.width * merged_ocr_parameters.vsplit! &&
+            i.box[3][0] < size.width * merged_ocr_parameters.vsplit!
           );
         });
         const right = ocr_results.filter((i) => {
           return (
-            i.box[0][0] >= size.width * merged_ocr_parameters.vsplit &&
-            i.box[3][0] >= size.width * merged_ocr_parameters.vsplit
+            i.box[0][0] >= size.width * merged_ocr_parameters.vsplit! &&
+            i.box[3][0] >= size.width * merged_ocr_parameters.vsplit!
           );
         });
         parts.push(

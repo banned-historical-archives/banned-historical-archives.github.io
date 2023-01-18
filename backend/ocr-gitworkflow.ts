@@ -70,7 +70,7 @@ export async function start() {
       config.ext = extname(imgsOrPDFs[0]).replace('.', '');
 
       /**
-       * 1. 修改 books.ts
+       * 1. 新增 books/[id].ts
        * 2. 如果是图片集，下载图片到 public/archives${n}/${id}/${n}.${ext}，如果是pdf 下载到 public/archives${n}/${id}.pdf
        * 3. 调用 parser，生成ocr_cache
        * 4. [gitworkflow] 在 archives${n} 中创建 pr
@@ -81,48 +81,41 @@ export async function start() {
         i.page_start = i.page_start || 1;
         i.page_end = i.page_end || imgsOrPDFs.length;
       });
-      const booksts = fs.readFileSync(join(__dirname, 'books.ts')).toString();
-      const temp = Array.from(booksts);
-      temp.splice(
-        booksts.indexOf('= [') + 3,
-        0,
-        `
-  {
-    entity: {
-      id: '${id}',
-      name: '${config.source_name!}',
-      internal: true,
-      official: true,
-      type: '${config.ext == 'pdf' ? 'pdf' : 'img'}',
-      author: '',
-      files: ${
-        config.ext == 'pdf'
-          ? `'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives${config.archive_id}/main/${id}.pdf',`
-          : `new Array(${imgsOrPDFs.length})
-        .fill(0)
-        .map(
-          (i, idx) =>
-            \`https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives${config.archive_id}/main/${id}/\${
-              idx + 1
-            }.${config.ext}\`,
-        )
-        .join(','),`
-      }
-    },
-    parser_option: {
-      page_limits: [],
-      ext: '${config.ext}',
-      articles: ${JSON.stringify(config.articles)},
-      ocr: ${JSON.stringify(config.ocr)},
-      ocr_exceptions: ${JSON.stringify(config.ocr_exceptions || {})},
-    },
-    parser: automation.parse,
-    path: join(normalize(__dirname), '../public/archives${
-      config.archive_id
-    }/${id}${config.ext == 'pdf' ? '.pdf' : ''}'),
-  },`,
-      );
-      fs.writeFileSync(join(__dirname, 'books.ts'), temp.join(''));
+      const file_content = `export default {
+  entity: {
+    id: '${id}',
+    name: '${config.source_name!}',
+    internal: true,
+    official: true,
+    type: '${config.ext == 'pdf' ? 'pdf' : 'img'}',
+    author: '',
+    files: ${
+      config.ext == 'pdf'
+        ? `'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives${config.archive_id}/main/${id}.pdf',`
+        : `new Array(${imgsOrPDFs.length})
+      .fill(0)
+      .map(
+        (i, idx) =>
+          \`https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives${config.archive_id}/main/${id}/\${
+            idx + 1
+          }.${config.ext}\`,
+      )
+      .join(','),`
+    }
+  },
+  parser_option: {
+    page_limits: [],
+    ext: '${config.ext}',
+    articles: ${JSON.stringify(config.articles)},
+    ocr: ${JSON.stringify(config.ocr)},
+    ocr_exceptions: ${JSON.stringify(config.ocr_exceptions || {})},
+  },
+  parser_id: 'automation',
+  path: '/archives${
+    config.archive_id
+  }/${id}${config.ext == 'pdf' ? '.pdf' : ''}',
+};`;
+      fs.writeFileSync(join(__dirname, `books/${id}.ts`), file_content);
 
       const dirPath = join(
         __dirname,
