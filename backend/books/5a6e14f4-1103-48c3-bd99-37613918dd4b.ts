@@ -2512,7 +2512,7 @@ export default {
         title: '中共中央、中央文革小组关于进行修改党纲党章工作的通知',
         authors: [],
         dates: [{ year: 1967, month: 12, day: 16 }],
-        page_start: 1,
+        page_start: 659,
         page_end: 659,
       },
       {

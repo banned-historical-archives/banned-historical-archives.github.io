@@ -72,8 +72,8 @@ init()
           id: `${article.id}-${publication.id}`,
           document: es_article,
         });
-        console.log(`${++t}/${articles.length}`);
       }
+      console.log(`${++t}/${articles.length}`);
     }
   })
   .catch((error) => console.error(error));
