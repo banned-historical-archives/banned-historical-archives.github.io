@@ -88,7 +88,7 @@ export async function start() {
     internal: ${!!config.internal},
     official: ${!!config.official},
     type: '${config.ext == 'pdf' ? 'pdf' : 'img'}',
-    author: ${config.author || ''},
+    author: '${config.author || ''}',
     files: ${
       config.ext == 'pdf'
         ? `'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives${config.archive_id}/main/${id}.pdf',`
