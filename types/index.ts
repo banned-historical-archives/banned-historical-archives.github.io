@@ -138,6 +138,9 @@ export type LACResult = {
 
 export type ParserOptionV2 = {
   archive_id?: number;
+  internal?: boolean;
+  official?: boolean;
+  author?: string;
   articles?: {
     title: string;
     authors: string[]; // 作者
