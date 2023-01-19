@@ -244,6 +244,7 @@ export default {
         dates: [{ year: 1973, month: 12, day: null }],
         page_start: 85,
         page_end: 102,
+        ocr: { vsplit: 0.4 },
       },
       {
         title:
@@ -1578,7 +1579,7 @@ export default {
         authors: [],
         dates: [
           { year: 1976, month: 10, day: 21 },
-          { year: 22, month: 22, day: 22 },
+          { year: 1976, month: 10, day: 22 },
         ],
         page_start: 607,
         page_end: 614,
