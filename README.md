@@ -90,6 +90,7 @@ https://github.com/banned-historical-archives/banned-historical-archives.github.
 ## 收录的文稿和书籍
 
 | ID | 名称 | 作者及出版社 | 是否内部文件 | 是否来源官方 | 校对状态 |
+|---|---|---|---|---|---|
 zhangchunqiao|春桥文录|张春桥|N|N|未知
 8800caac-f5a2-417f-aab5-1d6959527fd3|首长讲话||Y|Y|未知
 a998d3d5-eabf-4abc-b717-f4dc401f53b3|学习文件||Y|Y|未知
