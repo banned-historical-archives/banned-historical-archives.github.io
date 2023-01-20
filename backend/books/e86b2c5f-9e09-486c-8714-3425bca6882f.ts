@@ -15,7 +15,7 @@ export default {
     articles: [
       {
         title: '马克思恩格斯列宁论无产阶级专政',
-        authors: ['诸夏怀斯社'],
+        authors: ['马克思', '恩格斯', '列宁'],
         page_start: 3,
         page_end: 31,
         dates: [{ year: 1975, month: 2 }],
