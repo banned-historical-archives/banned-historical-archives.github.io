@@ -5,7 +5,7 @@ export default {
     name: '江青十年讲话汇编',
     internal: false,
     official: false,
-    author: '',
+    author: '江青，本世纪初国内老左编',
     files: '/books/jqjianghua.pdf',
   },
   parser_option: {

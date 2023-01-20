@@ -5,7 +5,7 @@ export default {
     internal: true,
     official: true,
     type: 'img',
-    author: '',
+    author: '张春桥',
     files:
       'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/4487f711-d1dc-4c33-a1a9-50a1b7f7d659/1.jpg,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/4487f711-d1dc-4c33-a1a9-50a1b7f7d659/2.jpg,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/4487f711-d1dc-4c33-a1a9-50a1b7f7d659/3.jpg,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/4487f711-d1dc-4c33-a1a9-50a1b7f7d659/4.jpg,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/4487f711-d1dc-4c33-a1a9-50a1b7f7d659/5.jpg,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/4487f711-d1dc-4c33-a1a9-50a1b7f7d659/6.jpg',
   },

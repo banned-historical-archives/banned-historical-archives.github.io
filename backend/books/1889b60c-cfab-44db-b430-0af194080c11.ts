@@ -5,7 +5,7 @@ export default {
     internal: true,
     official: true,
     type: 'img',
-    author: '',
+    author: '毛远新',
     files:
       'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/1889b60c-cfab-44db-b430-0af194080c11/1.jpg',
   },

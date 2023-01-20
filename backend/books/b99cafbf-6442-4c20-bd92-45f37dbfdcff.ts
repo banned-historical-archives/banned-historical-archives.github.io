@@ -5,7 +5,7 @@ export default {
     internal: true,
     official: true,
     type: 'img',
-    author: '',
+    author: '王洪文',
     files:
       'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/b99cafbf-6442-4c20-bd92-45f37dbfdcff/1.jpg,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/b99cafbf-6442-4c20-bd92-45f37dbfdcff/2.jpg',
   },

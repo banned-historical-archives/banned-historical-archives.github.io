@@ -5,7 +5,7 @@ export default {
     internal: true,
     official: true,
     type: 'img',
-    author: '',
+    author: '王洪文',
     files:
       'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/72a130d0-a36b-4b75-8e93-f35bf6ff8176/1.jpg,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/72a130d0-a36b-4b75-8e93-f35bf6ff8176/2.jpg,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/72a130d0-a36b-4b75-8e93-f35bf6ff8176/3.jpg,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/72a130d0-a36b-4b75-8e93-f35bf6ff8176/4.jpg,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/72a130d0-a36b-4b75-8e93-f35bf6ff8176/5.jpg,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/72a130d0-a36b-4b75-8e93-f35bf6ff8176/6.jpg,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/72a130d0-a36b-4b75-8e93-f35bf6ff8176/7.jpg,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/72a130d0-a36b-4b75-8e93-f35bf6ff8176/8.jpg,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/72a130d0-a36b-4b75-8e93-f35bf6ff8176/9.jpg,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/72a130d0-a36b-4b75-8e93-f35bf6ff8176/10.jpg',
   },

@@ -5,7 +5,7 @@ export default {
     internal: true,
     official: true,
     type: 'pdf',
-    author: '',
+    author: '毛泽东，人民出版社1968年版',
     files:
       'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives3/main/f5f88e94-5aa4-47b1-90fc-01f24b0bbf5b.pdf',
   },
