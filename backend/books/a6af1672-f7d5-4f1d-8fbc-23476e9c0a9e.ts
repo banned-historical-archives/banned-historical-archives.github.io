@@ -5,7 +5,7 @@ export default {
     internal: true,
     official: true,
     type: 'img',
-    author: '',
+    author: '张春桥',
     files:
       'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/a6af1672-f7d5-4f1d-8fbc-23476e9c0a9e/1.png,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/a6af1672-f7d5-4f1d-8fbc-23476e9c0a9e/2.png,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/a6af1672-f7d5-4f1d-8fbc-23476e9c0a9e/3.png,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/a6af1672-f7d5-4f1d-8fbc-23476e9c0a9e/4.png,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/a6af1672-f7d5-4f1d-8fbc-23476e9c0a9e/5.png,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/a6af1672-f7d5-4f1d-8fbc-23476e9c0a9e/6.png,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/a6af1672-f7d5-4f1d-8fbc-23476e9c0a9e/7.png,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/a6af1672-f7d5-4f1d-8fbc-23476e9c0a9e/8.png,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/a6af1672-f7d5-4f1d-8fbc-23476e9c0a9e/9.png,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/a6af1672-f7d5-4f1d-8fbc-23476e9c0a9e/10.png,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/a6af1672-f7d5-4f1d-8fbc-23476e9c0a9e/11.png',
   },

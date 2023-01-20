@@ -5,7 +5,7 @@ export default {
     internal: true,
     official: true,
     type: 'img',
-    author: '',
+    author: '杨春甫，1976年12月',
     files:
       'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/d5aa4730-b778-49c2-af22-093b61025603/1.png,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/d5aa4730-b778-49c2-af22-093b61025603/2.png,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/d5aa4730-b778-49c2-af22-093b61025603/3.png,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/d5aa4730-b778-49c2-af22-093b61025603/4.png',
   },

@@ -2,10 +2,10 @@ export default {
   entity: {
     id: '39332105-8098-4d2b-b85d-1f30059627f1',
     name: '自然辩证法一九七五年第一期',
-    internal: true,
+    internal: false,
     official: true,
     type: 'pdf',
-    author: '',
+    author: '《自然辩证法》编辑部',
     files:
       'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives2/main/39332105-8098-4d2b-b85d-1f30059627f1.pdf',
   },

@@ -2,10 +2,10 @@ export default {
   entity: {
     id: 'ca1b4083-cfe9-4328-b68c-a48ad2d32230',
     name: '自然辩证法一九七五年第四期',
-    internal: true,
+    internal: false,
     official: true,
     type: 'pdf',
-    author: '',
+    author: '《自然辩证法》编辑部',
     files:
       'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives2/main/ca1b4083-cfe9-4328-b68c-a48ad2d32230.pdf',
   },

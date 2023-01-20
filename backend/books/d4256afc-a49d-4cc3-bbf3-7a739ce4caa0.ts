@@ -5,7 +5,7 @@ export default {
     internal: true,
     official: true,
     type: 'img',
-    author: '',
+    author: '张春桥',
     files:
       'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/d4256afc-a49d-4cc3-bbf3-7a739ce4caa0/1.jpg,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/d4256afc-a49d-4cc3-bbf3-7a739ce4caa0/2.jpg,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/d4256afc-a49d-4cc3-bbf3-7a739ce4caa0/3.jpg',
   },

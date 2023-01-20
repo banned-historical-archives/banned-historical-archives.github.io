@@ -1,9 +1,9 @@
 export default {
   entity: {
-    internal: true,
+    internal: false,
     official: true,
     type: 'pdf',
-    author: '',
+    author: '法国毛主义共产党',
     id: 'd309a3d9-17e8-4491-9602-57b226112aac',
     name: '帝国主义国家中的人民战争',
     files:
