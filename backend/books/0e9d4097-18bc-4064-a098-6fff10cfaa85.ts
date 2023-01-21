@@ -77,9 +77,16 @@ export default {
         dates: [{ year: 1958 }],
       },
       {
-        title: '南斯拉夫点滴',
-        authors: ['静霞'],
+        title: '南斯拉夫牛奶过剩了吗？',
+        authors: ['禄柏'],
         page_start: 40,
+        page_end: 42,
+        dates: [{ year: 1958 }],
+      },
+      {
+        title: '铁托做寿',
+        authors: ['静霞'],
+        page_start: 42,
         page_end: 43,
         dates: [{ year: 1958 }],
       },
