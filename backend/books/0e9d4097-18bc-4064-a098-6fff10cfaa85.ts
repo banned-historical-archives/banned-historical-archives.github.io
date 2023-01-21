@@ -46,7 +46,7 @@ export default {
       },
       {
         title: '工农群众学习马克思主义理论的高潮',
-        authors: ['《红旗杂志》编辑部'],
+        authors: ['《红旗》杂志编辑部'],
         page_start: 23,
         page_end: 23,
         dates: [{ year: 1958 }],

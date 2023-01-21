@@ -23,7 +23,7 @@ export default {
       {
         title:
           '无产阶级文化大革命的指南针——重新发表《在延安文艺座谈会上的讲话》按语',
-        authors: ['《红旗杂志》编辑部'],
+        authors: ['《红旗》杂志编辑部'],
         page_start: 27,
         page_end: 29,
         dates: [{ year: 1966 }],
