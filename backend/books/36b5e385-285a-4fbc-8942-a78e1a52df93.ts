@@ -3,9 +3,9 @@ export default {
     id: '36b5e385-285a-4fbc-8942-a78e1a52df93',
     name: '红旗一九五八年第三期',
     internal: false,
-    official: false,
+    official: true,
     type: 'pdf',
-    author: '',
+    author: '《红旗》杂志编辑部',
     files:
       'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives2/main/36b5e385-285a-4fbc-8942-a78e1a52df93.pdf',
   },
