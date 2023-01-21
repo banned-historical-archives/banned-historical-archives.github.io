@@ -5,9 +5,9 @@ export default {
       internal: false,
       official: true,
       type: 'pdf',
-      author: '',
+      author: '马克思、恩格斯，人民出版社1972年5月',
       files:
-        'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives3/main/46b4e27a-b129-b9c7-da66-d93579cc36ad.pdf',
+        'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives4/main/46b4e27a-b129-b9c7-da66-d93579cc36ad.pdf',
     },
     parser_option: {
       page_limits: [],
