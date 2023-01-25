@@ -1,8 +1,8 @@
 export default {
   entity: {
     id: 'cb043827-1a6a-46f3-863d-a430958e5a0d',
-    name: '无产阶级文化大革命参考资料',
-    internal: false,
+    name: '无产阶级文化大革命参考资料（1966年）',
+    internal: true,
     official: false,
     type: 'pdf',
     author: '',
