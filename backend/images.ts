@@ -4,10 +4,42 @@ import { Image } from './entities';
 const images: (Image & {
   id?: string;
 })[] = [
-  {"name":"《简明世界史（近代部分）》插图九","description":"罗伯斯比尔","source":"《简明世界史（近代部分）》","show_in_gallery":true,"tags":[],"id":"d15d9897-46bf-44b0-937b-2800fc01df57","url":"https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives7/main/d1/d15d9897-46bf-44b0-937b-2800fc01df57.png"},
-  {"name":"《简明世界史（近代部分）》插图十","description":"马拉","source":"《简明世界史（近代部分）》","show_in_gallery":true,"tags":[],"id":"bebdd5a4-f34f-4b37-b542-27642fe0b9db","url":"https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives7/main/be/bebdd5a4-f34f-4b37-b542-27642fe0b9db.png"},
-  {"name":"《简明世界史（近代部分）》插图十一","description":"巴贝夫","source":"《简明世界史（近代部分）》","show_in_gallery":true,"tags":[],"id":"dcf7fd56-c1ba-4dd4-a874-a21f5838a847","url":"https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives7/main/dc/dcf7fd56-c1ba-4dd4-a874-a21f5838a847.png"},
-  {"name":"《简明世界史（近代部分）》插图十二","description":"西班牙人民反抗拿破仑的侵略","source":"《简明世界史（近代部分）》","show_in_gallery":true,"tags":[],"id":"928525db-7944-4bf9-9b79-49ca8e9ad1d1","url":"https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives7/main/92/928525db-7944-4bf9-9b79-49ca8e9ad1d1.png"},
+  {
+    name: '《简明世界史（近代部分）》插图九',
+    description: '罗伯斯比尔',
+    source: '《简明世界史（近代部分）》',
+    show_in_gallery: true,
+    tags: [],
+    id: 'd15d9897-46bf-44b0-937b-2800fc01df57',
+    url: 'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives7/main/d1/d15d9897-46bf-44b0-937b-2800fc01df57.png',
+  },
+  {
+    name: '《简明世界史（近代部分）》插图十',
+    description: '马拉',
+    source: '《简明世界史（近代部分）》',
+    show_in_gallery: true,
+    tags: [],
+    id: 'bebdd5a4-f34f-4b37-b542-27642fe0b9db',
+    url: 'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives7/main/be/bebdd5a4-f34f-4b37-b542-27642fe0b9db.png',
+  },
+  {
+    name: '《简明世界史（近代部分）》插图十一',
+    description: '巴贝夫',
+    source: '《简明世界史（近代部分）》',
+    show_in_gallery: true,
+    tags: [],
+    id: 'dcf7fd56-c1ba-4dd4-a874-a21f5838a847',
+    url: 'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives7/main/dc/dcf7fd56-c1ba-4dd4-a874-a21f5838a847.png',
+  },
+  {
+    name: '《简明世界史（近代部分）》插图十二',
+    description: '西班牙人民反抗拿破仑的侵略',
+    source: '《简明世界史（近代部分）》',
+    show_in_gallery: true,
+    tags: [],
+    id: '928525db-7944-4bf9-9b79-49ca8e9ad1d1',
+    url: 'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives7/main/92/928525db-7944-4bf9-9b79-49ca8e9ad1d1.png',
+  },
   {
     name: '《简明世界史（近代部分）》插图一',
     description: '克伦威尔',

@@ -11,7 +11,7 @@ import { normalize } from './utils';
 import { basename } from 'node:path';
 import { Article } from './entities';
 import fs from 'fs';
-import {JSDOM} from 'jsdom';
+import { JSDOM } from 'jsdom';
 import { ContentType, Date, ParserResult } from '../types';
 
 function bydir(dir: string, author: string, out: string) {
@@ -22,15 +22,21 @@ function bydir(dir: string, author: string, out: string) {
     const dom = new JSDOM(a);
 
     let title_raw: string[] = [];
-    try{
-      title_raw = dom.window.document.querySelector('.titles')!.innerHTML!.split('<br>').map(i=> i.trim()).filter(i=> i);
-    }catch{
-      console.log(file)
+    try {
+      title_raw = dom.window.document
+        .querySelector('.titles')!
+        .innerHTML!.split('<br>')
+        .map((i) => i.trim())
+        .filter((i) => i);
+    } catch {
+      console.log(file);
       continue;
     }
     const dates: Date[] = [];
     if (/\d+(\.\d+(\.\d+))$/.test(title_raw[title_raw.length - 1])) {
-      const date = Array.from(title_raw[title_raw.length - 1].matchAll(/\d+(\.\d+(\.\d+))$/g))[0][0];
+      const date = Array.from(
+        title_raw[title_raw.length - 1].matchAll(/\d+(\.\d+(\.\d+))$/g),
+      )[0][0];
       dates.push({
         year: parseInt(date.split('.')[0]),
         month: parseInt(date.split('.')[1]),
@@ -38,7 +44,11 @@ function bydir(dir: string, author: string, out: string) {
       });
       title_raw.pop();
     }
-    const authors: string[] = author ? [author] : title_raw.slice(1).reduce((m: string[], i) => [...m, ...i.split(' ')], []);
+    const authors: string[] = author
+      ? [author]
+      : title_raw
+          .slice(1)
+          .reduce((m: string[], i) => [...m, ...i.split(' ')], []);
     const temp = a.split('</font>')[1];
     const source = temp?.split('</div>')[0].trim() || '';
     const p: ParserResult = {
@@ -51,23 +61,32 @@ function bydir(dir: string, author: string, out: string) {
       page_start: 0,
       page_end: 0,
       description: source,
-      parts: [{
-        type: ContentType.title,
-        text: title_raw[0],
-      }],
+      parts: [
+        {
+          type: ContentType.title,
+          text: title_raw[0],
+        },
+      ],
     };
-    dom.window.document.querySelectorAll('.contents,.titleR,.headingB,.headingN,.titleB,.inscriberR').forEach((i) => {
-      p.parts.push({
-        type:
-          i.className === 'titleB' || i.className === 'headingN'
-            ? ContentType.subtitle
-            : ContentType.paragraph,
-        text: i.textContent!.trim(),
+    dom.window.document
+      .querySelectorAll(
+        '.contents,.titleR,.headingB,.headingN,.titleB,.inscriberR',
+      )
+      .forEach((i) => {
+        p.parts.push({
+          type:
+            i.className === 'titleB' || i.className === 'headingN'
+              ? ContentType.subtitle
+              : ContentType.paragraph,
+          text: i.textContent!.trim(),
+        });
       });
-    });
     res.push(p);
   }
-  fs.writeFileSync(join(__dirname, `parser/GPCR_v3/${out}`), JSON.stringify(res));
+  fs.writeFileSync(
+    join(__dirname, `parser/GPCR_v3/${out}`),
+    JSON.stringify(res),
+  );
 }
 
 (async () => {
@@ -82,5 +101,5 @@ function bydir(dir: string, author: string, out: string) {
   // bydir(join(__dirname, '../x/第三版 江青 张春桥 姚文元 王洪文/姚文元'), '姚文元', 'ywy.x');
   // bydir(join(__dirname, '../x/第三版新材料 文革期间 66、68  四，中央首长关于文化大革命的讲话和指示 部分'), '', 'others-c.x');
   // bydir(join(__dirname, '../x/b'), '', 'others-b.x');
- // bydir(join(__dirname, '../x/a'), '', 'others-a.x');
+  // bydir(join(__dirname, '../x/a'), '', 'others-a.x');
 })();
