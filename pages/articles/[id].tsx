@@ -473,6 +473,8 @@ export default function ArticleViewer({
 
   const showCompareMenu = !!anchorEl;
 
+  const isLocalhost = ((global || window as any)['location'] as any)?.hostname === 'localhost';
+
   const publication = article.publications.find(
     (i) => i.id === selectedPublication,
   )!;
@@ -518,7 +520,7 @@ export default function ArticleViewer({
                 </a>
               </Typography>
               <Document
-                file={publication.files}
+                file={isLocalhost? publication.files.replace('https://raw.githubusercontent.com/banned-historical-archives/banned-historical-', '/').replace('/main/', '/') : publication.files}
                 options={{
                   cMapUrl: `/pdfjs-dist/cmaps/`,
                   cMapPacked: true,

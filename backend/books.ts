@@ -12,6 +12,7 @@ import * as maoquanji from './parser/maoquanji';
 import * as wanghongwen from './parser/wanghongwen';
 import * as yaowenyuan from './parser/yaowenyuan';
 import * as zhangchunqiao from './parser/zhangchunqiao';
+import * as GPCRv3 from './parser/GPCR_v3';
 import * as zzj1 from './parser/zzj1';
 import * as automation from './parser/automation';
 import { apply_patch, apply_patch_v2, get_article_id } from '../utils';
@@ -25,6 +26,7 @@ const parsers: { [key: string]: any } = {
   jinghuo,
   wansui,
   wenji,
+  GPCRv3,
   jqjianghua,
   xuanji,
   jimi,
