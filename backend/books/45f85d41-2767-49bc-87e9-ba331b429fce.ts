@@ -200,7 +200,7 @@ export default {
         title:
           '接见阿尔巴尼亚新闻工作者代表团、劳动青年联盟代表团、工会工作代表团和档案工作者代表团的谈话',
         authors: ['毛泽东'],
-        dates: [{ year: null, day: 4 }],
+        dates: [{ year: 1963, month: 5, day: 4 }],
         page_start: 52,
         page_end: 54,
       },
