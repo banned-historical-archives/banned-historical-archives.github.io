@@ -129,10 +129,10 @@ function parse(dir: string, out: string) {
     };
     a.slice(3).forEach((i) => {
       if (i)
-      p.parts.push({
-        type: ContentType.paragraph,
-        text: i,
-      });
+        p.parts.push({
+          type: ContentType.paragraph,
+          text: i,
+        });
     });
     res.push(p);
   }
