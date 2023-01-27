@@ -1023,7 +1023,7 @@ export default {
       {
         title: '中央《关于学习周恩来同志政府工作报告的通知》',
         authors: ['毛泽东'],
-        dates: [{ year: null, month: 1, day: 14 }],
+        dates: [{ year: 1965, month: 1, day: 14 }],
         page_start: 239,
         page_end: 239,
       },
@@ -1913,9 +1913,9 @@ export default {
         page_end: 308,
       },
       {
-        title: '对铁道兵党委一个报告',
+        title: '对铁道兵党委一个报告（渡口驻军支左经验）的批示',
         authors: ['毛泽东'],
-        dates: [{ year: null, month: 3, day: 7 }],
+        dates: [{ year: 1967, month: 3, day: 7 }],
         page_start: 308,
         page_end: 308,
       },
@@ -2568,9 +2568,9 @@ export default {
         page_end: 353,
       },
       {
-        title: '接见刚果',
+        title: '接见刚果（布）总理努马扎莱的谈话',
         authors: ['毛泽东'],
-        dates: [{ year: null, month: 10, day: 3 }],
+        dates: [{ year: 1967, month: 10, day: 3 }],
         page_start: 353,
         page_end: 353,
       },
