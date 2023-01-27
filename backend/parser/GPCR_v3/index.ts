@@ -19,10 +19,22 @@ import c from './others-a';
 import ywy from './ywy';
 import whw from './whw';
 import zcq from './zcq';
+import lb from './lb';
+import mzd from './mzd';
 
 export async function parse(
   path: string,
   parser_opt: ParserOption,
 ): Promise<ParserResult[]> {
-  return [...whw, ...jq, ...zcq, ...ywy, ...a, ...b, ...c] as ParserResult[];
+  return [
+    ...mzd,
+    ...lb,
+    ...whw,
+    ...jq,
+    ...zcq,
+    ...ywy,
+    ...a,
+    ...b,
+    ...c,
+  ] as ParserResult[];
 }

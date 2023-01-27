@@ -89,13 +89,66 @@ function bydir(dir: string, author: string, out: string) {
   );
 }
 
-(async () => {
-  const ds = await init();
-  const books = await get_books();
-  const book = books.find((i) => i.entity.id === 'GPCRv3')!;
-  console.log(await book.parser(book.path, book.parser_option));
+function parse(dir: string, out: string) {
+  const files = fs.readdirSync(dir);
+  const res = [];
+  for (const file of files) {
+    let a = fs
+      .readFileSync(dir + '/' + file)
+      .toString()
+      .split('\r\n');
+    const title = a[0];
+    const authors = a[1].split(' ').filter((i) => i);
 
-  // bydir(join(__dirname, '../x/第三版 江青 张春桥 姚文元 王洪文/江青'), '江青', 'jq.x');
+    const dates: Date[] = [];
+    if (/\d+(\.\d+(\.\d+))$/.test(a[2])) {
+      const date = Array.from(a[2].matchAll(/\d+(\.\d+(\.\d+))$/g))[0][0];
+      dates.push({
+        year: parseInt(date.split('.')[0]),
+        month: parseInt(date.split('.')[1]),
+        day: parseInt(date.split('.')[2]),
+      });
+    }
+    const source = /^来源：/.test(a[a.length - 1]) ? a[a.length - 1] : '';
+    const p: ParserResult = {
+      title,
+      authors,
+      dates,
+      is_range_date: false,
+      comment_pivots: [],
+      comments: [],
+      page_start: 0,
+      page_end: 0,
+      description: source,
+      parts: [
+        {
+          type: ContentType.title,
+          text: title,
+        },
+      ],
+    };
+    a.slice(3).forEach((i) => {
+      if (i)
+      p.parts.push({
+        type: ContentType.paragraph,
+        text: i,
+      });
+    });
+    res.push(p);
+  }
+  fs.writeFileSync(
+    join(__dirname, `parser/GPCR_v3/${out}`),
+    JSON.stringify(res),
+  );
+}
+
+(async () => {
+  // const ds = await init();
+  // const books = await get_books();
+  // const book = books.find((i) => i.entity.id === 'GPCRv3')!;
+  // console.log(await book.parser(book.path, book.parser_option));
+
+  parse(join(__dirname, '../l'), 'lb.ts');
   // bydir(join(__dirname, '../x/第三版 江青 张春桥 姚文元 王洪文/王洪文'), '王洪文', 'whw.x');
   // bydir(join(__dirname, '../x/第三版 江青 张春桥 姚文元 王洪文/张春桥'), '张春桥', 'zcq.x');
   // bydir(join(__dirname, '../x/第三版 江青 张春桥 姚文元 王洪文/姚文元'), '姚文元', 'ywy.x');
