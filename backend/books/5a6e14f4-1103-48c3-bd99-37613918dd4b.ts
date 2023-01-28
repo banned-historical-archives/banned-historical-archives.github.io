@@ -1727,8 +1727,8 @@ export default {
         title: '真理的声音是室息不了的',
         authors: ['邓力群'],
         dates: [{ year: 1980, month: 6, day: 24 }],
-        page_start: 473,
-        page_end: 1,
+        page_start: 470,
+        page_end: 473,
       },
       {
         title: '欢呼京剧革命的伟大胜利',
