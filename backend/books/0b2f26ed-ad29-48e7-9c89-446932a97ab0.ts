@@ -61,8 +61,8 @@ export default {
       },
       {
         title: '《辽宁日报》发表《一份发人深省的答卷》的编者按语',
-        authors: ['（1973年7月19日）'],
-        dates: [],
+        authors: [],
+        dates: [{ year: 1973, month: 7, day: 19 }],
         page_start: 23,
         page_end: 23,
       },
@@ -347,7 +347,7 @@ export default {
       },
       {
         title: '“四人帮”在批林批孔中是怎样搞篡党夺权阴谋的',
-        authors: ['郑攀理', '李文', '160-162'],
+        authors: ['郑攀理', '李文'],
         dates: [{ year: 1977, month: 1, day: 30 }],
         page_start: 1,
         page_end: 1,
