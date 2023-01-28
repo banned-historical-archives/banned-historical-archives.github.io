@@ -3850,9 +3850,9 @@ const res = [
   },
   {
     title: '姚文元1976年日记摘录',
-    authors: ['1976.02.00-09.00'],
-    dates: [],
-    is_range_date: false,
+    authors: [],
+    dates: [{ year: 1976, month: 2 }, { year: 1976, month: 9 }],
+    is_range_date: true,
     comment_pivots: [],
     comments: [],
     page_start: 0,

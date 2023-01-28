@@ -1725,7 +1725,7 @@ export default {
       },
       {
         title: '真理的声音是室息不了的',
-        authors: ['邓力群', '470-'],
+        authors: ['邓力群'],
         dates: [{ year: 1980, month: 6, day: 24 }],
         page_start: 473,
         page_end: 1,
