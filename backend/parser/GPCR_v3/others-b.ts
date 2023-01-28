@@ -8127,8 +8127,8 @@ const res = [
   },
   {
     title: '周恩来在部长会议上的报告中关于档案问题的讲话',
-    authors: ['周恩来', '1966.11.19', '（？）'],
-    dates: [],
+    authors: ['周恩来'],
+    dates: [{ month: 11, year: 1966, day: 19 }],
     is_range_date: false,
     comment_pivots: [],
     comments: [],
