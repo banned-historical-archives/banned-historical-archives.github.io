@@ -3851,7 +3851,10 @@ const res = [
   {
     title: '姚文元1976年日记摘录',
     authors: [],
-    dates: [{ year: 1976, month: 2 }, { year: 1976, month: 9 }],
+    dates: [
+      { year: 1976, month: 2 },
+      { year: 1976, month: 9 },
+    ],
     is_range_date: true,
     comment_pivots: [],
     comments: [],
