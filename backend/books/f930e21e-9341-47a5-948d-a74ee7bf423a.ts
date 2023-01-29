@@ -1,7 +1,7 @@
 export default {
   entity: {
     id: 'f930e21e-9341-47a5-948d-a74ee7bf423a',
-    name: '李富春副总理关于一九六七年全国生产供应会议的重要指示',
+    name: '李富春副总理关于一九六七年全国生产供应会议的重要指示（1967.6.26）',
     internal: false,
     official: false,
     type: 'pdf',
