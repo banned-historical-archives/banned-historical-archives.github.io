@@ -1,7 +1,7 @@
 export default {
   entity: {
     id: 'a87e6586-d7ad-419a-8781-4b93dd7c13e0',
-    name: '郑州市深揭狠批“四人帮”大会发言材料之四',
+    name: '郑州市深揭狠批“四人帮”大会发言材料之四（1977.3.17）',
     internal: true,
     official: true,
     type: 'img',
