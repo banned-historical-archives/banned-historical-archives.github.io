@@ -4,6 +4,8 @@ import { Image } from './entities';
 const images: (Image & {
   id?: string;
 })[] = [
+  {"name":"《简明世界史（近代部分）》后图一","description":"审判英国国王查理一世","source":"《简明世界史（近代部分）》","show_in_gallery":true,"tags":[],"id":"773ab58d-a1db-4181-866d-6df5a1afe098","url":"https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives7/main/77/773ab58d-a1db-4181-866d-6df5a1afe098.png"},
+  {"name":"《简明世界史（近代部分）》后图二","description":"一七七六年七月四日在费城签署美国独立宣言","source":"《简明世界史（近代部分）》","show_in_gallery":true,"tags":[],"id":"d2b32053-1798-4ffd-9093-bcfdbd7a8688","url":"https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives7/main/d2/d2b32053-1798-4ffd-9093-bcfdbd7a8688.png"},
   {
     name: '《简明世界史（近代部分）》插图九',
     description: '罗伯斯比尔',
