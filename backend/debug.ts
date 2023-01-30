@@ -148,7 +148,8 @@ function parse(dir: string, out: string) {
   // const book = books.find((i) => i.entity.id === 'GPCRv3')!;
   // console.log(await book.parser(book.path, book.parser_option));
 
-  parse(join(__dirname, '../l'), 'lb.ts');
+  parse(join(__dirname, '../zp'), 'zp.ts');
+  // parse(join(__dirname, '../l'), 'lb.ts');
   // bydir(join(__dirname, '../x/第三版 江青 张春桥 姚文元 王洪文/王洪文'), '王洪文', 'whw.x');
   // bydir(join(__dirname, '../x/第三版 江青 张春桥 姚文元 王洪文/张春桥'), '张春桥', 'zcq.x');
   // bydir(join(__dirname, '../x/第三版 江青 张春桥 姚文元 王洪文/姚文元'), '姚文元', 'ywy.x');
