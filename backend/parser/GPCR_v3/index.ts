@@ -24,6 +24,7 @@ import mzd from './mzd';
 import zp from './zp';
 import jpc from './jpc';
 import zcq2 from './zcq2';
+import zs from './zs';
 
 export async function parse(
   path: string,
@@ -42,5 +43,6 @@ export async function parse(
     ...jpc,
     ...zcq2,
     ...zp,
+    ...zs,
   ] as ParserResult[];
 }
