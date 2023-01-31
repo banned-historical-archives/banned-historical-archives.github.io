@@ -1,6 +1,4 @@
-import res from './jq';
-
-const jpc = [
+const res = [
   {
     title: '两案内不属中央管理的干部判刑和拟判刑人员登记表 -- 戈志盛',
     authors: ['中共呼和浩特市委'],
