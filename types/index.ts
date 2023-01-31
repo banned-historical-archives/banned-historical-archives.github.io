@@ -35,6 +35,7 @@ export enum ContentType {
   quotation = 'quotation',
   signature = 'signature',
   image = 'image',
+  image_description = 'image_description',
 }
 
 export type ContentPartRaw = {

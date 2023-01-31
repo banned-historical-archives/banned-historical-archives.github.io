@@ -82,6 +82,12 @@ function PureArticle({
       return (
         <img key={key} src={part.text} width="50%" style={{ margin: 'auto' }} />
       );
+    } else if (part.type === ContentType.image_description) {
+      return (
+        <Typography key={key} variant="subtitle1" sx={{ textAlign: 'center' }}>
+          {content}
+        </Typography>
+      );
     } else if (part.type === ContentType.subdate) {
       return (
         <Typography key={key} variant="subtitle1" sx={{ textAlign: 'center' }}>
