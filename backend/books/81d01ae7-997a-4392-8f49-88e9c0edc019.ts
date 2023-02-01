@@ -1,7 +1,7 @@
 export default {
   entity: {
     id: '81d01ae7-997a-4392-8f49-88e9c0edc019',
-    name: '王力同志十月十七日在政协礼堂的讲话记录',
+    name: '王力同志十月十七日在政协礼堂的讲话记录（1966.10.17）',
     internal: false,
     official: false,
     type: 'img',
