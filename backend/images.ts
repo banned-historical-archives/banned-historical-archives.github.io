@@ -4,9 +4,33 @@ import { Image } from './entities';
 const images: (Image & {
   id?: string;
 })[] = [
-  {"name":"《简明世界史（近代部分）》后图三","description":"攻占巴斯底狱","source":"《简明世界史（近代部分）》","show_in_gallery":true,"tags":[],"id":"e5cb1b30-973d-4e34-9dbb-20463453364c","url":"https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives7/main/e5/e5cb1b30-973d-4e34-9dbb-20463453364c.png"},
-  {"name":"《简明世界史（近代部分）》后图四","description":"处决路易十六","source":"《简明世界史（近代部分）》","show_in_gallery":true,"tags":[],"id":"7dd3ce92-638a-4315-a46d-4408ce61e295","url":"https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives7/main/7d/7dd3ce92-638a-4315-a46d-4408ce61e295.png"},
-  {"name":"《简明世界史（近代部分）》后图五","description":"拿破仑的雾月十八日政变","source":"《简明世界史（近代部分）》","show_in_gallery":true,"tags":[],"id":"d4f46f8a-f563-440f-b417-e8539d50d32e","url":"https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives7/main/d4/d4f46f8a-f563-440f-b417-e8539d50d32e.png"},
+  {
+    name: '《简明世界史（近代部分）》后图三',
+    description: '攻占巴斯底狱',
+    source: '《简明世界史（近代部分）》',
+    show_in_gallery: true,
+    tags: [],
+    id: 'e5cb1b30-973d-4e34-9dbb-20463453364c',
+    url: 'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives7/main/e5/e5cb1b30-973d-4e34-9dbb-20463453364c.png',
+  },
+  {
+    name: '《简明世界史（近代部分）》后图四',
+    description: '处决路易十六',
+    source: '《简明世界史（近代部分）》',
+    show_in_gallery: true,
+    tags: [],
+    id: '7dd3ce92-638a-4315-a46d-4408ce61e295',
+    url: 'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives7/main/7d/7dd3ce92-638a-4315-a46d-4408ce61e295.png',
+  },
+  {
+    name: '《简明世界史（近代部分）》后图五',
+    description: '拿破仑的雾月十八日政变',
+    source: '《简明世界史（近代部分）》',
+    show_in_gallery: true,
+    tags: [],
+    id: 'd4f46f8a-f563-440f-b417-e8539d50d32e',
+    url: 'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives7/main/d4/d4f46f8a-f563-440f-b417-e8539d50d32e.png',
+  },
   {
     name: '《简明世界史（近代部分）》后图一',
     description: '审判英国国王查理一世',
