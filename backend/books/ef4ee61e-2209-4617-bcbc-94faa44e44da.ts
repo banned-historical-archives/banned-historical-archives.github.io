@@ -1,7 +1,7 @@
 export default {
   entity: {
     id: 'ef4ee61e-2209-4617-bcbc-94faa44e44da',
-    name: '国务院、中央军委文件 国发﹝1974﹞102号',
+    name: '国务院、中央军委文件 国发〔1974〕102号',
     internal: false,
     official: true,
     type: 'pdf',
