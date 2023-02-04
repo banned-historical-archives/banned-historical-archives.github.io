@@ -4,6 +4,8 @@ import { Image } from './entities';
 const images: (Image & {
   id?: string;
 })[] = [
+  {"name":"《简明世界史（近代部分）》后图六","description":"委内瑞拉宣布独立","source":"《简明世界史（近代部分）》","show_in_gallery":true,"tags":[],"id":"6a9a3c53-56cb-434c-83fa-8cfbeb9821d4","url":"https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives7/main/6a/6a9a3c53-56cb-434c-83fa-8cfbeb9821d4.png"},
+  {"name":"《简明世界史（近代部分）》后图七","description":"西印度群岛黑人在甘蔗园劳动","source":"《简明世界史（近代部分）》","show_in_gallery":true,"tags":[],"id":"3b5b2a52-6502-43de-9df0-fd3760f680d1","url":"https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives7/main/3b/3b5b2a52-6502-43de-9df0-fd3760f680d1.png"},
   {
     name: '《简明世界史（近代部分）》后图三',
     description: '攻占巴斯底狱',
