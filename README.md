@@ -1,11 +1,25 @@
-# <p align="center">和谐历史档案馆</p>
-
-# Banned Historical Archives
+# 和谐历史档案馆 - Banned Historical Archives
 
 [官网](https://banned-historical-archives.github.io)
 
+## Wiki
+
+资源贡献\校对\纠错  
+[\[Github issues\]](https://github.com/banned-historical-archives/banned-historical-archives.github.io/issues)  
+[\[Gitlab issues\]备用地址](https://gitlab.com/banned-historical-archives/banned-historical-archives.gitlab.io/-/issues)  
+[开发者贡献代码](https://github.com/banned-historical-archives/banned-historical-archives.github.io/wiki/%E5%BC%80%E5%8F%91%E8%80%85%E8%B4%A1%E7%8C%AE%E4%BB%A3%E7%A0%81)  
+[文稿录入与校对](https://github.com/banned-historical-archives/banned-historical-archives.github.io/wiki/%E6%96%87%E7%A8%BF%E5%BD%95%E5%85%A5%E4%B8%8E%E6%A0%A1%E5%AF%B9)  
+[标准化加工及开发说明](https://github.com/banned-historical-archives/banned-historical-archives.github.io/wiki/%E6%A0%87%E5%87%86%E5%8C%96%E5%8A%A0%E5%B7%A5%E5%8F%8A%E5%BC%80%E5%8F%91%E8%AF%B4%E6%98%8E)  
+[校对规范](https://github.com/banned-historical-archives/banned-historical-archives.github.io/wiki/%E6%A0%A1%E5%AF%B9%E8%A7%84%E8%8C%83)  
+
+谷歌搜索引擎仅收录了很小部分文稿，搜索效果也不太让人满意。  
+本地搜索引擎不仅可以精准检索全部文稿，更重要的是保护你的隐私。  
+**[本地搜索的使用](https://github.com/banned-historical-archives/banned-historical-archives.github.io/wiki/%E6%9C%AC%E5%9C%B0%E6%90%9C%E7%B4%A2%E7%9A%84%E4%BD%BF%E7%94%A8)**
+
+## 介绍
+
 和谐历史档案馆收录各类受官方封禁以及半封禁的文稿、报纸、杂志和多媒体资料，并对它们进行标准化加工，通过解析、识别、分类，形成标准化文稿档案和多媒体档案/数据库。
-虽然民间有不少人在做资料收集和校验工作，但分散的工作可能无法避免重复劳动，资料的二次汇编难以保证真实性，而且缺乏统一的版本管理，难以维护。我们已经使用一系列自动化工具解决这些问题，每一篇文稿都可溯源、可验证。[\[文稿录入与校对\]](https://github.com/banned-historical-archives/banned-historical-archives.github.io/wiki/文稿录入与校对)
+虽然民间有不少人在做资料收集和校验工作，但分散的工作可能无法避免重复劳动，资料的二次汇编难以保证真实性，而且缺乏统一的版本管理，难以维护。我们已经使用一系列自动化工具解决这些问题，每一篇文稿都可溯源、可验证。
 
 其中文稿包含但不限于中央发表的文件，中央高层会议纪要，主要人物的通知、著作、谈话/对话/讲话、宣言/声明、电报、通讯、书信、消息、评论/批语/批注/批示、意见、指示/命令，以及群众运动中重要文献。主要人物包括毛泽东，江青、姚文元、张春桥、王洪文等。其中一些书籍名称或其中文稿的注释中可能表现出鲜明的立场，我们仅仅做收录和校对工作，尽量保持文稿的原貌，其内容不代表我们的立场。
 
@@ -16,59 +30,45 @@
 
 ## 功能
 
-1. 文稿版本对比——多版本逐字对比、多版本逐行对比和文字原稿对比
-   ![文稿版本对比](https://user-images.githubusercontent.com/109972625/183229751-6e00a481-78a0-4fcc-a203-f73607bdc0c6.jpg)
+1. 基本的文稿、音乐、图片查询功能；
+2. 文稿版本对比——多版本逐字对比、多版本逐行对比和文字原稿对比；
+![文稿版本对比](https://user-images.githubusercontent.com/109972625/183229751-6e00a481-78a0-4fcc-a203-f73607bdc0c6.jpg)
 
 例如[在扩大的中央工作会议上的讲话](https://banned-historical-archives.github.io/articles/6f36e2e6db/)这篇文章，点击右上角“对比”按钮，选择“对比不同来源解析后的文本”。
 
 ![文稿来源对比](https://banned-historical-archives.github.io/images/comparison_pdf.png)
 
-2. 文稿来源对比
-3. 歌曲歌词版本对比
+3. 文稿来源对比
+4. 歌曲歌词版本对比
 
 ## 与其他文库/数据库的区别
 
-- 文稿
+- 收录多种来源的文稿，可进行版本对比。
+- 收录的文稿经过最细粒度的加工，在每个段落提取了原有的排版信息以及角标注释信息，在必要时还可以对比不同版本文稿中的注释。非标准化的加工则无法区分文中子标题/子标题日期/段落/引文/注释等信息，无论是正文的版本对比还是其他数据的对比都很困难。
+- 可溯源，可验证。所有信息均来自对原始文件（如 pdf）的解析，可以校验原始文件的摘要确保一致。
+- 文本识别的模型、训练集、代码，以及解析算法公开透明。
+- 包含完整的文稿校对记录。
 
-  - 收录多种来源的文稿，可进行版本对比。
-  - 收录的文稿经过最细粒度的加工，在每个段落提取了原有的排版信息以及角标注释信息，在必要时还可以对比不同版本文稿中的注释。非标准化的加工则无法区分文中子标题/子标题日期/段落/引文/注释等信息，无论是正文的版本对比还是其他数据的对比都很困难。
-  - 可溯源，可验证。所有信息均来自对原始文件（如 pdf）的解析，可以校验原始文件的摘要确保一致。
-  - 文本识别的模型、训练集、代码，以及解析算法公开透明。
-  - 包含完整的文稿校对记录。
-
-  ## 贡献资源/纠错/讨论
-
-[\[文稿录入与校对\]](https://github.com/banned-historical-archives/banned-historical-archives.github.io/wiki/文稿录入与校对)
-[\[Github issues\]](https://github.com/banned-historical-archives/banned-historical-archives.github.io/issues)
-[\[Gitlab issues\]备用地址](https://gitlab.com/banned-historical-archives/banned-historical-archives.gitlab.io/-/issues)
-
-### 源代码
+## 源代码
 
 [\[Github\]](https://github.com/banned-historical-archives/banned-historical-archives.github.io)
 [\[Gitlab\]](https://gitlab.com/banned-historical-archives/banned-historical-archives.gitlab.io)
 
-如果以备份为目的 fork 本仓库，最好同时 fork 本仓库对应的资源仓库 banned-historical-archives0, banned-historical-archives1, banned-historical-archives2 ... banned-historical-archives7
+如果以备份为目的 fork 本仓库，最好同时 fork 本仓库对应的资源仓库 banned-historical-archives0, banned-historical-archives1, banned-historical-archives2 ... banned-historical-archives8
 
 [\[开发者如何贡献代码\]](https://github.com/banned-historical-archives/banned-historical-archives.github.io/wiki/开发者贡献代码)
 
-### 其他
+## 其他
 
-#### 数据库导出
+### 数据库导出
 
 在初始化项目后，执行 mysqldump 命令导出数据库，使用方法见 mysql 官网。
 
-#### 静态 html 文件导出
+### 静态 html 文件导出
 
 https://github.com/banned-historical-archives/banned-historical-archives.github.io/tree/gh-pages
 
 自动构建的 html 文件在 gh-pages 分支，可以直接下载该分支的 zip 压缩包
-
-#### 使用本地搜索引擎(推荐)
-
-谷歌搜索引擎仅收录了很小部分文稿，搜索效果也不太让人满意。
-本地搜索引擎不仅可以精准检索全部文稿，更重要的是保护你的隐私。
-
-https://github.com/banned-historical-archives/banned-historical-archives.github.io/blob/master/doc/local-search-engine.md
 
 ## 友情链接
 
@@ -85,7 +85,7 @@ https://github.com/banned-historical-archives/banned-historical-archives.github.
 | 人民日报   | 待解析   |
 | 学习与批判 | 正在录入 |
 | 参考消息   | 待解析   |
-| 自然辩证法 | 正在录入 |
+| 自然辩证法 | 已收录 |
 
 ## 收录的文稿和书籍
 
