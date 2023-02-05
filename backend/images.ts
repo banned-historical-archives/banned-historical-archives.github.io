@@ -4,6 +4,9 @@ import { Image } from './entities';
 const images: (Image & {
   id?: string;
 })[] = [
+  {"name":"《简明世界史（近代部分）》插图十三","description":"杜桑·卢维杜尔","source":"《简明世界史（近代部分）》","show_in_gallery":true,"tags":[],"id":"3ac01f00-b037-40f9-8ba7-d663b0c01fc6","url":"https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives7/main/3a/3ac01f00-b037-40f9-8ba7-d663b0c01fc6.png"},
+  {"name":"《简明世界史（近代部分）》插图十四","description":"西蒙·波利瓦尔","source":"《简明世界史（近代部分）》","show_in_gallery":true,"tags":[],"id":"f32b51fb-063f-4cf6-ba55-c3dc24b6f7ae","url":"https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives7/main/f3/f32b51fb-063f-4cf6-ba55-c3dc24b6f7ae.png"},
+  {"name":"《简明世界史（近代部分）》插图十五","description":"一八一七年圣马丁率军越过安第斯山进入智利","source":"《简明世界史（近代部分）》","show_in_gallery":true,"tags":[],"id":"4098dd45-8b17-499a-9939-e9254344ee5e","url":"https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives7/main/40/4098dd45-8b17-499a-9939-e9254344ee5e.png"},
   {
     name: '《简明世界史（近代部分）》后图三',
     description: '攻占巴斯底狱',
