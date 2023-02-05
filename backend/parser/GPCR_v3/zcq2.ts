@@ -2220,8 +2220,8 @@ const res = [
   },
   {
     title: '张春桥在中央政治局扩大会议的讲话',
-    authors: ['1966.05.06'],
-    dates: [],
+    authors: ['张春桥'],
+    dates: [{ year: 1966, month: 5, day: 6 }],
     is_range_date: false,
     comment_pivots: [],
     comments: [],

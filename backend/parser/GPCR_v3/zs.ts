@@ -20163,9 +20163,9 @@ const res = [
     ],
   },
   {
-    title: '中央文革“2·24”对西藏文革的指示中央文革',
-    authors: ['1967.02.24'],
-    dates: [],
+    title: '中央文革“2·24”对西藏文革的指示',
+    authors: ['中央文革'],
+    dates: [{ year: 1967, month: 2, day: 24 }],
     is_range_date: false,
     comment_pivots: [],
     comments: [],
