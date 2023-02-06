@@ -123,7 +123,7 @@ export default {
         dates: [{ year: 1974, month: 10 }],
       },
       {
-        title: '第十六章 第一次帝国主义世界大列宁反对社会沙文主义的斗争',
+        title: '第十六章 第一次帝国主义世界大战 列宁反对社会沙文主义的斗争',
         authors: ['北京大学历史系'],
         page_start: 637,
         page_end: 663,
