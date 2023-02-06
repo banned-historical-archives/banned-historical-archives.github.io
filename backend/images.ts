@@ -258,7 +258,7 @@ const images: (Image & {
     url: 'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives7/main/a1/a1fff102-0db9-4f67-bd92-52c4a9747361.jpg',
   },
   {
-    name: '全国无产阶级文革大革命形势略图',
+    name: '全国无产阶级文化大革命形势略图',
     source: '',
     description: '',
     show_in_gallery: true,
