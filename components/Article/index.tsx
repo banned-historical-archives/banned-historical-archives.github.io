@@ -80,11 +80,11 @@ function PureArticle({
       );
     } else if (part.type === ContentType.image) {
       return (
-        <img key={key} src={part.text} width="50%" style={{ margin: 'auto' }} />
+        <img key={key} src={part.text} width="50%" style={{ margin: 'auto', marginTop: '1.25em' }} />
       );
     } else if (part.type === ContentType.image_description) {
       return (
-        <Typography key={key} variant="subtitle1" sx={{ textAlign: 'center' }}>
+        <Typography key={key} variant="subtitle1" sx={{ textAlign: 'center', marginBottom: '1.25em' }}>
           {content}
         </Typography>
       );
@@ -94,10 +94,25 @@ function PureArticle({
           {content}
         </Typography>
       );
+    } else if (part.type === ContentType.subtitle) {
+      return (
+        <Typography key={key} variant="subtitle1" sx={{ textAlign: 'center', fontSize: '1.5em', fontWeight: 'bold', margin: '1.25em 0 1.25em 0' }}>
+          {content}
+        </Typography>
+      );
+    } else if (part.type === ContentType.subtitle2) {
+      return (
+        <Typography key={key} variant="subtitle1" sx={{ textAlign: 'center', fontSize: '1.17em', fontWeight: 'bold', margin: '1.25em 0 1.25em 0' }}>
+          {content}
+        </Typography>
+      );
+    } else if (part.type === ContentType.subtitle3) {
+      return (
+        <Typography key={key} variant="subtitle1" sx={{ textAlign: 'center', fontWeight: 'bold', margin: '0.625em 0 0.625em 0' }}>
+          {content}
+        </Typography>
+      );
     } else if (
-      part.type === ContentType.subtitle ||
-      part.type === ContentType.subtitle2 ||
-      part.type === ContentType.subtitle3 ||
       part.type === ContentType.subtitle4 ||
       part.type === ContentType.subtitle5
     ) {
