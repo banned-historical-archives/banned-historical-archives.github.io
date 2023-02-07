@@ -103,6 +103,12 @@ function PureArticle({
           {content}
         </Typography>
       );
+    } else if (part.type === ContentType.signature) {
+      return (
+        <Typography key={key} variant="subtitle1" sx={{ textAlign: 'right' }}>
+          {content}
+        </Typography>
+      );
     } else if (part.type === ContentType.subtitle) {
       return (
         <Typography
