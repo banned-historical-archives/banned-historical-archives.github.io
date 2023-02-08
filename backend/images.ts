@@ -4,6 +4,14 @@ import { Image } from './entities';
 const images: (Image & {
   id?: string;
 })[] = [
+  {"name":"《简明世界史（近代部分）》插图十六","description":"十八世纪的日本酿酒工场","source":"《简明世界史（近代部分）》","show_in_gallery":true,"tags":[],"id":"c5a5bb3a-2470-418d-806c-042928f50cb6","url":"https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives7/main/c5/c5a5bb3a-2470-418d-806c-042928f50cb6.png"},
+  {"name":"《简明世界史（近代部分）》插图十七","description":"西山起义军使用的印章和战鼓","source":"《简明世界史（近代部分）》","show_in_gallery":true,"tags":[],"id":"752059ee-3796-4da7-b2cd-2b81724031e7","url":"https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives7/main/75/752059ee-3796-4da7-b2cd-2b81724031e7.png"},
+  {"name":"《简明世界史（近代部分）》插图十八","description":"铁普索丹","source":"《简明世界史（近代部分）》","show_in_gallery":true,"tags":[],"id":"a7a1a3e4-b69f-45cf-8c87-067d422c5c6d","url":"https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives7/main/a7/a7a1a3e4-b69f-45cf-8c87-067d422c5c6d.png"},
+  {"name":"《简明世界史（近代部分）》插图十九","description":"英国东印度公司——掠夺亚洲人民的吸血鬼","source":"《简明世界史（近代部分）》","show_in_gallery":true,"tags":[],"id":"9e6895e9-ff7a-4821-875e-70af39b1f715","url":"https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives7/main/9e/9e6895e9-ff7a-4821-875e-70af39b1f715.png"},
+  {"name":"《简明世界史（近代部分）》插图二十","description":"万恶的奴隶贸易","source":"《简明世界史（近代部分）》","show_in_gallery":true,"tags":[],"id":"6954507d-58cb-4b60-874d-6f9fffb2c3c8","url":"https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives7/main/69/6954507d-58cb-4b60-874d-6f9fffb2c3c8.png"},
+  {"name":"《简明世界史（近代部分）》插图二十一","description":"奴隶船的平面图","source":"《简明世界史（近代部分）》","show_in_gallery":true,"tags":[],"id":"374c944a-81a7-4c7b-abda-d41efabedb6a","url":"https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives7/main/37/374c944a-81a7-4c7b-abda-d41efabedb6a.png"},
+  {"name":"《简明世界史（近代部分）》插图二十二","description":"班图人民抗击西方殖民者","source":"《简明世界史（近代部分）》","show_in_gallery":true,"tags":[],"id":"29a6b196-38d1-4e1f-9538-54bcb2201455","url":"https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives7/main/29/29a6b196-38d1-4e1f-9538-54bcb2201455.png"},
+  {"name":"《简明世界史（近代部分）》插图二十三","description":"穆罕默德·阿里","source":"《简明世界史（近代部分）》","show_in_gallery":true,"tags":[],"id":"224d4d43-1942-40ab-991c-27e6bcef5133","url":"https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives7/main/22/224d4d43-1942-40ab-991c-27e6bcef5133.png"},
   {
     name: '《简明世界史（近代部分）》后图六',
     description: '委内瑞拉宣布独立',
