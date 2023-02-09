@@ -12,8 +12,9 @@
 [标准化加工及开发说明](https://github.com/banned-historical-archives/banned-historical-archives.github.io/wiki/%E6%A0%87%E5%87%86%E5%8C%96%E5%8A%A0%E5%B7%A5%E5%8F%8A%E5%BC%80%E5%8F%91%E8%AF%B4%E6%98%8E)  
 [校对规范](https://github.com/banned-historical-archives/banned-historical-archives.github.io/wiki/%E6%A0%A1%E5%AF%B9%E8%A7%84%E8%8C%83)  
 
-谷歌搜索引擎仅收录了很小部分文稿，搜索效果也不太让人满意。  
-本地搜索引擎不仅可以精准检索全部文稿，更重要的是保护你的隐私。  
+## 安全提醒
+为了你的隐私和安全，建议全程翻墙访问。
+如需进行全文检索，建议使用本地搜索代替。
 **[本地搜索的使用](https://github.com/banned-historical-archives/banned-historical-archives.github.io/wiki/%E6%9C%AC%E5%9C%B0%E6%90%9C%E7%B4%A2%E7%9A%84%E4%BD%BF%E7%94%A8)**
 
 ## 介绍
