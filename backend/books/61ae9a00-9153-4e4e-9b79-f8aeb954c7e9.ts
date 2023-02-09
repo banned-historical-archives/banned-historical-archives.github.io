@@ -23,7 +23,7 @@ export default {
             year: 2016,
             month: 10,
             day: 18,
-          }
+          },
         ],
       },
       {
@@ -36,7 +36,7 @@ export default {
             year: 2016,
             month: 10,
             day: 18,
-          }
+          },
         ],
       },
       {
@@ -49,7 +49,7 @@ export default {
             year: 2016,
             month: 10,
             day: 18,
-          }
+          },
         ],
       },
       {
@@ -62,7 +62,7 @@ export default {
             year: 2016,
             month: 10,
             day: 18,
-          }
+          },
         ],
       },
       {
@@ -75,7 +75,7 @@ export default {
             year: 2016,
             month: 10,
             day: 18,
-          }
+          },
         ],
       },
       {
@@ -88,7 +88,7 @@ export default {
             year: 2016,
             month: 10,
             day: 18,
-          }
+          },
         ],
       },
       {
@@ -101,7 +101,7 @@ export default {
             year: 2016,
             month: 10,
             day: 18,
-          }
+          },
         ],
       },
       {
@@ -114,7 +114,7 @@ export default {
             year: 2016,
             month: 10,
             day: 18,
-          }
+          },
         ],
       },
       {
@@ -127,7 +127,7 @@ export default {
             year: 2016,
             month: 10,
             day: 18,
-          }
+          },
         ],
       },
       {
@@ -140,7 +140,7 @@ export default {
             year: 2016,
             month: 10,
             day: 18,
-          }
+          },
         ],
       },
       {
@@ -153,7 +153,7 @@ export default {
             year: 2016,
             month: 10,
             day: 18,
-          }
+          },
         ],
       },
       {
@@ -166,7 +166,7 @@ export default {
             year: 2016,
             month: 10,
             day: 18,
-          }
+          },
         ],
       },
       {
@@ -179,7 +179,7 @@ export default {
             year: 2016,
             month: 10,
             day: 18,
-          }
+          },
         ],
       },
       {
@@ -192,7 +192,7 @@ export default {
             year: 2016,
             month: 10,
             day: 18,
-          }
+          },
         ],
       },
       {
@@ -205,7 +205,7 @@ export default {
             year: 2016,
             month: 10,
             day: 18,
-          }
+          },
         ],
       },
       {
@@ -218,7 +218,7 @@ export default {
             year: 2016,
             month: 10,
             day: 18,
-          }
+          },
         ],
       },
       {
@@ -231,7 +231,7 @@ export default {
             year: 2016,
             month: 10,
             day: 18,
-          }
+          },
         ],
       },
       {
@@ -244,7 +244,7 @@ export default {
             year: 2016,
             month: 10,
             day: 18,
-          }
+          },
         ],
       },
       {
@@ -257,7 +257,7 @@ export default {
             year: 2016,
             month: 10,
             day: 18,
-          }
+          },
         ],
       },
       {
@@ -270,7 +270,7 @@ export default {
             year: 2016,
             month: 10,
             day: 18,
-          }
+          },
         ],
       },
       {
@@ -283,7 +283,7 @@ export default {
             year: 2016,
             month: 10,
             day: 18,
-          }
+          },
         ],
       },
       {
@@ -296,7 +296,7 @@ export default {
             year: 2016,
             month: 10,
             day: 18,
-          }
+          },
         ],
       },
       {
@@ -309,7 +309,7 @@ export default {
             year: 2016,
             month: 10,
             day: 18,
-          }
+          },
         ],
       },
       {
@@ -322,7 +322,7 @@ export default {
             year: 2016,
             month: 10,
             day: 18,
-          }
+          },
         ],
       },
       {
@@ -335,7 +335,7 @@ export default {
             year: 2016,
             month: 10,
             day: 18,
-          }
+          },
         ],
       },
       {
@@ -348,7 +348,7 @@ export default {
             year: 2016,
             month: 10,
             day: 18,
-          }
+          },
         ],
       },
       {
@@ -361,7 +361,7 @@ export default {
             year: 2016,
             month: 10,
             day: 18,
-          }
+          },
         ],
       },
       {
@@ -374,7 +374,7 @@ export default {
             year: 2016,
             month: 10,
             day: 18,
-          }
+          },
         ],
       },
       {
@@ -387,7 +387,7 @@ export default {
             year: 2016,
             month: 10,
             day: 18,
-          }
+          },
         ],
       },
       {
@@ -400,7 +400,7 @@ export default {
             year: 2016,
             month: 10,
             day: 18,
-          }
+          },
         ],
       },
       {
@@ -413,7 +413,7 @@ export default {
             year: 2016,
             month: 10,
             day: 18,
-          }
+          },
         ],
       },
       {
@@ -426,7 +426,7 @@ export default {
             year: 2016,
             month: 10,
             day: 18,
-          }
+          },
         ],
       },
     ],
