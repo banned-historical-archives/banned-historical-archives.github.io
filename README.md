@@ -17,6 +17,11 @@
 如需进行全文检索，建议使用本地搜索代替。
 **[本地搜索的使用](https://github.com/banned-historical-archives/banned-historical-archives.github.io/wiki/%E6%9C%AC%E5%9C%B0%E6%90%9C%E7%B4%A2%E7%9A%84%E4%BD%BF%E7%94%A8)**
 
+请谨慎使用github和git工具，在以下操作中避免个人身份泄露，issue 发言、star、watch、fork、pull request、git commit。
+
+建议使用临时的github账号，随机的id和邮箱。
+
+
 ## 介绍
 
 和谐历史档案馆收录各类受官方封禁以及半封禁的文稿、报纸、杂志和多媒体资料，并对它们进行标准化加工，通过解析、识别、分类，形成标准化文稿档案和多媒体档案/数据库。
