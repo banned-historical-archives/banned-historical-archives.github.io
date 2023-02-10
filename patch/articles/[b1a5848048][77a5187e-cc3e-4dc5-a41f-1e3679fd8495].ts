@@ -1,0 +1,5 @@
+
+export default [
+// {"version":2,"parts":{"0":{"diff":"=3\t+ \t=2","type":"title"},"1":{"diff":"=24\t-1\t+同\t=83"},"2":{"diff":"=25\t-1\t+恰\t=36"},"3":{"diff":"=46\t-1\t+——\t=49\t-1\t+大\t=4\t-1\t+尤\t=124\t-1\t+使\t=103\t-1\t+坏\t=10\t-1\t+辨\t=34"},"4":{"diff":"=51\t-1\t+着\t=3\t-1\t+诸\t=44\t-1\t+大\t=2\t-2\t+——\t=56\t-1\t+史\t=122"}},"comments":{},"description":""}
+  {"version":2,"parts":{"0":{"diff":"=3\t+ \t=2","type":"title"},"1":{"diff":"=24\t-1\t+%E5%90%8C\t=83"},"2":{"diff":"=25\t-1\t+%E6%81%B0\t=36"},"3":{"diff":"=46\t-1\t+%E2%80%94%E2%80%94\t=49\t-1\t+%E5%A4%A7\t=4\t-1\t+%E5%B0%A4\t=124\t-1\t+%E4%BD%BF\t=103\t-1\t+%E5%9D%8F\t=10\t-1\t+%E8%BE%A8\t=34"},"4":{"diff":"=51\t-1\t+%E7%9D%80\t=3\t-1\t+%E8%AF%B8\t=44\t-1\t+%E5%A4%A7\t=2\t-2\t+%E2%80%94%E2%80%94\t=56\t-1\t+%E5%8F%B2\t=122"}},"comments":{},"description":""},
+];
