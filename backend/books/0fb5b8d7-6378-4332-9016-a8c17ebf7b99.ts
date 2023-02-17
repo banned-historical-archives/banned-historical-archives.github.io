@@ -15,6 +15,7 @@ export default {
     articles: [
       {
         title: '张春桥在总参党委扩大会第一次全体会议上的讲话',
+        alias: '张春桥一九七三年三月十五日在总参党委扩大会第一次全体会议上的讲话',
         authors: ['张春桥'],
         page_start: 2,
         page_end: 10,
