@@ -15,6 +15,7 @@ export default {
     articles: [
       {
         title: '王洪文、张春桥在听取三部批林批孔运动情况汇报时的插话',
+        alias: '王洪文、张春桥一九七四年三月六日在听取三部批林批孔运动情况汇报时的插话',
         authors: ['王洪文', '张春桥'],
         page_start: 2,
         page_end: 4,
