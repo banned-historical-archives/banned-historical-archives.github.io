@@ -14,7 +14,8 @@ export default {
     ext: 'png',
     articles: [
       {
-        title: '江青给中央军委的信',
+        title: '江青致王洪文叶剑英张春桥邓小平的信',
+        alias: '江青给中央军委的信',
         authors: ['江青'],
         page_start: 2,
         page_end: 3,
