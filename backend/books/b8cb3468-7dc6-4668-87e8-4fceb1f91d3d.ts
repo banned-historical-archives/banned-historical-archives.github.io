@@ -15,7 +15,7 @@ export default {
     articles: [
       {
         title: '江青致王洪文叶剑英张春桥邓小平的信',
-        alias: '江青给中央军委的信',
+        alias: '江青一九七四年一月二十四日给中央军委的信',
         authors: ['江青'],
         page_start: 2,
         page_end: 3,
@@ -24,6 +24,7 @@ export default {
       },
       {
         title: '迟群、谢静宜在军委直属单位批林批孔报告会上的讲话',
+        alias: '迟群、谢静宜一九七四年一月二十四日在军委直属单位批林批孔报告会上的讲话',
         authors: ['迟群', '谢静宜'],
         page_start: 3,
         page_end: 16,
