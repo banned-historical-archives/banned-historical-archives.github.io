@@ -53,7 +53,7 @@ async function init_articles(AppDataSource: DataSource) {
         },
         ['id'],
       );
-      delete patchFiles[`[${article_id}][${publication_id}]`]
+      delete patchFiles[`[${article_id}][${publication_id}]`];
 
       await AppDataSource.createQueryBuilder()
         .relation(Article, 'publications')
@@ -201,7 +201,7 @@ async function init_articles(AppDataSource: DataSource) {
   }
   if (Object.keys(patchFiles).length) {
     console.log(patchFiles);
-    throw(new Error('found unused patch files'));
+    throw new Error('found unused patch files');
   }
 }
 
