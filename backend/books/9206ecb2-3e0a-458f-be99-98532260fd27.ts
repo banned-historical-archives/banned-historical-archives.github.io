@@ -1,11 +1,11 @@
 export default {
   entity: {
     id: '9206ecb2-3e0a-458f-be99-98532260fd27',
-    name: '“四人帮”罪行材料（五）',
+    name: '“四人帮”罪行材料（五）（1976.12）',
     internal: true,
     official: true,
     type: 'img',
-    author: '总参谋部政治部',
+    author: '总参谋部政治部，1976.12',
     files:
       'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/9206ecb2-3e0a-458f-be99-98532260fd27/1.png,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/9206ecb2-3e0a-458f-be99-98532260fd27/2.png,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/9206ecb2-3e0a-458f-be99-98532260fd27/3.png,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/9206ecb2-3e0a-458f-be99-98532260fd27/4.png',
   },
