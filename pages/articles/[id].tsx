@@ -134,6 +134,8 @@ export const getStaticProps: GetStaticProps = async (
     props: {
       article: {
         ...article,
+        dates: article.dates.map((i) => ({...i,
+        article: {} as Article})),
         tags: article.tags.map((i) => ({
           name: i.name,
           id: i.id,
@@ -162,6 +164,11 @@ export const getStaticProps: GetStaticProps = async (
               publication : {} as Publication,
             };
           }),
+          comments: publication_details[i].comments.map((j) => ({
+            ...j,
+            publication: {} as Publication,
+            article: {} as Article,
+          })),
           page: {
             start: publication_details[i].page.end,
             end: publication_details[i].page.start,
