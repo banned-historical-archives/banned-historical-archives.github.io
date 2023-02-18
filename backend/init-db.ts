@@ -1,4 +1,5 @@
 import 'reflect-metadata';
+import { join } from 'node:path/posix';
 import { init } from './data-source';
 
 import get_books from './books';
@@ -21,15 +22,23 @@ import { music as musicData } from './music';
 import { ArticleCategory, TagType } from '../types';
 import { get_article_id, hash_str_arr, uuid } from '../utils';
 import { Image, ImageTag } from './entities';
+import { normalize } from './utils';
+import { readdirSync } from 'node:fs';
 
 async function init_articles(AppDataSource: DataSource) {
+  const patchFiles = readdirSync(
+    join(normalize(__dirname), '../patch/articles'),
+  ).reduce((a, b) => {
+    a[b.substring(0, b.indexOf('.'))] = true;
+    return a;
+  }, {} as { [k: string]: boolean });
   const books = await get_books();
   for (const book of books) {
     console.log(book.entity.name);
+    const publication_id = book.entity.id!;
     const res = await book.parser(book.path, book.parser_option);
     console.log('parsed', book.entity.name);
 
-    const publication_id = book.entity.id!;
     await AppDataSource.manager.upsert(Publication, book.entity, ['id']);
 
     for (const r of res) {
@@ -44,6 +53,7 @@ async function init_articles(AppDataSource: DataSource) {
         },
         ['id'],
       );
+      delete patchFiles[`[${article_id}][${publication_id}]`];
 
       await AppDataSource.createQueryBuilder()
         .relation(Article, 'publications')
@@ -188,6 +198,10 @@ async function init_articles(AppDataSource: DataSource) {
       );
     }
     console.log('done', book.entity.name);
+  }
+  if (Object.keys(patchFiles).length) {
+    console.log(patchFiles);
+    throw new Error('found unused patch files');
   }
 }
 

@@ -51,6 +51,7 @@ import {
   md5,
 } from '../../utils';
 import ArticleComponent from '../../components/Article';
+import { Publication } from '../../backend/entities';
 
 pdfjs.GlobalWorkerOptions.workerSrc = `/pdfjs-dist/legacy/build/pdf.worker.min.js`;
 
@@ -126,10 +127,57 @@ export const getStaticProps: GetStaticProps = async (
       page,
     };
   }
+  if (!article || !publication_details) {
+    return {notFound: true};
+  }
   return {
     props: {
-      article: JSON.parse(JSON.stringify(article)),
-      publication_details: JSON.parse(JSON.stringify(publication_details)),
+      article: {
+        ...article,
+        dates: article.dates.map((i) => ({...i,
+        article: {} as Article})),
+        tags: article.tags.map((i) => ({
+          name: i.name,
+          id: i.id,
+          type: i.type,
+        })),
+        publications: article.publications.map((i) => ({
+          ...i,
+          articles: [],
+          comments: (i.comments || []).map((j) => ({
+            ...j,
+          })),
+          contents: (i.contents || []).map((j) => ({
+            ...j,
+          })),
+          pages: (i.pages || []).map((j) => ({ ...j })),
+        })),
+        authors: article.authors.map((i) => ({ id: i.id, name: i.name })),
+      },
+      publication_details: Object.keys(publication_details).reduce((x, i) => {
+        x[i] = {
+          ...publication_details[i],
+          contents: publication_details[i].contents.map((j) => {
+            return {
+              ...j,
+              article: {} as Article,
+              publication : {} as Publication,
+            };
+          }),
+          comments: publication_details[i].comments.map((j) => ({
+            ...j,
+            publication: {} as Publication,
+            article: {} as Article,
+          })),
+          page: {
+            start: publication_details[i].page.end,
+            end: publication_details[i].page.start,
+          } as PageEntity,
+        };
+        return x;
+      },
+
+      {} as PublicationDetails),
     },
   };
 };
