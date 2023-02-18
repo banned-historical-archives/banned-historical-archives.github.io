@@ -128,18 +128,17 @@ export const getStaticProps: GetStaticProps = async (
     };
   }
   if (!article || !publication_details) {
-    return {notFound: true};
+    return { notFound: true };
   }
   return {
     props: {
       article: {
         ...article,
-        alias: article.aliases.map(i => ({
+        alias: article.aliases.map((i) => ({
           ...i,
           article: {} as Article,
         })),
-        dates: article.dates.map((i) => ({...i,
-        article: {} as Article})),
+        dates: article.dates.map((i) => ({ ...i, article: {} as Article })),
         tags: article.tags.map((i) => ({
           name: i.name,
           id: i.id,
@@ -158,30 +157,32 @@ export const getStaticProps: GetStaticProps = async (
         })),
         authors: article.authors.map((i) => ({ id: i.id, name: i.name })),
       },
-      publication_details: Object.keys(publication_details).reduce((x, i) => {
-        x[i] = {
-          ...publication_details[i],
-          contents: publication_details[i].contents.map((j) => {
-            return {
+      publication_details: Object.keys(publication_details).reduce(
+        (x, i) => {
+          x[i] = {
+            ...publication_details[i],
+            contents: publication_details[i].contents.map((j) => {
+              return {
+                ...j,
+                article: {} as Article,
+                publication: {} as Publication,
+              };
+            }),
+            comments: publication_details[i].comments.map((j) => ({
               ...j,
+              publication: {} as Publication,
               article: {} as Article,
-              publication : {} as Publication,
-            };
-          }),
-          comments: publication_details[i].comments.map((j) => ({
-            ...j,
-            publication: {} as Publication,
-            article: {} as Article,
-          })),
-          page: {
-            start: publication_details[i].page.end,
-            end: publication_details[i].page.start,
-          } as PageEntity,
-        };
-        return x;
-      },
+            })),
+            page: {
+              start: publication_details[i].page.end,
+              end: publication_details[i].page.start,
+            } as PageEntity,
+          };
+          return x;
+        },
 
-      {} as PublicationDetails),
+        {} as PublicationDetails,
+      ),
     },
   };
 };
