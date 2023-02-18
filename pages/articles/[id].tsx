@@ -134,6 +134,10 @@ export const getStaticProps: GetStaticProps = async (
     props: {
       article: {
         ...article,
+        alias: article.aliases.map(i => ({
+          ...i,
+          article: {} as Article,
+        })),
         dates: article.dates.map((i) => ({...i,
         article: {} as Article})),
         tags: article.tags.map((i) => ({
