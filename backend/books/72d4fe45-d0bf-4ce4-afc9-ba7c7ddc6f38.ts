@@ -1,11 +1,11 @@
 export default {
   entity: {
     id: '72d4fe45-d0bf-4ce4-afc9-ba7c7ddc6f38',
-    name: '“四人帮”罪行材料（八）',
+    name: '“四人帮”罪行材料（八）（1976.12）',
     internal: true,
     official: true,
     type: 'img',
-    author: '总参谋部政治部',
+    author: '总参谋部政治部，1976.12',
     files:
       'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/72d4fe45-d0bf-4ce4-afc9-ba7c7ddc6f38/1.png,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/72d4fe45-d0bf-4ce4-afc9-ba7c7ddc6f38/2.png,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/72d4fe45-d0bf-4ce4-afc9-ba7c7ddc6f38/3.png',
   },
@@ -15,6 +15,7 @@ export default {
     articles: [
       {
         title: '王洪文对作战部领导同志的讲话',
+        alias: '一九七四年五月四日王洪文对作战部领导同志的讲话',
         authors: ['王洪文'],
         page_start: 1,
         page_end: 3,

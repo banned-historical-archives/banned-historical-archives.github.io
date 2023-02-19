@@ -136,7 +136,7 @@ export default {
         title: '第三章 十一届三中全会 第四节 彻底解决帮派体系',
         authors: ['水陆洲'],
         page_start: 190,
-        page_end: 1,
+        page_end: 203,
         dates: [{ year: 2012, month: 3, day: 16 }],
       },
       {
@@ -207,7 +207,7 @@ export default {
         authors: ['水陆洲'],
         page_start: 280,
         page_end: 305,
-        dates: [{ year: 2012, month: 1111111, day: 1111111 }],
+        dates: [{ year: 2012, month: 3, day: 18 }],
       },
       {
         title: '第六章 星星之火可以燎原 第二节 湖北省',
