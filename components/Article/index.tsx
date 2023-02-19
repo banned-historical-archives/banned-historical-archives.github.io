@@ -74,7 +74,11 @@ function PureArticle({
       );
     } else if (part.type === ContentType.appellation) {
       return (
-        <Typography key={key} variant="body1" sx={{ margin: 0.5, fontWeight: 'bold' }}>
+        <Typography
+          key={key}
+          variant="body1"
+          sx={{ margin: 0.5, fontWeight: 'bold' }}
+        >
           {content}
         </Typography>
       );
