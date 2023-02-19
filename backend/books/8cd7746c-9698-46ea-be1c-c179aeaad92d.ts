@@ -47,7 +47,7 @@ export default {
           '第一章 学习无产阶级专政的理论 第四节 毛泽东关于批修正主义的指示',
         authors: ['水陆洲'],
         page_start: 116,
-        page_end: 1,
+        page_end: 140,
         dates: [{ year: 2012, month: 3, day: 12 }],
       },
       {
@@ -82,7 +82,7 @@ export default {
         title: '第一章 学习无产阶级专政的理论 第九节 落实各类人员政策',
         authors: ['水陆洲'],
         page_start: 173,
-        page_end: -1,
+        page_end: 176,
         dates: [{ year: 2012, month: 3, day: 12 }],
       },
       {
