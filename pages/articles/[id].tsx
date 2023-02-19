@@ -134,7 +134,7 @@ export const getStaticProps: GetStaticProps = async (
     props: {
       article: {
         ...article,
-        alias: article.aliases.map((i) => ({
+        aliases: article.aliases.map((i) => ({
           ...i,
           article: {} as Article,
         })),
