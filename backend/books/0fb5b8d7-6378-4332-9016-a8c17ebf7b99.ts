@@ -1,11 +1,11 @@
 export default {
   entity: {
     id: '0fb5b8d7-6378-4332-9016-a8c17ebf7b99',
-    name: '“四人帮”罪行材料（二）',
+    name: '“四人帮”罪行材料（二）（1976.12）',
     internal: true,
     official: true,
     type: 'img',
-    author: '总参谋部政治部',
+    author: '总参谋部政治部，1976.12',
     files:
       'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/0fb5b8d7-6378-4332-9016-a8c17ebf7b99/1.jpg,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/0fb5b8d7-6378-4332-9016-a8c17ebf7b99/2.jpg,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/0fb5b8d7-6378-4332-9016-a8c17ebf7b99/3.jpg,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/0fb5b8d7-6378-4332-9016-a8c17ebf7b99/4.jpg,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/0fb5b8d7-6378-4332-9016-a8c17ebf7b99/5.jpg,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/0fb5b8d7-6378-4332-9016-a8c17ebf7b99/6.jpg,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/0fb5b8d7-6378-4332-9016-a8c17ebf7b99/7.jpg,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/0fb5b8d7-6378-4332-9016-a8c17ebf7b99/8.jpg,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/0fb5b8d7-6378-4332-9016-a8c17ebf7b99/9.jpg,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/0fb5b8d7-6378-4332-9016-a8c17ebf7b99/10.jpg',
   },
