@@ -70,9 +70,6 @@ jobs:
           labels: |
             report
             automated pr
-          team-reviewers: |
-            owners
-            maintainers
           draft: false
       - name: Create Pull Request For Submodule
         env:
