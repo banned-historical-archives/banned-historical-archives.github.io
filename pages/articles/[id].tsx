@@ -132,57 +132,8 @@ export const getStaticProps: GetStaticProps = async (
   }
   return {
     props: {
-      article: {
-        ...article,
-        aliases: article.aliases.map((i) => ({
-          ...i,
-          article: {} as Article,
-        })),
-        dates: article.dates.map((i) => ({ ...i, article: {} as Article })),
-        tags: article.tags.map((i) => ({
-          name: i.name,
-          id: i.id,
-          type: i.type,
-        })),
-        publications: article.publications.map((i) => ({
-          ...i,
-          articles: [],
-          comments: (i.comments || []).map((j) => ({
-            ...j,
-          })),
-          contents: (i.contents || []).map((j) => ({
-            ...j,
-          })),
-          pages: (i.pages || []).map((j) => ({ ...j })),
-        })),
-        authors: article.authors.map((i) => ({ id: i.id, name: i.name })),
-      },
-      publication_details: Object.keys(publication_details).reduce(
-        (x, i) => {
-          x[i] = {
-            ...publication_details[i],
-            contents: publication_details[i].contents.map((j) => {
-              return {
-                ...j,
-                article: {} as Article,
-                publication: {} as Publication,
-              };
-            }),
-            comments: publication_details[i].comments.map((j) => ({
-              ...j,
-              publication: {} as Publication,
-              article: {} as Article,
-            })),
-            page: {
-              start: publication_details[i].page.end,
-              end: publication_details[i].page.start,
-            } as PageEntity,
-          };
-          return x;
-        },
-
-        {} as PublicationDetails,
-      ),
+      article: JSON.parse(JSON.stringify(article)),
+      publication_details: JSON.parse(JSON.stringify(publication_details)),
     },
   };
 };
