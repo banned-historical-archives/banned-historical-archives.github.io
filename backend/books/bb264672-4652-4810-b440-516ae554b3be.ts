@@ -1,7 +1,7 @@
 export default {
   entity: {
     id: 'bb264672-4652-4810-b440-516ae554b3be',
-    name: '毛远新有关研究“儒法斗争史"的三次谈话（摘编）',
+    name: '毛远新有关研究“儒法斗争史”的三次谈话（摘编）',
     internal: true,
     official: true,
     type: 'img',
