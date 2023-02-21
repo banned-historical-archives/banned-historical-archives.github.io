@@ -5,10 +5,12 @@ import {
   PrimaryGeneratedColumn,
   ManyToMany,
   ManyToOne,
+  Index,
 } from 'typeorm';
 import { Article, Publication, Tag, Content, Date, Page } from '../entities';
 
 @Entity()
+@Index(["articleId", "publicationId"])
 export default class Comment {
   @PrimaryColumn()
   id!: string;

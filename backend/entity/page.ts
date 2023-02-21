@@ -7,10 +7,12 @@ import {
   ManyToOne,
   OneToOne,
   OneToMany,
+  Index,
 } from 'typeorm';
 import { Article, Comment, Publication, Tag } from '../entities';
 
 @Entity()
+@Index(["articleId", "publicationId"])
 export default class Page {
   @PrimaryColumn()
   id!: string;

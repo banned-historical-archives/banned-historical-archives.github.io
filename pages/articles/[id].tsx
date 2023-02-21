@@ -8,9 +8,8 @@ import React, {
 } from 'react';
 import { diff_match_patch, Diff } from 'diff-match-patch';
 import Head from 'next/head';
-import Popover from '@mui/material/Popover';
 
-import Select, { SelectChangeEvent } from '@mui/material/Select';
+import Select  from '@mui/material/Select';
 import Menu from '@mui/material/Menu';
 import Paper from '@mui/material/Paper';
 import InputLabel from '@mui/material/InputLabel';
@@ -23,7 +22,6 @@ import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
-import TextField from '@mui/material/TextField';
 import { ContentType, Patch, PatchV2 } from '../../types';
 import { Document, Page, pdfjs } from 'react-pdf';
 import Layout from '../../components/Layout';
@@ -35,8 +33,6 @@ import Comment from '../../backend/entity/comment';
 import PageEntity from '../../backend/entity/page';
 import {
   GetStaticProps,
-  GetServerSideProps,
-  GetServerSidePropsContext,
   GetStaticPropsContext,
 } from 'next';
 import { init } from '../../backend/data-source';
@@ -51,7 +47,6 @@ import {
   md5,
 } from '../../utils';
 import ArticleComponent from '../../components/Article';
-import { Publication } from '../../backend/entities';
 
 pdfjs.GlobalWorkerOptions.workerSrc = `/pdfjs-dist/legacy/build/pdf.worker.min.js`;
 
@@ -103,39 +98,42 @@ export const getStaticProps: GetStaticProps = async (
   const publication_details: PublicationDetails = {};
   for (const publication of article!.publications) {
     const publicationId = publication.id!;
-    const comments = await AppDataSource.manager.find(Comment, {
-      where: {
-        publicationId,
-        articleId,
-      },
-    });
-    const contents = await AppDataSource.manager.find(Content, {
-      where: {
-        publicationId,
-        articleId,
-      },
-    });
-    const page = (await AppDataSource.manager.findOne(PageEntity, {
-      where: {
-        publicationId,
-        articleId,
-      },
-    }))!;
+    const [comments, contents, page] = await Promise.all([
+      AppDataSource.manager.find(Comment, {
+        where: {
+          publicationId,
+          articleId,
+        },
+      }),
+      AppDataSource.manager.find(Content, {
+        where: {
+          publicationId,
+          articleId,
+        },
+      }),
+      AppDataSource.manager.findOne(PageEntity, {
+        where: {
+          publicationId,
+          articleId,
+        },
+      }),
+    ]);
     publication_details[publicationId] = {
       comments,
       contents,
-      page,
+      page: page!,
     };
   }
   if (!article || !publication_details) {
     return { notFound: true };
   }
-  return {
+  const r = {
     props: {
       article: JSON.parse(JSON.stringify(article)),
       publication_details: JSON.parse(JSON.stringify(publication_details)),
     },
   };
+  return r;
 };
 
 enum CompareType {
