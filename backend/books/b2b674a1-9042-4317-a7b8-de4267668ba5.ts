@@ -1212,7 +1212,7 @@ export default {
       {
         title: '苏联《政治经济学教科书》',
         authors: ['毛泽东'],
-        dates: [{}, {}],
+        dates: [],
         page_start: 304,
         page_end: 342,
       },
