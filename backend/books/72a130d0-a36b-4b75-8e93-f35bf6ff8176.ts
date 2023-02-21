@@ -1,8 +1,8 @@
 export default {
   entity: {
     id: '72a130d0-a36b-4b75-8e93-f35bf6ff8176',
-    name: '关于无产阶级文化大革命问题',
-    internal: true,
+    name: '关于无产阶级文化大革命问题（1973.12.30）',
+    internal: false,
     official: true,
     type: 'img',
     author: '王洪文',
