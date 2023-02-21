@@ -14,8 +14,8 @@ export default {
     ext: 'jpg',
     articles: [
       {
-        title:
-          '张春桥同志在中共上海市委宣传部举办的第13次时事政策讲演会上的报告记录稿',
+        title: '张春桥在上海市委宣传部第十三次时事政策讲演会上的报告',
+        alias: '关于日本问题的报告',
         authors: ['张春桥'],
         page_start: 1,
         page_end: 6,
