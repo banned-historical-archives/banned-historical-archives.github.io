@@ -5,7 +5,8 @@ export default {
     internal: true,
     official: true,
     type: 'img',
-    author: '张春桥、王效禹，1967.5，山东省委党校红色造反者指挥部《触灵魂》、济南市人委大联合总部市经委红色造反队、济南市财贸系统革命造反总指挥部、济南市革命委员会办公厅、济南市商业一局系统革命造反司令部、天津市五金交电公司无产阶级革命造反派大联合总部、天津人民出版社十·一八革命造反团',
+    author:
+      '张春桥、王效禹，1967.5，山东省委党校红色造反者指挥部《触灵魂》、济南市人委大联合总部市经委红色造反队、济南市财贸系统革命造反总指挥部、济南市革命委员会办公厅、济南市商业一局系统革命造反司令部、天津市五金交电公司无产阶级革命造反派大联合总部、天津人民出版社十·一八革命造反团',
     files:
       'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/040958d6-6657-414d-9702-8234e7c28625/1.jpg,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/040958d6-6657-414d-9702-8234e7c28625/2.jpg,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/040958d6-6657-414d-9702-8234e7c28625/3.jpg,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/040958d6-6657-414d-9702-8234e7c28625/4.jpg,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/040958d6-6657-414d-9702-8234e7c28625/5.jpg,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/040958d6-6657-414d-9702-8234e7c28625/6.jpg,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/040958d6-6657-414d-9702-8234e7c28625/7.jpg,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/040958d6-6657-414d-9702-8234e7c28625/8.jpg,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/040958d6-6657-414d-9702-8234e7c28625/9.jpg',
   },
