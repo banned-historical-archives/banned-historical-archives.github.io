@@ -183,7 +183,7 @@ function PureArticle({
             .split('\n')
             .filter((j) => j)
             .map((j, j_idx) => (
-              <Typography variant="body1" key={j_idx} sx={{ color: 'grey' }}>
+              <Typography variant="body1" key={j_idx} sx={{ color: 'grey', padding: '0.625em 2.5em 0.625em 2.5em', borderLeft: '2px solid' }}>
                 {j}
               </Typography>
             ))}
