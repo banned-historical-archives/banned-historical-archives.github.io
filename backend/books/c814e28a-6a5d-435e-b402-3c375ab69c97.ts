@@ -5,7 +5,8 @@ export default {
     internal: false,
     official: false,
     type: 'img',
-    author: '张春桥，上海工司常委，1967.3，上海红旗锅炉厂造反兵团翻印、青浦县朱家角镇中心校毛泽东思想红卫兵司令部翻印',
+    author:
+      '张春桥，上海工司常委，1967.3，上海红旗锅炉厂造反兵团翻印、青浦县朱家角镇中心校毛泽东思想红卫兵司令部翻印',
     files:
       'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/c814e28a-6a5d-435e-b402-3c375ab69c97/1.jpg,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/c814e28a-6a5d-435e-b402-3c375ab69c97/2.jpg,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/c814e28a-6a5d-435e-b402-3c375ab69c97/3.jpg',
   },
@@ -33,7 +34,7 @@ export default {
         page_start: 2,
         page_end: 3,
         dates: [{ year: 1967, month: 3 }],
-      }
+      },
     ],
     ocr_exceptions: {},
   },
