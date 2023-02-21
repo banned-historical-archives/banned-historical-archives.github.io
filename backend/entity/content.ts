@@ -11,7 +11,7 @@ import { ArticleType, ContentType } from '../../types';
 import { Article, Comment, Publication, Tag, Date, Page } from '../entities';
 
 @Entity()
-@Index(["articleId", "publicationId"])
+@Index(['articleId', 'publicationId'])
 export default class Content {
   @PrimaryColumn()
   id!: string;

@@ -12,7 +12,7 @@ import {
 import { Article, Comment, Publication, Tag } from '../entities';
 
 @Entity()
-@Index(["articleId", "publicationId"])
+@Index(['articleId', 'publicationId'])
 export default class Page {
   @PrimaryColumn()
   id!: string;

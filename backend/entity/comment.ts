@@ -10,7 +10,7 @@ import {
 import { Article, Publication, Tag, Content, Date, Page } from '../entities';
 
 @Entity()
-@Index(["articleId", "publicationId"])
+@Index(['articleId', 'publicationId'])
 export default class Comment {
   @PrimaryColumn()
   id!: string;

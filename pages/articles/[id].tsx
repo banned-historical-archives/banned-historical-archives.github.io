@@ -9,7 +9,7 @@ import React, {
 import { diff_match_patch, Diff } from 'diff-match-patch';
 import Head from 'next/head';
 
-import Select  from '@mui/material/Select';
+import Select from '@mui/material/Select';
 import Menu from '@mui/material/Menu';
 import Paper from '@mui/material/Paper';
 import InputLabel from '@mui/material/InputLabel';
@@ -31,10 +31,7 @@ import Article from '../../backend/entity/article';
 import Date from '../../backend/entity/date';
 import Comment from '../../backend/entity/comment';
 import PageEntity from '../../backend/entity/page';
-import {
-  GetStaticProps,
-  GetStaticPropsContext,
-} from 'next';
+import { GetStaticProps, GetStaticPropsContext } from 'next';
 import { init } from '../../backend/data-source';
 import { DiffViewer } from '../../components/DiffViewer';
 import Tags from '../../components/Tags';
