@@ -1,9 +1,9 @@
 export default {
   entity: {
     id: '06439682-30be-43c0-8fc3-fcd67fd66bec',
-    name: '我为什么参加红色造反团',
-    internal: true,
-    official: false,
+    name: '我为什么参加红色造反团（1966.12.11）',
+    internal: false,
+    official: true,
     type: 'img',
     author:
       '哈军工红色造反团驻沪《红色造反》战斗队印、苏州市纺织工人革命委员会翻印',
