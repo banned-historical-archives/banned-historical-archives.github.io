@@ -15,6 +15,7 @@ export default {
     articles: [
       {
         title: '宗明兰给周忠民的回信的送审稿',
+        alias: '宗明兰一九七六年九月三十日给周忠民的回信的送审稿',
         authors: ['宗明兰'],
         page_start: 1,
         page_end: 4,
@@ -22,6 +23,7 @@ export default {
       },
       {
         title: '宗明兰给周忠民的回信',
+        alias: '宗明兰一九七六年九月三十日给周忠民的回信',
         authors: ['宗明兰'],
         page_start: 5,
         page_end: 7,
