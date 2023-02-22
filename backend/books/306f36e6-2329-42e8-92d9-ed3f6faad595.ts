@@ -1,7 +1,7 @@
 export default {
   entity: {
     id: '306f36e6-2329-42e8-92d9-ed3f6faad595',
-    name: '宗明兰同志的两份揭批查资料',
+    name: '宗明兰的两份揭批查资料（1976.9.30）',
     internal: true,
     official: true,
     type: 'img',
@@ -16,15 +16,15 @@ export default {
       {
         title: '宗明兰给周忠民的回信的送审稿',
         authors: ['宗明兰'],
-        page_start: 2,
+        page_start: 1,
         page_end: 4,
         dates: [{ year: 1976, month: 9, day: 30 }],
       },
       {
         title: '宗明兰给周忠民的回信',
         authors: ['宗明兰'],
-        page_start: 2,
-        page_end: 4,
+        page_start: 5,
+        page_end: 7,
         dates: [{ year: 1976, month: 9, day: 30 }],
       },
     ],
