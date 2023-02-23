@@ -33,7 +33,4 @@ jobs:
           labels: |
             report
             automated pr
-          team-reviewers: |
-            owners
-            maintainers
           draft: false
