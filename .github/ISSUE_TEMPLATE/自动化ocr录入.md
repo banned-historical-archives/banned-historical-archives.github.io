@@ -22,6 +22,10 @@ assignees: ''
   articles: [{
     title: '在中央政治局会议上的讲话',
     authors: ['毛泽东', '江青'], // 作者
+    tags: [{
+      name: '北京',
+      type: 'place'
+    }], // 可选， type: articleCategory = '文稿大类', articleType = '文稿类型', place = '地点', character = '人物', issuer = '发行机构', subject = '主题', recorder = '记录员', reviewer = '审核员', translator = '翻译员', reprint = '翻印/传抄',
     dates: [
       {
         year: 1949,

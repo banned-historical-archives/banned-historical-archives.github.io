@@ -1,6 +1,6 @@
 import { join } from 'node:path/posix';
 import { existsSync } from 'node:fs';
-import { Book, ParserOption } from '../types';
+import { Book, ParserOption, ParserResult, TagType } from '../types';
 import * as jinghuo from './parser/jinghuo_parser';
 import * as wansui from './parser/wansui_parser';
 import * as wenji from './parser/wenji_parser';
@@ -47,8 +47,19 @@ function post_script(i: Book) {
     parser_id: i.parser_id,
     parser: async (path: string, opt: ParserOption) => {
       const res = await parsers[i.parser_id].parse(path, opt);
+      let t = 0;
       for (const j in res) {
-        const article = res[j];
+        const article = res[j] as ParserResult;
+        if (opt.articles && opt.articles[t] && opt.articles[t].tags) {
+          if (!article.tags) article.tags= [];
+          for (const tag of (opt.articles!)[t].tags!) {
+            article.tags.push({
+              name: tag.name,
+              type: TagType[tag.type],
+            });
+          }
+        }
+        ++t;
         for (const part of article.parts) {
           part.text = traditionalChineseToSimpleChinese(part.text);
         }
