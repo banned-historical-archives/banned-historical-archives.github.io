@@ -51,8 +51,8 @@ function post_script(i: Book) {
       for (const j in res) {
         const article = res[j] as ParserResult;
         if (opt.articles && opt.articles[t] && opt.articles[t].tags) {
-          if (!article.tags) article.tags= [];
-          for (const tag of (opt.articles!)[t].tags!) {
+          if (!article.tags) article.tags = [];
+          for (const tag of opt.articles![t].tags!) {
             article.tags.push({
               name: tag.name,
               type: TagType[tag.type],
