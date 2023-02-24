@@ -1,11 +1,11 @@
 export default {
   entity: {
     id: '799f3f6f-d8d1-4181-b6a7-9a9daaf84bb8',
-    name: '宗明兰在省工农干部学习班大会上的发言（提纲）',
-    internal: true,
+    name: '宗明兰在省工农干部学习班大会上的发言（1974.2）',
+    internal: false,
     official: true,
     type: 'img',
-    author: '',
+    author: '宗明兰，1974.2',
     files:
       'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/799f3f6f-d8d1-4181-b6a7-9a9daaf84bb8/1.jpg,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/799f3f6f-d8d1-4181-b6a7-9a9daaf84bb8/2.jpg,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/799f3f6f-d8d1-4181-b6a7-9a9daaf84bb8/3.jpg,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/799f3f6f-d8d1-4181-b6a7-9a9daaf84bb8/4.jpg,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/799f3f6f-d8d1-4181-b6a7-9a9daaf84bb8/5.jpg,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/799f3f6f-d8d1-4181-b6a7-9a9daaf84bb8/6.jpg,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/799f3f6f-d8d1-4181-b6a7-9a9daaf84bb8/7.jpg',
   },
@@ -14,7 +14,8 @@ export default {
     ext: 'jpg',
     articles: [
       {
-        title: '宗明兰在省工农干部学习班大会上的发言（提纲）',
+        title: '宗明兰在省工农干部学习班大会上的发言',
+        alias: '勇往直前，不断革命——学习党的基本路线的体会',
         authors: ['宗明兰'],
         page_start: 2,
         page_end: 7,

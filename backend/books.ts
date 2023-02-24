@@ -2,7 +2,6 @@ import { join } from 'node:path/posix';
 import { existsSync } from 'node:fs';
 import { Book, ParserOption, ParserResult, TagType } from '../types';
 import * as jinghuo from './parser/jinghuo_parser';
-import * as wansui from './parser/wansui_parser';
 import * as wenji from './parser/wenji_parser';
 import * as jqjianghua from './parser/jqjianghua_parser';
 import * as xuanji from './parser/xuanji';
@@ -24,7 +23,6 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 
 const parsers: { [key: string]: any } = {
   jinghuo,
-  wansui,
   wenji,
   GPCRv3,
   jqjianghua,
