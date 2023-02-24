@@ -12,11 +12,11 @@ export enum TagType {
   articleType = '文稿类型',
   place = '地点',
   character = '人物',
-  issuer = '发行机构',
-  subject = '主题',
-  recorder = '记录员',
-  reviewer = '审核员',
-  translator = '翻译员',
+  issuer = '出版方/发行方',
+  subject = '主题/事件',
+  recorder = '记录',
+  reviewer = '审核',
+  translator = '翻译',
   reprint = '翻印/传抄',
 }
 
