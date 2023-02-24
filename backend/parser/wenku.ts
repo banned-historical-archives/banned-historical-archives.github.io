@@ -489,6 +489,6 @@ const overwrite: { [title: string]: Partial<ParserResult> } = {
     authors: ['张春桥', '姚文元'],
   },
   我为什么参加红色造反团: {
-    dates: [{ year: 1966, month: 12, day: 11 }]
-  }
+    dates: [{ year: 1966, month: 12, day: 11 }],
+  },
 };
