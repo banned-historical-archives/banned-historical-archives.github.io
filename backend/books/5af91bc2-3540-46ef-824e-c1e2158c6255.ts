@@ -20,28 +20,6 @@ export default {
         authors: ['张春桥'],
         page_start: 1,
         page_end: 8,
-        tags: [{
-          name: '对话',
-          type: 'articleType'
-        }, {
-          name: '张春桥',
-          type: 'character'
-        }, {
-          name: '红卫兵上海市大专院校革命委员会',
-          type: 'character'
-        }, {
-          name: '上海市工人革命造反总司令部',
-          type: 'character'
-        }, {
-          name: '中央音乐学院红教工“劲松”战斗组',
-          type: 'reprint'
-        }, {
-          name: '上海文艺界革命造反派纵队上海交响乐团支队',
-          type: 'reprint'
-        }, {
-          name: '上海革命文工团“红旗”、“鲁迅”战斗队',
-          type: 'reprint'
-        }],
         dates: [{ year: 1966, month: 12, day: 23 }],
       },
     ],

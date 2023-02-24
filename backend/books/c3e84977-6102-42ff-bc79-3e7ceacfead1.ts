@@ -18,22 +18,6 @@ export default {
         authors: ['张春桥'],
         page_start: 1,
         page_end: 5,
-        tags: [{
-          name: '讲话',
-          type: 'articleType'
-        }, {
-          name: '张春桥',
-          type: 'character'
-        }, {
-          name: '陈丕显',
-          type: 'character'
-        }, {
-          name: '曹荻秋',
-          type: 'character'
-        }, {
-          name: '党的九大',
-          type: 'subject'
-        }], // 可选， type: articleCategory = '文稿大类', articleType = '文稿类型', place = '地点', character = '人物', issuer = '发行方/出版方', subject = '主题/事件', recorder = '记录', reviewer = '审核', translator = '翻译', reprint = '翻印/传抄',
         dates: [{ year: 1968, month: 11, day: 25 }],
       },
     ],
