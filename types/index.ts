@@ -14,6 +14,10 @@ export enum TagType {
   character = '人物',
   issuer = '发行机构',
   subject = '主题',
+  recorder = '记录员',
+  reviewer = '审核员',
+  translator = '翻译员',
+  reprint = '翻印/传抄',
 }
 
 export enum ImageTagType {
@@ -152,6 +156,7 @@ export type ParserOptionV2 = {
     ocr_exceptions?: {
       [key: string]: Partial<OCRParameter & OCRParameterAdvanced>;
     };
+    tags?: { name: string; type: keyof typeof TagType }[];
     page_start: number;
     page_end: number;
   }[];
