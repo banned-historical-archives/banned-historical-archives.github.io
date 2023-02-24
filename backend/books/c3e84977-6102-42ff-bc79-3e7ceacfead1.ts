@@ -33,7 +33,7 @@ export default {
         }, {
           name: '党的九大',
           type: 'subject'
-        }], // 可选， type: articleCategory = '文稿大类', articleType = '文稿类型', place = '地点', character = '人物', issuer = '发行方/出版方', subject = '主题/事件', recorder = '记录', reviewer = '审核', translator = '翻译', reprint = '翻印/传抄',
+        }],
         dates: [{ year: 1968, month: 11, day: 25 }],
       },
     ],
