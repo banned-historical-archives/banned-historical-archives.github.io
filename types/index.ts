@@ -156,7 +156,7 @@ export type ParserOptionV2 = {
     ocr_exceptions?: {
       [key: string]: Partial<OCRParameter & OCRParameterAdvanced>;
     };
-    tags?: {name: string, type: keyof typeof TagType}[],
+    tags?: { name: string; type: keyof typeof TagType }[];
     page_start: number;
     page_end: number;
   }[];
