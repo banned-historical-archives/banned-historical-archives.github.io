@@ -29,8 +29,8 @@ jobs:
           MYSQL_HOST: mysql
           MYSQL_PORT: 3306
       - name: Load submodule
-        run: git submodule update public/archives9
-        run: ls public/archives9
+      - run: git submodule update public/archives9
+      - run: ls public/archives9
       - name: Set up MySQL
         run: |
           apt-get update
