@@ -23,9 +23,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - run: |
-          git submodule update public/archives9
-          ls public/archives9
         env:
           # use mysql for the host here because we have specified a container for the job.
           # If we were running the job on the VM this would be localhost
