@@ -37,9 +37,6 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 17.9
-      - run: |
-          git submodule update public/archives9
-          ls public/archives9
       - run: npm install
       - run: cp -r ./node_modules/pdfjs-dist ./public/
       - run: CI=true npm run init-db
