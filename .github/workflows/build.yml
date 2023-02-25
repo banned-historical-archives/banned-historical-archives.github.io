@@ -28,9 +28,6 @@ jobs:
           # If we were running the job on the VM this would be localhost
           MYSQL_HOST: mysql
           MYSQL_PORT: 3306
-      - name: Load submodule
-      - run: git submodule update public/archives9
-      - run: ls public/archives9
       - name: Set up MySQL
         run: |
           apt-get update
@@ -40,6 +37,9 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 17.9
+      - run: |
+          git submodule update public/archives9
+          ls public/archives9
       - run: npm install
       - run: cp -r ./node_modules/pdfjs-dist ./public/
       - run: CI=true npm run init-db
