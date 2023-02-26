@@ -23,14 +23,17 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+      - run: pwd
+      - run: ls
+      - run: ls public
       - run: git submodule update --init public/archives9
 
+      - name: Set up MySQL
         env:
           # use mysql for the host here because we have specified a container for the job.
           # If we were running the job on the VM this would be localhost
           MYSQL_HOST: mysql
           MYSQL_PORT: 3306
-      - name: Set up MySQL
         run: |
           apt-get update
           apt-get install -y --force-yes mysql-client
