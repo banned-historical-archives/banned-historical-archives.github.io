@@ -159,7 +159,7 @@ export function get_tags(
     '耿飙',
     '黄作珍',
     '中央文革调查组',
-    '宋穷',
+    '宋任穷',
     '张国华',
     '王海蓉',
     '邱会作',
@@ -214,6 +214,7 @@ export function get_tags(
     '李再含',
     '周扬',
     '向仲华',
+    '陈锡联'
   ];
   const content =
     parser_result.description +

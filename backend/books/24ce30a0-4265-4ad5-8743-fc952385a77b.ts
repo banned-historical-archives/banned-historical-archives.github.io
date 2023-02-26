@@ -1,7 +1,7 @@
 export default {
   entity: {
     id: '24ce30a0-4265-4ad5-8743-fc952385a77b',
-    name: '陈锡联同志在沈阳三派革命群众组织代表座谈会上的讲话',
+    name: '陈锡联同志在沈阳三派革命群众组织代表座谈会上的讲话（1968.4.7）',
     internal: true,
     official: false,
     type: 'img',
@@ -15,9 +15,14 @@ export default {
     articles: [
       {
         title: '陈锡联在沈阳三派革命群众组织代表座谈会上的讲话',
+        alias: '陈锡联同志在沈阳三派革命群众组织代表座谈会上的讲话',
         authors: ['陈锡联'],
         page_start: 1,
         page_end: 1,
+        tags: [
+          { name: '辽宁文革', type: 'subject' }, // 事件
+          { name: '辽革站-辽报联委《进军号》战斗组', type: 'reprint' }, // 翻印/传抄
+      ],
         dates: [{ year: 1968, month: 4, day: 7 }],
       },
     ],
