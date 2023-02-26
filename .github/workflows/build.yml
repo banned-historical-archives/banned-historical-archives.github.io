@@ -23,9 +23,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - run: pwd
-      - run: ls
-      - run: ls public
+        with:
+          token: ${{ secrets.GH_PAT}}
       - run: git submodule update --init public/archives9
 
       - name: Set up MySQL
