@@ -44,7 +44,6 @@ jobs:
       - run: SITE_URL='https://banned-historical-archives.github.io' CI=true COMMIT_HASH="${{ github.sha }}" npm run build
       - run: touch out/.nojekyll
       - run: git config --global http.postBuffer 2097152000
-      - run: rm -rf public/archives9
       - name: Deploy to GitHub Pages
         uses: crazy-max/ghaction-github-pages@v3
         with:
