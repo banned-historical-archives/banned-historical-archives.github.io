@@ -1,7 +1,7 @@
 name: build
 on:
   push:
-    branches: ['master']
+    branches: ['master', 'test']
 
 jobs:
   container-job:
@@ -22,7 +22,9 @@ jobs:
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=10s --health-retries=10
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
+      - run: git submodule update --init public/archives9
+
         env:
           # use mysql for the host here because we have specified a container for the job.
           # If we were running the job on the VM this would be localhost
