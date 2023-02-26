@@ -65,7 +65,8 @@
     "typeorm": "^0.3.7",
     "uuid": "^9.0.0",
     "vitest": "^0.19.1",
-    "web-streams-polyfill": "^3.2.1"
+    "web-streams-polyfill": "^3.2.1",
+    "zwitch": "^2.0.2"
   },
   "devDependencies": {
     "@babel/cli": "^7.18.9",
