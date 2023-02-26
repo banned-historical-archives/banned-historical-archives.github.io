@@ -222,7 +222,9 @@ export function get_tags(
     parser_result.parts.reduce((m, i) => m + i.text + '\n', '');
   return important_characters
     .filter(
-      (i) => content.indexOf(i) !== content.lastIndexOf(i) || parser_result.authors.indexOf(i) >= 0
+      (i) =>
+        content.indexOf(i) !== content.lastIndexOf(i) ||
+        parser_result.authors.indexOf(i) >= 0,
     )
     .map((i) => ({
       name: i,

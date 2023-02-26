@@ -19,19 +19,24 @@ export default {
         authors: ['毛远新'],
         page_start: 1,
         page_end: 5,
-        tags: [{
-          name: '反潮流',
-          type: 'subject' // 事件
-        }, {
-          name: '批林批孔',
-          type: 'subject' // 事件
-        }, {
-          name: '冯金',
-          type: 'reprint' // 翻印/传抄
-        }, {
-          name: '辽宁文革',
-          type: 'subject' // 事件
-        }],
+        tags: [
+          {
+            name: '反潮流',
+            type: 'subject', // 事件
+          },
+          {
+            name: '批林批孔',
+            type: 'subject', // 事件
+          },
+          {
+            name: '冯金',
+            type: 'reprint', // 翻印/传抄
+          },
+          {
+            name: '辽宁文革',
+            type: 'subject', // 事件
+          },
+        ],
         dates: [{ year: 1974, month: 2, day: 16 }],
       },
     ],
