@@ -6,7 +6,8 @@ export default {
     official: false,
     author: '静火',
     type: 'pdf',
-    files: '/books/maoxuan-jinghuo.pdf',
+    files:
+      'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives9/main/books/maoxuan-jinghuo.pdf',
   },
   parser_option: {
     page_limits: [
@@ -16,5 +17,5 @@ export default {
     ],
   },
   parser_id: 'jinghuo',
-  path: '/books/maoxuan-jinghuo.pdf',
+  path: '/archives9/books/maoxuan-jinghuo.pdf',
 };

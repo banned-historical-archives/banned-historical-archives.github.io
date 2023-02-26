@@ -33,7 +33,7 @@ export default {
           { name: '毛主义', type: 'subject' }, // 事件
           { name: '三大工具的同心建设', type: 'subject' }, // 事件
           { name: '两条路线斗争', type: 'subject' }, // 事件
-      ],
+        ],
         dates: [{ year: 2021, month: 7, day: 1 }],
       },
     ],

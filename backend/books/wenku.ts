@@ -10,5 +10,5 @@ export default {
   },
   parser_option: { page_limits: [] },
   parser_id: 'wenku',
-  path: '/TheGPCRdatabase',
+  path: '/archives9/TheGPCRdatabase',
 };

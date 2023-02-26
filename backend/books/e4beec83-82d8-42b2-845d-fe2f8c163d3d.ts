@@ -24,7 +24,7 @@ export default {
           { name: '世界形势', type: 'subject' }, // 事件
           { name: '外交政策', type: 'subject' }, // 事件
           { name: '越南战争', type: 'subject' }, // 事件
-      ],
+        ],
         dates: [{ year: 1967, month: 6 }],
       },
     ],

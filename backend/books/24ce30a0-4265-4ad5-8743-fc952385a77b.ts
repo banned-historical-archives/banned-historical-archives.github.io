@@ -22,7 +22,7 @@ export default {
         tags: [
           { name: '辽宁文革', type: 'subject' }, // 事件
           { name: '辽革站-辽报联委《进军号》战斗组', type: 'reprint' }, // 翻印/传抄
-      ],
+        ],
         dates: [{ year: 1968, month: 4, day: 7 }],
       },
     ],

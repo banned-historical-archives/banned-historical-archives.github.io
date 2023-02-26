@@ -6,9 +6,10 @@ export default {
     official: false,
     type: 'epub',
     author: '宋永毅',
-    files: '/books/机密档案中新发现的毛泽东讲话.epub',
+    files:
+      'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives9/main/books/机密档案中新发现的毛泽东讲话.epub',
   },
   parser_option: { page_limits: [] },
   parser_id: 'jimi',
-  path: '/books/机密档案中新发现的毛泽东讲话.epub',
+  path: '/archives9/books/机密档案中新发现的毛泽东讲话.epub',
 };

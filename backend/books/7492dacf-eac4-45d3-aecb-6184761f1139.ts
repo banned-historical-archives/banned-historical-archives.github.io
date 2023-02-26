@@ -18,28 +18,36 @@ export default {
         authors: ['毛远新'],
         page_start: 1,
         page_end: 2,
-        tags: [{
-          name: '北京',
-          type: 'issuer' // 发行方/出版方
-        }, {
-          name: '辽宁文革',
-          type: 'subject' // 事件
-        }, {
-          name: '二月逆流',
-          type: 'subject' // 事件
-        }, {
-          name: '批斗宋任穷',
-          type: 'subject' // 事件
-        }, {
-          name: '辽联',
-          type: 'character' // 人物
-        }, {
-          name: '辽革站',
-          type: 'character' // 人物
-        }, {
-          name: '八三一',
-          type: 'character' // 人物
-        }],
+        tags: [
+          {
+            name: '北京',
+            type: 'issuer', // 发行方/出版方
+          },
+          {
+            name: '辽宁文革',
+            type: 'subject', // 事件
+          },
+          {
+            name: '二月逆流',
+            type: 'subject', // 事件
+          },
+          {
+            name: '批斗宋任穷',
+            type: 'subject', // 事件
+          },
+          {
+            name: '辽联',
+            type: 'character', // 人物
+          },
+          {
+            name: '辽革站',
+            type: 'character', // 人物
+          },
+          {
+            name: '八三一',
+            type: 'character', // 人物
+          },
+        ],
         ocr_exceptions: {
           '2': {
             auto_vsplit: true,
@@ -55,10 +63,12 @@ export default {
         authors: ['江青'],
         page_start: 2,
         page_end: 2,
-        tags: [{
-          name: '二月逆流',
-          type: 'subject' // 事件
-        }],
+        tags: [
+          {
+            name: '二月逆流',
+            type: 'subject', // 事件
+          },
+        ],
         ocr_exceptions: {
           '2': {
             auto_vsplit: true,

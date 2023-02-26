@@ -5,7 +5,8 @@ export default {
     internal: false,
     official: false,
     type: 'img',
-    author: '江青、陈伯达，1966.7.23，中国人民大学“大唤大叫”战斗队转抄、上海毛棉行业红卫军委员会翻印',
+    author:
+      '江青、陈伯达，1966.7.23，中国人民大学“大唤大叫”战斗队转抄、上海毛棉行业红卫军委员会翻印',
     files:
       'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/259053b8-c23b-40e9-95d0-63476a3bc6c8/1.jpg,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/259053b8-c23b-40e9-95d0-63476a3bc6c8/2.jpg',
   },

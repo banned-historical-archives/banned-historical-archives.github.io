@@ -6,7 +6,8 @@ export default {
     internal: false,
     official: false,
     author: '江青，本世纪初国内老左编',
-    files: '/books/jqjianghua.pdf',
+    files:
+      'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives9/main/books/jqjianghua.pdf',
   },
   parser_option: {
     page_limits: [
@@ -15,5 +16,5 @@ export default {
     ],
   },
   parser_id: 'jqjianghua',
-  path: '/books/jqjianghua.pdf',
+  path: '/archives9/books/jqjianghua.pdf',
 };
