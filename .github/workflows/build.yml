@@ -22,9 +22,8 @@ jobs:
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=10s --health-retries=10
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v2
       - run: cd public && rm -rf archives9 && git clone --depth=1 https://github.com/banned-historical-archives/banned-historical-archives9.git archives9
-
       - name: Set up MySQL
         env:
           # use mysql for the host here because we have specified a container for the job.
@@ -45,6 +44,7 @@ jobs:
       - run: SITE_URL='https://banned-historical-archives.github.io' CI=true COMMIT_HASH="${{ github.sha }}" npm run build
       - run: touch out/.nojekyll
       - run: git config --global http.postBuffer 2097152000
+      - run: rm -rf public/archives9
       - name: Deploy to GitHub Pages
         uses: crazy-max/ghaction-github-pages@v3
         with:
