@@ -25,7 +25,7 @@ jobs:
       - uses: actions/checkout@v3
         with:
           token: ${{ secrets.GH_PAT}}
-      - run: git submodule update --init public/archives9
+      - run: cd public && rm -rf archives9 && git clone git@github.com:banned-historical-archives/banned-historical-archives9.git archives9
 
       - name: Set up MySQL
         env:
