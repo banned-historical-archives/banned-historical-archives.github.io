@@ -6,7 +6,8 @@ export default {
     internal: false,
     official: true,
     author: '中央文献研究室',
-    files: '/books/wenji5.pdf',
+    files:
+      'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives9/main/books/wenji5.pdf',
   },
   parser_option: {
     page_limits: [[14, 363]],
@@ -14,5 +15,5 @@ export default {
     content_min_x: 45.84,
   },
   parser_id: 'wenji',
-  path: '/books/wenji5.pdf',
+  path: '/archives9/books/wenji5.pdf',
 };

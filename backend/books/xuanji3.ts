@@ -6,9 +6,10 @@ export default {
     internal: false,
     official: true,
     author: '毛泽东',
-    files: '/books/毛泽东选集(1967)3.pdf',
+    files:
+      'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives9/main/books/毛泽东选集(1967)3.pdf',
   },
   parser_option: { page_limits: [[10, 329]], name: 'xuanji3' },
   parser_id: 'xuanji',
-  path: '/books/毛泽东选集(1967)3.pdf',
+  path: '/archives9/books/毛泽东选集(1967)3.pdf',
 };
