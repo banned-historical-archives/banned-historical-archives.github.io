@@ -1,11 +1,11 @@
 export default {
   entity: {
     id: 'cf7e2b8e-9249-4aa3-b0f4-2707aa6e74b0',
-    name: '姚文元同志在上海市革命委员会报告会上的讲话',
-    internal: true,
-    official: true,
+    name: '姚文元同志在上海市革命委员会报告会上的讲话（1967.6.3）',
+    internal: false,
+    official: false,
     type: 'img',
-    author: '',
+    author: '姚文元，1967.6.3',
     files:
       'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/cf7e2b8e-9249-4aa3-b0f4-2707aa6e74b0/1.jpg,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/cf7e2b8e-9249-4aa3-b0f4-2707aa6e74b0/2.jpg,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/cf7e2b8e-9249-4aa3-b0f4-2707aa6e74b0/3.jpg,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/cf7e2b8e-9249-4aa3-b0f4-2707aa6e74b0/4.jpg,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/cf7e2b8e-9249-4aa3-b0f4-2707aa6e74b0/5.jpg,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/cf7e2b8e-9249-4aa3-b0f4-2707aa6e74b0/6.jpg,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/cf7e2b8e-9249-4aa3-b0f4-2707aa6e74b0/7.jpg,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/cf7e2b8e-9249-4aa3-b0f4-2707aa6e74b0/8.jpg,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/cf7e2b8e-9249-4aa3-b0f4-2707aa6e74b0/9.jpg,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/cf7e2b8e-9249-4aa3-b0f4-2707aa6e74b0/10.jpg',
   },
@@ -18,6 +18,13 @@ export default {
         authors: ['姚文元'],
         page_start: 1,
         page_end: 10,
+        tags: [{
+          name: '上海文革',
+          type: 'subject' // 事件
+        }, {
+          name: '革命的三结合',
+          type: 'subject' // 事件
+        }],
         dates: [{ year: 1967, month: 6, day: 3 }],
       },
     ],
