@@ -504,6 +504,10 @@ const overwrite: { [title: string]: Partial<ParserResult> } = {
   },
   中共中央同意对方剑文的问题进行公开批判的通知: {
     authors: ['中共中央', '北京卫戍区'],
-    dates: [{ year: 1969, month: 8, day: 4 }, { year: 1969, month: 6, day: 25 }, { year: 1969, month: 7, day: 4 }]
-  }
+    dates: [
+      { year: 1969, month: 8, day: 4 },
+      { year: 1969, month: 6, day: 25 },
+      { year: 1969, month: 7, day: 4 },
+    ],
+  },
 };
