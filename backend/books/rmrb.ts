@@ -6,8 +6,7 @@ export default {
     official: true,
     author: '',
     type: '',
-    files:
-      '',
+    files: '',
   },
   parser_option: {},
   parser_id: 'rmrb',

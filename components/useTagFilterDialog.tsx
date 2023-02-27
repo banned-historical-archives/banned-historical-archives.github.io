@@ -24,8 +24,9 @@ export function useTagFilterDialog(
   );
   const [tags, setTags] = useState<Tag[]>(default_tags);
   const [selected, setSelected] = useState<string>(
-    tags_all[Symbol.iterator]().next().value ?
-    tags_all[Symbol.iterator]().next().value[1].id : '',
+    tags_all[Symbol.iterator]().next().value
+      ? tags_all[Symbol.iterator]().next().value[1].id
+      : '',
   );
   const onClose = useCallback(() => setTagDialog(false), []);
   const onConfirm = useCallback(() => {
