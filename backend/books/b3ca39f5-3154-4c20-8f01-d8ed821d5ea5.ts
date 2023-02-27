@@ -23,22 +23,7 @@ export default {
         page_start: 1,
         page_end: 7,
         tags: [
-          {
-            name: '武钢综合厂革命委员会',
-            type: 'reprint', // 翻印/传抄
-          },
-          {
-            name: '铁路、交通系统文革',
-            type: 'subject', // 事件
-          },
-          {
-            name: '革命大联合',
-            type: 'subject', // 事件
-          },
-          {
-            name: '派性问题',
-            type: 'subject', // 事件
-          },
+          { name: '武钢综合厂革命委员会', type: 'reprint' },
         ],
       },
     ],

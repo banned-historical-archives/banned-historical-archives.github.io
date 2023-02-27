@@ -21,18 +21,6 @@ export default {
         page_end: 23,
         tags: [
           { name: '共产主义小组（毛主义）', type: 'issuer' }, // 发行方/出版方
-          { name: '新民主主义革命', type: 'subject' }, // 事件
-          { name: '世界形势', type: 'subject' }, // 事件
-          { name: '人民战争', type: 'subject' }, // 事件
-          { name: '革命的三联合', type: 'subject' }, // 事件
-          { name: '革命大联合', type: 'subject' }, // 事件
-          { name: '七二〇事件', type: 'subject' }, // 事件
-          { name: '党内资产阶级', type: 'subject' }, // 事件
-          { name: '资本主义复辟', type: 'subject' }, // 事件
-          { name: '佳士运动', type: 'subject' }, // 事件
-          { name: '毛主义', type: 'subject' }, // 事件
-          { name: '三大工具的同心建设', type: 'subject' }, // 事件
-          { name: '两条路线斗争', type: 'subject' }, // 事件
       ],
         dates: [{ year: 2021, month: 7, day: 1 }],
       },

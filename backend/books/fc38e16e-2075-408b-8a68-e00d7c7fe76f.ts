@@ -20,26 +20,7 @@ export default {
         page_start: 2,
         page_end: 7,
         tags: [
-          {
-            name: '反潮流',
-            type: 'subject', // 事件
-          },
-          {
-            name: '限制资产阶级法权',
-            type: 'subject', // 事件
-          },
-          {
-            name: '派性问题',
-            type: 'subject', // 事件
-          },
-          {
-            name: '浙江文革',
-            type: 'subject', // 事件
-          },
-          {
-            name: '中共浙江省委办公室',
-            type: 'issuer', // 发行方/出版方
-          },
+          { name: '中共浙江省委办公室', type: 'issuer' },
         ],
         ocr_exceptions: {
           '2': { content_thresholds: [0.5, 0.12, 0, 0] },

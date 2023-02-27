@@ -19,20 +19,6 @@ export default {
         authors: ['张春桥'],
         page_start: 1,
         page_end: 21,
-        tags: [
-          {
-            name: '限制资产阶级法权',
-            type: 'subject', // 事件
-          },
-          {
-            name: '学习无产阶级专政理论',
-            type: 'subject', // 事件
-          },
-          {
-            name: '《毛泽东选集》第五卷的编纂',
-            type: 'subject', // 事件
-          },
-        ],
         dates: [{ year: 1975, month: 3, day: 1 }],
       },
     ],

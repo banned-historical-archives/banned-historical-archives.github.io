@@ -28,9 +28,7 @@ export default {
         page_start: 1,
         page_end: 3,
         tags: [
-          { name: '方剑文问题', type: 'subject' },
           { name: '浙江省联总《情况交流》编辑组', type: 'issuer' },
-          { name: '浙江红暴', type: 'character' },
         ],
         dates: [
           { year: 1969, month: 8, day: 4 },

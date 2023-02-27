@@ -21,34 +21,7 @@ export default {
         page_start: 1,
         page_end: 8,
         tags: [
-          {
-            name: '指示',
-            type: 'articleType',
-          },
-          {
-            name: '康生',
-            type: 'character',
-          },
-          {
-            name: '江青',
-            type: 'character',
-          },
-          {
-            name: '姚文元',
-            type: 'character',
-          },
-          {
-            name: '安徽无产阶级革命派（P派）',
-            type: 'character',
-          },
-          {
-            name: '安徽文革',
-            type: 'subject',
-          },
-          {
-            name: '安徽无产阶级革命派（P派）',
-            type: 'reprint',
-          },
+          { name: '安徽无产阶级革命派（P派）', type: 'reprint' },
         ],
         dates: [{ year: 1967, month: 9, day: 5 }],
       },

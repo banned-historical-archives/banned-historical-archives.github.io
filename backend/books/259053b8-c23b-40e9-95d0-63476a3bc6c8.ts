@@ -20,7 +20,6 @@ export default {
         page_start: 1,
         page_end: 2,
         tags: [
-          { name: '北京文革', type: 'subject' }, // 事件
           { name: '中国人民大学“大唤大叫”战斗队', type: 'reprint' }, // 翻印/传抄
           { name: '上海毛棉行业红卫军委员会', type: 'reprint' }, // 翻印/传抄
         ],
