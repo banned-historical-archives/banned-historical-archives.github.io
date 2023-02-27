@@ -21,7 +21,7 @@ export default {
         page_end: 23,
         tags: [
           { name: '共产主义小组（毛主义）', type: 'issuer' }, // 发行方/出版方
-      ],
+        ],
         dates: [{ year: 2021, month: 7, day: 1 }],
       },
     ],

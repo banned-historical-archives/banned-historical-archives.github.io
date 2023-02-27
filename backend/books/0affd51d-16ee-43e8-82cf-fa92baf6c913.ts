@@ -27,9 +27,7 @@ export default {
         authors: ['中共中央', '北京卫戍区'],
         page_start: 1,
         page_end: 3,
-        tags: [
-          { name: '浙江省联总《情况交流》编辑组', type: 'issuer' },
-        ],
+        tags: [{ name: '浙江省联总《情况交流》编辑组', type: 'issuer' }],
         dates: [
           { year: 1969, month: 8, day: 4 },
           { year: 1969, month: 6, day: 25 },

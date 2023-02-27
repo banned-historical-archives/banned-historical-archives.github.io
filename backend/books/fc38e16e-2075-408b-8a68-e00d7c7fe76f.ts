@@ -19,9 +19,7 @@ export default {
         authors: ['王洪文', '纪登奎'],
         page_start: 2,
         page_end: 7,
-        tags: [
-          { name: '中共浙江省委办公室', type: 'issuer' },
-        ],
+        tags: [{ name: '中共浙江省委办公室', type: 'issuer' }],
         ocr_exceptions: {
           '2': { content_thresholds: [0.5, 0.12, 0, 0] },
           '4': { content_thresholds: [0, 0.12, 0, 0.5] },

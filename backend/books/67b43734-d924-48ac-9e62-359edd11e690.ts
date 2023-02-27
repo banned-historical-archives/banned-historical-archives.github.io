@@ -20,9 +20,7 @@ export default {
         authors: ['康生', '江青', '姚文元'],
         page_start: 1,
         page_end: 8,
-        tags: [
-          { name: '安徽无产阶级革命派（P派）', type: 'reprint' },
-        ],
+        tags: [{ name: '安徽无产阶级革命派（P派）', type: 'reprint' }],
         dates: [{ year: 1967, month: 9, day: 5 }],
       },
     ],

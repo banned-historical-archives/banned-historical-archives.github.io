@@ -22,9 +22,7 @@ export default {
         dates: [{ year: 1968, month: 5, day: 12 }],
         page_start: 1,
         page_end: 7,
-        tags: [
-          { name: '武钢综合厂革命委员会', type: 'reprint' },
-        ],
+        tags: [{ name: '武钢综合厂革命委员会', type: 'reprint' }],
       },
     ],
     ocr_exceptions: {},

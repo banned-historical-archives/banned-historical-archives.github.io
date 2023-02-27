@@ -19,9 +19,7 @@ export default {
         authors: ['毛远新'],
         page_start: 1,
         page_end: 5,
-        tags: [
-          { name: '冯金', type: 'reprint' },
-        ],
+        tags: [{ name: '冯金', type: 'reprint' }],
         dates: [{ year: 1974, month: 2, day: 16 }],
       },
     ],
