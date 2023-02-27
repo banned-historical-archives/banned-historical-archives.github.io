@@ -59,21 +59,18 @@ export default function PatchableArticle({
           size="small"
           onClick={() =>
             window.open(
-              'https://github.com/banned-historical-archives/banned-historical-archives.github.io/wiki/%E5%A6%82%E4%BD%95%E8%B4%A1%E7%8C%AE%E4%B8%8E%E6%A0%A1%E5%AF%B9%E6%96%87%E7%A8%BF',
+              'https://github.com/banned-historical-archives/banned-historical-archives.github.io/wiki/%E6%A0%87%E5%87%86%E5%8C%96%E6%96%87%E7%A8%BF%E5%BD%95%E5%85%A5%E4%B8%8E%E6%A0%A1%E5%AF%B9',
               '_blank',
             )
           }
         >
           校对注意事项
         </Button>
-        <Button
-          onClick={(e) => {
-            setPopoverContent('〔〕、·、×、〇');
-            setAnchorEl(e.currentTarget);
-          }}
+        <Stack
+          sx={{ position: 'fixed', top: '50%', left: 0, zIndex: 1 }}
         >
-          校对常用符号
-        </Button>
+          〔〕、·、×、〇
+        </Stack>
       </Stack>
       <Popover
         open={!!anchorEl}

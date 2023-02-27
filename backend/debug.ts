@@ -18,12 +18,12 @@ import { ContentType, Date, ParserResult } from '../types';
   const ds = await init();
   const books = await get_books();
   const book = books.find(
-    (i) => i.entity.id === '4487f711-d1dc-4c33-a1a9-50a1b7f7d659',
+    (i) => i.entity.id === '3f502324-0a16-4470-b3fc-3e237f39b604',
   )!;
 
-  console.log(
-    get_article_id((await book.parser(book.path, book.parser_option))[0]),
-  );
+  for (const i of await book.parser(book.path, book.parser_option)) {
+    console.log(get_article_id(i));
+  }
   // console.log(await book.parser(book.path, book.parser_option));
 
   debugger;

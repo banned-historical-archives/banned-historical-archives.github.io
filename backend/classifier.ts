@@ -294,7 +294,7 @@ export function get_tags(
       name: '辽宁无产阶级革命派联络站（辽革站）',
       type: TagType.character,
     });
-  } else if (content.indexOf('八三一') >= 0) {
+  } else if (content.indexOf('八三一') >= 0 && content.indexOf('辽宁') >= 0) {
     organization_results.push({
       name: '毛泽东思想八三一沈阳革命造反总司令部（八三一）',
       type: TagType.character,
@@ -374,6 +374,7 @@ export function get_tags(
     '佳士运动',
     '同心建设',
     '毛主义',
+    '武斗',
   ];
 
   const event_results = event_subjects
@@ -432,6 +433,8 @@ export function get_tags(
     content.indexOf('世界形势') >= 0
   ) {
     event_results.push({ name: '世界形势', type: TagType.subject });
+  } else if (content.indexOf('克己复礼') >= 0) {
+    event_results.push({ name: '批林批孔', type: TagType.subject });
   }
 
   const subjects_results = [...provice_results, ...event_results];
