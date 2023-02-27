@@ -6,9 +6,10 @@ export default {
     type: 'pdf',
     official: false,
     author: '王洪文',
-    files: '/books/王洪文文集.pdf',
+    files:
+      'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives9/main/books/王洪文文集.pdf',
   },
   parser_option: { page_limits: [[4, 66]] },
   parser_id: 'wanghongwen',
-  path: '/books/王洪文文集.pdf',
+  path: '/archives9/books/王洪文文集.pdf',
 };

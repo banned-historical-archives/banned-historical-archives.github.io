@@ -6,9 +6,10 @@ export default {
     official: true,
     author: '杨家沟文改局',
     type: 'pdf',
-    files: '/books/zzj1.pdf',
+    files:
+      'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives9/main/books/zzj1.pdf',
   },
   parser_option: { page_limits: [[1, 6]] },
   parser_id: 'zzj1',
-  path: '/books/zzj1.pdf',
+  path: '/archives9/books/zzj1.pdf',
 };

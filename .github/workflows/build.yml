@@ -23,12 +23,13 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+      - run: cd public && rm -rf archives9 && git clone --depth=1 https://github.com/banned-historical-archives/banned-historical-archives9.git archives9
+      - name: Set up MySQL
         env:
           # use mysql for the host here because we have specified a container for the job.
           # If we were running the job on the VM this would be localhost
           MYSQL_HOST: mysql
           MYSQL_PORT: 3306
-      - name: Set up MySQL
         run: |
           apt-get update
           apt-get install -y --force-yes mysql-client

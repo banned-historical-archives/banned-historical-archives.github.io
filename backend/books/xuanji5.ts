@@ -6,7 +6,8 @@ export default {
     type: 'pdf',
     official: true,
     author: '毛泽东',
-    files: '/books/毛泽东选集(1977)5.pdf',
+    files:
+      'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives9/main/books/毛泽东选集(1977)5.pdf',
   },
   parser_option: {
     page_limits: [[16, 513]],
@@ -16,5 +17,5 @@ export default {
     name: 'xuanji5',
   },
   parser_id: 'xuanji',
-  path: '/books/毛泽东选集(1977)5.pdf',
+  path: '/archives9/books/毛泽东选集(1977)5.pdf',
 };
