@@ -24,19 +24,21 @@ export async function parse(
   parser_opt: ParserOption,
 ): Promise<ParserResult[]> {
     const year_start = 1946;
-    const year_end = 1976;
+    const year_end = 1958;
     const res:ParserResult[] = [];
     for (let i = year_start; i <= year_end; ++i) {
       for (let j = year_start === 1946 ? 5 : 1; j <= 12; ++j) {
         const dir = `${i}年${j > 9 ? j : '0' + j}月`;
         try {
-          execSync(`7z x ${dir}月.7z -y`, {
+          execSync(`7z x -y ${dir}.7z`, {
             cwd: normalize(dirPathOrFilePath),
           });
         } catch (e) {}
         const files = readdirSync(normalize(join(dirPathOrFilePath, dir)));
         for (const file of files) {
-          const content = readFileSync(normalize(join(dirPathOrFilePath, dir, file)))
+          const content = readFileSync(
+            normalize(join(dirPathOrFilePath, dir, file)),
+          )
             .toString()
             .split('\n');
           res.push({
