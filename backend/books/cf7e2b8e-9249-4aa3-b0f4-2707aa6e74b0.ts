@@ -18,16 +18,6 @@ export default {
         authors: ['姚文元'],
         page_start: 1,
         page_end: 10,
-        tags: [
-          {
-            name: '上海文革',
-            type: 'subject', // 事件
-          },
-          {
-            name: '革命的三结合',
-            type: 'subject', // 事件
-          },
-        ],
         dates: [{ year: 1967, month: 6, day: 3 }],
       },
     ],

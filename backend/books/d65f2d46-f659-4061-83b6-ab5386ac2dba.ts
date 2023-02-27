@@ -32,7 +32,6 @@ export default {
         tags: [
           { name: '北京人民出版社', type: 'issuer' },
           { name: '中共北京市委宣传组', type: 'issuer' },
-          { name: '党内资产阶级', type: 'subject' },
         ],
         dates: [{ year: 1976, month: 6 }],
       },
@@ -44,7 +43,6 @@ export default {
         tags: [
           { name: '北京人民出版社', type: 'issuer' },
           { name: '中共北京市委宣传组', type: 'issuer' },
-          { name: '党内资产阶级', type: 'subject' },
         ],
         dates: [{ year: 1976, month: 6 }],
       },
@@ -56,7 +54,6 @@ export default {
         tags: [
           { name: '北京人民出版社', type: 'issuer' },
           { name: '中共北京市委宣传组', type: 'issuer' },
-          { name: '党内资产阶级', type: 'subject' },
         ],
         dates: [{ year: 1976, month: 6 }],
       },
@@ -68,7 +65,6 @@ export default {
         tags: [
           { name: '北京人民出版社', type: 'issuer' },
           { name: '中共北京市委宣传组', type: 'issuer' },
-          { name: '党内资产阶级', type: 'subject' },
         ],
         dates: [{ year: 1976, month: 6 }],
       },
@@ -80,7 +76,6 @@ export default {
         tags: [
           { name: '北京人民出版社', type: 'issuer' },
           { name: '中共北京市委宣传组', type: 'issuer' },
-          { name: '党内资产阶级', type: 'subject' },
         ],
         dates: [{ year: 1976, month: 6 }],
       },
