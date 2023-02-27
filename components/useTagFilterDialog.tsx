@@ -20,11 +20,13 @@ export function useTagFilterDialog(
   const [show, setTagDialog] = useState(false);
   const [tagFilter, setTagFilter] = useState<string | null>(null);
   const default_tags = Array.from(
-    tags_all_order_by_type.get(TagType.articleType)!.values(),
+    tags_all_order_by_type.get(TagType.articleType)?.values() || [],
   );
   const [tags, setTags] = useState<Tag[]>(default_tags);
   const [selected, setSelected] = useState<string>(
-    tags_all[Symbol.iterator]().next().value[1].id,
+    tags_all[Symbol.iterator]().next().value
+      ? tags_all[Symbol.iterator]().next().value[1].id
+      : '',
   );
   const onClose = useCallback(() => setTagDialog(false), []);
   const onConfirm = useCallback(() => {

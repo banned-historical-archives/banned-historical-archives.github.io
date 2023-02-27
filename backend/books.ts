@@ -13,6 +13,7 @@ import * as yaowenyuan from './parser/yaowenyuan';
 import * as zhangchunqiao from './parser/zhangchunqiao';
 import * as GPCRv3 from './parser/GPCR_v3';
 import * as zzj1 from './parser/zzj1';
+import * as rmrb from './parser/rmrb';
 import * as automation from './parser/automation';
 import { apply_patch, apply_patch_v2, get_article_id } from '../utils';
 import { traditionalChineseToSimpleChinese } from '../utils/i18n';
@@ -26,6 +27,7 @@ const parsers: { [key: string]: any } = {
   wenji,
   GPCRv3,
   jqjianghua,
+  rmrb,
   xuanji,
   jimi,
   wenku,
