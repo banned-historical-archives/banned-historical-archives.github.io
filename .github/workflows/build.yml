@@ -32,15 +32,19 @@ jobs:
           MYSQL_PORT: 3306
         run: |
           apt-get update
-          apt-get install -y --force-yes mysql-client p7zip-full
+          apt-get install -y --force-yes mysql-client
           mysql --host mysql -e 'CREATE DATABASE banned_history CHARACTER SET utf8 COLLATE utf8_general_ci;' -uroot -proot_password
+      - name: Set up 7zip
+      - run: apt-get install -y --force-yes p7zip-full
+      - run: 7z x public/archives10/1976年12月.7z
+      - run: ls public/archives10/1976年12月
       - name: Use Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 17.9
       - run: npm install
       - run: cp -r ./node_modules/pdfjs-dist ./public/
-      - run: CI=true npm run init-db
+      - run: NODE_OPTIONS="--max-old-space-size=8192" CI=true npm run init-db
       - run: SITE_URL='https://banned-historical-archives.github.io' CI=true COMMIT_HASH="${{ github.sha }}" npm run build
       - run: touch out/.nojekyll
       - run: git config --global http.postBuffer 2097152000
