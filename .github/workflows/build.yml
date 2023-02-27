@@ -24,6 +24,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: cd public && rm -rf archives9 && git clone --depth=1 https://github.com/banned-historical-archives/banned-historical-archives9.git archives9 && rm -rf archives10 && git clone --depth=1 https://github.com/banned-historical-archives/banned-historical-archives10.git archives10
+      - run: ls public
+      - run: ls public/archives10
       - name: Set up MySQL
         env:
           # use mysql for the host here because we have specified a container for the job.
@@ -34,7 +36,7 @@ jobs:
           apt-get update
           apt-get install -y --force-yes mysql-client
           mysql --host mysql -e 'CREATE DATABASE banned_history CHARACTER SET utf8 COLLATE utf8_general_ci;' -uroot -proot_password
-          apt-get install -y --force-yes p7zip-full
+          apt-get install -y --force-yes p7zip-full p7zip-rar
           7z x public/archives10/1976年12月.7z
           ls public/archives10/1976年12月
       - name: Use Node.js
