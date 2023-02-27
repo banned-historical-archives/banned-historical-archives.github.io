@@ -30,7 +30,7 @@ export async function parse(
       for (let j = year_start === 1946 ? 5 : 1; j <= 12; ++j) {
         const dir = `${i}年${j > 9 ? j : '0' + j}月`;
         try {
-          execSync(`7z x ${dir}月.7z`, {
+          execSync(`7z x ${dir}月.7z -y`, {
             cwd: normalize(dirPathOrFilePath),
           });
         } catch (e) {}
