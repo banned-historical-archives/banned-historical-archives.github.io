@@ -19,12 +19,6 @@ export default {
         authors: ['姚文元'],
         page_start: 1,
         page_end: 15,
-        tags: [
-          { name: '无产阶级国际主义', type: 'subject' }, // 事件
-          { name: '世界形势', type: 'subject' }, // 事件
-          { name: '外交政策', type: 'subject' }, // 事件
-          { name: '越南战争', type: 'subject' }, // 事件
-        ],
         dates: [{ year: 1967, month: 6 }],
       },
     ],

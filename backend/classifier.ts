@@ -47,6 +47,12 @@ export function get_article_types(parser_result: ParserResult) {
 export function get_tags(
   parser_result: ParserResult,
 ): { name: string; type: TagType }[] {
+  const content =
+    parser_result.description +
+    parser_result.title +
+    parser_result.parts.reduce((m, i) => m + i.text + '\n', '');
+
+  // 关键人物在 标题/正文/描述 中出现大于等于两次，加入 tags
   const important_characters = [
     '周恩来',
     '戚本禹',
@@ -108,14 +114,12 @@ export function get_tags(
     '钱学森',
     '李钟奇',
     '温玉成',
-    '全军文革',
     '金敬迈',
     '廖承志',
     '王秀珍',
     '雍文涛',
     '王林',
     '李雪峰',
-    '中央文革',
     '李震',
     '刘少奇',
     '胡耀邦',
@@ -230,80 +234,207 @@ export function get_tags(
     '高岗',
     '饶漱石',
     '彭德怀',
+    '方剑文',
   ];
 
-  const important_subjects = [
-    '农业',
-    '工业',
-    '文艺',
-    '大批判',
-    '邓小平',
-    '刘少奇',
-    '林彪',
-    '一月革命',
-    '夺权',
-    '大联合',
-    '红卫兵',
-    '革命委员会',
-    '教育革命',
-    '批陈整风',
-    '批林批孔',
-    '五一六',
-    '上山下乡',
-    '一打三反',
-    '破四旧',
-    '党内资产阶级',
-    '二月逆流',
-    '资产阶级法权',
-    '派性',
-    '反潮流',
-    '清理阶级队伍',
-    '三结合',
-    '两条路线斗争',
-    '七二〇事件',
-    '越南战争',
-    '朝鲜战争',
-    '清理阶级队伍',
-    '清队',
-  ];
-
-  const content =
-    parser_result.description +
-    parser_result.title +
-    parser_result.parts.reduce((m, i) => m + i.text + '\n', '');
-
-  const character_results = important_characters
+  const person_results = important_characters
     .filter(
       (i) =>
         content.indexOf(i) !== content.lastIndexOf(i) ||
         parser_result.authors.indexOf(i) >= 0,
     )
     .map((i) => ({ name: i, type: TagType.character }));
-  const subjects_results = important_subjects
-    .filter((i) => content.indexOf(i) !== content.lastIndexOf(i))
-    .map((i) => {
-      if (i === '农业') return { name: '农业战线', type: TagType.subject };
-      else if (i === '工业') return { name: '工业战线', type: TagType.subject };
-      else if (i === '文艺') return { name: '文艺战线', type: TagType.subject };
-      else if (i === '五一六')
-        return { name: '清查五·一六', type: TagType.subject };
-      else if (i === '红卫兵')
-        return { name: '红卫兵运动', type: TagType.subject };
-      else if (i === '大批判')
-        return { name: '革命大批判', type: TagType.subject };
-      else if (i === '大联合')
-        return { name: '革命大联合', type: TagType.subject };
-      else if (i === '三结合')
-        return { name: '革命三结合', type: TagType.subject };
-      else if (i === '邓小平') return { name: '批邓', type: TagType.subject };
-      else if (i === '刘少奇') return { name: '批刘', type: TagType.subject };
-      else if (i === '林彪') return { name: '批林批孔', type: TagType.subject };
-      else if (i === '资产阶级法权')
-        return { name: '限制资产阶级法权', type: TagType.subject };
-      else if (i === '清队')
-        return { name: '清理阶级队伍', type: TagType.subject };
-      else return { name: i, type: TagType.subject };
+
+  // 关键组织在 标题/正文/描述 中出现，加入 tags
+  const important_organizations = [
+    '中央文革',
+    '红暴',
+    '红色暴动委员会',
+    '红革会',
+    '工总司',
+    'P派',
+    '辽联',
+    '辽革站',
+    '八三一',
+  ];
+
+  const organization_results = [];
+  if (content.indexOf('中央文革') >= 0) {
+    organization_results.push({ name: '中央文革', type: TagType.character });
+  } else if (content.indexOf('工总司') >= 0) {
+    organization_results.push({
+      name: '上海市工人革命造反总司令部（工总司）',
+      type: TagType.character,
     });
+  } else if (
+    content.indexOf('红暴') >= 0 ||
+    content.indexOf('红色暴动委员会') >= 0
+  ) {
+    organization_results.push({
+      name: '浙江省红色暴动委员会（红暴）',
+      type: TagType.character,
+    });
+  } else if (content.indexOf('红革会') >= 0) {
+    organization_results.push({
+      name: '红卫兵上海市大专院校革命委员会（红革会）',
+      type: TagType.character,
+    });
+  } else if (content.indexOf('P派') >= 0) {
+    organization_results.push({
+      name: '安徽无产阶级革命派（P派）',
+      type: TagType.character,
+    });
+  } else if (content.indexOf('辽联') >= 0) {
+    organization_results.push({
+      name: '辽宁省革命造反派大联合委员会（辽联）',
+      type: TagType.character,
+    });
+  } else if (content.indexOf('辽革站') >= 0) {
+    organization_results.push({
+      name: '辽宁无产阶级革命派联络站（辽革站）',
+      type: TagType.character,
+    });
+  } else if (content.indexOf('八三一') >= 0) {
+    organization_results.push({
+      name: '毛泽东思想八三一沈阳革命造反总司令部（八三一）',
+      type: TagType.character,
+    });
+  }
+
+  const character_results = [...person_results, ...organization_results];
+
+  // 全国省和自治区在 标题/正文/描述 中出现大于等于两次，且日期非空并内含至少一项年份大于 1965，将“xx文革”加入 tags
+  const provice_subjects = [
+    '黑龙江',
+    '吉林',
+    '辽宁',
+    '河北',
+    '河南',
+    '山东',
+    '山西',
+    '陕西',
+    '甘肃',
+    '青海',
+    '四川',
+    '湖北',
+    '湖南',
+    '江西',
+    '安徽',
+    '江苏',
+    '浙江',
+    '福建',
+    '广东',
+    '海南省',
+    '云南',
+    '贵州',
+    '北京',
+    '天津',
+    '上海',
+    '重庆',
+    '内蒙古',
+    '宁夏',
+    '新疆',
+    '西藏',
+    '广西',
+  ];
+
+  const provice_results = provice_subjects
+    .filter((i) => {
+      if (parser_result.dates.length === 0) {
+        return false;
+      } else if (content.indexOf(i) !== content.lastIndexOf(i)) {
+        for (let i = 0; i < parser_result.dates.length; i++) {
+          if (parser_result.dates[i].year! >= 1965) return true;
+        }
+      }
+    })
+    .map((i) => ({ name: `${i}文革`, type: TagType.character }));
+
+  // 关键事件在 标题/正文/描述 中出现，稍加修改或不修改后加入 tags
+  const event_subjects = [
+    '一月革命',
+    '夺权',
+    '革命委员会',
+    '教育革命',
+    '批陈整风',
+    '批林批孔',
+    '上山下乡',
+    '一打三反',
+    '破四旧',
+    '党内资产阶级',
+    '二月逆流',
+    '派性',
+    '反潮流',
+    '清理阶级队伍',
+    '两条路线斗争',
+    '七二〇事件',
+    '越南战争',
+    '朝鲜战争',
+    '人民战争',
+    '佳士运动',
+    '同心建设',
+    '毛主义',
+  ];
+
+  const event_results = event_subjects
+    .filter((i) => content.indexOf(i) >= 0)
+    .map((i) => ({ name: i, type: TagType.subject }));
+
+  if (content.indexOf('农业') >= 0) {
+    event_results.push({ name: '农业战线', type: TagType.subject });
+  } else if (content.indexOf('工业') >= 0) {
+    event_results.push({ name: '工业战线', type: TagType.subject });
+  } else if (content.indexOf('文艺') >= 0) {
+    event_results.push({ name: '文艺战线', type: TagType.subject });
+  } else if (content.indexOf('五一六') >= 0) {
+    event_results.push({ name: '清查五·一六', type: TagType.subject });
+  } else if (content.indexOf('红卫兵') >= 0) {
+    event_results.push({ name: '红卫兵运动', type: TagType.subject });
+  } else if (content.indexOf('大批判') >= 0) {
+    event_results.push({ name: '革命大批判', type: TagType.subject });
+  } else if (content.indexOf('大联合') >= 0) {
+    event_results.push({ name: '革命大联合', type: TagType.subject });
+  } else if (content.indexOf('三结合') >= 0) {
+    event_results.push({ name: '革命三结合', type: TagType.subject });
+  } else if (
+    content.indexOf('邓小平') >= 0 ||
+    content.indexOf('刘少奇') >= 0 ||
+    content.indexOf('林彪') >= 0
+  ) {
+    event_results.push({ name: '批判修正主义', type: TagType.subject });
+  } else if (content.indexOf('资产阶级法权') >= 0) {
+    event_results.push({ name: '限制资产阶级法权', type: TagType.subject });
+  } else if (
+    content.indexOf('清队') >= 0 ||
+    content.indexOf('清理阶级队伍') >= 0
+  ) {
+    event_results.push({ name: '清理阶级队伍', type: TagType.subject });
+  } else if (content.indexOf('同心建设') >= 0) {
+    event_results.push({ name: '三大工具的同心建设', type: TagType.subject });
+  } else if (content.indexOf('第五卷') >= 0) {
+    event_results.push({
+      name: '编纂《毛泽东选集》第五卷',
+      type: TagType.subject,
+    });
+  } else if (
+    content.indexOf('走资派') >= 0 ||
+    content.indexOf('走资本主义道路的当权派') >= 0 ||
+    content.indexOf('走资本主义道路当权派') >= 0
+  ) {
+    event_results.push({ name: '党内资产阶级', type: TagType.subject });
+  } else if (
+    content.indexOf('国际主义') >= 0 ||
+    content.indexOf('无产阶级国际主义') >= 0
+  ) {
+    event_results.push({ name: '无产阶级国际主义', type: TagType.subject });
+  } else if (
+    content.indexOf('国际形势') >= 0 ||
+    content.indexOf('世界形势') >= 0
+  ) {
+    event_results.push({ name: '世界形势', type: TagType.subject });
+  }
+
+  const subjects_results = [...provice_results, ...event_results];
 
   return [...character_results, ...subjects_results];
 }
