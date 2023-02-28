@@ -235,6 +235,19 @@ export function get_tags(
     '饶漱石',
     '彭德怀',
     '方剑文',
+    '梁守富',
+    '曹在风',
+    '曹轶欧',
+    '曾希圣',
+    '陈再道',
+    '黄岩',
+    '刘秀山',
+    '程明远',
+    '严光',
+    '阎洪滏',
+    '蔡洪江',
+    '黄文明',
+    '周世忠'
   ];
 
   const person_results = important_characters
@@ -256,6 +269,8 @@ export function get_tags(
     '辽联',
     '辽革站',
     '八三一',
+    '六四〇八',
+    '八·二七派',
   ];
 
   const organization_results = [];
@@ -296,10 +311,27 @@ export function get_tags(
     });
   } else if (content.indexOf('八三一') >= 0 && content.indexOf('辽宁') >= 0) {
     organization_results.push({
-      name: '毛泽东思想八三一沈阳革命造反总司令部（八三一）',
+      name: '（辽宁）毛泽东思想八三一沈阳革命造反总司令部（八三一）',
       type: TagType.character,
     });
-  }
+  } else if (
+    content.indexOf('六四〇八') >= 0 ||
+    content.indexOf('六四〇八部队') >= 0
+  ) {
+    organization_results.push({
+      name: '六四〇八部队（六四〇八）',
+      type: TagType.character,
+    });
+  } else if (
+    content.indexOf('八·二七派') >= 0 ||
+    content.indexOf('八二七派') >= 0
+  ) {
+    organization_results.push({
+      name: '（江苏）八·二七派（P派）',
+      type: TagType.character,
+    });
+  } 
+  
 
   const character_results = [...person_results, ...organization_results];
 
@@ -352,7 +384,6 @@ export function get_tags(
 
   // 关键事件在 标题/正文/描述 中出现，稍加修改或不修改后加入 tags
   const event_subjects = [
-    '一月革命',
     '夺权',
     '革命委员会',
     '教育革命',
@@ -375,6 +406,8 @@ export function get_tags(
     '同心建设',
     '毛主义',
     '武斗',
+    '人民内部矛盾',
+    '三支两军',
   ];
 
   const event_results = event_subjects
@@ -387,8 +420,6 @@ export function get_tags(
     event_results.push({ name: '工业战线', type: TagType.subject });
   } else if (content.indexOf('文艺') >= 0) {
     event_results.push({ name: '文艺战线', type: TagType.subject });
-  } else if (content.indexOf('五一六') >= 0) {
-    event_results.push({ name: '清查五·一六', type: TagType.subject });
   } else if (content.indexOf('红卫兵') >= 0) {
     event_results.push({ name: '红卫兵运动', type: TagType.subject });
   } else if (content.indexOf('大批判') >= 0) {
@@ -435,7 +466,29 @@ export function get_tags(
     event_results.push({ name: '世界形势', type: TagType.subject });
   } else if (content.indexOf('克己复礼') >= 0) {
     event_results.push({ name: '批林批孔', type: TagType.subject });
+  } else if (
+    content.indexOf('一月革命') >= 0 ||
+    content.indexOf('一月风暴') >= 0
+  ) {
+    event_results.push({ name: '一月革命', type: TagType.subject });
+  } else if (
+    content.indexOf('一·二六夺权') >= 0 ||
+    content.indexOf('一二六夺权') >= 0
+  ) {
+    event_results.push({ name: '一·二六夺权', type: TagType.subject });
+  } else if (
+    content.indexOf('九·一三') >= 0 ||
+    content.indexOf('九·一三事件') >= 0
+  ) {
+    event_results.push({ name: '九·一三事件', type: TagType.subject });
+  }  else if (
+    content.indexOf('5·16') >= 0 ||
+    content.indexOf('五·一六') >= 0
+  ) {
+    event_results.push({ name: '清查五·一六', type: TagType.subject });
   }
+
+  
 
   const subjects_results = [...provice_results, ...event_results];
 

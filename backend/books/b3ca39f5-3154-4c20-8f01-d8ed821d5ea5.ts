@@ -1,7 +1,7 @@
 export default {
   entity: {
     id: 'b3ca39f5-3154-4c20-8f01-d8ed821d5ea5',
-    name: '总理、陈伯达、康生、江青、姚文元等同志在接见全国铁路、交通会议全体代表时的重要讲话（1968.5.12）',
+    name: '中央首长接见全国铁路、交通会议全体代表时的讲话（1968.5.12）',
     internal: false,
     official: false,
     type: 'img',
