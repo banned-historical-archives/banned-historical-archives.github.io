@@ -28,3 +28,6 @@
 [submodule "public/archives9"]
 	path = public/archives9
 	url = git@github.com:banned-historical-archives/banned-historical-archives9.git
+[submodule "public/archives10"]
+	path = public/archives10
+	url = git@github.com:banned-historical-archives/banned-historical-archives10.git

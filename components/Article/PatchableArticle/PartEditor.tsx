@@ -196,6 +196,7 @@ export default function Part({
             const newPartDiff: PartDiff = { ...partDiff.current };
             if (!e.target.value.length) {
               newPartDiff.delete = true;
+              delete newPartDiff.diff;
               setDeleted(true);
             } else {
               delete newPartDiff.delete;
@@ -204,7 +205,7 @@ export default function Part({
                 originText,
                 e.target.value,
               );
-              if (diff.length !== 1) {
+              if (diff.length !== 1 || !originText) {
                 newPartDiff.diff = new diff_match_patch().diff_toDelta(diff);
               } else {
                 delete newPartDiff.diff;

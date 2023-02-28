@@ -37,7 +37,7 @@ async function init_articles(AppDataSource: DataSource) {
     console.log(book.entity.name);
     const publication_id = book.entity.id!;
     const res = await book.parser(book.path, book.parser_option);
-    console.log('parsed', book.entity.name);
+    console.log('parsed', book.entity.name, 'length:', res.length);
 
     await AppDataSource.manager.upsert(Publication, book.entity, ['id']);
 
