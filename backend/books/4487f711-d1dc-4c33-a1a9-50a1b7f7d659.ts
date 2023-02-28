@@ -1,7 +1,7 @@
 export default {
   entity: {
     id: '4487f711-d1dc-4c33-a1a9-50a1b7f7d659',
-    name: '关于日本问题的报告（1956.11）',
+    name: '张春桥关于日本问题的报告（1956.11）',
     internal: true,
     official: true,
     type: 'img',
