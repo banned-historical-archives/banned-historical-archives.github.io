@@ -66,11 +66,6 @@ export default function PatchableArticle({
         >
           校对注意事项
         </Button>
-        <Stack
-          sx={{ position: 'fixed', top: '50%', left: 0, zIndex: 1 }}
-        >
-          〔〕、·、×、〇
-        </Stack>
       </Stack>
       <Popover
         open={!!anchorEl}
