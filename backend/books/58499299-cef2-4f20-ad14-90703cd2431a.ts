@@ -21,7 +21,7 @@ export default {
         tags: [
           { name: '红卫战报', type: 'issuer' }, // 发行方/出版方
           { name: '电气革命造反组', type: 'reprint' }, // 翻印/传抄
-      ],
+        ],
         dates: [{ year: 1967, month: 3, day: 20 }],
       },
       {
