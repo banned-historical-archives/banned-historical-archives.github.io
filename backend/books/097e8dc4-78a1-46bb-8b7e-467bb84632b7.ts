@@ -1,11 +1,11 @@
 export default {
   entity: {
     id: '097e8dc4-78a1-46bb-8b7e-467bb84632b7',
-    name: '重要讲话',
-    internal: true,
-    official: true,
+    name: '中央首长重要讲话（1967年）',
+    internal: false,
+    official: false,
     type: 'img',
-    author: '张春桥',
+    author: '毛泽东、江青、康生、张春桥、关锋，1967年左右',
     files:
       'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/097e8dc4-78a1-46bb-8b7e-467bb84632b7/1.jpg,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/097e8dc4-78a1-46bb-8b7e-467bb84632b7/2.jpg,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/097e8dc4-78a1-46bb-8b7e-467bb84632b7/3.jpg,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/097e8dc4-78a1-46bb-8b7e-467bb84632b7/4.jpg',
   },
@@ -44,6 +44,11 @@ export default {
         authors: ['江青', '陈伯达', '康生'],
         page_start: 2,
         page_end: 2,
+        tags: [
+          { name: '北京政法学院“政法公社”', type: 'reprint' }, // 翻印/传抄
+          { name: '北京航空学院三〇三教研室', type: 'reprint' }, // 翻印/传抄
+          { name: '上海五十四中学红色造反团', type: 'reprint' }, // 翻印/传抄
+        ],
         dates: [{ year: 1967, month: 1, day: 4 }],
       },
       {
@@ -52,6 +57,9 @@ export default {
         authors: ['江青'],
         page_start: 3,
         page_end: 3,
+        tags: [
+          { name: '清华大学毛泽东思想红卫兵《震五洲》战斗小组', type: 'recorder' }, // 记录
+        ],
         ocr_exceptions: { '3': { content_thresholds: [0, 0.26, 0, 0] } },
         dates: [{ year: 1966, month: 10, day: 6 }],
       },
@@ -73,6 +81,10 @@ export default {
         authors: ['关锋'],
         page_start: 4,
         page_end: 4,
+        tags: [
+          { name: '清华大学力九五', type: 'reprint' }, // 翻印/传抄
+          { name: '《铁臂》', type: 'reprint' }, // 翻印/传抄
+        ],
         ocr_exceptions: { '4': { content_thresholds: [0.27, 0, 0, 0] } },
         dates: [{ year: 1966, month: 9, day: 28 }],
       },

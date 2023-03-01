@@ -247,7 +247,11 @@ export function get_tags(
     '阎洪滏',
     '蔡洪江',
     '黄文明',
-    '周世忠'
+    '周世忠',
+    '吴献忠',
+    '柴春泽',
+    '张铁生',
+    '黄帅',
   ];
 
   const person_results = important_characters
@@ -271,6 +275,7 @@ export function get_tags(
     '八三一',
     '六四〇八',
     '八·二七派',
+    '百万雄师',
   ];
 
   const organization_results = [];
@@ -330,7 +335,12 @@ export function get_tags(
       name: '（江苏）八·二七派（P派）',
       type: TagType.character,
     });
-  } 
+  } else if (content.indexOf('百万雄师') >= 0) {
+    organization_results.push({
+      name: '武汉地区无产阶级革命派百万雄师联络站（百万雄师）',
+      type: TagType.character,
+    });
+  }
   
 
   const character_results = [...person_results, ...organization_results];
