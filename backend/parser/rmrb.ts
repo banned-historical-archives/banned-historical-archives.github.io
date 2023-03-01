@@ -26,8 +26,6 @@ export async function parse(
   const year_start = 1946;
   const year_end = 1958;
   const res: ParserResult[] = [];
-  return [];
-  // TODO ci中7z解压乱码
   for (let i = year_start; i <= year_end; ++i) {
     for (let j = year_start === 1946 ? 5 : 1; j <= 12; ++j) {
       const dir = `${i}年${j > 9 ? j : '0' + j}月`;
