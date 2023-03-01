@@ -26,6 +26,8 @@ export async function parse(
   const year_start = 1946;
   const year_end = 1958;
   const res: ParserResult[] = [];
+  return [];
+  // TODO 数量太大，构建时磁盘空间不足
   for (let i = year_start; i <= year_end; ++i) {
     for (let j = year_start === 1946 ? 5 : 1; j <= 12; ++j) {
       const dir = `${i}年${j > 9 ? j : '0' + j}月`;

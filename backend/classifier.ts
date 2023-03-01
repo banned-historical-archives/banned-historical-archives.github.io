@@ -335,6 +335,7 @@ export function get_tags(
       name: '（江苏）八·二七派（P派）',
       type: TagType.character,
     });
+<<<<<<< HEAD
   } else if (content.indexOf('百万雄师') >= 0) {
     organization_results.push({
       name: '武汉地区无产阶级革命派百万雄师联络站（百万雄师）',
@@ -342,6 +343,9 @@ export function get_tags(
     });
   }
   
+=======
+  }
+>>>>>>> 34351d9f322f91d2534cc681b3f40602aa1f3352
 
   const character_results = [...person_results, ...organization_results];
 
@@ -491,14 +495,9 @@ export function get_tags(
     content.indexOf('九·一三事件') >= 0
   ) {
     event_results.push({ name: '九·一三事件', type: TagType.subject });
-  }  else if (
-    content.indexOf('5·16') >= 0 ||
-    content.indexOf('五·一六') >= 0
-  ) {
+  } else if (content.indexOf('5·16') >= 0 || content.indexOf('五·一六') >= 0) {
     event_results.push({ name: '清查五·一六', type: TagType.subject });
   }
-
-  
 
   const subjects_results = [...provice_results, ...event_results];
 
