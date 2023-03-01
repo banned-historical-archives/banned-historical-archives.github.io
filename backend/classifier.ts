@@ -247,7 +247,7 @@ export function get_tags(
     '阎洪滏',
     '蔡洪江',
     '黄文明',
-    '周世忠'
+    '周世忠',
   ];
 
   const person_results = important_characters
@@ -330,8 +330,7 @@ export function get_tags(
       name: '（江苏）八·二七派（P派）',
       type: TagType.character,
     });
-  } 
-  
+  }
 
   const character_results = [...person_results, ...organization_results];
 
@@ -481,14 +480,9 @@ export function get_tags(
     content.indexOf('九·一三事件') >= 0
   ) {
     event_results.push({ name: '九·一三事件', type: TagType.subject });
-  }  else if (
-    content.indexOf('5·16') >= 0 ||
-    content.indexOf('五·一六') >= 0
-  ) {
+  } else if (content.indexOf('5·16') >= 0 || content.indexOf('五·一六') >= 0) {
     event_results.push({ name: '清查五·一六', type: TagType.subject });
   }
-
-  
 
   const subjects_results = [...provice_results, ...event_results];
 
