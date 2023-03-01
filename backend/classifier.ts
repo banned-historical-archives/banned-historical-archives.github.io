@@ -341,7 +341,6 @@ export function get_tags(
       type: TagType.character,
     });
   }
-  
 
   const character_results = [...person_results, ...organization_results];
 
