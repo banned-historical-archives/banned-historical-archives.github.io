@@ -1382,7 +1382,7 @@ const res = [
     ],
   },
   {
-    title: '张春桥与华东局革命造反派座谈记要',
+    title: '张春桥与华东局革命造反派座谈纪要',
     authors: ['张春桥'],
     dates: [{ year: 1967, month: 2, day: 25 }],
     is_range_date: false,

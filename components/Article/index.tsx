@@ -26,6 +26,11 @@ function PureArticle({
   comments: Comment[];
   description?: string;
 }) {
+  const [popoverContent, setPopoverContent] = useState('');
+  const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
+
+  let str = '正文：\n';
+
   const contentsComponent = contents.map((part) => {
     const part_comments = comments.filter((i) => i.part_index === part.index);
     let text = part.text;
@@ -61,8 +66,10 @@ function PureArticle({
         );
       }
     });
+
     const key = part.id;
     if (part.type === ContentType.title) {
+      str = str + '# ' + texts + '\n\n';
       return (
         <Typography
           key={key}
@@ -73,6 +80,7 @@ function PureArticle({
         </Typography>
       );
     } else if (part.type === ContentType.appellation) {
+      str = str + texts + '\n\n';
       return (
         <Typography
           key={key}
@@ -83,6 +91,7 @@ function PureArticle({
         </Typography>
       );
     } else if (part.type === ContentType.image) {
+      str = str + texts + '\n\n';
       return (
         <img
           key={key}
@@ -92,6 +101,7 @@ function PureArticle({
         />
       );
     } else if (part.type === ContentType.image_description) {
+      str = str + texts + '\n\n';
       return (
         <Typography
           key={key}
@@ -102,18 +112,21 @@ function PureArticle({
         </Typography>
       );
     } else if (part.type === ContentType.subdate) {
+      str = str + texts + '\n\n';
       return (
         <Typography key={key} variant="subtitle1" sx={{ textAlign: 'center' }}>
           {content}
         </Typography>
       );
     } else if (part.type === ContentType.signature) {
+      str = str + texts + '\n\n';
       return (
         <Typography key={key} variant="subtitle1" sx={{ textAlign: 'right' }}>
           {content}
         </Typography>
       );
     } else if (part.type === ContentType.subtitle) {
+      str = str + '## ' + texts + '\n\n';
       return (
         <Typography
           key={key}
@@ -129,6 +142,7 @@ function PureArticle({
         </Typography>
       );
     } else if (part.type === ContentType.subtitle2) {
+      str = str + '### ' + texts + '\n\n';
       return (
         <Typography
           key={key}
@@ -144,6 +158,7 @@ function PureArticle({
         </Typography>
       );
     } else if (part.type === ContentType.subtitle3) {
+      str = str + '#### ' + texts + '\n\n';
       return (
         <Typography
           key={key}
@@ -161,12 +176,14 @@ function PureArticle({
       part.type === ContentType.subtitle4 ||
       part.type === ContentType.subtitle5
     ) {
+      str = str + texts + '\n\n';
       return (
         <Typography key={key} variant="subtitle1" sx={{ textAlign: 'center' }}>
           {content}
         </Typography>
       );
     } else if (part.type === ContentType.paragraph) {
+      str = str + texts + '\n\n';
       return (
         <Typography
           key={key}
@@ -177,6 +194,7 @@ function PureArticle({
         </Typography>
       );
     } else if (part.type === ContentType.quotation) {
+      str = str + texts + '\n\n';
       return (
         <Stack spacing={1} key={key}>
           {part.text
@@ -198,6 +216,7 @@ function PureArticle({
         </Stack>
       );
     } else {
+      str = str + texts + '\n\n';
       return (
         <Typography
           key={key}
@@ -257,8 +276,35 @@ function PureArticle({
     </>
   ) : null;
 
+  if (description) str = str + '描述：\n' + description.split('\n') + '\n';
+  if (comments.filter((i) => i.index !== -1).length) {
+    str += `注释：\n`;
+    comments
+      .filter((i) => {
+        if (i.index !== -1 && i.text) return true;
+      })
+      .map((i) => {
+        str = `${str}〔${i.index}〕${i.text}\n\n`;
+      });
+  }
+
   return (
     <>
+      <Popover
+        open={!!anchorEl}
+        anchorEl={anchorEl}
+        onClose={() => setAnchorEl(null)}
+      >
+        <TextField multiline value={popoverContent} />
+      </Popover>
+      <Button
+          onClick={(e) => {
+            setPopoverContent(str);
+            setAnchorEl(e.currentTarget);
+          }}
+        >
+          本页文本
+      </Button>
       {contentsComponent}
       {descriptionComponent}
       {commentsComponent}
