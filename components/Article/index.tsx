@@ -29,9 +29,10 @@ function PureArticle({
   const [popoverContent, setPopoverContent] = useState('');
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
 
-  let str = '正文：\n';
+  let str = [['正文：']];
 
   const contentsComponent = contents.map((part) => {
+    let s: string[] = [];
     const part_comments = comments.filter((i) => i.part_index === part.index);
     let text = part.text;
     let t = 0;
@@ -51,8 +52,10 @@ function PureArticle({
     const content: (ReactElement | string)[] = [];
     texts.forEach((text, idx) => {
       content.push(<span key={`${md5(text)}-${idx}`}>{text}</span>);
+      s.push(text);
       if (part_comments.length) {
         const comment_idx = part_comments.shift()!.index;
+        s.push(`〔${comment_idx}〕`);
         content.push(
           <a
             key={Math.random()}
@@ -67,9 +70,15 @@ function PureArticle({
       }
     });
 
+    if (part.type === ContentType.title) s.unshift('# ')
+    else if (part.type === ContentType.subtitle) s.unshift('## ')
+    else if (part.type === ContentType.subtitle2) s.unshift('### ')
+    else if (part.type === ContentType.subtitle3) s.unshift('#### ')
+
+    str.push(s);
+
     const key = part.id;
     if (part.type === ContentType.title) {
-      str = str + '# ' + texts + '\n\n';
       return (
         <Typography
           key={key}
@@ -80,7 +89,6 @@ function PureArticle({
         </Typography>
       );
     } else if (part.type === ContentType.appellation) {
-      str = str + texts + '\n\n';
       return (
         <Typography
           key={key}
@@ -91,7 +99,6 @@ function PureArticle({
         </Typography>
       );
     } else if (part.type === ContentType.image) {
-      str = str + texts + '\n\n';
       return (
         <img
           key={key}
@@ -101,7 +108,6 @@ function PureArticle({
         />
       );
     } else if (part.type === ContentType.image_description) {
-      str = str + texts + '\n\n';
       return (
         <Typography
           key={key}
@@ -112,21 +118,18 @@ function PureArticle({
         </Typography>
       );
     } else if (part.type === ContentType.subdate) {
-      str = str + texts + '\n\n';
       return (
         <Typography key={key} variant="subtitle1" sx={{ textAlign: 'center' }}>
           {content}
         </Typography>
       );
     } else if (part.type === ContentType.signature) {
-      str = str + texts + '\n\n';
       return (
         <Typography key={key} variant="subtitle1" sx={{ textAlign: 'right' }}>
           {content}
         </Typography>
       );
     } else if (part.type === ContentType.subtitle) {
-      str = str + '## ' + texts + '\n\n';
       return (
         <Typography
           key={key}
@@ -142,7 +145,6 @@ function PureArticle({
         </Typography>
       );
     } else if (part.type === ContentType.subtitle2) {
-      str = str + '### ' + texts + '\n\n';
       return (
         <Typography
           key={key}
@@ -158,7 +160,6 @@ function PureArticle({
         </Typography>
       );
     } else if (part.type === ContentType.subtitle3) {
-      str = str + '#### ' + texts + '\n\n';
       return (
         <Typography
           key={key}
@@ -176,14 +177,12 @@ function PureArticle({
       part.type === ContentType.subtitle4 ||
       part.type === ContentType.subtitle5
     ) {
-      str = str + texts + '\n\n';
       return (
         <Typography key={key} variant="subtitle1" sx={{ textAlign: 'center' }}>
           {content}
         </Typography>
       );
     } else if (part.type === ContentType.paragraph) {
-      str = str + texts + '\n\n';
       return (
         <Typography
           key={key}
@@ -194,7 +193,6 @@ function PureArticle({
         </Typography>
       );
     } else if (part.type === ContentType.quotation) {
-      str = str + texts + '\n\n';
       return (
         <Stack spacing={1} key={key}>
           {part.text
@@ -216,7 +214,6 @@ function PureArticle({
         </Stack>
       );
     } else {
-      str = str + texts + '\n\n';
       return (
         <Typography
           key={key}
@@ -276,18 +273,34 @@ function PureArticle({
     </>
   ) : null;
 
-  if (description) str = str + '描述：\n' + description.split('\n') + '\n';
+  const temp: number[] = [];
+
+  if (description) {
+    str.push(['描述：']);
+    str.push([`${description}`]);
+  }
+  
   if (comments.filter((i) => i.index !== -1).length) {
-    str += `注释：\n`;
+    str.push(['注释：'])
+    let s: string[] = []
     comments
       .filter((i) => {
-        if (i.index !== -1 && i.text) return true;
+        if (i.index !== -1 && i.text) {
+          temp.push(i.index);
+          return true;
+        }
       })
       .map((i) => {
-        str = `${str}〔${i.index}〕${i.text}\n\n`;
+        s.push(`〔${i.index}〕${i.text}\n\n`)
       });
+    str.push(s);
   }
 
+  let result_str = ''
+
+  str.forEach((item, i) => {
+    result_str = result_str + item.join('') + '\n\n'
+  })
   return (
     <>
       <Popover
@@ -299,7 +312,7 @@ function PureArticle({
       </Popover>
       <Button
           onClick={(e) => {
-            setPopoverContent(str);
+            setPopoverContent(result_str);
             setAnchorEl(e.currentTarget);
           }}
         >
