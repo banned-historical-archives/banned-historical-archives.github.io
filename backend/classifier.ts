@@ -314,7 +314,6 @@ export function get_tags(
     },
   ]
 
-<<<<<<< HEAD
   const organization_results: { name: string; type: TagType.character; }[] = [];
 
   important_organizations.forEach(item => {
@@ -331,71 +330,6 @@ export function get_tags(
       }
     })
   })
-=======
-  const organization_results = [];
-  if (content.indexOf('中央文革') >= 0) {
-    organization_results.push({ name: '中央文革', type: TagType.character });
-  } else if (content.indexOf('工总司') >= 0) {
-    organization_results.push({
-      name: '上海市工人革命造反总司令部（工总司）',
-      type: TagType.character,
-    });
-  } else if (
-    content.indexOf('红暴') >= 0 ||
-    content.indexOf('红色暴动委员会') >= 0
-  ) {
-    organization_results.push({
-      name: '浙江省红色暴动委员会（红暴）',
-      type: TagType.character,
-    });
-  } else if (content.indexOf('红革会') >= 0) {
-    organization_results.push({
-      name: '红卫兵上海市大专院校革命委员会（红革会）',
-      type: TagType.character,
-    });
-  } else if (content.indexOf('P派') >= 0) {
-    organization_results.push({
-      name: '安徽无产阶级革命派（P派）',
-      type: TagType.character,
-    });
-  } else if (content.indexOf('辽联') >= 0) {
-    organization_results.push({
-      name: '辽宁省革命造反派大联合委员会（辽联）',
-      type: TagType.character,
-    });
-  } else if (content.indexOf('辽革站') >= 0) {
-    organization_results.push({
-      name: '辽宁无产阶级革命派联络站（辽革站）',
-      type: TagType.character,
-    });
-  } else if (content.indexOf('八三一') >= 0 && content.indexOf('辽宁') >= 0) {
-    organization_results.push({
-      name: '（辽宁）毛泽东思想八三一沈阳革命造反总司令部（八三一）',
-      type: TagType.character,
-    });
-  } else if (
-    content.indexOf('六四〇八') >= 0 ||
-    content.indexOf('六四〇八部队') >= 0
-  ) {
-    organization_results.push({
-      name: '六四〇八部队（六四〇八）',
-      type: TagType.character,
-    });
-  } else if (
-    content.indexOf('八·二七派') >= 0 ||
-    content.indexOf('八二七派') >= 0
-  ) {
-    organization_results.push({
-      name: '（江苏）八·二七派（P派）',
-      type: TagType.character,
-    });
-  } else if (content.indexOf('百万雄师') >= 0) {
-    organization_results.push({
-      name: '武汉地区无产阶级革命派百万雄师联络站（百万雄师）',
-      type: TagType.character,
-    });
-  }
->>>>>>> 834ac76308925543a3b99e016718d739a1b36f30
 
   const character_results = [...person_results, ...organization_results];
 
