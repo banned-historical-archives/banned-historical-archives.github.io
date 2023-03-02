@@ -58,7 +58,10 @@ export default {
         page_start: 3,
         page_end: 3,
         tags: [
-          { name: '清华大学毛泽东思想红卫兵《震五洲》战斗小组', type: 'recorder' }, // 记录
+          {
+            name: '清华大学毛泽东思想红卫兵《震五洲》战斗小组',
+            type: 'recorder',
+          }, // 记录
         ],
         ocr_exceptions: { '3': { content_thresholds: [0, 0.26, 0, 0] } },
         dates: [{ year: 1966, month: 10, day: 6 }],
