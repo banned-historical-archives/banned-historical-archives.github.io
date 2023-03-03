@@ -252,17 +252,6 @@ export function get_tags(
     '柴春泽',
     '张铁生',
     '黄帅',
-    '胡厚民',
-    '夏邦银',
-    '朱洪霞',
-    '戴行江',
-    '聂年生',
-    '吴正斌',
-    '吴焱金',
-    '顾建棠',
-    '彭勋',
-    '万里',
-    '李昌',
   ];
 
   const person_results = important_characters
@@ -569,26 +558,6 @@ export function get_tags(
       origin: ['四五运动'],
       after: '四五运动'
     },
-    {
-      origin: ['小靳庄', '小靳庄经验'],
-      after: '小靳庄经验'
-    },
-    {
-      origin: ['唯生产力论'],
-      after: '批判唯生产力论'
-    },
-    {
-      origin: ['鞍钢宪法'],
-      after: '鞍钢宪法'
-    },
-    {
-      origin: ['五七干校'],
-      after: '五七干校'
-    },
-    {
-      origin: ['阶级斗争熄灭论'],
-      after: '阶级斗争熄灭论'
-    }
   ];
 
   const event_results: { name: string; type: TagType.subject; }[] = [];
