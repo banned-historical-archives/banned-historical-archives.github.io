@@ -264,7 +264,7 @@ export async function parse(
       }
       let j = i;
       let title = '';
-      while (!/^（\d/.test(catalog_candidates[j])) {
+      while (!/^（\d/.test(catalog_candidates[j])) {break;
         title += catalog_candidates[j];
         ++j;
       }
@@ -275,7 +275,7 @@ export async function parse(
       i = j;
 
       if (!catalogs[catalogs.length - 1].dates[0].year) {
-        debugger;
+        //debugger;
       }
 
       if (

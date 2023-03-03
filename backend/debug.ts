@@ -17,15 +17,19 @@ import { ContentType, Date, ParserResult } from '../types';
 (async () => {
   const ds = await init();
   const books = await get_books();
+  for(let x = 2; x<=26;++x) {
+     console.log(x);
   const book = books.find(
-    (i) => i.entity.id === '3f502324-0a16-4470-b3fc-3e237f39b604',
+    (i) => i.entity.id === 'maoquanji' + x,
   )!;
 
-  for (const i of await book.parser(book.path, book.parser_option)) {
-    console.log(get_article_id(i));
-  }
-  // console.log(await book.parser(book.path, book.parser_option));
-
+  // for (const i of await book.parser(book.path, book.parser_option)) {
+  //   console.log(get_article_id(i));
+  // }
+  try{
+  console.log(await book.parser(book.path, book.parser_option));
+  }catch(e) {}
+}
   debugger;
   // parse(join(__dirname, '../a'), 'zs.ts');
   // parse(join(__dirname, '../l'), 'lb.ts');
