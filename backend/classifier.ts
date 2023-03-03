@@ -542,6 +542,22 @@ export function get_tags(
       origin: ['5·16', '五·一六'],
       after: '清查五·一六'
     },
+    {
+      origin: ['哈尔套会议'],
+      after: '哈尔套会议'
+    },
+    {
+      origin: ['朝阳农学院'],
+      after: '朝阳农学院'
+    },
+    {
+      origin: ['以三项指示为纲'],
+      after: '以三项指示为纲'
+    },
+    {
+      origin: ['四五运动'],
+      after: '四五运动'
+    },
   ];
 
   const event_results: { name: string; type: TagType.subject; }[] = [];
