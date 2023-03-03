@@ -79,11 +79,51 @@ const columns: GridColDef<Article>[] = [
     headerName: '标题',
     minWidth: 350,
     flex: 1,
-    renderCell: (params: GridRenderCellParams<string, Article>) => (
-      <a href={`/articles/${params.row.id}`} rel="noreferrer" target="_blank">
-        {params.row!.title}
-      </a>
-    ),
+    renderCell: (params: GridRenderCellParams<string, Article>) => {
+      const [popoverContent, setPopoverContent] = useState('');
+      const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
+
+      const title = '标题：' + params.row!.title;
+      const authors = '作者：' + params.row.authors.map(i => i.name).join(',')
+      const dates = '日期：' + params.row.dates
+      .map((i) =>
+        i
+          ? [
+              i.year || '----',
+              ensure_two_digits(i.month, '--'),
+              ensure_two_digits(i.day, '--'),
+            ]
+              .filter((j) => j)
+              .join('/')
+          : '----/--/--',
+      )
+      .join(' ')
+      const is_range_date = '是否时间段：'+ String(params.row.is_range_date);
+      const source_name = '来源：' + params.row.publications.map((i) => i.name).join(',');
+
+      return (
+        <>
+          <Popover
+            open={!!anchorEl}
+            anchorEl={anchorEl}
+            onClose={() => setAnchorEl(null)}
+          >
+            <TextField multiline value={popoverContent} />
+          </Popover>
+          <Button
+              onClick={(e) => {
+                setPopoverContent(`${title}\n${authors}\n${dates}\n${is_range_date}\n${source_name}`);
+                setAnchorEl(e.currentTarget);
+              }}
+            >
+              信息
+          </Button>
+          <a href={`/articles/${params.row.id}`} rel="noreferrer" target="_blank">
+            {params.row!.title}
+          </a>
+        </>
+      )
+    }
   },
   {
     field: 'authors',
