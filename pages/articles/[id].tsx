@@ -628,13 +628,13 @@ export default function ArticleViewer({
               onClick={() =>
                 window.open(
                   `https://github.com/banned-historical-archives/banned-historical-archives.github.io/issues?q=+${encodeURIComponent(
-                    `is:pr "OCR patch" "${article.title}" "${i.name}" "${article.id}" "${i.id}"`,
+                    `is:pr "${article.id}" "${i.id}"`,
                   )}+`,
                   '_blank',
                 )
               }
               src={`https://img.shields.io/github/issues-search/banned-historical-archives/banned-historical-archives.github.io?style=for-the-badge&color=%23cc0000&label=%E6%A0%A1%E5%AF%B9%E8%AE%B0%E5%BD%95&query=${encodeURIComponent(
-                `is:pr "OCR patch" "${article.title}" "${i.name}" "${article.id}" "${i.id}"`,
+                `is:pr "${article.id}" "${i.id}"`,
               )}`}
             />
           ))}
