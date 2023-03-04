@@ -252,6 +252,8 @@ export function get_tags(
     '柴春泽',
     '张铁生',
     '黄帅',
+    '耿金章',
+    '潘国平'
   ];
 
   const person_results = important_characters
@@ -493,10 +495,6 @@ export function get_tags(
     {
       origin: ['三结合'],
       after: '革命三结合'
-    },
-    {
-      origin: ['邓小平', '林彪', '刘少奇'],
-      after: '批判修正主义'
     },
     {
       origin: ['资产阶级法权'],

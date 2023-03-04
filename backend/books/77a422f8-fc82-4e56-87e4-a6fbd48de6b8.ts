@@ -18,6 +18,9 @@ export default {
         authors: ['王洪文'],
         page_start: 2,
         page_end: 5,
+        tags: [
+          { name: '总参谋部政治部', type: 'issuer' }, // 发行方/出版方
+        ],
         ocr_exceptions: { '5': { content_thresholds: [0, 0.09, 0, 0.5] } },
         dates: [{ year: 1974, month: 9, day: 22 }],
       },
@@ -26,6 +29,9 @@ export default {
         authors: ['王洪文', '张春桥'],
         page_start: 5,
         page_end: 9,
+        tags: [
+          { name: '总参谋部政治部', type: 'issuer' }, // 发行方/出版方
+        ],
         ocr_exceptions: { '5': { content_thresholds: [0, 0.09, 0.5, 0] } },
         dates: [{ year: 1974, month: 9, day: 22 }],
       },

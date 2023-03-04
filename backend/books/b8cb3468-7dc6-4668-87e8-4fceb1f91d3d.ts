@@ -19,6 +19,9 @@ export default {
         authors: ['江青'],
         page_start: 2,
         page_end: 3,
+        tags: [
+          { name: '总参谋部政治部', type: 'issuer' }, // 发行方/出版方
+        ],
         ocr_exceptions: { '3': { content_thresholds: [0, 0.11, 0, 0.5] } },
         dates: [{ year: 1974, month: 1, day: 24 }],
       },
@@ -29,6 +32,9 @@ export default {
         authors: ['迟群', '谢静宜'],
         page_start: 3,
         page_end: 16,
+        tags: [
+          { name: '总参谋部政治部', type: 'issuer' }, // 发行方/出版方
+        ],
         ocr_exceptions: { '3': { content_thresholds: [0, 0.11, 0.5, 0] } },
         dates: [{ year: 1974, month: 1, day: 24 }],
       },
