@@ -19,6 +19,10 @@ export default {
         authors: ['张春桥'],
         page_start: 1,
         page_end: 2,
+        tags: [
+          { name: '山东省委党校红色造反者指挥部《触灵魂》', type: 'reprint' }, // 翻印/传抄
+          { name: '济南市人委大联合总部市经委红色造反队', type: 'reprint' }, // 翻印/传抄
+        ],
         dates: [{ year: 1967, month: 5 }],
       },
       {
@@ -26,6 +30,9 @@ export default {
         authors: ['王效禹'],
         page_start: 2,
         page_end: 4,
+        tags: [
+          { name: '济南市财贸系统革命造反总指挥部', type: 'reprint' }, // 翻印/传抄
+        ],
         ocr_exceptions: {
           '2': { content_thresholds: [0.25, 0.09, 0.5, 0] },
           '4': { content_thresholds: [0, 0.09, 0, 0.5] },
@@ -37,6 +44,12 @@ export default {
         authors: ['王效禹'],
         page_start: 4,
         page_end: 9,
+        tags: [
+          { name: '济南市革命委员会办公厅', type: 'recorder' }, // 记录
+          { name: '济南市商业一局系统革命造反司令部', type: 'recorder' }, // 记录
+          { name: '天津市五金交电公司无产阶级革命造反派大联合总部', type: 'reprint' }, // 翻印/传抄
+          { name: '天津人民出版社十·一八革命造反团翻印', type: 'reprint' }, // 翻印/传抄
+        ],
         dates: [{ year: 1967, month: 5, day: 28 }],
       },
     ],

@@ -19,6 +19,9 @@ export default {
         authors: ['王洪文'],
         page_start: 1,
         page_end: 3,
+        tags: [
+          { name: '总参谋部政治部', type: 'issuer' }, // 发行方/出版方
+        ],
         ocr_exceptions: {
           '2': { content_thresholds: [0, 0.1, 0, 0] },
           '3': { content_thresholds: [0, 0.5, 0, 0.16] },

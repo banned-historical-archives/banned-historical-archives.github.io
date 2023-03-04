@@ -21,6 +21,9 @@ export default {
         authors: ['张春桥'],
         page_start: 1,
         page_end: 4,
+        tags: [
+          { name: '总参谋部政治部', type: 'issuer' }, // 发行方/出版方
+        ],
         dates: [{ year: 1973, month: 1, day: 30 }],
       },
     ],

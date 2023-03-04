@@ -80,7 +80,7 @@ export default {
         page_start: 8,
         page_end: 9,
         ocr_exceptions: { '9': { content_thresholds: [0, 0.08, 0, 0.5] } },
-        dates: [{ year: 1976, month: 3, day: 15 }],
+        dates: [{ year: 1976, month: 3, day: 20 }],
       },
       {
         title: '吴正斌在武胜路集会上的讲话（节录）',
