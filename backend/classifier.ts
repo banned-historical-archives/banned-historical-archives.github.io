@@ -253,7 +253,8 @@ export function get_tags(
     '张铁生',
     '黄帅',
     '耿金章',
-    '潘国平'
+    '潘国平',
+    '温巨敏',
   ];
 
   const person_results = important_characters
@@ -555,6 +556,10 @@ export function get_tags(
     {
       origin: ['四五运动'],
       after: '四五运动'
+    },
+    {
+      origin: ['儒法斗争'],
+      after: '儒法斗争'
     },
   ];
 
