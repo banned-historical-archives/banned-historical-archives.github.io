@@ -1,11 +1,11 @@
 export default {
   entity: {
     id: '9172bd1f-5918-4850-820a-b229e2d89b8f',
-    name: '王洪文副主席重要电话指示',
-    internal: true,
+    name: '王洪文副主席重要电话指示（1974.3.16）',
+    internal: false,
     official: true,
     type: 'img',
-    author: '王洪文',
+    author: '王洪文，1976.3.16',
     files:
       'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/9172bd1f-5918-4850-820a-b229e2d89b8f/1.jpg',
   },
