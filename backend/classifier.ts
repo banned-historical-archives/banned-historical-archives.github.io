@@ -255,6 +255,8 @@ export function get_tags(
     '耿金章',
     '潘国平',
     '温巨敏',
+    '博古',
+
   ];
 
   const person_results = important_characters
@@ -561,6 +563,10 @@ export function get_tags(
       origin: ['儒法斗争'],
       after: '儒法斗争'
     },
+    {
+      origin: ['支左'],
+      after: '军队支左'
+    }
   ];
 
   const event_results: { name: string; type: TagType.subject; }[] = [];
