@@ -1,11 +1,11 @@
 export default {
   entity: {
     id: '787c5af3-10c9-40fd-bd3e-6e0a13e7e67c',
-    name: '毛远新吹捧宋江、美化自己的一段谈话（节录）',
-    internal: true,
+    name: '毛远新吹捧宋江、美化自己的一段谈话（节录）（1976.12）',
+    internal: false,
     official: true,
     type: 'img',
-    author: '',
+    author: '毛远新，1976.12，反攻倒算材料',
     files:
       'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/787c5af3-10c9-40fd-bd3e-6e0a13e7e67c/1.png,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/787c5af3-10c9-40fd-bd3e-6e0a13e7e67c/2.png,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/787c5af3-10c9-40fd-bd3e-6e0a13e7e67c/3.png',
   },
