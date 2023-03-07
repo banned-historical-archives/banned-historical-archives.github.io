@@ -16,6 +16,7 @@ export default {
       {
         title:
           '王洪文在铁路文化宫大会上的讲话',
+        alias: '市革会领导成员、工总司主要负责人王洪文同志一九六七年十二月廿二日下午在铁路文化宫大会上的重要讲话',
         authors: ['王洪文'],
         page_start: 1,
         page_end: 6,

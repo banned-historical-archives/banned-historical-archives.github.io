@@ -317,6 +317,10 @@ export function get_tags(
       origin: ['八·二七派', '（江苏）八·二七派（P派）'],
       after: '六四〇八部队（六四〇八）',
     },
+    {
+      origin: ['赤卫队'],
+      after: '捍卫毛泽东思想工人赤卫队上海总部（赤卫队）',
+    }
   ]
 
   const organization_results: { name: string; type: TagType.character; }[] = [];
