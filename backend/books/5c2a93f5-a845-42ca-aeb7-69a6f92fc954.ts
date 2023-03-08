@@ -1,11 +1,11 @@
 export default {
   entity: {
     id: '5c2a93f5-a845-42ca-aeb7-69a6f92fc954',
-    name: '毛远新在市地委书记会议召集人会上的讲话记录',
-    internal: true,
+    name: '毛远新在市地委书记会议召集人会上的讲话记录（1976.11）',
+    internal: false,
     official: true,
     type: 'img',
-    author: '',
+    author: '毛远新，1976.11，反攻倒算材料，大东区无线电器材厂',
     files:
       'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/5c2a93f5-a845-42ca-aeb7-69a6f92fc954/1.jpg,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/5c2a93f5-a845-42ca-aeb7-69a6f92fc954/2.jpg,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/5c2a93f5-a845-42ca-aeb7-69a6f92fc954/3.jpg,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/5c2a93f5-a845-42ca-aeb7-69a6f92fc954/4.jpg,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/5c2a93f5-a845-42ca-aeb7-69a6f92fc954/5.jpg,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/5c2a93f5-a845-42ca-aeb7-69a6f92fc954/6.jpg,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/5c2a93f5-a845-42ca-aeb7-69a6f92fc954/7.jpg',
   },
