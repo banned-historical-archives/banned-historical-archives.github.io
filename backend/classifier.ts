@@ -256,7 +256,8 @@ export function get_tags(
     '潘国平',
     '温巨敏',
     '博古',
-
+    '王若水',
+    '黄涛',
   ];
 
   const person_results = important_characters
