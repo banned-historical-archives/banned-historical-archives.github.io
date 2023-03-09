@@ -47,7 +47,10 @@ export default {
         tags: [
           { name: '济南市革命委员会办公厅', type: 'recorder' }, // 记录
           { name: '济南市商业一局系统革命造反司令部', type: 'recorder' }, // 记录
-          { name: '天津市五金交电公司无产阶级革命造反派大联合总部', type: 'reprint' }, // 翻印/传抄
+          {
+            name: '天津市五金交电公司无产阶级革命造反派大联合总部',
+            type: 'reprint',
+          }, // 翻印/传抄
           { name: '天津人民出版社十·一八革命造反团翻印', type: 'reprint' }, // 翻印/传抄
         ],
         dates: [{ year: 1967, month: 5, day: 28 }],
