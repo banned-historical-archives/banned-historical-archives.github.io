@@ -70,10 +70,10 @@ function PureArticle({
       }
     });
 
-    if (part.type === ContentType.title) s.unshift('# ')
-    else if (part.type === ContentType.subtitle) s.unshift('## ')
-    else if (part.type === ContentType.subtitle2) s.unshift('### ')
-    else if (part.type === ContentType.subtitle3) s.unshift('#### ')
+    if (part.type === ContentType.title) s.unshift('# ');
+    else if (part.type === ContentType.subtitle) s.unshift('## ');
+    else if (part.type === ContentType.subtitle2) s.unshift('### ');
+    else if (part.type === ContentType.subtitle3) s.unshift('#### ');
 
     str.push(s);
 
@@ -279,10 +279,10 @@ function PureArticle({
     str.push(['描述：']);
     str.push([`${description}`]);
   }
-  
+
   if (comments.filter((i) => i.index !== -1).length) {
-    str.push(['注释：'])
-    let s: string[] = []
+    str.push(['注释：']);
+    let s: string[] = [];
     comments
       .filter((i) => {
         if (i.index !== -1 && i.text) {
@@ -291,16 +291,16 @@ function PureArticle({
         }
       })
       .map((i) => {
-        s.push(`〔${i.index}〕${i.text}\n\n`)
+        s.push(`〔${i.index}〕${i.text}\n\n`);
       });
     str.push(s);
   }
 
-  let result_str = ''
+  let result_str = '';
 
   str.forEach((item, i) => {
-    result_str = result_str + item.join('') + '\n\n'
-  })
+    result_str = result_str + item.join('') + '\n\n';
+  });
   return (
     <>
       <Popover
@@ -311,12 +311,12 @@ function PureArticle({
         <TextField multiline value={popoverContent} />
       </Popover>
       <Button
-          onClick={(e) => {
-            setPopoverContent(result_str);
-            setAnchorEl(e.currentTarget);
-          }}
-        >
-          本页文本
+        onClick={(e) => {
+          setPopoverContent(result_str);
+          setAnchorEl(e.currentTarget);
+        }}
+      >
+        本页文本
       </Button>
       {contentsComponent}
       {descriptionComponent}
