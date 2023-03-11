@@ -1,0 +1,24 @@
+import { readFileSync } from 'fs';
+import {
+  ContentPart,
+  ContentPartRaw,
+  ContentType,
+  Date,
+  OCRResult,
+  ParserOption,
+  ParserResult,
+  Pivot,
+} from '../../../types';
+import { merge_to_lines, pdfjsContentToOCRResult } from '../utils';
+import { normalize } from '../../utils';
+import { join, basename } from 'node:path/posix';
+import peru from './peru';
+
+export async function parse(
+  path: string,
+  parser_opt: ParserOption,
+): Promise<ParserResult[]> {
+  return [
+    ...peru,
+  ] as ParserResult[];
+}
