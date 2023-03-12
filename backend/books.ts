@@ -12,6 +12,7 @@ import * as wanghongwen from './parser/wanghongwen';
 import * as yaowenyuan from './parser/yaowenyuan';
 import * as zhangchunqiao from './parser/zhangchunqiao';
 import * as GPCRv3 from './parser/GPCR_v3';
+import * as maoistlibray from './parser/maoistlibray';
 import * as zzj1 from './parser/zzj1';
 import * as rmrb from './parser/rmrb';
 import * as automation from './parser/automation';
@@ -26,6 +27,7 @@ const parsers: { [key: string]: any } = {
   jinghuo,
   wenji,
   GPCRv3,
+  maoistlibray,
   jqjianghua,
   rmrb,
   xuanji,
