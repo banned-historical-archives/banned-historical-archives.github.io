@@ -1,11 +1,11 @@
 export default {
   entity: {
     id: '2b76c2fb-c46b-4bc2-a9e7-14a3e76e265e',
-    name: '驳国内某些人对各国马列毛主义者的攻击',
+    name: '驳国内某些人对各国马列毛主义者的攻击（2021）',
     internal: false,
     official: false,
     type: 'pdf',
-    author: '龚格晟',
+    author: '知乎作者：龚格晟',
     files:
       'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives3/main/2b76c2fb-c46b-4bc2-a9e7-14a3e76e265e.pdf',
   },

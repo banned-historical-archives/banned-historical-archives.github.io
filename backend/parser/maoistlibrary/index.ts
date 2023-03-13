@@ -13,6 +13,9 @@ import { merge_to_lines, pdfjsContentToOCRResult } from '../utils';
 import { normalize } from '../../utils';
 import { join, basename } from 'node:path/posix';
 import peru from './peru';
+import india from './india';
+import philippines from './philippines';
+import turkey from './turkey';
 
 export async function parse(
   path: string,
@@ -20,5 +23,8 @@ export async function parse(
 ): Promise<ParserResult[]> {
   return [
     ...peru,
+    ...india,
+    ...philippines,
+    ...turkey,
   ] as ParserResult[];
 }
