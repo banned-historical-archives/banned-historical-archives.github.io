@@ -15,6 +15,7 @@ import { join, basename } from 'node:path/posix';
 import peru from './peru';
 import india from './india';
 import philippines from './philippines';
+import turkey from './turkey';
 
 export async function parse(
   path: string,
@@ -24,5 +25,6 @@ export async function parse(
     ...peru,
     ...india,
     ...philippines,
+    ...turkey,
   ] as ParserResult[];
 }
