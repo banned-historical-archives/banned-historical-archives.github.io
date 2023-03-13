@@ -14,6 +14,7 @@ import { normalize } from '../../utils';
 import { join, basename } from 'node:path/posix';
 import peru from './peru';
 import india from './india';
+import philippines from './philippines';
 
 export async function parse(
   path: string,
@@ -22,5 +23,6 @@ export async function parse(
   return [
     ...peru,
     ...india,
+    ...philippines,
   ] as ParserResult[];
 }
