@@ -16,6 +16,7 @@ import peru from './peru';
 import india from './india';
 import philippines from './philippines';
 import turkey from './turkey';
+import afghanistan from './afghanistan';
 
 export async function parse(
   path: string,
@@ -26,5 +27,6 @@ export async function parse(
     ...india,
     ...philippines,
     ...turkey,
+    ...afghanistan,
   ] as ParserResult[];
 }
