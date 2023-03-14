@@ -19,6 +19,7 @@ import Turkey from './Turkey';
 import Afghanistan from './Afghanistan';
 import NorthKalimantan from './NorthKalimantan';
 import Nepal from './Nepal';
+import Brazil from './Brazil';
 
 export async function parse(
   path: string,
@@ -32,5 +33,6 @@ export async function parse(
     ...Afghanistan,
     ...NorthKalimantan,
     ...Nepal,
+    ...Brazil,
   ] as ParserResult[];
 }
