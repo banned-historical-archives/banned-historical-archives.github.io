@@ -12,30 +12,31 @@ import {
 import { merge_to_lines, pdfjsContentToOCRResult } from '../utils';
 import { normalize } from '../../utils';
 import { join, basename } from 'node:path/posix';
-import Peru from './Peru';
-import India from './India';
-import Philippines from './Philippines';
-import Turkey from './Turkey';
-import Afghanistan from './Afghanistan';
-import NorthKalimantan from './NorthKalimantan';
-import Nepal from './Nepal';
-import Brazil from './Brazil';
-import Chile from './Chile';
-import France from './France';
+import peru from './peru';
+import india from './india';
+import philippines from './philippines';
+import turkey from './turkey';
+import afghanistan from './afghanistan';
+import northKalimantan from './northKalimantan';
+import nepal from './nepal';
+import brazil from './brazil';
+import chile from './chile';
+import france from './france';
 
 export async function parse(
   path: string,
   parser_opt: ParserOption,
 ): Promise<ParserResult[]> {
   return [
-    ...Peru,
-    ...India,
-    ...Philippines,
-    ...Turkey,
-    ...Afghanistan,
-    ...NorthKalimantan,
-    ...Nepal,
-    ...Brazil,
-    ...Chile,
+    ...peru,
+    ...india,
+    ...philippines,
+    ...turkey,
+    ...afghanistan,
+    ...northKalimantan,
+    ...nepal,
+    ...brazil,
+    ...chile,
+    ...france,
   ] as ParserResult[];
 }
