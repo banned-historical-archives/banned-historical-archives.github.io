@@ -21,6 +21,7 @@ import NorthKalimantan from './NorthKalimantan';
 import Nepal from './Nepal';
 import Brazil from './Brazil';
 import Chile from './Chile';
+import France from './France';
 
 export async function parse(
   path: string,
