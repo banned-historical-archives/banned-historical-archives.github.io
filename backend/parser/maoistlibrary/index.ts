@@ -17,11 +17,11 @@ import india from './india';
 import philippines from './philippines';
 import turkey from './turkey';
 import afghanistan from './afghanistan';
-import northKalimantan from './northKalimantan';
-import nepal from './nepal';
-import brazil from './brazil';
-import chile from './chile';
-import france from './france';
+import northKalimantan from './NorthKalimantan';
+import nepal from './Nepal';
+import brazil from './Brazil';
+import chile from './Chile';
+import france from './France';
 
 export async function parse(
   path: string,
