@@ -23,6 +23,7 @@ import brazil from './Brazil';
 import chile from './Chile';
 import france from './France';
 import Danmark from './Denmark';
+import England from './England';
 
 export async function parse(
   path: string,
@@ -40,5 +41,6 @@ export async function parse(
     ...chile,
     ...france,
     ...Danmark,
+    ...England,
   ] as ParserResult[];
 }
