@@ -49,7 +49,6 @@ export default {
           { year: 1880, month: 3 },
         ],
       },
-      { title: '注释', authors: [], page_start: 82, page_end: 100, dates: [] },
     ],
     ocr: { content_thresholds: [0, 0.087, 0, 0] },
     ocr_exceptions: {},
