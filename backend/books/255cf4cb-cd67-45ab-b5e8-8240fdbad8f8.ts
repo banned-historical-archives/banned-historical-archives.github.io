@@ -25,6 +25,13 @@ export default {
         ],
       },
       {
+        title: '德文第一版序言',
+        authors: ['恩格斯'],
+        page_start: 8,
+        page_end: 10,
+        dates: [{ year: 1882, month: 9, day: 21 }],
+      },
+      {
         title: '德文第四版序言',
         authors: ['恩格斯'],
         page_start: 11,
