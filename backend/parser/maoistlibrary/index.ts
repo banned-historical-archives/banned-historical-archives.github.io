@@ -26,6 +26,12 @@ import Danmark from './Denmark';
 import England from './England';
 import Norway from './Norway';
 import America from './America';
+import Italy from './Italy';
+import Austria from './Austria';
+import Australia from './Australia';
+import Japan from './Japan';
+import Switzerland from './Switzerland';
+import Canada from './Canada';
 
 export async function parse(
   path: string,
@@ -46,5 +52,11 @@ export async function parse(
     ...England,
     ...Norway,
     ...America,
+    ...Italy,
+    ...Austria,
+    ...Australia,
+    ...Japan,
+    ...Switzerland,
+    ...Canada
   ] as ParserResult[];
 }
