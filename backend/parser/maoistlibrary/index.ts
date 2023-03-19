@@ -57,6 +57,6 @@ export async function parse(
     ...Australia,
     ...Japan,
     ...Switzerland,
-    ...Canada
+    ...Canada,
   ] as ParserResult[];
 }
