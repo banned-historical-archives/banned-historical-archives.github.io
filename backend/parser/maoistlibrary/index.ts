@@ -31,6 +31,7 @@ import Austria from './Austria';
 import Australia from './Australia';
 import Japan from './Japan';
 import Switzerland from './Switzerland';
+import Canada from './Canada';
 
 export async function parse(
   path: string,
@@ -55,6 +56,7 @@ export async function parse(
     ...Austria,
     ...Australia,
     ...Japan,
-    ...Switzerland
+    ...Switzerland,
+    ...Canada
   ] as ParserResult[];
 }
