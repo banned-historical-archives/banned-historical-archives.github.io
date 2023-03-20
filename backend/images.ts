@@ -4,6 +4,13 @@ import { Image } from './entities';
 const images: (Image & {
   id?: string;
 })[] = [
+  {"name":"《简明世界史（近代部分）》插图二十四","description":"布朗基","source":"《简明世界史（近代部分）》","show_in_gallery":true,"tags":[],"id":"ee77f6f7-9fc0-4c01-8bfa-aa0a7970d547","url":"https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives7/main/ee/ee77f6f7-9fc0-4c01-8bfa-aa0a7970d547.png"},
+  {"name":"《简明世界史（近代部分）》插图二十五","description":"青年时代的马克思","source":"《简明世界史（近代部分）》","show_in_gallery":true,"tags":[],"id":"34012035-915e-4d93-b534-25b33d3ef935","url":"https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives7/main/34/34012035-915e-4d93-b534-25b33d3ef935.png"},
+  {"name":"《简明世界史（近代部分）》插图二十六","description":"青年时代的恩格斯","source":"《简明世界史（近代部分）》","show_in_gallery":true,"tags":[],"id":"eada8981-37bd-488e-b63d-00db0d97eed6","url":"https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives7/main/ea/eada8981-37bd-488e-b63d-00db0d97eed6.png"},
+  {"name":"《简明世界史（近代部分）》插图二十七","description":"《共产党宣言》第一版","source":"《简明世界史（近代部分）》","show_in_gallery":true,"tags":[],"id":"23344f86-9139-4def-b1be-b5248227a6c9","url":"https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives7/main/23/23344f86-9139-4def-b1be-b5248227a6c9.png"},
+  {"name":"《简明世界史（近代部分）》后图八","description":"英国伦敦的贫民窟","source":"《简明世界史（近代部分）》","show_in_gallery":true,"tags":[],"id":"fa4a6c48-ea9f-4b9e-acba-a2c90f61c5ca","url":"https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives7/main/fa/fa4a6c48-ea9f-4b9e-acba-a2c90f61c5ca.png"},
+  {"name":"《简明世界史（近代部分）》后图九","description":"一八三四年里昂工人起义","source":"《简明世界史（近代部分）》","show_in_gallery":true,"tags":[],"id":"05e2697e-770c-4223-9221-cd0feca3aabe","url":"https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives7/main/05/05e2697e-770c-4223-9221-cd0feca3aabe.png"},
+  {"name":"《简明世界史（近代部分）》后图十","description":"马克思在共产主义者同盟会议上","source":"《简明世界史（近代部分）》","show_in_gallery":true,"tags":[],"id":"2c9eab44-2cfa-40f3-b26b-beb3538c406b","url":"https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives7/main/2c/2c9eab44-2cfa-40f3-b26b-beb3538c406b.png"},
   {
     name: '《简明世界史（近代部分）》插图十六',
     description: '十八世纪的日本酿酒工场',
