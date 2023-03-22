@@ -174,7 +174,7 @@ export default function CommentEditor({
                 commentDiff.current.insertBefore = insertBefore.filter(
                   (j) => j.id !== i.id,
                 );
-                setInsertAfter(commentDiff.current.insertBefore);
+                setInsertBefore(commentDiff.current.insertBefore);
                 onChange(removeIds(commentDiff.current));
               }}
             >
