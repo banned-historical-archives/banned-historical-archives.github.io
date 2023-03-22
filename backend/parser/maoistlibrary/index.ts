@@ -32,6 +32,8 @@ import Australia from './Australia';
 import Japan from './Japan';
 import Switzerland from './Switzerland';
 import Canada from './Canada';
+import InternationalJointStatement from './InternationalJointStatement';
+import InternationalOrganizations from './InternationalOrganizations';
 
 export async function parse(
   path: string,
