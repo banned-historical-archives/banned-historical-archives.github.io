@@ -2,26 +2,6 @@
 
 [官网](https://banned-historical-archives.github.io)
 
-## Wiki
-
-资源贡献\校对\纠错  
-[\[Github issues\]](https://github.com/banned-historical-archives/banned-historical-archives.github.io/issues)  
-[\[Gitlab issues\]备用地址](https://gitlab.com/banned-historical-archives/banned-historical-archives.gitlab.io/-/issues)  
-[开发者贡献代码](https://github.com/banned-historical-archives/banned-historical-archives.github.io/wiki/%E5%BC%80%E5%8F%91%E8%80%85%E8%B4%A1%E7%8C%AE%E4%BB%A3%E7%A0%81)  
-[文稿录入与校对](https://github.com/banned-historical-archives/banned-historical-archives.github.io/wiki/%E6%96%87%E7%A8%BF%E5%BD%95%E5%85%A5%E4%B8%8E%E6%A0%A1%E5%AF%B9)  
-[标准化加工及开发说明](https://github.com/banned-historical-archives/banned-historical-archives.github.io/wiki/%E6%A0%87%E5%87%86%E5%8C%96%E5%8A%A0%E5%B7%A5%E5%8F%8A%E5%BC%80%E5%8F%91%E8%AF%B4%E6%98%8E)  
-[校对规范](https://github.com/banned-historical-archives/banned-historical-archives.github.io/wiki/%E6%A0%A1%E5%AF%B9%E8%A7%84%E8%8C%83)  
-
-## 安全提醒
-为了你的隐私和安全，建议全程翻墙访问。
-如需进行全文检索，建议使用本地搜索代替。
-**[本地搜索的使用](https://github.com/banned-historical-archives/banned-historical-archives.github.io/wiki/%E6%9C%AC%E5%9C%B0%E6%90%9C%E7%B4%A2%E7%9A%84%E4%BD%BF%E7%94%A8)**
-
-请谨慎使用 github 和 git 工具，在以下操作中避免个人身份泄露，issue 发言、star、watch、fork、pull request、git commit。
-
-建议使用临时的 github 账号，随机的 id 和邮箱。
-
-
 ## 介绍
 
 和谐历史档案馆收录各类受官方封禁以及半封禁的文稿、报纸、杂志和多媒体资料，并对它们进行标准化加工，通过解析、识别、分类，形成标准化文稿档案和多媒体档案/数据库。
@@ -33,6 +13,41 @@
 报纸和杂志经过类似的方法转换为标准文稿档案（以文章为最小单位），主要包括红旗杂志、学习与批判、参考消息等。
 
 多媒体资料包括音乐及歌词、电影、照片、录音等。目前主要收录社会主义中国创作的红色音乐。
+
+## Wiki
+
+资源贡献\校对\纠错  
+[\[Github issues\]](https://github.com/banned-historical-archives/banned-historical-archives.github.io/issues)  
+[\[Gitlab issues\]备用地址](https://gitlab.com/banned-historical-archives/banned-historical-archives.gitlab.io/-/issues)  
+[开发者贡献代码](https://github.com/banned-historical-archives/banned-historical-archives.github.io/wiki/%E5%BC%80%E5%8F%91%E8%80%85%E8%B4%A1%E7%8C%AE%E4%BB%A3%E7%A0%81)  
+[文稿录入与校对](https://github.com/banned-historical-archives/banned-historical-archives.github.io/wiki/%E6%96%87%E7%A8%BF%E5%BD%95%E5%85%A5%E4%B8%8E%E6%A0%A1%E5%AF%B9)  
+[标准化加工及开发说明](https://github.com/banned-historical-archives/banned-historical-archives.github.io/wiki/%E6%A0%87%E5%87%86%E5%8C%96%E5%8A%A0%E5%B7%A5%E5%8F%8A%E5%BC%80%E5%8F%91%E8%AF%B4%E6%98%8E)  
+[校对规范](https://github.com/banned-historical-archives/banned-historical-archives.github.io/wiki/%E6%A0%A1%E5%AF%B9%E8%A7%84%E8%8C%83)  
+
+## 安全提醒
+
+为了你的隐私和安全，建议全程翻墙访问。
+如需进行全文检索，建议使用本地搜索代替。
+
+请谨慎使用 github 和 git 工具，在以下操作中避免个人身份泄露，issue 发言、star、watch、fork、pull request、git commit。
+
+建议使用临时的 github 账号，随机的 id 和邮箱。
+
+## 全文搜索
+
+### 1. 谷歌搜索
+
+在数据库内上方搜索框搜索即为谷歌搜索，谷歌搜索收到网页收录影响，不保证即时性与搜索效果。
+
+### 2. 本地使用 Elasticsearch（推荐、操作略复杂）
+
+**[本地搜索的使用](https://github.com/banned-historical-archives/banned-historical-archives.github.io/wiki/%E6%9C%AC%E5%9C%B0%E6%90%9C%E7%B4%A2%E7%9A%84%E4%BD%BF%E7%94%A8)**
+
+### 3. 本地文本搜索（面向不懂技术的使用者）
+
+将[此处的文本备份库](https://github.com/PirateBook1/GPCR) fork 到本地，使用 Recoll（推荐，可模糊搜索，构建索引速度较慢）或 [OpenSearcher](https://github.com/Gaoyongxian666/OpenSearcher)（目前只能精确搜索，但是构建索引速度快）。两款软件均在 Github 上有开源，Recoll Windows 版官方收费，可在网络上找到破解版。
+![image](https://user-images.githubusercontent.com/113572850/225878946-33fc02ab-5f2e-465c-96fb-58a6dd782b7e.png)
+![image](https://user-images.githubusercontent.com/113572850/225878356-42d2a5d2-fb16-4e9b-bc37-be8178c2359e.png)
 
 ## 功能
 
