@@ -17,9 +17,7 @@ import { ContentType, Date, ParserResult } from '../types';
 (async () => {
   const ds = await init();
   const books = await get_books();
-  const book = books.find(
-    (i) => i.entity.id === 'GPCRv3',
-  )!;
+  const book = books.find((i) => i.entity.id === 'GPCRv3')!;
 
   for (const i of await book.parser(book.path, book.parser_option)) {
     console.log(get_article_id(i));

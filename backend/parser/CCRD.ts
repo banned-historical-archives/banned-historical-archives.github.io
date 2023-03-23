@@ -19,7 +19,6 @@ export async function parse(
   path: string,
   parser_opt: ParserOption,
 ): Promise<ParserResult[]> {
-
   const res: ParserResult[] = [];
   const root = path;
   for (let j of fs.readdirSync(normalize(`${root}`))) {
@@ -34,7 +33,8 @@ export async function parse(
               t === json.contents.length - 2) &&
             (x.type === 'source' || /^来源：/.test(x.text)),
         );
-        const parts = originIdx >= 0 ? json.contents.slice(0, originIdx) : json.contents;
+        const parts =
+          originIdx >= 0 ? json.contents.slice(0, originIdx) : json.contents;
         res.push({
           title: json.title,
           authors: json.authors,
