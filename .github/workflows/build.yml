@@ -3,6 +3,11 @@ on:
   push:
     branches: ['master']
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 jobs:
   container-job:
     runs-on: ubuntu-latest
@@ -30,7 +35,7 @@ jobs:
           MYSQL_PORT: 3306
         run: |
           sudo apt-get update
-          sudo apt-get install -y --force-yes mysql-client p7zip-full language-pack-zh-han*
+          sudo apt-get install -y --force-yes mysql-client p7zip-full wget language-pack-zh-han*
           mysql --host 127.0.0.1 -e 'CREATE DATABASE banned_history CHARACTER SET utf8 COLLATE utf8_general_ci;' -uroot -proot_password
       - name: Use Node.js
         uses: actions/setup-node@v3
@@ -50,3 +55,13 @@ jobs:
       - run: git add .
       - run: git commit -m update
       - run: git push origin x:gh-pages -f
+      - name: Setup Pages
+        uses: actions/configure-pages@v3
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v1
+        with:
+          # Upload entire repository
+          path: '.'
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v1
