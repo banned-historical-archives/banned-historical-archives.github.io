@@ -40,12 +40,13 @@ jobs:
       - run: cp -r ./node_modules/pdfjs-dist ./public/
       - run: NODE_OPTIONS="--max-old-space-size=8192" npm run init-db
       - run: SITE_URL='https://banned-historical-archives.github.io' COMMIT_HASH="${{ github.sha }}" npm run build
-      - run: touch out/.nojekyll
       - run: git config --global http.postBuffer 2097152000
-      - name: Deploy to GitHub Pages
-        uses: crazy-max/ghaction-github-pages@v3
-        with:
-          target_branch: gh-pages
-          build_dir: out
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - run: git config --global user.email "you@example.com"
+      - run: git config --global user.name "Your Name"
+      - run: git checkout --orphan x
+      - run: git reset --hard
+      - run: mv out/* ./
+      - run: touch .nojekyll
+      - run: git add .
+      - run: git commit -m update
+      - run: git push origin x:gh-page -f
