@@ -29,6 +29,7 @@ export enum ImageTagType {
 export enum ContentType {
   appellation = 'appellation',
   title = 'title',
+  authors = 'authors',
   subtitle = 'subtitle',
   subtitle2 = 'subtitle2',
   subtitle3 = 'subtitle3',

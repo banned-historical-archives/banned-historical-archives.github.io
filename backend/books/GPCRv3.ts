@@ -10,5 +10,5 @@ export default {
   },
   parser_option: {},
   parser_id: 'GPCRv3',
-  path: '',
+  path: '/archives9/CCRD/0',
 };

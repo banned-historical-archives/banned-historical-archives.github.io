@@ -29,6 +29,7 @@ export default class Article {
 
   @Column({
     type: 'varchar',
+    length: 2000,
     comment: `
 初始来源
 例如：1919 年 12 月 28 日《湖南教育月刊》

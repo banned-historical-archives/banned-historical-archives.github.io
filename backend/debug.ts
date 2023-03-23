@@ -18,21 +18,13 @@ import { ContentType, Date, ParserResult } from '../types';
   const ds = await init();
   const books = await get_books();
   const book = books.find(
-    (i) => i.entity.id === '3f502324-0a16-4470-b3fc-3e237f39b604',
+    (i) => i.entity.id === 'GPCRv3',
   )!;
 
   for (const i of await book.parser(book.path, book.parser_option)) {
     console.log(get_article_id(i));
   }
-  // console.log(await book.parser(book.path, book.parser_option));
+  console.log(await book.parser(book.path, book.parser_option));
 
   debugger;
-  // parse(join(__dirname, '../a'), 'zs.ts');
-  // parse(join(__dirname, '../l'), 'lb.ts');
-  // bydir(join(__dirname, '../x/第三版 江青 张春桥 姚文元 王洪文/王洪文'), '王洪文', 'whw.x');
-  // bydir(join(__dirname, '../x/第三版 江青 张春桥 姚文元 王洪文/张春桥'), '张春桥', 'zcq.x');
-  // bydir(join(__dirname, '../x/第三版 江青 张春桥 姚文元 王洪文/姚文元'), '姚文元', 'ywy.x');
-  // bydir(join(__dirname, '../x/第三版新材料 文革期间 66、68  四，中央首长关于文化大革命的讲话和指示 部分'), '', 'others-c.x');
-  // bydir(join(__dirname, '../x/b'), '', 'others-b.x');
-  // bydir(join(__dirname, '../x/a'), '', 'others-a.x');
 })();
