@@ -1,7 +1,7 @@
 ﻿name: build-readme
 on:
-  push:
-    branches: ['master']
+  pull_request:
+    types: [closed]
 
 permissions:
   contents: write
