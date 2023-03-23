@@ -22,7 +22,7 @@ import { ensureDirSync } from 'fs-extra';
       const id = get_article_id(i);
       ensureDirSync(dirPath);
       fs.writeFileSync(
-        join(dirPath, `${i.title.replace(/\//g, '').replace(/\*/g, '')}[${id}]`),
+        join(dirPath, `${i.title.replace(/\//g, '').replace(/\*/g, '').substring(0, 50)}[${id}]`),
         `id: ${id}
 标题：${i.title}
 日期：${i.dates
