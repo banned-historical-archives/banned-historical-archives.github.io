@@ -1,8 +1,8 @@
 export default {
   entity: {
-    id: 'GPCRv3',
-    name: '中国文化大革命文库（第三版）',
-    internal: true,
+    id: 'CCRD-dayuejin',
+    name: '中国大跃进-大饥荒数据库',
+    internal: false,
     official: false,
     type: 'db',
     author: '宋永毅',
@@ -10,5 +10,5 @@ export default {
   },
   parser_option: {},
   parser_id: 'CCRD',
-  path: '/archives9/CCRD/0',
+  path: '/archives9/CCRD/2',
 };

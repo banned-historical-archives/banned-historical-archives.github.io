@@ -10,7 +10,7 @@ import * as maoquanji from './parser/maoquanji';
 import * as wanghongwen from './parser/wanghongwen';
 import * as yaowenyuan from './parser/yaowenyuan';
 import * as zhangchunqiao from './parser/zhangchunqiao';
-import * as GPCRv3 from './parser/GPCRv3';
+import * as CCRD from './parser/CCRD';
 import * as maoistlibrary from './parser/maoistlibrary';
 import * as zzj1 from './parser/zzj1';
 import * as rmrb from './parser/rmrb';
@@ -25,13 +25,16 @@ const patch_dir = join(normalize(__dirname), '../patch/articles');
 const parsers: { [key: string]: any } = {
   jinghuo,
   wenji,
-  GPCRv3,
+  CCRD,
   maoistlibrary,
   jqjianghua,
   rmrb,
   xuanji,
   jimi,
   maoquanji,
+  CCRDdayuejin,
+  CCRDfanyou,
+  CCRDshzygz,
   wanghongwen,
   yaowenyuan,
   zhangchunqiao,
