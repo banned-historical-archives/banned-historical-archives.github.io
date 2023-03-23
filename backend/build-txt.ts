@@ -14,11 +14,15 @@ import { ensureDirSync } from 'fs-extra';
   for (const book of books) {
     console.log(book.entity.name);
     const res = await book.parser(book.path, book.parser_option);
+    const dirPath = join(
+      __dirname,
+      `../txt/${book.entity.name?.replace(/\//g, '')}`,
+    );
     for (const i of res) {
       const id = get_article_id(i);
-      ensureDirSync(join(__dirname, '../txt/' + id.substring(0, 3)));
+      ensureDirSync(dirPath);
       fs.writeFileSync(
-        join(__dirname, '../txt/' + id.substring(0, 3) + '/' + id),
+        join(dirPath, `${i.title.replace(/\//g, '')}[${id}]`),
         `id: ${id}
 标题：${i.title}
 日期：${i.dates
