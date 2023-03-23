@@ -41,4 +41,6 @@ ${i.comments.map((j, idx) => `[${idx}]${j}`).join('\n')}
     }
     console.log('parsed', book.entity.name, 'length:', res.length);
   }
+  console.log('done');
+  process.exit();
 })();
