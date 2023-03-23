@@ -1,7 +1,5 @@
 ﻿name: build-readme
-on:
-  pull_request:
-    types: [closed]
+on: workflow_dispatch
 
 permissions:
   contents: write
