@@ -30,9 +30,9 @@ import { ensureDirSync } from 'fs-extra';
           .join(',')}
 是否是时间段：${i.is_range_date}
 作者：${i.authors.join(',')}
-来源：${i.origin}
-描述：${i.description}
-标签：${i.tags?.map((i) => i.name).join(',')}
+来源：${i.origin || ''}
+描述：${i.description || ''}
+标签：${i.tags?.map((i) => i.name).join(',') || ''}
 书籍：${book.entity.name}
 书籍作者：${book.entity.author}
 
