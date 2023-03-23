@@ -30,6 +30,7 @@ export enum ContentType {
   appellation = 'appellation',
   title = 'title',
   authors = 'authors',
+  place = 'place',
   subtitle = 'subtitle',
   subtitle2 = 'subtitle2',
   subtitle3 = 'subtitle3',

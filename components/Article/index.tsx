@@ -116,6 +116,18 @@ function PureArticle({
           {content}
         </Typography>
       );
+    } else if (part.type === ContentType.place) {
+      return (
+        <Typography key={key} variant="subtitle1" sx={{ textAlign: 'center' }}>
+          {content}
+        </Typography>
+      );
+    } else if (part.type === ContentType.authors) {
+      return (
+        <Typography key={key} variant="subtitle1" sx={{ textAlign: 'center' }}>
+          {content}
+        </Typography>
+      );
     } else if (part.type === ContentType.signature) {
       return (
         <Typography key={key} variant="subtitle1" sx={{ textAlign: 'right' }}>
