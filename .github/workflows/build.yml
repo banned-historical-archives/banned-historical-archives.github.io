@@ -49,4 +49,4 @@ jobs:
       - run: touch .nojekyll
       - run: git add .
       - run: git commit -m update
-      - run: git push origin x:gh-page -f
+      - run: git push origin x:gh-pages -f
