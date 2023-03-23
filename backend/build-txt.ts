@@ -36,10 +36,18 @@ import { ensureDirSync } from 'fs-extra';
 书籍：${book.entity.name}
 书籍作者：${book.entity.author}
 
-${i.parts.map((j) => j.text).join('\n')}
+正文：
+${i.parts.map((j) => {
+  if (j.type === 'title') return (`# ${ j.text }`)
+  else if (j.type === 'subtitle') return (`## ${ j.text }`)
+  else if (j.type === 'subtitle2') return (`### ${ j.text }`)
+  else if (j.type === 'subtitle3') return (`#### ${ j.text }`)
+  else if (j.type === 'quotation') return (`> ${ j.text }`)
+  else return j.text
+}).join('\n\n')}
 
-[注释]
-${i.comments.map((j, idx) => `[${idx}]${j}`).join('\n')}
+注释：
+${i.comments.map((j, idx) => `[${idx + 1}]${j}`).join('\n\n')}
 `,
       );
     }
