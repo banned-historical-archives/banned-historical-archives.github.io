@@ -91,6 +91,12 @@ https://github.com/banned-historical-archives/banned-historical-archives.github.
 
 自动构建的 html 文件在 gh-pages 分支，可以直接下载该分支的 zip 压缩包
 
+### txt 文件导出
+
+https://github.com/banned-historical-archives/banned-historical-archives.github.io/tree/txt
+
+可以直接下载该分支的 zip 压缩包
+
 ## 计划收录的报刊杂志
 
 | 名称       | 收录状态 |
