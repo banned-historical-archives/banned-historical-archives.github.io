@@ -4,6 +4,16 @@ import { Image } from './entities';
 const images: (Image & {
   id?: string;
 })[] = [
+  {"name":"《简明世界史（近代部分）》插图二十八","description":"革命群众焚毁国王“宝座”","source":"《简明世界史（近代部分）》","show_in_gallery":true,"tags":[],"id":"56819f9f-1228-46de-a45f-2a404111feb8","url":"https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives7/main/56/56819f9f-1228-46de-a45f-2a404111feb8.png"},
+  {"name":"《简明世界史（近代部分）》插图二十九","description":"匈牙利起义（中立者为苏科特）","source":"《简明世界史（近代部分）》","show_in_gallery":true,"tags":[],"id":"362c233c-3ffa-4f80-8900-e2594ead17aa","url":"https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives7/main/36/362c233c-3ffa-4f80-8900-e2594ead17aa.png"},
+  {"name":"《简明世界史（近代部分）》插图三十","description":"贝拉采斯库","source":"《简明世界史（近代部分）》","show_in_gallery":true,"tags":[],"id":"31ff39e3-af42-47f2-b78f-c6db503abbcc","url":"https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives7/main/31/31ff39e3-af42-47f2-b78f-c6db503abbcc.png"},
+  {"name":"《简明世界史（近代部分）》插图三十一","description":"《新莱茵报》最后一期","source":"《简明世界史（近代部分）》","show_in_gallery":true,"tags":[],"id":"97b78fd6-9305-424f-bda9-e30d23210a86","url":"https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives7/main/97/97b78fd6-9305-424f-bda9-e30d23210a86.png"},
+  {"name":"《简明世界史（近代部分）》插图三十二","description":"加里波第","source":"《简明世界史（近代部分）》","show_in_gallery":true,"tags":[],"id":"f1fac1d0-ab93-46cf-8934-0b1100ab22f8","url":"https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives7/main/f1/f1fac1d0-ab93-46cf-8934-0b1100ab22f8.png"},
+  {"name":"《简明世界史（近代部分）》插图三十三","description":"东布罗夫斯基","source":"《简明世界史（近代部分）》","show_in_gallery":true,"tags":[],"id":"07c4bf5f-f143-4097-903e-e47eb4004457","url":"https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives7/main/07/07c4bf5f-f143-4097-903e-e47eb4004457.png"},
+  {"name":"《简明世界史（近代部分）》后图十一","description":"一八四八年柏林三月起义","source":"《简明世界史（近代部分）》","show_in_gallery":true,"tags":[],"id":"b4324eb6-f428-467e-93f5-bc603c6cb8bf","url":"https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives7/main/b4/b4324eb6-f428-467e-93f5-bc603c6cb8bf.png"},
+  {"name":"《简明世界史（近代部分）》后图十二","description":"一八四八年捷克布拉格人民起义","source":"《简明世界史（近代部分）》","show_in_gallery":true,"tags":[],"id":"9a1cbfe6-7fea-487a-b82e-a2ab2451c042","url":"https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives7/main/9a/9a1cbfe6-7fea-487a-b82e-a2ab2451c042.png"},
+  {"name":"《简明世界史（近代部分）》后图十三","description":"一八四八年巴黎六月起义","source":"《简明世界史（近代部分）》","show_in_gallery":true,"tags":[],"id":"396837f6-6624-419e-8849-b67dbd4fc775","url":"https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives7/main/39/396837f6-6624-419e-8849-b67dbd4fc775.png"},
+  {"name":"《简明世界史（近代部分）》后图十四","description":"一八四九年恩格斯参加街垒战斗","source":"《简明世界史（近代部分）》","show_in_gallery":true,"tags":[],"id":"5e676653-9f74-4028-9558-11ecb7b5e1c4","url":"https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives7/main/5e/5e676653-9f74-4028-9558-11ecb7b5e1c4.png"},
   {
     name: '《简明世界史（近代部分）》插图二十四',
     description: '布朗基',
