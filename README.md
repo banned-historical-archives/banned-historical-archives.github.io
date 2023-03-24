@@ -86,13 +86,15 @@
 
 https://github.com/banned-historical-archives/banned-historical-archives.github.io/tree/gh-pages
 
-自动构建的 html 文件在 gh-pages 分支，可以直接下载该分支的 zip 压缩包
+自动构建的 html 文件在 gh-pages 分支
+
+[zip 压缩包](https://github.com/banned-historical-archives/banned-historical-archives.github.io/archive/refs/heads/gh-pages.zip)
 
 ### txt 文件导出
 
 https://github.com/banned-historical-archives/banned-historical-archives.github.io/tree/txt
 
-可以直接下载该分支的 zip 压缩包
+[zip 压缩包](https://github.com/banned-historical-archives/banned-historical-archives.github.io/archive/refs/heads/txt.zip)
 
 ## 计划收录的报刊杂志
 
