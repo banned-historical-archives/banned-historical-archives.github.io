@@ -45,6 +45,7 @@ jobs:
       - run: cp -r ./node_modules/pdfjs-dist ./public/
       - run: NODE_OPTIONS="--max-old-space-size=8192" npm run init-db
       - run: SITE_URL='https://banned-historical-archives.github.io' COMMIT_HASH="${{ github.sha }}" npm run build
+      - uses: actions/checkout@v3
       - run: git config --global http.postBuffer 2097152000
       - run: git config --global user.email "you@example.com"
       - run: git config --global user.name "Your Name"
