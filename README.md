@@ -45,10 +45,7 @@
 
 ### 3. 本地文本搜索（面向不懂技术的使用者）
 
-将[此分支](https://github.com/banned-historical-archives/banned-historical-archives.github.io/tree/txt) fork 到本地，使用 Recoll（推荐，可模糊搜索，构建索引速度较慢）或 [OpenSearcher](https://github.com/Gaoyongxian666/OpenSearcher)（目前只能精确搜索，但是构建索引速度快）。两款软件均在 Github 上有开源，Recoll Windows 版官方收费，可在网络上找到破解版。
-![image](https://user-images.githubusercontent.com/113572850/225878946-33fc02ab-5f2e-465c-96fb-58a6dd782b7e.png)
-![image](https://user-images.githubusercontent.com/113572850/225878356-42d2a5d2-fb16-4e9b-bc37-be8178c2359e.png)
-
+下载[此分支](https://github.com/banned-historical-archives/banned-historical-archives.github.io/tree/txt)的压缩包或 fork 到本地，安装 VSCode并使用VSCode打开目录，在vscode中进行搜索
 ## 功能
 
 1. 基本的文稿、音乐、图片查询功能；
