@@ -29,6 +29,7 @@ jobs:
           MYSQL_PORT: 3306
         run: |
           sudo apt-get update
+          sudo apt-get install -y --force-yes mysql-client p7zip-full language-pack-zh-han*
           mysql --host 127.0.0.1 -e 'CREATE DATABASE banned_history CHARACTER SET utf8 COLLATE utf8_general_ci;' -uroot -proot_password
       - name: Use Node.js
         uses: actions/setup-node@v3
