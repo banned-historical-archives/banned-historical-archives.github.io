@@ -4,6 +4,8 @@ on:
 
 permissions:
   contents: write
+  pull-requests: write
+
 jobs:
   container-job:
     runs-on: ubuntu-latest
@@ -37,9 +39,18 @@ jobs:
           node-version: 17.9
       - run: npm install
       - run: NODE_OPTIONS="--max-old-space-size=8192" npm run build-readme
-      - run: git config --global http.postBuffer 2097152000
-      - run: git config --global user.email "you@example.com"
-      - run: git config --global user.name "Your Name"
-      - run: git add .
-      - run: git commit -m 'i'
-      - run: git push
+      - name: Create Pull Request
+        id: cpr
+        uses: peter-evans/create-pull-request@v4
+        with:
+          body: 'update readme'
+          committer: GitHub <noreply@github.com>
+          author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
+          signoff: false
+          branch-suffix: random
+          delete-branch: true
+          title: '[bot]Update README'
+          labels: |
+            report
+            automated pr
+          draft: false
