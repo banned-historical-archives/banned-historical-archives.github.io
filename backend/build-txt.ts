@@ -33,8 +33,6 @@ init()
   const publication = await AppDataSource.getRepository(Publication);
   const all_publications = await publication.find({ relations: ["pages"] })
 
-  const article = await AppDataSource.getRepository(Article).createQueryBuilder().leftJoinAndSelect("Article.authors", "Author").leftJoinAndSelect("Article.dates", "Date")
-
   const comment = await AppDataSource.getRepository(Comment).createQueryBuilder()
 
   const content = await AppDataSource.getRepository(Content).createQueryBuilder()
@@ -132,7 +130,7 @@ init()
                   data[i].pages[j].content[part_index].text = ''
                 }
               } catch (err) {
-                console.log(data[i].pages[j].title)
+                console.log('处理失败！文章 id：' + data[i].pages[j].articleId + '等待校对！')
               }
             }
           }
