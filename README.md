@@ -39,13 +39,14 @@
 
 在数据库内上方搜索框搜索即为谷歌搜索，谷歌搜索收到网页收录影响，不保证即时性与搜索效果。
 
-### 2. 本地使用 Elasticsearch（推荐、操作略复杂）
+### 2. 本地使用 Elastic Search（推荐、操作略复杂）
 
 **[本地搜索的使用](https://github.com/banned-historical-archives/banned-historical-archives.github.io/wiki/%E6%9C%AC%E5%9C%B0%E6%90%9C%E7%B4%A2%E7%9A%84%E4%BD%BF%E7%94%A8)**
 
 ### 3. 本地文本搜索（面向不懂技术的使用者）
 
-下载[此分支](https://github.com/banned-historical-archives/banned-historical-archives.github.io/tree/txt)的压缩包或 fork 到本地，安装 VSCode并使用VSCode打开目录，在vscode中进行搜索
+下载[此分支](https://github.com/banned-historical-archives/banned-historical-archives.github.io/tree/txt)的压缩包或 fork 到本地，安装 VS Code 并使用 VS Code 打开目录，在 VS Code 中进行搜索
+
 ## 功能
 
 1. 基本的文稿、音乐、图片查询功能；
