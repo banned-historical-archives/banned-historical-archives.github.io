@@ -19,6 +19,20 @@
       }
     },
     {
+      "name": "init-db",
+      "type": "node",
+      "request": "launch",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["-r", "ts-node/register"],
+      "args": ["${workspaceFolder}/backend/init-db.ts"],
+      "cwd": "${workspaceRoot}",
+      "internalConsoleOptions": "openOnSessionStart",
+      "skipFiles": ["<node_internals>/**", "node_modules/**"],
+      "env": {
+        "TS_NODE_PROJECT": "tsconfig.build.json"
+      }
+    },
+    {
       "type": "pwa-node",
       "request": "launch",
       "name": "Debug Current Test File",

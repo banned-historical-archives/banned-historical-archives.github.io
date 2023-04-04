@@ -275,7 +275,7 @@ export async function parse(
       i = j;
 
       if (!catalogs[catalogs.length - 1].dates[0].year) {
-        debugger;
+        //debugger;
       }
 
       if (
@@ -295,28 +295,34 @@ export async function parse(
   for (let i = 0; i < parser_opt.page_limits.length; ++i) {
     const j = parser_opt.page_limits[i];
     for (let page = j[0]; page <= j[1]; ++page) {
-      const ocrResults = (
-        await ocr({
-          pdf: pdf_path,
-          page,
-          cache_path: join(
-            normalize(__dirname),
-            `../ocr_cache/maoquanji${basename(pdf_path).replace(
-              /[^\d]/g,
-              '',
-            )}/${page}.json`,
-          ),
-        })
-      ).ocr_results
-        .map((i) =>
-          fixtures.scale[volume]?.has(page)
-            ? ({
-                ...i,
-                box: i.box.map((j) =>
-                  j.map((k) => k * fixtures.scale[volume]!.get(page)!),
+      const origin = await ocr({
+        pdf: pdf_path,
+        page,
+        cache_path: join(
+          normalize(__dirname),
+          `../ocr_cache/maoquanji${basename(pdf_path).replace(
+            /[^\d]/g,
+            '',
+          )}/${page}.json`,
+        ),
+      });
+      const needsResize =
+        origin.dimensions.height < 1500 && parseInt(volume) < 27;
+      const ocrResults = origin.ocr_results
+        .map(
+          (i) =>
+            ({
+              ...i,
+              box: i.box.map((j) =>
+                j.map(
+                  (k) =>
+                    k *
+                    (needsResize
+                      ? 1500 / origin.dimensions.height
+                      : fixtures.scale[volume]?.get(page) || 1),
                 ),
-              } as OCRResult)
-            : i,
+              ),
+            } as OCRResult),
         )
         .filter((i) => i.text && !/^[:·：\.\d]*$/.test(i.text)) // 去页码
         .filter((i) => i.box[3][1] > 125) // 去页眉
