@@ -252,17 +252,12 @@ export function get_tags(
     '柴春泽',
     '张铁生',
     '黄帅',
-    '胡厚民',
-    '夏邦银',
-    '朱洪霞',
-    '戴行江',
-    '聂年生',
-    '吴正斌',
-    '吴焱金',
-    '顾建棠',
-    '彭勋',
-    '万里',
-    '李昌',
+    '耿金章',
+    '潘国平',
+    '温巨敏',
+    '博古',
+    '王若水',
+    '黄涛',
   ];
 
   const person_results = important_characters
@@ -323,12 +318,16 @@ export function get_tags(
       origin: ['八·二七派', '（江苏）八·二七派（P派）'],
       after: '六四〇八部队（六四〇八）',
     },
-  ]
+    {
+      origin: ['赤卫队'],
+      after: '捍卫毛泽东思想工人赤卫队上海总部（赤卫队）',
+    },
+  ];
 
-  const organization_results: { name: string; type: TagType.character; }[] = [];
+  const organization_results: { name: string; type: TagType.character }[] = [];
 
-  important_organizations.forEach(item => {
-    item.origin.forEach(i => {
+  important_organizations.forEach((item) => {
+    item.origin.forEach((i) => {
       if (content.indexOf(i) >= 0) {
         for (let i = 0; i < parser_result.dates.length; i++) {
           if (parser_result.dates[i].year! >= 1965) {
@@ -339,8 +338,8 @@ export function get_tags(
           }
         }
       }
-    })
-  })
+    });
+  });
 
   const character_results = [...person_results, ...organization_results];
 
@@ -395,214 +394,198 @@ export function get_tags(
   const event_subjects = [
     {
       origin: ['夺权'],
-      after: '夺权'
+      after: '夺权',
     },
     {
       origin: ['革命委员会'],
-      after: '革命委员会'
+      after: '革命委员会',
     },
     {
       origin: ['批陈整风'],
-      after: '批陈整风'
+      after: '批陈整风',
     },
     {
       origin: ['批林批孔', '克己复礼'],
-      after: '批林批孔'
+      after: '批林批孔',
     },
     {
       origin: ['教育革命'],
-      after: '教育革命'
+      after: '教育革命',
     },
     {
       origin: ['上山下乡'],
-      after: '上山下乡'
+      after: '上山下乡',
     },
     {
       origin: ['一打三反'],
-      after: '一打三反'
+      after: '一打三反',
     },
     {
       origin: ['破四旧'],
-      after: '破四旧'
+      after: '破四旧',
     },
     {
       origin: ['二月逆流'],
-      after: '二月逆流'
+      after: '二月逆流',
     },
     {
       origin: ['派性'],
-      after: '派性'
+      after: '派性',
     },
     {
       origin: ['反潮流'],
-      after: '反潮流'
+      after: '反潮流',
     },
     {
       origin: ['两条路线斗争'],
-      after: '两条路线斗争'
+      after: '两条路线斗争',
     },
     {
       origin: ['七二〇事件'],
-      after: '七二〇事件'
+      after: '七二〇事件',
     },
     {
       origin: ['越南战争'],
-      after: '越南战争'
+      after: '越南战争',
     },
     {
       origin: ['朝鲜战争'],
-      after: '朝鲜战争'
+      after: '朝鲜战争',
     },
     {
       origin: ['人民战争'],
-      after: '人民战争'
+      after: '人民战争',
     },
     {
       origin: ['佳士运动'],
-      after: '佳士运动'
+      after: '佳士运动',
     },
     {
       origin: ['毛主义'],
-      after: '毛主义'
+      after: '毛主义',
     },
     {
       origin: ['武斗'],
-      after: '武斗'
+      after: '武斗',
     },
     {
       origin: ['人民内部矛盾'],
-      after: '人民内部矛盾'
+      after: '人民内部矛盾',
     },
     {
       origin: ['三支两军'],
-      after: '三支两军'
+      after: '三支两军',
     },
     {
       origin: ['农业'],
-      after: '农业战线'
+      after: '农业战线',
     },
     {
       origin: ['工业'],
-      after: '工业战线'
+      after: '工业战线',
     },
     {
       origin: ['文艺'],
-      after: '文艺战线'
+      after: '文艺战线',
     },
     {
       origin: ['红卫兵'],
-      after: '红卫兵运动'
+      after: '红卫兵运动',
     },
     {
       origin: ['大批判'],
-      after: '革命大批判'
+      after: '革命大批判',
     },
     {
       origin: ['大联合'],
-      after: '革命大联合'
+      after: '革命大联合',
     },
     {
       origin: ['三结合'],
-      after: '革命三结合'
-    },
-    {
-      origin: ['邓小平', '林彪', '刘少奇'],
-      after: '批判修正主义'
+      after: '革命三结合',
     },
     {
       origin: ['资产阶级法权'],
-      after: '限制资产阶级法权'
+      after: '限制资产阶级法权',
     },
     {
       origin: ['清队', '清理阶级队伍'],
-      after: '清理阶级队伍'
+      after: '清理阶级队伍',
     },
     {
       origin: ['同心建设'],
-      after: '三大工具的同心建设'
+      after: '三大工具的同心建设',
     },
     {
       origin: ['第五卷'],
-      after: '编纂《毛泽东选集》第五卷'
+      after: '编纂《毛泽东选集》第五卷',
     },
     {
       origin: ['走资派', '走资本主义道路的当权派', '走资本主义道路当权派'],
-      after: '党内资产阶级'
+      after: '党内资产阶级',
     },
     {
       origin: ['国际主义', '无产阶级国际主义'],
-      after: '无产阶级国际主义'
+      after: '无产阶级国际主义',
     },
     {
       origin: ['国际形势', '世界形势'],
-      after: '世界形势'
+      after: '世界形势',
     },
     {
       origin: ['一月革命', '一月风暴'],
-      after: '一月革命'
+      after: '一月革命',
     },
     {
       origin: ['一·二六夺权', '一二六夺权'],
-      after: '一·二六夺权'
+      after: '一·二六夺权',
     },
     {
       origin: ['九·一三', '九一三'],
-      after: '九·一三事件'
+      after: '九·一三事件',
     },
     {
       origin: ['5·16', '五·一六'],
-      after: '清查五·一六'
+      after: '清查五·一六',
     },
     {
       origin: ['哈尔套会议'],
-      after: '哈尔套会议'
+      after: '哈尔套会议',
     },
     {
       origin: ['朝阳农学院'],
-      after: '朝阳农学院'
+      after: '朝阳农学院',
     },
     {
       origin: ['以三项指示为纲'],
-      after: '以三项指示为纲'
+      after: '以三项指示为纲',
     },
     {
       origin: ['四五运动'],
-      after: '四五运动'
+      after: '四五运动',
     },
     {
-      origin: ['小靳庄', '小靳庄经验'],
-      after: '小靳庄经验'
+      origin: ['儒法斗争'],
+      after: '儒法斗争',
     },
     {
-      origin: ['唯生产力论'],
-      after: '批判唯生产力论'
+      origin: ['支左'],
+      after: '军队支左',
     },
-    {
-      origin: ['鞍钢宪法'],
-      after: '鞍钢宪法'
-    },
-    {
-      origin: ['五七干校'],
-      after: '五七干校'
-    },
-    {
-      origin: ['阶级斗争熄灭论'],
-      after: '阶级斗争熄灭论'
-    }
   ];
 
-  const event_results: { name: string; type: TagType.subject; }[] = [];
+  const event_results: { name: string; type: TagType.subject }[] = [];
 
-  event_subjects.forEach(item => {
-    item.origin.forEach(i => {
+  event_subjects.forEach((item) => {
+    item.origin.forEach((i) => {
       if (content.indexOf(i) >= 0) {
         event_results.push({
           name: item.after,
           type: TagType.subject,
-        })
+        });
       }
-    })
-  })
+    });
+  });
 
   const subjects_results = [...provice_results, ...event_results];
 

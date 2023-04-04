@@ -1,11 +1,11 @@
 export default {
   entity: {
     id: '93482dc4-edc3-4ce3-a6d2-960ec210656a',
-    name: '“四人帮”死党毛远新破坏教育革命言论摘编（初编）',
-    internal: true,
+    name: '“四人帮”死党毛远新破坏教育革命言论摘编（初编）（1976.12）',
+    internal: false,
     official: true,
     type: 'img',
-    author: '辽宁省教育局大批判组整理',
+    author: '毛远新，1976.12，反攻倒算材料，辽宁省教育局大批判组整理',
     files:
       'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/93482dc4-edc3-4ce3-a6d2-960ec210656a/1.png,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/93482dc4-edc3-4ce3-a6d2-960ec210656a/2.png,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/93482dc4-edc3-4ce3-a6d2-960ec210656a/3.png,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/93482dc4-edc3-4ce3-a6d2-960ec210656a/4.png,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/93482dc4-edc3-4ce3-a6d2-960ec210656a/5.png,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/93482dc4-edc3-4ce3-a6d2-960ec210656a/6.png,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/93482dc4-edc3-4ce3-a6d2-960ec210656a/7.png,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/93482dc4-edc3-4ce3-a6d2-960ec210656a/8.png,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/93482dc4-edc3-4ce3-a6d2-960ec210656a/9.png',
   },
@@ -18,6 +18,9 @@ export default {
         authors: ['毛远新'],
         page_start: 3,
         page_end: 4,
+        tags: [
+          { name: '辽宁省教育局大批判组整理', type: 'issuer' }, // 发行方/出版方
+        ],
         ocr_exceptions: { '3': { content_thresholds: [0, 0, 0.5, 0] } },
         dates: [
           { year: 1974 },
@@ -37,6 +40,9 @@ export default {
         authors: ['毛远新'],
         page_start: 5,
         page_end: 5,
+        tags: [
+          { name: '辽宁省教育局大批判组整理', type: 'issuer' }, // 发行方/出版方
+        ],
         dates: [
           { year: 1974, month: 4, day: 11 },
           { year: 1973, month: 11, day: 24 },
@@ -51,6 +57,9 @@ export default {
         authors: ['毛远新'],
         page_start: 6,
         page_end: 7,
+        tags: [
+          { name: '辽宁省教育局大批判组整理', type: 'issuer' }, // 发行方/出版方
+        ],
         ocr_exceptions: { '7': { content_thresholds: [0, 0, 0, 0.5] } },
         dates: [
           { year: 1976, month: 1, day: 1 },
@@ -68,6 +77,9 @@ export default {
         authors: ['毛远新'],
         page_start: 7,
         page_end: 9,
+        tags: [
+          { name: '辽宁省教育局大批判组整理', type: 'issuer' }, // 发行方/出版方
+        ],
         ocr_exceptions: { '9': { content_thresholds: [0, 0, 0, 0.5] } },
         dates: [
           { year: 1974, month: 2, day: 22 },
@@ -86,6 +98,9 @@ export default {
         authors: ['毛远新'],
         page_start: 9,
         page_end: 9,
+        tags: [
+          { name: '辽宁省教育局大批判组整理', type: 'issuer' }, // 发行方/出版方
+        ],
         dates: [
           { year: 1972, month: 11, day: 11 },
           { year: 1974, month: 11, day: 28 },

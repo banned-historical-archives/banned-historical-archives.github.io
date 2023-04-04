@@ -21,6 +21,9 @@ export default {
         authors: ['王洪文', '张春桥'],
         page_start: 2,
         page_end: 3,
+        tags: [
+          { name: '总参谋部政治部', type: 'issuer' }, // 发行方/出版方
+        ],
         dates: [{ year: 1974, month: 2, day: 8 }],
       },
     ],

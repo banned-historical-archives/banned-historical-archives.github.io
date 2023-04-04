@@ -2,7 +2,7 @@ export default {
   entity: {
     id: 'f692a8bf-a640-4079-89e3-c41186cb50ff',
     name: '毛远新的谈话记录（1976.11）',
-    internal: true,
+    internal: false,
     official: true,
     type: 'img',
     author: '毛远新，1976.11，反攻倒算材料',

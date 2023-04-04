@@ -9,6 +9,6 @@ export default {
     files: '',
   },
   parser_option: {},
-  parser_id: 'GPCRv3',
-  path: '',
+  parser_id: 'CCRD',
+  path: '/archives9/CCRD/0',
 };

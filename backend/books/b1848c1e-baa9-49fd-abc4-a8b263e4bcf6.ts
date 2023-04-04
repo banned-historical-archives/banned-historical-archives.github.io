@@ -1,11 +1,11 @@
 export default {
   entity: {
     id: 'b1848c1e-baa9-49fd-abc4-a8b263e4bcf6',
-    name: '毛远新同志在沈阳三派革命群众组织代表座谈会上的讲话',
-    internal: true,
+    name: '毛远新在沈阳三派革命群众组织代表座谈会上的讲话（1968.4.7）',
+    internal: false,
     official: true,
     type: 'img',
-    author: '',
+    author: '毛远新，1968.4.7',
     files:
       'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/b1848c1e-baa9-49fd-abc4-a8b263e4bcf6/1.png,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/b1848c1e-baa9-49fd-abc4-a8b263e4bcf6/2.png,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/b1848c1e-baa9-49fd-abc4-a8b263e4bcf6/3.png',
   },

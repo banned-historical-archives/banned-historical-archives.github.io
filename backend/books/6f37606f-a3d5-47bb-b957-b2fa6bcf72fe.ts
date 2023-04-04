@@ -5,7 +5,8 @@ export default {
     internal: false,
     official: false,
     type: 'img',
-    author: '张春桥，1967.2.25，赤卫军上海市大专院校革命委员会一九六七年三月四日，赤卫军复旦大学革命委员会翻印',
+    author:
+      '张春桥，1967.2.25，赤卫军上海市大专院校革命委员会一九六七年三月四日，赤卫军复旦大学革命委员会翻印',
     files:
       'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/6f37606f-a3d5-47bb-b957-b2fa6bcf72fe/1.jpg,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/6f37606f-a3d5-47bb-b957-b2fa6bcf72fe/2.jpg,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/6f37606f-a3d5-47bb-b957-b2fa6bcf72fe/3.jpg',
   },

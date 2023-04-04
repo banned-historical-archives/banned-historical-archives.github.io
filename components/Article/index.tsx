@@ -26,11 +26,6 @@ function PureArticle({
   comments: Comment[];
   description?: string;
 }) {
-  const [popoverContent, setPopoverContent] = useState('');
-  const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
-
-  let str = [['正文：']];
-
   const contentsComponent = contents.map((part) => {
     let s: string[] = [];
     const part_comments = comments.filter((i) => i.part_index === part.index);
@@ -70,12 +65,10 @@ function PureArticle({
       }
     });
 
-    if (part.type === ContentType.title) s.unshift('# ')
-    else if (part.type === ContentType.subtitle) s.unshift('## ')
-    else if (part.type === ContentType.subtitle2) s.unshift('### ')
-    else if (part.type === ContentType.subtitle3) s.unshift('#### ')
-
-    str.push(s);
+    if (part.type === ContentType.title) s.unshift('# ');
+    else if (part.type === ContentType.subtitle) s.unshift('## ');
+    else if (part.type === ContentType.subtitle2) s.unshift('### ');
+    else if (part.type === ContentType.subtitle3) s.unshift('#### ');
 
     const key = part.id;
     if (part.type === ContentType.title) {
@@ -118,6 +111,18 @@ function PureArticle({
         </Typography>
       );
     } else if (part.type === ContentType.subdate) {
+      return (
+        <Typography key={key} variant="subtitle1" sx={{ textAlign: 'center' }}>
+          {content}
+        </Typography>
+      );
+    } else if (part.type === ContentType.place) {
+      return (
+        <Typography key={key} variant="subtitle1" sx={{ textAlign: 'center' }}>
+          {content}
+        </Typography>
+      );
+    } else if (part.type === ContentType.authors) {
       return (
         <Typography key={key} variant="subtitle1" sx={{ textAlign: 'center' }}>
           {content}
@@ -273,51 +278,8 @@ function PureArticle({
     </>
   ) : null;
 
-  const temp: number[] = [];
-
-  if (description) {
-    str.push(['描述：']);
-    str.push([`${description}`]);
-  }
-  
-  if (comments.filter((i) => i.index !== -1).length) {
-    str.push(['注释：'])
-    let s: string[] = []
-    comments
-      .filter((i) => {
-        if (i.index !== -1 && i.text) {
-          temp.push(i.index);
-          return true;
-        }
-      })
-      .map((i) => {
-        s.push(`〔${i.index}〕${i.text}\n\n`)
-      });
-    str.push(s);
-  }
-
-  let result_str = ''
-
-  str.forEach((item, i) => {
-    result_str = result_str + item.join('') + '\n\n'
-  })
   return (
     <>
-      <Popover
-        open={!!anchorEl}
-        anchorEl={anchorEl}
-        onClose={() => setAnchorEl(null)}
-      >
-        <TextField multiline value={popoverContent} />
-      </Popover>
-      <Button
-          onClick={(e) => {
-            setPopoverContent(result_str);
-            setAnchorEl(e.currentTarget);
-          }}
-        >
-          本页文本
-      </Button>
       {contentsComponent}
       {descriptionComponent}
       {commentsComponent}

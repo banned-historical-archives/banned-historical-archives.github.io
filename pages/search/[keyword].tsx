@@ -41,7 +41,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Link from 'next/link';
 
 export default function Search() {
-  const [es_size, setSize] = useState(5);
+  const [es_size, setSize] = useState(10);
   const [es_from, setFrom] = useState(0);
   const [page, setPage] = useState(1);
   const [res, setRes] = useState<any>();

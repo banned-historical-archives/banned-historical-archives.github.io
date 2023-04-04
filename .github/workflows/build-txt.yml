@@ -1,0 +1,49 @@
+name: build-txt
+on:
+  push:
+    branches: ['master']
+
+permissions:
+  contents: write
+jobs:
+  container-job:
+    runs-on: ubuntu-latest
+
+    # runs all of the steps inside the specified container rather than on the VM host.
+    # Because of this the network configuration changes from host based network to a container network.
+    services:
+      mysql:
+        image: mysql:5.7
+        env:
+          MYSQL_ROOT_PASSWORD: root_password
+        ports:
+          - 3306:3306
+        # needed because the mysql container does not provide a healthcheck
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=10s --health-retries=10
+
+    steps:
+      - uses: actions/checkout@v3
+      - run: cd public && rm -rf archives9 && git clone --depth=1 https://github.com/banned-historical-archives/banned-historical-archives9.git archives9 && rm -rf archives10 && git clone --depth=1 https://github.com/banned-historical-archives/banned-historical-archives10.git archives10
+      - name: Set up MySQL
+        env:
+          MYSQL_HOST: mysql
+          MYSQL_PORT: 3306
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --force-yes mysql-client p7zip-full language-pack-zh-han*
+          mysql --host 127.0.0.1 -e 'CREATE DATABASE banned_history CHARACTER SET utf8 COLLATE utf8_general_ci;' -uroot -proot_password
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 17.9
+      - run: npm install
+      - run: NODE_OPTIONS="--max-old-space-size=8192" npm run init-db
+      - run: NODE_OPTIONS="--max-old-space-size=8192" npm run build-txt
+      - run: git config --global http.postBuffer 2097152000
+      - run: git config --global user.email "you@example.com"
+      - run: git config --global user.name "Your Name"
+      - run: git checkout --orphan x
+      - run: git reset --hard
+      - run: git add txt
+      - run: git commit -m i
+      - run: git push origin x:txt -f

@@ -3,6 +3,11 @@ on:
   push:
     branches: ['master']
 
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
 jobs:
   container-job:
     runs-on: ubuntu-latest
@@ -20,7 +25,7 @@ jobs:
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=10s --health-retries=10
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - run: cd public && rm -rf archives9 && git clone --depth=1 https://github.com/banned-historical-archives/banned-historical-archives9.git archives9 && rm -rf archives10 && git clone --depth=1 https://github.com/banned-historical-archives/banned-historical-archives10.git archives10
       - name: Set up MySQL
         env:
@@ -30,7 +35,7 @@ jobs:
           MYSQL_PORT: 3306
         run: |
           sudo apt-get update
-          sudo apt-get install -y --force-yes mysql-client p7zip-full language-pack-zh-han*
+          sudo apt-get install -y --force-yes mysql-client p7zip-full wget language-pack-zh-han*
           mysql --host 127.0.0.1 -e 'CREATE DATABASE banned_history CHARACTER SET utf8 COLLATE utf8_general_ci;' -uroot -proot_password
       - name: Use Node.js
         uses: actions/setup-node@v3
@@ -40,12 +45,24 @@ jobs:
       - run: cp -r ./node_modules/pdfjs-dist ./public/
       - run: NODE_OPTIONS="--max-old-space-size=8192" npm run init-db
       - run: SITE_URL='https://banned-historical-archives.github.io' COMMIT_HASH="${{ github.sha }}" npm run build
-      - run: touch out/.nojekyll
       - run: git config --global http.postBuffer 2097152000
-      - name: Deploy to GitHub Pages
-        uses: crazy-max/ghaction-github-pages@v3
+      - run: git config --global user.email "you@example.com"
+      - run: git config --global user.name "Your Name"
+      - run: git checkout --orphan x
+      - run: git reset --hard
+      - run: mv out/* ./
+      - run: touch .nojekyll
+      - run: rm -rf node_modules && rm -rf .next
+      - run: git add .
+      - run: git commit -m update
+      - run: git push origin x:gh-pages -f
+      - name: Setup Pages
+        uses: actions/configure-pages@v3
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v1
         with:
-          target_branch: gh-pages
-          build_dir: out
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # Upload entire repository
+          path: '.'
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v1

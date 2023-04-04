@@ -1,11 +1,11 @@
 export default {
   entity: {
     id: 'f750c865-cb15-4c03-98b2-aad6e569d88a',
-    name: '毛远新破坏民兵建设的部分罪行材料',
-    internal: true,
+    name: '毛远新破坏民兵建设的部分罪行材料（1976.12）',
+    internal: false,
     official: true,
     type: 'img',
-    author: '',
+    author: '毛远新，1976.12，反攻倒算材料，辽宁省委民兵工作领导小组办公室',
     files:
       'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/f750c865-cb15-4c03-98b2-aad6e569d88a/1.jpg,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/f750c865-cb15-4c03-98b2-aad6e569d88a/2.jpg,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/f750c865-cb15-4c03-98b2-aad6e569d88a/3.jpg,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/f750c865-cb15-4c03-98b2-aad6e569d88a/4.jpg,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/f750c865-cb15-4c03-98b2-aad6e569d88a/5.jpg,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/f750c865-cb15-4c03-98b2-aad6e569d88a/6.jpg,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/f750c865-cb15-4c03-98b2-aad6e569d88a/7.jpg,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/f750c865-cb15-4c03-98b2-aad6e569d88a/8.jpg,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/f750c865-cb15-4c03-98b2-aad6e569d88a/9.jpg,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/f750c865-cb15-4c03-98b2-aad6e569d88a/10.jpg,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/f750c865-cb15-4c03-98b2-aad6e569d88a/11.jpg,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/f750c865-cb15-4c03-98b2-aad6e569d88a/12.jpg,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/f750c865-cb15-4c03-98b2-aad6e569d88a/13.jpg,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/f750c865-cb15-4c03-98b2-aad6e569d88a/14.jpg,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/f750c865-cb15-4c03-98b2-aad6e569d88a/15.jpg,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/f750c865-cb15-4c03-98b2-aad6e569d88a/16.jpg',
   },
@@ -18,6 +18,9 @@ export default {
         authors: ['辽宁省委民兵工作领导小组办公室'],
         page_start: 3,
         page_end: 5,
+        tags: [
+          { name: '辽宁省委民兵工作领导小组办公室', type: 'issuer' }, // 发行方/出版方
+        ],
         ocr_exceptions: { '5': { content_thresholds: [0, 0, 0, 0.5] } },
         dates: [{ year: 1976 }],
       },
@@ -27,6 +30,9 @@ export default {
         authors: ['毛远新'],
         page_start: 5,
         page_end: 5,
+        tags: [
+          { name: '辽宁省委民兵工作领导小组办公室', type: 'issuer' }, // 发行方/出版方
+        ],
         ocr_exceptions: { '5': { content_thresholds: [0.19, 0.46, 0.5, 0] } },
         dates: [{ year: 1973, month: 12, day: 8 }],
       },
@@ -36,6 +42,9 @@ export default {
         authors: ['毛远新'],
         page_start: 5,
         page_end: 8,
+        tags: [
+          { name: '辽宁省委民兵工作领导小组办公室', type: 'issuer' }, // 发行方/出版方
+        ],
         ocr_exceptions: { '5': { content_thresholds: [0.54, 0, 0.5, 0] } },
         dates: [{ year: 1973, month: 12, day: 13 }],
       },
@@ -45,6 +54,9 @@ export default {
         authors: ['毛远新'],
         page_start: 8,
         page_end: 9,
+        tags: [
+          { name: '辽宁省委民兵工作领导小组办公室', type: 'issuer' }, // 发行方/出版方
+        ],
         ocr_exceptions: { '8': { content_thresholds: [0.3, 0, 0.5, 0] } },
         dates: [{ year: 1974, month: 1, day: 14 }],
       },
@@ -54,6 +66,9 @@ export default {
         authors: ['毛远新'],
         page_start: 9,
         page_end: 10,
+        tags: [
+          { name: '辽宁省委民兵工作领导小组办公室', type: 'issuer' }, // 发行方/出版方
+        ],
         ocr_exceptions: {
           '9': { content_thresholds: [0.31, 0, 0.5, 0] },
           '10': { content_thresholds: [0, 0.73, 0, 0.5] },
@@ -66,6 +81,9 @@ export default {
         authors: ['毛远新'],
         page_start: 10,
         page_end: 11,
+        tags: [
+          { name: '辽宁省委民兵工作领导小组办公室', type: 'issuer' }, // 发行方/出版方
+        ],
         ocr_exceptions: { '11': { content_thresholds: [0, 0, 0, 0.5] } },
         dates: [{ year: 1974, month: 3, day: 31 }],
       },
@@ -75,6 +93,9 @@ export default {
         authors: ['毛远新'],
         page_start: 11,
         page_end: 11,
+        tags: [
+          { name: '辽宁省委民兵工作领导小组办公室', type: 'issuer' }, // 发行方/出版方
+        ],
         ocr_exceptions: { '11': { content_thresholds: [0, 0.7, 0.5, 0] } },
         dates: [{ year: 1974, month: 4, day: 5 }],
       },
@@ -84,6 +105,9 @@ export default {
         authors: ['毛远新'],
         page_start: 11,
         page_end: 11,
+        tags: [
+          { name: '辽宁省委民兵工作领导小组办公室', type: 'issuer' }, // 发行方/出版方
+        ],
         ocr_exceptions: { '11': { content_thresholds: [0.3, 0.51, 0.5, 0] } },
         dates: [{ year: 1974, month: 11 }],
       },
@@ -93,6 +117,9 @@ export default {
         authors: ['毛远新'],
         page_start: 11,
         page_end: 15,
+        tags: [
+          { name: '辽宁省委民兵工作领导小组办公室', type: 'issuer' }, // 发行方/出版方
+        ],
         ocr_exceptions: {
           '11': { content_thresholds: [0.5, 0, 0.5, 0] },
           '15': { content_thresholds: [0, 0.5, 0, 0.5] },
@@ -105,6 +132,9 @@ export default {
         authors: ['毛远新'],
         page_start: 15,
         page_end: 16,
+        tags: [
+          { name: '辽宁省委民兵工作领导小组办公室', type: 'issuer' }, // 发行方/出版方
+        ],
         ocr_exceptions: { '16': { content_thresholds: [0, 0.84, 0, 0.5] } },
         dates: [{ year: 1975, month: 5, day: 16 }],
       },
@@ -113,6 +143,9 @@ export default {
         authors: ['毛远新'],
         page_start: 16,
         page_end: 16,
+        tags: [
+          { name: '辽宁省委民兵工作领导小组办公室', type: 'issuer' }, // 发行方/出版方
+        ],
         ocr_exceptions: { '16': { content_thresholds: [0.16, 0, 0, 0.5] } },
         dates: [
           { year: 1975, month: 3 },
