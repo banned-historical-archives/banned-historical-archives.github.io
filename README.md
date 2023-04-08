@@ -97,6 +97,12 @@ https://github.com/banned-historical-archives/banned-historical-archives.github.
 
 [zip 压缩包](https://github.com/banned-historical-archives/banned-historical-archives.github.io/archive/refs/heads/txt.zip)
 
+## 资料主要来源
+
+* https://github.com/ProletRevDicta/Prolet
+* zlib
+* http://www.mzdbl.cn
+
 ## 计划收录的报刊杂志
 
 | 名称       | 收录状态 |
