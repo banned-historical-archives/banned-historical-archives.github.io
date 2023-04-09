@@ -99,9 +99,10 @@ https://github.com/banned-historical-archives/banned-historical-archives.github.
 
 ## 资料主要来源
 
-* https://github.com/ProletRevDicta/Prolet
-* zlib
-* http://www.mzdbl.cn
+* https://github.com/ProletRevDicta/Prolet Prolet
+* https://zh.annas-archive.org/ 安娜的档案
+* http://www.mzdbl.cn 毛泽东博览
+* https://ip.lidicity.com/hj/cn/index.html 怀旧金曲立地城
 
 ## 计划收录的报刊杂志
 
