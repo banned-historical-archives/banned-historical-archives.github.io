@@ -87,8 +87,6 @@
 
 https://github.com/banned-historical-archives/banned-historical-archives.github.io/tree/gh-pages
 
-自动构建的 html 文件在 gh-pages 分支
-
 [zip 压缩包](https://github.com/banned-historical-archives/banned-historical-archives.github.io/archive/refs/heads/gh-pages.zip)
 
 ### txt 文件导出
@@ -102,6 +100,8 @@ https://github.com/banned-historical-archives/banned-historical-archives.github.
 * https://github.com/ProletRevDicta/Prolet Prolet
 * https://zh.annas-archive.org/ 安娜的档案
 * http://www.mzdbl.cn 毛泽东博览
+* https://www.marxists.org/chinese/index.html 中文马克思主义文库
+* https://bannedthought.net/ bannedthought
 * https://ip.lidicity.com/hj/cn/index.html 怀旧金曲立地城
 
 ## 计划收录的报刊杂志
