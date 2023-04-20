@@ -133,11 +133,10 @@ export default function Part({
             variant="outlined"
             size="small"
             onClick={() => {
-              setInsertBefore(insertBefore.filter((j) => j.id !== i.id));
               partDiff.current.insertBefore = insertBefore.filter(
                 (j) => j.id !== i.id,
               );
-              setInsertAfter(partDiff.current.insertBefore);
+              setInsertBefore(partDiff.current.insertBefore);
               onChange(removeIds(partDiff.current));
             }}
           >
@@ -281,7 +280,6 @@ export default function Part({
             variant="outlined"
             size="small"
             onClick={() => {
-              setInsertAfter(insertAfter.filter((j) => j.id !== i.id));
               partDiff.current.insertAfter = insertAfter.filter(
                 (j) => j.id !== i.id,
               );
