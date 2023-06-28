@@ -1,11 +1,11 @@
 export default {
   entity: {
     id: 'eb1072b3-9057-4142-8fd8-544053ced488',
-    name: '赵辛初同志在全省广播大会上的讲话',
+    name: '赵辛初同志在全省广播大会上的讲话（1975.6.4）',
     internal: false,
     official: true,
     type: 'img',
-    author: '中共湖北省委办公厅',
+    author: '中共湖北省委办公厅印，1975.6.5',
     files:
       'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/eb1072b3-9057-4142-8fd8-544053ced488/1.png,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/eb1072b3-9057-4142-8fd8-544053ced488/2.png,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/eb1072b3-9057-4142-8fd8-544053ced488/3.png,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/eb1072b3-9057-4142-8fd8-544053ced488/4.png,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/eb1072b3-9057-4142-8fd8-544053ced488/5.png,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/eb1072b3-9057-4142-8fd8-544053ced488/6.png,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/eb1072b3-9057-4142-8fd8-544053ced488/7.png',
   },
