@@ -1,11 +1,11 @@
 export default {
   entity: {
     id: '1a64a4ed-2bab-4ea1-8b71-c280caca4767',
-    name: '宗明兰在各市、地宣传组长座谈会上的讲话',
+    name: '宗明兰在各市、地宣传组长座谈会上的讲话（1976.12）',
     internal: true,
     official: true,
     type: 'img',
-    author: '',
+    author: '宗明兰，1976.12',
     files:
       'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/1a64a4ed-2bab-4ea1-8b71-c280caca4767/1.jpg,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/1a64a4ed-2bab-4ea1-8b71-c280caca4767/2.jpg,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/1a64a4ed-2bab-4ea1-8b71-c280caca4767/3.jpg,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/1a64a4ed-2bab-4ea1-8b71-c280caca4767/4.jpg,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/1a64a4ed-2bab-4ea1-8b71-c280caca4767/5.jpg,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/1a64a4ed-2bab-4ea1-8b71-c280caca4767/6.jpg,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/1a64a4ed-2bab-4ea1-8b71-c280caca4767/7.jpg,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/1a64a4ed-2bab-4ea1-8b71-c280caca4767/8.jpg,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/1a64a4ed-2bab-4ea1-8b71-c280caca4767/9.jpg,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/1a64a4ed-2bab-4ea1-8b71-c280caca4767/10.jpg',
   },
