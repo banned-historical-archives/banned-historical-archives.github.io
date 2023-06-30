@@ -1,11 +1,11 @@
 export default {
   entity: {
     id: '49dfa82c-62bd-4241-88af-8941e04cabee',
-    name: '张延成同志在济南市有线广播大会上的讲话',
+    name: '张延成同志在济南市有线广播大会上的讲话（1973.11.10）',
     internal: true,
     official: true,
     type: 'img',
-    author: '济南市革命委员会办公室印',
+    author: '张延成，济南市革命委员会办公室印，1973.11.10',
     files: new Array(8)
       .fill(0)
       .map(
