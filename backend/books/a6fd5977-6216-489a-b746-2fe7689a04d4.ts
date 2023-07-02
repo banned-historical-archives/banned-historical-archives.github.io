@@ -1,11 +1,11 @@
 export default {
   entity: {
     id: 'a6fd5977-6216-489a-b746-2fe7689a04d4',
-    name: '夏邦银、朱鸿霞、胡厚民等人配合“四人帮”在湖北大搞篡党夺权阴谋活动的罪行',
+    name: '夏邦银、朱鸿霞、胡厚民等人配合“四人帮”在湖北大搞篡党夺权阴谋活动的罪行（1977.2.16）',
     internal: false,
     official: true,
     type: 'img',
-    author: '中共武汉市委材料组',
+    author: '中共武汉市委材料组，1977.2.16整理',
     files:
       'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/a6fd5977-6216-489a-b746-2fe7689a04d4/1.png,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/a6fd5977-6216-489a-b746-2fe7689a04d4/2.png,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/a6fd5977-6216-489a-b746-2fe7689a04d4/3.png,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/a6fd5977-6216-489a-b746-2fe7689a04d4/4.png,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/a6fd5977-6216-489a-b746-2fe7689a04d4/5.png,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/a6fd5977-6216-489a-b746-2fe7689a04d4/6.png,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/a6fd5977-6216-489a-b746-2fe7689a04d4/7.png,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/a6fd5977-6216-489a-b746-2fe7689a04d4/8.png,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/a6fd5977-6216-489a-b746-2fe7689a04d4/9.png',
   },
