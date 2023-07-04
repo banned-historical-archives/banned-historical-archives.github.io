@@ -20,7 +20,7 @@ export default {
         page_end: 14,
         dates: [{ year: 1976, month: 7, day: 8 }],
         tags: [
-            { name: '中共中山县委宣传部', type: 'reprint' }, // 翻印/传抄
+          { name: '中共中山县委宣传部', type: 'reprint' }, // 翻印/传抄
         ],
       },
     ],
