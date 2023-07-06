@@ -1,11 +1,11 @@
 export default {
   entity: {
     id: '187473e3-da31-44f3-95e9-8b7b89c95627',
-    name: '全国农业劳动模范陈以梅同志在山东省工农兵代表批林批孔汇报大会上的讲话',
-    internal: true,
-    official: true,
+    name: '全国农业劳动模范陈以梅同志在山东省工农兵代表批林批孔汇报大会上的讲话（1974.2.27）',
+    internal: false,
+    official: false,
     type: 'pdf',
-    author: '',
+    author: '陈以梅，1974.2.27',
     files:
       'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/187473e3-da31-44f3-95e9-8b7b89c95627.pdf',
   },
