@@ -1,11 +1,11 @@
 export default {
   entity: {
     id: '5717249f-0249-47cf-9d87-0f960ce7d4b3',
-    name: '陈以梅同志在济南市二所对济南工人谈话',
-    internal: true,
-    official: true,
+    name: '陈以梅同志讲话（1974.3.22）',
+    internal: false,
+    official: false,
     type: 'pdf',
-    author: '',
+    author: '陈以梅，1974.3.22，济南工人整理',
     files:
       'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/5717249f-0249-47cf-9d87-0f960ce7d4b3.pdf',
   },
