@@ -1,11 +1,11 @@
 export default {
   entity: {
     id: '2e2e3766-4530-464b-882c-f8b079a63e66',
-    name: '检查交代我和上海黄涛串联的犯罪情况',
+    name: '检查交代我和上海黄涛串联的犯罪情况（杨春甫一九七六年十二月十七日检查交代材料）',
     internal: true,
     official: true,
     type: 'img',
-    author: '',
+    author: '杨春甫，1976.12.17',
     files:
       'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/2e2e3766-4530-464b-882c-f8b079a63e66/1.png,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/2e2e3766-4530-464b-882c-f8b079a63e66/2.png,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/2e2e3766-4530-464b-882c-f8b079a63e66/3.png,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/2e2e3766-4530-464b-882c-f8b079a63e66/4.png',
   },
