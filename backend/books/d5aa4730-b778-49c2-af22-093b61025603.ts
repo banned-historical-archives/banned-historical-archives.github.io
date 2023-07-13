@@ -1,11 +1,11 @@
 export default {
   entity: {
     id: 'd5aa4730-b778-49c2-af22-093b61025603',
-    name: '检查交代我向党进攻的思想情况',
+    name: '检查交代我向党进攻的思想情况（杨春甫一九七六年十二月十九日检查交代材料）',
     internal: true,
     official: true,
     type: 'img',
-    author: '杨春甫，1976年12月',
+    author: '杨春甫，一九七六年十二月',
     files:
       'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/d5aa4730-b778-49c2-af22-093b61025603/1.png,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/d5aa4730-b778-49c2-af22-093b61025603/2.png,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/d5aa4730-b778-49c2-af22-093b61025603/3.png,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/d5aa4730-b778-49c2-af22-093b61025603/4.png',
   },
