@@ -5,7 +5,8 @@ export default {
     internal: false,
     official: false,
     type: 'img',
-    author: '毛远新，1968.3.4，辽革站《迎曙光》战斗兵团、阜联筹《红色风雷》编辑部翻印',
+    author:
+      '毛远新，1968.3.4，辽革站《迎曙光》战斗兵团、阜联筹《红色风雷》编辑部翻印',
     files:
       'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/52d8fbe4-965f-4cfc-872b-e6029e3f734d/1.jpg,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/52d8fbe4-965f-4cfc-872b-e6029e3f734d/2.jpg',
   },
@@ -21,8 +22,8 @@ export default {
         page_end: 2,
         dates: [{ year: 1968, month: 3, day: 4 }],
         tags: [
-            { name: '辽革站《迎曙光》战斗兵团', type: 'reprint' }, // 翻印/传抄
-            { name: '阜联筹《红色风雷》编辑部', type: 'reprint' }, // 翻印/传抄
+          { name: '辽革站《迎曙光》战斗兵团', type: 'reprint' }, // 翻印/传抄
+          { name: '阜联筹《红色风雷》编辑部', type: 'reprint' }, // 翻印/传抄
         ],
       },
     ],
