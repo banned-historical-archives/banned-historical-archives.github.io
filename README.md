@@ -1,6 +1,6 @@
 # 和谐历史档案馆 - Banned Historical Archives
 
-[官网](https://banned-historical-archives.github.io)
+[网站](https://banned-historical-archives.github.io)
 
 ## 介绍
 
@@ -15,13 +15,15 @@
 
 多媒体资料涵盖音乐及歌词、电影、照片、录音等，目前主要收录了社会主义中国创作的红色音乐。
 
-### 为什么官方要封禁某历史资料，甚至包括官方过去公开的文件？
+### 为什么官方要封禁这些历史资料，甚至包括官方过去公开的文件？
+* 过去的统治阶级是无产阶级，现在的统治阶级是官僚资产阶级（修正主义者）。
 * 历史资料中包含大量群众造反经验，对当前统治阶级极为不利。
-* 有些观点与现行教科书、宣传方向和政策立场存在冲突，甚至存在历史描述上的矛盾。为防止激起民众好奇心，避免对这段历史的深入挖掘和讨论。
+* 许多观点与现行教科书、宣传方向和政策立场存在矛盾，甚至修改、编造和美化历史。为防止激起民众好奇心，避免对有争议的历史深入挖掘和讨论。
 
 ### 被封禁的资料中揭露的内容
-* 邓小平和刘少奇是浮夸风的主要负责人。
-* 四人帮案件是冤案。在毛泽东去世后，四人帮在反右斗争中失利，他们曾经对反革命的打压被定性为篡权夺党，而那些反革命的官僚阶级却得以翻案并成为国家的新领导者。这些反革命分子实际上是文革期间极端行为的主要推动者，他们通常使用极端（极左）的手段支持文化大革命，来达到破坏文化大革命的目的，以消减对他们造成的威胁。例如，在破四旧政策中，扶持暴力的红卫兵西纠联动进行打砸抢活动，事后把责任归咎于真正的革命者和其他全部红卫兵。
+* 刘少奇和邓小平是浮夸风的主要负责人。
+* 四人帮案件是冤案。在毛泽东去世后，四人帮在反右斗争中失利，他们曾经对反革命的抗争被定性为篡权夺党，而那些反革命的官僚阶级却得以翻案并成为国家的新领导者。这些反革命分子通常也是文革期间极端行为的主要推动者，他们使用极端（极左）的手段支持文化大革命，来达到破坏文化大革命的目的，以消减对他们造成的威胁。例如，在破四旧政策中，扶持暴力的红卫兵西纠联动进行打砸抢行动，事后把责任归咎于真正的革命者或其他红卫兵。
+* 1949-1976年中国实行社会主义制度。1976年后官僚资产阶级逐渐成为国家的主人，所谓改革开放，实际上是统治阶级为谋取个人利益重回落后生产关系的借口，为变全民所有制的生产资料为国家（官僚）所有提供便利。
 * TODO
 
 ## Wiki
@@ -29,7 +31,7 @@
 资源贡献\校对\纠错  
 [\[Github issues\]](https://github.com/banned-historical-archives/banned-historical-archives.github.io/issues)  
 [\[Gitlab issues\]备用地址](https://gitlab.com/banned-historical-archives/banned-historical-archives.gitlab.io/-/issues)  
-[开发者贡献代码](https://github.com/banned-historical-archives/banned-historical-archives.github.io/wiki/%E5%BC%80%E5%8F%91%E8%80%85%E8%B4%A1%E7%8C%AE%E4%BB%A3%E7%A0%81)  
+[开发者如何贡献代码](https://github.com/banned-historical-archives/banned-historical-archives.github.io/wiki/%E5%BC%80%E5%8F%91%E8%80%85%E8%B4%A1%E7%8C%AE%E4%BB%A3%E7%A0%81)  
 [文稿录入与校对](https://github.com/banned-historical-archives/banned-historical-archives.github.io/wiki/%E6%96%87%E7%A8%BF%E5%BD%95%E5%85%A5%E4%B8%8E%E6%A0%A1%E5%AF%B9)  
 [标准化加工及开发说明](https://github.com/banned-historical-archives/banned-historical-archives.github.io/wiki/%E6%A0%87%E5%87%86%E5%8C%96%E5%8A%A0%E5%B7%A5%E5%8F%8A%E5%BC%80%E5%8F%91%E8%AF%B4%E6%98%8E)  
 [校对规范](https://github.com/banned-historical-archives/banned-historical-archives.github.io/wiki/%E6%A0%A1%E5%AF%B9%E8%A7%84%E8%8C%83)  
