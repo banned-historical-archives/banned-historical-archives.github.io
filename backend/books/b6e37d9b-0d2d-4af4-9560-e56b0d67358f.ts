@@ -22,7 +22,7 @@ export default {
       },
       {
         title: '实验、抽象和假说在科学研究中的作用',
-        authors: ['何祚麻'],
+        authors: ['何祚庥'],
         page_start: 14,
         page_end: 24,
         ocr: {
