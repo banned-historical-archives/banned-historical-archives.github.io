@@ -1,4 +1,10 @@
-import React, { ReactElement, useEffect, useMemo, useRef, useState } from 'react';
+import React, {
+  ReactElement,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import Head from 'next/head';
 import { diff_match_patch, Diff } from 'diff-match-patch';
 import Popover from '@mui/material/Popover';

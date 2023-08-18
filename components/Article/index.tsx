@@ -98,7 +98,7 @@ function PureArticle({
           alt=""
           key={key}
           src={part.text}
-          style={{ width:'50%', margin: 'auto', marginTop: '1.25em' }}
+          style={{ width: '50%', margin: 'auto', marginTop: '1.25em' }}
         />
       );
     } else if (part.type === ContentType.image_description) {

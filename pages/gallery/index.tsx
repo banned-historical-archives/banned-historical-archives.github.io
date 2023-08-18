@@ -74,7 +74,7 @@ const columns: GridColDef<ImageEntity>[] = [
     minWidth: 350,
     flex: 1,
     renderCell: (params: GridRenderCellParams<string, ImageEntity>) => (
-      <Image alt="" src={params.row!.url} style={{width: '100%'}} />
+      <Image alt="" src={params.row!.url} style={{ width: '100%' }} />
     ),
   },
   {
