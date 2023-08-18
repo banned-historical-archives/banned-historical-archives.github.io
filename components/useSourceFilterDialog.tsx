@@ -27,7 +27,7 @@ export function useSourceFilterDialog(sources_all: string[]) {
     setSources(Array.from(new Set([...default_sources, selected])));
     setSourceFilter(selected);
     setSourceDialog(false);
-  }, [sources, selected]);
+  }, [selected]);
   const SourceDialog = (
     <Dialog onClose={onClose} open={show}>
       <DialogTitle>选择来源</DialogTitle>

@@ -1,4 +1,5 @@
 import { ReactElement, useState, useEffect, useMemo } from 'react';
+import Image from 'next/image';
 import Popover from '@mui/material/Popover';
 import Head from 'next/head';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -437,7 +438,7 @@ export default function Articles({ articles }: { articles: Article[] }) {
                   horizontal: 'center',
                 }}
               >
-                <img src="/images/filter.png" width="200" />
+                <Image alt="" src="/images/filter.png" width="200" />
                 <Typography sx={{ p: 2 }}>
                   可在每一列右上角添加筛选器进行高级检索
                 </Typography>

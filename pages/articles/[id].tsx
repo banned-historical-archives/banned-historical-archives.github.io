@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import React, {
   useRef,
   useState,
@@ -544,7 +545,7 @@ export default function ArticleViewer({
             publication.files
               .split(',')
               .filter((i, idx) => idx + 1 >= page.start && idx + 1 <= page.end)
-              .map((f) => <img key={f} src={f} />)
+              .map((f) => <Image alt="" key={f} src={f} />)
           ) : (
             <>未知类型</>
           )
@@ -622,7 +623,8 @@ export default function ArticleViewer({
             <Authors authors={article.authors} />
           </Stack>
           {article.publications.map((i) => (
-            <img
+            <Image
+              alt=""
               style={{ cursor: 'pointer' }}
               key={i.id}
               onClick={() =>

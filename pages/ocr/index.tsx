@@ -1,4 +1,5 @@
 // 本地测试使用
+import Image from 'next/image';
 import React, {
   ReactElement,
   useCallback,
@@ -65,7 +66,7 @@ export default function OCR() {
 
   useEffect(() => {
     update();
-  }, []);
+  }, [update]);
 
   const range_a = parseInt(range.split('-')[0]);
   const range_b = parseInt(range.split('-')[1]);
@@ -99,7 +100,7 @@ export default function OCR() {
             width={OCRResults![idx]?.dimensions.width}
           />
         ) : (
-          <img src={`/books/${id}/${idx + range_a}.${img_ext}`} />
+          <Image alt="" src={`/books/${id}/${idx + range_a}.${img_ext}`} />
         )}
         {OCRResults![idx]?.ocr_results.map((res) => {
           return (

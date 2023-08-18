@@ -1,4 +1,4 @@
-import React, { ReactElement, useEffect, useRef, useState } from 'react';
+import React, { ReactElement, useEffect, useMemo, useRef, useState } from 'react';
 import Head from 'next/head';
 import { diff_match_patch, Diff } from 'diff-match-patch';
 import Popover from '@mui/material/Popover';
@@ -386,7 +386,7 @@ export default function Music({ music }: { music: MusicEntity[] }) {
   );
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
-  const playlist: PlayList = {};
+  const playlist: PlayList = useMemo(() => ({}), []);
   for (const m of music) {
     for (const l of m.lyrics) {
       for (const a of l.audios) {

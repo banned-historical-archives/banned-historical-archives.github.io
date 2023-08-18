@@ -37,7 +37,7 @@ export function useTagFilterDialog(
     );
     setTagFilter(selected);
     setTagDialog(false);
-  }, [tags, selected]);
+  }, [default_tags, tags_all, selected]);
   const TagDialog = (
     <Dialog onClose={onClose} open={show}>
       <DialogTitle>选择标签</DialogTitle>

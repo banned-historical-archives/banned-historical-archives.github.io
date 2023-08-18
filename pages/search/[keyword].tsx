@@ -62,7 +62,7 @@ export default function Search() {
 
   useEffect(() => {
     setFrom(es_size * (page - 1));
-  }, [page]);
+  }, [page, es_size]);
 
   if (!res) return null;
   const total = Math.ceil(res.total.value / es_size);

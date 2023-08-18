@@ -22,7 +22,7 @@ export function useAuthorFilterDialog(authors_all: string[]) {
     setAuthors(Array.from(new Set([...default_authors, selected])));
     setAuthorFilter(selected);
     setAuthorDialog(false);
-  }, [authors, selected]);
+  }, [selected]);
   const AuthorDialog = (
     <Dialog onClose={onClose} open={show}>
       <DialogTitle>选择作者</DialogTitle>

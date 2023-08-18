@@ -13,6 +13,7 @@ import {
 import { diff_match_patch, Diff } from 'diff-match-patch';
 import { ReactElement, useEffect, useRef, useState } from 'react';
 import { Article, Content, Comment } from '../../backend/entities';
+import Image from 'next/image';
 import { ContentType } from '../../types';
 import { bracket_left, bracket_right, md5 } from '../../utils';
 import PatchableArticle from './PatchableArticle';
@@ -93,11 +94,11 @@ function PureArticle({
       );
     } else if (part.type === ContentType.image) {
       return (
-        <img
+        <Image
+          alt=""
           key={key}
           src={part.text}
-          width="50%"
-          style={{ margin: 'auto', marginTop: '1.25em' }}
+          style={{ width:'50%', margin: 'auto', marginTop: '1.25em' }}
         />
       );
     } else if (part.type === ContentType.image_description) {
