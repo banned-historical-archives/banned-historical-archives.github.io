@@ -52,8 +52,8 @@ jobs:
       - name: init subm
         working-directory: ./banned-historical-archives.github.io
         run: |
-          rm -rf public/archives${{ steps.get_archive_id.outputs.archive_id }
-          git clone --depth 1 https://github.com/banned-historical-archives/banned-historical-archives${{ steps.get_archive_id.outputs.archive_id } public/archives${{ steps.get_archive_id.outputs.archive_id }
+          rm -rf public/archives${{ steps.get_archive_id.outputs.archive_id }}
+          git clone --depth 1 https://github.com/banned-historical-archives/banned-historical-archives${{ steps.get_archive_id.outputs.archive_id }} public/archives${{ steps.get_archive_id.outputs.archive_id }}
       - id: action_with_json_output
         working-directory: ./banned-historical-archives.github.io
         run: echo ::set-output name=data::$(npx ts-node --project ./tsconfig.build.json backend/ocr-gitworkflow.ts)
