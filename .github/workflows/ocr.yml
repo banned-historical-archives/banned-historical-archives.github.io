@@ -31,7 +31,7 @@ jobs:
       - run: git config --global --add safe.directory /__w/banned-historical-archives.github.io/banned-historical-archives.github.io
       - run: git config --system credential.helper store
       - run: echo "https://banned-historical-archives:${{ secrets.GH_PAT }}@github.com" > ~/.git-credentials
-      - run: git clone -d 1 https://github.com/banned-historical-archives/banned-historical-archives.github.io.git
+      - run: git clone --depth 1 https://github.com/banned-historical-archives/banned-historical-archives.github.io.git
       - run: cd banned-historical-archives.github.io
       - run: git submodule init public/archives2 && git submodule update
       - uses: actions/setup-node@v3.4.1
