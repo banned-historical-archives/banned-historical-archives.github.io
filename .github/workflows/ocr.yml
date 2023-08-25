@@ -50,7 +50,7 @@ jobs:
         env:
           BODY: ${{ github.event.issue.body }}
           TITLE: ${{ github.event.issue.title }}
-      - run: git submodule init public/archives${{ steps.get_archive_id.outputs.archive_id }} && git submodule update
+      - run: git config --global submodule.token '${{ secrets.GH_PAT}}' && git submodule init public/archives${{ steps.get_archive_id.outputs.archive_id }} && git submodule update
       - id: action_with_json_output
         run: echo ::set-output name=data::$(npx ts-node --project ./tsconfig.build.json backend/ocr-gitworkflow.ts)
         env:
