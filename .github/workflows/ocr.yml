@@ -29,10 +29,12 @@ jobs:
       - run: pip install pymupdf
       - run: useradd -u 1001 ci   
       - run: git config --global --add safe.directory /__w/banned-historical-archives.github.io/banned-historical-archives.github.io
-      - run: git config --system credential.helper store
-      - run: echo "https://banned-historical-archives:${{ secrets.GH_PAT }}@github.com" > ~/.git-credentials
-      - run: git clone --depth 1 https://github.com/banned-historical-archives/banned-historical-archives.github.io.git
-      - run: cd banned-historical-archives.github.io && git submodule init public/archives2 && git submodule update
+      - name: clone
+        run: |
+          git config --system credential.helper store
+          echo "https://banned-historical-archives:${{ secrets.GH_PAT }}@github.com" > ~/.git-credentials
+          git clone --depth 1 https://github.com/banned-historical-archives/banned-historical-archives.github.io.git
+          cd banned-historical-archives.github.io && git submodule init public/archives2 && git submodule update
       - uses: actions/setup-node@v3.4.1
         with:
           node-version: 16
