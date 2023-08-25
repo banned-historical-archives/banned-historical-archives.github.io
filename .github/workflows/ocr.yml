@@ -35,9 +35,6 @@ jobs:
           echo "https://banned-historical-archives:${{ secrets.GH_PAT }}@github.com" > ~/.git-credentials
           git config --global submodule.token ${{ secrets.GH_PAT }}
           git clone --depth 1 https://github.com/banned-historical-archives/banned-historical-archives.github.io.git
-          cd banned-historical-archives.github.io
-          rm -rf public/archives2
-          git clone --depth 1 https://github.com/banned-historical-archives/banned-historical-archives2 public/archives2
       - uses: actions/setup-node@v3.4.1
         with:
           node-version: 16
@@ -54,7 +51,9 @@ jobs:
           TITLE: ${{ github.event.issue.title }}
       - name: init subm
         working-directory: ./banned-historical-archives.github.io
-        run: git submodule init public/archives${{ steps.get_archive_id.outputs.archive_id }} && git submodule update
+        run: |
+          rm -rf public/archives${{ steps.get_archive_id.outputs.archive_id }
+          git clone --depth 1 https://github.com/banned-historical-archives/banned-historical-archives${{ steps.get_archive_id.outputs.archive_id } public/archives${{ steps.get_archive_id.outputs.archive_id }
       - id: action_with_json_output
         working-directory: ./banned-historical-archives.github.io
         run: echo ::set-output name=data::$(npx ts-node --project ./tsconfig.build.json backend/ocr-gitworkflow.ts)
