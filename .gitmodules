@@ -1,33 +1,33 @@
 [submodule "public/archives0"]
 	path = public/archives0
-	url = git@github.com:banned-historical-archives/banned-historical-archives0.git
+	url = git@github.com/banned-historical-archives0.git
 [submodule "public/archives1"]
 	path = public/archives1
-	url = git@github.com:banned-historical-archives/banned-historical-archives1.git
+	url = git@github.com/banned-historical-archives1.git
 [submodule "public/archives2"]
 	path = public/archives2
-	url = git@github.com:banned-historical-archives/banned-historical-archives2.git
+	url = git@github.com/banned-historical-archives2.git
 [submodule "public/archives3"]
 	path = public/archives3
-	url = git@github.com:banned-historical-archives/banned-historical-archives3.git
+	url = git@github.com/banned-historical-archives3.git
 [submodule "public/archives4"]
 	path = public/archives4
-	url = git@github.com:banned-historical-archives/banned-historical-archives4.git
+	url = git@github.com/banned-historical-archives4.git
 [submodule "public/archives5"]
 	path = public/archives5
-	url = git@github.com:banned-historical-archives/banned-historical-archives5.git
+	url = git@github.com/banned-historical-archives5.git
 [submodule "public/archives6"]
 	path = public/archives6
-	url = git@github.com:banned-historical-archives/banned-historical-archives6.git
+	url = git@github.com/banned-historical-archives6.git
 [submodule "public/archives7"]
 	path = public/archives7
-	url = git@github.com:banned-historical-archives/banned-historical-archives7.git
+	url = git@github.com/banned-historical-archives7.git
 [submodule "public/archives8"]
 	path = public/archives8
-	url = git@github.com:banned-historical-archives/banned-historical-archives8.git
+	url = git@github.com/banned-historical-archives8.git
 [submodule "public/archives9"]
 	path = public/archives9
-	url = git@github.com:banned-historical-archives/banned-historical-archives9.git
+	url = git@github.com/banned-historical-archives9.git
 [submodule "public/archives10"]
 	path = public/archives10
-	url = git@github.com:banned-historical-archives/banned-historical-archives10.git
+	url = git@github.com/banned-historical-archives10.git
