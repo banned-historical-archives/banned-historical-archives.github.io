@@ -27,7 +27,7 @@ jobs:
       - run: apt update
       - run: apt install git -y
       - run: pip install pymupdf
-      - run: useradd -u 1001 ci   
+      - run: useradd -u 1001 ci
       - run: git config --global --add safe.directory /__w/banned-historical-archives.github.io/banned-historical-archives.github.io/banned-historical-archives.github.io
       - name: clone
         run: |
