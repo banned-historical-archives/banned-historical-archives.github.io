@@ -32,7 +32,7 @@ jobs:
         with:
           ref: master
           token: ${{ secrets.GH_PAT}}
-          submodules: true
+          submodules: false
       - run: git config --global --add safe.directory /__w/banned-historical-archives.github.io/banned-historical-archives.github.io/public/archives0
       - run: git config --global --add safe.directory /__w/banned-historical-archives.github.io/banned-historical-archives.github.io/public/archives1
       - run: git config --global --add safe.directory /__w/banned-historical-archives.github.io/banned-historical-archives.github.io/public/archives2
@@ -50,6 +50,7 @@ jobs:
         env:
           BODY: ${{ github.event.issue.body }}
           TITLE: ${{ github.event.issue.title }}
+      - run: git submodule init public/archives${{ steps.get_archive_id.outputs.archive_id }}
       - id: action_with_json_output
         run: echo ::set-output name=data::$(npx ts-node --project ./tsconfig.build.json backend/ocr-gitworkflow.ts)
         env:
