@@ -27,21 +27,12 @@ jobs:
       - run: apt update
       - run: apt install git -y
       - run: pip install pymupdf
-      - run: useradd -u 1001 ci
-      - uses: actions/checkout@v3
-        with:
-          ref: master
-          token: ${{ secrets.GH_PAT}}
-          submodules: false
-      - run: git config --global --add safe.directory /__w/banned-historical-archives.github.io/banned-historical-archives.github.io/public/archives0
-      - run: git config --global --add safe.directory /__w/banned-historical-archives.github.io/banned-historical-archives.github.io/public/archives1
-      - run: git config --global --add safe.directory /__w/banned-historical-archives.github.io/banned-historical-archives.github.io/public/archives2
-      - run: git config --global --add safe.directory /__w/banned-historical-archives.github.io/banned-historical-archives.github.io/public/archives3
-      - run: git config --global --add safe.directory /__w/banned-historical-archives.github.io/banned-historical-archives.github.io/public/archives4
-      - run: git config --global --add safe.directory /__w/banned-historical-archives.github.io/banned-historical-archives.github.io/public/archives5
+      - run: useradd -u 1001 ci   
       - run: git config --global --add safe.directory /__w/banned-historical-archives.github.io/banned-historical-archives.github.io
       - run: git config --system credential.helper store
-      - run: echo "https://banned-historical-archives:${{ secrets.GH_PAT}}@github.com" > ~/.git-credentials
+      - run: echo "https://banned-historical-archives:${{ secrets.GH_PAT }}@github.com" > ~/.git-credentials
+      - run: git clone -d 1 https://github.com/banned-historical-archives/banned-historical-archives.github.io.git
+      - run: cd banned-historical-archives.github.io
       - run: git submodule init public/archives2 && git submodule update
       - uses: actions/setup-node@v3.4.1
         with:
