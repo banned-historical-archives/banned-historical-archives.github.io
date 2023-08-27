@@ -1,5 +1,4 @@
 // 本地测试使用
-import Image from 'next/image';
 import React, {
   ReactElement,
   useCallback,
@@ -100,7 +99,7 @@ export default function OCR() {
             width={OCRResults![idx]?.dimensions.width}
           />
         ) : (
-          <Image alt="" src={`/books/${id}/${idx + range_a}.${img_ext}`} />
+          <img alt="" src={`/books/${id}/${idx + range_a}.${img_ext}`} />
         )}
         {OCRResults![idx]?.ocr_results.map((res) => {
           return (
