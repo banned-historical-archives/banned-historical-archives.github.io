@@ -13,7 +13,6 @@ import {
 import { diff_match_patch, Diff } from 'diff-match-patch';
 import { ReactElement, useEffect, useRef, useState } from 'react';
 import { Article, Content, Comment } from '../../backend/entities';
-import Image from 'next/image';
 import { ContentType } from '../../types';
 import { bracket_left, bracket_right, md5 } from '../../utils';
 import PatchableArticle from './PatchableArticle';
@@ -94,7 +93,7 @@ function PureArticle({
       );
     } else if (part.type === ContentType.image) {
       return (
-        <Image
+        <img
           alt=""
           key={key}
           src={part.text}

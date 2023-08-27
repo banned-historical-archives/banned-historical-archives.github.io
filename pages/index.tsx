@@ -1,7 +1,6 @@
 import type { NextPage } from 'next';
 import React, { ReactElement, useEffect, useState } from 'react';
 import Head from 'next/head';
-import Image from 'next/image';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import txt from '../README.md';

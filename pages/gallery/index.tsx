@@ -1,5 +1,4 @@
 import React, { ReactElement, useEffect, useRef, useState } from 'react';
-import Image from 'next/image';
 import Head from 'next/head';
 import { diff_match_patch, Diff } from 'diff-match-patch';
 import Popover from '@mui/material/Popover';
@@ -74,7 +73,7 @@ const columns: GridColDef<ImageEntity>[] = [
     minWidth: 350,
     flex: 1,
     renderCell: (params: GridRenderCellParams<string, ImageEntity>) => (
-      <Image alt="" src={params.row!.url} style={{ width: '100%' }} />
+      <img alt="" src={params.row!.url} style={{ width: '100%' }} />
     ),
   },
   {
