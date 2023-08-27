@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import React, {
   useRef,
   useState,
@@ -176,6 +175,7 @@ export default function ArticleViewer({
     | undefined
   >();
 
+  const [previewScale, setPreviewScale] = useState(1);
   const [showMore, setShowMore] = useState(true);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [compareType, setCompareType] = useState<CompareType>(CompareType.none);
@@ -520,6 +520,42 @@ export default function ArticleViewer({
                   [下载]
                 </a>
               </Typography>
+              <Stack
+                direction="row"
+                spacing="10px"
+                sx={{
+                  position: 'fixed',
+                  bottom: 10,
+                  right: 10,
+                  zIndex: 1,
+                  opacity: 0.7,
+                }}
+              >
+                <Button
+                  onClick={() => setPreviewScale(previewScale + 0.1)}
+                  variant="contained"
+                  sx={{
+                    borderRadius: '100%',
+                    width: '50px',
+                    minWidth: '50px',
+                    height: '50px',
+                  }}
+                >
+                  +
+                </Button>
+                <Button
+                  onClick={() => setPreviewScale(previewScale - 0.1)}
+                  variant="contained"
+                  sx={{
+                    borderRadius: '100%',
+                    width: '50px',
+                    minWidth: '50px',
+                    height: '50px',
+                  }}
+                >
+                  -
+                </Button>
+              </Stack>
               <Document
                 file={
                   isLocalhost
@@ -537,7 +573,11 @@ export default function ArticleViewer({
                 }}
               >
                 {new Array(page.end - page.start + 1).fill(0).map((i, idx) => (
-                  <Page pageNumber={idx + page.start} key={idx} />
+                  <Page
+                    pageNumber={idx + page.start}
+                    key={idx}
+                    width={500 * previewScale}
+                  />
                 ))}
               </Document>
             </>
@@ -545,7 +585,7 @@ export default function ArticleViewer({
             publication.files
               .split(',')
               .filter((i, idx) => idx + 1 >= page.start && idx + 1 <= page.end)
-              .map((f) => <Image alt="" key={f} src={f} />)
+              .map((f) => <img alt="" key={f} src={f} />)
           ) : (
             <>未知类型</>
           )
@@ -623,7 +663,7 @@ export default function ArticleViewer({
             <Authors authors={article.authors} />
           </Stack>
           {article.publications.map((i) => (
-            <Image
+            <img
               alt=""
               style={{ cursor: 'pointer' }}
               key={i.id}
