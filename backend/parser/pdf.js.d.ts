@@ -22,6 +22,7 @@ type Page = {
 };
 type Doc = {
   getPage: (x: number) => Page;
+  numPages: number;
 };
 export function getDocument(
   pdfPath:

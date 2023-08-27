@@ -177,6 +177,9 @@ export type ParserOption = ParserOptionV2 & {
   content_min_x?: number;
   name?: string;
   header_min_height?: number;
+
+  meta?: any;
+  id?: any;
 };
 
 export type OCRParameter = {

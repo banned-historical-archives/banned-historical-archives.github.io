@@ -1,4 +1,5 @@
 import { join } from 'node:path/posix';
+import * as maoistlegacy_proofread from './parser/maoistlegacy-proofread';
 import { existsSync } from 'node:fs';
 import { Book, ParserOption, ParserResult, TagType } from '../types';
 import * as jinghuo from './parser/jinghuo_parser';
@@ -37,6 +38,7 @@ const parsers: { [key: string]: any } = {
   zhangchunqiao,
   zzj1,
   automation,
+  'maoistlegacy-proofread': maoistlegacy_proofread,
 };
 
 function post_script(i: Book) {
@@ -100,7 +102,9 @@ export default async function get_books() {
   for (const file of files) {
     temp.push(await import(`./books/${file}`));
   }
-  const books: Book[] = temp.map((i) => i.default);
+  const books: Book[] = temp
+    .map((i) => i.default)
+    .concat(await maoistlegacy_proofread.get_books());
   return books.map((i) => {
     return post_script(i);
   });
