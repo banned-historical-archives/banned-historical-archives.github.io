@@ -511,6 +511,42 @@ export default function ArticleViewer({
   ) {
     compare_elements.push(
       <Stack key="origin" sx={{ flex: 1, overflowY: 'scroll' }}>
+        <Stack
+          direction="row"
+          spacing="10px"
+          sx={{
+            position: 'fixed',
+            bottom: 20,
+            right: 20,
+            zIndex: 1,
+            opacity: 0.7,
+          }}
+        >
+          <Button
+            onClick={() => setPreviewScale(previewScale + 0.1)}
+            variant="contained"
+            sx={{
+              borderRadius: '100%',
+              width: '50px',
+              minWidth: '50px',
+              height: '50px',
+            }}
+          >
+            +
+          </Button>
+          <Button
+            onClick={() => setPreviewScale(previewScale - 0.1)}
+            variant="contained"
+            sx={{
+              borderRadius: '100%',
+              width: '50px',
+              minWidth: '50px',
+              height: '50px',
+            }}
+          >
+            -
+          </Button>
+        </Stack>
         {publication.type !== 'db' ? (
           publication.type === 'pdf' ? (
             <>
@@ -520,42 +556,6 @@ export default function ArticleViewer({
                   [下载]
                 </a>
               </Typography>
-              <Stack
-                direction="row"
-                spacing="10px"
-                sx={{
-                  position: 'fixed',
-                  bottom: 10,
-                  right: 10,
-                  zIndex: 1,
-                  opacity: 0.7,
-                }}
-              >
-                <Button
-                  onClick={() => setPreviewScale(previewScale + 0.1)}
-                  variant="contained"
-                  sx={{
-                    borderRadius: '100%',
-                    width: '50px',
-                    minWidth: '50px',
-                    height: '50px',
-                  }}
-                >
-                  +
-                </Button>
-                <Button
-                  onClick={() => setPreviewScale(previewScale - 0.1)}
-                  variant="contained"
-                  sx={{
-                    borderRadius: '100%',
-                    width: '50px',
-                    minWidth: '50px',
-                    height: '50px',
-                  }}
-                >
-                  -
-                </Button>
-              </Stack>
               <Document
                 file={
                   isLocalhost
@@ -585,7 +585,9 @@ export default function ArticleViewer({
             publication.files
               .split(',')
               .filter((i, idx) => idx + 1 >= page.start && idx + 1 <= page.end)
-              .map((f) => <img alt="" key={f} src={f} />)
+              .map((f) => (
+                <img alt="" key={f} src={f} width={previewScale * 500} />
+              ))
           ) : (
             <>未知类型</>
           )
