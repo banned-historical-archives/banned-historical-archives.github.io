@@ -114,6 +114,7 @@ https://github.com/banned-historical-archives/banned-historical-archives.github.
 ## 资料主要来源
 
 * https://github.com/ProletRevDicta/Prolet Prolet
+* https://maoistlegacy.de maoistlegacy
 * https://zh.annas-archive.org/ 安娜的档案
 * http://www.mzdbl.cn 毛泽东博览
 * https://www.marxists.org/chinese/index.html 中文马克思主义文库
