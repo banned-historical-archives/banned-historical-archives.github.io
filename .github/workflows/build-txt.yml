@@ -23,7 +23,11 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - run: cd public && rm -rf archives9 && git clone --depth=1 https://github.com/banned-historical-archives/banned-historical-archives9.git archives9
+      - name: setup archives
+        run: |
+          cd public
+          rm -rf archives9 && git clone --depth=1 https://github.com/banned-historical-archives/banned-historical-archives9.git archives9
+          rm -rf archives11 && git clone --depth=1 https://github.com/banned-historical-archives/banned-historical-archives11.git archives11
       - name: Set up MySQL
         env:
           MYSQL_HOST: mysql
