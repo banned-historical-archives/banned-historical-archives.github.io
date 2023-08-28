@@ -13,7 +13,7 @@ export default class Publication {
   @PrimaryColumn({ type: 'varchar' })
   id!: string;
 
-  @Column({ type: 'varchar' })
+  @Column({ type: 'varchar', length: 512 })
   name!: string;
 
   @Column({ type: 'bool', comment: `内部文件` })
