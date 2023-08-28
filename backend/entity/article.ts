@@ -24,7 +24,7 @@ export default class Article {
   @PrimaryColumn({ type: 'varchar' })
   id!: string;
 
-  @Column({ type: 'varchar' })
+  @Column({ type: 'varchar', length: 512 })
   title!: string;
 
   @Column({

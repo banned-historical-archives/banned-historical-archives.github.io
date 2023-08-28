@@ -59,7 +59,6 @@ export async function parse(
   return res;
 }
 
-
 /*
 资料类型与处理方案：
 
@@ -85,7 +84,16 @@ export async function get_books(): Promise<Book[]> {
         internal: false,
         official: false,
         type: meta.pdf ? 'pdf' : meta.imgs.length ? 'img' : 'unknown',
-        files: meta.pdf ? meta.pdf : meta.imgs.join(','),
+        files: meta.pdf
+          ? `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives11/main/data/${id}/${id}.pdf`
+          : meta.imgs
+              .map(
+                (i: any, idx: number) =>
+                  `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives11/main/data/${id}/${
+                    idx + 1
+                  }.${i.split('.').pop()}`,
+              )
+              .join(','),
       },
       parser_option: {
         page_limits: [],
