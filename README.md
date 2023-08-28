@@ -4,7 +4,7 @@
 
 ## 介绍
 
-和谐历史档案馆致力于搜集、整合各类受官方封禁或部分封禁的文稿、报纸、杂志和多媒体资料。我们对这些资料进行标准化处理，通过解析、识别和分类，形成规范化的文稿档案和多媒体档案/数据库。
+和谐历史档案馆，一个[开源](https://github.com/banned-historical-archives/banned-historical-archives.github.io)的，致力于搜集、整合各类受官方封禁或部分封禁的文稿、报纸、杂志和多媒体资料的档案馆。我们对这些资料进行标准化处理，通过解析、识别和分类，形成规范化的文稿档案和多媒体档案/数据库。
 
 尽管民间有许多人在进行资料收集和校验工作，但分散的工作可能难以避免重复劳动，资料的二次汇编真实性无法确保，且缺少统一的版本管理，难以维护。我们运用一系列自动化工具解决了这些问题，确保每篇文稿的溯源和可验证性。
 
@@ -61,7 +61,7 @@
 
 ### 3. 本地文本搜索（面向不懂技术的使用者）
 
-下载[此分支](https://github.com/banned-historical-archives/banned-historical-archives.github.io/tree/txt)的压缩包或 fork 到本地，安装 VS Code 并使用 VS Code 打开目录，在 VS Code 中进行搜索
+下载[此分支](https://github.com/banned-historical-archives/banned-historical-archives.github.io/tree/txt)的压缩包，安装 VS Code 并使用它打开解压后的目录，在 VS Code 中进行搜索
 
 ## 功能
 
