@@ -161,7 +161,7 @@ init()
     objs.forEach((item, i) => {
       objs[
         i
-      ] = `${item.title}|${item.author}|${item.internal}|${item.official}|${item.status}`;
+      ] = `${item.title.replace(/[\.]/g, '')}|${item.author}|${item.internal}|${item.official}|${item.status}`;
     });
     const result = first + mid1 + '\n' + objs.join('\n') + '\n\n' + mid2 + last;
     fs.writeFileSync(dirPath, result);
