@@ -19,7 +19,5 @@ jobs:
       - run: cd public && rm -rf archives9 && git clone --depth=1 https://github.com/banned-historical-archives/banned-historical-archives9.git archives9
       - name: Use Node.js
         uses: actions/setup-node@v3
-        with:
-          node-version: 17.9
       - run: npm install
       - run: npm run test
