@@ -41,26 +41,29 @@ export async function parse(
     ),
   );
 
-  return chapters.slice(3).filter(i => i.title).map((article) => {
-    const dates = [{year: 2016}];
-    const title = article.title;
-    const merged_parts = Array.from(
-      new JSDOM(article.text).window.document.querySelectorAll('p'),
-    ).map((i) => ({
-      text: i.innerHTML,
-      type: ContentType.paragraph,
-    }));
-    return {
-      title,
-      parts: merged_parts,
-      authors: ['戚本禹'],
-      dates,
-      is_range_date: false,
-      comments: [],
-      comment_pivots: [],
-      description: '',
-      page_start: 0,
-      page_end: 0,
-    };
-  });
+  return chapters
+    .slice(3)
+    .filter((i) => i.title)
+    .map((article) => {
+      const dates = [{ year: 2016 }];
+      const title = article.title;
+      const merged_parts = Array.from(
+        new JSDOM(article.text).window.document.querySelectorAll('p'),
+      ).map((i) => ({
+        text: i.innerHTML,
+        type: ContentType.paragraph,
+      }));
+      return {
+        title,
+        parts: merged_parts,
+        authors: ['戚本禹'],
+        dates,
+        is_range_date: false,
+        comments: [],
+        comment_pivots: [],
+        description: '',
+        page_start: 0,
+        page_end: 0,
+      };
+    });
 }
