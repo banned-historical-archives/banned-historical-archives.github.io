@@ -166,7 +166,10 @@ init().then(async (AppDataSource) => {
     const res = await book.parser(book.path, book.parser_option);
     const dirPath = join(
       __dirname,
-      `../txt/${book.entity.name?.replace(/\//g, '').replace(/\*/g, '').slice(0, 50)}`,
+      `../txt/${book.entity.name
+        ?.replace(/\//g, '')
+        .replace(/\*/g, '')
+        .slice(0, 50)}`,
     );
     for (const i of res) {
       const id = get_article_id(i);
