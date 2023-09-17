@@ -37,7 +37,8 @@ jobs:
           echo "https://banned-historical-archives:${{ secrets.GH_PAT }}@github.com" > ~/.git-credentials
           git config --global submodule.token ${{ secrets.GH_PAT }}
           git clone --depth 1 https://github.com/banned-historical-archives/banned-historical-archives.github.io.git
-      - uses: actions/setup-node@v3.4.1
+      - name: Use Node.js
+        uses: actions/setup-node@v3
       - name: node init
         working-directory: ./banned-historical-archives.github.io
         run: |
