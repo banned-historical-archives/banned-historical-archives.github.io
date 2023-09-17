@@ -7,6 +7,7 @@ import * as wenji from './parser/wenji_parser';
 import * as jqjianghua from './parser/jqjianghua_parser';
 import * as xuanji from './parser/xuanji';
 import * as jimi from './parser/jimi';
+import * as qibenyu from './parser/qibenyu';
 import * as maoquanji from './parser/maoquanji';
 import * as wanghongwen from './parser/wanghongwen';
 import * as yaowenyuan from './parser/yaowenyuan';
@@ -29,6 +30,7 @@ const parsers: { [key: string]: any } = {
   CCRD,
   maoistlibrary,
   jqjianghua,
+  qibenyu,
   rmrb,
   xuanji,
   jimi,
