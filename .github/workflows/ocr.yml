@@ -38,8 +38,6 @@ jobs:
           git config --global submodule.token ${{ secrets.GH_PAT }}
           git clone --depth 1 https://github.com/banned-historical-archives/banned-historical-archives.github.io.git
       - uses: actions/setup-node@v3.4.1
-        with:
-          node-version: 16
       - name: node init
         working-directory: ./banned-historical-archives.github.io
         run: |
