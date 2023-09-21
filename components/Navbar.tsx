@@ -180,7 +180,7 @@ export default function Navbar() {
                       return;
                     }
                     window.open(
-                      'https://duckduckgo.com?q=' +
+                      'https://www.google.com/search?q=' +
                         encodeURIComponent(
                           'site:banned-historical-archives.github.io ' +
                             inputValue,
