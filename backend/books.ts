@@ -5,6 +5,7 @@ import { Book, ParserOption, ParserResult, TagType } from '../types';
 import * as jinghuo from './parser/jinghuo_parser';
 import * as wenji from './parser/wenji_parser';
 import * as jqjianghua from './parser/jqjianghua_parser';
+import * as wengeqianqixinianlu1 from './parser/wengeqianqixinianlu1';
 import * as xuanji from './parser/xuanji';
 import * as jimi from './parser/jimi';
 import * as qibenyu from './parser/qibenyu';
@@ -33,6 +34,7 @@ const parsers: { [key: string]: any } = {
   qibenyu,
   rmrb,
   xuanji,
+  wengeqianqixinianlu1,
   jimi,
   maoquanji,
   wanghongwen,
