@@ -1,0 +1,5 @@
+
+export default [
+// {"version":2,"parts":{"0":{"diff":"=11\t-1\t+ 誓\t=14"},"1":{"diff":"=5\t+）"},"2":{"insertAfter":[{"type":"paragraph","text":"工人革命造反派代表们革命的战友们，同志们！"}],"diff":"=3\t-21"},"3":{"diff":"=31\t-1\t+领\t=14"},"4":{"diff":"=5\t-1\t+帅\t=168\t-1"},"5":{"diff":"=7\t-1\t+希\t=5\t-1\t+慨\t=1\t+慷\t=68\t-1\t+级\t=49\t+年。"},"6":{"delete":true}},"comments":{},"description":""}
+  {"version":2,"parts":{"0":{"diff":"=11\t-1\t+ %E8%AA%93\t=14"},"1":{"diff":"=5\t+%EF%BC%89"},"2":{"insertAfter":[{"type":"paragraph","text":"工人革命造反派代表们革命的战友们，同志们！"}],"diff":"=3\t-21"},"3":{"diff":"=31\t-1\t+%E9%A2%86\t=14"},"4":{"diff":"=5\t-1\t+%E5%B8%85\t=168\t-1"},"5":{"diff":"=7\t-1\t+%E5%B8%8C\t=5\t-1\t+%E6%85%A8\t=1\t+%E6%85%B7\t=68\t-1\t+%E7%BA%A7\t=49\t+%E5%B9%B4%E3%80%82"},"6":{"delete":true}},"comments":{},"description":""},
+];
