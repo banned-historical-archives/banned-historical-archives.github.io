@@ -1,6 +1,6 @@
 # 和谐历史档案馆 - Banned Historical Archives
 
-[网站](https://banned-historical-archives.github.io)
+[https://banned-historical-archives.github.io](https://banned-historical-archives.github.io)
 
 ## 介绍
 
