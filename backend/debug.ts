@@ -18,7 +18,7 @@ import { extract_dates } from './parser/utils';
 (async () => {
   const ds = await init();
   const books = await get_books();
-  for (const x of ['chuanxinlu1', 'chuanxinlu2', 'chuanxinlu3']) {
+  for (const x of ['chuanxinlu2', 'chuanxinlu3']) {
     const book = books.find((i) => i.entity.id === x)!;
 
     // for (const i of await book.parser(book.path, book.parser_option)) {

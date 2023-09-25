@@ -142,7 +142,12 @@ function extract_title_authors_dates(parts: ContentPart[]) {
     title = candidate.slice(0, type2_idx);
   } else if (type3_idx !== -1) {
     title = candidate.slice(0, type3_idx);
-    dates = extract_dates(candidate.slice(type3_idx, type3_end_idx + 1)).dates;
+    if (type3_end_idx == -1)
+      dates = extract_dates(candidate.slice(type3_idx)).dates;
+    else
+      dates = extract_dates(
+        candidate.slice(type3_idx, type3_end_idx + 1),
+      ).dates;
   } else {
     if (parts[0].text.startsWith('270')) {
       title = '童小鹏接待内蒙干部及师生谈话记录';
