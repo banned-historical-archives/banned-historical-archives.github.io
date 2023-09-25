@@ -180,6 +180,8 @@ export type ParserOption = ParserOptionV2 & {
 
   meta?: any;
   id?: any;
+
+  idx?: number;
 };
 
 export type OCRParameter = {

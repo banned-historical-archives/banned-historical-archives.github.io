@@ -64,36 +64,44 @@ export async function parse(
             // 去掉空格块
             i.text = i.text.replace(/ /g, '');
             return i;
-          }).filter((i) => i.text && i.box[0][1] < 788), // 去掉页眉页脚
+          })
+          .filter((i) => i.text && i.box[0][1] < 788), // 去掉页眉页脚
         10,
       );
-      const idx = res.findIndex(i => /^第[一二三四五六七八九十]+卷/.test(i.text));
+      const idx = res.findIndex((i) =>
+        /^第[一二三四五六七八九十]+卷/.test(i.text),
+      );
       const prev = parts[parts.length - 1];
       if (idx < 0) {
-        parts.push(...res.map(i => ({
-          merge_up: i.box[0][0] < 110,
-          page: page_idx + range[0],
-          type: ContentType.paragraph,
-          text: i.text,
-        })))
+        parts.push(
+          ...res.map((i) => ({
+            merge_up: i.box[0][0] < 110,
+            page: page_idx + range[0],
+            type: ContentType.paragraph,
+            text: i.text,
+          })),
+        );
       } else {
-        parts.push(...res.slice(0, idx).map(i => ({
-          merge_up: i.box[0][0] < 110,
-          page: page_idx + range[0],
-          type: ContentType.paragraph,
-          text: i.text,
-        })),
-        {
-          merge_up: false,
-          type: ContentType.title,
-          page: page_idx + range[0],
-          text: res[idx].text
-        },...res.slice(idx + 1).map(i => ({
-          merge_up: i.box[0][0] < 110,
-          page: page_idx + range[0],
-          type: ContentType.paragraph,
-          text: i.text,
-        })))
+        parts.push(
+          ...res.slice(0, idx).map((i) => ({
+            merge_up: i.box[0][0] < 110,
+            page: page_idx + range[0],
+            type: ContentType.paragraph,
+            text: i.text,
+          })),
+          {
+            merge_up: false,
+            type: ContentType.title,
+            page: page_idx + range[0],
+            text: res[idx].text,
+          },
+          ...res.slice(idx + 1).map((i) => ({
+            merge_up: i.box[0][0] < 110,
+            page: page_idx + range[0],
+            type: ContentType.paragraph,
+            text: i.text,
+          })),
+        );
       }
     });
 
@@ -109,7 +117,7 @@ export async function parse(
         continue;
       } else {
         if (articles[articles.length - 1])
-        articles[articles.length - 1].push(parts[i]);
+          articles[articles.length - 1].push(parts[i]);
       }
     }
 
@@ -119,8 +127,8 @@ export async function parse(
       return {
         title,
         parts: merged_parts,
-        authors: ['周良霄','顾菊英'],
-        dates: [{year: 2008}],
+        authors: ['周良霄', '顾菊英'],
+        dates: [{ year: 2008 }],
         is_range_date: false,
         comments: [],
         comment_pivots: [],

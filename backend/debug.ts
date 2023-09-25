@@ -18,11 +18,14 @@ import { extract_dates } from './parser/utils';
 (async () => {
   const ds = await init();
   const books = await get_books();
-  const book = books.find((i) => i.entity.id === 'wengeqianqixinianlu1')!;
+  for (const x of ['chuanxinlu1', 'chuanxinlu2', 'chuanxinlu3']) {
+    const book = books.find((i) => i.entity.id === x)!;
 
-  // for (const i of await book.parser(book.path, book.parser_option)) {
-  //   console.log(get_article_id(i));
-  // }
-  console.log(await book.parser(book.path, book.parser_option));
-  debugger;
+    // for (const i of await book.parser(book.path, book.parser_option)) {
+    //   console.log(get_article_id(i));
+    // }
+    const t = await book.parser(book.path, book.parser_option);
+    console.log(t);
+    debugger;
+  }
 })();
