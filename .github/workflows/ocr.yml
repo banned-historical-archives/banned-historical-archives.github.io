@@ -89,7 +89,7 @@ jobs:
           cd public/archives${{ steps.get_archive_id.outputs.archive_id }}
           git checkout -b feat/${{ steps.generate-uuid.outputs.uuid }}
           git add .
-          git commit -m 'feat: ${{ github.event.issue.title }}'
+          git commit -m 'feat: ocr'
           git push origin feat/${{ steps.generate-uuid.outputs.uuid }}
           curl \
           -X POST \
