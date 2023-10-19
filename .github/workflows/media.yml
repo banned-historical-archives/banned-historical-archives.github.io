@@ -44,33 +44,37 @@ jobs:
       - name: Create Pull Request
         env:
           GH_TOKEN: ${{ secrets.GH_PAT }}
+          BODY: ${{ github.event.issue.body }}
+          TITLE: ${{ github.event.issue.title }}
         run: |
           cd public/archives${{ env.archive_id }}
           git config --global user.name github-actions
           git config --global user.email github-actions@github.com
           git checkout -b feat-${{ steps.generate-uuid.outputs.uuid }}
           git add .
-          git commit -m 'feat: automation'
+          git commit -m 'feat: $TITLE'
           git push origin feat-${{ steps.generate-uuid.outputs.uuid }}
           curl \
           -X POST \
           -H "Accept: application/vnd.github+json" \
           -H "Authorization: Bearer $GH_TOKEN" \
           https://api.github.com/repos/banned-historical-archives/banned-historical-archives${{ env.archive_id }}/pulls \
-          -d '{"title":"[自动化多媒体录入]","body":"https://github.com/banned-historical-archives/banned-historical-archives.github.io/issues/${{github.event.issue.number}}","head":"feat-${{ steps.generate-uuid.outputs.uuid }}","base":"main"}'
+          -d '{"title":"$TITLE","body":"https://github.com/banned-historical-archives/banned-historical-archives.github.io/issues/${{github.event.issue.number}}","head":"feat-${{ steps.generate-uuid.outputs.uuid }}","base":"main"}'
       - name: Create Pull Request
         env:
           GH_TOKEN: ${{ secrets.GH_PAT }}
+          BODY: ${{ github.event.issue.body }}
+          TITLE: ${{ github.event.issue.title }}
         run: |
           git add .
-          git commit -m 'feat: automation'
+          git commit -m 'feat: $TITLE'
           git push origin HEAD:feat-${{ steps.generate-uuid.outputs.uuid }}
           curl \
           -X POST \
           -H "Accept: application/vnd.github+json" \
           -H "Authorization: Bearer $GH_TOKEN" \
           https://api.github.com/repos/banned-historical-archives/banned-historical-archives.github.io/pulls \
-          -d '{"title":"[自动化多媒体录入]","body":"https://github.com/banned-historical-archives/banned-historical-archives.github.io/issues/${{github.event.issue.number}}","head":"feat-${{ steps.generate-uuid.outputs.uuid }}","base":"master"}'
+          -d '{"title":"$TITLE","body":"https://github.com/banned-historical-archives/banned-historical-archives.github.io/issues/${{github.event.issue.number}}","head":"feat-${{ steps.generate-uuid.outputs.uuid }}","base":"master"}'
       - name: Create comment
         uses: peter-evans/create-or-update-comment@v2
         with:
