@@ -50,7 +50,7 @@ jobs:
           git config --global user.email github-actions@github.com
           git checkout -b feat-${{ steps.generate-uuid.outputs.uuid }}
           git add .
-          git commit -m 'feat: automation}'
+          git commit -m 'feat: automation'
           git push origin feat-${{ steps.generate-uuid.outputs.uuid }}
           curl \
           -X POST \
