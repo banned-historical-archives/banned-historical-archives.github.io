@@ -68,6 +68,9 @@ jobs:
         run: npx npm run prettier
       - name: Create Pull Request
         working-directory: ./banned-historical-archives.github.io
+        env:
+          BODY: ${{ github.event.issue.body }}
+          TITLE: ${{ github.event.issue.title }}
         run: |
           git checkout -b feat/${{ steps.generate-uuid.outputs.uuid }}
           git add ./
@@ -85,6 +88,9 @@ jobs:
           https://api.github.com/repos/banned-historical-archives/banned-historical-archives.github.io/pulls
       - name: Create Pull Request For Submodule
         working-directory: ./banned-historical-archives.github.io
+        env:
+          BODY: ${{ github.event.issue.body }}
+          TITLE: ${{ github.event.issue.title }}
         run: |
           cd public/archives${{ steps.get_archive_id.outputs.archive_id }}
           git checkout -b feat/${{ steps.generate-uuid.outputs.uuid }}
