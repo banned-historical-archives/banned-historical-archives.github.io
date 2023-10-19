@@ -63,7 +63,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GH_PAT }}
         run: |
           git add .
-          git commit -m 'feat: ${{ github.event.issue.title }}'
+          git commit -m 'feat: automation'
           git push origin HEAD:feat-${{ steps.generate-uuid.outputs.uuid }}
           curl \
           -X POST \
