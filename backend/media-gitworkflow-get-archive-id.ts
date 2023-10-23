@@ -19,7 +19,12 @@ export async function start() {
       const config = JSON5.parse(body2);
       config.archive_id =
         config.archive_id == undefined ? 7 : config.archive_id;
-      console.log(config.archive_id);
+      if (config.archive_id >= 0) {
+        console.log(config.archive_id);
+      } else {
+        console.log('bad archive id');
+        process.exit(3);
+      }
     } catch (e) {
       console.log(e);
       process.exit(1);
