@@ -48,6 +48,8 @@ export async function parse(
     ...northKalimantan,
     ...nepal,
     ...brazil,
+    ...InternationalOrganizations,
+    ...InternationalJointStatement,
     ...chile,
     ...france,
     ...Danmark,
