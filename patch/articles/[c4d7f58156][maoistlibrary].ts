@@ -1,0 +1,5 @@
+
+export default [
+// {"version":2,"parts":{"0":{"insertBefore":[{"type":"title","text":"马列毛主义万岁"}],"insertAfter":[{"type":"subdate","text":"一九九三年"}],"diff":"=8\t-5","type":"authors"},"1":{"type":"subtitle"},"5":{"type":"subtitle"},"7":{"type":"subtitle2"},"11":{"type":"subtitle2"},"14":{"type":"subtitle2"},"26":{"type":"subtitle"},"31":{"type":"signature"},"32":{"diff":"+ ","delete":true}},"comments":{},"description":""}
+  {"version":2,"parts":{"0":{"insertBefore":[{"type":"title","text":"马列毛主义万岁"}],"insertAfter":[{"type":"subdate","text":"一九九三年"}],"diff":"=8\t-5","type":"authors"},"1":{"type":"subtitle"},"5":{"type":"subtitle"},"7":{"type":"subtitle2"},"11":{"type":"subtitle2"},"14":{"type":"subtitle2"},"26":{"type":"subtitle"},"31":{"type":"signature"},"32":{"diff":"+ ","delete":true}},"comments":{},"description":""},
+];
