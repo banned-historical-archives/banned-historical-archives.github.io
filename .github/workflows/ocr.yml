@@ -74,7 +74,7 @@ jobs:
         run: |
           git checkout -b feat/${{ steps.generate-uuid.outputs.uuid }}
           git add ./
-          git commit -m 'feat: $TITLE'
+          git commit -m "feat: $TITLE"
           git push origin feat/${{ steps.generate-uuid.outputs.uuid }}
           curl -X POST \
           -H "Accept: application/vnd.github+json" \
@@ -95,7 +95,7 @@ jobs:
           cd public/archives${{ steps.get_archive_id.outputs.archive_id }}
           git checkout -b feat/${{ steps.generate-uuid.outputs.uuid }}
           git add .
-          git commit -m 'feat: $TITLE'
+          git commit -m "feat: $TITLE"
           git push origin feat/${{ steps.generate-uuid.outputs.uuid }}
           curl \
           -X POST \
