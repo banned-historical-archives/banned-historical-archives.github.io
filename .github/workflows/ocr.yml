@@ -102,7 +102,7 @@ jobs:
           -H "Accept: application/vnd.github+json" \
           -H "Authorization: Bearer ${{ secrets.GH_PAT }}" \
           https://api.github.com/repos/banned-historical-archives/banned-historical-archives${{ steps.get_archive_id.outputs.archive_id }}/pulls \
-          -d '{"title":$TITLE,"body":"https://github.com/banned-historical-archives/banned-historical-archives.github.io/issues/${{github.event.issue.number}}","head":"feat/${{ steps.generate-uuid.outputs.uuid }}","base":"main"}'
+          -d "{\"title\":$TITLE,\"body\":\"https://github.com/banned-historical-archives/banned-historical-archives.github.io/issues/${{github.event.issue.number}}\",\"head\":\"feat/${{ steps.generate-uuid.outputs.uuid }}\",\"base\":\"main\"}"
       - name: Create comment
         uses: peter-evans/create-or-update-comment@v2
         with:
