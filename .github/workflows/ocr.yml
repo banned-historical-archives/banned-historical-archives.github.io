@@ -68,19 +68,16 @@ jobs:
         run: npx npm run prettier
       - name: Create Pull Request
         working-directory: ./banned-historical-archives.github.io
-        env:
-          BODY: ${{ github.event.issue.body }}
-          TITLE: ${{ github.event.issue.title }}
         run: |
           git checkout -b feat/${{ steps.generate-uuid.outputs.uuid }}
           git add ./
-          git commit -m "feat: $TITLE"
+          git commit -m "feat: 自动化文稿录入"
           git push origin feat/${{ steps.generate-uuid.outputs.uuid }}
           curl -X POST \
           -H "Accept: application/vnd.github+json" \
           -H "Authorization: Bearer ${{ secrets.GH_PAT }}" \
           -d "{
-            \"title\": \"$TITLE\",
+            \"title\": \"自动化文稿录入\",
             \"body\": \"fix #${{ github.event.issue.number }}\",
             \"head\": \"feat/${{ steps.generate-uuid.outputs.uuid }}\",
             \"base\": \"master\"
@@ -88,14 +85,11 @@ jobs:
           https://api.github.com/repos/banned-historical-archives/banned-historical-archives.github.io/pulls
       - name: Create Pull Request For Submodule
         working-directory: ./banned-historical-archives.github.io
-        env:
-          BODY: ${{ github.event.issue.body }}
-          TITLE: ${{ github.event.issue.title }}
         run: |
           cd public/archives${{ steps.get_archive_id.outputs.archive_id }}
           git checkout -b feat/${{ steps.generate-uuid.outputs.uuid }}
           git add .
-          git commit -m "feat: $TITLE"
+          git commit -m "feat: 自动化文稿录入"
           git push origin feat/${{ steps.generate-uuid.outputs.uuid }}
           curl \
           -X POST \
@@ -103,7 +97,7 @@ jobs:
           -H "Authorization: Bearer ${{ secrets.GH_PAT }}" \
           https://api.github.com/repos/banned-historical-archives/banned-historical-archives${{ steps.get_archive_id.outputs.archive_id }}/pulls \
           -d "{
-            \"title\": \"$TITLE\",
+            \"title\": \"自动化文稿录入\",
             \"body\": \"https://github.com/banned-historical-archives/banned-historical-archives.github.io/issues/${{github.event.issue.number}}\",\"head\":\"feat/${{ steps.generate-uuid.outputs.uuid }}\",
             \"base\":\"main\"}"
       - name: Create comment
