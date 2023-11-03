@@ -74,7 +74,9 @@ jobs:
         run: |
           git checkout -b feat/${{ steps.generate-uuid.outputs.uuid }}
           git add ./
-          git commit -m "feat: $TITLE"
+          echo $TITLE
+          echo "__ $TITLE"
+          git commit -m $TITLE
           git push origin feat/${{ steps.generate-uuid.outputs.uuid }}
           curl -X POST \
           -H "Accept: application/vnd.github+json" \
