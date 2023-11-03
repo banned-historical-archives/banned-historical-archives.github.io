@@ -74,19 +74,17 @@ jobs:
         run: |
           git checkout -b feat/${{ steps.generate-uuid.outputs.uuid }}
           git add ./
-          echo $TITLE
-          echo "__ $TITLE"
-          git commit -m $TITLE
+          git commit -m "feat: $TITLE"
           git push origin feat/${{ steps.generate-uuid.outputs.uuid }}
           curl -X POST \
           -H "Accept: application/vnd.github+json" \
           -H "Authorization: Bearer ${{ secrets.GH_PAT }}" \
-          -d '{
-            "title": "$TITLE",
-            "body": "fix #${{ github.event.issue.number }}",
-            "head": "feat/${{ steps.generate-uuid.outputs.uuid }}",
-            "base": "master"
-          }' \
+          -d "{
+            \"title\": \"$TITLE\",
+            \"body\": \"fix #${{ github.event.issue.number }}\",
+            \"head\": \"feat/${{ steps.generate-uuid.outputs.uuid }}\",
+            \"base\": \"master\"
+          }" \
           https://api.github.com/repos/banned-historical-archives/banned-historical-archives.github.io/pulls
       - name: Create Pull Request For Submodule
         working-directory: ./banned-historical-archives.github.io
