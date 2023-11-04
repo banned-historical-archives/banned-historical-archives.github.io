@@ -67,6 +67,8 @@ export async function start() {
       const imgsOrPDFs = Array.from(body.matchAll(/\[.*?\]\(http.*?\)/g)).map(
         (i) => (i as any)[0].replace(/^.*\(/, '').replace(/\)/, ''),
       );
+
+      // github issue中上传的文件如果是jpg或png，没有后缀，导致图片最终存储为"xxx."，但不影响使用
       config.ext = extname(imgsOrPDFs[0]).replace('.', '');
 
       /**
