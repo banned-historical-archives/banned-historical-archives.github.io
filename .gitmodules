@@ -37,6 +37,27 @@
 [submodule "public/archives12"]
 	path = public/archives12
 	url = git@github.com:banned-historical-archives/banned-historical-archives12.git
+[submodule "public/archives13"]
+	path = public/archives13
+	url = git@github.com:banned-historical-archives/banned-historical-archives13.git
 [submodule "public/archives14"]
 	path = public/archives14
 	url = git@github.com:banned-historical-archives/banned-historical-archives14.git
+[submodule "public/archives15"]
+	path = public/archives15
+	url = git@github.com:banned-historical-archives/banned-historical-archives15.git
+[submodule "public/archives16"]
+	path = public/archives16
+	url = git@github.com:banned-historical-archives/banned-historical-archives16.git
+[submodule "public/archives17"]
+	path = public/archives17
+	url = git@github.com:banned-historical-archives/banned-historical-archives17.git
+[submodule "public/archives18"]
+	path = public/archives18
+	url = git@github.com:banned-historical-archives/banned-historical-archives18.git
+[submodule "public/archives19"]
+	path = public/archives19
+	url = git@github.com:banned-historical-archives/banned-historical-archives19.git
+[submodule "public/archives20"]
+	path = public/archives20
+	url = git@github.com:banned-historical-archives/banned-historical-archives20.git
