@@ -19,7 +19,7 @@ assignees: ''
 {
   source_name: '毛泽东全集第一卷', // 来源文件，书籍，数据库，报纸等等
   author: '', // 出版社
-  archive_id: 15, // 子仓库id，banned-historical-archives[id]，默认为 15，
+  archive_id: 16, // 子仓库id，banned-historical-archives[id]，默认为 16，
   articles: [{
     title: '在中央政治局会议上的讲话',
     authors: ['毛泽东', '江青'], // 作者
@@ -86,7 +86,7 @@ assignees: ''
 {
   source_name: '毛泽东全集第一卷', // 来源文件名称，书籍，数据库，报纸等等
   author: '',
-  archive_id: 15,
+  archive_id: 16,
   articles: [{
     title: '在中央政治局会议上的讲话',
     authors: ['毛泽东'], // 作者
