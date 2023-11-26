@@ -163,6 +163,7 @@ export type ParserOptionV2 = {
     page_end: number;
   }[];
   ext?: string;
+  pdf_no_ocr?: boolean; // 如果为true，表示pdf不进行ocr，使用pdf内的文本
   ocr?: Partial<OCRParameter & OCRParameterAdvanced>; // ocr 全局参数
   ocr_exceptions?: {
     [key: string]: Partial<OCRParameter & OCRParameterAdvanced>;

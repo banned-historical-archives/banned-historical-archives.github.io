@@ -110,6 +110,7 @@ export async function start() {
     ext: '${config.ext}',
     articles: ${JSON.stringify(config.articles)},
     ocr: ${JSON.stringify(config.ocr)},
+    pdf_no_ocr: ${JSON.stringify(!!config.pdf_no_ocr)},
     ocr_exceptions: ${JSON.stringify(config.ocr_exceptions || {})},
   },
   parser_id: 'automation',

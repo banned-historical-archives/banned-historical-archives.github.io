@@ -1,4 +1,5 @@
 import { join } from 'path';
+import * as pdfjsLib from './pdf.js';
 import { basename } from 'node:path/posix';
 import { existsSync, writeFileSync, readFileSync } from 'fs';
 import ocr from '../ocr';
@@ -15,7 +16,7 @@ import {
   Pivot,
   TagType,
 } from '../../types';
-import { merge_to_lines } from './utils';
+import { merge_to_lines, pdfjsContentToOCRResult } from './utils';
 import { normalize } from '../utils';
 
 type PartRaw = { page: number; x: number; merge_up?: boolean } & ContentPartRaw;
@@ -117,25 +118,51 @@ export async function parse(
         ...(article.ocr_exceptions ? article.ocr_exceptions[i] : {}),
         ...(parser_opt.ocr_exceptions ? parser_opt.ocr_exceptions[i] : {}),
       };
-      let { ocr_results, dimensions } = await ocr(
-        parser_opt.ext == 'pdf'
-          ? {
-              pdf: dirPathOrFilePath,
-              page: i,
-              cache_path: join(
-                normalize(__dirname),
-                `../ocr_cache/${basename(dirPathOrFilePath).replace(
-                  /\.pdf$/,
-                  '',
-                )}/${i}.json`,
-              ),
-              ...merged_ocr_parameters,
-            }
-          : {
-              img: dirPathOrFilePath + '/' + i + `.${parser_opt.ext}`,
-              ...merged_ocr_parameters,
-            },
-      );
+      let page_res: {
+        ocr_results: OCRResult[];
+        dimensions: { width: number; height: number };
+      };
+      if (parser_opt.pdf_no_ocr && parser_opt.ext == 'pdf') {
+        const doc = await pdfjsLib.getDocument({
+          url: dirPathOrFilePath,
+          cMapPacked: true,
+          cMapUrl: './node_modules/pdfjs-dist/cmaps/',
+        }).promise;
+        let content_obj = await(await doc.getPage(i)).getTextContent();
+        const viewport = (await doc.getPage(i)).getViewport({ scale: 1 });
+        page_res = {
+          dimensions: { width: viewport.width, height: viewport.height },
+          ocr_results: merge_to_lines(
+            pdfjsContentToOCRResult(content_obj, viewport.height).map((i) => {
+              // 去掉空格块
+              i.text = i.text.replace(/ /g, '');
+              return i;
+            }),
+            10,
+          ),
+        };
+      } else {
+        page_res = await ocr(
+          parser_opt.ext == 'pdf'
+            ? {
+                pdf: dirPathOrFilePath,
+                page: i,
+                cache_path: join(
+                  normalize(__dirname),
+                  `../ocr_cache/${basename(dirPathOrFilePath).replace(
+                    /\.pdf$/,
+                    '',
+                  )}/${i}.json`,
+                ),
+                ...merged_ocr_parameters,
+              }
+            : {
+                img: dirPathOrFilePath + '/' + i + `.${parser_opt.ext}`,
+                ...merged_ocr_parameters,
+              },
+        );
+      }
+      let { ocr_results, dimensions } = page_res;
 
       const content_thresholds = merged_ocr_parameters.content_thresholds!;
       const line_merge_threshold = merged_ocr_parameters.line_merge_threshold!;

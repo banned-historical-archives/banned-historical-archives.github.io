@@ -1,6 +1,6 @@
 ---
-name: 自动化OCR录入
-about: 自动化OCR录入
+name: 自动化文稿录入
+about: 自动化文稿录入
 title: '[自动化文稿录入]标题'
 labels: ''
 assignees: ''
@@ -53,6 +53,7 @@ assignees: ''
       },
     } // 默认为空
   }],
+  pdf_no_ocr: false, // 默认为false，如果pdf已经有文本信息就可以设置为true跳过OCR
   ocr: { // ocr 参数 以及 默认参数
     rec_model: 'ch_ppocr_mobile_v2.0',
     rec_backend: 'onnx',
