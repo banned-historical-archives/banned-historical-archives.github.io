@@ -64,6 +64,9 @@ export async function start() {
       config.id = id;
       config.archive_id =
         config.archive_id == undefined ? 1 : config.archive_id;
+      if (config.pdf_no_ocr) {
+        config.archive_id = 9;
+      }
       const imgsOrPDFs = Array.from(body.matchAll(/\[.*?\]\(http.*?\)/g)).map(
         (i) => (i as any)[0].replace(/^.*\(/, '').replace(/\)/, ''),
       );
