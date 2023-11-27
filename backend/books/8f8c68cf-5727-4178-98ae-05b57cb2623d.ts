@@ -7,7 +7,7 @@ export default {
     type: 'pdf',
     author: '中央文献出版社',
     files:
-      'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives16/main/8f8c68cf-5727-4178-98ae-05b57cb2623d.pdf',
+      'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives9/main/8f8c68cf-5727-4178-98ae-05b57cb2623d.pdf',
   },
   parser_option: {
     page_limits: [],
