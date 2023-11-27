@@ -128,7 +128,7 @@ export async function parse(
           cMapPacked: true,
           cMapUrl: './node_modules/pdfjs-dist/cmaps/',
         }).promise;
-        let content_obj = await(await doc.getPage(i)).getTextContent();
+        let content_obj = await (await doc.getPage(i)).getTextContent();
         const viewport = (await doc.getPage(i)).getViewport({ scale: 1 });
         page_res = {
           dimensions: { width: viewport.width, height: viewport.height },
