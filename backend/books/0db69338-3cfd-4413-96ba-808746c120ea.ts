@@ -1,7 +1,7 @@
 export default {
   entity: {
     id: '0db69338-3cfd-4413-96ba-808746c120ea',
-    name: '毛远新同志三月一日在省宣传工作会议上的讲话',
+    name: '毛远新在省宣传工作会议上的讲话（1975.3.5辽宁）',
     internal: false,
     official: false,
     type: 'img',

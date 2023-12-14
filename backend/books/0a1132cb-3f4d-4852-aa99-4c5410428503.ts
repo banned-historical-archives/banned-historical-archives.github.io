@@ -1,7 +1,7 @@
 export default {
   entity: {
     id: '0a1132cb-3f4d-4852-aa99-4c5410428503',
-    name: '文革通讯第131期',
+    name: '文革通讯第131期（1967.9.21浙江）',
     internal: false,
     official: false,
     type: 'img',

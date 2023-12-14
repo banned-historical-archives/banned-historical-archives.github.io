@@ -1,7 +1,7 @@
 export default {
   entity: {
     id: '0a114fe5-ae50-41dd-8f16-191b9add6feb',
-    name: '宝音同志在省揭批“四人帮”经验交流会上的发言',
+    name: '宝音同志在省揭批“四人帮”经验交流会上的发言（1977.11.26河北）',
     internal: false,
     official: false,
     type: 'img',

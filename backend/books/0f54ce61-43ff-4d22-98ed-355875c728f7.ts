@@ -1,8 +1,8 @@
 export default {
   entity: {
     id: '0f54ce61-43ff-4d22-98ed-355875c728f7',
-    name: '在中央工作会议第一次全体会议上周恩来同志的讲话',
-    internal: false,
+    name: '在中央工作会议第一次全体会议上周恩来同志的讲话（1973.5.20）',
+    internal: true,
     official: false,
     type: 'img',
     author: '',
