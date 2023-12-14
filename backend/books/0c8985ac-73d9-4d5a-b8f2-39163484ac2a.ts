@@ -1,7 +1,7 @@
 export default {
   entity: {
     id: '0c8985ac-73d9-4d5a-b8f2-39163484ac2a',
-    name: '愤怒揭发“帮市委”在去年的阴谋活动',
+    name: '愤怒揭发“帮市委”在去年的阴谋活动（1977.8.23）',
     internal: false,
     official: false,
     type: 'img',
@@ -25,7 +25,7 @@ export default {
         authors: ['孙景祥'],
         page_start: 1,
         page_end: 47,
-        dates: [{ year: 1977, month: 8, day: 22 }],
+        dates: [{ year: 1977, month: 8, day: 23 }],
       },
     ],
     ocr: undefined,
