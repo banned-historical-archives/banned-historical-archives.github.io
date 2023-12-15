@@ -1,11 +1,11 @@
 export default {
   entity: {
     id: '1b577929-8e72-4e52-a897-1388a0b4949c',
-    name: '杨春甫在全国计划工作座谈会上的发言（要点）',
+    name: '杨春甫在全国计划工作座谈会上的发言（要点）（1976.12.12辽宁）',
     internal: true,
     official: true,
     type: 'img',
-    author: '',
+    author: '杨春甫，1976.7.19',
     files:
       'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/1b577929-8e72-4e52-a897-1388a0b4949c/1.png,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/1b577929-8e72-4e52-a897-1388a0b4949c/2.png',
   },

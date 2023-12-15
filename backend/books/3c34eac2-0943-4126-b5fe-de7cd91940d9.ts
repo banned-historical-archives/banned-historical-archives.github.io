@@ -1,11 +1,11 @@
 export default {
   entity: {
     id: '3c34eac2-0943-4126-b5fe-de7cd91940d9',
-    name: '李伯秋同志在省委城市民兵工作会议上的讲话',
-    internal: false,
+    name: '李伯秋同志在省委城市民兵工作会议上的讲话（1973.12.20辽宁）',
+    internal: true,
     official: false,
     type: 'img',
-    author: '',
+    author: '李伯秋，1973.12.20',
     files: new Array(9)
       .fill(0)
       .map(

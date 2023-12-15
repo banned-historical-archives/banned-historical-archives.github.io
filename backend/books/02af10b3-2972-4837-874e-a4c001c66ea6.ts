@@ -5,7 +5,7 @@ export default {
     internal: false,
     official: false,
     type: 'pdf',
-    author: '',
+    author: '《红旗》杂志编辑部',
     files:
       'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives2/main/02af10b3-2972-4837-874e-a4c001c66ea6.pdf',
   },

@@ -3,9 +3,9 @@ export default {
     id: '02be0769-aa68-4da3-ab00-22c99386193c',
     name: '红旗一九六五年第十三期',
     internal: false,
-    official: false,
+    official: true,
     type: 'pdf',
-    author: '',
+    author: '《红旗》杂志编辑部',
     files:
       'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives2/main/02be0769-aa68-4da3-ab00-22c99386193c.pdf',
   },

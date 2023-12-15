@@ -1,11 +1,11 @@
 export default {
   entity: {
     id: '3c5a9dbd-88a8-4e82-b5d3-f1ba7a192680',
-    name: '刘兴元传达毛主席五次重要指示',
+    name: '刘兴元传达毛主席五次重要指示（1974.1.6）',
     internal: false,
     official: false,
     type: 'img',
-    author: '',
+    author: '未知',
     files: new Array(24)
       .fill(0)
       .map(

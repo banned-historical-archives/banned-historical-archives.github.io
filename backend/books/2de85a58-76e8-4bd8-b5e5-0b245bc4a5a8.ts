@@ -1,11 +1,11 @@
 export default {
   entity: {
     id: '2de85a58-76e8-4bd8-b5e5-0b245bc4a5a8',
-    name: '揭发批判赵万有结帮篡党操纵办公厅座谈会的罪行',
+    name: '揭发批判赵万有结帮篡党操纵办公厅座谈会的罪行（1977.5.11四川）',
     internal: false,
     official: false,
     type: 'img',
-    author: '',
+    author: '孙景祥，1977.5.11',
     files: new Array(23)
       .fill(0)
       .map(

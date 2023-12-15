@@ -3,7 +3,7 @@ export default {
     id: '2fead20b-5f42-47fe-b8af-3c0334fcab32',
     name: '中共中央文件[1975]5号',
     internal: false,
-    official: false,
+    official: true,
     type: 'img',
     author: '中共中央',
     files: new Array(3)

@@ -1,11 +1,11 @@
 export default {
   entity: {
     id: '1a735b9e-4da2-403b-9410-e134a3e002bf',
-    name: '陈锡联同志在山东重点企业批林批孔汇报会议上的讲话',
+    name: '陈锡联同志在山东重点企业批林批孔汇报会议上的讲话（1974.6.27山东）',
     internal: false,
     official: false,
     type: 'img',
-    author: '',
+    author: '陈锡联，1974.6.27',
     files: new Array(2)
       .fill(0)
       .map(

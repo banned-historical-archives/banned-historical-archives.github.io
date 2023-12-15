@@ -5,7 +5,7 @@ export default {
     internal: false,
     official: false,
     type: 'pdf',
-    author: '水陆洲编',
+    author: '水陆洲编，2011年',
     files:
       'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives3/main/1aafef62-9a6b-46ee-be90-c2a2ae3af076.pdf',
   },

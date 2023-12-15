@@ -1,7 +1,7 @@
 export default {
   entity: {
     id: '2dd523d0-86c2-49dc-884d-496ab565cd91',
-    name: '文革通讯第20期',
+    name: '文革通讯（第20期）',
     internal: false,
     official: false,
     type: 'pdf',

@@ -1,7 +1,7 @@
 export default {
   entity: {
     id: '3def24c5-f4fd-4209-a0e0-a772fae67601',
-    name: '文革通讯第147期',
+    name: '文革通讯（第147期）',
     internal: false,
     official: false,
     type: 'img',

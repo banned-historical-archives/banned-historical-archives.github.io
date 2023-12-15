@@ -1,7 +1,7 @@
 export default {
   entity: {
     id: '1a64a4ed-2bab-4ea1-8b71-c280caca4767',
-    name: '宗明兰在各市、地宣传组长座谈会上的讲话（1976.12）',
+    name: '宗明兰在各市、地宣传组长座谈会上的讲话（1976.12辽宁）',
     internal: true,
     official: true,
     type: 'img',
