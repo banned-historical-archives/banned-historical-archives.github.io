@@ -3,9 +3,9 @@ export default {
     id: '2e6a6318-09b5-40db-b041-75f9847722d3',
     name: '红旗一九六四年增刊第一号',
     internal: false,
-    official: false,
+    official: true,
     type: 'pdf',
-    author: '',
+    author: '《红旗》杂志编辑部',
     files:
       'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives2/main/2e6a6318-09b5-40db-b041-75f9847722d3.pdf',
   },

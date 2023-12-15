@@ -1,7 +1,7 @@
 export default {
   entity: {
     id: '3a5b3418-1fa0-4ae8-b606-a6126da58bca',
-    name: '文革通讯第5期',
+    name: '文革通讯（第5期）',
     internal: false,
     official: false,
     type: 'pdf',

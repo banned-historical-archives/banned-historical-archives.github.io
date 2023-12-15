@@ -1,11 +1,11 @@
 export default {
   entity: {
     id: '02e7281e-cf73-430a-a726-1e96a1202f8e',
-    name: '六月八日下午军区25次党委扩大会全体会议李德生同志的讲话',
+    name: '李德生在军区第二十五次党委扩大会议全体会议上的讲话（1973.6.8）',
     internal: false,
     official: false,
     type: 'img',
-    author: '',
+    author: '李德生，1973.6.8',
     files: new Array(16)
       .fill(0)
       .map(
@@ -21,7 +21,8 @@ export default {
     ext: '',
     articles: [
       {
-        title: '六月八日下午军区25次党委扩大会全体会议李德生同志的讲话',
+        title: '李德生在军区第二十五次党委扩大会议全体会议上的讲话',
+        alias: '六月八日下午军区25次党委扩大会全体会议李德生同志的讲话',
         authors: ['李德生'],
         page_start: 1,
         page_end: 16,

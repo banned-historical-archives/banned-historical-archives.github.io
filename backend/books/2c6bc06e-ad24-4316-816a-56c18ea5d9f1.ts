@@ -1,11 +1,11 @@
 export default {
   entity: {
     id: '2c6bc06e-ad24-4316-816a-56c18ea5d9f1',
-    name: '朝阳地委无产阶级专政理论问题讨论会简报第20期',
+    name: '朝阳地委无产阶级专政理论问题讨论会简报（第20期）（1975.6.17）',
     internal: false,
     official: false,
     type: 'img',
-    author: '',
+    author: '王吉道，1975.6.17',
     files: new Array(11)
       .fill(0)
       .map(

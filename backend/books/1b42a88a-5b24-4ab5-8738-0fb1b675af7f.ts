@@ -5,7 +5,7 @@ export default {
     internal: false,
     official: true,
     type: 'pdf',
-    author: '恩格斯，人民出版社1971年版',
+    author: '《自然辩证法》编辑部',
     files:
       'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives2/main/1b42a88a-5b24-4ab5-8738-0fb1b675af7f.pdf',
   },

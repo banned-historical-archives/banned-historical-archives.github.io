@@ -1,11 +1,11 @@
 export default {
   entity: {
     id: '3d5982c2-265a-4ddc-bc10-46d17f434b3b',
-    name: '邓兴国、崔大田、黄廉、周家喻反动言论摘录',
+    name: '邓兴国、崔大田、黄廉、周家喻反动言论摘录（1977.3.7四川）',
     internal: false,
     official: false,
     type: 'img',
-    author: '中共四川省委大批判组',
+    author: '中共四川省委大批判组，1977.3.7',
     files: new Array(19)
       .fill(0)
       .map(
