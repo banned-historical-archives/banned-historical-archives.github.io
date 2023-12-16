@@ -1,7 +1,7 @@
 export default {
   entity: {
     id: '3e699a1d-a191-4ef4-a84e-c37e6f8ea3c3',
-    name: '周总理在中央工作会议第二次全体会议上的讲话',
+    name: '周总理在中央工作会议第二次全体会议上的讲话（1973.5.26）',
     internal: false,
     official: false,
     type: 'img',

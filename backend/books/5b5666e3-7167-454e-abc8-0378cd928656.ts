@@ -5,7 +5,7 @@ export default {
     internal: false,
     official: true,
     type: 'img',
-    author: '上海市革命委员会',
+    author: '上海市革命委员会，1967.6.2',
     files: new Array(5)
       .fill(0)
       .map(

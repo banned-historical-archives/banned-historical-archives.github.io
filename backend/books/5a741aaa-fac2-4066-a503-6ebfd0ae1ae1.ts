@@ -1,7 +1,7 @@
 export default {
   entity: {
     id: '5a741aaa-fac2-4066-a503-6ebfd0ae1ae1',
-    name: '文革通讯第12期',
+    name: '文革通讯（第12期）',
     internal: false,
     official: false,
     type: 'pdf',

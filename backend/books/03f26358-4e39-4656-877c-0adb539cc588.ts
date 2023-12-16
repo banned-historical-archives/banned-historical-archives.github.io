@@ -1,11 +1,11 @@
 export default {
   entity: {
     id: '03f26358-4e39-4656-877c-0adb539cc588',
-    name: '彻底揭发批判“四人帮”操纵和指挥的坏人吕毅的反革命罪行',
+    name: '彻底揭发批判“四人帮”操纵和指挥的坏人吕毅的反革命罪行（1978.1.3河北）',
     internal: false,
     official: false,
     type: 'img',
-    author: '中共保定地委揭批“四人帮”办公室',
+    author: '中共保定地委揭批“四人帮”办公室，1978.1.3',
     files: new Array(7)
       .fill(0)
       .map(

@@ -1,11 +1,11 @@
 export default {
   entity: {
     id: '3ec829b1-a175-4e6e-96e5-3440251c858a',
-    name: '中国共产党广西壮族自治区委员会文件',
+    name: '中国共产党广西壮族自治区委员会文件 桂发〔77〕3号（1977.1.20广西）',
     internal: false,
-    official: false,
+    official: true,
     type: 'img',
-    author: '中共广西壮族自治区委员会',
+    author: '中共广西壮族自治区委员会办公厅，1977.1.20印发',
     files: new Array(44)
       .fill(0)
       .map(
