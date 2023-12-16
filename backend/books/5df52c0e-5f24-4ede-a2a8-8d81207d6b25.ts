@@ -1,11 +1,11 @@
 export default {
   entity: {
     id: '5df52c0e-5f24-4ede-a2a8-8d81207d6b25',
-    name: '王竹泉同志在南郊会议上的发言',
+    name: '王竹泉同志在南郊会议上的发言（1972.4山东）',
     internal: false,
     official: false,
     type: 'img',
-    author: '',
+    author: '王竹泉，1972.4',
     files: new Array(2)
       .fill(0)
       .map(

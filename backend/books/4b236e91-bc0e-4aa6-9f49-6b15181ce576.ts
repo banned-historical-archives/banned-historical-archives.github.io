@@ -1,11 +1,11 @@
 export default {
   entity: {
     id: '4b236e91-bc0e-4aa6-9f49-6b15181ce576',
-    name: '揭发“四人帮”在《社会主义政治经济学》编写工作中的滔天罪行',
+    name: '揭发“四人帮”在《社会主义政治经济学》编写工作中的滔天罪行（1977.3.16）',
     internal: false,
     official: false,
     type: 'img',
-    author: '',
+    author: '《社会主义政治经济学》上海编写组，中山大学经济系十四级翻印，1977.3.16',
     files: new Array(10)
       .fill(0)
       .map(

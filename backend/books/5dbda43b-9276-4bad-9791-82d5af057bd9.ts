@@ -1,11 +1,11 @@
 export default {
   entity: {
     id: '5dbda43b-9276-4bad-9791-82d5af057bd9',
-    name: '六月八日下午军区党委扩大会议全体会议陈先瑞同志讲话',
+    name: '陈先瑞在军区党委扩大会议全体会议上的讲话（1973.6.8）',
     internal: false,
     official: false,
     type: 'img',
-    author: '',
+    author: '陈先瑞，1973.6.8',
     files: new Array(4)
       .fill(0)
       .map(
@@ -21,7 +21,8 @@ export default {
     ext: '',
     articles: [
       {
-        title: '六月八日下午军区党委扩大会议全体会议陈先瑞同志讲话',
+        title: '陈先瑞在军区党委扩大会议全体会议上的讲话',
+        alias: '六月八日下午军区党委扩大会议全体会议陈先瑞同志讲话',
         authors: ['陈先瑞'],
         page_start: 1,
         page_end: 4,

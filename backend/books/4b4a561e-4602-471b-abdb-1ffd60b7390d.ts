@@ -1,11 +1,11 @@
 export default {
   entity: {
     id: '4b4a561e-4602-471b-abdb-1ffd60b7390d',
-    name: '张铁生一九七六年十月十二日在兴城县欢迎他大学毕业回乡务农大会上的讲话',
+    name: '张铁生在兴城县欢迎他大学毕业回乡务农大会上的讲话（1976.11辽宁）',
     internal: false,
     official: false,
     type: 'img',
-    author: '',
+    author: '张铁生，1976.11',
     files: new Array(5)
       .fill(0)
       .map(
@@ -21,8 +21,8 @@ export default {
     ext: '',
     articles: [
       {
-        title:
-          '张铁生一九七六年十月十二日在兴城县欢迎他大学毕业回乡务农大会上的讲话',
+        title: '张铁生在兴城县欢迎他大学毕业回乡务农大会上的讲话',
+        alias: '张铁生一九七六年十月十二日在兴城县欢迎他大学毕业回乡务农大会上的讲话',
         authors: ['张铁生'],
         page_start: 1,
         page_end: 5,

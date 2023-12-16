@@ -1,11 +1,11 @@
 export default {
   entity: {
     id: '5e3d0e71-5662-48f8-a5cb-7a6a7c5e105f',
-    name: '原形毕露',
+    name: '原形毕露（1976.10.6后）',
     internal: false,
     official: false,
     type: 'img',
-    author: '上海大字报',
+    author: '上海大字报，1976.10.6后',
     files: new Array(2)
       .fill(0)
       .map(

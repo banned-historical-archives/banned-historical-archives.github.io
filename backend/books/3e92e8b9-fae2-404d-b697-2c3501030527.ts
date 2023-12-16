@@ -1,11 +1,11 @@
 export default {
   entity: {
     id: '3e92e8b9-fae2-404d-b697-2c3501030527',
-    name: '杨广立的罪证材料',
+    name: '杨广立的罪证材料（1978.11江苏）',
     internal: false,
-    official: false,
+    official: true,
     type: 'img',
-    author: '中共江苏省委材料组',
+    author: '中共江苏省委材料组，1978.11整理，1979.2印发',
     files: new Array(94)
       .fill(0)
       .map(
