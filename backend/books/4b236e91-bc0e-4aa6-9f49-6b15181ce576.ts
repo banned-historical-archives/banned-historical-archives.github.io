@@ -5,7 +5,8 @@ export default {
     internal: false,
     official: false,
     type: 'img',
-    author: '《社会主义政治经济学》上海编写组，中山大学经济系十四级翻印，1977.3.16',
+    author:
+      '《社会主义政治经济学》上海编写组，中山大学经济系十四级翻印，1977.3.16',
     files: new Array(10)
       .fill(0)
       .map(
