@@ -8,13 +8,14 @@ import {
   ContentPartRaw,
   ContentType,
   Date,
-  OCRParameter,
+  OCRParameterLegacy,
   OCRParameterAdvanced,
   OCRResult,
   ParserOption,
   ParserResult,
   Pivot,
   TagType,
+  OCRParameter,
 } from '../../types';
 import { merge_to_lines, pdfjsContentToOCRResult } from './utils';
 import { normalize } from '../utils';
@@ -93,13 +94,9 @@ export async function parse(
   parser_opt: ParserOption,
 ): Promise<ParserResult[]> {
   parser_opt.ocr = {
-    rec_model: 'ch_ppocr_mobile_v2.0',
-    rec_backend: 'onnx',
-    det_model: 'ch_PP-OCRv3_det',
-    det_backend: 'onnx',
-    resized_shape: 1496,
-    box_score_thresh: 0.3,
-    min_box_size: 10,
+    det_limit_side_len: 2496,
+    drop_score: 0.3,
+
     content_thresholds: [0.0, 0.0, 0.0, 0.0],
     line_merge_threshold: 30,
     standard_paragraph_merge_strategy_threshold: 0,
@@ -112,7 +109,7 @@ export async function parse(
   for (const article of parser_opt.articles!) {
     const parts: PartRaw[] = [];
     for (let i = article.page_start; i <= article.page_end; ++i) {
-      const merged_ocr_parameters = {
+      const merged_ocr_parameters: Partial<OCRParameter & OCRParameterAdvanced> = {
         ...(parser_opt.ocr || {}),
         ...(article.ocr ? article.ocr : {}),
         ...(article.ocr_exceptions ? article.ocr_exceptions[i] : {}),
@@ -154,11 +151,11 @@ export async function parse(
                     '',
                   )}/${i}.json`,
                 ),
-                ...merged_ocr_parameters,
+                params: merged_ocr_parameters,
               }
             : {
                 img: dirPathOrFilePath + '/' + i + `.${parser_opt.ext}`,
-                ...merged_ocr_parameters,
+                params: merged_ocr_parameters,
               },
         );
       }

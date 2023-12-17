@@ -170,6 +170,112 @@ export type ParserOptionV2 = {
   }; // 例外， 比如第三页的ocr参数与其他页面不同，默认为空，此参数比articles中的优先级高
 };
 
+export type OCRParameter = {
+  image_dir: string;
+
+  use_gpu: boolean; //False,
+  use_xpu: boolean; //False,
+  use_npu: boolean; //False,
+  ir_optim: boolean; //True,
+  use_tensorrt: boolean; //False,
+  min_subgraph_size: number; //15,
+  precision: 'fp32';
+  gpu_mem: number; //500,
+  gpu_id: number; //0,
+
+  use_onnx: boolean; //False,
+  page_num: number; //0,
+  det_algorithm: 'DB';
+  det_limit_side_len: number; //960,
+  det_limit_type: 'max' | 'min'; // 'max'
+  det_box_type: 'quad';
+  det_model_dir: string;
+
+  // DB parmas
+  det_db_thresh: number; // 0.3,
+  det_db_box_thresh: number; // 0.6,
+  det_db_unclip_ratio: number; // 1.5,
+  max_batch_size: number; // 10,
+  use_dilation: boolean; // False,
+  det_db_score_mode: 'fast';
+
+  // EAST parmas
+  det_east_score_thresh: number; // 0.8,
+  det_east_cover_thresh: number; // 0.1,
+  det_east_nms_thresh: number; // 0.2,
+
+  // SAST parmas
+  det_sast_score_thresh: number; // 0.5,
+  det_sast_nms_thresh: number; // 0.2,
+
+  // PSE parmas
+  det_pse_thresh: number; // 0,
+  det_pse_box_thresh: number; // 0.85,
+  det_pse_min_area: number; // 16,
+  det_pse_scale: number; // 1,
+
+  // FCE parmas
+  scales: number[]; // [8, 16, 32],
+  alpha: number; // 1.0,
+  beta: number; // 1.0,
+  fourier_degree: number; // 5,
+
+  // params for text recognizer
+  rec_model_dir: string;
+  rec_algorithm: 'SVTR_LCNet';
+  rec_image_inverse: boolean; // True,
+  rec_image_shape: '3, 48, 320';
+  rec_batch_num: number; // 6,
+  max_text_length: number; // 25,
+  rec_char_dict_path: './paddle/ppocr_keys_v1.txt';
+  use_space_char: boolean; // True,
+  vis_font_path: string; // "./doc/fonts/simfang.ttf",
+  drop_score: number; // 0.5,
+
+  // params for e2e
+  e2e_algorithm: string; // 'PGNet'
+  e2e_model_dir: string;
+  e2e_limit_side_len: number; // 768
+  e2e_limit_type: 'max';
+
+  // PGNet parmas
+  e2e_pgnet_score_thresh: number; //0.5
+  e2e_char_dict_path: './ppocr/utils/ic15_dict.txt';
+  e2e_pgnet_valid_set: 'totaltext';
+  e2e_pgnet_mode: 'fast';
+
+  // params for text classifier
+  use_angle_cls: boolean; // False,
+  cls_model_dir: string;
+  cls_image_shape: '3, 48, 192';
+  label_list: ['0', '180'];
+  cls_batch_num: number; // 6
+  cls_thresh: number; // 0.9,
+
+  enable_mkldnn: boolean; // false,
+  cpu_threads: number; // 10,
+  use_pdserving: boolean; // False,
+  warmup: boolean; // False,
+
+  // SR parmas
+  sr_image_shape: '3, 32, 128';
+  sr_batch_num: number; // 1,
+
+  draw_img_save_dir: './inference_results';
+  save_crop_res: boolean; // False,
+  crop_res_save_dir: './output';
+
+  // multi-process
+  use_mp: boolean; // False
+  total_process_num: number; // 1
+  process_id: number; // 0,
+
+  benchmark: boolean; //  False,
+  save_log_path: './log_output/';
+
+  show_log: boolean; // False,
+};
+
 export type ParserOption = ParserOptionV2 & {
   page_limits: [number, number][];
 
@@ -185,7 +291,7 @@ export type ParserOption = ParserOptionV2 & {
   idx?: number;
 };
 
-export type OCRParameter = {
+export type OCRParameterLegacy = {
   rec_model: string;
   rec_backend: string;
   det_model: string;

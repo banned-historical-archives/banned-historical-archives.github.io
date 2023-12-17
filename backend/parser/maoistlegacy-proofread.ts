@@ -10,7 +10,7 @@ import {
   ContentPartRaw,
   ContentType,
   Date,
-  OCRParameter,
+  OCRParameterLegacy,
   OCRParameterAdvanced,
   OCRResult,
   ParserOption,

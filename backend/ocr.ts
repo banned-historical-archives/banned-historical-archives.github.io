@@ -2,7 +2,7 @@ import { exec, execSync } from 'node:child_process';
 import { join, basename, dirname, extname } from 'node:path/posix';
 import { isAbsolute } from 'node:path';
 import fs from 'fs-extra';
-import { OCRParameter, OCRResult } from '../types';
+import { OCRParameter, OCRParameterLegacy, OCRResult } from '../types';
 import { sleep } from '../utils';
 import pdf2image from './pdf2image';
 import { normalize } from './utils';
@@ -18,20 +18,14 @@ export default async function ocr({
   pdf,
   page,
   cache_path,
-
-  rec_model = 'ch_ppocr_mobile_v2.0',
-  rec_backend = 'onnx',
-  det_model = 'ch_PP-OCRv3_det',
-  det_backend = 'onnx',
-  resized_shape = 1496,
-  box_score_thresh = 0.3,
-  min_box_size = 10,
-}: Partial<OCRParameter> & {
+  params,
+}: {
   cache?: boolean;
   cache_path?: string;
   img?: string;
   pdf?: string;
   page?: number; // start from 1
+  params: Partial<OCRParameter>
 }): Promise<{
   ocr_results: OCRResult[];
   dimensions: { height: number; width: number };
@@ -61,21 +55,27 @@ export default async function ocr({
     ? await pdf2image({ pdf_path: abs_target_path, page: page! - 1 })
     : abs_target_path;
   const dimensions = sizeOf(abs_ocr_target);
-  const ocr_command = `python backend/ocr.py ${abs_ocr_target} ${rec_model} ${rec_backend} ${det_model} ${det_backend} ${resized_shape} ${box_score_thresh} ${min_box_size}`;
-  const raw = execSync(ocr_command).toString();
-
-  const candidates: string[] = raw.split('\n');
-  const t = JSON.parse(
-    candidates[candidates.length - 2].replace(/"score": NaN\,/g, '"score": 0,'),
-  );
+  const ocr_command = `python ocr.py "${JSON.stringify({
+    ...params,
+    image_dir: abs_ocr_target,
+  }).replace(/"/g, '\"')}"`;
+  const raw = execSync(ocr_command, {
+    cwd: process.env.OCR_EXEC_PATH!,
+  }).toString();
+  const t = JSON.parse(raw) as (([[
+    [number,number],
+    [number,number],
+    [number,number],
+    [number,number],
+  ],[string, number]])[]);
 
   const res: {
     ocr_results: OCRResult[];
     dimensions: { height: number; width: number };
   } = {
-    ocr_results: t.map((i: any) => ({
-      text: i.text,
-      box: i.position,
+    ocr_results: t[0].map((i: any) => ({
+      text: i[1][0],
+      box: i[0],
     })),
     dimensions: {
       height: dimensions.height!,

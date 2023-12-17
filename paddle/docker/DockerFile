@@ -1,8 +1,0 @@
-# from paddlecloud/paddleocr:2.5-cpu-efbb0a
-# RUN pip install --upgrade paddlenlp && pip install lac
-# COPY ./lac.py /lac.py
-
-FROM ubuntu:20.04
-RUN sudo apt install make cmake bzip2 gcc python3
-RUN python -m pip install paddlepaddle==2.3.2 -i https://pypi.tuna.tsinghua.edu.cn/simple
-RUN python -m pip install "paddleocr>=2.6"
