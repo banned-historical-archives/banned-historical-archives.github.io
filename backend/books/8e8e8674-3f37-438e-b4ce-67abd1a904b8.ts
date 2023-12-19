@@ -1,11 +1,11 @@
 export default {
   entity: {
     id: '8e8e8674-3f37-438e-b4ce-67abd1a904b8',
-    name: '“四人帮”的爪牙反革命分子韩金海部分罪行材料',
+    name: '“四人帮”的爪牙反革命分子韩金海部分罪行材料（1977.11.15湖北）',
     internal: false,
     official: false,
     type: 'img',
-    author: '中共济南市委清查办',
+    author: '中共济南市委清查办，1977.11.15',
     files: new Array(13)
       .fill(0)
       .map(

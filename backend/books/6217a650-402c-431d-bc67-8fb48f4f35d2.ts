@@ -1,11 +1,11 @@
 export default {
   entity: {
     id: '6217a650-402c-431d-bc67-8fb48f4f35d2',
-    name: '邓小平言论摘录（续编）',
+    name: '邓小平言论摘录（续编）（1976.4）',
     internal: false,
     official: false,
     type: 'img',
-    author: '北京大学清华大学材料组',
+    author: '北京大学、清华大学材料组编，1976.4',
     files: new Array(17)
       .fill(0)
       .map(
@@ -21,21 +21,21 @@ export default {
     ext: '',
     articles: [
       {
-        title: '邓小平在万里同志向国务院汇报XX铁路局情况时的插话',
+        title: '邓小平在万里同志向国务院汇报××铁路局情况时的插话',
         authors: ['邓小平'],
         page_start: 3,
         page_end: 4,
         dates: [{ year: 1975, month: 3, day: 25 }],
       },
       {
-        title: '邓小平接见XXX、XXX同志时的谈话',
+        title: '邓小平接见×××、×××同志时的谈话',
         authors: ['邓小平'],
         page_start: 4,
         page_end: 6,
         dates: [{ year: 1975, month: 8, day: 6 }],
       },
       {
-        title: '邓小平通知XXX同志到XX省委工作时的谈话',
+        title: '邓小平通知×××同志到××省委工作时的谈话',
         authors: ['邓小平'],
         page_start: 6,
         page_end: 6,
@@ -49,7 +49,7 @@ export default {
         dates: [{ year: 1975, month: 9, day: 22 }],
       },
       {
-        title: '邓小平在研究XX省委领导班子会议上的讲话',
+        title: '邓小平在研究××省委领导班子会议上的讲话',
         authors: ['邓小平'],
         page_start: 7,
         page_end: 7,
@@ -70,7 +70,7 @@ export default {
         dates: [{ year: 1976, month: 3, day: 7 }],
       },
       {
-        title: 'XXX同志揭发的邓小平的言论',
+        title: '×××同志揭发的邓小平的言论',
         authors: [],
         page_start: 11,
         page_end: 12,

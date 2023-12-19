@@ -1,11 +1,11 @@
 export default {
   entity: {
     id: '5f0c1924-5126-4ec8-ae9a-19d74904fe14',
-    name: '辽宁省揭批“四人帮”、毛远新及其党羽、亲信反党罪行大会发言材料汇编',
+    name: '辽宁省揭批“四人帮”、毛远新及其党羽、亲信反党罪行大会发言材料汇编（1977.8.8辽宁）',
     internal: false,
     official: false,
     type: 'img',
-    author: '中共梁老师委揭批“四人帮“办公室',
+    author: '中共辽宁省委揭批“四人帮”办公室，1977.8.8',
     files: new Array(32)
       .fill(0)
       .map(

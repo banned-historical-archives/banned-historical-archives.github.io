@@ -1,11 +1,11 @@
 export default {
   entity: {
     id: '6d699b70-aefe-4ba5-b655-f61a181b8138',
-    name: '国际共运参考资料第4804期',
-    internal: false,
+    name: '国际共运参考资料第4804期（1972.6.26）',
+    internal: true,
     official: false,
     type: 'img',
-    author: '',
+    author: '1972.6.26',
     files: new Array(8)
       .fill(0)
       .map(

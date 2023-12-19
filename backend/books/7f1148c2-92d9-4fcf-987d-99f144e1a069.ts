@@ -3,9 +3,9 @@ export default {
     id: '7f1148c2-92d9-4fcf-987d-99f144e1a069',
     name: '红旗一九六五年第十一期',
     internal: false,
-    official: false,
+    official: true,
     type: 'pdf',
-    author: '',
+    author: '《红旗》杂志编辑部',
     files:
       'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives2/main/7f1148c2-92d9-4fcf-987d-99f144e1a069.pdf',
   },

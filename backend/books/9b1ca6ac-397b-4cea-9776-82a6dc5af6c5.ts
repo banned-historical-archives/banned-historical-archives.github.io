@@ -1,7 +1,7 @@
 export default {
   entity: {
     id: '9b1ca6ac-397b-4cea-9776-82a6dc5af6c5',
-    name: '关于工人队伍基本状况的调查',
+    name: '关于工人队伍基本状况的调查（1973.8上海）',
     internal: true,
     official: true,
     type: 'img',

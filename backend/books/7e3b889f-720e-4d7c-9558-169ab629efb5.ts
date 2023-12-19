@@ -3,9 +3,9 @@ export default {
     id: '7e3b889f-720e-4d7c-9558-169ab629efb5',
     name: '红旗一九六五年第二期',
     internal: false,
-    official: false,
+    official: true,
     type: 'pdf',
-    author: '',
+    author: '《红旗》杂志编辑部',
     files:
       'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives2/main/7e3b889f-720e-4d7c-9558-169ab629efb5.pdf',
   },

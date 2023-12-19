@@ -1,11 +1,11 @@
 export default {
   entity: {
     id: '7eee72e7-217b-4d9e-8951-a336870eac45',
-    name: '王张江姚言论集',
+    name: '王张江姚言论集（1976.12上海）',
     internal: false,
     official: false,
     type: 'img',
-    author: '',
+    author: '1976.12上海',
     files: new Array(18)
       .fill(0)
       .map(

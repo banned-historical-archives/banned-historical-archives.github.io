@@ -1,11 +1,11 @@
 export default {
   entity: {
     id: '6dd12d61-0852-49c9-9cb5-8e7e4b84db84',
-    name: '别赋',
+    name: '别赋（1975.9）',
     internal: false,
     official: false,
     type: 'img',
-    author: '',
+    author: '北京大学、清华大学大批判组注释组，1975.9',
     files: new Array(9)
       .fill(0)
       .map(

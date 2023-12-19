@@ -5,7 +5,7 @@ export default {
     internal: false,
     official: false,
     type: 'img',
-    author: '周荣鑫、李富春',
+    author: '周荣鑫、李富春，1966.10.9',
     files: new Array(2)
       .fill(0)
       .map(

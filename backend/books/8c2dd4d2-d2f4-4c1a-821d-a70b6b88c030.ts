@@ -1,11 +1,11 @@
 export default {
   entity: {
     id: '8c2dd4d2-d2f4-4c1a-821d-a70b6b88c030',
-    name: '深揭猛批“四人帮”斩断黑手朱鸿霞',
+    name: '深揭猛批“四人帮”斩断黑手朱鸿霞（1977湖北）',
     internal: false,
-    official: false,
+    official: true,
     type: 'img',
-    author: '',
+    author: '1977年湖北省农业学大寨会议典型材料',
     files: new Array(5)
       .fill(0)
       .map(
