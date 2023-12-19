@@ -5,7 +5,7 @@ export default {
     internal: true,
     official: true,
     type: 'pdf',
-    author: '',
+    author: '红色文献翻译2020年',
     files:
       'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives3/main/8a563ff2-adac-4454-a821-36ef7e584dd4.pdf',
   },

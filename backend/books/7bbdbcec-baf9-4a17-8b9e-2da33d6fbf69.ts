@@ -5,7 +5,7 @@ export default {
     internal: false,
     official: false,
     type: 'pdf',
-    author: '',
+    author: '周恩来',
     files:
       'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/7bbdbcec-baf9-4a17-8b9e-2da33d6fbf69.pdf',
   },

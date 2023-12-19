@@ -1,11 +1,11 @@
 export default {
   entity: {
     id: '6b090f57-85e8-4970-b7e4-c32d5bb91420',
-    name: '学习无产阶级专政理论的体会',
+    name: '学习无产阶级专政理论的体会（1975.2）',
     internal: false,
     official: false,
     type: 'img',
-    author: '',
+    author: '余制波，1975.2',
     files: new Array(14)
       .fill(0)
       .map(

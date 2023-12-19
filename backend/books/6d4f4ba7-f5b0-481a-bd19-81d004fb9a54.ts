@@ -1,11 +1,11 @@
 export default {
   entity: {
     id: '6d4f4ba7-f5b0-481a-bd19-81d004fb9a54',
-    name: '“四人帮”反党集团在文艺方面的反革命修正主义言论摘编',
+    name: '“四人帮”反党集团在文艺方面的反革命修正主义言论摘编（1976.12）',
     internal: false,
     official: false,
     type: 'img',
-    author: '',
+    author: '1976.12',
     files: new Array(16)
       .fill(0)
       .map(

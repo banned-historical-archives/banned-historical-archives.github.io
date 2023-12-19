@@ -3,9 +3,9 @@ export default {
     id: '5f2ee462-296f-4ad5-8bf1-51af26899a37',
     name: '红旗一九六五年第八期',
     internal: false,
-    official: false,
+    official: true,
     type: 'pdf',
-    author: '',
+    author: '《红旗》杂志编辑部',
     files:
       'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives2/main/5f2ee462-296f-4ad5-8bf1-51af26899a37.pdf',
   },

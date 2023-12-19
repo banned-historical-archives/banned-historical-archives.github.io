@@ -1,11 +1,11 @@
 export default {
   entity: {
     id: '6b5bdcdc-835f-4aed-946a-58af6167215c',
-    name: '打倒“四人帮”福建得解放——揭发王张江姚反党集团在福建阴谋篡党夺权的滔天罪行',
+    name: '打倒“四人帮”福建得解放——揭发王张江姚反党集团在福建阴谋篡党夺权的滔天罪行（1976.12福建）',
     internal: false,
     official: false,
     type: 'img',
-    author: '第二次全国农业学大寨会议秘书处',
+    author: '第二次全国农业学大寨会议秘书处，1976.12印',
     files: new Array(9)
       .fill(0)
       .map(

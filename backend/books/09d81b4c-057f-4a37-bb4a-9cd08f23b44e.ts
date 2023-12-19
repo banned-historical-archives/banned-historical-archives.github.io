@@ -3,9 +3,9 @@ export default {
     id: '09d81b4c-057f-4a37-bb4a-9cd08f23b44e',
     name: '红旗一九五八年第四期',
     internal: false,
-    official: false,
+    official: true,
     type: 'pdf',
-    author: '',
+    author: '《红旗》杂志编辑部',
     files:
       'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives2/main/09d81b4c-057f-4a37-bb4a-9cd08f23b44e.pdf',
   },

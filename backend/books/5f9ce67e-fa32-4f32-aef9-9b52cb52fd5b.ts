@@ -3,7 +3,7 @@ export default {
     id: '5f9ce67e-fa32-4f32-aef9-9b52cb52fd5b',
     name: '彻底揭发批判王张江姚反党集团发言材料汇编（七）',
     internal: false,
-    official: false,
+    official: true,
     type: 'img',
     author: '中共山东省委宣传部',
     files: new Array(19)

@@ -1,11 +1,11 @@
 export default {
   entity: {
     id: '6f46675c-df6e-49de-ad08-56be55cfba14',
-    name: '张春桥同志、姚文元同志在上海市革命委员会教卫小组座谈会上的讲话',
+    name: '张春桥姚文元在上海市革命委员会教卫小组座谈会上的讲话',
     internal: true,
     official: true,
     type: 'img',
-    author: '',
+    author: '1976.3',
     files:
       'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/6f46675c-df6e-49de-ad08-56be55cfba14/1.jpg,https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/6f46675c-df6e-49de-ad08-56be55cfba14/2.jpg',
   },
@@ -14,7 +14,8 @@ export default {
     ext: 'jpg',
     articles: [
       {
-        title: '张春桥、姚文元同志在上海市革命委员会教卫小组座谈会上的讲话',
+        title: '张春桥姚文元在上海市革命委员会教卫小组座谈会上的讲话',
+        alias: '张春桥、姚文元同志在上海市革命委员会教卫小组座谈会上的讲话',
         authors: ['张春桥', '姚文元'],
         page_start: 1,
         page_end: 2,
