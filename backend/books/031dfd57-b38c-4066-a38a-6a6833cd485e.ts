@@ -3,9 +3,9 @@ export default {
     id: '031dfd57-b38c-4066-a38a-6a6833cd485e',
     name: '红旗一九六四年第六期',
     internal: false,
-    official: false,
+    official: true,
     type: 'pdf',
-    author: '',
+    author: '《红旗》杂志编辑部',
     files:
       'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives2/main/031dfd57-b38c-4066-a38a-6a6833cd485e.pdf',
   },

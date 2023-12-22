@@ -5,7 +5,7 @@ export default {
     internal: false,
     official: false,
     type: 'img',
-    author: '',
+    author: '北京大学、清华大学大批判组文化部注释组',
     files: new Array(37)
       .fill(0)
       .map(

@@ -5,7 +5,7 @@ export default {
     internal: false,
     official: false,
     type: 'img',
-    author: '',
+    author: '张春桥，1976.2.3',
     files: new Array(1)
       .fill(0)
       .map(

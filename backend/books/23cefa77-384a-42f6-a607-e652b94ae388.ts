@@ -5,7 +5,7 @@ export default {
     internal: false,
     official: false,
     type: 'img',
-    author: '',
+    author: '杨坡兰，1974.2.17',
     files: new Array(9)
       .fill(0)
       .map(
@@ -21,7 +21,8 @@ export default {
     ext: '',
     articles: [
       {
-        title: '中共中央候补委员杨坡兰同志在省级机关全体干部职工大会上的报告',
+        title: '杨坡兰在省级机关全体干部职工大会上的报告',
+        alias: '中共中央候补委员杨坡兰同志在省级机关全体干部职工大会上的报告',
         authors: ['杨坡兰'],
         page_start: 1,
         page_end: 9,
