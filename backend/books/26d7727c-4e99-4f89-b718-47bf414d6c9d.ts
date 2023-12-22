@@ -5,7 +5,7 @@ export default {
     internal: false,
     official: false,
     type: 'img',
-    author: '北京大学清华大学材料组',
+    author: '北京大学、清华大学材料组',
     files: new Array(20)
       .fill(0)
       .map(
@@ -22,7 +22,7 @@ export default {
     articles: [
       {
         title: '邓小平反对以毛主席为首的党中央，反对马列主义、毛泽东思想',
-        authors: ['北京大学清华大学材料组'],
+        authors: ['北京大学材料组', '清华大学材料组'],
         page_start: 3,
         page_end: 5,
         dates: [{ year: 1976, month: 5 }],

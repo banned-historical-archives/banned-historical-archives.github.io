@@ -1,11 +1,11 @@
 export default {
   entity: {
     id: '37d27b52-129f-4f48-b39f-ed3a6cc67bd8',
-    name: '石敬野同志讲话',
+    name: '石敬野同志讲话（1976.10.27）',
     internal: false,
     official: false,
     type: 'img',
-    author: '',
+    author: '石敬野，1976.10.27',
     files: new Array(2)
       .fill(0)
       .map(

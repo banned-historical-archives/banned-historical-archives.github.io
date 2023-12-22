@@ -1,11 +1,11 @@
 export default {
   entity: {
     id: '28ab47bd-97ee-4f1f-8536-26ad2c157500',
-    name: '斩断“四人帮”伸进福建的魔爪——陈佳忠、郑重的罪行录',
+    name: '斩断“四人帮”伸进福建的魔爪——陈佳忠、郑重的罪行录（1976.12福建）',
     internal: false,
-    official: false,
+    official: true,
     type: 'img',
-    author: '中共福建省委党校大批判材料组',
+    author: '中共福建省委党校大批判材料组，1976.12',
     files: new Array(23)
       .fill(0)
       .map(

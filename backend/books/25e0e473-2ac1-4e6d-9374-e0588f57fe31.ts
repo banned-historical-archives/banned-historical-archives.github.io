@@ -1,11 +1,11 @@
 export default {
   entity: {
     id: '25e0e473-2ac1-4e6d-9374-e0588f57fe31',
-    name: '王竹泉同志讲话',
+    name: '王竹泉同志讲话（1968山东）',
     internal: false,
     official: false,
     type: 'img',
-    author: '',
+    author: '王竹泉，时间约为1968',
     files: new Array(3)
       .fill(0)
       .map(

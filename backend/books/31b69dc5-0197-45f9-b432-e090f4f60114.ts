@@ -1,7 +1,7 @@
 export default {
   entity: {
     id: '31b69dc5-0197-45f9-b432-e090f4f60114',
-    name: '中央首长在北京市革命委员会常委扩大会议上的重要讲话',
+    name: '中央首长在北京市革命委员会常委扩大会议上的重要讲话（1976.9.1）',
     internal: true,
     official: false,
     type: 'img',

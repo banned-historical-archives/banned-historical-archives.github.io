@@ -1,11 +1,11 @@
 export default {
   entity: {
     id: '39adb7a3-a162-470a-8446-326f5b111c17',
-    name: '哈尔滨市学习毛主席重要指示批邓、反击右倾翻案风经验交流会翻印材料',
+    name: '一九七五年十月六日胡乔木同志的谈话（1975.10.6）',
     internal: false,
     official: false,
     type: 'img',
-    author: '',
+    author: '哈尔滨市学习毛主席重要指示批邓、反击右倾翻案风经验交流会翻印材料',
     files: new Array(6)
       .fill(0)
       .map(

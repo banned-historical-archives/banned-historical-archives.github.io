@@ -1,7 +1,7 @@
 export default {
   entity: {
     id: '24ce30a0-4265-4ad5-8743-fc952385a77b',
-    name: '陈锡联同志在沈阳三派革命群众组织代表座谈会上的讲话（1968.4.7）',
+    name: '陈锡联同志在沈阳三派革命群众组织代表座谈会上的讲话（1968.4.7辽宁）',
     internal: true,
     official: false,
     type: 'img',

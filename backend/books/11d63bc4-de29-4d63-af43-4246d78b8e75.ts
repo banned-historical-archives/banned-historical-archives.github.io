@@ -5,7 +5,7 @@ export default {
     internal: false,
     official: true,
     type: 'pdf',
-    author: '康生、谢富治',
+    author: '康生、谢富治，1967.8.11',
     files:
       'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives1/main/11d63bc4-de29-4d63-af43-4246d78b8e75.pdf',
   },

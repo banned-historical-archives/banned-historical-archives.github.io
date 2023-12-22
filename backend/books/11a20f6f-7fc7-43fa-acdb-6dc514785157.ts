@@ -5,7 +5,7 @@ export default {
     internal: true,
     official: true,
     type: 'pdf',
-    author: '',
+    author: '印度共产党（毛主义）中央委员会，棱镜杂志社2020.10出版',
     files:
       'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives3/main/11a20f6f-7fc7-43fa-acdb-6dc514785157.pdf',
   },
