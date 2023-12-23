@@ -5,7 +5,7 @@ export default {
     internal: true,
     official: true,
     type: 'pdf',
-    author: '',
+    author: '南开大学1976年版',
     files:
       'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives3/main/86b9ca9f-61be-4a2e-b545-8bfb7c6fe4ac.pdf',
   },

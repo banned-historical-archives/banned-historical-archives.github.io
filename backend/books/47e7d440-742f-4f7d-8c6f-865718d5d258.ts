@@ -1,7 +1,7 @@
 export default {
   entity: {
     id: '47e7d440-742f-4f7d-8c6f-865718d5d258',
-    name: '情况交流（11）',
+    name: '情况交流（11）（1969.8.6浙江）',
     internal: false,
     official: false,
     type: 'img',

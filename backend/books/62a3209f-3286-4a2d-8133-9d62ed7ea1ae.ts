@@ -1,11 +1,11 @@
 export default {
   entity: {
     id: '62a3209f-3286-4a2d-8133-9d62ed7ea1ae',
-    name: '王、张、江、姚“四人帮”篡党夺权的反革命罪行在我省的流毒和影响',
+    name: '王、张、江、姚“四人帮”篡党夺权的反革命罪行在我省的流毒和影响（1977.3四川）',
     internal: false,
     official: false,
     type: 'img',
-    author: '中共四川省委政策研究室编',
+    author: '中共四川省委政策研究室编，1977.4四川',
     files: new Array(24)
       .fill(0)
       .map(

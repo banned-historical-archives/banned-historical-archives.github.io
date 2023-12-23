@@ -2,7 +2,7 @@ export default {
   entity: {
     id: '79da64b8-3433-4da6-9e03-61863d278909',
     name: '毛泽东选集第三卷（人民出版社1991年版）',
-    internal: true,
+    internal: false,
     official: true,
     type: 'pdf',
     author: '',

@@ -1,11 +1,11 @@
 export default {
   entity: {
     id: '83d2eeb1-95b0-406a-824a-5bf9f1bb1398',
-    name: '切实加强领导，放手发动群众，打好揭批“四人帮”的第三个战役——在中国科学院揭批“四人帮”第三战役动员大会上的讲话',
+    name: '切实加强领导，放手发动群众，打好揭批“四人帮”的第三个战役——在中国科学院揭批“四人帮”第三战役动员大会上的讲话（1977.11.20）',
     internal: false,
-    official: false,
+    official: true,
     type: 'img',
-    author: '',
+    author: '中国科学院',
     files: new Array(12)
       .fill(0)
       .map(

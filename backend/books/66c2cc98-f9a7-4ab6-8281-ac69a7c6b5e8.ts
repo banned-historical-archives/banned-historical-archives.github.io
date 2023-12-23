@@ -5,7 +5,7 @@ export default {
     internal: true,
     official: true,
     type: 'pdf',
-    author: '',
+    author: '夏尔·贝特兰，中国文化传播出版社2009年8月版',
     files:
       'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives3/main/66c2cc98-f9a7-4ab6-8281-ac69a7c6b5e8.pdf',
   },
