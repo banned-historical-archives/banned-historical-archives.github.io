@@ -1,11 +1,11 @@
 export default {
   entity: {
     id: '79aaa01d-9de9-4d16-bb7f-641d78d0edd6',
-    name: '“四人帮”死党毛远新在鞍山的主要罪行',
+    name: '“四人帮”死党毛远新在鞍山的主要罪行（1977.1辽宁）',
     internal: false,
-    official: false,
+    official: true,
     type: 'img',
-    author: '',
+    author: '中共鞍山市委清查王张江姚反党集团罪行小组办公室，1977.1辽宁',
     files: new Array(13)
       .fill(0)
       .map(

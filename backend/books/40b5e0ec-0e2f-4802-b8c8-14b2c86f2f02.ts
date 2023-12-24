@@ -1,11 +1,11 @@
 export default {
   entity: {
     id: '40b5e0ec-0e2f-4802-b8c8-14b2c86f2f02',
-    name: '“四人帮”死党毛远新在辽宁的主要罪行',
+    name: '“四人帮”死党毛远新在辽宁的主要罪行（1976.12辽宁）',
     internal: false,
-    official: false,
+    official: true,
     type: 'img',
-    author: '',
+    author: '1976.12辽宁',
     files: new Array(16)
       .fill(0)
       .map(

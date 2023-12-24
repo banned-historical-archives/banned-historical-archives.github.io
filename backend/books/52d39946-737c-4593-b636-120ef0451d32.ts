@@ -1,11 +1,11 @@
 export default {
   entity: {
     id: '52d39946-737c-4593-b636-120ef0451d32',
-    name: '愤怒控诉“四人帮”在仙游犯下的滔天罪行',
+    name: '愤怒控诉“四人帮”在仙游犯下的滔天罪行（1976.12.1福建）',
     internal: false,
     official: false,
     type: 'img',
-    author: '第二次全国农业学大寨会议秘书处',
+    author: '第二次全国农业学大寨会议秘书处，1976.12.1福建',
     files: new Array(9)
       .fill(0)
       .map(

@@ -1,11 +1,11 @@
 export default {
   entity: {
     id: '42cdc3c3-bd66-48d9-8298-c608c2b9e8e7',
-    name: '王知常的反革命修正主义言论',
+    name: '王知常的反革命修正主义言论（1976.12）',
     internal: false,
-    official: false,
+    official: true,
     type: 'img',
-    author: '',
+    author: '1976.12',
     files: new Array(10)
       .fill(0)
       .map(

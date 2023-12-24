@@ -1,11 +1,11 @@
 export default {
   entity: {
     id: '89e1627b-5c19-4b37-bcad-67852bf3164a',
-    name: '蒋科大罪证材料',
+    name: '蒋科大罪证材料（1979.2江苏）',
     internal: false,
     official: false,
     type: 'img',
-    author: '中共江苏省委材料组',
+    author: '中共江苏省委材料组，1978.11整理，1979.2印发',
     files: new Array(63)
       .fill(0)
       .map(

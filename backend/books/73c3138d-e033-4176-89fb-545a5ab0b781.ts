@@ -3,9 +3,9 @@ export default {
     id: '73c3138d-e033-4176-89fb-545a5ab0b781',
     name: '红旗一九六五年第十二期',
     internal: false,
-    official: false,
+    official: true,
     type: 'pdf',
-    author: '',
+    author: '《红旗》杂志编辑部',
     files:
       'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives2/main/73c3138d-e033-4176-89fb-545a5ab0b781.pdf',
   },

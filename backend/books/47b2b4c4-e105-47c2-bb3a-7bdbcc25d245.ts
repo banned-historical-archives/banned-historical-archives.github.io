@@ -1,11 +1,11 @@
 export default {
   entity: {
     id: '47b2b4c4-e105-47c2-bb3a-7bdbcc25d245',
-    name: '杨春甫同志在全省外贸工作会议上的讲话',
+    name: '杨春甫同志在全省外贸工作会议上的讲话（1971.12.10辽宁）',
     internal: false,
     official: false,
     type: 'img',
-    author: '',
+    author: '杨春甫，1971.12.10辽宁',
     files: new Array(11)
       .fill(0)
       .map(
