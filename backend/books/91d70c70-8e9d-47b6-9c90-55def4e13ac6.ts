@@ -1,11 +1,11 @@
 export default {
   entity: {
     id: '91d70c70-8e9d-47b6-9c90-55def4e13ac6',
-    name: '深入开展路线对比认真解决好打砸抢问题',
+    name: '深入开展路线对比认真解决好打砸抢问题（文件〔1978〕京40号）（1978.12.8北京）',
     internal: false,
     official: false,
     type: 'img',
-    author: '',
+    author: '铁道部北京铁路局政治部，1978.12.8',
     files: new Array(8)
       .fill(0)
       .map(
