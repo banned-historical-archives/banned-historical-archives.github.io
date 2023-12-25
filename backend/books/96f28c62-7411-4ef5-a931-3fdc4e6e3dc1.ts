@@ -1,11 +1,11 @@
 export default {
   entity: {
     id: '96f28c62-7411-4ef5-a931-3fdc4e6e3dc1',
-    name: '“初澜”资料选编',
+    name: '“初澜”资料选编（1977.6-7）',
     internal: false,
     official: false,
     type: 'img',
-    author: '文化部批判组',
+    author: '文化部批判组，1977.6-7',
     files: new Array(54)
       .fill(0)
       .map(

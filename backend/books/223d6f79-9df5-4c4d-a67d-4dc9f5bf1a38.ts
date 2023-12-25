@@ -1,11 +1,11 @@
 export default {
   entity: {
     id: '223d6f79-9df5-4c4d-a67d-4dc9f5bf1a38',
-    name: '刘正良的揭发交代和检查',
+    name: '刘正良的揭发交代和检查（1977.3湖南）',
     internal: false,
     official: false,
     type: 'img',
-    author: '',
+    author: '刘正良，1977.3',
     files: new Array(13)
       .fill(0)
       .map(

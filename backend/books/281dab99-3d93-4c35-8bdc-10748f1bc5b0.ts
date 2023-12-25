@@ -1,11 +1,11 @@
 export default {
   entity: {
     id: '281dab99-3d93-4c35-8bdc-10748f1bc5b0',
-    name: '张铁生一九七六年二月三日在清华大学的讲话',
+    name: '张铁生一九七六年二月三日在清华大学的讲话（1976.12）',
     internal: false,
     official: false,
     type: 'img',
-    author: '',
+    author: '张铁生，1976.12',
     files: new Array(8)
       .fill(0)
       .map(

@@ -1,11 +1,11 @@
 export default {
   entity: {
     id: '167c1c48-45d0-4a35-8c61-c4283330c246',
-    name: '财贸情况第十八期',
+    name: '财贸情况第十八期（1976.4.6辽宁）',
     internal: false,
     official: false,
     type: 'img',
-    author: '辽宁省委革命委员会财贸组',
+    author: '辽宁省委革命委员会财贸组，1976.4.6',
     files: new Array(8)
       .fill(0)
       .map(

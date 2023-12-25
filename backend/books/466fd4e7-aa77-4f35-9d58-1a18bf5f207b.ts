@@ -1,11 +1,11 @@
 export default {
   entity: {
     id: '466fd4e7-aa77-4f35-9d58-1a18bf5f207b',
-    name: '长沙市深入揭发批判“四人帮”滔天罪行大会材料',
+    name: '长沙市深入揭发批判“四人帮”滔天罪行大会材料（1977.7.22湖南）',
     internal: false,
     official: false,
     type: 'img',
-    author: '中共长沙市委办公室',
+    author: '中共长沙市委办公室，1977.7.22',
     files: new Array(28)
       .fill(0)
       .map(
