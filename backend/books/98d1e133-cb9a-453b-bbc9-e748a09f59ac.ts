@@ -1,11 +1,11 @@
 export default {
   entity: {
     id: '98d1e133-cb9a-453b-bbc9-e748a09f59ac',
-    name: '国际问题资料第20期',
+    name: '国际问题资料第20期（1976.6.20上海）',
     internal: false,
     official: false,
     type: 'img',
-    author: '上海《国际问题资料》编辑组',
+    author: '上海《国际问题资料》编辑组，1976.6.20',
     files: new Array(12)
       .fill(0)
       .map(

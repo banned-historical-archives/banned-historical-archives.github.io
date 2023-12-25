@@ -1,11 +1,11 @@
 export default {
   entity: {
     id: '496fc2fe-c2fe-440b-9546-cd53d287347f',
-    name: '姚文元反动言论摘录',
+    name: '姚文元反动言论摘录（1978.3）',
     internal: false,
     official: false,
     type: 'img',
-    author: '红旗杂志社材料组',
+    author: '红旗杂志社材料组编，1978.3',
     files: new Array(11)
       .fill(0)
       .map(

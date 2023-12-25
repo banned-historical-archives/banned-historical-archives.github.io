@@ -1,11 +1,11 @@
 export default {
   entity: {
     id: '315e44af-8bfb-407f-ae8a-5f36bc1ae784',
-    name: '朱永嘉的反革命修正主义言论',
+    name: '朱永嘉的反革命修正主义言论（1976.12）',
     internal: false,
     official: false,
     type: 'img',
-    author: '',
+    author: '朱永嘉，1976.12',
     files: new Array(19)
       .fill(0)
       .map(
