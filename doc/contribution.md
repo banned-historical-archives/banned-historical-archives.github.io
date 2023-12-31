@@ -4,15 +4,7 @@
 ### a.安装依赖并创建数据库
 依赖： docker, nodejs, mysql
 
-数据库 charset 需要设为 utf8_general_ci
-创建数据库时可以参考以下默认配置，当然也可以通过环境变量修改这些参数
-```
-  host: process.env.CI ? 'mysql' : 'localhost',
-  port: parseInt(process.env.DB_PORT || '3306'),
-  username: process.env.DB_USER || 'root',
-  password: process.env.DB_PASSWORD || 'root_password',
-  database: process.env.DB_NAME || 'banned_history',
-```
+docker run --name bha -e MYSQL_ROOT_PASSWORD=bha -e MYSQL_DATABASE=bha -p3307:3306 -d mysql:8 --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
 
 ### b.安装 node_modules
 ```

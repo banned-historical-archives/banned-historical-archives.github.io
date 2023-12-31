@@ -270,7 +270,9 @@ import { extract_dates } from './parser/utils';
     ["fcdc4d9bbf","96cdc4a4-0b09-4d57-8277-6dbcbcf6e4e0"],
     ["fe8bab5ccd","d36737e2-811c-4b1d-9c2c-8889eade960c"]
     ];
+    /*
   for (const x of patch_all) {
+
     const book = books.find((i) => i.entity.id === x[1])!;
 
     // for (const i of await book.parser(book.path, book.parser_option)) {
@@ -283,5 +285,13 @@ import { extract_dates } from './parser/utils';
       debugger;
     }
   }
+  */
+
+ for(const book of books) {
+  if (book.parser_option?.ocr?.extract_text_from_pdf) {
+    const p =join(__dirname, `./ocr_cache/${book.entity.id}`)
+    fs.rmSync(p, {recursive: true, force: true})
+  }
+ }
   debugger;
 })();
