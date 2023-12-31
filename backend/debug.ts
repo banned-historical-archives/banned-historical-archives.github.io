@@ -276,8 +276,12 @@ import { extract_dates } from './parser/utils';
     // for (const i of await book.parser(book.path, book.parser_option)) {
     //   console.log(get_article_id(i));
     // }
-    const t = await book.parser(book.path, book.parser_option);
-    console.log(t);
-    debugger;
+    try {
+      const t = await book.parser(book.path, book.parser_option);
+      console.log(t);
+    } catch (e) {
+      debugger;
+    }
   }
+  debugger;
 })();

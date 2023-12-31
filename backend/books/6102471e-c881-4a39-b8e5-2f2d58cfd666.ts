@@ -30,7 +30,6 @@ export default {
       },
     ],
     ocr: undefined,
-    pdf_no_ocr: false,
     ocr_exceptions: {},
   },
   parser_id: 'automation',

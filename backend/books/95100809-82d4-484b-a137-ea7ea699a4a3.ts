@@ -160,7 +160,6 @@ export default {
       },
     ],
     ocr: { content_thresholds: [0, 0.017, 0, 0.2] },
-    pdf_no_ocr: false,
     ocr_exceptions: {},
   },
   parser_id: 'automation',

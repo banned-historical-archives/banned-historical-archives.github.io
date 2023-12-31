@@ -21,8 +21,9 @@ export default {
         dates: [{ year: 2006 }],
       },
     ],
-    ocr: undefined,
-    pdf_no_ocr: true,
+    ocr: {
+      extract_text_from_pdf: true,
+    },
     ocr_exceptions: {},
   },
   parser_id: 'automation',

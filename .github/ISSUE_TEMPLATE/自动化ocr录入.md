@@ -53,8 +53,8 @@ assignees: ''
       },
     } // 默认为空
   }],
-  pdf_no_ocr: false, // 默认为false，如果pdf已经有文本信息就可以设置为true跳过OCR
   ocr: { // ocr 参数 以及 默认参数
+    extract_text_from_pdf: false, // 默认为false，如果pdf已经有文本信息就可以设置为true跳过OCR
     rec_model: 'ch_ppocr_mobile_v2.0',
     rec_backend: 'onnx',
     det_model: 'ch_PP-OCRv3_det',

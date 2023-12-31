@@ -302,6 +302,7 @@ export type OCRParameterLegacy = {
 };
 
 export type OCRParameterAdvanced = {
+  extract_text_from_pdf: boolean;
   line_merge_threshold: number; // 单位像素，如果小于这个阈值将被视为同一行
   standard_paragraph_merge_strategy_threshold: number; // 标准段落合并策略，超过 threshold * width 的表示新段落，否则向上合并
   differential_paragraph_merge_strategy_threshold: number; // 差分段落合并策略，x[i] - x[i-1] > threshold 的表示新段落，否则向上合并，单位像素

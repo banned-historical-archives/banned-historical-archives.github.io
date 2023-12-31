@@ -125,7 +125,7 @@ export async function parse(
         ocr_results: OCRResult[];
         dimensions: { width: number; height: number };
       };
-      if (parser_opt.pdf_no_ocr && parser_opt.ext == 'pdf') {
+      if (parser_opt.ocr?.extract_text_from_pdf && parser_opt.ext == 'pdf') {
         const doc = await pdfjsLib.getDocument({
           url: dirPathOrFilePath,
           cMapPacked: true,

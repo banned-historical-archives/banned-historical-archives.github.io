@@ -64,9 +64,6 @@ export async function start() {
       config.id = id;
       config.archive_id =
         config.archive_id == undefined ? 1 : config.archive_id;
-      if (config.pdf_no_ocr) {
-        config.archive_id = 9;
-      }
       const imgsOrPDFs = Array.from(body.matchAll(/\[.*?\]\(http.*?\)/g)).map(
         (i) => (i as any)[0].replace(/^.*\(/, '').replace(/\)/, ''),
       );
@@ -113,7 +110,6 @@ export async function start() {
     ext: '${config.ext}',
     articles: ${JSON.stringify(config.articles)},
     ocr: ${JSON.stringify(config.ocr)},
-    pdf_no_ocr: ${JSON.stringify(!!config.pdf_no_ocr)},
     ocr_exceptions: ${JSON.stringify(config.ocr_exceptions || {})},
   },
   parser_id: 'automation',

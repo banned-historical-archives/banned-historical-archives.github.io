@@ -14,8 +14,6 @@
   database: process.env.DB_NAME || 'banned_history',
 ```
 
-如需运行OCR，依赖: python3.x, cnocr 2.2
-
 ### b.安装 node_modules
 ```
 npm install
@@ -33,27 +31,3 @@ npm run init-db
 ```
 npm run dev
 ```
-### f.调试 OCR
-```
-$ npm run dev
-// 如果是 windows 使用 npx next dev
-
-$ npm run dev:ocr-server
-```
-打开 localhost:3000/ocr 并输入图片地址和页码范围，等待几秒钟就能看到 OCR 识别结果。
-
-### OCR参数
-在parser中调用OCR时可以修改如下参数，
-默认参数为：
-```
-  rec_model = 'ch_ppocr_mobile_v2.0',
-  rec_backend = 'onnx',
-  det_model = 'ch_PP-OCRv3_det',
-  det_backend = 'onnx',
-  resized_shape = 1496,
-  box_score_thresh = 0.3,
-  min_box_size = 10,
-  cache = true,
-```
-也可以使用cnocr的在线页面调试
-https://huggingface.co/spaces/breezedeus/cnocr
