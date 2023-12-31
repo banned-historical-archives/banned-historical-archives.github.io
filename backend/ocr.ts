@@ -7,6 +7,7 @@ import { sleep } from '../utils';
 import pdf2image from './pdf2image';
 import { normalize } from './utils';
 import sizeOf from 'image-size';
+import { tmpdir } from 'node:os';
 
 /**
  * db shufflenet v2 py
@@ -55,10 +56,13 @@ export default async function ocr({
     ? await pdf2image({ pdf_path: abs_target_path, page: page! - 1 })
     : abs_target_path;
   const dimensions = sizeOf(abs_ocr_target);
-  const ocr_command = `python ocr.py "${JSON.stringify({
+
+  const tmp_file = join(tmpdir(), Math.random().toString());
+  await fs.writeFile(tmp_file, JSON.stringify({
     ...params,
     image_dir: abs_ocr_target,
-  }).replace(/"/g, '\"')}"`;
+  }));
+  const ocr_command = `python3 ocr.py ${tmp_file}`;
   const raw = execSync(ocr_command, {
     cwd: process.env.OCR_EXEC_PATH!,
   }).toString();

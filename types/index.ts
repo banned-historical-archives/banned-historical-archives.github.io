@@ -343,8 +343,8 @@ export type CommentDiff = {
 
 export type PatchV2 = {
   version: 2;
-  parts: { [idx: string]: PartDiff };
-  comments: { [idx: string]: CommentDiff };
-  newComments?: string[];
+  parts: { [idx: string]: PartDiff }; // text中包含注释
+  comments: { [idx: string]: CommentDiff }; // 从非空注释状态下提交的变更
+  newComments?: string[]; // 从空注释状态下提交的变更
   description?: StringDiff; // 如果为空字符串表示无变更，如果不存在，表示删除
 };

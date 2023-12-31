@@ -152,6 +152,7 @@ export default {
       content_thresholds: [0.054, 0, 0, 0],
     },
     ocr_exceptions: {},
+    pdf_no_ocr: true,
   },
   parser_id: 'automation',
   path: '/archives3/59a773b1-be74-4412-8da3-23d7458f998d.pdf',

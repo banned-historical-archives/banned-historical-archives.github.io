@@ -204,6 +204,7 @@ export default {
       content_thresholds: [0.054, 0, 0, 0],
     },
     ocr_exceptions: {},
+    pdf_no_ocr: true,
   },
   parser_id: 'automation',
   path: '/archives3/47db5441-00d4-4901-ab0f-99d36ae4555b.pdf',

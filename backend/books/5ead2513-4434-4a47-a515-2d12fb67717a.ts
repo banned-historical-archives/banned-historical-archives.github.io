@@ -128,6 +128,7 @@ export default {
       content_thresholds: [0.054, 0, 0, 0],
     },
     ocr_exceptions: {},
+    pdf_no_ocr: true,
   },
   parser_id: 'automation',
   path: '/archives3/5ead2513-4434-4a47-a515-2d12fb67717a.pdf',

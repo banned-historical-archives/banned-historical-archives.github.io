@@ -267,6 +267,7 @@ export default {
         dates: [{ year: 2011, month: 6, day: 24 }],
       },
     ],
+    pdf_no_ocr: true,
     ocr: {
       standard_paragraph_merge_strategy_threshold: 0.186,
       differential_paragraph_merge_strategy_threshold: 0,

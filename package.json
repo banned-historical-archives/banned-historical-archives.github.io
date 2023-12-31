@@ -44,6 +44,7 @@
     "dotenv": "^16.0.3",
     "epub": "^1.2.1",
     "express": "^4.18.1",
+    "fast-xml-parser": "^4.3.2",
     "fs-extra": "^10.1.0",
     "iconv-lite": "^0.6.3",
     "image-size": "^1.0.2",

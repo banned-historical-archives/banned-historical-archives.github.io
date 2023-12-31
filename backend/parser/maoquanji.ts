@@ -298,6 +298,24 @@ export async function parse(
       const origin = await ocr({
         pdf: pdf_path,
         page,
+        params: {
+    "det_db_box_thresh": 0.2,
+    'use_gpu': true,
+    'gpu_mem': 7000,
+    'rec_model_dir': "./paddle/ch_PP-OCRv4_rec_infer",
+    'det_model_dir': "./paddle/ch_PP-OCRv4_det_infer",
+
+    det_limit_side_len: 2496,
+    drop_score: 0.3,
+
+    content_thresholds: [0.0, 0.0, 0.0, 0.0],
+    line_merge_threshold: 30,
+    standard_paragraph_merge_strategy_threshold: 0,
+    differential_paragraph_merge_strategy_threshold: 30,
+    auto_vsplit: true,
+    vsplit: 0.5,
+    ...parser_opt.ocr,
+        },
         cache_path: join(
           normalize(__dirname),
           `../ocr_cache/maoquanji${basename(pdf_path).replace(
@@ -306,6 +324,7 @@ export async function parse(
           )}/${page}.json`,
         ),
       });
+      continue
       const needsResize =
         origin.dimensions.height < 1500 && parseInt(volume) < 27;
       const ocrResults = origin.ocr_results
@@ -442,6 +461,8 @@ export async function parse(
       }
     }
   }
+
+  return [];
 
   consume_catalog_candidates();
 
