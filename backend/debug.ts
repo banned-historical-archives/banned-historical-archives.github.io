@@ -20,7 +20,7 @@ import { extract_dates } from './parser/utils';
   const books = await get_books();
   for (const book of books) {
     if (!book.entity.id?.startsWith('maoquanji')) continue;
-    if (parseInt(book.entity.id?.replace('maoquanji', '')) < 38) continue;
+    if (parseInt(book.entity.id?.replace('maoquanji', '')) < 52) continue;
     console.log(book.entity.id);
     const t = await book.parser(book.path, book.parser_option);
     console.log(t, book.entity.id);

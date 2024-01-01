@@ -41,8 +41,9 @@ function extract_parts(
     /^：?[(（]?\d+年/.test(i.text),
   );
 
-  if (date_idx == -1 || date_idx > 4) {
-    debugger;
+  if ((date_idx == -1 || date_idx > 4) && raw[0].page > 230) {
+    // console.log(raw[0].page)
+    // debugger;
   }
 
   const title =
@@ -171,16 +172,17 @@ export async function parse(
       34: new Set([31, 34, 202, 35,36,37]),
       37: new Set([294]),
       40: new Set([438]),
-      41: new Set([472]),
-      42: new Set([251]),
-      43: new Set([260]),
-      44: new Set([169, 533]),
-      47: new Set([272]),
-      48: new Set([112, 339]),
+      41: new Set([472, 169]),
+      42: new Set([251,354,487, 163]),
+      43: new Set([260, 191, 372]),
+      44: new Set([169,71, 533,451]),
+      45: new Set([335,336]),
+      47: new Set([272,178]),
+      48: new Set([112, 339,310,330,331,332,333,334,335]),
       49: new Set([270]),
-      50: new Set([189, 272]),
+      50: new Set([189, 272,154]),
       51: new Set([50, 173]),
-      52: new Set([275, 317]),
+      52: new Set([275, 317, 238,236, 240, 241, 271]),
     },
   };
 
@@ -264,7 +266,7 @@ export async function parse(
       }
       let j = i;
       let title = '';
-      while (!/^（\d/.test(catalog_candidates[j])) {
+      while (!/^[（\(]\d/.test(catalog_candidates[j])) {
         title += catalog_candidates[j];
         ++j;
       }
@@ -343,80 +345,6 @@ export async function parse(
           })
           .filter((i) => i);
         catalog_candidates.push(...catalogs_raw);
-        // 34卷目录22页缺失（对应原书12页）
-        if (volume === '34' && page == 21) {
-          consume_catalog_candidates();
-          catalogs.push(
-            ...[
-              {
-                title: '祝贺捷克斯洛伐克总统萨波托斯基七十寿辰的电报',
-                dates: [{ year: 1954, month: 12, day: 16 }],
-                is_range_date: false,
-              },
-              {
-                title: '给黄炎培的信',
-                dates: [{ year: 1954, month: 12, day: 17 }],
-                is_range_date: false,
-              },
-              {
-                title: '给章士钊的信',
-                dates: [{ year: 1954, month: 12, day: 17 }],
-                is_range_date: false,
-              },
-              {
-                title: '给毛泽荣的信',
-                dates: [{ year: 1954, month: 12, day: 18 }],
-                is_range_date: false,
-              },
-              {
-                title: '给郭耿光的信',
-                dates: [{ year: 1954, month: 12, day: 18 }],
-                is_range_date: false,
-              },
-              {
-                title: '关于政协的性质和任务的谈话提纲',
-                dates: [{ year: 1954, month: 12, day: 19 }],
-                is_range_date: false,
-              },
-              {
-                title: '关于政协的性质和任务',
-                dates: [{ year: 1954, month: 12, day: 19 }],
-                is_range_date: false,
-              },
-              {
-                title: '给李济深的信',
-                dates: [{ year: 1954, month: 12, day: 24 }],
-                is_range_date: false,
-              },
-              {
-                title: '给李达的信',
-                dates: [{ year: 1954, month: 12, day: 28 }],
-                is_range_date: false,
-              },
-              {
-                title: '对韶山全体农民来信的批语和复信',
-                dates: [{ year: 1954, month: 12 }],
-                is_range_date: false,
-              },
-              {
-                title:
-                  '对中央农村工作部关于全国第四次互助合作会议的报告的批语和修改',
-                dates: [{ year: 1954, month: 12, day: 30 }],
-                is_range_date: false,
-              },
-              {
-                title: '关于阅看冯雪峰的诗和寓言的批语',
-                dates: [{ year: 1954, month: 12, day: 31 }],
-                is_range_date: false,
-              },
-              {
-                title: '毛泽东、周恩来祝贺越南政府还都河内的电报',
-                dates: [{ year: 1954, month: 12, day: 31 }],
-                is_range_date: false,
-              },
-            ],
-          );
-        }
       } else {
         if (!ocrResults.length) continue;
         if (ocrResults[0].text.startsWith('附录')) {
@@ -448,13 +376,13 @@ export async function parse(
   consume_catalog_candidates();
 
   // console.log(catalogs, articles_raw);
-  // console.log(
-  //   articles_raw
-  //     .map((i) => [i[0].ocr_results[0].text, i[0].page])
-  //     .map(
-  //       (i, idx) => i[0] + '##' + i[1] + ' ## ' + (catalogs[idx] || {}).title,
-  //     ),
-  // );
+  console.log(
+    articles_raw
+      .map((i) => [i[0].ocr_results[0].text, i[0].page])
+      .map(
+        (i, idx) => i[0] + '##' + i[1] + ' ## ' + (catalogs[idx] || {}).title,
+      ),
+  );
 
   const articles_parts = articles_raw.map((i) => extract_parts(i));
   return articles_parts.map((i, idx) => ({
