@@ -18,6 +18,19 @@ import { extract_dates } from './parser/utils';
 (async () => {
   const ds = await init();
   const books = await get_books();
+  for (const book of books) {
+    if (!book.entity.id?.startsWith('maoquanji')) continue;
+    if (parseInt(book.entity.id?.replace('maoquanji', '')) < 27) continue;
+    console.log(book.entity.id);
+    try {
+      const t = await book.parser(book.path, book.parser_option);
+      console.log(t);
+    } catch (e) {
+      debugger;
+    }
+  }
+  debugger;
+  return;
   const patch_all = [
     ["00540b9d04","72d4fe45-d0bf-4ce4-afc9-ba7c7ddc6f38"],
     ["012898eef6","c21f8808-2334-4e60-a047-27a52e8adbce"],
@@ -287,6 +300,7 @@ import { extract_dates } from './parser/utils';
   }
   */
 
+  /*
  for(const book of books) {
   if (book.parser_option?.ocr?.extract_text_from_pdf) {
     const p =join(__dirname, `./ocr_cache/${book.entity.id}`)
@@ -294,5 +308,6 @@ import { extract_dates } from './parser/utils';
     fs.rmSync(p, {recursive: true, force: true})
   }
  }
+ */
   debugger;
 })();

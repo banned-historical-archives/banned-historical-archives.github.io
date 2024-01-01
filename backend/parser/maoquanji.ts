@@ -309,15 +309,9 @@ export async function parse(
         },
         cache_path: join(
           normalize(__dirname),
-          `../ocr_cache/maoquanji${basename(pdf_path).replace(
-            /[^\d]/g,
-            '',
-          )}/${page}.json`,
+          `../ocr_cache/${basename(pdf_path)}/${page}.json`,
         ),
       });
-      continue
-      const needsResize =
-        origin.dimensions.height < 1500 && parseInt(volume) < 27;
       const ocrResults = origin.ocr_results
         .map(
           (i) =>
@@ -327,9 +321,7 @@ export async function parse(
                 j.map(
                   (k) =>
                     k *
-                    (needsResize
-                      ? 1500 / origin.dimensions.height
-                      : fixtures.scale[volume]?.get(page) || 1),
+                    (fixtures.scale[volume]?.get(page) || 1),
                 ),
               ),
             } as OCRResult),
@@ -453,23 +445,16 @@ export async function parse(
     }
   }
 
-  return [];
-
   consume_catalog_candidates();
 
-  // TODO
-  // 27卷 201 页 上下颠倒
-  // TODO
-  // 40卷 49页 方向不对
-
   // console.log(catalogs, articles_raw);
-  console.log(
-    articles_raw
-      .map((i) => [i[0].ocr_results[0].text, i[0].page])
-      .map(
-        (i, idx) => i[0] + '##' + i[1] + ' ## ' + (catalogs[idx] || {}).title,
-      ),
-  );
+  // console.log(
+  //   articles_raw
+  //     .map((i) => [i[0].ocr_results[0].text, i[0].page])
+  //     .map(
+  //       (i, idx) => i[0] + '##' + i[1] + ' ## ' + (catalogs[idx] || {}).title,
+  //     ),
+  // );
 
   const articles_parts = articles_raw.map((i) => extract_parts(i));
   return articles_parts.map((i, idx) => ({

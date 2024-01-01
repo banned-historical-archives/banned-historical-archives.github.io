@@ -7,7 +7,7 @@ export default {
     official: false,
     author: '张迪杰',
     files:
-      'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives0/main/mao-quanji/39-OCR.pdf',
+      'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives0/main/mao-quanji/maoquanji39.pdf',
   },
   parser_option: {
     page_limits: [
@@ -50,5 +50,5 @@ export default {
     ],
   },
   parser_id: 'maoquanji',
-  path: '/archives0/mao-quanji/39-OCR.pdf',
+  path: '/archives0/mao-quanji/maoquanji39.pdf',
 };
