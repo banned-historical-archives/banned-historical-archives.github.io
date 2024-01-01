@@ -290,6 +290,7 @@ import { extract_dates } from './parser/utils';
  for(const book of books) {
   if (book.parser_option?.ocr?.extract_text_from_pdf) {
     const p =join(__dirname, `./ocr_cache/${book.entity.id}`)
+    if (fs.existsSync(p))
     fs.rmSync(p, {recursive: true, force: true})
   }
  }
