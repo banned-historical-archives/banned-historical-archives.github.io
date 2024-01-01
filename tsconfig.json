@@ -17,6 +17,15 @@
     "jsx": "preserve",
     "incremental": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "migration/PPOCRV3toV4.js"],
-  "exclude": ["node_modules", "backend/parser/pdf.js", "backend/parser/pdf.worker.js"]
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "migration/PPOCRV3toV4.js"
+  ],
+  "exclude": [
+    "node_modules",
+    "backend/parser/pdf.js",
+    "backend/parser/pdf.worker.js"
+  ]
 }

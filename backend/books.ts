@@ -104,7 +104,9 @@ export async function get_book(id: string) {
 
 export default async function get_books() {
   const files = fs.readdirSync(join(normalize(__dirname), './books'));
-  const temp = await Promise.all(files.map(file => import(`./books/${file}`)));
+  const temp = await Promise.all(
+    files.map((file) => import(`./books/${file}`)),
+  );
   const books: Book[] = temp
     .map((i) => i.default)
     .concat(await maoistlegacy_proofread.get_books());

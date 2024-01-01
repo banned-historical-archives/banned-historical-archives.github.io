@@ -94,11 +94,11 @@ export async function parse(
   parser_opt: ParserOption,
 ): Promise<ParserResult[]> {
   parser_opt.ocr = {
-    "det_db_box_thresh": 0.2,
-    'use_gpu': true,
-    'gpu_mem': 7000,
-    'rec_model_dir': "./paddle/ch_PP-OCRv4_rec_infer",
-    'det_model_dir': "./paddle/ch_PP-OCRv4_det_infer",
+    det_db_box_thresh: 0.2,
+    use_gpu: true,
+    gpu_mem: 7000,
+    rec_model_dir: './paddle/ch_PP-OCRv4_rec_infer',
+    det_model_dir: './paddle/ch_PP-OCRv4_det_infer',
 
     det_limit_side_len: 2496,
     drop_score: 0.3,
@@ -115,31 +115,33 @@ export async function parse(
   for (const article of parser_opt.articles!) {
     const parts: PartRaw[] = [];
     for (let i = article.page_start; i <= article.page_end; ++i) {
-      const merged_ocr_parameters: Partial<OCRParameter & OCRParameterAdvanced> = {
+      const merged_ocr_parameters: Partial<
+        OCRParameter & OCRParameterAdvanced
+      > = {
         ...(parser_opt.ocr || {}),
         ...(article.ocr ? article.ocr : {}),
         ...(article.ocr_exceptions ? article.ocr_exceptions[i] : {}),
         ...(parser_opt.ocr_exceptions ? parser_opt.ocr_exceptions[i] : {}),
       };
       let { ocr_results, dimensions } = await ocr(
-          parser_opt.ext == 'pdf'
-            ? {
-                pdf: dirPathOrFilePath,
-                page: i,
-                cache_path: join(
-                  normalize(__dirname),
-                  `../ocr_cache/${basename(dirPathOrFilePath).replace(
-                    /\.pdf$/,
-                    '',
-                  )}/${i}.json`,
-                ),
-                params: merged_ocr_parameters,
-              }
-            : {
-                img: dirPathOrFilePath + '/' + i + `.${parser_opt.ext}`,
-                params: merged_ocr_parameters,
-              },
-        );
+        parser_opt.ext == 'pdf'
+          ? {
+              pdf: dirPathOrFilePath,
+              page: i,
+              cache_path: join(
+                normalize(__dirname),
+                `../ocr_cache/${basename(dirPathOrFilePath).replace(
+                  /\.pdf$/,
+                  '',
+                )}/${i}.json`,
+              ),
+              params: merged_ocr_parameters,
+            }
+          : {
+              img: dirPathOrFilePath + '/' + i + `.${parser_opt.ext}`,
+              params: merged_ocr_parameters,
+            },
+      );
 
       const content_thresholds = merged_ocr_parameters.content_thresholds!;
       const line_merge_threshold = merged_ocr_parameters.line_merge_threshold!;

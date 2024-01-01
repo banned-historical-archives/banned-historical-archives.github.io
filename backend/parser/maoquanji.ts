@@ -169,20 +169,20 @@ export async function parse(
     assert_no_title_page: {
       30: new Set([125]),
       33: new Set([123, 535]),
-      34: new Set([31, 34, 202, 35,36,37]),
+      34: new Set([31, 34, 202, 35, 36, 37]),
       37: new Set([294]),
       40: new Set([438]),
       41: new Set([472, 169]),
-      42: new Set([251,354,487, 163]),
+      42: new Set([251, 354, 487, 163]),
       43: new Set([260, 191, 372]),
-      44: new Set([169,71, 533,451]),
-      45: new Set([335,336]),
-      47: new Set([272,178]),
-      48: new Set([112, 339,310,330,331,332,333,334,335]),
+      44: new Set([169, 71, 533, 451]),
+      45: new Set([335, 336]),
+      47: new Set([272, 178]),
+      48: new Set([112, 339, 310, 330, 331, 332, 333, 334, 335]),
       49: new Set([270]),
-      50: new Set([189, 272,154]),
+      50: new Set([189, 272, 154]),
       51: new Set([50, 173]),
-      52: new Set([275, 317, 238,236, 240, 241, 271]),
+      52: new Set([275, 317, 238, 236, 240, 241, 271]),
     },
   };
 
@@ -301,13 +301,13 @@ export async function parse(
         pdf: pdf_path,
         page,
         params: {
-    content_thresholds: [0.0, 0.0, 0.0, 0.0],
-    line_merge_threshold: 30,
-    standard_paragraph_merge_strategy_threshold: 0,
-    differential_paragraph_merge_strategy_threshold: 30,
-    auto_vsplit: true,
-    vsplit: 0.5,
-    ...parser_opt.ocr,
+          content_thresholds: [0.0, 0.0, 0.0, 0.0],
+          line_merge_threshold: 30,
+          standard_paragraph_merge_strategy_threshold: 0,
+          differential_paragraph_merge_strategy_threshold: 30,
+          auto_vsplit: true,
+          vsplit: 0.5,
+          ...parser_opt.ocr,
         },
         cache_path: join(
           normalize(__dirname),
@@ -320,11 +320,7 @@ export async function parse(
             ({
               ...i,
               box: i.box.map((j) =>
-                j.map(
-                  (k) =>
-                    k *
-                    (fixtures.scale[volume]?.get(page) || 1),
-                ),
+                j.map((k) => k * (fixtures.scale[volume]?.get(page) || 1)),
               ),
             } as OCRResult),
         )
