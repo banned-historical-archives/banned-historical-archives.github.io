@@ -18,16 +18,16 @@ import { extract_dates } from './parser/utils';
 (async () => {
   const ds = await init();
   const books = await get_books();
-  for (const book of books) {
-    if (!book.entity.id?.startsWith('maoquanji')) continue;
-    if (parseInt(book.entity.id?.replace('maoquanji', '')) < 52) continue;
-    console.log(book.entity.id);
-    const t = await book.parser(book.path, book.parser_option);
-    console.log(t, book.entity.id);
-    debugger;
-  }
-  debugger;
-  return;
+  // for (const book of books) {
+  //   if (!book.entity.id?.startsWith('maoquanji')) continue;
+  //   if (parseInt(book.entity.id?.replace('maoquanji', '')) < 52) continue;
+  //   console.log(book.entity.id);
+  //   const t = await book.parser(book.path, book.parser_option);
+  //   console.log(t, book.entity.id);
+  //   debugger;
+  // }
+  // debugger;
+  // return;
   const patch_all = [
     ["00540b9d04","72d4fe45-d0bf-4ce4-afc9-ba7c7ddc6f38"],
     ["012898eef6","c21f8808-2334-4e60-a047-27a52e8adbce"],
@@ -280,7 +280,6 @@ import { extract_dates } from './parser/utils';
     ["fcdc4d9bbf","96cdc4a4-0b09-4d57-8277-6dbcbcf6e4e0"],
     ["fe8bab5ccd","d36737e2-811c-4b1d-9c2c-8889eade960c"]
     ];
-    /*
   for (const x of patch_all) {
 
     const book = books.find((i) => i.entity.id === x[1])!;
@@ -290,12 +289,11 @@ import { extract_dates } from './parser/utils';
     // }
     try {
       const t = await book.parser(book.path, book.parser_option);
-      console.log(t);
+      console.log(t, book.entity.name);
     } catch (e) {
       debugger;
     }
   }
-  */
 
   /*
  for(const book of books) {

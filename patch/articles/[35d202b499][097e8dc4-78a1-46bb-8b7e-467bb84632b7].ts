@@ -1,0 +1,4 @@
+export default [
+  {"version":2,"parts":{"0":{"delete":true,"insertAfter":[{"type":"paragraph","text":"关锋同志九月二十八日在地质学院同学座会上"},{"type":"paragraph","text":"讲话片段"},{"type":"paragraph","text":"我们人为，对错误的路必须批到，要彻底肃清它在群众中的恶劣影响，清除流毒，才能很好货彻十六条，不破不立·我们儿个赞成这祥做要批判。"},{"type":"paragraph","text":"路错是什么错跌呢？路藏错就是打击革金群众，镇压革命左派制造了一段反干扰阶段，打击院党委提意见的！，工作组提意见的，赶工作组的。当时很早起来搞工作组是对的！。应该给他们平反，应吸收他们参加各级文革组织的领导。在二十几天反干扰中已给他们造成了极坏的"},{"type":"paragraph","text":"奥。只是口头上“我错了，”不管用。要歌身影响，已经造成了处地想一想这些问题。"}]},"1":{"delete":true},"2":{"delete":true}},"comments":{}},
+  {"version":2,"parts":{},"description":"","comments":{},"newComments":[]},
+]
