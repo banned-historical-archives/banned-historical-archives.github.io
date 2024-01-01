@@ -7,7 +7,7 @@ export default {
     official: false,
     author: '张迪杰',
     files:
-      'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives8/main/mao-quanji/maoquanji13.pdf',
+      'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives8/main/maoquanji13.pdf',
   },
   parser_option: {
     page_limits: [],
@@ -1393,5 +1393,5 @@ export default {
     ocr: { content_thresholds: [0.06, 0.06, 0.01, 0.01] },
   },
   parser_id: 'automation',
-  path: '/archives8/mao-quanji/maoquanji13.pdf',
+  path: '/archives8/maoquanji13.pdf',
 };
