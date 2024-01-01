@@ -167,8 +167,8 @@ export async function parse(
     },
     assert_no_title_page: {
       30: new Set([125]),
-      33: new Set([123]),
-      34: new Set([31, 34, 202]),
+      33: new Set([123, 535]),
+      34: new Set([31, 34, 202, 35,36,37]),
       37: new Set([294]),
       40: new Set([438]),
       41: new Set([472]),
@@ -309,7 +309,7 @@ export async function parse(
         },
         cache_path: join(
           normalize(__dirname),
-          `../ocr_cache/${basename(pdf_path)}/${page}.json`,
+          `../ocr_cache/${basename(pdf_path).split('.')[0]}/${page}.json`,
         ),
       });
       const ocrResults = origin.ocr_results
