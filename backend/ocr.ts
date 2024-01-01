@@ -65,14 +65,12 @@ export default async function ocr({
     const viewport = (await doc.getPage(page!)).getViewport({ scale: 1 });
     res = {
       dimensions: { width: viewport.width, height: viewport.height },
-      ocr_results: merge_to_lines(
+      ocr_results: 
         pdfjsContentToOCRResult(content_obj, viewport.height).map((i) => {
           // 去掉空格块
           i.text = i.text.replace(/ /g, '');
           return i;
         }),
-        params.line_merge_threshold || 10,
-      ),
     };
   } else {
 

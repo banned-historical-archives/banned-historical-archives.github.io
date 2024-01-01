@@ -121,31 +121,7 @@ export async function parse(
         ...(article.ocr_exceptions ? article.ocr_exceptions[i] : {}),
         ...(parser_opt.ocr_exceptions ? parser_opt.ocr_exceptions[i] : {}),
       };
-      let page_res: {
-        ocr_results: OCRResult[];
-        dimensions: { width: number; height: number };
-      };
-      if (parser_opt.ocr?.extract_text_from_pdf && parser_opt.ext == 'pdf') {
-        const doc = await pdfjsLib.getDocument({
-          url: dirPathOrFilePath,
-          cMapPacked: true,
-          cMapUrl: './node_modules/pdfjs-dist/cmaps/',
-        }).promise;
-        let content_obj = await (await doc.getPage(i)).getTextContent();
-        const viewport = (await doc.getPage(i)).getViewport({ scale: 1 });
-        page_res = {
-          dimensions: { width: viewport.width, height: viewport.height },
-          ocr_results: merge_to_lines(
-            pdfjsContentToOCRResult(content_obj, viewport.height).map((i) => {
-              // 去掉空格块
-              i.text = i.text.replace(/ /g, '');
-              return i;
-            }),
-            10,
-          ),
-        };
-      } else {
-        page_res = await ocr(
+      let { ocr_results, dimensions } = await ocr(
           parser_opt.ext == 'pdf'
             ? {
                 pdf: dirPathOrFilePath,
@@ -164,13 +140,11 @@ export async function parse(
                 params: merged_ocr_parameters,
               },
         );
-      }
-      let { ocr_results, dimensions } = page_res;
 
       const content_thresholds = merged_ocr_parameters.content_thresholds!;
       const line_merge_threshold = merged_ocr_parameters.line_merge_threshold!;
 
-      // 无论resize的值是多少，OCR结果的坐标范围取决于原图像的size
+      // 还原OCR结果的坐标
       const size = dimensions;
       const content_thresholds_px = [
         content_thresholds[0] * size.height!,
