@@ -1,0 +1,68 @@
+name: build_ocr_cache
+on:
+  workflow_dispatch:
+  push:
+    branches: ['ocr_config']
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+  actions: write
+
+jobs:
+  container-job:
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/banned-historical-archives/ocr:main
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          repository: 'banned-historical-archives/ocr_helper'
+          path: './ocr_helper'
+          ref: 'main'
+      - uses: actions/checkout@v4
+        with:
+          path: './raw'
+          ref: 'main'
+      - uses: actions/checkout@v4
+        with:
+          path: './ocr_config'
+          ref: 'ocr_config'
+      - uses: actions/checkout@v4
+        with:
+          path: './ocr_cache'
+          ref: 'ocr_cache'
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+      - run: cd ocr_helper && npm install && npm run build_ocr_cache -- ../ocr_config ../raw ../ocr_cache
+      - run: git config --global http.postBuffer 2097152000
+      - run: git config --global user.email "you@example.com"
+      - run: git config --global user.name "Your Name"
+
+      - name: Check for changes
+        id: check_changes
+        run: |
+          cd ocr_cache
+          git status --porcelain
+          if [ -z "$(git status --porcelain)" ]; then
+            echo "No changes to commit"
+            echo "::set-output name=changes::false"
+          else
+            echo "Changes detected"
+            echo "::set-output name=changes::true"
+          fi
+      
+      - name: Commit and push changes
+        if: steps.check_changes.outputs.changes == 'true'
+        run: |
+          cd ./ocr_cache
+          git add .
+          git commit -m automation && git push
+      - name: Invoke workflow
+        uses: benc-uk/workflow-dispatch@v1
+        with:
+          workflow: build_parsed_article.yml
+          ref: ocr_cache
