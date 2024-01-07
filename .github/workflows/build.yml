@@ -34,24 +34,8 @@ jobs:
       - run: cp -r ./node_modules/pdfjs-dist ./public/
       - run: node_options="--max-old-space-size=8192" npm run build-catelog
       - run: node_options="--max-old-space-size=8192" npm run dev:nextjs-helper && npm run build
-      - run: git config --global http.postBuffer 2097152000
-      - run: git config --global user.email "you@example.com"
-      - run: git config --global user.name "Your Name"
-      - run: git checkout --orphan x
-      - run: git reset --hard
-      - run: find . -maxdepth 1 ! -name . ! -name 'out' -exec rm -rf {} +
-      - run: mv out/* ./ && rmdir out
-      - run: touch .nojekyll
-      - run: git add .
-      - run: git commit -m update
-      - run: git push origin x:gh-pages -f
-      - name: Setup Pages
-        uses: actions/configure-pages@v3
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v1
+
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
-          # Upload entire repository
-          path: '.'
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v1
+          folder: out
