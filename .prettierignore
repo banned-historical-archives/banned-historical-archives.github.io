@@ -8,3 +8,5 @@ package-lock.json
 yarn.lock
 *.js
 *.md
+catelog.json
+article_indexes.json

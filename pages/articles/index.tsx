@@ -27,7 +27,13 @@ import Button from '@mui/material/Button';
 import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
 import SettingsIcon from '@mui/icons-material/Settings';
-import { ArticleCategory, ArticleType, Catelog, CatelogItem, TagType } from '../../types';
+import {
+  ArticleCategory,
+  ArticleType,
+  Catelog,
+  CatelogItem,
+  TagType,
+} from '../../types';
 import Typography from '@mui/material/Typography';
 import {
   GetStaticProps,
@@ -51,10 +57,12 @@ import { join } from 'path';
 export const getStaticProps: GetStaticProps = async (
   context: GetStaticPropsContext,
 ) => {
-  const res = JSON.parse((await readFile(join(process.cwd(), './catelog.json'))).toString());
+  const res = JSON.parse(
+    (await readFile(join(process.cwd(), './catelog.json'))).toString(),
+  );
   return {
     props: {
-      articles: res
+      articles: res,
     },
   };
 };
@@ -196,7 +204,7 @@ export default function Articles({ articles }: { articles: Catelog }) {
     articles.forEach((i) =>
       i.tags.forEach((j) => {
         const id = j.type + '##' + j.name;
-        m.set(id, {...j, id} as Tag);
+        m.set(id, { ...j, id } as Tag);
       }),
     );
     return m;
@@ -209,24 +217,20 @@ export default function Articles({ articles }: { articles: Catelog }) {
           m.set(j.type, new Map());
         }
         const id = j.type + '##' + j.name;
-        m.get(j.type)!.set(id, {...j, id} as Tag);
+        m.get(j.type)!.set(id, { ...j, id } as Tag);
       }),
     );
     return m;
   }, [articles]);
   const sources_all = useMemo(() => {
     const set = new Set<string>();
-    articles.forEach((i) =>
-      i.books.forEach(j => set.add(j)),
-    );
+    articles.forEach((i) => i.books.forEach((j) => set.add(j)));
     return Array.from(set).sort();
   }, [articles]);
 
   const authors_all = useMemo(() => {
     const set = new Set<string>();
-    articles.forEach((i) =>
-      i.authors.forEach((j) => j && set.add(j)),
-    );
+    articles.forEach((i) => i.authors.forEach((j) => j && set.add(j)));
     return Array.from(set).sort();
   }, [articles]);
 
@@ -270,7 +274,9 @@ export default function Articles({ articles }: { articles: Catelog }) {
           : true,
       )
       .filter((i) =>
-        tagFilter ? !!i.tags.find((k) => k.type + '##' + k.name === tagFilter) : true,
+        tagFilter
+          ? !!i.tags.find((k) => k.type + '##' + k.name === tagFilter)
+          : true,
       );
   }, [articles, dateFilter, tagFilter, authorFilter, sourceFilter]);
 

@@ -297,8 +297,8 @@ export default function ArticleComponent({
   publicationName,
   description,
 }: {
-  description: string,
-  articleId: string,
+  description: string;
+  articleId: string;
   publicationName?: string;
   publicationId: string;
   patchable?: boolean;

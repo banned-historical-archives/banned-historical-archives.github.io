@@ -5,7 +5,11 @@ import Popover from '@mui/material/Popover';
 import { ArticleCategory, ArticleType, TagType } from '../types';
 import { Tag } from '../backend/entities';
 
-export default function Tags({ tags }: { tags: {type: string, name: string}[] }) {
+export default function Tags({
+  tags,
+}: {
+  tags: { type: string; name: string }[];
+}) {
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
   const [label, setLabel] = useState('');
 

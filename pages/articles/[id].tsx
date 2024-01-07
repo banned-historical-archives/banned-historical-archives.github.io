@@ -1,4 +1,4 @@
-import { useParams } from 'next/navigation'
+import { useParams } from 'next/navigation';
 import React, {
   useRef,
   useState,
@@ -23,7 +23,14 @@ import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
-import { ArticleIndexes, Catelog, ContentType, ParserResult, Patch, PatchV2 } from '../../types';
+import {
+  ArticleIndexes,
+  Catelog,
+  ContentType,
+  ParserResult,
+  Patch,
+  PatchV2,
+} from '../../types';
 import { Document, Page, pdfjs } from 'react-pdf';
 import Layout from '../../components/Layout';
 
@@ -61,7 +68,9 @@ type PublicationDetails = {
   };
 };
 export async function getStaticPaths() {
-  const article_indexes = JSON.parse(readFileSync(join(process.cwd(), 'article_indexes.json')).toString()) as ArticleIndexes;
+  const article_indexes = JSON.parse(
+    readFileSync(join(process.cwd(), 'article_indexes.json')).toString(),
+  ) as ArticleIndexes;
   return {
     paths: Object.keys(article_indexes).map((i) => ({
       params: {
@@ -78,10 +87,12 @@ export const getStaticProps: GetStaticProps = async (
   const { id } = context.params as {
     id: string;
   };
-  const data = await (await fetch('http://localhost:3001/get_article?id=' + id)).json()
+  const data = await (
+    await fetch('http://localhost:3001/get_article?id=' + id)
+  ).json();
   return {
     props: {
-      books: data.books
+      books: data.books,
     },
   };
 };
@@ -117,12 +128,12 @@ export default function ArticleViewer({
     id: string;
     type: string;
     name: string;
-    tags: {type: string, name: string}[],
+    tags: { type: string; name: string }[];
     files: string[];
     article: ParserResult;
   }[];
 }) {
-  const {id: articleId} = useParams<{ id: string }>()
+  const { id: articleId } = useParams<{ id: string }>();
   const booksRef = useRef(books);
   const patchWrap = useRef<
     | {
@@ -138,12 +149,12 @@ export default function ArticleViewer({
   const [showMore, setShowMore] = useState(true);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [compareType, setCompareType] = useState<CompareType>(CompareType.none);
-  const [comparePublication, setComparePublication] = useState<string>(
-    books[books.length -1].id
+  const [comparedPublication, setComparePublication] = useState<string>(
+    books[books.length - 1].id,
   );
   const [compareMode, setCompareMode] = useState(CompareMode.line);
   const [selectedPublication, setSelectedPublication] = useState<string>(
-    books[0].id
+    books[0].id,
   );
 
   /*
@@ -258,57 +269,38 @@ export default function ArticleViewer({
     }
   }, []);
 
-  const article_diff = useRef<Diff[][]>();
-  /*
-  const update_article_diff = useCallback(() => {
+  const article_diff: Diff[][] = useMemo(() => {
     if (
       compareType !== CompareType.version ||
-      !article ||
       !(typeof window !== 'undefined')
     )
-      return;
-    let comments_a: { text: string; index: number }[] = publication_details[
-      selectedPublication
-    ].comments
-      .sort((a, b) => (a.index > b.index ? 1 : -1))
-      .filter((i) => i.index !== -1);
-    let comments_b: { text: string; index: number }[] = publication_details[
-      comparePublication!
-    ].comments
-      .sort((a, b) => (a.index > b.index ? 1 : -1))
-      .filter((i) => i.index !== -1);
-    let contents_a: { text: string }[] = publication_details[
-      selectedPublication
-    ].contents.sort((a, b) => (a.index > b.index ? 1 : -1));
-    let contents_b: { text: string }[] = publication_details[
-      comparePublication!
-    ].contents.sort((a, b) => (a.index > b.index ? 1 : -1));
+      return [];
+    const article_a = booksRef.current.find(i => i.id == selectedPublication)!.article;
+    const article_b = booksRef.current.find(i => i.id == comparedPublication)!.article;
+    let comments_a = article_a.comments;
+    let comments_b = article_b.comments
+    let contents_a = article_a.parts;
+    let contents_b = article_b.parts;
     if (compareMode === CompareMode.literal) {
-      contents_a = [{ text: join_text(contents_a) }];
-      contents_b = [{ text: join_text(contents_b) }];
       return [
         new diff_match_patch().diff_main(
-          join_text(contents_a),
-          join_text(contents_b),
+          join_text([{ text: join_text(contents_a) }]),
+          join_text([{ text: join_text(contents_b) }]),
         ),
       ];
     } else if (compareMode === CompareMode.description_and_comments) {
       const max_n_comment = Math.max(comments_a.length, comments_b.length);
       return [
         new diff_match_patch().diff_main(
-          publication_details[selectedPublication].comments.find(
-            (i) => i.index === -1,
-          )?.text || '',
-          publication_details[comparePublication].comments.find(
-            (i) => i.index === -1,
-          )?.text || '',
+          article_a.description || '',
+          article_b.description || '',
         ),
         ...new Array(max_n_comment)
           .fill(0)
           .map((x, p) =>
             new diff_match_patch().diff_main(
-              comments_a[p] ? comments_a[p].text : '',
-              comments_b[p] ? comments_b[p].text : '',
+              comments_a[p] || '',
+              comments_b[p] || '',
             ),
           ),
       ];
@@ -324,26 +316,41 @@ export default function ArticleViewer({
       ++i;
     }
     return res;
-  }, []);
-  */
+  }, [
+    selectedPublication,
+    compareType,
+    compareMode,
+    comparedPublication,
+  ]);
 
   const showCompareMenu = !!anchorEl;
 
   const isLocalhost =
     ((global || (window as any))['location'] as any)?.hostname === 'localhost';
 
-  const book = booksRef.current.find(i => i.id ==selectedPublication)!;
+  const book = booksRef.current.find((i) => i.id == selectedPublication)!;
+  const comparedBook = booksRef.current.find((i) => i.id == comparedPublication)!;
   const article = book.article;
   const aliases: string[] = [];
-  booksRef.current.forEach(book => {
+  booksRef.current.forEach((book) => {
     if (book.article.alias) aliases.push(book.article.alias);
   });
 
   const { description, parts, comments, page_start, page_end } = article;
-  const articleComments = comments.map((i, idx) => ({text: i, id: idx.toString(), index: idx} as Comment))
-  const articleContents = parts.map((i, idx) => ({...i, index: idx, id: idx.toString()} as Content));
+  const articleComments = comments.map(
+    (i, idx) => ({ text: i, id: idx.toString(), index: idx } as Comment),
+  );
+  const articleContents = parts.map(
+    (i, idx) => ({ ...i, index: idx, id: idx.toString() } as Content),
+  );
+  const comparedArticleComments = comparedBook.article.comments.map(
+    (i, idx) => ({ text: i, id: idx.toString(), index: idx } as Comment),
+  );
+  const comparedArticleContents = comparedBook.article.parts.map(
+    (i, idx) => ({ ...i, index: idx, id: idx.toString() } as Content),
+  );
 
-  const all_tags = new Map<string, {type: string, name: string}>();
+  const all_tags = new Map<string, { type: string; name: string }>();
   booksRef.current.forEach((i) => {
     i.tags.forEach((j) => {
       all_tags.set(j.type + '##' + j.name, j);
@@ -432,7 +439,7 @@ export default function ArticleViewer({
                           '/',
                         )
                         .replace('/main/', '/')
-                    : (book.files[0] || '')
+                    : book.files[0] || ''
                 }
                 options={{
                   cMapUrl: `/pdfjs-dist/cmaps/`,
@@ -449,7 +456,8 @@ export default function ArticleViewer({
               </Document>
             </>
           ) : book.type === 'img' ? (
-            book.files.filter((i, idx) => idx + 1 >= page_start && idx + 1 <= page_end)
+            book.files
+              .filter((i, idx) => idx + 1 >= page_start && idx + 1 <= page_end)
               .map((f) => (
                 <img alt="" key={f} src={f} width={previewScale * 500} />
               ))
@@ -468,7 +476,7 @@ export default function ArticleViewer({
           <InputLabel>对比目标</InputLabel>
           <Select
             size="small"
-            value={comparePublication}
+            value={comparedPublication}
             input={<OutlinedInput label="对比目标" />}
             onChange={(e) => {
               setComparePublication(e.target.value);
@@ -487,12 +495,12 @@ export default function ArticleViewer({
           }}
         >
           <ArticleComponent
-            description={description}
+            description={comparedBook.article.description}
             articleId={articleId}
-            article={article}
-            publicationId={comparePublication}
-            comments={articleComments}
-            contents={articleContents}
+            article={comparedBook.article}
+            publicationId={comparedPublication}
+            comments={comparedArticleComments}
+            contents={comparedArticleContents}
           />
         </Stack>
       </Stack>,
@@ -517,7 +525,7 @@ export default function ArticleViewer({
           </Select>
         </FormControl>
         <Stack sx={{ overflowY: 'scroll' }}>
-          {/*<DiffViewer diff={article_diff} key={diff_id} />*/}
+          <DiffViewer diff={article_diff} />
         </Stack>
       </Stack>,
     );
@@ -632,14 +640,14 @@ export default function ArticleViewer({
             </MenuItem>
             <MenuItem
               onClick={() => {
-                // setComparePublication(
-                //   article.publications.length === 1
-                //     ? article.publications[0].id
-                //     : article.publications.find((i) => i.id !== publication.id)!
-                //         .id,
-                // );
-                // setCompareType(CompareType.version);
-                // setAnchorEl(null);
+                setComparePublication(
+                  booksRef.current.length === 1
+                    ? booksRef.current[0].id
+                    : booksRef.current.find((i) => i.id !== book.id)!
+                        .id,
+                );
+                setCompareType(CompareType.version);
+                setAnchorEl(null);
               }}
             >
               对比不同来源解析后的文本
@@ -649,7 +657,6 @@ export default function ArticleViewer({
                 let str = prompt('导入代码') || '';
                 str = str.replace(/^\{OCR补丁\}/, '');
                 str = str.substr(0, str.lastIndexOf('}') + 1);
-                console.log(str);
                 try {
                   const patchWrap = JSON.parse(str);
                   // addOCRComparisonPublicationV2(
@@ -705,9 +712,7 @@ export default function ArticleViewer({
             <Typography variant="body1" sx={{ overflowX: 'scroll' }}>
               标题：
               {article.title}
-              {aliases.length
-                ? `(别名:${aliases.join(',')})`
-                : ''}
+              {aliases.length ? `(别名:${aliases.join(',')})` : ''}
             </Typography>
           </Grid>
           <Grid item xs={2} sx={{ display: { md: 'none', xs: 'flex' } }}>

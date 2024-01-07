@@ -54,7 +54,7 @@ jobs:
             echo "Changes detected"
             echo "::set-output name=changes::true"
           fi
-      
+
       - name: Commit and push changes
         if: steps.check_changes.outputs.changes == 'true'
         run: |
