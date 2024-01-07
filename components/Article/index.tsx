@@ -13,7 +13,7 @@ import {
 import { diff_match_patch, Diff } from 'diff-match-patch';
 import { ReactElement, useEffect, useRef, useState } from 'react';
 import { Article, Content, Comment } from '../../backend/entities';
-import { ContentType } from '../../types';
+import { ContentType, ParserResult } from '../../types';
 import { bracket_left, bracket_right, md5 } from '../../utils';
 import PatchableArticle from './PatchableArticle';
 
@@ -289,25 +289,29 @@ function PureArticle({
 
 export default function ArticleComponent({
   article,
+  articleId,
   comments,
   patchable,
   contents,
   publicationId,
   publicationName,
+  description,
 }: {
+  description: string,
+  articleId: string,
   publicationName?: string;
   publicationId: string;
   patchable?: boolean;
-  article: Article;
+  article: ParserResult;
   comments: Comment[];
   contents: Content[];
 }) {
-  const description = comments.find((i) => i.index === -1)?.text;
   contents = contents.sort((a, b) => (a.index > b.index ? 1 : -1));
   comments = comments.sort((a, b) => a.index - b.index);
 
   return patchable ? (
     <PatchableArticle
+      articleId={articleId}
       article={article}
       comments={comments}
       contents={contents}

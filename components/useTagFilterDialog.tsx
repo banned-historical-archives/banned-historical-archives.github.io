@@ -15,7 +15,7 @@ import { TagType } from '../types';
 
 export function useTagFilterDialog(
   tags_all: Map<string, Tag>,
-  tags_all_order_by_type: Map<TagType, Map<string, Tag>>,
+  tags_all_order_by_type: Map<string, Map<string, Tag>>,
 ) {
   const [show, setTagDialog] = useState(false);
   const [tagFilter, setTagFilter] = useState<string | null>(null);

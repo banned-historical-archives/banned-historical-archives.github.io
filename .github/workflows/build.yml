@@ -1,5 +1,6 @@
 name: build
 on:
+  workflow_dispatch:
   push:
     branches: ['master']
 
@@ -7,48 +8,22 @@ permissions:
   contents: write
   pages: write
   id-token: write
+  actions: write
 
 jobs:
   container-job:
     runs-on: ubuntu-22.04
 
-    # runs all of the steps inside the specified container rather than on the VM host.
-    # Because of this the network configuration changes from host based network to a container network.
-    services:
-      mysql:
-        image: mysql:5.7
-        env:
-          MYSQL_ROOT_PASSWORD: root_password
-        ports:
-          - 3306:3306
-        # needed because the mysql container does not provide a healthcheck
-        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=10s --health-retries=10
-
     steps:
-      - uses: actions/checkout@v3
-      # - run: sudo du -h -d 1 /
-      # - run: cd public && rm -rf archives9 && git clone --depth=1 https://github.com/banned-historical-archives/banned-historical-archives9.git archives9 && rm -rf archives10 && git clone --depth=1 https://github.com/banned-historical-archives/banned-historical-archives10.git archives10
-      - name: setup archives
-        run: |
-          cd public
-          rm -rf archives9 && git clone --depth=1 https://github.com/banned-historical-archives/banned-historical-archives9.git archives9
-          rm -rf archives11 && git clone --depth=1 https://github.com/banned-historical-archives/banned-historical-archives11.git archives11
-      - name: Set up MySQL
-        env:
-          # use mysql for the host here because we have specified a container for the job.
-          # If we were running the job on the VM this would be localhost
-          MYSQL_HOST: mysql
-          MYSQL_PORT: 3306
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y --force-yes mysql-client p7zip-full wget language-pack-zh-han*
-          mysql --host 127.0.0.1 -e 'CREATE DATABASE bha CHARACTER SET utf8 COLLATE utf8_general_ci;' -uroot -proot_password
+      - uses: actions/checkout@v4
+        with:
+          submodule: true
       - name: Use Node.js
         uses: actions/setup-node@v3
       - run: npm install
       - run: cp -r ./node_modules/pdfjs-dist ./public/
-      - run: NODE_OPTIONS="--max-old-space-size=8192" npm run init-db
-      - run: SITE_URL='https://banned-historical-archives.github.io' COMMIT_HASH="${{ github.sha }}" npm run build
+      - run: node_options="--max-old-space-size=8192" npm run build-catelog
+      - run: node_options="--max-old-space-size=8192" npm run build
       - run: git config --global http.postBuffer 2097152000
       - run: git config --global user.email "you@example.com"
       - run: git config --global user.name "Your Name"

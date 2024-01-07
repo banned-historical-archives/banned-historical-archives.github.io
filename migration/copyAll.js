@@ -4,11 +4,6 @@ const { execSync } =require('child_process');
 const fs = require('fs-extra')
 
 const archives_dir = join(__dirname, '../public');
-function ensureTags(dest) {
-    execSync('((git checkout --orphan tags || git checkout tags) && git reset --hard origin/tags && git pull) || true',{cwd: dest});
-    execSync('(git add . && git commit -m fix) || true',{cwd: dest});
-    execSync('(git push --set-upstream origin tags) || true',{cwd: dest});
-}
 function ensureFixExt(dest) {
     execSync('git checkout main && git reset --hard origin/main',{cwd: dest});
     execSync(`node ${join(__dirname, 'fixExtension.js')} ${dest}`);
@@ -31,15 +26,11 @@ function fixWorkflow(dest) {
 }
 function ensureParsedArticle(dest) {
     execSync('((git checkout --orphan parsed_article || git checkout parsed_article) && git reset --hard && git pull) || true',{cwd: dest});
-    fs.ensureDirSync(
-        join(dest, '.github', 'workflows'),
-    );
-    fs.cpSync(
-        join(__dirname, 'workflows', 'build_tags.yml'),
-        join(dest, '.github/workflows', 'build_tags.yml')
-    )
     execSync('(git add . && git commit -m init) || true',{cwd: dest});
     execSync('(git push --set-upstream origin parsed_article) || true',{cwd: dest});
+}
+function updateBranch(dest) {
+    execSync('((git checkout --orphan parsed_article || git checkout parsed_article) && git reset --hard && git pull) || true',{cwd: dest});
 }
 fs.readdirSync(archives_dir).filter(i => i.startsWith('archives')).forEach(i => {
     if (
@@ -56,10 +47,10 @@ fs.readdirSync(archives_dir).filter(i => i.startsWith('archives')).forEach(i => 
     execSync('git clean -f && git reset --hard',{cwd: dest});
 
     // fixWorkflow(dest);
+    // updateBranch(dest);
 
-    ensureFixExt(dest);
+    // ensureFixExt(dest);
     ensureParsedArticle(dest);
-    ensureTags(dest);
 
     execSync(`node ${join(__dirname, 'copyConfig')} ${dest}`);
     fs.ensureDirSync(

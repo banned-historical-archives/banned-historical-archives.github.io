@@ -1,3 +1,4 @@
+import { useParams } from 'next/navigation'
 import React, {
   useRef,
   useState,
@@ -22,7 +23,7 @@ import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
-import { ContentType, Patch, PatchV2 } from '../../types';
+import { ArticleIndexes, Catelog, ContentType, ParserResult, Patch, PatchV2 } from '../../types';
 import { Document, Page, pdfjs } from 'react-pdf';
 import Layout from '../../components/Layout';
 
@@ -32,7 +33,6 @@ import Date from '../../backend/entity/date';
 import Comment from '../../backend/entity/comment';
 import PageEntity from '../../backend/entity/page';
 import { GetStaticProps, GetStaticPropsContext } from 'next';
-import { init } from '../../backend/data-source';
 import { DiffViewer } from '../../components/DiffViewer';
 import Tags from '../../components/Tags';
 import Authors from '../../components/Authors';
@@ -44,6 +44,9 @@ import {
   md5,
 } from '../../utils';
 import ArticleComponent from '../../components/Article';
+import { pathExists, readFile, readFileSync } from 'fs-extra';
+import { join } from 'path';
+import { useRouter } from 'next/router';
 
 pdfjs.GlobalWorkerOptions.workerSrc = `/pdfjs-dist/legacy/build/pdf.worker.min.js`;
 
@@ -58,14 +61,11 @@ type PublicationDetails = {
   };
 };
 export async function getStaticPaths() {
-  const AppDataSource = await init();
-  const articles = await AppDataSource.manager.find(Article, {
-    relations: {},
-  });
+  const article_indexes = JSON.parse(readFileSync(join(process.cwd(), 'article_indexes.json')).toString()) as ArticleIndexes;
   return {
-    paths: articles.map((i) => ({
+    paths: Object.keys(article_indexes).map((i) => ({
       params: {
-        id: i.id,
+        id: i,
       },
     })),
     fallback: false, // can also be true or 'blocking'
@@ -75,62 +75,15 @@ export async function getStaticPaths() {
 export const getStaticProps: GetStaticProps = async (
   context: GetStaticPropsContext,
 ) => {
-  const AppDataSource = await init();
   const { id } = context.params as {
     id: string;
   };
-  const articleId = id;
-  const article = await AppDataSource.manager.findOne(Article, {
-    where: {
-      id,
-    },
-    relations: {
-      authors: true,
-      aliases: true,
-      publications: true,
-      tags: true,
-      dates: true,
-    },
-  });
-  const publication_details: PublicationDetails = {};
-  for (const publication of article!.publications) {
-    const publicationId = publication.id!;
-    const [comments, contents, page] = await Promise.all([
-      AppDataSource.manager.find(Comment, {
-        where: {
-          publicationId,
-          articleId,
-        },
-      }),
-      AppDataSource.manager.find(Content, {
-        where: {
-          publicationId,
-          articleId,
-        },
-      }),
-      AppDataSource.manager.findOne(PageEntity, {
-        where: {
-          publicationId,
-          articleId,
-        },
-      }),
-    ]);
-    publication_details[publicationId] = {
-      comments,
-      contents,
-      page: page!,
-    };
-  }
-  if (!article || !publication_details) {
-    return { notFound: true };
-  }
-  const r = {
+  const data = await (await fetch('http://localhost:3001/get_article?id=' + id)).json()
+  return {
     props: {
-      article: JSON.parse(JSON.stringify(article)),
-      publication_details: JSON.parse(JSON.stringify(publication_details)),
+      books: data.books
     },
   };
-  return r;
 };
 
 enum CompareType {
@@ -158,13 +111,19 @@ enum CompareMode {
 }
 
 export default function ArticleViewer({
-  article,
-  publication_details,
+  books,
 }: {
-  article: Article;
-  publication_details: PublicationDetails;
+  books: {
+    id: string;
+    type: string;
+    name: string;
+    tags: {type: string, name: string}[],
+    files: string[];
+    article: ParserResult;
+  }[];
 }) {
-  const id = article.id;
+  const {id: articleId} = useParams<{ id: string }>()
+  const booksRef = useRef(books);
   const patchWrap = useRef<
     | {
         commitHash: string;
@@ -180,102 +139,17 @@ export default function ArticleViewer({
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [compareType, setCompareType] = useState<CompareType>(CompareType.none);
   const [comparePublication, setComparePublication] = useState<string>(
-    article.publications[article.publications.length - 1].id,
+    books[books.length -1].id
   );
   const [compareMode, setCompareMode] = useState(CompareMode.line);
   const [selectedPublication, setSelectedPublication] = useState<string>(
-    article.publications[0].id,
+    books[0].id
   );
 
-  const addOCRComparisonPublicationV1 = useCallback(
-    (publicationId: string, patch: Patch, article: Article) => {
-      if (publication_details[virtual_publication_id]) {
-        return;
-      }
-      article.publications.push({
-        ...article.publications.find((i) => i.id === publicationId)!,
-        id: virtual_publication_id,
-        name: '#OCR补丁预览#',
-      });
-      const { page, comments, contents } = publication_details[publicationId];
-      const d = new diff_match_patch();
-      const patched_contents = contents.map((i) => ({
-        ...i,
-        id: Math.random().toString(),
-      }));
-      const patched_comments = comments.map((i) => ({
-        ...i,
-        id: Math.random().toString(),
-      }));
-      contents
-        .sort((a, b) => a.index - b.index)
-        .forEach((content, idx) => {
-          const text_arr = Array.from(content.text);
-          comments
-            .filter(
-              (i) => i.part_index === content.index || i.part_index === -1,
-            )
-            .sort((a, b) => b.index - a.index)
-            .forEach((i) => {
-              if (
-                patch.comments[i.index] ||
-                (i.index === -1 && patch.description)
-              ) {
-                const diff = new diff_match_patch().diff_fromDelta(
-                  i.text,
-                  patch.comments[i.index] || patch.description,
-                );
-                const new_text = diff
-                  .filter((i) => i[0] !== -1)
-                  .map((i) => i[1])
-                  .join('');
-                const x = patched_comments.find((h) => h.index === i.index)!;
-                if (x) x.text = new_text;
-              }
-
-              if (i.index !== -1)
-                text_arr.splice(
-                  i.offset,
-                  0,
-                  `${bracket_left}${i.index}${bracket_right}`,
-                );
-            });
-
-          if (!patch.parts[content.index]) {
-            return;
-          }
-
-          const origin_text = text_arr.join('');
-          const diff = d.diff_fromDelta(origin_text, patch.parts[idx]);
-          const new_text = diff
-            .filter((i) => i[0] !== -1)
-            .map((i) => i[1])
-            .join('');
-          const [pivots, pure_text] = extract_pivots(new_text, idx);
-          pivots.forEach((x) => {
-            const t = patched_comments.find((i) => x.index === i.index)!;
-            t.offset = x.offset;
-            t.part_index = x.part_idx;
-          });
-          patched_contents[idx].text = pure_text;
-        });
-      publication_details[virtual_publication_id] = {
-        page,
-        comments: patched_comments,
-        contents: patched_contents,
-      };
-    },
-    [publication_details],
-  );
-
+  /*
   const addOCRComparisonPublicationV2 = useCallback(
     (publicationId: string, patch: PatchV2, article: Article) => {
-      if (publication_details[virtual_publication_id]) {
-        delete publication_details[virtual_publication_id];
-        article.publications = article.publications.filter(
-          (i) => i.id !== virtual_publication_id,
-        );
-      }
+      booksRef.current = booksRef.current.filter(i => i.id != virtual_publication_id);
       const publication = {
         ...article.publications.find((i) => i.id === publicationId)!,
         id: virtual_publication_id,
@@ -355,6 +229,7 @@ export default function ArticleViewer({
     },
     [publication_details],
   );
+  */
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
@@ -368,17 +243,13 @@ export default function ArticleViewer({
       const patch = patchWrap.current ? patchWrap.current.patch! : undefined;
       if (patch && typeof window !== 'undefined') {
         if ((patch as PatchV2).version === 2) {
+          /*
           addOCRComparisonPublicationV2(
             patchWrap.current!.publicationId,
             patch as PatchV2,
             article,
           );
-        } else {
-          addOCRComparisonPublicationV1(
-            patchWrap.current!.publicationId,
-            patch as Patch,
-            article,
-          );
+          */
         }
         setCompareType(CompareType.version);
         setComparePublication(virtual_publication_id);
@@ -387,7 +258,9 @@ export default function ArticleViewer({
     }
   }, []);
 
-  const article_diff: Diff[][] | undefined = useMemo(() => {
+  const article_diff = useRef<Diff[][]>();
+  /*
+  const update_article_diff = useCallback(() => {
     if (
       compareType !== CompareType.version ||
       !article ||
@@ -451,39 +324,31 @@ export default function ArticleViewer({
       ++i;
     }
     return res;
-  }, [
-    compareType,
-    compareMode,
-    publication_details,
-    comparePublication,
-    selectedPublication,
-    article,
-  ]);
-  const diff_id: string | undefined = useMemo(() => {
-    if (compareType !== CompareType.version || !article) return;
-    return Math.random().toString();
-  }, [
-    compareType,
-    compareMode,
-    publication_details,
-    comparePublication,
-    selectedPublication,
-    article,
-  ]);
+  }, []);
+  */
 
   const showCompareMenu = !!anchorEl;
 
   const isLocalhost =
     ((global || (window as any))['location'] as any)?.hostname === 'localhost';
 
-  const publication = article.publications.find(
-    (i) => i.id === selectedPublication,
-  )!;
+  const book = booksRef.current.find(i => i.id ==selectedPublication)!;
+  const article = book.article;
+  const aliases: string[] = [];
+  booksRef.current.forEach(book => {
+    if (book.article.alias) aliases.push(book.article.alias);
+  });
 
-  const { contents, comments, page } = publication_details[selectedPublication];
-  const selectedPublicationName = article.publications.find(
-    (i) => i.id === selectedPublication,
-  )?.name;
+  const { description, parts, comments, page_start, page_end } = article;
+  const articleComments = comments.map((i, idx) => ({text: i, id: idx.toString(), index: idx} as Comment))
+  const articleContents = parts.map((i, idx) => ({...i, index: idx, id: idx.toString()} as Content));
+
+  const all_tags = new Map<string, {type: string, name: string}>();
+  booksRef.current.forEach((i) => {
+    i.tags.forEach((j) => {
+      all_tags.set(j.type + '##' + j.name, j);
+    });
+  });
 
   const compare_elements: ReactElement[] = [];
   compare_elements.push(
@@ -497,10 +362,12 @@ export default function ArticleViewer({
     >
       <ArticleComponent
         article={article}
+        articleId={articleId}
         publicationId={selectedPublication}
-        publicationName={selectedPublicationName}
-        comments={comments}
-        contents={contents}
+        publicationName={book.name}
+        description={description}
+        comments={articleComments}
+        contents={articleContents}
         patchable={compareType === CompareType.originProofread}
       />
     </Stack>,
@@ -547,44 +414,42 @@ export default function ArticleViewer({
             -
           </Button>
         </Stack>
-        {publication.type !== 'db' ? (
-          publication.type === 'pdf' ? (
+        {book.type !== 'db' ? (
+          book.type === 'pdf' ? (
             <>
               <Typography variant="subtitle1">
-                来源文件(页码{page.start}-{page.end})
-                <a href={publication.files} target="__blank">
+                来源文件(页码{page_start}-{page_end})
+                <a href="" target="__blank">
                   [下载]
                 </a>
               </Typography>
               <Document
                 file={
                   isLocalhost
-                    ? publication.files
+                    ? (book.files[0] || '')
                         .replace(
                           'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-',
                           '/',
                         )
                         .replace('/main/', '/')
-                    : publication.files
+                    : (book.files[0] || '')
                 }
                 options={{
                   cMapUrl: `/pdfjs-dist/cmaps/`,
                   cMapPacked: true,
                 }}
               >
-                {new Array(page.end - page.start + 1).fill(0).map((i, idx) => (
+                {new Array(page_end - page_start + 1).fill(0).map((i, idx) => (
                   <Page
-                    pageNumber={idx + page.start}
+                    pageNumber={idx + page_start}
                     key={idx}
                     width={500 * previewScale}
                   />
                 ))}
               </Document>
             </>
-          ) : publication.type === 'img' ? (
-            publication.files
-              .split(',')
-              .filter((i, idx) => idx + 1 >= page.start && idx + 1 <= page.end)
+          ) : book.type === 'img' ? (
+            book.files.filter((i, idx) => idx + 1 >= page_start && idx + 1 <= page_end)
               .map((f) => (
                 <img alt="" key={f} src={f} width={previewScale * 500} />
               ))
@@ -609,7 +474,7 @@ export default function ArticleViewer({
               setComparePublication(e.target.value);
             }}
           >
-            {article.publications.map((i) => (
+            {booksRef.current.map((i) => (
               <MenuItem key={i.id} value={i.id}>
                 {i.name}
               </MenuItem>
@@ -622,10 +487,12 @@ export default function ArticleViewer({
           }}
         >
           <ArticleComponent
+            description={description}
+            articleId={articleId}
             article={article}
             publicationId={comparePublication}
-            comments={publication_details[comparePublication!]!.comments}
-            contents={publication_details[comparePublication!]!.contents}
+            comments={articleComments}
+            contents={articleContents}
           />
         </Stack>
       </Stack>,
@@ -650,7 +517,7 @@ export default function ArticleViewer({
           </Select>
         </FormControl>
         <Stack sx={{ overflowY: 'scroll' }}>
-          <DiffViewer diff={article_diff} key={diff_id} />
+          {/*<DiffViewer diff={article_diff} key={diff_id} />*/}
         </Stack>
       </Stack>,
     );
@@ -664,7 +531,7 @@ export default function ArticleViewer({
           <Stack direction="row" sx={{ overflowX: 'scroll', flex: 1 }}>
             <Authors authors={article.authors} />
           </Stack>
-          {article.publications.map((i) => (
+          {booksRef.current.map((i) => (
             <img
               alt=""
               style={{ cursor: 'pointer' }}
@@ -672,13 +539,13 @@ export default function ArticleViewer({
               onClick={() =>
                 window.open(
                   `https://github.com/banned-historical-archives/banned-historical-archives.github.io/issues?q=+${encodeURIComponent(
-                    `is:pr "${article.id}" "${i.id}"`,
+                    `is:pr "${articleId}" "${i.id}"`,
                   )}+`,
                   '_blank',
                 )
               }
               src={`https://img.shields.io/github/issues-search/banned-historical-archives/banned-historical-archives.github.io?style=for-the-badge&color=%23cc0000&label=%E6%A0%A1%E5%AF%B9%E8%AE%B0%E5%BD%95&query=${encodeURIComponent(
-                `is:pr "${article.id}" "${i.id}"`,
+                `is:pr "${articleId}" "${i.id}"`,
               )}`}
             />
           ))}
@@ -688,10 +555,10 @@ export default function ArticleViewer({
         <Typography variant="body1" sx={{ overflowX: 'scroll' }}>
           时间：
           {article.is_range_date
-            ? `${date_to_string(article.dates[0])}-${date_to_string(
-                article.dates[1],
+            ? `${date_to_string(article.dates[0] as Date)}-${date_to_string(
+                article.dates[1] as Date,
               )}`
-            : article.dates.map((i) => date_to_string(i)).join(',')}
+            : article.dates.map((i) => date_to_string(i as Date)).join(',')}
         </Typography>
       </Grid>
       <Grid item xs={12} md={3}>
@@ -703,7 +570,7 @@ export default function ArticleViewer({
             alignItems="center"
             sx={{ flex: 1, overflowX: 'scroll' }}
           >
-            <Tags tags={article.tags} />
+            <Tags tags={Array.from(all_tags.values())} />
           </Stack>
         </Stack>
       </Grid>
@@ -715,7 +582,7 @@ export default function ArticleViewer({
             spacing={1}
             sx={{ flex: 1, overflowX: 'scroll' }}
           >
-            {article.publications.map((i) => (
+            {booksRef.current.map((i) => (
               <Chip
                 key={i.id}
                 label={i.name}
@@ -765,14 +632,14 @@ export default function ArticleViewer({
             </MenuItem>
             <MenuItem
               onClick={() => {
-                setComparePublication(
-                  article.publications.length === 1
-                    ? article.publications[0].id
-                    : article.publications.find((i) => i.id !== publication.id)!
-                        .id,
-                );
-                setCompareType(CompareType.version);
-                setAnchorEl(null);
+                // setComparePublication(
+                //   article.publications.length === 1
+                //     ? article.publications[0].id
+                //     : article.publications.find((i) => i.id !== publication.id)!
+                //         .id,
+                // );
+                // setCompareType(CompareType.version);
+                // setAnchorEl(null);
               }}
             >
               对比不同来源解析后的文本
@@ -785,19 +652,11 @@ export default function ArticleViewer({
                 console.log(str);
                 try {
                   const patchWrap = JSON.parse(str);
-                  if (patchWrap.patch.version !== 2) {
-                    addOCRComparisonPublicationV1(
-                      patchWrap.publicationId,
-                      patchWrap.patch,
-                      article,
-                    );
-                  } else {
-                    addOCRComparisonPublicationV2(
-                      patchWrap.publicationId,
-                      patchWrap.patch,
-                      article,
-                    );
-                  }
+                  // addOCRComparisonPublicationV2(
+                  //   patchWrap.publicationId,
+                  //   patchWrap.patch,
+                  //   article,
+                  // );
                   setComparePublication(virtual_publication_id);
                   setSelectedPublication(patchWrap.publicationId);
                   setCompareType(CompareType.version);
@@ -846,8 +705,8 @@ export default function ArticleViewer({
             <Typography variant="body1" sx={{ overflowX: 'scroll' }}>
               标题：
               {article.title}
-              {article.aliases.length
-                ? `(别名:${article.aliases.map((x) => x.name).join(',')})`
+              {aliases.length
+                ? `(别名:${aliases.join(',')})`
                 : ''}
             </Typography>
           </Grid>

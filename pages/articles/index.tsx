@@ -27,7 +27,7 @@ import Button from '@mui/material/Button';
 import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
 import SettingsIcon from '@mui/icons-material/Settings';
-import { ArticleCategory, ArticleType, TagType } from '../../types';
+import { ArticleCategory, ArticleType, Catelog, CatelogItem, TagType } from '../../types';
 import Typography from '@mui/material/Typography';
 import {
   GetStaticProps,
@@ -35,7 +35,6 @@ import {
   GetServerSidePropsContext,
   GetStaticPropsContext,
 } from 'next';
-import { init } from '../../backend/data-source';
 import { Tag } from '../../backend/entities';
 import Tags from '../../components/Tags';
 import Authors from '../../components/Authors';
@@ -46,22 +45,16 @@ import {
 import { useAuthorFilterDialog } from '../../components/useAuthorFilterDialog';
 import { useTagFilterDialog } from '../../components/useTagFilterDialog';
 import { useSourceFilterDialog } from '../../components/useSourceFilterDialog';
+import { readFile } from 'fs-extra';
+import { join } from 'path';
 
 export const getStaticProps: GetStaticProps = async (
   context: GetStaticPropsContext,
 ) => {
-  const AppDataSource = await init();
-  const articles = await AppDataSource.manager.find(Article, {
-    relations: {
-      authors: true,
-      publications: true,
-      tags: true,
-      dates: true,
-    },
-  });
+  const res = JSON.parse((await readFile(join(process.cwd(), './catelog.json'))).toString());
   return {
     props: {
-      articles: JSON.parse(JSON.stringify(articles)),
+      articles: res
     },
   };
 };
@@ -73,13 +66,13 @@ function ensure_two_digits(a?: number, fallback = '') {
   return a < 10 ? `0${a}` : a;
 }
 
-const columns: GridColDef<Article>[] = [
+const columns: GridColDef<CatelogItem>[] = [
   {
     field: 'title',
     headerName: '标题',
     minWidth: 350,
     flex: 1,
-    renderCell: (params: GridRenderCellParams<string, Article>) => {
+    renderCell: (params: GridRenderCellParams<string, CatelogItem>) => {
       return (
         <a href={`/articles/${params.row.id}`} rel="noreferrer" target="_blank">
           {params.row!.title}
@@ -92,9 +85,9 @@ const columns: GridColDef<Article>[] = [
     headerName: '作者',
     minWidth: 150,
     flex: 1,
-    valueGetter: (params: GridValueGetterParams<Article, Article>) =>
-      params.row.authors.map((i) => i.name).join(','),
-    renderCell: (params: GridRenderCellParams<string, Article>) => (
+    valueGetter: (params: GridValueGetterParams<CatelogItem, CatelogItem>) =>
+      params.row.authors.map((i) => i).join(','),
+    renderCell: (params: GridRenderCellParams<string, CatelogItem>) => (
       <div style={{ overflow: 'visible' }}>
         <Authors authors={params.row.authors} />
       </div>
@@ -107,7 +100,7 @@ const columns: GridColDef<Article>[] = [
       '可能包含多个时间点（起草时间，发布时间，子文稿时间等）或时间段',
     minWidth: 150,
     flex: 1,
-    valueGetter: (params: GridValueGetterParams<Article, Article>) =>
+    valueGetter: (params: GridValueGetterParams<CatelogItem, CatelogItem>) =>
       params.row.dates
         .map((i) =>
           i
@@ -121,7 +114,7 @@ const columns: GridColDef<Article>[] = [
             : '----/--/--',
         )
         .join(' '),
-    renderCell: (params: GridRenderCellParams<string, Article>) => (
+    renderCell: (params: GridRenderCellParams<string, CatelogItem>) => (
       <Stack spacing={1}>
         {params.row!.is_range_date ? (
           <Typography variant="caption">
@@ -155,8 +148,8 @@ const columns: GridColDef<Article>[] = [
     headerName: '来源',
     flex: 1,
     minWidth: 150,
-    valueGetter: (params: GridValueGetterParams<Article, Article>) =>
-      params.row.publications.map((i) => i.name).join(','),
+    valueGetter: (params: GridValueGetterParams<CatelogItem, CatelogItem>) =>
+      params.row.books.join(','),
   },
   {
     field: 'tags',
@@ -166,9 +159,9 @@ const columns: GridColDef<Article>[] = [
     sortComparator: (tags_a: string, tags_b: string) => {
       return tags_a > tags_b ? 1 : -1;
     },
-    valueGetter: (params: GridValueGetterParams<Article, Article>) =>
+    valueGetter: (params: GridValueGetterParams<CatelogItem, CatelogItem>) =>
       params.row.tags.map((i) => i.name).join(','),
-    renderCell: (params: GridRenderCellParams<string, Article>) => (
+    renderCell: (params: GridRenderCellParams<string, CatelogItem>) => (
       <div style={{ overflow: 'visible' }}>
         <Tags tags={params.row.tags} />
       </div>
@@ -197,24 +190,26 @@ function date_include(a: Article, b: DateFilter) {
   }
 }
 
-export default function Articles({ articles }: { articles: Article[] }) {
+export default function Articles({ articles }: { articles: Catelog }) {
   const tags_all = useMemo(() => {
     const m = new Map<string, Tag>();
     articles.forEach((i) =>
       i.tags.forEach((j) => {
-        m.set(j.id, j);
+        const id = j.type + '##' + j.name;
+        m.set(id, {...j, id} as Tag);
       }),
     );
     return m;
   }, [articles]);
   const tags_all_order_by_type = useMemo(() => {
-    const m = new Map<TagType, Map<string, Tag>>();
+    const m = new Map<string, Map<string, Tag>>();
     articles.forEach((i) =>
       i.tags.forEach((j) => {
         if (!m.get(j.type)) {
           m.set(j.type, new Map());
         }
-        m.get(j.type)!.set(j.id, j);
+        const id = j.type + '##' + j.name;
+        m.get(j.type)!.set(id, {...j, id} as Tag);
       }),
     );
     return m;
@@ -222,7 +217,7 @@ export default function Articles({ articles }: { articles: Article[] }) {
   const sources_all = useMemo(() => {
     const set = new Set<string>();
     articles.forEach((i) =>
-      i.publications.forEach((j) => j.name && set.add(j.name)),
+      i.books.forEach(j => set.add(j)),
     );
     return Array.from(set).sort();
   }, [articles]);
@@ -230,7 +225,7 @@ export default function Articles({ articles }: { articles: Article[] }) {
   const authors_all = useMemo(() => {
     const set = new Set<string>();
     articles.forEach((i) =>
-      i.authors.forEach((j) => j.name && set.add(j.name)),
+      i.authors.forEach((j) => j && set.add(j)),
     );
     return Array.from(set).sort();
   }, [articles]);
@@ -265,17 +260,17 @@ export default function Articles({ articles }: { articles: Article[] }) {
 
   const filtered_articles = useMemo(() => {
     return articles
-      .filter((i) => date_include(i, dateFilter))
+      .filter((i) => date_include(i as unknown as Article, dateFilter))
       .filter((i) =>
-        authorFilter ? !!i.authors.find((k) => k.name === authorFilter) : true,
+        authorFilter ? !!i.authors.find((k) => k === authorFilter) : true,
       )
       .filter((i) =>
         sourceFilter
-          ? !!i.publications.find((k) => k.name.indexOf(sourceFilter) > -1)
+          ? !!i.books.find((k) => k.indexOf(sourceFilter) > -1)
           : true,
       )
       .filter((i) =>
-        tagFilter ? !!i.tags.find((k) => k.id === tagFilter) : true,
+        tagFilter ? !!i.tags.find((k) => k.type + '##' + k.name === tagFilter) : true,
       );
   }, [articles, dateFilter, tagFilter, authorFilter, sourceFilter]);
 

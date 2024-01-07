@@ -5,7 +5,7 @@ import Popover from '@mui/material/Popover';
 import { ArticleCategory, ArticleType, TagType } from '../types';
 import { Tag } from '../backend/entities';
 
-export default function Tags({ tags }: { tags: Tag[] }) {
+export default function Tags({ tags }: { tags: {type: string, name: string}[] }) {
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
   const [label, setLabel] = useState('');
 
@@ -34,7 +34,7 @@ export default function Tags({ tags }: { tags: Tag[] }) {
 
       {tags.map((tag) => (
         <Chip
-          key={tag.id}
+          key={tag.type + '##' + tag.name}
           onMouseEnter={(event) => {
             setLabel(tag.type);
             setAnchorEl(event.currentTarget);

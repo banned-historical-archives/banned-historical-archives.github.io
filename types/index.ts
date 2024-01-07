@@ -349,3 +349,25 @@ export type PatchV2 = {
   newComments?: string[]; // 从空注释状态下提交的变更
   description?: StringDiff; // 如果为空字符串表示无变更，如果不存在，表示删除
 };
+
+export type CatelogTemp = {
+    [article_id: string]: {
+        title: string,
+        authors: string[],
+        dates: any,
+        is_range_date: boolean,
+        tags: {[type: string]: {[name: string]: boolean}};
+        books: {[id: string]: string};
+    }
+}
+export type Catelog = CatelogItem[];
+export type CatelogItem = {
+  id: string;
+  title: string,
+  authors: string[],
+  dates: Date[],
+  is_range_date: boolean,
+  books: string[],
+  tags: {type: string, name: string}[];
+};
+export type ArticleIndexes = {[aid: string]: {[book_id: string]: string}};

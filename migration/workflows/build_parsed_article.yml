@@ -68,12 +68,6 @@ jobs:
           git add .
           git commit -m automation && git push
       - name: Invoke workflow
-        uses: benc-uk/workflow-dispatch@v1
-        if: steps.check_changes.outputs.changes == 'true'
-        with:
-          workflow: build_tags.yml
-          ref: parsed_article
-      - name: Invoke workflow
         if: steps.check_changes.outputs.changes == 'true'
         uses: benc-uk/workflow-dispatch@v1
         with:
