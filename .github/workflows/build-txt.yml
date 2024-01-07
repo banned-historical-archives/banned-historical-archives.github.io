@@ -26,7 +26,6 @@ jobs:
       - name: Use Node.js
         uses: actions/setup-node@v3
       - run: npm install
-      - run: NODE_OPTIONS="--max-old-space-size=8192" npm run init-db
       - run: node_options="--max-old-space-size=8192" npm run dev:nextjs-helper && npm run build-txt
       - run: git config --global http.postBuffer 2097152000
       - run: git config --global user.email "you@example.com"
