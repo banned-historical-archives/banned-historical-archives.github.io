@@ -426,20 +426,13 @@ export default function ArticleViewer({
             <>
               <Typography variant="subtitle1">
                 来源文件(页码{page_start}-{page_end})
-                <a href="" target="__blank">
+                <a href={book.files[0]} target="__blank">
                   [下载]
                 </a>
               </Typography>
               <Document
                 file={
-                  isLocalhost
-                    ? (book.files[0] || '')
-                        .replace(
-                          'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-',
-                          '/',
-                        )
-                        .replace('/main/', '/')
-                    : book.files[0] || ''
+                  book.files[0] || ''
                 }
                 options={{
                   cMapUrl: `/pdfjs-dist/cmaps/`,

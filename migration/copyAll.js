@@ -27,14 +27,19 @@ function fixWorkflow(dest) {
 function fixConfig(dest) {
     execSync('((git checkout --orphan ocr_config || git checkout ocr_config) && git reset --hard && git pull) || true',{cwd: dest});
 
-    /*
     fs.readdirSync(join(dest)).filter(i => i.endsWith('.ts')).forEach(j => {
-        const str = fs.readFileSync(join(dest, j)).toString();
-        fs.writeFileSync(join(dest, j), str.replace('.`,', '.jpg`,'));
-    });
-    */
+        const str = fs.readFileSync(join(dest, j)).toString().replace('export default ', '');
+        const cfg = eval('tmp='+str);
+        cfg.entity.files = cfg.entity.files.split(',');
+        fs.writeFileSync(join(dest, j), 'export default ' + JSON.stringify(cfg, null, 2));
 
-    execSync('(git add . && git commit -m fix_img_ext) || true',{cwd: dest});
+        //if (fs.pathExistsSync(join(dest, parse(j).name))) {
+        //    fs.unlinkSync(join(dest, parse(j).name))
+        //    console.log('rm ', join(dest, parse(j).name))
+        //}
+    });
+
+    execSync('(git add . && git commit -m rm) || true',{cwd: dest});
     execSync('(git push --set-upstream origin ocr_config) || true',{cwd: dest});
 }
 function findNonJpg(dest) {
@@ -64,12 +69,13 @@ function findNonJpg(dest) {
 
     Array.from(candidates_png.values()).forEach(j => {
         const str = fs.readFileSync(join(dest, j + '.ts')).toString();
-        fs.writeFileSync(join(dest, j), str.replace('.jpg`,', '.png`,'));
+        fs.writeFileSync(join(dest, j + '.ts'), str.replace('.jpg`,', '.png`,'));
     });
+    console.log(Array.from(candidates_png.values()))
     console.log(Array.from(candidates_jpeg.values()))
     Array.from(candidates_jpeg.values()).forEach(j => {
         const str = fs.readFileSync(join(dest, j + '.ts')).toString();
-        fs.writeFileSync(join(dest, j), str.replace('.jpg`,', '.jpeg`,'));
+        fs.writeFileSync(join(dest, j + '.ts'), str.replace('.jpg`,', '.jpeg`,'));
     });
 
     execSync('(git add . && git commit -m fix_img_ext) || true',{cwd: dest});
@@ -92,14 +98,14 @@ fs.readdirSync(archives_dir).filter(i => i.startsWith('archives')).forEach(i => 
         i == 'archives11' ||
         i == 'archives12'
     ) return;
-    // if (i !== 'archives18') return;
+    // if (i !== 'archives1') return;
     const dest = join(archives_dir, i);
     console.log(dest)
     execSync('git clean -f && git reset --hard',{cwd: dest});
-     //   fixConfig(dest);
-     // findNonJpg(dest);
+     // fixConfig(dest);
+     //findNonJpg(dest);
     updateBranch(dest);
-        return;
+    return;
     // fixWorkflow(dest);
 
     // ensureFixExt(dest);
