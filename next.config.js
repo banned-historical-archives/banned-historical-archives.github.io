@@ -7,7 +7,7 @@ const nextConfig = {
   swcMinify: true,
   trailingSlash: true,
   staticPageGenerationTimeout: 800,
-  output: 'standalone',
+  output: 'export',
   webpack: (config) => {
     config.module.rules.push(
       {
