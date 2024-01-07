@@ -30,7 +30,6 @@ import Menu from '@mui/material/Menu';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import Divider from '@mui/material/Divider';
-import { init } from '../../backend/data-source';
 import ImageEntity from '../../backend/entity/image';
 import Stack from '@mui/material/Stack';
 import Accordion from '@mui/material/Accordion';
@@ -49,19 +48,14 @@ import {
 } from '@mui/x-data-grid-pro';
 import { ensure_two_digits } from '../../utils';
 import ImageTags from '../../components/ImageTags';
+import images from '../../backend/images';
 
 export const getStaticProps: GetStaticProps = async (
   context: GetStaticPropsContext,
 ) => {
-  const AppDataSource = await init();
-  const images = await AppDataSource.manager.find(ImageEntity, {
-    relations: {
-      tags: true,
-    },
-  });
   return {
     props: {
-      images: JSON.parse(JSON.stringify(images)),
+      images
     },
   };
 };

@@ -36,7 +36,6 @@ import Menu from '@mui/material/Menu';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import Divider from '@mui/material/Divider';
-import { init } from '../../backend/data-source';
 import MusicEntity from '../../backend/entity/music';
 import Stack from '@mui/material/Stack';
 import Accordion from '@mui/material/Accordion';
@@ -46,21 +45,14 @@ import Typography from '@mui/material/Typography';
 import PauseCircleIcon from '@mui/icons-material/PauseCircle';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { DiffViewer } from '../../components/DiffViewer';
+import { music } from '../../backend/music'
 
 export const getStaticProps: GetStaticProps = async (
   context: GetStaticPropsContext,
 ) => {
-  const AppDataSource = await init();
-  const music = await AppDataSource.manager.find(MusicEntity, {
-    relations: {
-      lyrics: {
-        audios: true,
-      },
-    },
-  });
   return {
     props: {
-      music: JSON.parse(JSON.stringify(music)),
+      music
     },
   };
 };

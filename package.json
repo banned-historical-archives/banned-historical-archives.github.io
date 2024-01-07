@@ -2,7 +2,7 @@
   "name": "x",
   "version": "0.1.0",
   "scripts": {
-    "dev:nextjs-helper": "ts-node --project ./tsconfig.build.json ./backend/nextjs-helper",
+    "dev:nextjs-helper": "ts-node --project ./tsconfig.build.json ./backend/nextjs-helper &",
     "build-catelog": "ts-node --project ./tsconfig.build.json ./backend/build-catelog.ts",
     "dev": "COMMIT_HASH=$(git rev-parse HEAD) next dev",
     "dev:es-server": "ts-node --project ./tsconfig.build.json ./backend/es-server.ts",
