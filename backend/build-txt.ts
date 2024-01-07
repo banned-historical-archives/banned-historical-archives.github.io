@@ -62,7 +62,7 @@ const article_indexes = JSON.parse(
 
 Object.keys(article_indexes).forEach((article_id) => {
   for (const book_id of Object.keys(article_indexes[article_id])) {
-    const archives_id = article_indexes[article_id][book_id];
+    const archives_id = 'archives' + article_indexes[article_id][book_id];
     const book_info = JSON.parse(
       fs
         .readFileSync(
