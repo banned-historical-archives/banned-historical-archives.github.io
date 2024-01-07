@@ -24,6 +24,57 @@ function fixWorkflow(dest) {
     execSync(`(git push --set-upstream origin ${i}) || true`,{cwd: dest});
 });
 }
+function fixConfig(dest) {
+    execSync('((git checkout --orphan ocr_config || git checkout ocr_config) && git reset --hard && git pull) || true',{cwd: dest});
+
+    /*
+    fs.readdirSync(join(dest)).filter(i => i.endsWith('.ts')).forEach(j => {
+        const str = fs.readFileSync(join(dest, j)).toString();
+        fs.writeFileSync(join(dest, j), str.replace('.`,', '.jpg`,'));
+    });
+    */
+
+    execSync('(git add . && git commit -m fix_img_ext) || true',{cwd: dest});
+    execSync('(git push --set-upstream origin ocr_config) || true',{cwd: dest});
+}
+function findNonJpg(dest) {
+    execSync('((git checkout --orphan main || git checkout main) && git reset --hard && git pull) || true',{cwd: dest});
+    const candidates_png = new Set();
+    const candidates_jpeg = new Set();
+    function f(x) {
+    for (const i of fs.readdirSync(x)) {
+        const t = fs.statSync(join(x, i))
+        if (t.isDirectory()) {
+            f(join(x, i));
+        } else {
+            const ext = parse(i).ext;
+            if (ext == '.png') {
+                candidates_png.add(basename(x));
+            } else if (ext == '.jpeg') {
+                candidates_jpeg.add(basename(x));
+            } else if (ext == '.pdf' || ext == '.jpg') {
+            } else {
+                console.log('unknown',join(x, i), ext)
+            }
+        }
+    }
+    }
+    f(dest)
+    execSync('((git checkout --orphan ocr_config || git checkout ocr_config) && git reset --hard && git pull) || true',{cwd: dest});
+
+    Array.from(candidates_png.values()).forEach(j => {
+        const str = fs.readFileSync(join(dest, j + '.ts')).toString();
+        fs.writeFileSync(join(dest, j), str.replace('.jpg`,', '.png`,'));
+    });
+    console.log(Array.from(candidates_jpeg.values()))
+    Array.from(candidates_jpeg.values()).forEach(j => {
+        const str = fs.readFileSync(join(dest, j + '.ts')).toString();
+        fs.writeFileSync(join(dest, j), str.replace('.jpg`,', '.jpeg`,'));
+    });
+
+    execSync('(git add . && git commit -m fix_img_ext) || true',{cwd: dest});
+    execSync('(git push --set-upstream origin ocr_config) || true',{cwd: dest});
+}
 function ensureParsedArticle(dest) {
     execSync('((git checkout --orphan parsed_article || git checkout parsed_article) && git reset --hard && git pull) || true',{cwd: dest});
     execSync('(git add . && git commit -m init) || true',{cwd: dest});
@@ -41,13 +92,15 @@ fs.readdirSync(archives_dir).filter(i => i.startsWith('archives')).forEach(i => 
         i == 'archives11' ||
         i == 'archives12'
     ) return;
-    // if (i !== 'archives9') return;
+    // if (i !== 'archives18') return;
     const dest = join(archives_dir, i);
     console.log(dest)
     execSync('git clean -f && git reset --hard',{cwd: dest});
-
+     //   fixConfig(dest);
+     // findNonJpg(dest);
+    updateBranch(dest);
+        return;
     // fixWorkflow(dest);
-    // updateBranch(dest);
 
     // ensureFixExt(dest);
     ensureParsedArticle(dest);
