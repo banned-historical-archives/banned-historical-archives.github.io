@@ -270,15 +270,16 @@ export default function ArticleViewer({
   }, []);
 
   const article_diff: Diff[][] = useMemo(() => {
-    if (
-      compareType !== CompareType.version ||
-      !(typeof window !== 'undefined')
-    )
+    if (compareType !== CompareType.version || !(typeof window !== 'undefined'))
       return [];
-    const article_a = booksRef.current.find(i => i.id == selectedPublication)!.article;
-    const article_b = booksRef.current.find(i => i.id == comparedPublication)!.article;
+    const article_a = booksRef.current.find(
+      (i) => i.id == selectedPublication,
+    )!.article;
+    const article_b = booksRef.current.find(
+      (i) => i.id == comparedPublication,
+    )!.article;
     let comments_a = article_a.comments;
-    let comments_b = article_b.comments
+    let comments_b = article_b.comments;
     let contents_a = article_a.parts;
     let contents_b = article_b.parts;
     if (compareMode === CompareMode.literal) {
@@ -316,12 +317,7 @@ export default function ArticleViewer({
       ++i;
     }
     return res;
-  }, [
-    selectedPublication,
-    compareType,
-    compareMode,
-    comparedPublication,
-  ]);
+  }, [selectedPublication, compareType, compareMode, comparedPublication]);
 
   const showCompareMenu = !!anchorEl;
 
@@ -329,7 +325,9 @@ export default function ArticleViewer({
     ((global || (window as any))['location'] as any)?.hostname === 'localhost';
 
   const book = booksRef.current.find((i) => i.id == selectedPublication)!;
-  const comparedBook = booksRef.current.find((i) => i.id == comparedPublication)!;
+  const comparedBook = booksRef.current.find(
+    (i) => i.id == comparedPublication,
+  )!;
   const article = book.article;
   const aliases: string[] = [];
   booksRef.current.forEach((book) => {
@@ -431,9 +429,7 @@ export default function ArticleViewer({
                 </a>
               </Typography>
               <Document
-                file={
-                  book.files[0] || ''
-                }
+                file={book.files[0] || ''}
                 options={{
                   cMapUrl: `/pdfjs-dist/cmaps/`,
                   cMapPacked: true,
@@ -636,8 +632,7 @@ export default function ArticleViewer({
                 setComparePublication(
                   booksRef.current.length === 1
                     ? booksRef.current[0].id
-                    : booksRef.current.find((i) => i.id !== book.id)!
-                        .id,
+                    : booksRef.current.find((i) => i.id !== book.id)!.id,
                 );
                 setCompareType(CompareType.version);
                 setAnchorEl(null);

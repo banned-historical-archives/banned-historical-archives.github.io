@@ -4,6 +4,7 @@ node_modules
 patch
 backend/ocr_cache
 public
+archives
 package-lock.json
 yarn.lock
 *.js

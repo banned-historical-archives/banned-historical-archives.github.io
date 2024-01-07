@@ -45,14 +45,14 @@ import Typography from '@mui/material/Typography';
 import PauseCircleIcon from '@mui/icons-material/PauseCircle';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { DiffViewer } from '../../components/DiffViewer';
-import { music } from '../../backend/music'
+import { music } from '../../backend/music';
 
 export const getStaticProps: GetStaticProps = async (
   context: GetStaticPropsContext,
 ) => {
   return {
     props: {
-      music
+      music,
     },
   };
 };

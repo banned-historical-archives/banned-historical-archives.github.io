@@ -13,7 +13,6 @@
     "build-readme": "ts-node --project ./tsconfig.build.json ./backend/build-readme.ts",
     "cp-pdfjs": "cp -r ./node_modules/pdfjs-dist ./public/",
     "postbuild": "next-sitemap",
-    "test": "vitest",
     "start": "next start",
     "lint": "next lint",
     "prettier": "prettier -w ."
