@@ -16,8 +16,18 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-        with:
-          submodules: true
+      - run: cd archives && rm -rf archives0 && git clone -b parsed_article --depth 1 git@github.com:banned-historical-archives/banned-historical-archives0.git archives0
+      - run: cd archives && rm -rf archives1 && git clone -b parsed_article --depth 1 git@github.com:banned-historical-archives/banned-historical-archives1.git archives1
+      - run: cd archives && rm -rf archives2 && git clone -b parsed_article --depth 1 git@github.com:banned-historical-archives/banned-historical-archives2.git archives2
+      - run: cd archives && rm -rf archives3 && git clone -b parsed_article --depth 1 git@github.com:banned-historical-archives/banned-historical-archives3.git archives3
+      - run: cd archives && rm -rf archives4 && git clone -b parsed_article --depth 1 git@github.com:banned-historical-archives/banned-historical-archives4.git archives4
+      - run: cd archives && rm -rf archives5 && git clone -b parsed_article --depth 1 git@github.com:banned-historical-archives/banned-historical-archives5.git archives5
+      - run: cd archives && rm -rf archives8 && git clone -b parsed_article --depth 1 git@github.com:banned-historical-archives/banned-historical-archives8.git archives8
+      - run: cd archives && rm -rf archives9 && git clone -b parsed_article --depth 1 git@github.com:banned-historical-archives/banned-historical-archives9.git archives9
+      - run: cd archives && rm -rf archives14 && git clone -b parsed_article --depth 1 git@github.com:banned-historical-archives/banned-historical-archives14.git archives14
+      - run: cd archives && rm -rf archives15 && git clone -b parsed_article --depth 1 git@github.com:banned-historical-archives/banned-historical-archives15.git archives15
+      - run: cd archives && rm -rf archives16 && git clone -b parsed_article --depth 1 git@github.com:banned-historical-archives/banned-historical-archives16.git archives16
+      - run: cd archives && rm -rf archives17 && git clone -b parsed_article --depth 1 git@github.com:banned-historical-archives/banned-historical-archives17.git archives17
       - name: Use Node.js
         uses: actions/setup-node@v3
       - run: npm install
