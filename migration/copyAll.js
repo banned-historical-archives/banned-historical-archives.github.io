@@ -3,7 +3,7 @@ const { execSync } =require('child_process');
 
 const fs = require('fs-extra')
 
-const archives_dir = join(__dirname, '../public');
+const archives_dir = join(__dirname, '../archives');
 function ensureFixExt(dest) {
     execSync('git checkout main && git reset --hard origin/main',{cwd: dest});
     execSync(`node ${join(__dirname, 'fixExtension.js')} ${dest}`);
