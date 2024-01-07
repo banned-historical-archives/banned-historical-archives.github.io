@@ -39,7 +39,7 @@ jobs:
       - run: git config --global user.name "Your Name"
       - run: git checkout --orphan x
       - run: git reset --hard
-      - run: find . -maxdepth 1 ! -name 'out' -exec rm -rf {} +
+      - run: find . -maxdepth 1 ! -name . ! -name 'out' -exec rm -rf {} +
       - run: mv out/* ./ && rmdir out
       - run: touch .nojekyll
       - run: git add .
