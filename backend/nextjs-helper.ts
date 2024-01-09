@@ -38,7 +38,7 @@ app.get('/get_article', async (req, res) => {
     book.tags = JSON.parse(
       (
         await readFile(
-          join(book_path, article_id.slice(0, 3), `${article_id}.tag`),
+          join(book_path, article_id.slice(0, 3), `${article_id}.tags`),
         )
       ).toString(),
     );
