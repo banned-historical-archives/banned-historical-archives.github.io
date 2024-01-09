@@ -26,6 +26,7 @@ function catelog_temp_to_catelog(c: BookCatelogTemp): BookCatelog {
   for (let i = 0; i <= 20; ++i) {
     const p = join(__dirname, '../parsed/archives' + i);
     console.log(p);
+    if (!await fs.pathExists(p)) continue;
     for (const prefix of (await fs.readdir(p)).filter(
       (i) => !i.startsWith('.') && !i.endsWith('.md'),
     )) {
