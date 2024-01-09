@@ -46,5 +46,7 @@ dist
 es_http_ca.crt
 .env
 
-catelog.json
+book_catelog.json
+music_catelog.json
+gallery_catelog.json
 article_indexes.json

@@ -1,63 +1,63 @@
-[submodule "public/archives0"]
+[submodule "archives/archives0"]
 	path = archives/archives0
 	url = git@github.com:banned-historical-archives/banned-historical-archives0.git
-[submodule "public/archives1"]
+[submodule "archives/archives1"]
 	path = archives/archives1
 	url = git@github.com:banned-historical-archives/banned-historical-archives1.git
-[submodule "public/archives2"]
+[submodule "archives/archives2"]
 	path = archives/archives2
 	url = git@github.com:banned-historical-archives/banned-historical-archives2.git
-[submodule "public/archives3"]
+[submodule "archives/archives3"]
 	path = archives/archives3
 	url = git@github.com:banned-historical-archives/banned-historical-archives3.git
-[submodule "public/archives4"]
+[submodule "archives/archives4"]
 	path = archives/archives4
 	url = git@github.com:banned-historical-archives/banned-historical-archives4.git
-[submodule "public/archives5"]
+[submodule "archives/archives5"]
 	path = archives/archives5
 	url = git@github.com:banned-historical-archives/banned-historical-archives5.git
-[submodule "public/archives6"]
+[submodule "archives/archives6"]
 	path = archives/archives6
 	url = git@github.com:banned-historical-archives/banned-historical-archives6.git
-[submodule "public/archives7"]
+[submodule "archives/archives7"]
 	path = archives/archives7
 	url = git@github.com:banned-historical-archives/banned-historical-archives7.git
-[submodule "public/archives8"]
+[submodule "archives/archives8"]
 	path = archives/archives8
 	url = git@github.com:banned-historical-archives/banned-historical-archives8.git
-[submodule "public/archives9"]
+[submodule "archives/archives9"]
 	path = archives/archives9
 	url = git@github.com:banned-historical-archives/banned-historical-archives9.git
-[submodule "public/archives10"]
+[submodule "archives/archives10"]
 	path = archives/archives10
 	url = git@github.com:banned-historical-archives/banned-historical-archives10.git
-[submodule "public/archives11"]
+[submodule "archives/archives11"]
 	path = archives/archives11
 	url = git@github.com:banned-historical-archives/banned-historical-archives11.git
-[submodule "public/archives12"]
+[submodule "archives/archives12"]
 	path = archives/archives12
 	url = git@github.com:banned-historical-archives/banned-historical-archives12.git
-[submodule "public/archives13"]
-	path = public/archives13
+[submodule "archives/archives13"]
+	path = archives/archives13
 	url = git@github.com:banned-historical-archives/banned-historical-archives13.git
-[submodule "public/archives14"]
+[submodule "archives/archives14"]
 	path = archives/archives14
 	url = git@github.com:banned-historical-archives/banned-historical-archives14.git
-[submodule "public/archives15"]
+[submodule "archives/archives15"]
 	path = archives/archives15
 	url = git@github.com:banned-historical-archives/banned-historical-archives15.git
-[submodule "public/archives16"]
+[submodule "archives/archives16"]
 	path = archives/archives16
 	url = git@github.com:banned-historical-archives/banned-historical-archives16.git
-[submodule "public/archives17"]
+[submodule "archives/archives17"]
 	path = archives/archives17
 	url = git@github.com:banned-historical-archives/banned-historical-archives17.git
-[submodule "public/archives18"]
+[submodule "archives/archives18"]
 	path = archives/archives18
 	url = git@github.com:banned-historical-archives/banned-historical-archives18.git
-[submodule "public/archives19"]
+[submodule "archives/archives19"]
 	path = archives/archives19
 	url = git@github.com:banned-historical-archives/banned-historical-archives19.git
-[submodule "public/archives20"]
+[submodule "archives/archives20"]
 	path = archives/archives20
 	url = git@github.com:banned-historical-archives/banned-historical-archives20.git

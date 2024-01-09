@@ -1,8 +1,8 @@
-name: build_parsed_article
+name: build_parsed
 on:
   workflow_dispatch:
   push:
-    branches: ['ocr_patch', 'ocr_cache', 'ocr_config']
+    branches: ['ocr_patch', 'ocr_cache', 'config']
 
 permissions:
   contents: write
@@ -11,7 +11,7 @@ permissions:
   actions: write
 
 jobs:
-  build_parsed_article:
+  build_parsed:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -25,8 +25,8 @@ jobs:
           ref: 'main'
       - uses: actions/checkout@v4
         with:
-          path: './ocr_config'
-          ref: 'ocr_config'
+          path: './config'
+          ref: 'config'
       - uses: actions/checkout@v4
         with:
           path: './ocr_cache'
@@ -37,13 +37,13 @@ jobs:
           ref: 'ocr_patch'
       - uses: actions/checkout@v4
         with:
-          path: './parsed_article'
-          ref: 'parsed_article'
+          path: './parsed'
+          ref: 'parsed'
       - name: Use Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 18
-      - run: cd ocr_helper && npm install && npm run build_parsed_article -- ../ocr_config ../ocr_cache ../ocr_patch ../parsed_article ../raw
+      - run: cd ocr_helper && npm install && npm run build_parsed -- ../config ../ocr_cache ../ocr_patch ../parsed ../raw
       - run: git config --global http.postBuffer 2097152000
       - run: git config --global user.email "you@example.com"
       - run: git config --global user.name "Your Name"
@@ -51,7 +51,7 @@ jobs:
       - name: Check for changes
         id: check_changes
         run: |
-          cd parsed_article
+          cd parsed
           git status --porcelain
           if [ -z "$(git status --porcelain)" ]; then
             echo "No changes to commit"
@@ -64,7 +64,7 @@ jobs:
       - name: Commit and push changes
         if: steps.check_changes.outputs.changes == 'true'
         run: |
-          cd ./parsed_article
+          cd ./parsed
           git add .
           git commit -m automation && git push
       - name: Invoke workflow
@@ -74,3 +74,4 @@ jobs:
           workflow: build.yml
           ref: master
           repo: banned-historical-archives/banned-historical-archives.github.io
+          token: ${{secrets.GH_PAT}}

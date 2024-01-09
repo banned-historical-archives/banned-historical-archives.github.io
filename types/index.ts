@@ -350,7 +350,7 @@ export type PatchV2 = {
   description?: StringDiff; // 如果为空字符串表示无变更，如果不存在，表示删除
 };
 
-export type CatelogTemp = {
+export type BookCatelogTemp = {
   [article_id: string]: {
     title: string;
     authors: string[];
@@ -360,8 +360,8 @@ export type CatelogTemp = {
     books: { [id: string]: string };
   };
 };
-export type Catelog = CatelogItem[];
-export type CatelogItem = {
+export type BookCatelog = BookCatelogItem[];
+export type BookCatelogItem = {
   id: string;
   title: string;
   authors: string[];

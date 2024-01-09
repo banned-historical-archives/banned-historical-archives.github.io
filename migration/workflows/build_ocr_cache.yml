@@ -2,7 +2,7 @@ name: build_ocr_cache
 on:
   workflow_dispatch:
   push:
-    branches: ['ocr_config']
+    branches: ['config']
 
 permissions:
   contents: write
@@ -27,8 +27,8 @@ jobs:
           ref: 'main'
       - uses: actions/checkout@v4
         with:
-          path: './ocr_config'
-          ref: 'ocr_config'
+          path: './config'
+          ref: 'config'
       - uses: actions/checkout@v4
         with:
           path: './ocr_cache'
@@ -37,7 +37,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 18
-      - run: cd ocr_helper && npm install && npm run build_ocr_cache -- ../ocr_config ../raw ../ocr_cache
+      - run: cd ocr_helper && npm install && npm run build_ocr_cache -- ../config ../raw ../ocr_cache
       - run: git config --global http.postBuffer 2097152000
       - run: git config --global user.email "you@example.com"
       - run: git config --global user.name "Your Name"
@@ -64,5 +64,5 @@ jobs:
       - name: Invoke workflow
         uses: benc-uk/workflow-dispatch@v1
         with:
-          workflow: build_parsed_article.yml
+          workflow: build_parsed.yml
           ref: ocr_cache

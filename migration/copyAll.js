@@ -11,26 +11,30 @@ function ensureFixExt(dest) {
     execSync('(git push --set-upstream origin main) || true',{cwd: dest});
 }
 function fixWorkflow(dest) {
-    ['ocr_patch', 'ocr_cache', 'ocr_config'].forEach(i => {
+    ['ocr_patch', 'ocr_cache', 'config'].forEach(i => {
     execSync(`((git checkout --orphan ${i} || git checkout ${i}) && git reset --hard && git pull) || true`,{cwd: dest});
     fs.ensureDirSync(
         join(dest, '.github', 'workflows'),
     );
     fs.cpSync(
-        join(__dirname, 'workflows', 'build_parsed_article.yml'),
-        join(dest, '.github/workflows', 'build_parsed_article.yml')
+        join(__dirname, 'workflows', 'build_parsed.yml'),
+        join(dest, '.github/workflows', 'build_parsed.yml')
     )
+    if (fs.pathExistsSync(join(dest, '.github/workflows', 'build_parsed_article.yml')))
+        fs.unlinkSync(join(dest, '.github/workflows', 'build_parsed_article.yml'))
+
     execSync('(git add . && git commit -m fix_workflow) || true',{cwd: dest});
     execSync(`(git push --set-upstream origin ${i}) || true`,{cwd: dest});
 });
 }
 function fixConfig(dest) {
-    execSync('((git checkout --orphan ocr_config || git checkout ocr_config) && git reset --hard && git pull) || true',{cwd: dest});
+    execSync('((git checkout --orphan config || git checkout config) && git reset --hard && git pull) || true',{cwd: dest});
 
     fs.readdirSync(join(dest)).filter(i => i.endsWith('.ts')).forEach(j => {
         const str = fs.readFileSync(join(dest, j)).toString().replace('export default ', '');
         const cfg = eval('tmp='+str);
-        cfg.entity.files = cfg.entity.files.split(',');
+        cfg.resource_type = 'book';
+        cfg.version = 2;
         fs.writeFileSync(join(dest, j), 'export default ' + JSON.stringify(cfg, null, 2));
 
         //if (fs.pathExistsSync(join(dest, parse(j).name))) {
@@ -39,8 +43,8 @@ function fixConfig(dest) {
         //}
     });
 
-    execSync('(git add . && git commit -m rm) || true',{cwd: dest});
-    execSync('(git push --set-upstream origin ocr_config) || true',{cwd: dest});
+    execSync('(git add . && git commit -m add_resource_type) || true',{cwd: dest});
+    execSync('(git push --set-upstream origin config) || true',{cwd: dest});
 }
 function findNonJpg(dest) {
     execSync('((git checkout --orphan main || git checkout main) && git reset --hard && git pull) || true',{cwd: dest});
@@ -65,7 +69,7 @@ function findNonJpg(dest) {
     }
     }
     f(dest)
-    execSync('((git checkout --orphan ocr_config || git checkout ocr_config) && git reset --hard && git pull) || true',{cwd: dest});
+    execSync('((git checkout --orphan config || git checkout config) && git reset --hard && git pull) || true',{cwd: dest});
 
     Array.from(candidates_png.values()).forEach(j => {
         const str = fs.readFileSync(join(dest, j + '.ts')).toString();
@@ -79,15 +83,16 @@ function findNonJpg(dest) {
     });
 
     execSync('(git add . && git commit -m fix_img_ext) || true',{cwd: dest});
-    execSync('(git push --set-upstream origin ocr_config) || true',{cwd: dest});
+    execSync('(git push --set-upstream origin config) || true',{cwd: dest});
 }
-function ensureParsedArticle(dest) {
-    execSync('((git checkout --orphan parsed_article || git checkout parsed_article) && git reset --hard && git pull) || true',{cwd: dest});
+function ensureParsed(dest) {
+    execSync('((git checkout --orphan parsed || git checkout parsed) && git reset --hard && git pull) || true',{cwd: dest});
+    execSync('touch README.md',{cwd: dest});
     execSync('(git add . && git commit -m init) || true',{cwd: dest});
-    execSync('(git push --set-upstream origin parsed_article) || true',{cwd: dest});
+    execSync('(git push --set-upstream origin parsed) || true',{cwd: dest});
 }
 function updateBranch(dest) {
-    execSync('((git checkout --orphan parsed_article || git checkout parsed_article) && git reset --hard && git pull) || true',{cwd: dest});
+    execSync('((git checkout --orphan parsed || git checkout parsed) && git reset --hard && git pull) || true',{cwd: dest});
 }
 fs.readdirSync(archives_dir).filter(i => i.startsWith('archives')).forEach(i => {
     if (
@@ -102,37 +107,50 @@ fs.readdirSync(archives_dir).filter(i => i.startsWith('archives')).forEach(i => 
     const dest = join(archives_dir, i);
     console.log(dest)
     execSync('git clean -f && git reset --hard',{cwd: dest});
-     // fixConfig(dest);
-     //findNonJpg(dest);
-    updateBranch(dest);
+
+    // execSync('git checkout ocr_config',{cwd: dest});
+    // execSync('git push origin ocr_config:config',{cwd: dest});
+    
+    // fixConfig(dest);
+    // findNonJpg(dest);
+    // updateBranch(dest);
+    fixWorkflow(dest);
+
+    // execSync('git checkout ocr_config',{cwd: dest});
+    // execSync('(git push origin ocr_config:config)||true',{cwd: dest});
+    // fs.cpSync(
+    //     join(__dirname, 'workflows', 'build_parsed.yml'),
+    //     join(dest, '.github/workflows', 'build_parsed.yml')
+    // )
+    // execSync('(git add . && git commit -m fix_workflow) || true',{cwd: dest});
+    // execSync(`(git push --set-upstream origin config) || true`,{cwd: dest});
     return;
-    // fixWorkflow(dest);
 
     // ensureFixExt(dest);
-    ensureParsedArticle(dest);
+    ensureParsed(dest);
 
-    execSync(`node ${join(__dirname, 'copyConfig')} ${dest}`);
+    // execSync(`node ${join(__dirname, 'copyConfig')} ${dest}`);
     fs.ensureDirSync(
         join(dest, '.github', 'workflows'),
     );
     fs.cpSync(
-        join(__dirname, 'workflows', 'build_parsed_article.yml'),
-        join(dest, '.github/workflows', 'build_parsed_article.yml')
+        join(__dirname, 'workflows', 'build_parsed.yml'),
+        join(dest, '.github/workflows', 'build_parsed.yml')
     )
     fs.cpSync(
         join(__dirname, 'workflows', 'build_ocr_cache.yml'),
         join(dest, '.github/workflows', 'build_ocr_cache.yml')
     )
     execSync(`(git add . && git commit -m wip) || true`, {cwd: dest});
-    execSync(`(git push --set-upstream origin ocr_config) || true`, {cwd: dest});
+    execSync(`(git push --set-upstream origin config) || true`, {cwd: dest});
 
     execSync(`node ${join(__dirname, 'copyCache')} ${dest}`);
     fs.ensureDirSync(
         join(dest, '.github', 'workflows'),
     );
     fs.cpSync(
-        join(__dirname, 'workflows', 'build_parsed_article.yml'),
-        join(dest, '.github/workflows', 'build_parsed_article.yml')
+        join(__dirname, 'workflows', 'build_parsed.yml'),
+        join(dest, '.github/workflows', 'build_parsed.yml')
     )
     execSync(`(git add . && git commit -m wip) || true`, {cwd: dest});
     execSync(`(git push --set-upstream origin ocr_cache) || true`, {cwd: dest});
@@ -142,8 +160,8 @@ fs.readdirSync(archives_dir).filter(i => i.startsWith('archives')).forEach(i => 
         join(dest, '.github', 'workflows'),
     );
     fs.cpSync(
-        join(__dirname, 'workflows', 'build_parsed_article.yml'),
-        join(dest, '.github/workflows', 'build_parsed_article.yml')
+        join(__dirname, 'workflows', 'build_parsed.yml'),
+        join(dest, '.github/workflows', 'build_parsed.yml')
     )
     execSync(`(git add . && git commit -m wip) || true`, {cwd: dest});
     execSync(`(git push --set-upstream origin ocr_patch) || true`, {cwd: dest});

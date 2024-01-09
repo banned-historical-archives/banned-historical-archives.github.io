@@ -15,6 +15,6 @@ jobs:
       - name: Invoke workflow
         uses: benc-uk/workflow-dispatch@v1
         with:
-          workflow: build_parsed_article.yml
+          workflow: build_parsed.yml
           ref: ocr_cache
           repo: banned-historical-archives/banned-historical-archives0
