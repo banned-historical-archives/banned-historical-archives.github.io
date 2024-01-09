@@ -23,8 +23,8 @@ function catelog_temp_to_catelog(c: BookCatelogTemp): BookCatelog {
   });
 }
 (async () => {
-  for (const i of [0, 1, 2, 3, 4, 5, 8, 9, 14, 15, 16, 17, 18]) {
-    const p = join(__dirname, '../archives/archives' + i);
+  for (let i = 0; i <= 20; ++i) {
+    const p = join(__dirname, '../parsed/archives' + i);
     console.log(p);
     for (const prefix of (await fs.readdir(p)).filter(
       (i) => !i.startsWith('.') && !i.endsWith('.md'),

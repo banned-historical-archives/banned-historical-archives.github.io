@@ -1,0 +1,1 @@
+通过 npm run init-config 初始化

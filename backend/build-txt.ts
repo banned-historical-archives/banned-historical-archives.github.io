@@ -68,7 +68,7 @@ Object.keys(article_indexes).forEach((article_id) => {
         .readFileSync(
           join(
             __dirname,
-            `../archives/${archives_id}/${book_id.slice(
+            `../parsed/${archives_id}/${book_id.slice(
               0,
               3,
             )}/${book_id}/${book_id}.bookinfo`,
@@ -81,7 +81,7 @@ Object.keys(article_indexes).forEach((article_id) => {
         .readFileSync(
           join(
             __dirname,
-            `../archives/${archives_id}/${book_id.slice(
+            `../parsed/${archives_id}/${book_id.slice(
               0,
               3,
             )}/${book_id}/${article_id.slice(0, 3)}/${article_id}.json`,
@@ -94,10 +94,10 @@ Object.keys(article_indexes).forEach((article_id) => {
         .readFileSync(
           join(
             __dirname,
-            `../archives/${archives_id}/${book_id.slice(
+            `../parsed/${archives_id}/${book_id.slice(
               0,
               3,
-            )}/${book_id}/${article_id.slice(0, 3)}/${article_id}.tag`,
+            )}/${book_id}/${article_id.slice(0, 3)}/${article_id}.tags`,
           ),
         )
         .toString(),

@@ -1,0 +1,1 @@
+npm run init-ocr_patch
