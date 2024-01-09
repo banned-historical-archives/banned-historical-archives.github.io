@@ -58,7 +58,7 @@ export const getStaticProps: GetStaticProps = async (
   context: GetStaticPropsContext,
 ) => {
   const res = JSON.parse(
-    (await readFile(join(process.cwd(), './catelog.json'))).toString(),
+    (await readFile(join(process.cwd(), './book_catelog.json'))).toString(),
   );
   return {
     props: {
