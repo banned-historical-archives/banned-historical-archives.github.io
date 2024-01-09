@@ -21,7 +21,7 @@ app.get('/get_article', async (req, res) => {
     const archives_id = article_indexes[req.query.id as string][i];
     const book_path = join(
       process.cwd(),
-      'archives/archives' + archives_id,
+      'parsed/archives' + archives_id,
       i.slice(0, 3),
       i,
     );
