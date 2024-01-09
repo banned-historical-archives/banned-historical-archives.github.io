@@ -30,8 +30,8 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import {
   ArticleCategory,
   ArticleType,
-  Catelog,
-  CatelogItem,
+  BookCatelog,
+  BookCatelogItem,
   TagType,
 } from '../../types';
 import Typography from '@mui/material/Typography';
@@ -74,13 +74,13 @@ function ensure_two_digits(a?: number, fallback = '') {
   return a < 10 ? `0${a}` : a;
 }
 
-const columns: GridColDef<CatelogItem>[] = [
+const columns: GridColDef<BookCatelogItem>[] = [
   {
     field: 'title',
     headerName: '标题',
     minWidth: 350,
     flex: 1,
-    renderCell: (params: GridRenderCellParams<string, CatelogItem>) => {
+    renderCell: (params: GridRenderCellParams<string, BookCatelogItem>) => {
       return (
         <a href={`/articles/${params.row.id}`} rel="noreferrer" target="_blank">
           {params.row!.title}
@@ -93,9 +93,9 @@ const columns: GridColDef<CatelogItem>[] = [
     headerName: '作者',
     minWidth: 150,
     flex: 1,
-    valueGetter: (params: GridValueGetterParams<CatelogItem, CatelogItem>) =>
+    valueGetter: (params: GridValueGetterParams<BookCatelogItem, BookCatelogItem>) =>
       params.row.authors.map((i) => i).join(','),
-    renderCell: (params: GridRenderCellParams<string, CatelogItem>) => (
+    renderCell: (params: GridRenderCellParams<string, BookCatelogItem>) => (
       <div style={{ overflow: 'visible' }}>
         <Authors authors={params.row.authors} />
       </div>
@@ -108,7 +108,7 @@ const columns: GridColDef<CatelogItem>[] = [
       '可能包含多个时间点（起草时间，发布时间，子文稿时间等）或时间段',
     minWidth: 150,
     flex: 1,
-    valueGetter: (params: GridValueGetterParams<CatelogItem, CatelogItem>) =>
+    valueGetter: (params: GridValueGetterParams<BookCatelogItem, BookCatelogItem>) =>
       params.row.dates
         .map((i) =>
           i
@@ -122,7 +122,7 @@ const columns: GridColDef<CatelogItem>[] = [
             : '----/--/--',
         )
         .join(' '),
-    renderCell: (params: GridRenderCellParams<string, CatelogItem>) => (
+    renderCell: (params: GridRenderCellParams<string, BookCatelogItem>) => (
       <Stack spacing={1}>
         {params.row!.is_range_date ? (
           <Typography variant="caption">
@@ -156,7 +156,7 @@ const columns: GridColDef<CatelogItem>[] = [
     headerName: '来源',
     flex: 1,
     minWidth: 150,
-    valueGetter: (params: GridValueGetterParams<CatelogItem, CatelogItem>) =>
+    valueGetter: (params: GridValueGetterParams<BookCatelogItem, BookCatelogItem>) =>
       params.row.books.join(','),
   },
   {
@@ -167,9 +167,9 @@ const columns: GridColDef<CatelogItem>[] = [
     sortComparator: (tags_a: string, tags_b: string) => {
       return tags_a > tags_b ? 1 : -1;
     },
-    valueGetter: (params: GridValueGetterParams<CatelogItem, CatelogItem>) =>
+    valueGetter: (params: GridValueGetterParams<BookCatelogItem, BookCatelogItem>) =>
       params.row.tags.map((i) => i.name).join(','),
-    renderCell: (params: GridRenderCellParams<string, CatelogItem>) => (
+    renderCell: (params: GridRenderCellParams<string, BookCatelogItem>) => (
       <div style={{ overflow: 'visible' }}>
         <Tags tags={params.row.tags} />
       </div>
@@ -198,7 +198,7 @@ function date_include(a: Article, b: DateFilter) {
   }
 }
 
-export default function Articles({ articles }: { articles: Catelog }) {
+export default function Articles({ articles }: { articles: BookCatelog }) {
   const tags_all = useMemo(() => {
     const m = new Map<string, Tag>();
     articles.forEach((i) =>
