@@ -1,6 +1,5 @@
 import { join, basename, dirname, extname } from 'node:path/posix';
 import fs from 'node:fs';
-import { parse } from './parser/automation';
 import { ParserOptionV2 } from '../types';
 import JSON5 from 'json5';
 import axios from 'axios';
@@ -140,6 +139,7 @@ export async function start() {
         }
       }
 
+      /*
       console.log(
         escapeData(
           '```\n' +
@@ -157,6 +157,7 @@ export async function start() {
             '\n```',
         ),
       );
+      */
     } catch (e) {
       console.log(e);
       process.exit(1);
