@@ -2,7 +2,6 @@ import 'reflect-metadata';
 import { join } from 'node:path/posix';
 import { init } from './data-source';
 
-import get_books from './books';
 import images from './images';
 import Article from './entity/article';
 import Author from './entity/author';
@@ -32,6 +31,7 @@ async function init_articles(AppDataSource: DataSource) {
     a[b.substring(0, b.indexOf('.'))] = true;
     return a;
   }, {} as { [k: string]: boolean });
+  /*
   const books = await get_books();
   for (const book of books) {
     console.log(book.entity.name);
@@ -199,6 +199,7 @@ async function init_articles(AppDataSource: DataSource) {
     }
     console.log('done', book.entity.name);
   }
+  */
   if (Object.keys(patchFiles).length) {
     console.log(patchFiles);
     throw new Error('found unused patch files');

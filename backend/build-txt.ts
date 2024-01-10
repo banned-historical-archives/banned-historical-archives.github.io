@@ -2,17 +2,6 @@ import 'reflect-metadata';
 import { join } from 'node:path/posix';
 import { init } from './data-source';
 
-import get_books from './books';
-import images from './images';
-import Article from './entity/article';
-import Author from './entity/author';
-import Date from './entity/date';
-import Music from './entity/music';
-import Lyric from './entity/lyric';
-import Audio from './entity/audio';
-import Alias from './entity/alias';
-import Content from './entity/content';
-import Comment from './entity/comment';
 import Publication from './entity/publication';
 import Tag from './entity/tag';
 import Page from './entity/page';
@@ -28,7 +17,6 @@ import {
 } from '../types';
 import { get_article_id, hash_str_arr, uuid } from '../utils';
 import { Image, ImageTag } from './entities';
-import { normalize } from './utils';
 import fs, { readFileSync, writeFileSync } from 'fs';
 import { ensureDirSync } from 'fs-extra';
 
