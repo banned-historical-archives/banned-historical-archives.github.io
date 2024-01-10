@@ -2,7 +2,6 @@ import 'reflect-metadata';
 import { join } from 'node:path/posix';
 import { init } from './data-source';
 
-import get_books from './books';
 import images from './images';
 import Article from './entity/article';
 import Author from './entity/author';
@@ -22,7 +21,6 @@ import { music as musicData } from './music';
 import { ArticleCategory, TagType } from '../types';
 import { get_article_id, hash_str_arr, uuid } from '../utils';
 import { Image, ImageTag } from './entities';
-import { normalize } from './utils';
 import fs from 'fs';
 
 class Line {
