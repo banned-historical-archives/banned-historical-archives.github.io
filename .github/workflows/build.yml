@@ -29,3 +29,4 @@ jobs:
         with:
           force: true
           folder: out
+          clean: true

@@ -81,6 +81,13 @@ export async function start() {
         files[i] = new_path;
       }
     }
+    if (is_pdf) {
+      const new_path = join(
+        dirname(files[0]),
+        id + parse(basename(files[0])).ext,
+      );
+      fs.renameSync(files[0], new_path);
+    }
 
     /**
      * 1. 新增 config/archives[n]/[id].ts
