@@ -31,8 +31,8 @@ jobs:
       - run: git checkout --orphan x
       - run: git reset --hard
       - run: mv out ../out
-      - run: git clean -f
-      - run: mv ../out .
+      - run: ls -Q | grep -v ".git" | xargs rm -fr
+      - run: mv ../out/* ./
       - run: git add .
       - run: git commit -m i
       - run: git push origin x:gh-pages -f
