@@ -86,6 +86,7 @@ export async function start() {
       i.page_end = i.page_end || links.length;
     });
     const file_content = `export default {
+  resource_type: 'book',
   entity: {
     id: '${id}',
     name: '${config.source_name!}',
