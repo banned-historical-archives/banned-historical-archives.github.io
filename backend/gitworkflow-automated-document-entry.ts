@@ -6,9 +6,9 @@ import axios from 'axios';
 import { uuid } from '../utils';
 import { tmpdir } from 'node:os';
 import { parse } from 'node:path';
+const {fromBuffer} =require('file-type-cjs');
 
-const body = (process.env as any).BODY.trim();
-const raw_title = (process.env as any).TITLE.trim();
+const body = ((process.env as any).BODY || '').trim();
 
 async function download(url: string, filePath: string) {
   const writer = fs.createWriteStream(filePath);
@@ -48,8 +48,7 @@ export async function start() {
       const p = join(tmpdir(), basename(link))
       await download(link, p);
 
-const {fileTypeFromFile} = await import('file-type');
-      const real_ext = (await fileTypeFromFile(p))?.ext;
+      const real_ext = (await fromBuffer(fs.readFileSync(p)))?.ext;
       if (!real_ext) process.exit(3);
       const new_path = join(tmpdir(), parse(basename(link)).name + '.' + real_ext);
       fs.renameSync(
