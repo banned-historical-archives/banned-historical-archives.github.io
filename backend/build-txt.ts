@@ -119,6 +119,15 @@ ${article.parts
 ${article.description || ''}
 `;
     ensureDirSync(join(__dirname, '../txt', book_id, article_id.slice(0, 3)));
-    writeFileSync(join(__dirname, '../txt', book_id, article_id.slice(0, 3), `${article_id}.txt`), content);
+    writeFileSync(
+      join(
+        __dirname,
+        '../txt',
+        book_id,
+        article_id.slice(0, 3),
+        `${article_id}.txt`,
+      ),
+      content,
+    );
   }
 });

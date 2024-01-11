@@ -18,8 +18,7 @@ export async function start() {
       id: string;
       source_name: string;
     };
-    config.archive_id =
-      config.archive_id == undefined ? 1 : config.archive_id;
+    config.archive_id = config.archive_id == undefined ? 1 : config.archive_id;
     if (config.archive_id >= 0) {
       console.log(config.archive_id);
     } else {

@@ -11,3 +11,14 @@ yarn.lock
 *.md
 catelog.json
 article_indexes.json
+
+book_catelog.json
+music_catelog.json
+gallery_catelog.json
+article_indexes.json
+
+config/archives*
+parsed/archives*
+ocr_cache/archives*
+ocr_patch/archives*
+raw/archives*

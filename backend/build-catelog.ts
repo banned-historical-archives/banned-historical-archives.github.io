@@ -26,7 +26,7 @@ function catelog_temp_to_catelog(c: BookCatelogTemp): BookCatelog {
   for (let i = 0; i <= 20; ++i) {
     const p = join(__dirname, '../parsed/archives' + i);
     console.log(p);
-    if (!await fs.pathExists(p)) continue;
+    if (!(await fs.pathExists(p))) continue;
     for (const prefix of (await fs.readdir(p)).filter(
       (i) => !i.startsWith('.') && !i.endsWith('.md'),
     )) {
@@ -34,10 +34,30 @@ function catelog_temp_to_catelog(c: BookCatelogTemp): BookCatelog {
         console.log('resource', resource);
         const flist = await fs.readdir(join(p, prefix, resource));
 
-        const book_info_path = join(p, prefix, resource, resource + '.bookinfo');
-        const music_info_path = join(p, prefix, resource, resource + '.musicinfo');
-        const picture_info_path = join(p, prefix, resource, resource + '.pictureinfo');
-        const video_info_path = join(p, prefix, resource, resource + '.videoinfo');
+        const book_info_path = join(
+          p,
+          prefix,
+          resource,
+          resource + '.bookinfo',
+        );
+        const music_info_path = join(
+          p,
+          prefix,
+          resource,
+          resource + '.musicinfo',
+        );
+        const picture_info_path = join(
+          p,
+          prefix,
+          resource,
+          resource + '.pictureinfo',
+        );
+        const video_info_path = join(
+          p,
+          prefix,
+          resource,
+          resource + '.videoinfo',
+        );
 
         if (await fs.pathExists(music_info_path)) {
           // TODO
@@ -46,15 +66,10 @@ function catelog_temp_to_catelog(c: BookCatelogTemp): BookCatelog {
         } else if (await fs.pathExists(video_info_path)) {
           // TODO
         } else if (await fs.pathExists(book_info_path)) {
-          const prefix2_list = flist.filter((x) =>
-            !x.endsWith('.bookinfo')
-          );
-
+          const prefix2_list = flist.filter((x) => !x.endsWith('.bookinfo'));
 
           const bookinfo = JSON.parse(
-            (
-              await fs.readFile(book_info_path)
-            ).toString(),
+            (await fs.readFile(book_info_path)).toString(),
           );
           for (const prefix2 of prefix2_list) {
             for (const article_file of (
@@ -63,7 +78,9 @@ function catelog_temp_to_catelog(c: BookCatelogTemp): BookCatelog {
               const article_id = parse(article_file).name;
               const article = JSON.parse(
                 (
-                  await fs.readFile(join(p, prefix, resource, prefix2, article_file))
+                  await fs.readFile(
+                    join(p, prefix, resource, prefix2, article_file),
+                  )
                 ).toString(),
               );
               const tags = JSON.parse(

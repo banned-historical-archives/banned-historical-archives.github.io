@@ -11,7 +11,6 @@ import { JSDOM } from 'jsdom';
 import { ContentType, Date, ParserResult } from '../types';
 
 (async () => {
-
   /*
  for(const book of books) {
   if (book.parser_option?.ocr?.extract_text_from_pdf) {

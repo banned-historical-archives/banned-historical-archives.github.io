@@ -93,8 +93,9 @@ const columns: GridColDef<BookCatelogItem>[] = [
     headerName: '作者',
     minWidth: 150,
     flex: 1,
-    valueGetter: (params: GridValueGetterParams<BookCatelogItem, BookCatelogItem>) =>
-      params.row.authors.map((i) => i).join(','),
+    valueGetter: (
+      params: GridValueGetterParams<BookCatelogItem, BookCatelogItem>,
+    ) => params.row.authors.map((i) => i).join(','),
     renderCell: (params: GridRenderCellParams<string, BookCatelogItem>) => (
       <div style={{ overflow: 'visible' }}>
         <Authors authors={params.row.authors} />
@@ -108,7 +109,9 @@ const columns: GridColDef<BookCatelogItem>[] = [
       '可能包含多个时间点（起草时间，发布时间，子文稿时间等）或时间段',
     minWidth: 150,
     flex: 1,
-    valueGetter: (params: GridValueGetterParams<BookCatelogItem, BookCatelogItem>) =>
+    valueGetter: (
+      params: GridValueGetterParams<BookCatelogItem, BookCatelogItem>,
+    ) =>
       params.row.dates
         .map((i) =>
           i
@@ -156,8 +159,9 @@ const columns: GridColDef<BookCatelogItem>[] = [
     headerName: '来源',
     flex: 1,
     minWidth: 150,
-    valueGetter: (params: GridValueGetterParams<BookCatelogItem, BookCatelogItem>) =>
-      params.row.books.join(','),
+    valueGetter: (
+      params: GridValueGetterParams<BookCatelogItem, BookCatelogItem>,
+    ) => params.row.books.join(','),
   },
   {
     field: 'tags',
@@ -167,8 +171,9 @@ const columns: GridColDef<BookCatelogItem>[] = [
     sortComparator: (tags_a: string, tags_b: string) => {
       return tags_a > tags_b ? 1 : -1;
     },
-    valueGetter: (params: GridValueGetterParams<BookCatelogItem, BookCatelogItem>) =>
-      params.row.tags.map((i) => i.name).join(','),
+    valueGetter: (
+      params: GridValueGetterParams<BookCatelogItem, BookCatelogItem>,
+    ) => params.row.tags.map((i) => i.name).join(','),
     renderCell: (params: GridRenderCellParams<string, BookCatelogItem>) => (
       <div style={{ overflow: 'visible' }}>
         <Tags tags={params.row.tags} />

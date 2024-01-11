@@ -9,7 +9,10 @@ import JSON5 from 'json5';
 
 export async function start() {
   const body = (process.env as any).TITLE.trim();
-  const res = (body.split(']')[1] || '').replace(/[\\\'\"\.\-\(\)]/g, '').split('\r')[0].split('\n')[0];
+  const res = (body.split(']')[1] || '')
+    .replace(/[\\\'\"\.\-\(\)]/g, '')
+    .split('\r')[0]
+    .split('\n')[0];
   console.log(res || 'unknown');
 }
 

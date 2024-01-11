@@ -6,7 +6,7 @@ import axios from 'axios';
 import { uuid } from '../utils';
 import { tmpdir } from 'node:os';
 import { parse } from 'node:path';
-const {fromBuffer} =require('file-type-cjs');
+const { fromBuffer } = require('file-type-cjs');
 
 const body = ((process.env as any).BODY || '').trim();
 
@@ -37,28 +37,35 @@ export async function start() {
     };
     const id = uuid();
     config.id = id;
-    config.archive_id =
-      config.archive_id == undefined ? 1 : config.archive_id;
-    const links = Array.from(body.matchAll(/\[.*?\]\(http.*?\)/g)).map(
-      (i) => (i as any)[0].replace(/^.*\(/, '').replace(/\)/, ''),
+    config.archive_id = config.archive_id == undefined ? 1 : config.archive_id;
+    const links = Array.from(body.matchAll(/\[.*?\]\(http.*?\)/g)).map((i) =>
+      (i as any)[0].replace(/^.*\(/, '').replace(/\)/, ''),
     );
 
     const files = [];
     for (const link of links) {
-      const p = join(tmpdir(), basename(link))
+      const p = join(tmpdir(), basename(link));
       await download(link, p);
 
       const real_ext = (await fromBuffer(fs.readFileSync(p)))?.ext;
       if (!real_ext) process.exit(3);
-      const new_path = join(tmpdir(), parse(basename(link)).name + '.' + real_ext);
-      fs.renameSync(
-        p,new_path
+      const new_path = join(
+        tmpdir(),
+        parse(basename(link)).name + '.' + real_ext,
       );
+      fs.renameSync(p, new_path);
       files.push(new_path);
     }
 
     const is_pdf = files.length == 1 && files[0].endsWith('.pdf');
-    const is_img_set = files.length > 0 && files.reduce((a, b) => a && (b.endsWith('.png') || b.endsWith('.jpg') || b.endsWith('.jpeg')), true)
+    const is_img_set =
+      files.length > 0 &&
+      files.reduce(
+        (a, b) =>
+          a &&
+          (b.endsWith('.png') || b.endsWith('.jpg') || b.endsWith('.jpeg')),
+        true,
+      );
 
     if (!is_pdf && !is_img_set) {
       process.exit(4);
@@ -66,9 +73,12 @@ export async function start() {
 
     if (is_img_set) {
       for (let i = 0; i < files.length; ++i) {
-        const new_path = join(dirname(files[i]),  i + parse(basename(files[i])).ext)
-        fs.renameSync(files[i], new_path)
-        files[i] = new_path
+        const new_path = join(
+          dirname(files[i]),
+          i + parse(basename(files[i])).ext,
+        );
+        fs.renameSync(files[i], new_path);
+        files[i] = new_path;
       }
     }
 
@@ -92,33 +102,43 @@ export async function start() {
     name: '${config.source_name!}',
     internal: ${!!config.internal},
     official: ${!!config.official},
-    type: '${is_pdf ? 'pdf' : is_img_set ?'img' : ''}',
+    type: '${is_pdf ? 'pdf' : is_img_set ? 'img' : ''}',
     author: '${config.author || ''}',
-    files: ${JSON.stringify(files.map(i =>
-      `'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives${config.archive_id}/main/${basename(i)}`
-      ))}
+    files: ${JSON.stringify(
+      files.map(
+        (i) =>
+          `'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives${
+            config.archive_id
+          }/main/${basename(i)}`,
+      ),
+    )}
   },
   parser_option: {
-    articles: ${JSON.stringify(config.articles)},
+    articles: ${JSON.stringify(config.articles, null, 2)},
     ocr: ${JSON.stringify(config.ocr)},
     ocr_exceptions: ${JSON.stringify(config.ocr_exceptions || {})},
   },
   parser_id: 'automation'
-      }',
 };`;
-    fs.writeFileSync(join(__dirname, `../config/archives${config.archive_id}/${id}.ts`), file_content);
+    fs.writeFileSync(
+      join(__dirname, `../config/archives${config.archive_id}/${id}.ts`),
+      file_content,
+    );
 
     for (const i of files) {
       if (is_img_set) {
         fs.renameSync(
           i,
-          join(__dirname, `../raw/archives${config.archive_id}/${id}/${basename(i)}`)
-        )
+          join(
+            __dirname,
+            `../raw/archives${config.archive_id}/${id}/${basename(i)}`,
+          ),
+        );
       } else {
         fs.renameSync(
           i,
-          join(__dirname, `../raw/archives${config.archive_id}/${id}.pdf`)
-        )
+          join(__dirname, `../raw/archives${config.archive_id}/${id}.pdf`),
+        );
       }
     }
   } catch (e) {
