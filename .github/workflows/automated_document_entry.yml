@@ -8,6 +8,7 @@ jobs:
     name: Automated document entry
     if: ${{ startsWith(github.event.issue.title, '[自动化文稿录入]') }}
     runs-on: ubuntu-latest
+    steps:
       - name: Get Time
         id: time
         uses: nanzm/get-time-action@v1.1
