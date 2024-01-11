@@ -30,7 +30,9 @@ jobs:
 
       - run: git checkout --orphan x
       - run: git reset --hard
-      - run: mv out/* .
+      - run: mv out ../out
+      - run: git clean -f
+      - run: mv ../out .
       - run: git add .
       - run: git commit -m i
       - run: git push origin x:gh-pages -f
