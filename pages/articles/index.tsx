@@ -32,6 +32,8 @@ import {
   ArticleType,
   BookCatelog,
   BookCatelogItem,
+  BookIndexes,
+  TagIndexes,
   TagType,
 } from '../../types';
 import Typography from '@mui/material/Typography';
@@ -60,9 +62,17 @@ export const getStaticProps: GetStaticProps = async (
   const res = JSON.parse(
     (await readFile(join(process.cwd(), './book_catelog.json'))).toString(),
   );
+  const tag_indexes = JSON.parse(
+    (await readFile(join(process.cwd(), './tag_indexes.json'))).toString(),
+  );
+  const book_indexes = JSON.parse(
+    (await readFile(join(process.cwd(), './book_indexes.json'))).toString(),
+  );
   return {
     props: {
-      articles: res,
+      catelog: res,
+      tag_indexes,
+      book_indexes,
     },
   };
 };
@@ -161,7 +171,7 @@ const columns: GridColDef<BookCatelogItem>[] = [
     minWidth: 150,
     valueGetter: (
       params: GridValueGetterParams<BookCatelogItem, BookCatelogItem>,
-    ) => params.row.books.join(','),
+    ) => params.row.books!.join(','),
   },
   {
     field: 'tags',
@@ -173,10 +183,10 @@ const columns: GridColDef<BookCatelogItem>[] = [
     },
     valueGetter: (
       params: GridValueGetterParams<BookCatelogItem, BookCatelogItem>,
-    ) => params.row.tags.map((i) => i.name).join(','),
+    ) => params.row.tags!.map((i) => i.name).join(','),
     renderCell: (params: GridRenderCellParams<string, BookCatelogItem>) => (
       <div style={{ overflow: 'visible' }}>
-        <Tags tags={params.row.tags} />
+        <Tags tags={params.row.tags!} />
       </div>
     ),
   },
@@ -203,41 +213,49 @@ function date_include(a: Article, b: DateFilter) {
   }
 }
 
-export default function Articles({ articles }: { articles: BookCatelog }) {
+export default function Articles({ catelog, book_indexes, tag_indexes, }: { catelog: BookCatelog, book_indexes: BookIndexes, tag_indexes: TagIndexes }) {
+  useEffect(() => {
+    catelog.forEach(i => {
+      try {
+      i.tags = i.tag_ids.map(j => ({type: tag_indexes[j][0], name: tag_indexes[j][1]}));
+      i.books = i.book_ids.map(j => (book_indexes[j][1]));
+      } catch(e) {
+        debugger;
+      }
+    });
+  }, [catelog, book_indexes, tag_indexes]);
   const tags_all = useMemo(() => {
     const m = new Map<string, Tag>();
-    articles.forEach((i) =>
-      i.tags.forEach((j) => {
-        const id = j.type + '##' + j.name;
-        m.set(id, { ...j, id } as Tag);
-      }),
-    );
+    tag_indexes.forEach((i, idx) => {
+      m.set(idx.toString(), {type: i[0], name: i[1], id: idx.toString()} as Tag);
+    });
     return m;
-  }, [articles]);
+  }, [tag_indexes]);
   const tags_all_order_by_type = useMemo(() => {
     const m = new Map<string, Map<string, Tag>>();
-    articles.forEach((i) =>
-      i.tags.forEach((j) => {
-        if (!m.get(j.type)) {
-          m.set(j.type, new Map());
+    tag_indexes.forEach((i, idx) =>{
+    const type = i[0];
+    const name = i[1];
+    const id = idx.toString();
+        if (!m.get(type)) {
+          m.set(type, new Map());
         }
-        const id = j.type + '##' + j.name;
-        m.get(j.type)!.set(id, { ...j, id } as Tag);
-      }),
-    );
+
+        m.get(type)!.set(id, { type, name, id } as Tag);
+      });
     return m;
-  }, [articles]);
+  }, [tag_indexes]);
   const sources_all = useMemo(() => {
     const set = new Set<string>();
-    articles.forEach((i) => i.books.forEach((j) => set.add(j)));
+    catelog.forEach((i) => i.book_ids.forEach((j) => set.add(book_indexes[j][1])));
     return Array.from(set).sort();
-  }, [articles]);
+  }, [catelog, book_indexes]);
 
   const authors_all = useMemo(() => {
     const set = new Set<string>();
-    articles.forEach((i) => i.authors.forEach((j) => j && set.add(j)));
+    catelog.forEach((i) => i.authors.forEach((j) => j && set.add(j)));
     return Array.from(set).sort();
-  }, [articles]);
+  }, [catelog]);
 
   const { TagDialog, tagFilter, setTagDialog, setTagFilter, tags } =
     useTagFilterDialog(tags_all, tags_all_order_by_type);
@@ -268,22 +286,22 @@ export default function Articles({ articles }: { articles: BookCatelog }) {
   };
 
   const filtered_articles = useMemo(() => {
-    return articles
+    return catelog
       .filter((i) => date_include(i as unknown as Article, dateFilter))
       .filter((i) =>
         authorFilter ? !!i.authors.find((k) => k === authorFilter) : true,
       )
       .filter((i) =>
         sourceFilter
-          ? !!i.books.find((k) => k.indexOf(sourceFilter) > -1)
+          ? !!i.book_ids.find((k) => book_indexes[k][1].indexOf(sourceFilter) > -1)
           : true,
       )
       .filter((i) =>
         tagFilter
-          ? !!i.tags.find((k) => k.type + '##' + k.name === tagFilter)
+          ? !!i.tag_ids.find((k) => k.toString() === tagFilter)
           : true,
       );
-  }, [articles, dateFilter, tagFilter, authorFilter, sourceFilter]);
+  }, [catelog, dateFilter, tagFilter, authorFilter, sourceFilter, book_indexes]);
 
   return (
     <>

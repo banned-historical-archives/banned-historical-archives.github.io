@@ -356,8 +356,8 @@ export type BookCatelogTemp = {
     authors: string[];
     dates: any;
     is_range_date: boolean;
-    tags: { [type: string]: { [name: string]: boolean } };
-    books: { [id: string]: string };
+    tag_ids: number[];
+    book_ids: number[];
   };
 };
 export type BookCatelog = BookCatelogItem[];
@@ -367,7 +367,11 @@ export type BookCatelogItem = {
   authors: string[];
   dates: Date[];
   is_range_date: boolean;
-  books: string[];
-  tags: { type: string; name: string }[];
+  book_ids: number[];
+  books?: string[];
+  tags?: {name: string, type: string}[];
+  tag_ids: number[];
 };
-export type ArticleIndexes = { [aid: string]: { [book_id: string]: string } };
+export type ArticleIndexes = { [aid: string]: number[] }; // book_number_id
+export type TagIndexes = [string, string][]; // type, name
+export type BookIndexes = [string, string, number][]; // id, name, archive_id

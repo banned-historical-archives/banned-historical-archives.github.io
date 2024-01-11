@@ -13,4 +13,10 @@ for (let i = 0; i <= 20; ++i) {
   const command = `(git clone --depth 1 --branch ${branch} ${prefix}/banned-historical-archives${i}.git ${dir}/archives${i}) || true`;
   console.log(command);
   execSync(command, { cwd: join(__dirname, '..') });
+  try {
+    execSync('(git reset --hard) || true', { cwd: join(__dirname, '../', dir, 'archives' + i) });
+    execSync('(git pull) || true', { cwd: join(__dirname, '../', dir, 'archives' + i) });
+  } catch (e) {
+    console.log(e)
+  }
 }

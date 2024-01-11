@@ -1,28 +1,27 @@
 import fs from 'fs-extra';
 import { join, parse } from 'path';
-import { ArticleIndexes, BookCatelog, BookCatelogTemp } from '../types';
+import { ArticleIndexes, BookCatelog, BookCatelogTemp, BookIndexes, TagIndexes } from '../types';
 
-const book_catelog: BookCatelogTemp = {};
+const catelog_temp: BookCatelogTemp = {};
 const article_indexes: ArticleIndexes = {};
+const tag_cache: {[type: string]: {[name: string]: number}} = {};
+const article_tag_cache = {};
+const tag_indexes: TagIndexes = [];
+const book_indexes_cache: {[id: string]: {name: string, archive_id: number, number_id: number}} = {};
+const book_indexes: BookIndexes = [];
 
 function catelog_temp_to_catelog(c: BookCatelogTemp): BookCatelog {
   return Object.keys(c).map((i) => {
     const a = c[i];
-    const tags: { type: string; name: string }[] = [];
-    Object.keys(a.tags).forEach((type) => {
-      Object.keys(a.tags[type]).forEach((name) => {
-        tags.push({ type, name });
-      });
-    });
     return {
       id: i,
       ...a,
-      tags,
-      books: Object.values(a.books),
     };
   });
 }
 (async () => {
+  let n_book = 0;
+  let n_tag = 0;
   for (let i = 0; i <= 20; ++i) {
     const p = join(__dirname, '../parsed/archives' + i);
     console.log(p);
@@ -90,26 +89,46 @@ function catelog_temp_to_catelog(c: BookCatelogTemp): BookCatelog {
                   )
                 ).toString(),
               ) as { type: string; name: string }[];
-              if (!book_catelog[article_id])
-                book_catelog[article_id] = {
+              if (!catelog_temp[article_id])
+                catelog_temp[article_id] = {
                   title: article.title,
                   dates: article.dates,
                   authors: article.authors,
                   is_range_date: article.is_range_date,
-                  tags: {},
-                  books: {},
+                  tag_ids: [],
+                  book_ids: [],
                 };
               tags.forEach((tag) => {
-                if (!book_catelog[article_id].tags[tag.type])
-                  book_catelog[article_id].tags[tag.type] = {};
-                book_catelog[article_id].tags[tag.type][tag.name] = true;
+                if (!tag_cache[tag.type])
+                  tag_cache[tag.type] = {};
+                if (tag_cache[tag.type][tag.name] == undefined) {
+                  tag_indexes.push([tag.type, tag.name]);
+                  tag_cache[tag.type][tag.name] = n_tag;
+                  catelog_temp[article_id].tag_ids.push(n_tag);
+                  n_tag++;
+                } else {
+                  catelog_temp[article_id].tag_ids.push(
+                    tag_cache[tag.type][tag.name]
+                  );
+                }
               });
-              book_catelog[article_id].books[bookinfo.id] = bookinfo.name;
-
               if (!article_indexes[article_id]) {
-                article_indexes[article_id] = {};
+                article_indexes[article_id] = [];
               }
-              article_indexes[article_id][bookinfo.id] = i.toString();
+              if (!book_indexes_cache[bookinfo.id]) {
+                book_indexes_cache[bookinfo.id] = {
+                  name: bookinfo.name,
+                  archive_id: i,
+                  number_id: n_book,
+                };
+                book_indexes.push([bookinfo.id, bookinfo.name, i]);
+                catelog_temp[article_id].book_ids.push(n_book);
+                article_indexes[article_id].push(n_book);
+                ++n_book;
+              } else {
+                catelog_temp[article_id].book_ids.push(book_indexes_cache[bookinfo.id].number_id);
+                article_indexes[article_id].push(book_indexes_cache[bookinfo.id].number_id);
+              }
             }
           }
         }
@@ -118,7 +137,15 @@ function catelog_temp_to_catelog(c: BookCatelogTemp): BookCatelog {
   }
   fs.writeFileSync(
     join(__dirname, '../book_catelog.json'),
-    JSON.stringify(catelog_temp_to_catelog(book_catelog)),
+    JSON.stringify(catelog_temp_to_catelog(catelog_temp)),
+  );
+  fs.writeFileSync(
+    join(__dirname, '../tag_indexes.json'),
+    JSON.stringify(tag_indexes),
+  );
+  fs.writeFileSync(
+    join(__dirname, '../book_indexes.json'),
+    JSON.stringify(book_indexes),
   );
   fs.writeFileSync(
     join(__dirname, '../article_indexes.json'),
