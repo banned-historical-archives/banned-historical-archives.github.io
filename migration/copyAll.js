@@ -3,7 +3,7 @@ const { execSync } =require('child_process');
 
 const fs = require('fs-extra')
 
-const archives_dir = join(__dirname, '../archives');
+const archives_dir = join(__dirname, '../config');
 function ensureFixExt(dest) {
     execSync('git checkout main && git reset --hard origin/main',{cwd: dest});
     execSync(`node ${join(__dirname, 'fixExtension.js')} ${dest}`);
@@ -11,8 +11,8 @@ function ensureFixExt(dest) {
     execSync('(git push --set-upstream origin main) || true',{cwd: dest});
 }
 function fixWorkflow(dest) {
-    ['ocr_patch', 'ocr_cache', 'config'].forEach(i => {
-    execSync(`((git checkout --orphan ${i} || git checkout ${i}) && git reset --hard && git pull) || true`,{cwd: dest});
+    // ['ocr_patch', 'ocr_cache', 'config'].forEach(i => {
+    execSync(`git pull || true`,{cwd: dest});
     fs.ensureDirSync(
         join(dest, '.github', 'workflows'),
     );
@@ -20,12 +20,18 @@ function fixWorkflow(dest) {
         join(__dirname, 'workflows', 'build_parsed.yml'),
         join(dest, '.github/workflows', 'build_parsed.yml')
     )
+    //if (i == 'config') {
+        fs.cpSync(
+            join(__dirname, 'workflows', 'build_ocr_cache.yml'),
+            join(dest, '.github/workflows', 'build_ocr_cache.yml')
+        )
+    //}
     if (fs.pathExistsSync(join(dest, '.github/workflows', 'build_parsed_article.yml')))
         fs.unlinkSync(join(dest, '.github/workflows', 'build_parsed_article.yml'))
 
     execSync('(git add . && git commit -m fix_workflow) || true',{cwd: dest});
-    execSync(`(git push --set-upstream origin ${i}) || true`,{cwd: dest});
-});
+    execSync(`(git push --set-upstream origin config) || true`,{cwd: dest});
+// });
 }
 function fixConfig(dest) {
     execSync('((git checkout --orphan config || git checkout config) && git reset --hard && git pull) || true',{cwd: dest});
