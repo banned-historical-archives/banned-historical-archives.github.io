@@ -183,7 +183,7 @@ const columns: GridColDef<BookCatelogItem>[] = [
     },
     valueGetter: (
       params: GridValueGetterParams<BookCatelogItem, BookCatelogItem>,
-    ) => params.row.tags!.map((i) => i.name).join(','),
+    ) => (params.row.tags!).map((i) => i.name).join(','),
     renderCell: (params: GridRenderCellParams<string, BookCatelogItem>) => (
       <div style={{ overflow: 'visible' }}>
         <Tags tags={params.row.tags!} />
@@ -214,15 +214,17 @@ function date_include(a: Article, b: DateFilter) {
 }
 
 export default function Articles({ catelog, book_indexes, tag_indexes, }: { catelog: BookCatelog, book_indexes: BookIndexes, tag_indexes: TagIndexes }) {
+  const [ready, setReady] = useState(false);
   useEffect(() => {
     catelog.forEach(i => {
       try {
-      i.tags = i.tag_ids.map(j => ({type: tag_indexes[j][0], name: tag_indexes[j][1]}));
-      i.books = i.book_ids.map(j => (book_indexes[j][1]));
+        i.tags = i.tag_ids.map(j => ({type: tag_indexes[j][0], name: tag_indexes[j][1]}));
+        i.books = i.book_ids.map(j => (book_indexes[j][1]));
       } catch(e) {
         debugger;
       }
     });
+    setReady(true);
   }, [catelog, book_indexes, tag_indexes]);
   const tags_all = useMemo(() => {
     const m = new Map<string, Tag>();
@@ -303,6 +305,7 @@ export default function Articles({ catelog, book_indexes, tag_indexes, }: { cate
       );
   }, [catelog, dateFilter, tagFilter, authorFilter, sourceFilter, book_indexes]);
 
+  if (!ready) return null;
   return (
     <>
       <Head>
