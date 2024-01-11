@@ -6,7 +6,6 @@ import axios from 'axios';
 import { uuid } from '../utils';
 import { tmpdir } from 'node:os';
 import { parse } from 'node:path';
-import {fileTypeFromFile} from 'file-type';
 
 const body = (process.env as any).BODY.trim();
 const raw_title = (process.env as any).TITLE.trim();
@@ -48,6 +47,8 @@ export async function start() {
     for (const link of links) {
       const p = join(tmpdir(), basename(link))
       await download(link, p);
+
+const {fileTypeFromFile} = await import('file-type');
       const real_ext = (await fileTypeFromFile(p))?.ext;
       if (!real_ext) process.exit(3);
       const new_path = join(tmpdir(), parse(basename(link)).name + '.' + real_ext);
