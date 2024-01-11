@@ -24,6 +24,10 @@ jobs:
       - run: node_options="--max-old-space-size=8192" npm run build-catelog
       - run: node_options="--max-old-space-size=8192" npm run dev:nextjs-helper && npm run build
 
+      - run: git config --global http.postBuffer 2097152000
+      - run: git config --global user.email "you@example.com"
+      - run: git config --global user.name "Your Name"
+
       - run: git checkout --orphan x
       - run: git reset --hard
       - run: mv out/* .
