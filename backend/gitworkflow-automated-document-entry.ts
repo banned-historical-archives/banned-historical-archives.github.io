@@ -114,7 +114,7 @@ export async function start() {
     files: ${JSON.stringify(
       files.map(
         (i) =>
-          `'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives${
+          `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives${
             config.archive_id
           }/main/${basename(i)}`,
       ),
