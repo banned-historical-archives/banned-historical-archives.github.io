@@ -29,6 +29,20 @@ function fixWorkflow(dest) {
     if (fs.pathExistsSync(join(dest, '.github/workflows', 'build_parsed_article.yml')))
         fs.unlinkSync(join(dest, '.github/workflows', 'build_parsed_article.yml'))
 
+    fs.readdirSync(join(dest)).filter(i => i.endsWith('.ts')).forEach(j => {
+        const str = fs.readFileSync(join(dest, j)).toString().replace('export default ', '');
+        const cfg = eval('tmp='+str);
+        if (cfg.parser_id === 'automation')
+            if (cfg.path.startsWith('/')) {
+                cfg.path = cfg.path.split('/').slice(2).join('/');
+            }
+        fs.writeFileSync(join(dest, j), 'export default ' + JSON.stringify(cfg, null, 2));
+
+        //if (fs.pathExistsSync(join(dest, parse(j).name))) {
+        //    fs.unlinkSync(join(dest, parse(j).name))
+        //    console.log('rm ', join(dest, parse(j).name))
+        //}
+    });
     execSync('(git add . && git commit -m fix_workflow) || true',{cwd: dest});
     execSync(`(git push --set-upstream origin config) || true`,{cwd: dest});
 // });
