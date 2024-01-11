@@ -46,8 +46,8 @@ jobs:
           rm -rf config/archives${{ steps.get_archive_id.outputs.archive_id }}
           mkdir -p raw
           mkdir -p config
-          git clone --depth 1 --branch main https://github.com/banned-historical-archives/banned-historical-archives${{ steps.get_archive_id.outputs.archive_id }} raw/archives${{ steps.get_archive_id.outputs.archive_id }}
-          git clone --depth 1 --branch config https://github.com/banned-historical-archives/banned-historical-archives${{ steps.get_archive_id.outputs.archive_id }} config/archives${{ steps.get_archive_id.outputs.archive_id }}
+          git clone --depth 1 --branch main git@github.com:banned-historical-archives/banned-historical-archives${{ steps.get_archive_id.outputs.archive_id }} raw/archives${{ steps.get_archive_id.outputs.archive_id }}
+          git clone --depth 1 --branch config git@github.com:banned-historical-archives/banned-historical-archives${{ steps.get_archive_id.outputs.archive_id }} config/archives${{ steps.get_archive_id.outputs.archive_id }}
       - id: action_with_json_output
         run: npx ts-node --project ./tsconfig.build.json backend/gitworkflow-automated-document-entry.ts
         env:
