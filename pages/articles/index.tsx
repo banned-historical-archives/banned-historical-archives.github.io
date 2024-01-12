@@ -183,7 +183,7 @@ const columns: GridColDef<BookCatelogItem>[] = [
     },
     valueGetter: (
       params: GridValueGetterParams<BookCatelogItem, BookCatelogItem>,
-    ) => (params.row.tags!).map((i) => i.name).join(','),
+    ) => params.row.tags!.map((i) => i.name).join(','),
     renderCell: (params: GridRenderCellParams<string, BookCatelogItem>) => (
       <div style={{ overflow: 'visible' }}>
         <Tags tags={params.row.tags!} />
@@ -213,14 +213,25 @@ function date_include(a: Article, b: DateFilter) {
   }
 }
 
-export default function Articles({ catelog, book_indexes, tag_indexes, }: { catelog: BookCatelog, book_indexes: BookIndexes, tag_indexes: TagIndexes }) {
+export default function Articles({
+  catelog,
+  book_indexes,
+  tag_indexes,
+}: {
+  catelog: BookCatelog;
+  book_indexes: BookIndexes;
+  tag_indexes: TagIndexes;
+}) {
   const [ready, setReady] = useState(false);
   useEffect(() => {
-    catelog.forEach(i => {
+    catelog.forEach((i) => {
       try {
-        i.tags = i.tag_ids.map(j => ({type: tag_indexes[j][0], name: tag_indexes[j][1]}));
-        i.books = i.book_ids.map(j => (book_indexes[j][1]));
-      } catch(e) {
+        i.tags = i.tag_ids.map((j) => ({
+          type: tag_indexes[j][0],
+          name: tag_indexes[j][1],
+        }));
+        i.books = i.book_ids.map((j) => book_indexes[j][1]);
+      } catch (e) {
         debugger;
       }
     });
@@ -229,27 +240,33 @@ export default function Articles({ catelog, book_indexes, tag_indexes, }: { cate
   const tags_all = useMemo(() => {
     const m = new Map<string, Tag>();
     tag_indexes.forEach((i, idx) => {
-      m.set(idx.toString(), {type: i[0], name: i[1], id: idx.toString()} as Tag);
+      m.set(idx.toString(), {
+        type: i[0],
+        name: i[1],
+        id: idx.toString(),
+      } as Tag);
     });
     return m;
   }, [tag_indexes]);
   const tags_all_order_by_type = useMemo(() => {
     const m = new Map<string, Map<string, Tag>>();
-    tag_indexes.forEach((i, idx) =>{
-    const type = i[0];
-    const name = i[1];
-    const id = idx.toString();
-        if (!m.get(type)) {
-          m.set(type, new Map());
-        }
+    tag_indexes.forEach((i, idx) => {
+      const type = i[0];
+      const name = i[1];
+      const id = idx.toString();
+      if (!m.get(type)) {
+        m.set(type, new Map());
+      }
 
-        m.get(type)!.set(id, { type, name, id } as Tag);
-      });
+      m.get(type)!.set(id, { type, name, id } as Tag);
+    });
     return m;
   }, [tag_indexes]);
   const sources_all = useMemo(() => {
     const set = new Set<string>();
-    catelog.forEach((i) => i.book_ids.forEach((j) => set.add(book_indexes[j][1])));
+    catelog.forEach((i) =>
+      i.book_ids.forEach((j) => set.add(book_indexes[j][1])),
+    );
     return Array.from(set).sort();
   }, [catelog, book_indexes]);
 
@@ -295,15 +312,22 @@ export default function Articles({ catelog, book_indexes, tag_indexes, }: { cate
       )
       .filter((i) =>
         sourceFilter
-          ? !!i.book_ids.find((k) => book_indexes[k][1].indexOf(sourceFilter) > -1)
+          ? !!i.book_ids.find(
+              (k) => book_indexes[k][1].indexOf(sourceFilter) > -1,
+            )
           : true,
       )
       .filter((i) =>
-        tagFilter
-          ? !!i.tag_ids.find((k) => k.toString() === tagFilter)
-          : true,
+        tagFilter ? !!i.tag_ids.find((k) => k.toString() === tagFilter) : true,
       );
-  }, [catelog, dateFilter, tagFilter, authorFilter, sourceFilter, book_indexes]);
+  }, [
+    catelog,
+    dateFilter,
+    tagFilter,
+    authorFilter,
+    sourceFilter,
+    book_indexes,
+  ]);
 
   if (!ready) return null;
   return (

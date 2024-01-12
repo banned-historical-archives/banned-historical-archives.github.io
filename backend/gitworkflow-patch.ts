@@ -1,4 +1,4 @@
-import { ArticleIndexes, BookIndexes } from "../types";
+import { ArticleIndexes, BookIndexes } from '../types';
 
 const { mkdirSync, existsSync, readFileSync, writeFileSync } = require('fs');
 const { join } = require('path');
@@ -26,23 +26,29 @@ let final: {
   patch: any;
 };
 let decoded = '';
-const book_indexes = JSON.parse(readFileSync(join(__dirname , '../book_indexes.json')).toString()) as BookIndexes;
-const article_indexes = JSON.parse(readFileSync(join(__dirname , '../article_indexes.json')).toString()) as ArticleIndexes;
+const book_indexes = JSON.parse(
+  readFileSync(join(__dirname, '../book_indexes.json')).toString(),
+) as BookIndexes;
+const article_indexes = JSON.parse(
+  readFileSync(join(__dirname, '../article_indexes.json')).toString(),
+) as ArticleIndexes;
 try {
   const patch = JSON.parse(body) as {
     articleId: string;
     publicationId: string;
     patch: any;
   };
-    final = {
-      ...patch,
-      COMMIT_HASH: process.env.COMMIT_HASH as string,
-    }
-    decoded = decodeURIComponent(JSON.stringify(final.patch)).replace(/\n/g, '');
+  final = {
+    ...patch,
+    COMMIT_HASH: process.env.COMMIT_HASH as string,
+  };
+  decoded = decodeURIComponent(JSON.stringify(final.patch)).replace(/\n/g, '');
 
-    const candidates = article_indexes[patch.articleId].map(i => book_indexes[i]);
-   const archive_id = candidates.find(i => i[0] == patch.publicationId)![2]
-   console.log('archive_id', archive_id);
+  const candidates = article_indexes[patch.articleId].map(
+    (i) => book_indexes[i],
+  );
+  const archive_id = candidates.find((i) => i[0] == patch.publicationId)![2];
+  console.log('archive_id', archive_id);
   const filepath = join(
     __dirname,
     `../ocr_patch/archives${archive_id}/[${final.articleId}][${final.publicationId}].ts`,
@@ -55,8 +61,9 @@ export default [
     content = readFileSync(filepath).toString();
   }
   const idx = content.lastIndexOf(']');
-  
-  content = content.slice(0, idx) + '  ' + JSON.stringify(final.patch) + ',\n];';
+
+  content =
+    content.slice(0, idx) + '  ' + JSON.stringify(final.patch) + ',\n];';
   console.log(filepath, content);
   writeFileSync(filepath, content);
 } catch (e) {

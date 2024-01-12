@@ -14,11 +14,18 @@ export async function start() {
   if (body.startsWith('{OCR补丁}')) {
     let str = body.replace(/^\{OCR补丁\}/, '');
     str = str.substr(0, str.lastIndexOf('}') + 1);
-    const obj = JSON5.parse(str) as {articleId: string, publicationId: string};
-    const a_indexes = JSON.parse(readFileSync(join(__dirname, '../article_indexes.json')).toString()) as ArticleIndexes;
-    const b_indexes = JSON.parse(readFileSync(join(__dirname, '../book_indexes.json')).toString()) as BookIndexes;
-    const candidates = a_indexes[obj.articleId].map(i => b_indexes[i]);
-    console.log(candidates.find(i => i[0] == obj.publicationId)![2]);
+    const obj = JSON5.parse(str) as {
+      articleId: string;
+      publicationId: string;
+    };
+    const a_indexes = JSON.parse(
+      readFileSync(join(__dirname, '../article_indexes.json')).toString(),
+    ) as ArticleIndexes;
+    const b_indexes = JSON.parse(
+      readFileSync(join(__dirname, '../book_indexes.json')).toString(),
+    ) as BookIndexes;
+    const candidates = a_indexes[obj.articleId].map((i) => b_indexes[i]);
+    console.log(candidates.find((i) => i[0] == obj.publicationId)![2]);
     process.exit(0);
   }
   try {

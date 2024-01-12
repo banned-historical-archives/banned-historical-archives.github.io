@@ -1,15 +1,25 @@
 import fs from 'fs-extra';
 import { join, parse } from 'path';
-import { ArticleIndexes, BookCatelog, BookCatelogTemp, BookIndexes, TagIndexes } from '../types';
+import {
+  ArticleIndexes,
+  BookCatelog,
+  BookCatelogTemp,
+  BookIndexes,
+  TagIndexes,
+} from '../types';
 
 const catelog_temp: BookCatelogTemp = {};
 const article_indexes: ArticleIndexes = {};
-const tag_cache: {[type: string]: {[name: string]: number}} = {};
+const tag_cache: { [type: string]: { [name: string]: number } } = {};
 const article_tag_cache = {};
 const tag_indexes: TagIndexes = [];
-const book_indexes_cache: {[id: string]: {name: string, archive_id: number, number_id: number}} = {};
+const book_indexes_cache: {
+  [id: string]: { name: string; archive_id: number; number_id: number };
+} = {};
 const book_indexes: BookIndexes = [];
-const catelog_tags_cache: {[article_id: string]: {[tag_id: string]: boolean}} = {};
+const catelog_tags_cache: {
+  [article_id: string]: { [tag_id: string]: boolean };
+} = {};
 
 function catelog_temp_to_catelog(c: BookCatelogTemp): BookCatelog {
   return Object.keys(c).map((i) => {
@@ -100,11 +110,10 @@ function catelog_temp_to_catelog(c: BookCatelogTemp): BookCatelog {
                   book_ids: [],
                 };
               tags.forEach((tag) => {
-                if (!tag_cache[tag.type])
-                  tag_cache[tag.type] = {};
-                  if (!catelog_tags_cache[article_id]) {
-catelog_tags_cache[article_id] = {}
-                  }
+                if (!tag_cache[tag.type]) tag_cache[tag.type] = {};
+                if (!catelog_tags_cache[article_id]) {
+                  catelog_tags_cache[article_id] = {};
+                }
                 if (tag_cache[tag.type][tag.name] == undefined) {
                   tag_indexes.push([tag.type, tag.name]);
                   tag_cache[tag.type][tag.name] = n_tag;
@@ -114,12 +123,10 @@ catelog_tags_cache[article_id] = {}
                   }
                   n_tag++;
                 } else {
-                      const x=tag_cache[tag.type][tag.name]
+                  const x = tag_cache[tag.type][tag.name];
                   if (catelog_tags_cache[article_id][x] == undefined) {
                     catelog_tags_cache[article_id][x] = true;
-                    catelog_temp[article_id].tag_ids.push(
-                      x
-                    );
+                    catelog_temp[article_id].tag_ids.push(x);
                   }
                 }
               });
@@ -137,8 +144,12 @@ catelog_tags_cache[article_id] = {}
                 article_indexes[article_id].push(n_book);
                 ++n_book;
               } else {
-                catelog_temp[article_id].book_ids.push(book_indexes_cache[bookinfo.id].number_id);
-                article_indexes[article_id].push(book_indexes_cache[bookinfo.id].number_id);
+                catelog_temp[article_id].book_ids.push(
+                  book_indexes_cache[bookinfo.id].number_id,
+                );
+                article_indexes[article_id].push(
+                  book_indexes_cache[bookinfo.id].number_id,
+                );
               }
             }
           }

@@ -14,9 +14,13 @@ for (let i = 0; i <= 20; ++i) {
   console.log(command);
   execSync(command, { cwd: join(__dirname, '..') });
   try {
-    execSync('(git reset --hard) || true', { cwd: join(__dirname, '../', dir, 'archives' + i) });
-    execSync('(git pull) || true', { cwd: join(__dirname, '../', dir, 'archives' + i) });
+    execSync('(git reset --hard) || true', {
+      cwd: join(__dirname, '../', dir, 'archives' + i),
+    });
+    execSync('(git pull) || true', {
+      cwd: join(__dirname, '../', dir, 'archives' + i),
+    });
   } catch (e) {
-    console.log(e)
+    console.log(e);
   }
 }

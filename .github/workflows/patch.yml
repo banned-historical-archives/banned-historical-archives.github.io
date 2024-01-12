@@ -44,7 +44,7 @@ jobs:
           ref: 'ocr_patch'
           token: ${{ secrets.GH_PAT }}
           path: 'ocr_patch/archives${{ steps.get_archive_id.outputs.archive_id }}'
-          
+
       - run: npx ts-node --project ./tsconfig.build.json backend/gitworkflow-patch.ts
         env:
           COMMIT_HASH: ${{ github.sha }}
