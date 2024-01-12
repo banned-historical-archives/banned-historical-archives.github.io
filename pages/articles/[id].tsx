@@ -157,115 +157,30 @@ export default function ArticleViewer({
     books[0].id,
   );
 
-  /*
   const addOCRComparisonPublicationV2 = useCallback(
-    (publicationId: string, patch: PatchV2, article: Article) => {
-      booksRef.current = booksRef.current.filter(i => i.id != virtual_publication_id);
-      const publication = {
-        ...article.publications.find((i) => i.id === publicationId)!,
-        id: virtual_publication_id,
-        name: '#OCR补丁预览#',
-      };
-      article.publications.push(publication);
-      const { page, comments, contents } = publication_details[publicationId];
-
-      const patched_article = apply_patch_v2(
-        {
-          title: article.title,
-          authors: article.authors.map((i) => i.name),
-          dates: [],
-          is_range_date: false,
-          parts: contents.map((i) => ({ type: i.type, text: i.text })),
-          page_start: page.start,
-          page_end: page.end,
-          description: comments.find((i) => i.part_index === -1)?.text || '',
-          comments: comments
-            .filter((i) => i.part_index !== -1)
-            .map((i) => i.text),
-          comment_pivots: comments
-            .filter((i) => i.part_index !== -1 && i.part_index !== -99)
-            .map((i) => ({
-              part_idx: i.part_index,
-              index: i.index,
-              offset: i.offset,
-            })),
-        },
-        patch,
+    (publicationId: string, patch: PatchV2) => {
+      booksRef.current = booksRef.current.filter(
+        (i) => i.id != virtual_publication_id,
       );
-      publication_details[virtual_publication_id] = {
-        page,
-        comments: [
-          ...patched_article.comments.map((i, comment_idx) => {
-            const pivot = patched_article.comment_pivots.find(
-              (j) => j.index === comment_idx + 1,
-            );
-            return {
-              id: Math.random().toString(),
-              publicationId,
-              articleId: article.id,
-              part_index: pivot ? pivot.part_idx : -99,
-              offset: pivot ? pivot.offset : -99,
-              index: comment_idx + 1,
-              article,
-              publication,
-              text: i,
-            };
-          }),
-          ...(patched_article.description
-            ? [
-                {
-                  id: Math.random().toString(),
-                  publicationId,
-                  articleId: article.id,
-                  part_index: -1,
-                  article,
-                  publication,
-                  index: -1,
-                  text: patched_article.description,
-                  offset: -1,
-                },
-              ]
-            : []),
-        ],
-        contents: patched_article.parts.map((i, idx) => ({
-          ...i,
-          id: Math.random().toString(),
-          index: idx,
-          publicationId,
-          articleId: article.id,
-          article,
-          publication,
-        })),
-      };
+      booksRef.current.push({
+        id: virtual_publication_id,
+        type: '',
+        tags: [],
+        files: [],
+        name: '#OCR补丁预览#',
+        article: apply_patch_v2(
+          booksRef.current.find((i) => i.id == publicationId)!.article,
+          patch,
+        ),
+      });
     },
-    [publication_details],
+    [],
   );
-  */
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     if (params.get('publication_id')) {
       setSelectedPublication(params.get('publication_id')!);
-    }
-    patchWrap.current = params.get('patch')
-      ? JSON.parse(decodeURIComponent(params.get('patch')!))
-      : undefined;
-    if (patchWrap.current) {
-      const patch = patchWrap.current ? patchWrap.current.patch! : undefined;
-      if (patch && typeof window !== 'undefined') {
-        if ((patch as PatchV2).version === 2) {
-          /*
-          addOCRComparisonPublicationV2(
-            patchWrap.current!.publicationId,
-            patch as PatchV2,
-            article,
-          );
-          */
-        }
-        setCompareType(CompareType.version);
-        setComparePublication(virtual_publication_id);
-        setSelectedPublication(patchWrap.current!.publicationId);
-      }
     }
   }, []);
 
@@ -647,11 +562,10 @@ export default function ArticleViewer({
                 str = str.substr(0, str.lastIndexOf('}') + 1);
                 try {
                   const patchWrap = JSON.parse(str);
-                  // addOCRComparisonPublicationV2(
-                  //   patchWrap.publicationId,
-                  //   patchWrap.patch,
-                  //   article,
-                  // );
+                  addOCRComparisonPublicationV2(
+                    patchWrap.publicationId,
+                    patchWrap.patch,
+                  );
                   setComparePublication(virtual_publication_id);
                   setSelectedPublication(patchWrap.publicationId);
                   setCompareType(CompareType.version);
