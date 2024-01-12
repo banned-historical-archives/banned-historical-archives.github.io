@@ -91,5 +91,5 @@ jobs:
           https://api.github.com/repos/banned-historical-archives/banned-historical-archives${{ steps.get_archive_id.outputs.archive_id }}/pulls \
           -d "{
             \"title\": \"[自动化录入]${{ steps.get_safe_title.outputs.safe_title}}\",
-            \"body\": \"https://github.com/banned-historical-archives/banned-historical-archives.github.io/issues/${{github.event.issue.number}}\",\"head\":\"feat/config-${{ steps.generate-uuid.outputs.uuid }}\",
+            \"body\": \"fix https://github.com/banned-historical-archives/banned-historical-archives.github.io/issues/${{github.event.issue.number}}\",\"head\":\"feat/config-${{ steps.generate-uuid.outputs.uuid }}\",
             \"base\":\"config\"}"
