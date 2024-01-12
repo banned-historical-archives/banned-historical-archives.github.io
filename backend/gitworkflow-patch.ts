@@ -27,6 +27,7 @@ let final: {
 };
 let decoded = '';
 const book_indexes = JSON.parse(readFileSync(join(__dirname , '../book_indexes.json')).toString()) as BookIndexes;
+const article_indexes = JSON.parse(readFileSync(join(__dirname , '../article_indexes.json')).toString()) as ArticleIndexes;
 try {
   const patch = JSON.parse(body) as {
     articleId: string;
@@ -39,7 +40,9 @@ try {
     }
     decoded = decodeURIComponent(JSON.stringify(final.patch)).replace(/\n/g, '');
 
-   const archive_id = book_indexes.find(i => i[0] == patch.publicationId)![2]
+    const candidates = article_indexes[patch.articleId].map(i => book_indexes[i]);
+   const archive_id = candidates.find(i => i[0] == patch.publicationId)![2]
+   console.log('archive_id', archive_id);
   const filepath = join(
     __dirname,
     `../ocr_patch/archives${archive_id}/[${final.articleId}][${final.publicationId}].ts`,
