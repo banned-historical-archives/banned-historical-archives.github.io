@@ -56,6 +56,6 @@ export default [
   }
   const idx = content.lastIndexOf(']');
   
-  content.slice(0, idx) + '  ' + JSON.stringify(final.patch) + '\n]';
+  content = content.slice(0, idx) + '  ' + JSON.stringify(final.patch) + '\n];';
   writeFileSync(filepath, content);
 } catch (e) { }
