@@ -114,10 +114,11 @@ catelog_tags_cache[article_id] = {}
                   }
                   n_tag++;
                 } else {
-                  if (catelog_tags_cache[article_id][n_tag] == undefined) {
-                    catelog_tags_cache[article_id][n_tag] = true;
+                      const x=tag_cache[tag.type][tag.name]
+                  if (catelog_tags_cache[article_id][x] == undefined) {
+                    catelog_tags_cache[article_id][x] = true;
                     catelog_temp[article_id].tag_ids.push(
-                      tag_cache[tag.type][tag.name]
+                      x
                     );
                   }
                 }
