@@ -69,4 +69,4 @@ jobs:
           -d "{
             \"title\": \"[OCR Patch]${{ steps.get_safe_title.outputs.safe_title}}\",
             \"body\": \"https://github.com/banned-historical-archives/banned-historical-archives.github.io/issues/${{github.event.issue.number}}\",\"head\":\"feat/${{ steps.generate-uuid.outputs.uuid }}\",
-            \"base\":\"main\"}"
+            \"base\":\"ocr_patch\"}"
