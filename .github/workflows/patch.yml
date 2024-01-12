@@ -36,14 +36,6 @@ jobs:
         env:
           BODY: ${{ github.event.issue.body }}
           TITLE: ${{ github.event.issue.title }}
-      - run: npx ts-node --project ./tsconfig.build.json backend/gitworkflow-patch.ts
-        env:
-          COMMIT_HASH: ${{ github.sha }}
-          BODY: ${{ github.event.issue.body }}
-
-      - run: git config --global http.postBuffer 2097152000
-      - run: git config --global user.email "you@example.com"
-      - run: git config --global user.name "Your Name"
 
       - name: init subm ocr patch
         uses: actions/checkout@v4
@@ -52,6 +44,15 @@ jobs:
           ref: 'ocr_patch'
           token: ${{ secrets.GH_PAT }}
           path: 'ocr_patch/archives${{ steps.get_archive_id.outputs.archive_id }}'
+          
+      - run: npx ts-node --project ./tsconfig.build.json backend/gitworkflow-patch.ts
+        env:
+          COMMIT_HASH: ${{ github.sha }}
+          BODY: ${{ github.event.issue.body }}
+
+      - run: git config --global http.postBuffer 2097152000
+      - run: git config --global user.email "you@example.com"
+      - run: git config --global user.name "Your Name"
 
       - name: Create Pull Request
         run: |
