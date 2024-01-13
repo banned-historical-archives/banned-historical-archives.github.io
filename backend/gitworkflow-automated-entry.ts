@@ -87,6 +87,7 @@ export async function start() {
         id + parse(basename(files[0])).ext,
       );
       fs.renameSync(files[0], new_path);
+      files[0] = new_path;
     }
 
     /**

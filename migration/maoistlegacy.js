@@ -50,7 +50,7 @@ async function build_cfg() {
                   }.${i.split('.').pop()}`,
               )
       },
-      parser_option: meta.pdf ? {
+      parser_option: meta.pdf || meta.imgs.length ? {
         articles: [{
         "page_start": 1,
         "page_end": size,
