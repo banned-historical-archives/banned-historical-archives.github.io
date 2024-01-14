@@ -1,4 +1,40 @@
-import type Publication from '../backend/entity/publication';
+export type Tag = {
+  name: string;
+  type: TagType;
+};
+
+export type Comment = {
+  index: number; // 编号
+  part_index: number;
+  id: string;
+  offset: number;
+  text: string;
+}
+export type Content = {
+  id: string;
+  type: ContentType;
+  text: string;
+  index: number;
+}
+export type Article = {
+  title: string;
+  author: string[];
+  dates: Date[];
+  is_range_date: boolean;
+  origin?: string;
+  alias?: string;
+  tags: Tag[];
+}
+
+export type Publication = {
+  id: string;
+  name: string;
+  internal: boolean;
+  official: boolean;
+  type: 'img' | 'pdf' | 'db' | 'unknown',
+  author: string;
+  files: string;
+}
 
 export enum ArticleCategory {
   centralFile = '中央文件',
@@ -19,11 +55,23 @@ export enum TagType {
   translator = '翻译',
   reprint = '翻印/传抄',
 }
+export type Image = {
+  id: string;
 
-export enum ImageTagType {
-  place = 'place',
-  character = 'character',
-  subject = 'subject',
+  name: string;
+
+  url: string;
+
+  show_in_gallery: boolean;
+
+  description: string;
+
+  source?: string;
+
+  year?: number;
+  month?: number;
+  day?: number;
+  tags: { name: string; type: string }[];
 }
 
 export enum ContentType {
@@ -59,8 +107,23 @@ export type Date = {
   day?: number;
 };
 
+export type Music = {
+  name: string;
+  composer: string;
+  description: string;
+  lyrics: {
+    lyricist: string;
+    version: string;
+    content: string;
+    audios: {
+      url: string;
+      source: string;
+      artist: string;
+    }[];
+  }[];
+}
 export type Pivot = {
-  part_idx: number; // 从 0 开始
+  part_index: number; // 从 0 开始
   index: number; // 注释编号
   offset: number; // 偏移量，从 0 开始，注释应该插入的index，比如'mzd[2]'的offset为3
 };
@@ -144,6 +207,7 @@ export type LACResult = {
 };
 
 export type ParserOptionV2 = {
+  resource_type?: 'book' | 'video' | 'music' | 'picture',
   archive_id?: number;
   internal?: boolean;
   official?: boolean;
@@ -168,6 +232,22 @@ export type ParserOptionV2 = {
   ocr_exceptions?: {
     [key: string]: Partial<OCRParameter & OCRParameterAdvanced>;
   }; // 例外， 比如第三页的ocr参数与其他页面不同，默认为空，此参数比articles中的优先级高
+};
+
+export type MusicMetaData = {
+  name: string;
+  composer: string;
+  description: string;
+  lyrics: {
+    lyricist: string;
+    version: string;
+    content: string;
+    audios: {
+      url: string;
+      source: string;
+      artist: string;
+    }[];
+  }[];
 };
 
 export type OCRParameter = {

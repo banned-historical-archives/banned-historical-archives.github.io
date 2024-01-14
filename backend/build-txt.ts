@@ -1,11 +1,6 @@
 import 'reflect-metadata';
 import { join } from 'node:path/posix';
-import { init } from './data-source';
 
-import Publication from './entity/publication';
-import Tag from './entity/tag';
-import Page from './entity/page';
-import { get_article_types, get_tags } from './classifier';
 import { Any, Brackets, DataSource } from 'typeorm';
 import { music as musicData } from './music';
 import {
@@ -14,10 +9,11 @@ import {
   Book,
   BookIndexes,
   ParserResult,
+  Publication,
+  Tag,
   TagType,
 } from '../types';
 import { get_article_id, hash_str_arr, uuid } from '../utils';
-import { Image, ImageTag } from './entities';
 import fs, { readFileSync, writeFileSync } from 'fs';
 import { ensureDirSync } from 'fs-extra';
 

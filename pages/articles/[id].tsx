@@ -34,11 +34,7 @@ import {
 import { Document, Page, pdfjs } from 'react-pdf';
 import Layout from '../../components/Layout';
 
-import Content from '../../backend/entity/content';
-import Article from '../../backend/entity/article';
-import Date from '../../backend/entity/date';
-import Comment from '../../backend/entity/comment';
-import PageEntity from '../../backend/entity/page';
+import { Content, Date, Comment } from '../../types';
 import { GetStaticProps, GetStaticPropsContext } from 'next';
 import { DiffViewer } from '../../components/DiffViewer';
 import Tags from '../../components/Tags';
@@ -60,13 +56,6 @@ pdfjs.GlobalWorkerOptions.workerSrc = `/pdfjs-dist/legacy/build/pdf.worker.min.j
 const commit_hash = process.env.COMMIT_HASH;
 const virtual_publication_id = '--preview-patch--';
 
-type PublicationDetails = {
-  [key: string]: {
-    comments: Comment[];
-    contents: Content[];
-    page: PageEntity;
-  };
-};
 export async function getStaticPaths() {
   const article_indexes = JSON.parse(
     readFileSync(join(process.cwd(), 'article_indexes.json')).toString(),
@@ -249,18 +238,18 @@ export default function ArticleViewer({
     if (book.article.alias) aliases.push(book.article.alias);
   });
 
-  const { description, parts, comments, page_start, page_end } = article;
-  const articleComments = comments.map(
-    (i, idx) => ({ text: i, id: idx.toString(), index: idx } as Comment),
+  const { description, parts, comments, page_start, page_end, comment_pivots } = article;
+  const articleComments: Comment[] = comments.map(
+    (i, idx) => ({ text: i, id: idx.toString(), ...comment_pivots[idx] }),
   );
-  const articleContents = parts.map(
-    (i, idx) => ({ ...i, index: idx, id: idx.toString() } as Content),
+  const articleContents: Content[] = parts.map(
+    (i, idx) => ({ ...i, index: idx, id: idx.toString() }),
   );
-  const comparedArticleComments = comparedBook.article.comments.map(
-    (i, idx) => ({ text: i, id: idx.toString(), index: idx } as Comment),
+  const comparedArticleComments: Comment[] = comparedBook.article.comments.map(
+    (i, idx) => ({ text: i, id: idx.toString(), ...comment_pivots[idx] }),
   );
-  const comparedArticleContents = comparedBook.article.parts.map(
-    (i, idx) => ({ ...i, index: idx, id: idx.toString() } as Content),
+  const comparedArticleContents: Content[] = comparedBook.article.parts.map(
+    (i, idx) => ({ ...i, index: idx, id: idx.toString() }),
   );
 
   const all_tags = new Map<string, { type: string; name: string }>();

@@ -197,7 +197,7 @@ export function extract_pivots(s: string, part_idx: number): [Pivot[], string] {
     }
     const index = parseInt(s.match(exp)![0].substr(1));
     s = s.replace(exp, '');
-    res.push({ part_idx, offset: idx, index });
+    res.push({ part_index: part_idx, offset: idx, index });
   }
   return [res, s];
 }
@@ -230,7 +230,7 @@ export function apply_patch_v2(
           const original_text_arr = Array.from(parts[idx].text);
           // 恢复bracket
           comment_pivots
-            .filter((i) => i.part_idx === idx)
+            .filter((i) => i.part_index === idx)
             .sort((a, b) => b.index - a.index)
             .forEach((i) =>
               original_text_arr.splice(
@@ -266,7 +266,7 @@ export function apply_patch_v2(
     } else {
       final_pivots.push(
         ...comment_pivots
-          .filter((j) => j.part_idx === idx)
+          .filter((j) => j.part_index === idx)
           .map((j) => ({ ...j, part_idx: final_parts.length })),
       );
       final_parts.push(parts[i]);
@@ -330,7 +330,7 @@ export function apply_patch(parserResult: ParserResult, patch: Patch) {
     const idx = parseInt(i);
     const text_arr = Array.from(parts[idx].text);
     comment_pivots
-      .filter((i) => i.part_idx === idx)
+      .filter((i) => i.part_index === idx)
       .sort((a, b) => b.index - a.index)
       .forEach((i) =>
         text_arr.splice(
@@ -346,7 +346,7 @@ export function apply_patch(parserResult: ParserResult, patch: Patch) {
       .map((i) => i[1])
       .join('');
     parserResult.comment_pivots = comment_pivots.filter(
-      (x) => x.part_idx !== idx,
+      (x) => x.part_index !== idx,
     );
     const [pivots, pure_text] = extract_pivots(new_text, idx);
     parserResult.comment_pivots.push(...pivots);

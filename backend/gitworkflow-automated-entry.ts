@@ -103,8 +103,9 @@ export async function start() {
       i.page_start = i.page_start || 1;
       i.page_end = i.page_end || links.length;
     });
+
     const file_content = `export default {
-  resource_type: 'book',
+  resource_type: ${config.resource_type},
   entity: {
     id: '${id}',
     name: '${config.source_name!}',
@@ -121,10 +122,19 @@ export async function start() {
       ),
     )}
   },
-  parser_option: {
-    articles: ${JSON.stringify(config.articles, null, 2)},
-    ocr: ${JSON.stringify(config.ocr)},
-    ocr_exceptions: ${JSON.stringify(config.ocr_exceptions || {})},
+  ${
+    JSON.stringify(
+      
+    config.resource_type === 'book' ?
+      {
+      parser_option: {
+        articles: config.articles,
+        ocr: config.ocr || {},
+        ocr_exceptions: config.ocr_exceptions || {},
+      }
+    } : {}
+    , null, 2)
+
   },
   parser_id: 'automation',
   path: '${is_img_set ? id : is_pdf ? id + '.pdf' : ''}'

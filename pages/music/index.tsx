@@ -36,7 +36,7 @@ import Menu from '@mui/material/Menu';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import Divider from '@mui/material/Divider';
-import MusicEntity from '../../backend/entity/music';
+import { Music as MusicEntity } from '../../types';
 import Stack from '@mui/material/Stack';
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
@@ -58,38 +58,42 @@ export const getStaticProps: GetStaticProps = async (
 };
 
 function Song({
+  songId,
   song,
   setPlayingName,
   setPlaying,
 }: {
+  songId: string;
   song: MusicEntity;
   setPlayingName: Function;
   setPlaying: Function;
 }) {
-  const [lyricLeft, setLyricLeft] = useState(song.lyrics[0].id);
+  const [lyricLeft, setLyricLeft] = useState(0);
   const [lyricRight, setLyricRight] = useState(
-    song.lyrics[song.lyrics.length - 1].id,
+    song.lyrics.length - 1
   );
-  const leftContents = song.lyrics
-    .find((i) => i.id === lyricLeft)!
-    .content.split('\n');
-  const rightContents = song.lyrics
-    .find((i) => i.id === lyricRight)!
-    .content.split('\n');
 
-  let i = 0;
-  const max_len = Math.max(leftContents.length, rightContents.length);
-  const diff: Diff[][] = [];
-  while (i < max_len) {
-    const a = leftContents[i] || '';
-    const b = rightContents[i] || '';
-    diff.push(new diff_match_patch().diff_main(a, b));
-    ++i;
-  }
+  const leftContents = useMemo(() => song.lyrics[lyricLeft].content.split('\n'), [lyricLeft]);
+  const rightContents = useMemo(() => song.lyrics[lyricRight]!.content.split('\n'), [lyricRight]);
+  const diff: Diff[][] = useMemo(() => {
+    const leftContents = song.lyrics[lyricLeft].content.split('\n');
+    const rightContents = song.lyrics[lyricRight]!.content.split('\n');
+    let i = 0;
+    const max_len = Math.max(leftContents.length, rightContents.length);
+
+    const res: Diff[][] = [];
+    while (i < max_len) {
+      const a = leftContents[i] || '';
+      const b = rightContents[i] || '';
+      res.push(new diff_match_patch().diff_main(a, b));
+      ++i;
+    }
+    return res;
+  }, [lyricLeft, lyricRight]);
 
   return (
     <Accordion disableGutters>
-      <AccordionSummary expandIcon={<ExpandMoreIcon />} id={song.id}>
+      <AccordionSummary expandIcon={<ExpandMoreIcon />} id={songId}>
         <Typography variant="h6">{song.name}</Typography>
       </AccordionSummary>
       <AccordionDetails>
@@ -98,15 +102,15 @@ function Song({
           演唱/演奏版本：
         </Typography>
         <Stack>
-          {song.lyrics.map((lyric) => (
-            <Stack key={lyric.id} sx={{ display: 'inline' }}>
-              {lyric.audios.map((audio) => {
+          {song.lyrics.map((lyric, idx) => (
+            <Stack key={idx} sx={{ display: 'inline' }}>
+              {lyric.audios.map((audio, aid) => {
                 const name = `${song.name}-${lyric.version}-${
                   audio.artist || '未知'
                 }`;
                 return (
                   <Button
-                    key={audio.id}
+                    key={idx + '-' + aid}
                     sx={{ justifyContent: 'start' }}
                     startIcon={<PlayCircleIcon />}
                     onClick={() => {
@@ -135,11 +139,11 @@ function Song({
               label="版本"
               sx={{ mb: 1 }}
               onChange={(e) => {
-                setLyricLeft(e.target.value);
+                setLyricLeft(parseInt(e.target.value as string));
               }}
             >
-              {song.lyrics.map((lyric) => (
-                <MenuItem key={lyric.id} value={lyric.id}>
+              {song.lyrics.map((lyric, idx) => (
+                <MenuItem key={idx} value={idx}>
                   {lyric.version}
                 </MenuItem>
               ))}
@@ -159,11 +163,11 @@ function Song({
                   label="版本"
                   sx={{ mb: 1 }}
                   onChange={(e) => {
-                    setLyricRight(e.target.value);
+                    setLyricRight(parseInt(e.target.value as string));
                   }}
                 >
-                  {song.lyrics.map((lyric) => (
-                    <MenuItem key={lyric.id} value={lyric.id}>
+                  {song.lyrics.map((lyric, idx) => (
+                    <MenuItem key={idx} value={idx}>
                       {lyric.version}
                     </MenuItem>
                   ))}
@@ -451,10 +455,11 @@ export default function Music({ music }: { music: MusicEntity[] }) {
         setPlayingName={setPlayingName}
         playingName={playingName}
       />
-      {music.map((i) => (
+      {music.map((i, idx) => (
         <Song
-          key={i.id}
+          key={idx}
           song={i}
+          songId={idx.toString()}
           setPlayingName={setPlayingName}
           setPlaying={setPlaying}
         />

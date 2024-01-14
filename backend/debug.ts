@@ -5,7 +5,6 @@ import { join } from 'node:path/posix';
 
 import { get_article_id, sleep } from '../utils';
 import { basename } from 'node:path';
-import { Article } from './entities';
 import fs from 'fs';
 import { JSDOM } from 'jsdom';
 import { ContentType, Date, ParserResult } from '../types';

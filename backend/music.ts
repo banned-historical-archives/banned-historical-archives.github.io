@@ -1,18 +1,6 @@
-export const music: {
-  name: string;
-  composer: string;
-  description: string;
-  lyrics: {
-    lyricist: string;
-    version: string;
-    content: string;
-    audios: {
-      url: string;
-      source: string;
-      artist: string;
-    }[];
-  }[];
-}[] = [
+import { Music } from "../types";
+
+export const music: Music[] = [
   {
     name: '我们走在大路上',
     composer: '李劫夫',

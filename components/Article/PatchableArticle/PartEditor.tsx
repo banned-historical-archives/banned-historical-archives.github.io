@@ -16,9 +16,7 @@ import {
 } from '@mui/material';
 import { diff_match_patch, Diff } from 'diff-match-patch';
 import { ReactElement, useEffect, useMemo, useRef, useState } from 'react';
-import { setTextRange } from 'typescript';
-import { Article, Content, Comment } from '../../../backend/entities';
-import { ContentPart, ContentType, PartDiff } from '../../../types';
+import { Content, Comment, ContentPart, ContentType, PartDiff } from '../../../types';
 import { bracket_left, bracket_right, md5 } from '../../../utils';
 
 export interface InsertPartDialogProps {

@@ -13,8 +13,7 @@ import {
 import Link from 'next/link';
 
 import Layout from '../../components/Layout';
-import Article from '../../backend/entity/article';
-import type Date from '../../backend/entity/date';
+import { Article } from '../../types/index';
 
 import TextField from '@mui/material/TextField';
 import DialogTitle from '@mui/material/DialogTitle';
@@ -43,7 +42,7 @@ import {
   GetServerSidePropsContext,
   GetStaticPropsContext,
 } from 'next';
-import { Tag } from '../../backend/entities';
+import { Tag } from '../../types';
 import Tags from '../../components/Tags';
 import Authors from '../../components/Authors';
 import {
@@ -197,17 +196,17 @@ function date_include(a: Article, b: DateFilter) {
   const date_b = b.year_b! * 10000 + b.month_b! * 100 + b.day_b!;
   if (a.is_range_date) {
     const range_a =
-      a.dates[0].year * 10000 +
+      a.dates[0].year! * 10000 +
       (a.dates[0].month || 0) * 100 +
       (a.dates[0].day || 0);
     const range_b =
-      a.dates[1].year * 10000 +
+      a.dates[1].year! * 10000 +
       (a.dates[1].month || 0) * 100 +
       (a.dates[1].day || 0);
     return range_a >= date_a && range_b <= date_b;
   } else {
     return a.dates.reduce((m, i) => {
-      const d = i.year * 10000 + (i.month || 0) * 100 + (i.day || 0);
+      const d = i.year! * 10000 + (i.month || 0) * 100 + (i.day || 0);
       return m && date_a <= d && date_b >= d;
     }, true);
   }

@@ -1,5 +1,4 @@
-import { ImageTagType } from '../types';
-import { Image } from './entities';
+import { Image, } from '../types';
 
 const images: (Image & {
   id?: string;

@@ -12,7 +12,7 @@ import {
 } from '@mui/material';
 import { diff_match_patch, Diff } from 'diff-match-patch';
 import { ReactElement, useEffect, useRef, useState } from 'react';
-import { Article, Content, Comment } from '../../backend/entities';
+import { Article, Content, Comment } from '../../types';
 import { ContentType, ParserResult } from '../../types';
 import { bracket_left, bracket_right, md5 } from '../../utils';
 import PatchableArticle from './PatchableArticle';
