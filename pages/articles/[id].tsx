@@ -30,6 +30,7 @@ import {
   ParserResult,
   Patch,
   PatchV2,
+  Tag,
 } from '../../types';
 import { Document, Page, pdfjs } from 'react-pdf';
 import Layout from '../../components/Layout';
@@ -252,10 +253,10 @@ export default function ArticleViewer({
     (i, idx) => ({ ...i, index: idx, id: idx.toString() }),
   );
 
-  const all_tags = new Map<string, { type: string; name: string }>();
+  const all_tags = new Map<string, Tag>();
   booksRef.current.forEach((i) => {
     i.tags.forEach((j) => {
-      all_tags.set(j.type + '##' + j.name, j);
+      all_tags.set(j.type + '##' + j.name, j as Tag);
     });
   });
 

@@ -449,7 +449,7 @@ export type BookCatelogItem = {
   is_range_date: boolean;
   book_ids: number[];
   books?: string[];
-  tags?: { name: string; type: string }[];
+  tags?: Tag[];
   tag_ids: number[];
 };
 export type ArticleIndexes = { [aid: string]: number[] }; // book_number_id

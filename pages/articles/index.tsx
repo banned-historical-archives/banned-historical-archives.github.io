@@ -228,7 +228,7 @@ export default function Articles({
         i.tags = i.tag_ids.map((j) => ({
           type: tag_indexes[j][0],
           name: tag_indexes[j][1],
-        }));
+        } as Tag));
         i.books = i.book_ids.map((j) => book_indexes[j][1]);
       } catch (e) {
         debugger;
@@ -380,10 +380,11 @@ export default function Articles({
                 </Typography>
                 <Stack direction="row" spacing={1}>
                   {tags.map((i) => {
-                    const isSelected = i.id == tagFilter;
+                    const id = i.type + '##' + i.name;
+                    const isSelected = id == tagFilter;
                     return (
                       <Chip
-                        key={i.id}
+                        key={id}
                         label={i.name}
                         variant={isSelected ? 'filled' : 'outlined'}
                         color={isSelected ? 'primary' : 'default'}
@@ -391,7 +392,7 @@ export default function Articles({
                           isSelected ? () => setTagFilter(null) : undefined
                         }
                         onClick={(e) => {
-                          setTagFilter(i.id);
+                          setTagFilter(id);
                         }}
                       />
                     );
