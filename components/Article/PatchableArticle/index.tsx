@@ -13,7 +13,6 @@ import {
 } from '@mui/material';
 import { diff_match_patch, Diff } from 'diff-match-patch';
 import { ReactElement, useEffect, useMemo, useRef, useState } from 'react';
-import { setTextRange } from 'typescript';
 import { Article, Content, Comment } from '../../../types';
 import {
   ContentPart,
