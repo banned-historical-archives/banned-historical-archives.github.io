@@ -10,8 +10,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import { Chip } from '@mui/material';
-import { Tag } from '../backend/entities';
-import { TagType } from '../types';
+import { TagType, Tag } from '../types';
 
 export function useTagFilterDialog(
   tags_all: Map<string, Tag>,
@@ -31,7 +30,7 @@ export function useTagFilterDialog(
   const onClose = useCallback(() => setTagDialog(false), []);
   const onConfirm = useCallback(() => {
     setTags(
-      Array.from(new Set([...default_tags.map((i) => i.id), selected])).map(
+      Array.from(new Set([...default_tags.map((i) => i.type + '##' + i.name), selected])).map(
         (i) => tags_all.get(i)!,
       ),
     );
@@ -51,11 +50,11 @@ export function useTagFilterDialog(
               (tag) => (
                 <Chip
                   sx={{ m: 0.5 }}
-                  key={tag.id}
-                  onClick={() => setSelected(tag.id)}
+                  key={tag.type + '##' + tag.name}
+                  onClick={() => setSelected(tag.type + '##' + tag.name)}
                   label={tag.name}
-                  color={selected === tag.id ? 'primary' : 'default'}
-                  variant={selected === tag.id ? 'filled' : 'outlined'}
+                  color={selected === tag.type + '##' + tag.name ? 'primary' : 'default'}
+                  variant={selected === tag.type + '##' + tag.name ? 'filled' : 'outlined'}
                 />
               ),
             )}

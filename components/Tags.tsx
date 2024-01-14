@@ -2,13 +2,12 @@ import Chip from '@mui/material/Chip';
 import Typography from '@mui/material/Typography';
 import { ReactElement, useState, useEffect, useMemo } from 'react';
 import Popover from '@mui/material/Popover';
-import { ArticleCategory, ArticleType, TagType } from '../types';
 import { Tag } from '../types';
 
 export default function Tags({
   tags,
 }: {
-  tags: { type: string; name: string }[];
+  tags: Tag[];
 }) {
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
   const [label, setLabel] = useState('');
