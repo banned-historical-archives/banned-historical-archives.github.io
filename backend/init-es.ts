@@ -1,6 +1,10 @@
 import 'reflect-metadata';
 
 import esClient from './connect-es';
+import { ArticleIndexes, BookIndexes, ParserResult } from '../types';
+import { readFileSync } from 'fs';
+import { join } from 'path';
+import { readJSONSync } from 'fs-extra';
 
 type ESArticle = {
   article_id: string;
@@ -10,8 +14,14 @@ type ESArticle = {
   aliases: string[];
   authors: string[];
   content: string;
-  comments: string[];
 };
+
+const article_indexes = JSON.parse(
+  readFileSync(join(process.cwd(), 'article_indexes.json')).toString(),
+) as ArticleIndexes;
+const book_indexes = JSON.parse(
+  readFileSync(join(process.cwd(), 'book_indexes.json')).toString(),
+) as BookIndexes;
 
 (async () => {
   // 清空
@@ -28,39 +38,29 @@ type ESArticle = {
 
   const es_articles: ESArticle[] = [];
   let t = 0;
-  /*
-  for (const article of articles) {
-    for (const publication of article.publications) {
-      const contents = await AppDataSource.manager.find(Content, {
-        where: {
-          publicationId: publication.id,
-          articleId: article.id,
-        },
-      });
-      const comments = await AppDataSource.manager.find(Comment, {
-        where: {
-          publicationId: publication.id,
-          articleId: article.id,
-        },
-      });
+  
+  const total = Object.keys(article_indexes).length;
+  for (const article_id of Object.keys(article_indexes)) {
+    for (const book_number_id of article_indexes[article_id]) {
+      const book = book_indexes[book_number_id];
+      const [book_id, book_name, archive_id] = book;
+      const article = readJSONSync(join(__dirname, '../parsed/archives' + archive_id, book_id.slice(0,3), book_id, article_id.slice(0, 3), article_id + '.json')) as ParserResult;
       const es_article: ESArticle = {
-        article_id: article.id,
-        publication_id: publication.id,
-        publication_name: publication.name,
-        authors: article.authors.map((i) => i.name),
+        article_id,
+        publication_id: book[0],
+        publication_name: book[1],
+        authors: article.authors,
         title: article.title,
-        aliases: article.aliases.map((i) => i.name),
-        content: contents.map((j) => j.text).join('\n'),
-        comments: comments.map((i) => i.text),
+        aliases: [],
+        content: article.description + article.parts.map((j) => j.text).join('\n') + article.comments.map(j => j).join('\n'),
       };
       es_articles.push(es_article);
       await esClient.index({
         index: 'article',
-        id: `${article.id}-${publication.id}`,
+        id: `${article_id}-${book_id}`,
         document: es_article,
       });
     }
-    console.log(`${++t}/${articles.length}`);
+    console.log(`${++t}/${total}`);
   }
-  */
 })();

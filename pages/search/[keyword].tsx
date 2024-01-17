@@ -47,9 +47,17 @@ export default function Search() {
   const router = useRouter();
   const keyword = router.query['keyword'] as string;
   async function update(keyword: string, es_size: number, es_from: number) {
-    const x = await (
+    const x = await(
       await fetch(
-        `http://localhost:8100?keyword=${keyword}&size=${es_size}&from=${es_from}`,
+        `http://localhost:9200/article/_search/?source=${ encodeURIComponent(JSON.stringify({
+          //index: 'article',
+          from: es_from,
+          size: es_size,
+          query: { match_phrase: { content: keyword } },
+          highlight: {
+            fields: { content: {} },
+          },
+        }))}&source_content_type=${encodeURIComponent('application/json')}`,
       )
     ).json();
     console.log(x);

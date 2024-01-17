@@ -1,7 +1,6 @@
 import express from 'express';
 import cors from 'cors';
 import timeout from 'connect-timeout';
-import esClient from './connect-es';
 
 const app = express();
 app.use(cors());

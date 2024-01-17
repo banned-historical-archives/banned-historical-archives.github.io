@@ -1,4 +1,3 @@
-import { useParams } from 'next/navigation';
 import React, {
   useRef,
   useState,
@@ -123,17 +122,8 @@ export default function ArticleViewer({
     article: ParserResult;
   }[];
 }) {
-  const { id: articleId } = useParams<{ id: string }>();
+  const [articleId, setArticleId] = useState<string>();
   const booksRef = useRef(books);
-  const patchWrap = useRef<
-    | {
-        commitHash: string;
-        articleId: string;
-        publicationId: string;
-        patch: Patch | PatchV2;
-      }
-    | undefined
-  >();
 
   const [previewScale, setPreviewScale] = useState(1);
   const [showMore, setShowMore] = useState(true);
@@ -260,6 +250,11 @@ export default function ArticleViewer({
     });
   });
 
+  useEffect(() => {
+    setArticleId(location.pathname.split('/').slice(-1)[0]);
+  }, []);
+  if (!articleId) return null;
+
   const compare_elements: ReactElement[] = [];
   compare_elements.push(
     <Stack
@@ -272,7 +267,7 @@ export default function ArticleViewer({
     >
       <ArticleComponent
         article={article}
-        articleId={articleId}
+        articleId={articleId!}
         publicationId={selectedPublication}
         publicationName={book.name}
         description={description}
