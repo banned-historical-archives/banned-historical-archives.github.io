@@ -38,9 +38,10 @@
 
 资源贡献\校对\纠错  
 [\[Github issues\]](https://github.com/banned-historical-archives/banned-historical-archives.github.io/issues)  
-[本地运行]()
-[文稿录入与校对]()
-[标准化加工及开发说明]()
+[本地运行](https://github.com/banned-historical-archives/banned-historical-archives.github.io/blob/master/docs/local.md)
+[本地搜索](https://github.com/banned-historical-archives/banned-historical-archives.github.io/blob/master/docs/local-search-engine.md)
+[文稿录入与校对](https://github.com/banned-historical-archives/banned-historical-archives.github.io/blob/master/docs/upload-and-correction.md)
+[标准化加工及开发说明](https://github.com/banned-historical-archives/banned-historical-archives.github.io/blob/master/docs/standarization.md)
 
 ## 安全提醒
 
