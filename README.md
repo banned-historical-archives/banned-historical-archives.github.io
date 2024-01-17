@@ -38,9 +38,9 @@
 
 资源贡献\校对\纠错  
 [\[Github issues\]](https://github.com/banned-historical-archives/banned-historical-archives.github.io/issues)  
-[开发者如何贡献代码](https://github.com/banned-historical-archives/banned-historical-archives.github.io/wiki/%E5%BC%80%E5%8F%91%E8%80%85%E8%B4%A1%E7%8C%AE%E4%BB%A3%E7%A0%81)  
-[文稿录入与校对](https://github.com/banned-historical-archives/banned-historical-archives.github.io/wiki/%E6%A0%87%E5%87%86%E5%8C%96%E6%96%87%E7%A8%BF%E5%BD%95%E5%85%A5%E4%B8%8E%E6%A0%A1%E5%AF%B9)  
-[标准化加工及开发说明](https://github.com/banned-historical-archives/banned-historical-archives.github.io/wiki/%E6%A0%87%E5%87%86%E5%8C%96%E5%8A%A0%E5%B7%A5%E5%8F%8A%E5%BC%80%E5%8F%91%E8%AF%B4%E6%98%8E)  
+[本地运行]()
+[文稿录入与校对]()
+[标准化加工及开发说明]()
 
 ## 安全提醒
 

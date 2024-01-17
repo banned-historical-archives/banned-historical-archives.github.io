@@ -115,9 +115,10 @@
 
 ## 仓库目录结构说明
 
-* 书籍原始文件路径：/public/books
-* 宋永毅-中国文化大革命文库原始文件路径：/public/TheGPCRdatabase
-* 音乐原始文件路径：/public/music
-* ocr 补丁文件：/patch
+* 文稿原始文件路径：/raw
+* 配置文件路径：/config
+* 纯文本文件路径：/parsed
+* ocr 补丁文件：/ocr_patch
+
 * 前端：/pages
 * 后端：/backend
