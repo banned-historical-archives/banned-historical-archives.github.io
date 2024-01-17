@@ -1,6 +1,6 @@
 ### 初始化本地搜索引擎
-
-1.  安装 docker 并使用 docker 运行 elasticsearch
+0. [本地运行web服务器](./local.md)
+1. 安装 docker 并使用 docker 运行 elasticsearch
 
 ```
 docker pull docker.elastic.co/elasticsearch/elasticsearch:8.5.1
