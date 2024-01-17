@@ -60,7 +60,7 @@
 
 ### 2. 本地使用 Elastic Search（推荐、操作略复杂）
 
-**[本地搜索的使用](https://github.com/banned-historical-archives/banned-historical-archives.github.io/wiki/%E6%9C%AC%E5%9C%B0%E6%90%9C%E7%B4%A2%E7%9A%84%E4%BD%BF%E7%94%A8)**
+**[本地搜索的使用](https://github.com/banned-historical-archives/banned-historical-archives.github.io/blob/master/docs/local-search-engine.md)**
 
 ### 3. 本地文本搜索（面向不懂技术的使用者）
 
@@ -91,15 +91,9 @@
 
 [\[Github\]](https://github.com/banned-historical-archives/banned-historical-archives.github.io)
 
-如果以备份为目的 fork 本仓库，最好同时 fork 本仓库对应的资源仓库 banned-historical-archives0, banned-historical-archives1, banned-historical-archives2 ... banned-historical-archives10
-
-[\[开发者如何贡献代码\]](https://github.com/banned-historical-archives/banned-historical-archives.github.io/wiki/开发者贡献代码)
+如果以备份为目的 fork 本仓库，最好同时 fork 本仓库对应的资源仓库 banned-historical-archives0, banned-historical-archives1, banned-historical-archives2 ... banned-historical-archives20
 
 ## 其他
-
-### 数据库导出
-
-在初始化项目后，执行 mysqldump 命令导出数据库，使用方法见 mysql 官网。
 
 ### 静态 html 文件导出
 
