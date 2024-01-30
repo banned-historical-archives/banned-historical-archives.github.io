@@ -52,7 +52,7 @@ export async function start() {
       if (!real_ext) process.exit(3);
       const new_path = join(
         tmpdir(),
-        files.length + '.' + real_ext,
+        (files.length + 1) + '.' + real_ext,
       );
       fs.renameSync(p, new_path);
       files.push(new_path);
