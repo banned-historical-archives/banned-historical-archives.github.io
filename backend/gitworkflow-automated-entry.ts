@@ -1,5 +1,6 @@
 import { join, basename, dirname, extname } from 'node:path/posix';
 import fs from 'node:fs';
+import fsextra from 'fs-extra';
 import { ParserOptionV2 } from '../types';
 import JSON5 from 'json5';
 import axios from 'axios';
@@ -42,7 +43,7 @@ export async function start() {
       (i as any)[0].replace(/^.*\(/, '').replace(/\)/, ''),
     );
 
-    const files = [];
+    const files: string[] = [];
     for (const link of links) {
       const p = join(tmpdir(), basename(link));
       await download(link, p);
@@ -51,7 +52,7 @@ export async function start() {
       if (!real_ext) process.exit(3);
       const new_path = join(
         tmpdir(),
-        parse(basename(link)).name + '.' + real_ext,
+        files.length + '.' + real_ext,
       );
       fs.renameSync(p, new_path);
       files.push(new_path);
@@ -69,25 +70,6 @@ export async function start() {
 
     if (!is_pdf && !is_img_set) {
       process.exit(4);
-    }
-
-    if (is_img_set) {
-      for (let i = 0; i < files.length; ++i) {
-        const new_path = join(
-          dirname(files[i]),
-          i + parse(basename(files[i])).ext,
-        );
-        fs.renameSync(files[i], new_path);
-        files[i] = new_path;
-      }
-    }
-    if (is_pdf) {
-      const new_path = join(
-        dirname(files[0]),
-        id + parse(basename(files[0])).ext,
-      );
-      fs.renameSync(files[0], new_path);
-      files[0] = new_path;
     }
 
     /**
@@ -146,6 +128,12 @@ export async function start() {
 
     for (const i of files) {
       if (is_img_set) {
+        fsextra.ensureDirSync(
+          join(
+            __dirname,
+            `../raw/archives${config.archive_id}/${id}`,
+          )
+        );
         fs.renameSync(
           i,
           join(
