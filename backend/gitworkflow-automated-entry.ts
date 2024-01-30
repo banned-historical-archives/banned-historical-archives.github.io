@@ -104,17 +104,15 @@ export async function start() {
       ),
     )}
   },
-  ${
+  parser_option: ${
     JSON.stringify(
       
     config.resource_type === 'book' ?
       {
-      parser_option: {
         articles: config.articles,
         ocr: config.ocr || {},
         ocr_exceptions: config.ocr_exceptions || {},
-      }
-    } : {}
+      } : {}
     , null, 2)
 
   },
