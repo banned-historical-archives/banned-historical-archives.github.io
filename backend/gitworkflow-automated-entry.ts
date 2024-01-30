@@ -87,7 +87,7 @@ export async function start() {
     });
 
     const file_content = `export default {
-  resource_type: ${config.resource_type},
+  resource_type: '${config.resource_type}',
   entity: {
     id: '${id}',
     name: '${config.source_name!}',
