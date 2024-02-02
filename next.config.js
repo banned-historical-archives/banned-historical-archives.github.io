@@ -5,7 +5,7 @@ const nextConfig = {
   },
   reactStrictMode: true,
   swcMinify: true,
-  trailingSlash: false,
+  trailingSlash: true,
   staticPageGenerationTimeout: 800,
   output: 'export',
   webpack: (config) => {

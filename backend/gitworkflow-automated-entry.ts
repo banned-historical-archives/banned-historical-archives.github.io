@@ -106,7 +106,6 @@ export async function start() {
   },
   parser_option: ${
     JSON.stringify(
-      
     config.resource_type === 'book' ?
       {
         articles: config.articles,
@@ -114,7 +113,6 @@ export async function start() {
         ocr_exceptions: config.ocr_exceptions || {},
       } : {}
     , null, 2)
-
   },
   parser_id: 'automation',
   path: '${is_img_set ? id : is_pdf ? id + '.pdf' : ''}'
