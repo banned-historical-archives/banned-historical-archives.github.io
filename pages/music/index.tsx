@@ -317,9 +317,7 @@ function Player({
               e.stopPropagation();
               if (repeatType === RepeatType.shuffle) {
                 const keys = Object.keys(playlist);
-                const idx = keys.findIndex((i) => i === playingName);
-                let t = 0;
-                while (t === idx) t = Math.floor(Math.random() * keys.length);
+                const t = Math.floor(Math.random() * keys.length);
                 setPlayingName(keys[t]);
               } else {
                 const keys = Object.keys(playlist);
