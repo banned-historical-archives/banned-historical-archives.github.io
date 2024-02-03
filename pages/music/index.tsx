@@ -434,9 +434,7 @@ export default function Music({ music }: { music: MusicEntity[] }) {
             setPlayingName(keys[idx + 1 < keys.length ? idx + 1 : 0]);
           } else if (repeatType === RepeatType.shuffle) {
             const keys = Object.keys(playlist);
-            const idx = keys.findIndex((i) => i === playingName);
-            let t = 0;
-            while (t === idx) t = Math.floor(Math.random() * keys.length);
+            const t = Math.floor(Math.random() * keys.length);
             setPlayingName(keys[t]);
           }
         }}
