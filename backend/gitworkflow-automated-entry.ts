@@ -1,7 +1,7 @@
 import { join, basename, dirname, extname } from 'node:path/posix';
 import fs from 'node:fs';
 import fsextra from 'fs-extra';
-import { ParserOptionV2 } from '../types';
+import { BookMetaData, Config, ParserOptionV2, ResourceMetaData } from '../types';
 import JSON5 from 'json5';
 import axios from 'axios';
 import { uuid } from '../utils';
@@ -86,37 +86,60 @@ export async function start() {
       i.page_end = i.page_end || links.length;
     });
 
-    const file_content = `export default {
-  resource_type: '${config.resource_type}',
-  entity: {
-    id: '${id}',
-    name: '${config.source_name!}',
-    internal: ${!!config.internal},
-    official: ${!!config.official},
-    type: '${is_pdf ? 'pdf' : is_img_set ? 'img' : ''}',
-    author: '${config.author || ''}',
-    files: ${JSON.stringify(
-      files.map(
-        (i) =>
-          `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives${
-            config.archive_id
-          }/main/${basename(i)}`,
-      ),
-    )}
-  },
-  parser_option: ${
-    JSON.stringify(
-    config.resource_type === 'book' ?
-      {
-        articles: config.articles,
-        ocr: config.ocr || {},
-        ocr_exceptions: config.ocr_exceptions || {},
-      } : {}
-    , null, 2)
-  },
-  parser_id: 'automation',
-  path: '${is_img_set ? id : is_pdf ? id + '.pdf' : ''}'
-};`;
+    let metadata: ResourceMetaData;
+    if (config.resource_type === 'book') {
+      metadata = {
+        id,
+        name: config.source_name!,
+        internal: !!config.internal,
+        official: !!config.official,
+        type: is_pdf ? 'pdf' : is_img_set ? 'img' : 'unknown',
+        author: config.author || '',
+        files:
+          files.map(
+            (i) =>
+              `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives${config.archive_id
+              }/main/${basename(i)}`,
+          ),
+      };
+    } else if (config.resource_type === 'music') {
+      metadata = config as any;
+    } else {
+      metadata = config as any;
+    };
+
+    let resource_config: Config;
+    
+    if (config.resource_type === 'book') {
+      resource_config = {
+        resource_type: 'book',
+        entity: metadata as BookMetaData,
+        parser_option: {
+          articles: config.articles,
+          ocr: config.ocr || {},
+          ocr_exceptions: config.ocr_exceptions || {},
+        },
+        parser_id: 'automation',
+        path: is_img_set ? id : is_pdf ? id + '.pdf' : ''
+      } as any
+    } else if (config.resource_type === 'music') {
+      resource_config = {
+        resource_config: config.resource_type,
+        entity: metadata,
+      } as any;
+    } else if (config.resource_type === 'picture') {
+      resource_config = {
+        resource_config: config.resource_type,
+        entity: metadata,
+      } as any;
+    } else if (config.resource_type === 'video') {
+      resource_config = {
+        resource_config: config.resource_type,
+        entity: metadata,
+      } as any;
+    }
+
+    const file_content = `export default ${JSON.stringify(resource_config)};`;
     fs.writeFileSync(
       join(__dirname, `../config/archives${config.archive_id}/${id}.ts`),
       file_content,

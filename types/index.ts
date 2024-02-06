@@ -245,7 +245,7 @@ export type PictureMetaData = {
   year?: number;
   month?: number;
   day?: number;
-  tags: string[];
+  tags: {name: string, type: string}[];
 };
 
 export type VideoMetaData = PictureMetaData;
