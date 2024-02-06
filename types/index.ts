@@ -36,7 +36,7 @@ export type BookMetaData = {
   files: string;
 }
 
-export type ResourceMetaData = BookMetaData | MusicMetaData;
+export type ResourceMetaData = BookMetaData | MusicMetaData | PictureMetaData | VideoMetaData;
 
 export enum ArticleCategory {
   centralFile = '中央文件',
@@ -254,6 +254,17 @@ export type MusicMetaData = {
   }[];
 };
 
+export type PictureMetaData = {
+  id: string;
+  name: string;
+  description: string;
+  source: string;
+  url: string;
+  tags: string[];
+};
+
+export type VideoMetaData = PictureMetaData;
+
 export type OCRParameter = {
   image_dir: string;
 
@@ -395,13 +406,35 @@ export type OCRParameterAdvanced = {
   vsplit: number; // 如果设置为0.5，ocr结果将从页面宽度的50%处分割，如果为0表示不分割。当auto_vsplit为false且vsplit不为0时，表示任何页面都进行分割。
 };
 
-export type Book = {
+export type BookConfig = {
+  resource_type: 'book',
   entity: Partial<BookMetaData>;
   path: string;
   parser_option: ParserOption;
   parser_id: string;
   parser: (path: string, opt: ParserOption) => Promise<ParserResult[]>;
+  version?: number;
 };
+
+export type MusicConfig = {
+  resource_type: 'music';
+  version?: number;
+  entity: MusicMetaData;
+}
+
+export type PictureConfig = {
+  resource_type: 'picture';
+  version?: number;
+  entity: PictureMetaData;
+}
+
+export type VideoConfig = {
+  resource_type: 'video';
+  version?: number;
+  entity: VideoMetaData;
+}
+
+export type Config = BookConfig | MusicConfig | PictureConfig | VideoConfig;
 
 export type Patch = {
   parts: { [idx: string]: string };
@@ -434,16 +467,6 @@ export type PatchV2 = {
   description?: StringDiff; // 如果为空字符串表示无变更，如果不存在，表示删除
 };
 
-export type BookCatelogTemp = {
-  [article_id: string]: {
-    title: string;
-    authors: string[];
-    dates: any;
-    is_range_date: boolean;
-    tag_ids: number[];
-    book_ids: number[];
-  };
-};
 export type BookCatelog = BookCatelogItem[];
 export type BookCatelogItem = {
   id: string;
@@ -460,3 +483,4 @@ export type ArticleIndexes = { [aid: string]: number[] }; // book_number_id
 export type TagIndexes = [string, string][]; // type, name
 export type BookIndexes = [string, string, number][]; // id, name, archive_id
 export type MusicIndexes = [string, string, number][]; // id, name, archive_id
+export type GalleryIndexes = (VideoMetaData | PictureMetaData)[];

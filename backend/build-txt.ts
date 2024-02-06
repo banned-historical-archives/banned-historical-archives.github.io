@@ -5,7 +5,7 @@ import { Any, Brackets, DataSource } from 'typeorm';
 import {
   ArticleCategory,
   ArticleIndexes,
-  Book,
+  BookConfig,
   BookIndexes,
   ParserResult,
   BookMetaData,

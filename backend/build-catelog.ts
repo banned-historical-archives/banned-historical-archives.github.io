@@ -1,17 +1,32 @@
 import fs from 'fs-extra';
 import { join, parse } from 'path';
+import JSON5 from 'json5'
 import {
   ArticleIndexes,
   BookCatelog,
-  BookCatelogTemp,
   BookIndexes,
   MusicMetaData,
   MusicIndexes,
   TagIndexes,
   ResourceMetaData,
   BookMetaData,
+  Config,
+  GalleryIndexes,
+  PictureMetaData,
+  VideoMetaData,
 } from '../types';
 
+type BookCatelogTemp = {
+  [article_id: string]: {
+    title: string;
+    authors: string[];
+    dates: any;
+    is_range_date: boolean;
+    tag_ids: number[];
+    book_ids: number[];
+  };
+};
+const gallery_indexes: GalleryIndexes = [];
 const music_indexes: MusicIndexes = [];
 const book_catelog_temp: BookCatelogTemp = {};
 const article_indexes: ArticleIndexes = {};
@@ -59,10 +74,17 @@ function catelog_temp_to_catelog(c: BookCatelogTemp): BookCatelog {
           (await fs.readFile(metadata_path)).toString(),
         ) as ResourceMetaData;
 
-        if ((metadata as any).lyrics) {
-          // music
+        const cfg = JSON5.parse(
+          (await fs.readFile(join(__dirname, `../config/archives${i}/${metadata.id}.ts`))).toString().replace('export default', ''),
+        ) as Config;
+
+        if (cfg.resource_type === 'music') {
           music_indexes.push([metadata.id, metadata.name, i])
-        } else {
+        } else if (cfg.resource_type === 'video') {
+          gallery_indexes.push(metadata as VideoMetaData);
+        } else if (cfg.resource_type === 'picture') {
+          gallery_indexes.push(metadata as PictureMetaData);
+        } else if (cfg.resource_type === 'book') {
           const bookMetaData = metadata as BookMetaData;
           const prefix2_list = flist.filter((x) => !x.endsWith('.metadata'));
 
@@ -149,6 +171,10 @@ function catelog_temp_to_catelog(c: BookCatelogTemp): BookCatelog {
   fs.writeFileSync(
     join(__dirname, '../tag_indexes.json'),
     JSON.stringify(tag_indexes),
+  );
+  fs.writeFileSync(
+    join(__dirname, '../gallery_indexes.json'),
+    JSON.stringify(gallery_indexes),
   );
   fs.writeFileSync(
     join(__dirname, '../music_indexes.json'),

@@ -47,12 +47,12 @@ es_http_ca.crt
 .env
 
 book_catelog.json
-music_catelog.json
-gallery_catelog.json
-article_indexes.json
-book_indexes.json
-music_indexes.json
 tag_indexes.json
+book_indexes.json
+
+article_indexes.json
+music_indexes.json
+gallery_indexes.json
 
 config/archives*
 parsed/archives*
