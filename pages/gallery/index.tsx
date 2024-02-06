@@ -48,6 +48,8 @@ import {
 } from '@mui/x-data-grid-pro';
 import { ensure_two_digits } from '../../utils';
 import ImageTags from '../../components/ImageTags';
+import { readFile } from 'fs-extra'
+import {join} from 'path'
 
 export const getStaticProps: GetStaticProps = async (
   context: GetStaticPropsContext,
@@ -62,6 +64,13 @@ export const getStaticProps: GetStaticProps = async (
   };
 };
 
+const ClickToShow = ({url} : {url: string}) => {
+  const [clicked, setClicked] = useState(false);
+  return clicked ?
+      <img alt="" src={url} style={{ width: '100%' }} />
+      : <Button onClick={() => setClicked(true)}>显示</Button>
+
+}
 const columns: GridColDef<PictureMetaData>[] = [
   {
     field: 'url',
@@ -69,7 +78,7 @@ const columns: GridColDef<PictureMetaData>[] = [
     minWidth: 350,
     flex: 1,
     renderCell: (params: GridRenderCellParams<string, PictureMetaData>) => (
-      <img alt="" src={params.row!.url} style={{ width: '100%' }} />
+      <ClickToShow url={params.row!.url}/>
     ),
   },
   {

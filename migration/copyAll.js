@@ -16,14 +16,15 @@ function fixWorkflow(dest, branch) {
     execSync(`(git push --set-upstream origin ${branch}) || true`,{cwd: dest});
 }
 
-for (const dir_name of ['config', 'ocr_patch', 'ocr_cache']) {
+for (const dir_name of ['parsed']) {
 const archives_dir = join(__dirname, '../' + dir_name);
 fs.readdirSync(archives_dir).filter(i => i.startsWith('archives')).forEach(i => {
-    if (i !== 'archives12') return;
     const dest = join(archives_dir, i);
     console.log(dest)
     execSync('git clean -f && git reset --hard',{cwd: dest});
-    fixWorkflow(dest, dir_name);
+    // execSync('git config pull.rebase true && git checkout parsed && git pull',{cwd: dest});
+    execSync('git reset --hard origin/parsed',{cwd: dest});
+    // fixWorkflow(dest, dir_name);
     return;
     })
 }
