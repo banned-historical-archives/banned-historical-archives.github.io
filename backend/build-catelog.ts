@@ -5,10 +5,15 @@ import {
   BookCatelog,
   BookCatelogTemp,
   BookIndexes,
+  MusicMetaData,
+  MusicIndexes,
   TagIndexes,
+  ResourceMetaData,
+  BookMetaData,
 } from '../types';
 
-const catelog_temp: BookCatelogTemp = {};
+const music_indexes: MusicIndexes = [];
+const book_catelog_temp: BookCatelogTemp = {};
 const article_indexes: ArticleIndexes = {};
 const tag_cache: { [type: string]: { [name: string]: number } } = {};
 const article_tag_cache = {};
@@ -44,43 +49,23 @@ function catelog_temp_to_catelog(c: BookCatelogTemp): BookCatelog {
         console.log('resource', resource);
         const flist = await fs.readdir(join(p, prefix, resource));
 
-        const book_info_path = join(
+        const metadata_path = join(
           p,
           prefix,
           resource,
-          resource + '.bookinfo',
+          resource + '.metadata',
         );
-        const music_info_path = join(
-          p,
-          prefix,
-          resource,
-          resource + '.musicinfo',
-        );
-        const picture_info_path = join(
-          p,
-          prefix,
-          resource,
-          resource + '.pictureinfo',
-        );
-        const video_info_path = join(
-          p,
-          prefix,
-          resource,
-          resource + '.videoinfo',
-        );
+        const metadata = JSON.parse(
+          (await fs.readFile(metadata_path)).toString(),
+        ) as ResourceMetaData;
 
-        if (await fs.pathExists(music_info_path)) {
-          // TODO
-        } else if (await fs.pathExists(picture_info_path)) {
-          // TODO
-        } else if (await fs.pathExists(video_info_path)) {
-          // TODO
-        } else if (await fs.pathExists(book_info_path)) {
-          const prefix2_list = flist.filter((x) => !x.endsWith('.bookinfo'));
+        if ((metadata as any).lyrics) {
+          // music
+          music_indexes.push([metadata.id, metadata.name, i])
+        } else {
+          const bookMetaData = metadata as BookMetaData;
+          const prefix2_list = flist.filter((x) => !x.endsWith('.metadata'));
 
-          const bookinfo = JSON.parse(
-            (await fs.readFile(book_info_path)).toString(),
-          );
           for (const prefix2 of prefix2_list) {
             for (const article_file of (
               await fs.readdir(join(p, prefix, resource, prefix2))
@@ -100,8 +85,8 @@ function catelog_temp_to_catelog(c: BookCatelogTemp): BookCatelog {
                   )
                 ).toString(),
               ) as { type: string; name: string }[];
-              if (!catelog_temp[article_id])
-                catelog_temp[article_id] = {
+              if (!book_catelog_temp[article_id])
+                book_catelog_temp[article_id] = {
                   title: article.title,
                   dates: article.dates,
                   authors: article.authors,
@@ -119,36 +104,36 @@ function catelog_temp_to_catelog(c: BookCatelogTemp): BookCatelog {
                   tag_cache[tag.type][tag.name] = n_tag;
                   if (catelog_tags_cache[article_id][n_tag] == undefined) {
                     catelog_tags_cache[article_id][n_tag] = true;
-                    catelog_temp[article_id].tag_ids.push(n_tag);
+                    book_catelog_temp[article_id].tag_ids.push(n_tag);
                   }
                   n_tag++;
                 } else {
                   const x = tag_cache[tag.type][tag.name];
                   if (catelog_tags_cache[article_id][x] == undefined) {
                     catelog_tags_cache[article_id][x] = true;
-                    catelog_temp[article_id].tag_ids.push(x);
+                    book_catelog_temp[article_id].tag_ids.push(x);
                   }
                 }
               });
               if (!article_indexes[article_id]) {
                 article_indexes[article_id] = [];
               }
-              if (!book_indexes_cache[bookinfo.id]) {
-                book_indexes_cache[bookinfo.id] = {
-                  name: bookinfo.name,
+              if (!book_indexes_cache[bookMetaData.id]) {
+                book_indexes_cache[bookMetaData.id] = {
+                  name: bookMetaData.name,
                   archive_id: i,
                   number_id: n_book,
                 };
-                book_indexes.push([bookinfo.id, bookinfo.name, i]);
-                catelog_temp[article_id].book_ids.push(n_book);
+                book_indexes.push([bookMetaData.id, bookMetaData.name, i]);
+                book_catelog_temp[article_id].book_ids.push(n_book);
                 article_indexes[article_id].push(n_book);
                 ++n_book;
               } else {
-                catelog_temp[article_id].book_ids.push(
-                  book_indexes_cache[bookinfo.id].number_id,
+                book_catelog_temp[article_id].book_ids.push(
+                  book_indexes_cache[bookMetaData.id].number_id,
                 );
                 article_indexes[article_id].push(
-                  book_indexes_cache[bookinfo.id].number_id,
+                  book_indexes_cache[bookMetaData.id].number_id,
                 );
               }
             }
@@ -159,11 +144,15 @@ function catelog_temp_to_catelog(c: BookCatelogTemp): BookCatelog {
   }
   fs.writeFileSync(
     join(__dirname, '../book_catelog.json'),
-    JSON.stringify(catelog_temp_to_catelog(catelog_temp)),
+    JSON.stringify(catelog_temp_to_catelog(book_catelog_temp)),
   );
   fs.writeFileSync(
     join(__dirname, '../tag_indexes.json'),
     JSON.stringify(tag_indexes),
+  );
+  fs.writeFileSync(
+    join(__dirname, '../music_indexes.json'),
+    JSON.stringify(music_indexes),
   );
   fs.writeFileSync(
     join(__dirname, '../book_indexes.json'),

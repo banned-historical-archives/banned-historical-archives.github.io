@@ -2,14 +2,13 @@ import 'reflect-metadata';
 import { join } from 'node:path/posix';
 
 import { Any, Brackets, DataSource } from 'typeorm';
-import { music as musicData } from './music';
 import {
   ArticleCategory,
   ArticleIndexes,
   Book,
   BookIndexes,
   ParserResult,
-  Publication,
+  BookMetaData,
   Tag,
   TagType,
 } from '../types';
@@ -52,7 +51,7 @@ Object.keys(article_indexes).forEach((article_id) => {
   for (const book_number_id of article_indexes[article_id]) {
     const book_id = book_indexes[book_number_id][0];
     const archives_id = 'archives' + book_indexes[book_number_id][2];
-    const book_info = JSON.parse(
+    const book_metadata = JSON.parse(
       fs
         .readFileSync(
           join(
@@ -60,11 +59,12 @@ Object.keys(article_indexes).forEach((article_id) => {
             `../parsed/${archives_id}/${book_id.slice(
               0,
               3,
-            )}/${book_id}/${book_id}.bookinfo`,
+            )}/${book_id}/${book_id}.metadata`,
           ),
         )
         .toString(),
-    ) as Publication;
+    ) as BookMetaData;
+    if ((book_metadata as any).lyrics) continue;
     const article = JSON.parse(
       fs
         .readFileSync(
@@ -101,8 +101,8 @@ Object.keys(article_indexes).forEach((article_id) => {
 作者：${article.authors.join(',')}
 来源：${article.origin || ''}
 标签：${tags?.map((i) => i.name).join(',') || ''}
-书籍：${book_info.name}
-书籍作者：${book_info.author}
+书籍：${book_metadata.name}
+书籍作者：${book_metadata.author}
 
 正文：
 ${article.parts

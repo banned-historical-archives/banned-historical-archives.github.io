@@ -43,32 +43,20 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 18
+      - run: cd parsed && git checkout --orphan x && git reset --hard
       - run: cd ocr_helper && npm install && npm run build_parsed -- ../config ../ocr_cache ../ocr_patch ../parsed ../raw
       - run: git config --global http.postBuffer 2097152000
       - run: git config --global user.email "you@example.com"
       - run: git config --global user.name "Your Name"
 
-      - name: Check for changes
-        id: check_changes
-        run: |
-          cd parsed
-          git status --porcelain
-          if [ -z "$(git status --porcelain)" ]; then
-            echo "No changes to commit"
-            echo "changes=false" >> "$GITHUB_OUTPUT"
-          else
-            echo "Changes detected"
-            echo "changes=true" >> "$GITHUB_OUTPUT"
-          fi
-
       - name: Commit and push changes
-        if: steps.check_changes.outputs.changes == 'true'
         run: |
           cd ./parsed
           git add .
-          git commit -m automation && git push
+          git commit -m automation
+          git push origin x:parsed -f
+
       - name: Invoke workflow
-        if: steps.check_changes.outputs.changes == 'true'
         uses: benc-uk/workflow-dispatch@v1
         with:
           workflow: build.yml

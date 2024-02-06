@@ -3,11 +3,12 @@ import { join } from 'node:path/posix';
 // import lac from './lac';
 // import { LACResult } from '../types';
 
-import { get_article_id, sleep } from '../utils';
+import { get_article_id, sleep, uuid } from '../utils';
 import { basename } from 'node:path';
-import fs from 'fs';
+import fs from 'fs-extra';
 import { JSDOM } from 'jsdom';
 import { ContentType, Date, ParserResult } from '../types';
+import { music } from './music'
 
 (async () => {
   /*
@@ -19,5 +20,14 @@ import { ContentType, Date, ParserResult } from '../types';
   }
  }
  */
+ for(const j of music) {
+  const i = j as any;
+  i.id= uuid();
+  fs.writeFileSync(join(__dirname, '../config/archives6/' + i.id + '.ts'), `export default {
+  "resource_type": "music",
+  "entity": ${JSON.stringify(i)},
+  "version": 2
+}`)
+ }
   debugger;
 })();

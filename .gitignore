@@ -51,6 +51,7 @@ music_catelog.json
 gallery_catelog.json
 article_indexes.json
 book_indexes.json
+music_indexes.json
 tag_indexes.json
 
 config/archives*

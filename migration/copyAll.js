@@ -20,6 +20,7 @@ function fixWorkflow(dest) {
         join(__dirname, 'workflows', 'build_parsed.yml'),
         join(dest, '.github/workflows', 'build_parsed.yml')
     )
+    /*
     //if (i == 'config') {
         fs.cpSync(
             join(__dirname, 'workflows', 'build_ocr_cache.yml'),
@@ -43,6 +44,7 @@ function fixWorkflow(dest) {
         //    console.log('rm ', join(dest, parse(j).name))
         //}
     });
+    */
     execSync('(git add . && git commit -m fix_workflow) || true',{cwd: dest});
     execSync(`(git push --set-upstream origin config) || true`,{cwd: dest});
 // });
@@ -119,7 +121,6 @@ fs.readdirSync(archives_dir).filter(i => i.startsWith('archives')).forEach(i => 
         i == 'archives6' ||
         i == 'archives7' ||
         i == 'archives10' ||
-        // i == 'archives9' ||
         i == 'archives11' ||
         i == 'archives12'
     ) return;

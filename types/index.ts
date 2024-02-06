@@ -26,7 +26,7 @@ export type Article = {
   tags: Tag[];
 }
 
-export type Publication = {
+export type BookMetaData = {
   id: string;
   name: string;
   internal: boolean;
@@ -35,6 +35,8 @@ export type Publication = {
   author: string;
   files: string;
 }
+
+export type ResourceMetaData = BookMetaData | MusicMetaData;
 
 export enum ArticleCategory {
   centralFile = '中央文件',
@@ -108,6 +110,7 @@ export type Date = {
 };
 
 export type Music = {
+  id: string;
   name: string;
   composer: string;
   description: string;
@@ -235,6 +238,7 @@ export type ParserOptionV2 = {
 };
 
 export type MusicMetaData = {
+  id: string;
   name: string;
   composer: string;
   description: string;
@@ -392,7 +396,7 @@ export type OCRParameterAdvanced = {
 };
 
 export type Book = {
-  entity: Partial<Publication>;
+  entity: Partial<BookMetaData>;
   path: string;
   parser_option: ParserOption;
   parser_id: string;
@@ -455,3 +459,4 @@ export type BookCatelogItem = {
 export type ArticleIndexes = { [aid: string]: number[] }; // book_number_id
 export type TagIndexes = [string, string][]; // type, name
 export type BookIndexes = [string, string, number][]; // id, name, archive_id
+export type MusicIndexes = [string, string, number][]; // id, name, archive_id
