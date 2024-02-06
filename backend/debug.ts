@@ -8,6 +8,7 @@ import { basename } from 'node:path';
 import fs from 'fs-extra';
 import { JSDOM } from 'jsdom';
 import { ContentType, Date, ParserResult } from '../types';
+import images from './images'
 
 (async () => {
   /*
@@ -19,14 +20,13 @@ import { ContentType, Date, ParserResult } from '../types';
   }
  }
  */
-// for(const j of music) {
-//  const i = j as any;
-//  i.id= uuid();
-//  fs.writeFileSync(join(__dirname, '../config/archives6/' + i.id + '.ts'), `export default {
-//  "resource_type": "music",
-//  "entity": ${JSON.stringify(i)},
-//  "version": 2
-//}`)
-// }
+ for(const j of images) {
+  const i = j as any;
+  fs.writeFileSync(join(__dirname, '../config/archives7/' + i.id + '.ts'), `export default {
+  "resource_type": "picture",
+  "entity": ${JSON.stringify(i)},
+  "version": 2
+}`)
+ }
   debugger;
 })();

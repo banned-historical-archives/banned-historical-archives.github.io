@@ -1,8 +1,5 @@
-import { Image, } from '../types';
 
-const images: (Image & {
-  id?: string;
-})[] = [
+const images = [
   {
     name: '《简明世界史（近代部分）》插图二十八',
     description: '革命群众焚毁国王“宝座”',

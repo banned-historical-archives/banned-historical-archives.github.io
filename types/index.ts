@@ -57,24 +57,6 @@ export enum TagType {
   translator = '翻译',
   reprint = '翻印/传抄',
 }
-export type Image = {
-  id: string;
-
-  name: string;
-
-  url: string;
-
-  show_in_gallery: boolean;
-
-  description: string;
-
-  source?: string;
-
-  year?: number;
-  month?: number;
-  day?: number;
-  tags: { name: string; type: string }[];
-}
 
 export enum ContentType {
   appellation = 'appellation',
@@ -260,6 +242,9 @@ export type PictureMetaData = {
   description: string;
   source: string;
   url: string;
+  year?: number;
+  month?: number;
+  day?: number;
   tags: string[];
 };
 

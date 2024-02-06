@@ -21,6 +21,7 @@ jobs:
       - run: npm install
       - run: cp -r ./node_modules/pdfjs-dist ./public/
       - run: node_options="--max-old-space-size=8192" npm run init-parsed
+      - run: node_options="--max-old-space-size=8192" npm run init-config
       - run: node_options="--max-old-space-size=8192" npm run build-catelog
       - run: node_options="--max-old-space-size=8192" npm run dev:nextjs-helper && npm run build
 
