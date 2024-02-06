@@ -8,7 +8,6 @@ import { basename } from 'node:path';
 import fs from 'fs-extra';
 import { JSDOM } from 'jsdom';
 import { ContentType, Date, ParserResult } from '../types';
-import images from './images'
 
 (async () => {
   /*
@@ -19,7 +18,6 @@ import images from './images'
     fs.rmSync(p, {recursive: true, force: true})
   }
  }
- */
  for(const j of images) {
   const i = j as any;
   fs.writeFileSync(join(__dirname, '../config/archives7/' + i.id + '.ts'), `export default {
@@ -28,5 +26,6 @@ import images from './images'
   "version": 2
 }`)
  }
+ */
   debugger;
 })();

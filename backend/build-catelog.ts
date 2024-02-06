@@ -75,7 +75,7 @@ function catelog_temp_to_catelog(c: BookCatelogTemp): BookCatelog {
         ) as ResourceMetaData;
 
         const cfg = JSON5.parse(
-          (await fs.readFile(join(__dirname, `../config/archives${i}/${metadata.id}.ts`))).toString().replace('export default', ''),
+          (await fs.readFile(join(__dirname, `../config/archives${i}/${metadata.id}.ts`))).toString().replace('export default', '').replace(/\;\s*$/, ''),
         ) as Config;
 
         if (cfg.resource_type === 'music') {
