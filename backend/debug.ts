@@ -8,7 +8,6 @@ import { basename } from 'node:path';
 import fs from 'fs-extra';
 import { JSDOM } from 'jsdom';
 import { ContentType, Date, ParserResult } from '../types';
-import { music } from './music'
 
 (async () => {
   /*
@@ -20,14 +19,14 @@ import { music } from './music'
   }
  }
  */
- for(const j of music) {
-  const i = j as any;
-  i.id= uuid();
-  fs.writeFileSync(join(__dirname, '../config/archives6/' + i.id + '.ts'), `export default {
-  "resource_type": "music",
-  "entity": ${JSON.stringify(i)},
-  "version": 2
-}`)
- }
+// for(const j of music) {
+//  const i = j as any;
+//  i.id= uuid();
+//  fs.writeFileSync(join(__dirname, '../config/archives6/' + i.id + '.ts'), `export default {
+//  "resource_type": "music",
+//  "entity": ${JSON.stringify(i)},
+//  "version": 2
+//}`)
+// }
   debugger;
 })();
