@@ -361,7 +361,7 @@ export default function Music({ music }: { music: MusicIndexes }) {
   */
 
   const getDetails = useCallback(async (id: string, archives_id: number): Promise<MusicEntity> => {
-    const url = `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives${archives_id}/parsed/${id.substr(0,3)}/${id}/${id}.musicinfo`;
+    const url = `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives${archives_id}/parsed/${id.substr(0,3)}/${id}/${id}.metadata`;
     const res = await(await fetch(url)).json() as MusicEntity
     return res;
   }, [])

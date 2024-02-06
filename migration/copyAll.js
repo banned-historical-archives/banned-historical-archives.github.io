@@ -19,13 +19,7 @@ function fixWorkflow(dest, branch) {
 for (const dir_name of ['config', 'ocr_patch', 'ocr_cache']) {
 const archives_dir = join(__dirname, '../' + dir_name);
 fs.readdirSync(archives_dir).filter(i => i.startsWith('archives')).forEach(i => {
-    if (
-        i == 'archives6' ||
-        i == 'archives7' ||
-        i == 'archives10' ||
-        i == 'archives12'
-    ) return;
-    if (i !== 'archives6') return;
+    if (i !== 'archives12') return;
     const dest = join(archives_dir, i);
     console.log(dest)
     execSync('git clean -f && git reset --hard',{cwd: dest});
