@@ -30,7 +30,7 @@ import Menu from '@mui/material/Menu';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import Divider from '@mui/material/Divider';
-import {Image as ImageEntity} from '../../types';
+import {GalleryIndexes, PictureMetaData } from '../../types';
 import Stack from '@mui/material/Stack';
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
@@ -48,25 +48,27 @@ import {
 } from '@mui/x-data-grid-pro';
 import { ensure_two_digits } from '../../utils';
 import ImageTags from '../../components/ImageTags';
-import images from '../../backend/images';
 
 export const getStaticProps: GetStaticProps = async (
   context: GetStaticPropsContext,
 ) => {
+  const res = JSON.parse(
+    (await readFile(join(process.cwd(), './gallery_indexes.json'))).toString(),
+  ) as GalleryIndexes;
   return {
     props: {
-      images,
+      gallery: res,
     },
   };
 };
 
-const columns: GridColDef<ImageEntity>[] = [
+const columns: GridColDef<PictureMetaData>[] = [
   {
     field: 'url',
     headerName: '预览',
     minWidth: 350,
     flex: 1,
-    renderCell: (params: GridRenderCellParams<string, ImageEntity>) => (
+    renderCell: (params: GridRenderCellParams<string, PictureMetaData>) => (
       <img alt="" src={params.row!.url} style={{ width: '100%' }} />
     ),
   },
@@ -75,7 +77,7 @@ const columns: GridColDef<ImageEntity>[] = [
     headerName: '名称',
     minWidth: 350,
     flex: 1,
-    renderCell: (params: GridRenderCellParams<string, ImageEntity>) => (
+    renderCell: (params: GridRenderCellParams<string, PictureMetaData>) => (
       <div>{params.row!.name}</div>
     ),
   },
@@ -84,7 +86,7 @@ const columns: GridColDef<ImageEntity>[] = [
     headerName: '描述',
     minWidth: 150,
     flex: 1,
-    renderCell: (params: GridRenderCellParams<string, ImageEntity>) => (
+    renderCell: (params: GridRenderCellParams<string, PictureMetaData>) => (
       <div>{params.row.description}</div>
     ),
   },
@@ -92,7 +94,7 @@ const columns: GridColDef<ImageEntity>[] = [
     field: 'source',
     headerName: '来源',
     flex: 1,
-    renderCell: (params: GridRenderCellParams<string, ImageEntity>) => (
+    renderCell: (params: GridRenderCellParams<string, PictureMetaData>) => (
       <div>{params.row.source}</div>
     ),
   },
@@ -101,7 +103,7 @@ const columns: GridColDef<ImageEntity>[] = [
     headerName: '时间',
     minWidth: 150,
     flex: 1,
-    valueGetter: (params: GridValueGetterParams<ImageEntity, ImageEntity>) =>
+    valueGetter: (params: GridValueGetterParams<PictureMetaData, PictureMetaData>) =>
       params.row.year
         ? [
             params.row.year || '----',
@@ -111,7 +113,7 @@ const columns: GridColDef<ImageEntity>[] = [
             .filter((j) => j)
             .join('/')
         : '----/--/--',
-    renderCell: (params: GridRenderCellParams<string, ImageEntity>) => (
+    renderCell: (params: GridRenderCellParams<string, PictureMetaData>) => (
       <Stack spacing={1}>
         <Typography variant="caption">
           {params.row.year
@@ -135,16 +137,16 @@ const columns: GridColDef<ImageEntity>[] = [
     sortComparator: (tags_a: string, tags_b: string) => {
       return tags_a > tags_b ? 1 : -1;
     },
-    valueGetter: (params: GridValueGetterParams<ImageEntity, ImageEntity>) =>
+    valueGetter: (params: GridValueGetterParams<PictureMetaData, PictureMetaData>) =>
       params.row.tags.map((i) => i.name).join(','),
-    renderCell: (params: GridRenderCellParams<string, ImageEntity>) => (
+    renderCell: (params: GridRenderCellParams<string, PictureMetaData>) => (
       <div style={{ overflow: 'visible' }}>
         <ImageTags tags={params.row.tags} />
       </div>
     ),
   },
 ];
-export default function Gallery({ images }: { images: ImageEntity[] }) {
+export default function Gallery({ gallery }: { gallery: GalleryIndexes }) {
   return (
     <Stack p={2} sx={{ height: '100%', overflow: 'scroll' }}>
       <Head>
@@ -158,7 +160,7 @@ export default function Gallery({ images }: { images: ImageEntity[] }) {
           getRowId={(row) => row.id}
           localeText={zhCN.components.MuiDataGrid.defaultProps.localeText}
           getRowHeight={() => 'auto'}
-          rows={images}
+          rows={gallery}
           columns={columns}
           pageSize={100}
           rowsPerPageOptions={[100]}
