@@ -30,7 +30,7 @@ app.get('/get_article', async (req, res) => {
       book_id,
     );
     const book = JSON.parse(
-      (await readFile(join(book_path, `${book_id}.bookinfo`))).toString(),
+      (await readFile(join(book_path, `${book_id}.metadata`))).toString(),
     );
     book.article = JSON.parse(
       (
