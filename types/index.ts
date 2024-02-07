@@ -191,13 +191,14 @@ export type LACResult = {
   type: LACType;
 };
 
-export type ParserOptionV2 = {
-  resource_type?: 'book' | 'video' | 'music' | 'picture',
+export type AutomatedEntryBookOption = {
+  resource_type?: 'book';
+  source_name: string;
   archive_id?: number;
   internal?: boolean;
   official?: boolean;
-  author?: string;
-  articles?: {
+  author: string;
+  articles: {
     title: string;
     authors: string[]; // 作者
     dates: Date[]; // 时间 或者 时间范围 或者 多个时间点
@@ -218,6 +219,23 @@ export type ParserOptionV2 = {
     [key: string]: Partial<OCRParameter & OCRParameterAdvanced>;
   }; // 例外， 比如第三页的ocr参数与其他页面不同，默认为空，此参数比articles中的优先级高
 };
+
+export type AutomatedEntryMusicOption = {
+  resource_type: 'music';
+  archive_id?: number;
+} & Omit<MusicMetaData, 'id'>;
+
+export type AutomatedEntryPictureOption = {
+  resource_type: 'picture';
+  archive_id?: number;
+} & Omit<PictureMetaData, 'id'>;
+
+export type AutomatedEntryVideoOption = {
+  resource_type: 'video';
+  archive_id?: number;
+} & Omit<VideoMetaData, 'id'>;
+
+export type AutomatedEntryOption = AutomatedEntryBookOption | AutomatedEntryPictureOption | AutomatedEntryVideoOption | AutomatedEntryMusicOption;
 
 export type MusicMetaData = {
   id: string;
@@ -356,7 +374,7 @@ export type OCRParameter = {
   show_log: boolean; // False,
 };
 
-export type ParserOption = ParserOptionV2 & {
+export type ParserOption = AutomatedEntryBookOption & {
   page_limits: [number, number][];
 
   /*legacy*/

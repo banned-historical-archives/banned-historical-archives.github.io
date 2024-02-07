@@ -4,7 +4,7 @@ import { isAbsolute } from 'node:path';
 import https from 'https';
 import { Transform } from 'stream';
 import fs from 'node:fs';
-import { ParserOptionV2 } from '../types';
+import { AutomationEntryOption } from '../types';
 import JSON5 from 'json5';
 
 export async function start() {
