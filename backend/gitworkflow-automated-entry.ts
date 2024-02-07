@@ -139,7 +139,7 @@ export async function start() {
       } as any;
     }
 
-    const file_content = `export default ${JSON.stringify(resource_config)};`;
+    const file_content = `export default ${JSON.stringify(resource_config!)};`;
     fs.writeFileSync(
       join(__dirname, `../config/archives${config.archive_id}/${id}.ts`),
       file_content,
