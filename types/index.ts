@@ -33,7 +33,7 @@ export type BookMetaData = {
   official: boolean;
   type: 'img' | 'pdf' | 'db' | 'unknown',
   author: string;
-  files: string;
+  files: string[];
 }
 
 export type ResourceMetaData = BookMetaData | MusicMetaData | PictureMetaData | VideoMetaData;
