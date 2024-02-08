@@ -10,6 +10,9 @@ import {
   Typography,
   FormControlLabel,
 } from '@mui/material';
+import SpeedDial from '@mui/material/SpeedDial';
+import PlayCircleIcon from '@mui/icons-material/PlayCircle';
+import PauseCircleIcon from '@mui/icons-material/PauseCircle';
 import { diff_match_patch, Diff } from 'diff-match-patch';
 import { ReactElement, useEffect, useRef, useState } from 'react';
 import { Article, Content, Comment } from '../../types';
@@ -26,6 +29,7 @@ function PureArticle({
   comments: Comment[];
   description?: string;
 }) {
+  const [playing, setPlaying] = useState(false);
   const contentsComponent = contents.map((part) => {
     let s: string[] = [];
     const part_comments = comments.filter((i) => i.part_index === part.index);
@@ -280,9 +284,41 @@ function PureArticle({
 
   return (
     <>
-      {contentsComponent}
-      {descriptionComponent}
-      {commentsComponent}
+      <div style={{ position: 'relative' }}>
+        <Button
+          sx={{
+            position: 'absolute',
+            top: 4,
+            left: 0,
+            minWidth: 0,
+            opacity: '0.5',
+            width: '20px',
+            height: '20px',
+            borderRadius: '10px',
+          }}
+          onClick={() => {
+            setPlaying(!playing);
+            if (!playing) {
+              const tts = new SpeechSynthesisUtterance(
+                contents.map((part) => part.text).join('\n'),
+              );
+              tts.voice = speechSynthesis
+                .getVoices()
+                .find((i: any) => i.lang == 'zh-CN')!;
+              tts.pitch = 0.5;
+              tts.rate = 1;
+              speechSynthesis.speak(tts);
+            } else {
+              speechSynthesis.cancel()
+            }
+          }}
+        >
+          {playing ? <PauseCircleIcon /> : <PlayCircleIcon />}
+        </Button>
+        {contentsComponent}
+        {descriptionComponent}
+        {commentsComponent}
+      </div>
     </>
   );
 }
