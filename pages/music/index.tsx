@@ -125,7 +125,9 @@ function Song({
                   sx={{ justifyContent: 'start' }}
                   startIcon={<PlayCircleIcon />}
                   onClick={() => {
-                    // setPlaying(true);
+                    setPlayingLyricIndex(idx);
+                    setPlayingFileIndex(0);
+                    setPlaying(true);
                   }}
                 >
                   {name}
