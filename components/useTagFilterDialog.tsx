@@ -47,7 +47,7 @@ export function useTagFilterDialog(
                 <Chip
                   sx={{ m: 0.5 }}
                   key={tag.id}
-                  onClick={() => setSelected(tag.id)}
+                  onClick={() => setSelected(tag.id!)}
                   label={tag.name}
                   color={selected === tag.id ? 'primary' : 'default'}
                   variant={selected === tag.id ? 'filled' : 'outlined'}
