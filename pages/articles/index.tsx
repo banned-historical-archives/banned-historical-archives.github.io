@@ -243,7 +243,7 @@ export default function Articles({
         type: i[0],
         name: i[1],
         id: idx.toString(),
-      } as Tag);
+      });
     });
     return m;
   }, [tag_indexes]);
@@ -380,7 +380,7 @@ export default function Articles({
                 </Typography>
                 <Stack direction="row" spacing={1}>
                   {tags.map((i) => {
-                    const id = i.type + '##' + i.name;
+                    const id = i.id!;
                     const isSelected = id == tagFilter;
                     return (
                       <Chip

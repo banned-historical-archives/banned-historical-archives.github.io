@@ -29,11 +29,7 @@ export function useTagFilterDialog(
   );
   const onClose = useCallback(() => setTagDialog(false), []);
   const onConfirm = useCallback(() => {
-    setTags(
-      Array.from(new Set([...default_tags.map((i) => i.type + '##' + i.name), selected])).map(
-        (i) => tags_all.get(i)!,
-      ),
-    );
+    setTags([...default_tags, tags_all.get(selected)!]);
     setTagFilter(selected);
     setTagDialog(false);
   }, [default_tags, tags_all, selected]);
@@ -50,11 +46,11 @@ export function useTagFilterDialog(
               (tag) => (
                 <Chip
                   sx={{ m: 0.5 }}
-                  key={tag.type + '##' + tag.name}
-                  onClick={() => setSelected(tag.type + '##' + tag.name)}
+                  key={tag.id}
+                  onClick={() => setSelected(tag.id)}
                   label={tag.name}
-                  color={selected === tag.type + '##' + tag.name ? 'primary' : 'default'}
-                  variant={selected === tag.type + '##' + tag.name ? 'filled' : 'outlined'}
+                  color={selected === tag.id ? 'primary' : 'default'}
+                  variant={selected === tag.id ? 'filled' : 'outlined'}
                 />
               ),
             )}
