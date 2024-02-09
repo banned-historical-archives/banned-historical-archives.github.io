@@ -243,7 +243,7 @@ export default function Articles({
         type: i[0],
         name: i[1],
         id: idx.toString(),
-      });
+      } as Tag);
     });
     return m;
   }, [tag_indexes]);
