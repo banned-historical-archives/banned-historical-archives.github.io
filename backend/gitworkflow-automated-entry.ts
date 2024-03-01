@@ -1,7 +1,19 @@
 import { join, basename, dirname, extname } from 'node:path/posix';
 import fs from 'node:fs';
 import fsextra from 'fs-extra';
-import { BookCatelog, BookConfig, BookMetaData, Config, MusicConfig, MusicMetaData, AutomatedEntryBookOption, PictureConfig, ResourceMetaData, VideoConfig, AutomatedEntryOption } from '../types';
+import {
+  BookCatelog,
+  BookConfig,
+  BookMetaData,
+  Config,
+  MusicConfig,
+  MusicMetaData,
+  AutomatedEntryBookOption,
+  PictureConfig,
+  ResourceMetaData,
+  VideoConfig,
+  AutomatedEntryOption,
+} from '../types';
 import JSON5 from 'json5';
 import axios from 'axios';
 import { uuid } from '../utils';
@@ -37,7 +49,10 @@ export async function start() {
     config.archive_id = config.archive_id == undefined ? 1 : config.archive_id;
     const raw_dir = join(__dirname, `../raw/archives${config.archive_id}`);
     const raw_url = `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives${config.archive_id}/main`;
-    const config_dir = join(__dirname, `../config/archives${config.archive_id}`);
+    const config_dir = join(
+      __dirname,
+      `../config/archives${config.archive_id}`,
+    );
     const links = Array.from(body.matchAll(/\[.*?\]\(http.*?\)/g)).map((i) =>
       (i as any)[0].replace(/^.*\(/, '').replace(/\)/, ''),
     );
@@ -52,10 +67,7 @@ export async function start() {
 
         const real_ext = (await fromBuffer(fs.readFileSync(p)))?.ext;
         if (!real_ext) process.exit(3);
-        const new_path = join(
-          tmpdir(),
-          (files.length + 1) + '.' + real_ext,
-        );
+        const new_path = join(tmpdir(), files.length + 1 + '.' + real_ext);
         fs.renameSync(p, new_path);
         files.push(new_path);
       }
@@ -95,11 +107,7 @@ export async function start() {
         official: !!config.official,
         type: is_pdf ? 'pdf' : is_img_set ? 'img' : 'unknown',
         author: config.author || '',
-        files:
-          files.map(
-            (i) =>
-              join(raw_url, basename(i)),
-          ),
+        files: files.map((i) => join(raw_url, basename(i))),
       };
       resource_config = {
         resource_type: 'book',
@@ -111,31 +119,18 @@ export async function start() {
           ocr_exceptions: config.ocr_exceptions || {},
         },
         parser_id: 'automation',
-        path: is_img_set ? id : is_pdf ? id + '.pdf' : ''
+        path: is_img_set ? id : is_pdf ? id + '.pdf' : '',
       } as BookConfig;
       for (const i of files) {
         if (is_img_set) {
-          fsextra.ensureDirSync(
-            join(
-              raw_dir,
-              `${id}`,
-            )
-          );
-          fs.renameSync(
-            i,
-            join(
-              raw_dir, `${id}/${basename(i)}`,
-            ),
-          );
+          fsextra.ensureDirSync(join(raw_dir, `${id}`));
+          fs.renameSync(i, join(raw_dir, `${id}/${basename(i)}`));
         } else {
-          fs.renameSync(
-            i,
-            join(raw_dir, `${id}.pdf`),
-          );
+          fs.renameSync(i, join(raw_dir, `${id}.pdf`));
         }
       }
     } else if (config.resource_type === 'music') {
-      const filtered = {...config} as any;
+      const filtered = { ...config } as any;
       delete filtered.archive_id;
       delete filtered.resource_type;
       metadata = filtered;
@@ -155,13 +150,16 @@ export async function start() {
           audio_idx++;
         }
         if (!resource_config.entity.lyrics[lyric_idx].audios[audio_idx]) {
-          audio_idx=0;
+          audio_idx = 0;
           lyric_idx++;
         }
-        resource_config.entity.lyrics[0].audios[0].url = join(raw_url, `${id}${extname(link)}`);
+        resource_config.entity.lyrics[0].audios[0].url = join(
+          raw_url,
+          `${id}${extname(link)}`,
+        );
       }
     } else if (config.resource_type === 'picture') {
-      const filtered = {...config} as any;
+      const filtered = { ...config } as any;
       delete filtered.archive_id;
       delete filtered.resource_type;
       metadata = filtered;
@@ -176,7 +174,7 @@ export async function start() {
       fs.renameSync(p, join(raw_dir, id + '.' + real_ext));
       resource_config.entity.url = join(raw_url, id + '.' + real_ext);
     } else if (config.resource_type === 'video') {
-      const filtered = {...config} as any;
+      const filtered = { ...config } as any;
       delete filtered.archive_id;
       delete filtered.resource_type;
       metadata = filtered;
@@ -192,14 +190,10 @@ export async function start() {
       resource_config.entity.url = join(raw_url, id + '.' + real_ext);
     } else {
       process.exit(5);
-    };
+    }
 
     const file_content = `export default ${JSON.stringify(resource_config!)};`;
-    fs.writeFileSync(
-      join(config_dir, `${id}.ts`),
-      file_content,
-    );
-
+    fs.writeFileSync(join(config_dir, `${id}.ts`), file_content);
   } catch (e) {
     console.log(e);
     process.exit(1);

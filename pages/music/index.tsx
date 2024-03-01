@@ -47,7 +47,7 @@ import PauseCircleIcon from '@mui/icons-material/PauseCircle';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { DiffViewer } from '../../components/DiffViewer';
 import { readFile } from 'fs-extra';
-import { join } from 'path'
+import { join } from 'path';
 import { Skeleton } from '@mui/material';
 
 export const getStaticProps: GetStaticProps = async (
@@ -73,20 +73,26 @@ function Song({
   details,
   musicIndexes,
 }: {
-  musicIndex: number,
-  idx: number
-  details?: MusicEntity,
-  musicIndexes: MusicIndexes,
+  musicIndex: number;
+  idx: number;
+  details?: MusicEntity;
+  musicIndexes: MusicIndexes;
   setPlaying: Function;
-  setPlayingMusicIndex: Function,
-  setPlayingLyricIndex: Function,
-  setPlayingFileIndex: Function,
+  setPlayingMusicIndex: Function;
+  setPlayingLyricIndex: Function;
+  setPlayingFileIndex: Function;
 }) {
   const [lyricLeft, setLyricLeft] = useState(0);
   const [lyricRight, setLyricRight] = useState(0);
 
-  const leftContents = useMemo(() => details?.lyrics[lyricLeft].content.split('\n'), [lyricLeft, details]);
-  const rightContents = useMemo(() => details?.lyrics[lyricRight]!.content.split('\n'), [lyricRight, details]);
+  const leftContents = useMemo(
+    () => details?.lyrics[lyricLeft].content.split('\n'),
+    [lyricLeft, details],
+  );
+  const rightContents = useMemo(
+    () => details?.lyrics[lyricRight]!.content.split('\n'),
+    [lyricRight, details],
+  );
   const diff: Diff[][] = useMemo(() => {
     if (!details) return [];
     const leftContents = details?.lyrics[lyricLeft].content.split('\n');
@@ -201,16 +207,20 @@ function Song({
     </AccordionDetails>
   );
   return (
-    <Accordion expanded={musicIndexes[idx][0] == details?.id} disableGutters onChange={(e, expanded) => {
-      if (expanded) {
-        setPlayingMusicIndex(idx);
-        setPlayingLyricIndex(0);
-        setPlayingFileIndex(0);
-        setTimeout(() => {
-          location.href = '#' + idx;
-        }, 100)
-      }
-    }}>
+    <Accordion
+      expanded={musicIndexes[idx][0] == details?.id}
+      disableGutters
+      onChange={(e, expanded) => {
+        if (expanded) {
+          setPlayingMusicIndex(idx);
+          setPlayingLyricIndex(0);
+          setPlayingFileIndex(0);
+          setTimeout(() => {
+            location.href = '#' + idx;
+          }, 100);
+        }
+      }}
+    >
       <AccordionSummary expandIcon={<ExpandMoreIcon />} id={idx.toString()}>
         <Typography variant="h6">{musicIndexes[idx][1]}</Typography>
       </AccordionSummary>
@@ -362,18 +372,26 @@ export default function Music({ music }: { music: MusicIndexes }) {
   );
   */
 
-  const getDetails = useCallback(async (id: string, archives_id: number): Promise<MusicEntity> => {
-    const url = `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives${archives_id}/parsed/${id.substr(0,3)}/${id}/${id}.metadata`;
-    const res = await(await fetch(url)).json() as MusicEntity
-    return res;
-  }, [])
+  const getDetails = useCallback(
+    async (id: string, archives_id: number): Promise<MusicEntity> => {
+      const url = `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives${archives_id}/parsed/${id.substr(
+        0,
+        3,
+      )}/${id}/${id}.metadata`;
+      const res = (await (await fetch(url)).json()) as MusicEntity;
+      return res;
+    },
+    [],
+  );
 
   useEffect(() => {
-    getDetails(music[playingMusicIndex][0], music[playingMusicIndex][2]).then(first => {
-      setPlayingDetails(first);
-      setPlayingLyricIndex(0);
-      setPlayingFileIndex(0);
-    });
+    getDetails(music[playingMusicIndex][0], music[playingMusicIndex][2]).then(
+      (first) => {
+        setPlayingDetails(first);
+        setPlayingLyricIndex(0);
+        setPlayingFileIndex(0);
+      },
+    );
   }, [playingMusicIndex]);
 
   useEffect(() => {
@@ -411,29 +429,37 @@ export default function Music({ music }: { music: MusicIndexes }) {
         setPlayingFileIndex(0);
         setTimeout(() => {
           location.href = '#' + (playingMusicIndex + 1);
-        }, 100)
+        }, 100);
       } else {
         setPlayingMusicIndex(0);
         setPlayingLyricIndex(0);
         setPlayingFileIndex(0);
         setTimeout(() => {
           location.href = '#' + 0;
-        }, 100)
+        }, 100);
       }
     } else if (repeatType === RepeatType.shuffle) {
       const m_idx = Math.floor(Math.random() * music.length);
-      const m = music[m_idx]
+      const m = music[m_idx];
       setPlayingMusicIndex(m_idx);
       const details = await getDetails(m[0], m[2]);
       setPlayingDetails(details);
       const l = Math.floor(details.lyrics.length * Math.random());
       setPlayingLyricIndex(l);
-      setPlayingFileIndex(Math.floor(details.lyrics[l].audios.length * Math.random()));
+      setPlayingFileIndex(
+        Math.floor(details.lyrics[l].audios.length * Math.random()),
+      );
       setTimeout(() => {
         location.href = '#' + m_idx;
-      }, 100)
+      }, 100);
     }
-  }, [playingDetails, playingMusicIndex, playingFileIndex, playingLyricIndex, repeatType]);
+  }, [
+    playingDetails,
+    playingMusicIndex,
+    playingFileIndex,
+    playingLyricIndex,
+    repeatType,
+  ]);
 
   return (
     <Stack p={2} sx={{ height: '100%', overflow: 'scroll' }}>

@@ -4,11 +4,7 @@ import { ReactElement, useState, useEffect, useMemo } from 'react';
 import Popover from '@mui/material/Popover';
 import { Tag } from '../types';
 
-export default function Tags({
-  tags,
-}: {
-  tags: Tag[];
-}) {
+export default function Tags({ tags }: { tags: Tag[] }) {
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
   const [label, setLabel] = useState('');
 

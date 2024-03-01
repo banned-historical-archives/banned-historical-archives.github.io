@@ -1,6 +1,6 @@
 import fs from 'fs-extra';
 import { join, parse } from 'path';
-import JSON5 from 'json5'
+import JSON5 from 'json5';
 import {
   ArticleIndexes,
   BookCatelog,
@@ -64,22 +64,24 @@ function catelog_temp_to_catelog(c: BookCatelogTemp): BookCatelog {
         console.log('resource', resource);
         const flist = await fs.readdir(join(p, prefix, resource));
 
-        const metadata_path = join(
-          p,
-          prefix,
-          resource,
-          resource + '.metadata',
-        );
+        const metadata_path = join(p, prefix, resource, resource + '.metadata');
         const metadata = JSON.parse(
           (await fs.readFile(metadata_path)).toString(),
         ) as ResourceMetaData;
 
         const cfg = JSON5.parse(
-          (await fs.readFile(join(__dirname, `../config/archives${i}/${metadata.id}.ts`))).toString().replace('export default', '').replace(/\;\s*$/, ''),
+          (
+            await fs.readFile(
+              join(__dirname, `../config/archives${i}/${metadata.id}.ts`),
+            )
+          )
+            .toString()
+            .replace('export default', '')
+            .replace(/\;\s*$/, ''),
         ) as Config;
 
         if (cfg.resource_type === 'music') {
-          music_indexes.push([metadata.id, metadata.name, i])
+          music_indexes.push([metadata.id, metadata.name, i]);
         } else if (cfg.resource_type === 'video') {
           gallery_indexes.push(metadata as VideoMetaData);
         } else if (cfg.resource_type === 'picture') {

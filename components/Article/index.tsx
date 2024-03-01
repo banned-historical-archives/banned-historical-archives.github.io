@@ -309,7 +309,7 @@ function PureArticle({
               tts.rate = 1;
               speechSynthesis.speak(tts);
             } else {
-              speechSynthesis.cancel()
+              speechSynthesis.cancel();
             }
           }}
         >

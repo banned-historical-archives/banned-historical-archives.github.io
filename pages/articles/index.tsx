@@ -225,10 +225,13 @@ export default function Articles({
   useEffect(() => {
     catelog.forEach((i) => {
       try {
-        i.tags = i.tag_ids.map((j) => ({
-          type: tag_indexes[j][0],
-          name: tag_indexes[j][1],
-        } as Tag));
+        i.tags = i.tag_ids.map(
+          (j) =>
+            ({
+              type: tag_indexes[j][0],
+              name: tag_indexes[j][1],
+            } as Tag),
+        );
         i.books = i.book_ids.map((j) => book_indexes[j][1]);
       } catch (e) {
         debugger;

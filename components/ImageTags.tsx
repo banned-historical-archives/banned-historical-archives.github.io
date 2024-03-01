@@ -5,7 +5,11 @@ import Popover from '@mui/material/Popover';
 import { ArticleCategory, ArticleType, TagType } from '../types';
 import { Tag } from '../types';
 
-export default function ImageTags({ tags }: { tags: {name: string, type: string }[] }) {
+export default function ImageTags({
+  tags,
+}: {
+  tags: { name: string; type: string }[];
+}) {
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
   const [label, setLabel] = useState('');
 

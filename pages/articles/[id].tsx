@@ -229,13 +229,20 @@ export default function ArticleViewer({
     if (book.article.alias) aliases.push(book.article.alias);
   });
 
-  const { description, parts, comments, page_start, page_end, comment_pivots } = article;
-  const articleComments: Comment[] = comments.map(
-    (i, idx) => ({ text: i, id: idx.toString(), ...comment_pivots[idx] }),
-  );
-  const articleContents: Content[] = parts.map(
-    (i, idx) => ({ ...i, index: idx, id: idx.toString() }),
-  );
+  const { description, parts, comments, page_start, page_end, comment_pivots } =
+    article;
+  const articleComments: Comment[] = comments.map((i, idx) => ({
+    text: i,
+    id: idx.toString(),
+    offset: comment_pivots[idx].offset,
+    index: comment_pivots[idx].index,
+    part_idx: comment_pivots[idx].part_index,
+  }));
+  const articleContents: Content[] = parts.map((i, idx) => ({
+    ...i,
+    index: idx,
+    id: idx.toString(),
+  }));
   const comparedArticleComments: Comment[] = comparedBook.article.comments.map(
     (i, idx) => ({ text: i, id: idx.toString(), ...comment_pivots[idx] }),
   );

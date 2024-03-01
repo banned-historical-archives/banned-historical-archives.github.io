@@ -34,17 +34,26 @@ const book_indexes = JSON.parse(
         },
       },
     });
-  } catch (e) { }
+  } catch (e) {}
 
   const es_articles: ESArticle[] = [];
   let t = 0;
-  
+
   const total = Object.keys(article_indexes).length;
   for (const article_id of Object.keys(article_indexes)) {
     for (const book_number_id of article_indexes[article_id]) {
       const book = book_indexes[book_number_id];
       const [book_id, book_name, archive_id] = book;
-      const article = readJSONSync(join(__dirname, '../parsed/archives' + archive_id, book_id.slice(0,3), book_id, article_id.slice(0, 3), article_id + '.json')) as ParserResult;
+      const article = readJSONSync(
+        join(
+          __dirname,
+          '../parsed/archives' + archive_id,
+          book_id.slice(0, 3),
+          book_id,
+          article_id.slice(0, 3),
+          article_id + '.json',
+        ),
+      ) as ParserResult;
       const es_article: ESArticle = {
         article_id,
         publication_id: book[0],
@@ -52,7 +61,10 @@ const book_indexes = JSON.parse(
         authors: article.authors,
         title: article.title,
         aliases: [],
-        content: article.description + article.parts.map((j) => j.text).join('\n') + article.comments.map(j => j).join('\n'),
+        content:
+          article.description +
+          article.parts.map((j) => j.text).join('\n') +
+          article.comments.map((j) => j).join('\n'),
       };
       es_articles.push(es_article);
       await esClient.index({

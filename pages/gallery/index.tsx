@@ -30,7 +30,7 @@ import Menu from '@mui/material/Menu';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import Divider from '@mui/material/Divider';
-import {GalleryIndexes, PictureMetaData } from '../../types';
+import { GalleryIndexes, PictureMetaData } from '../../types';
 import Stack from '@mui/material/Stack';
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
@@ -48,8 +48,8 @@ import {
 } from '@mui/x-data-grid-pro';
 import { ensure_two_digits } from '../../utils';
 import ImageTags from '../../components/ImageTags';
-import { readFile } from 'fs-extra'
-import {join} from 'path'
+import { readFile } from 'fs-extra';
+import { join } from 'path';
 
 export const getStaticProps: GetStaticProps = async (
   context: GetStaticPropsContext,
@@ -64,13 +64,14 @@ export const getStaticProps: GetStaticProps = async (
   };
 };
 
-const ClickToShow = ({url} : {url: string}) => {
+const ClickToShow = ({ url }: { url: string }) => {
   const [clicked, setClicked] = useState(false);
-  return clicked ?
-      <img alt="" src={url} style={{ width: '100%' }} />
-      : <Button onClick={() => setClicked(true)}>显示</Button>
-
-}
+  return clicked ? (
+    <img alt="" src={url} style={{ width: '100%' }} />
+  ) : (
+    <Button onClick={() => setClicked(true)}>显示</Button>
+  );
+};
 const columns: GridColDef<PictureMetaData>[] = [
   {
     field: 'url',
@@ -78,7 +79,7 @@ const columns: GridColDef<PictureMetaData>[] = [
     minWidth: 350,
     flex: 1,
     renderCell: (params: GridRenderCellParams<string, PictureMetaData>) => (
-      <ClickToShow url={params.row!.url}/>
+      <ClickToShow url={params.row!.url} />
     ),
   },
   {
@@ -112,7 +113,9 @@ const columns: GridColDef<PictureMetaData>[] = [
     headerName: '时间',
     minWidth: 150,
     flex: 1,
-    valueGetter: (params: GridValueGetterParams<PictureMetaData, PictureMetaData>) =>
+    valueGetter: (
+      params: GridValueGetterParams<PictureMetaData, PictureMetaData>,
+    ) =>
       params.row.year
         ? [
             params.row.year || '----',
@@ -146,8 +149,9 @@ const columns: GridColDef<PictureMetaData>[] = [
     sortComparator: (tags_a: string, tags_b: string) => {
       return tags_a > tags_b ? 1 : -1;
     },
-    valueGetter: (params: GridValueGetterParams<PictureMetaData, PictureMetaData>) =>
-      params.row.tags.map((i) => i.name).join(','),
+    valueGetter: (
+      params: GridValueGetterParams<PictureMetaData, PictureMetaData>,
+    ) => params.row.tags.map((i) => i.name).join(','),
     renderCell: (params: GridRenderCellParams<string, PictureMetaData>) => (
       <div style={{ overflow: 'visible' }}>
         <ImageTags tags={params.row.tags} />

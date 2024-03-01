@@ -10,13 +10,13 @@ export type Comment = {
   id: string;
   offset: number;
   text: string;
-}
+};
 export type Content = {
   id: string;
   type: ContentType;
   text: string;
   index: number;
-}
+};
 export type Article = {
   title: string;
   author: string[];
@@ -25,19 +25,23 @@ export type Article = {
   origin?: string;
   alias?: string;
   tags: Tag[];
-}
+};
 
 export type BookMetaData = {
   id: string;
   name: string;
   internal: boolean;
   official: boolean;
-  type: 'img' | 'pdf' | 'db' | 'unknown',
+  type: 'img' | 'pdf' | 'db' | 'unknown';
   author: string;
   files: string[];
-}
+};
 
-export type ResourceMetaData = BookMetaData | MusicMetaData | PictureMetaData | VideoMetaData;
+export type ResourceMetaData =
+  | BookMetaData
+  | MusicMetaData
+  | PictureMetaData
+  | VideoMetaData;
 
 export enum ArticleCategory {
   centralFile = '中央文件',
@@ -107,7 +111,7 @@ export type Music = {
       artist: string;
     }[];
   }[];
-}
+};
 export type Pivot = {
   part_index: number; // 从 0 开始
   index: number; // 注释编号
@@ -236,7 +240,11 @@ export type AutomatedEntryVideoOption = {
   archive_id?: number;
 } & Omit<VideoMetaData, 'id'>;
 
-export type AutomatedEntryOption = AutomatedEntryBookOption | AutomatedEntryPictureOption | AutomatedEntryVideoOption | AutomatedEntryMusicOption;
+export type AutomatedEntryOption =
+  | AutomatedEntryBookOption
+  | AutomatedEntryPictureOption
+  | AutomatedEntryVideoOption
+  | AutomatedEntryMusicOption;
 
 export type MusicMetaData = {
   id: string;
@@ -264,7 +272,7 @@ export type PictureMetaData = {
   year?: number;
   month?: number;
   day?: number;
-  tags: {name: string, type: string}[];
+  tags: { name: string; type: string }[];
 };
 
 export type VideoMetaData = PictureMetaData;
@@ -411,7 +419,7 @@ export type OCRParameterAdvanced = {
 };
 
 export type BookConfig = {
-  resource_type: 'book',
+  resource_type: 'book';
   entity: Partial<BookMetaData>;
   path: string;
   parser_option: ParserOption;
@@ -424,19 +432,19 @@ export type MusicConfig = {
   resource_type: 'music';
   version?: number;
   entity: MusicMetaData;
-}
+};
 
 export type PictureConfig = {
   resource_type: 'picture';
   version?: number;
   entity: PictureMetaData;
-}
+};
 
 export type VideoConfig = {
   resource_type: 'video';
   version?: number;
   entity: VideoMetaData;
-}
+};
 
 export type Config = BookConfig | MusicConfig | PictureConfig | VideoConfig;
 
