@@ -113,7 +113,7 @@ export type Music = {
   }[];
 };
 export type Pivot = {
-  part_index: number; // 从 0 开始
+  part_idx: number; // 从 0 开始
   index: number; // 注释编号
   offset: number; // 偏移量，从 0 开始，注释应该插入的index，比如'mzd[2]'的offset为3
 };

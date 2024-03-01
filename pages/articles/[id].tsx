@@ -236,7 +236,7 @@ export default function ArticleViewer({
     id: idx.toString(),
     offset: comment_pivots[idx].offset,
     index: comment_pivots[idx].index,
-    part_idx: comment_pivots[idx].part_index,
+    part_idx: comment_pivots[idx].part_idx,
   }));
   const articleContents: Content[] = parts.map((i, idx) => ({
     ...i,
