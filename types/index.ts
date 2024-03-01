@@ -6,7 +6,7 @@ export type Tag = {
 
 export type Comment = {
   index: number; // 编号
-  part_index: number;
+  part_idx: number;
   id: string;
   offset: number;
   text: string;
