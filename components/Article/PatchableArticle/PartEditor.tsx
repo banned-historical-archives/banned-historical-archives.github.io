@@ -107,7 +107,7 @@ export default function Part({
   const originText = useMemo(() => {
     const text_arr = Array.from(content.text);
     comments
-      .filter((i) => i.part_index === idx)
+      .filter((i) => i.part_idx === idx)
       .sort((a, b) => b.index - a.index)
       .forEach((i) =>
         text_arr.splice(

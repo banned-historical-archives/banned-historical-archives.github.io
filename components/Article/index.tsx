@@ -32,7 +32,7 @@ function PureArticle({
   const [playing, setPlaying] = useState(false);
   const contentsComponent = contents.map((part) => {
     let s: string[] = [];
-    const part_comments = comments.filter((i) => i.index === part.index);
+    const part_comments = comments.filter((i) => i.part_idx === part.index);
     let text = part.text;
     let t = 0;
     const texts: string[] = [];
