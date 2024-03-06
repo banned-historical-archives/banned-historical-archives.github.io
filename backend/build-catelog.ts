@@ -28,6 +28,7 @@ type BookCatelogTemp = {
 };
 const gallery_indexes: GalleryIndexes = [];
 const music_indexes: MusicIndexes = [];
+const music_indexes_temp: any[] = [];
 const book_catelog_temp: BookCatelogTemp = {};
 const article_indexes: ArticleIndexes = {};
 const tag_cache: { [type: string]: { [name: string]: number } } = {};
@@ -81,7 +82,8 @@ function catelog_temp_to_catelog(c: BookCatelogTemp): BookCatelog {
         ) as Config;
 
         if (cfg.resource_type === 'music') {
-          music_indexes.push([metadata.id, metadata.name, i]);
+          const music_metadata = metadata as MusicMetaData;
+          music_indexes_temp.push([metadata.id, metadata.name, i, music_metadata.lyrics.length])
         } else if (cfg.resource_type === 'video') {
           gallery_indexes.push(metadata as VideoMetaData);
         } else if (cfg.resource_type === 'picture') {
@@ -180,7 +182,7 @@ function catelog_temp_to_catelog(c: BookCatelogTemp): BookCatelog {
   );
   fs.writeFileSync(
     join(__dirname, '../music_indexes.json'),
-    JSON.stringify(music_indexes),
+    JSON.stringify(music_indexes_temp.sort((a,b) => b[3] - a[3]).map(i => [i[0],i[1],i[2]])),
   );
   fs.writeFileSync(
     join(__dirname, '../book_indexes.json'),
