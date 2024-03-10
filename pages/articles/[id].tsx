@@ -234,9 +234,9 @@ export default function ArticleViewer({
   const articleComments: Comment[] = comments.map((i, idx) => ({
     text: i,
     id: idx.toString(),
-    offset: comment_pivots[idx].offset,
-    index: comment_pivots[idx].index,
-    part_idx: comment_pivots[idx].part_idx,
+    offset: comment_pivots[idx]?.offset,
+    index: comment_pivots[idx]?.index,
+    part_idx: comment_pivots[idx]?.part_idx,
   }));
   const articleContents: Content[] = parts.map((i, idx) => ({
     ...i,
