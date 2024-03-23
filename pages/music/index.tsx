@@ -86,17 +86,19 @@ function Song({
   const [lyricRight, setLyricRight] = useState(0);
 
   const leftContents = useMemo(
-    () => details?.lyrics[lyricLeft].content.split('\n'),
+    () => (details?.lyrics[lyricLeft] || details?.lyrics[0]).content.split('\n'),
     [lyricLeft, details],
   );
   const rightContents = useMemo(
-    () => details?.lyrics[lyricRight]!.content.split('\n'),
+    () => (details?.lyrics[lyricRight] || details?.lyrics[0])!.content.split('\n'),
     [lyricRight, details],
   );
   const diff: Diff[][] = useMemo(() => {
     if (!details) return [];
-    const leftContents = details?.lyrics[lyricLeft].content.split('\n');
-    const rightContents = details?.lyrics[lyricRight]!.content.split('\n');
+    const left = details?.lyrics[lyricLeft] || details?.lyrics[0];
+    const right = details?.lyrics[lyricRight] || details?.lyrics[0];
+    const leftContents = left.content.split('\n');
+    const rightContents = right!.content.split('\n');
     let i = 0;
     const max_len = Math.max(leftContents.length, rightContents.length);
 
@@ -153,7 +155,7 @@ function Song({
         <Stack sx={{ flex: 1 }}>
           <Select
             size="small"
-            value={lyricLeft}
+            value={details?.lryics[lyricLeft] ? lyricLeft : 0}
             label="版本"
             sx={{ mb: 1 }}
             onChange={(e) => {
@@ -177,7 +179,7 @@ function Song({
             <Stack sx={{ flex: 1 }}>
               <Select
                 size="small"
-                value={lyricRight}
+                value={details?.lryics[lyricRight] ? lyricRight : 0}
                 label="版本"
                 sx={{ mb: 1 }}
                 onChange={(e) => {
