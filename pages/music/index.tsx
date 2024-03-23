@@ -155,7 +155,7 @@ function Song({
         <Stack sx={{ flex: 1 }}>
           <Select
             size="small"
-            value={details?.lryics[lyricLeft] ? lyricLeft : 0}
+            value={details?.lyrics[lyricLeft] ? lyricLeft : 0}
             label="版本"
             sx={{ mb: 1 }}
             onChange={(e) => {
@@ -179,7 +179,7 @@ function Song({
             <Stack sx={{ flex: 1 }}>
               <Select
                 size="small"
-                value={details?.lryics[lyricRight] ? lyricRight : 0}
+                value={details?.lyrics[lyricRight] ? lyricRight : 0}
                 label="版本"
                 sx={{ mb: 1 }}
                 onChange={(e) => {
