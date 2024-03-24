@@ -86,11 +86,11 @@ function Song({
   const [lyricRight, setLyricRight] = useState(0);
 
   const leftContents = useMemo(
-    () => (details?.lyrics[lyricLeft] || details?.lyrics[0])!.content.split('\n'),
+    () => (details?.lyrics[lyricLeft] || details?.lyrics[0])?.content.split('\n'),
     [lyricLeft, details],
   );
   const rightContents = useMemo(
-    () => (details?.lyrics[lyricRight] || details?.lyrics[0])!.content.split('\n'),
+    () => (details?.lyrics[lyricRight] || details?.lyrics[0])?.content.split('\n'),
     [lyricRight, details],
   );
   const diff: Diff[][] = useMemo(() => {
