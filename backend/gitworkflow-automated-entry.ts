@@ -48,7 +48,7 @@ export async function start() {
     const id = uuid();
     config.archive_id = config.archive_id == undefined ? 1 : config.archive_id;
     const raw_dir = join(__dirname, `../raw/archives${config.archive_id}`);
-    const raw_url = `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives${config.archive_id}/main`;
+    const raw_url = `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives${config.archive_id}/main/`;
     const config_dir = join(
       __dirname,
       `../config/archives${config.archive_id}`,
@@ -107,7 +107,7 @@ export async function start() {
         official: !!config.official,
         type: is_pdf ? 'pdf' : is_img_set ? 'img' : 'unknown',
         author: config.author || '',
-        files: files.map((i) => is_pdf ? join(raw_url, id + '.pdf') : join(raw_url, id, basename(i))),
+        files: files.map((i) => is_pdf ? raw_url + id + '.pdf' : raw_url, id, basename(i)),
       };
       resource_config = {
         resource_type: 'book',
@@ -124,9 +124,9 @@ export async function start() {
       for (const i of files) {
         if (is_img_set) {
           fsextra.ensureDirSync(join(raw_dir, `${id}`));
-          fs.renameSync(i, join(raw_dir, `${id}/${basename(i)}`));
+          fs.renameSync(i, raw_dir + `${id}/${basename(i)}`);
         } else {
-          fs.renameSync(i, join(raw_dir, `${id}.pdf`));
+          fs.renameSync(i, raw_dir + `${id}.pdf`);
         }
       }
     } else if (config.resource_type === 'music') {
@@ -172,7 +172,7 @@ export async function start() {
       await download(links[0], p);
       const real_ext = (await fromBuffer(fs.readFileSync(p)))?.ext;
       fs.renameSync(p, join(raw_dir, id + '.' + real_ext));
-      resource_config.entity.url = join(raw_url, id + '.' + real_ext);
+      resource_config.entity.url = raw_url + id + '.' + real_ext;
     } else if (config.resource_type === 'video') {
       const filtered = { ...config } as any;
       delete filtered.archive_id;
@@ -187,7 +187,7 @@ export async function start() {
       await download(links[0], p);
       const real_ext = (await fromBuffer(fs.readFileSync(p)))?.ext;
       fs.renameSync(p, join(raw_dir, id + '.' + real_ext));
-      resource_config.entity.url = join(raw_url, id + '.' + real_ext);
+      resource_config.entity.url = raw_url + id + '.' + real_ext;
     } else {
       process.exit(5);
     }
