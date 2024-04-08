@@ -124,9 +124,9 @@ export async function start() {
       for (const i of files) {
         if (is_img_set) {
           fsextra.ensureDirSync(join(raw_dir, `${id}`));
-          fs.renameSync(i, raw_dir + `${id}/${basename(i)}`);
+          fs.renameSync(i, join(raw_dir, `${id}/${basename(i)}`));
         } else {
-          fs.renameSync(i, raw_dir + `${id}.pdf`);
+          fs.renameSync(i, join(raw_dir, `${id}.pdf`));
         }
       }
     } else if (config.resource_type === 'music') {
