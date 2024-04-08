@@ -107,7 +107,7 @@ export async function start() {
         official: !!config.official,
         type: is_pdf ? 'pdf' : is_img_set ? 'img' : 'unknown',
         author: config.author || '',
-        files: files.map((i) => join(raw_url, basename(i))),
+        files: files.map((i) => is_pdf ? join(raw_url, basename(i)) : join(raw_url, id, basename(i))),
       };
       resource_config = {
         resource_type: 'book',
