@@ -107,7 +107,7 @@ export async function start() {
         official: !!config.official,
         type: is_pdf ? 'pdf' : is_img_set ? 'img' : 'unknown',
         author: config.author || '',
-        files: files.map((i) => is_pdf ? raw_url + id + '.pdf' : raw_url, id, basename(i)),
+        files: files.map((i) => is_pdf ? raw_url + id + '.pdf' : raw_url + id + '/' + basename(i)),
       };
       resource_config = {
         resource_type: 'book',
@@ -153,10 +153,7 @@ export async function start() {
           audio_idx = 0;
           lyric_idx++;
         }
-        resource_config.entity.lyrics[0].audios[0].url = join(
-          raw_url,
-          `${id}${extname(link)}`,
-        );
+        resource_config.entity.lyrics[0].audios[0].url = raw_url + `${id}${extname(link)}`;
       }
     } else if (config.resource_type === 'picture') {
       const filtered = { ...config } as any;
