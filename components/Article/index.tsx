@@ -17,7 +17,7 @@ import { diff_match_patch, Diff } from 'diff-match-patch';
 import { ReactElement, useEffect, useRef, useState } from 'react';
 import { Article, Content, Comment } from '../../types';
 import { ContentType, ParserResult } from '../../types';
-import { bracket_left, bracket_right, md5 } from '../../utils';
+import { bracket_left, bracket_right, crypto_md5 } from '../../utils';
 import PatchableArticle from './PatchableArticle';
 
 function PureArticle({
@@ -50,7 +50,7 @@ function PureArticle({
     }
     const content: (ReactElement | string)[] = [];
     texts.forEach((text, idx) => {
-      content.push(<span key={`${md5(text)}-${idx}`}>{text}</span>);
+      content.push(<span key={`${crypto_md5(text)}-${idx}`}>{text}</span>);
       s.push(text);
       if (part_comments.length) {
         const comment_idx = part_comments.shift()!.index;

@@ -1,4 +1,5 @@
 import { diff_match_patch, Diff } from 'diff-match-patch';
+import crypto from 'crypto';
 import {
   ArticleCategory,
   ArticleType,
@@ -374,10 +375,6 @@ export function apply_patch(parserResult: ParserResult, patch: Patch) {
   }
 }
 
-export function hash_str_arr(s: string[]) {
-  return md5(s.join('^')).substr(0, 10);
-}
-
 export function ensure_two_digits(a: number | undefined, fallback = '00') {
   if (!a && a !== 0) {
     return fallback;
@@ -385,25 +382,31 @@ export function ensure_two_digits(a: number | undefined, fallback = '00') {
   return a < 10 ? `0${a}` : a;
 }
 
+export function crypto_md5(str: string) {
+  return crypto.createHash('md5').update(str).digest('hex');
+}
 export function get_article_id(r: ParserResult) {
-  return hash_str_arr([
-    r.title,
-    JSON.stringify(
+  const res = crypto_md5(
+    JSON.stringify([
+      r.title,
       r.dates.sort((a, b) =>
         `${a.year || '0000'}-${ensure_two_digits(a.month)}-${ensure_two_digits(
           a.day,
         )}` >
-        `${b.year || '0000'}-${ensure_two_digits(b.month)}-${ensure_two_digits(
-          b.day,
-        )}`
+          `${b.year || '0000'}-${ensure_two_digits(b.month)}-${ensure_two_digits(
+            b.day,
+          )}`
           ? 1
           : -1,
-      ),
-    ),
-    JSON.stringify(r.is_range_date),
-    JSON.stringify(r.authors.sort((a, b) => (a > b ? 1 : -1))),
-    JSON.stringify(r.file_id || ''),
-  ]);
+      ).map(a => `${a.year || '0000'}-${ensure_two_digits(a.month)}-${ensure_two_digits(
+        a.day,
+      )}`),
+      !!r.is_range_date,
+      r.authors.sort((a, b) => (a > b ? 1 : -1)),
+      r.file_id || ''
+    ])
+  );
+  return res.substr(0, 10);
 }
 
 export async function sleep(t: number) {

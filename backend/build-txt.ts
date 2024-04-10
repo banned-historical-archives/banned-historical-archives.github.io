@@ -12,7 +12,7 @@ import {
   Tag,
   TagType,
 } from '../types';
-import { get_article_id, hash_str_arr, uuid } from '../utils';
+import { get_article_id, uuid } from '../utils';
 import fs, { readFileSync, writeFileSync } from 'fs';
 import { ensureDirSync } from 'fs-extra';
 

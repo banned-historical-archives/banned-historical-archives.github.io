@@ -1,9 +1,10 @@
 import { join } from 'node:path/posix';
+import crypto from 'crypto';
 // import { AppDataSource } from './data-source';
 // import lac from './lac';
 // import { LACResult } from '../types';
 
-import { get_article_id, sleep, uuid } from '../utils';
+import { crypto_md5, get_article_id, md5, sleep, uuid } from '../utils';
 import { basename } from 'node:path';
 import fs from 'fs-extra';
 import { JSDOM } from 'jsdom';
@@ -27,5 +28,12 @@ import { ContentType, Date, ParserResult } from '../types';
 }`)
  }
  */
+
+
+ for (const i of [
+'几天',
+'，1',
+'，3',])
+console.log( md5(i), crypto_md5(i))
   debugger;
 })();
