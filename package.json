@@ -1,5 +1,5 @@
 {
-  "name": "x",
+  "name": "banned-historical-archives.github.io",
   "version": "0.1.0",
   "scripts": {
     "dev:nextjs-helper": "ts-node --project ./tsconfig.build.json ./backend/nextjs-helper &",
