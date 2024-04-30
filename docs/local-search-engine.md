@@ -15,9 +15,3 @@ docker run -d --name es01 -p 9200:9200 -p 9300:9300 -e "http.cors.enabled=true" 
 ```
 npm run init-es
 ```
-
-3. 开启 es 代理
-
-```
-npm run dev:es-server
-```
