@@ -19,5 +19,8 @@ npm run init-catelog
 ### e.运行web服务器
 ```
 npm run dev:nextjs-helper
+
+另开终端执行
+
 npx next dev
 ```
