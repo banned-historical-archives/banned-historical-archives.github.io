@@ -1,0 +1,9 @@
+http.cors.enabled=true
+http.cors.allow-origin=*
+xpack.security.authc.anonymous.username=anonymous_user
+xpack.security.authc.anonnymous.authz_exceptioin=true
+xpack.security.authc.anonymous.roles=superuser
+ELASTIC_USERNAME=elastic
+ELASTIC_PASSWORD=password
+discovery.type=single-node
+xpack.security.http.ssl.enabled=false
