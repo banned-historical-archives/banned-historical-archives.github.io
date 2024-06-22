@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://banned-historical-archives.github.io
+
+# Sitemaps
+Sitemap: https://banned-historical-archives.github.io/sitemap.xml
