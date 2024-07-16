@@ -121,10 +121,11 @@ https://huggingface.co/datasets/banned-historical-archives/banned-historical-arc
 * https://jojokanbao.cn
 * https://github.com/ProletRevDicta/Prolet Prolet
 * https://maoistlegacy.de maoistlegacy
-* 中国文化大革命文库（第三版），包含广西“文革”档案资料（机密）
-* 中国反右运动数据库
-* 中国大跃进-大饥荒数据库
-* 中国五十年代初中期的政治运动数据库：从土地改革到公私合营
+* https://github.com/banned-historical-archives/CCRD CCRD 中国当代政治运动史数据库
+  * 中国文化大革命文库（第三版），包含广西“文革”档案资料（机密）
+  * 中国反右运动数据库
+  * 中国大跃进-大饥荒数据库
+  * 中国五十年代初中期的政治运动数据库：从土地改革到公私合营
 * https://zh.annas-archive.org/ 安娜的档案
 * http://www.mzdbl.cn 毛泽东博览
 * https://www.marxists.org/chinese/index.html 中文马克思主义文库
