@@ -65,8 +65,7 @@ export async function start() {
         const p = join(tmpdir(), basename(link));
         await download(link, p);
 
-        // 部分pdf文件无法被识别
-        const real_ext = link.endsWith('.pdf') ? 'pdf' : (await fromBuffer(fs.readFileSync(p)))?.ext;
+        const real_ext = await fromBuffer(fs.readFileSync(p)))?.ext;
         if (!real_ext) process.exit(3);
         const new_path = join(tmpdir(), files.length + 1 + '.' + real_ext);
         fs.renameSync(p, new_path);
