@@ -1,0 +1,7 @@
+
+export default [
+// {"version":2,"parts":{"0":{"delete":true},"1":{"delete":true},"2":{"delete":true},"3":{"delete":true},"4":{"delete":true},"5":{"diff":"=16\t+集会上的讲话（节录）","type":"title"},"6":{"diff":"-11\t=28\t-1\t+熄\t=1\t-1\t+嘛\t=6\t-1\t+争\t=2\t-1\t+改\t=15\t-1\t=2\t-1\t+”\t=25\t-1\t+搞\t=15"},"7":{"diff":"=56\t-1\t+焱\t=175\t-1\t+辫\t=3"},"8":{"diff":"=22\t-1\t+揪\t=64"},"9":{"delete":true},"10":{"delete":true}},"comments":{},"description":""}
+  {"version":2,"parts":{"0":{"delete":true},"1":{"delete":true},"2":{"delete":true},"3":{"delete":true},"4":{"delete":true},"5":{"diff":"=16\t+%E9%9B%86%E4%BC%9A%E4%B8%8A%E7%9A%84%E8%AE%B2%E8%AF%9D%EF%BC%88%E8%8A%82%E5%BD%95%EF%BC%89","type":"title"},"6":{"diff":"-11\t=28\t-1\t+%E7%86%84\t=1\t-1\t+%E5%98%9B\t=6\t-1\t+%E4%BA%89\t=2\t-1\t+%E6%94%B9\t=15\t-1\t=2\t-1\t+%E2%80%9D\t=25\t-1\t+%E6%90%9E\t=15"},"7":{"diff":"=56\t-1\t+%E7%84%B1\t=175\t-1\t+%E8%BE%AB\t=3"},"8":{"diff":"=22\t-1\t+%E6%8F%AA\t=64"},"9":{"delete":true},"10":{"delete":true}},"comments":{},"description":""},
+// {"version":2,"parts":{},"comments":{},"description":"+中共武汉市委材料组，一九七六年十二月"}
+  {"version":2,"parts":{},"comments":{},"description":"+%E4%B8%AD%E5%85%B1%E6%AD%A6%E6%B1%89%E5%B8%82%E5%A7%94%E6%9D%90%E6%96%99%E7%BB%84%EF%BC%8C%E4%B8%80%E4%B9%9D%E4%B8%83%E5%85%AD%E5%B9%B4%E5%8D%81%E4%BA%8C%E6%9C%88"},
+];

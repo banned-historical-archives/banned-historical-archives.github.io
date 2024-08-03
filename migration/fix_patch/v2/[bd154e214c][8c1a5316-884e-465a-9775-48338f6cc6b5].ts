@@ -1,0 +1,4 @@
+export default [
+  {"version":2,"parts":{"0":{"delete":true,"insertAfter":[{"type":"paragraph","text":"百"},{"type":"paragraph","text":"“四人种”反党集团集党夺权的野心中来已久，他食早就妄图利用市影会文艺宣传工具为复党夺权大社反车命奥论"},{"type":"paragraph","text":"生们最近召开厂党委对“四人希”王洪文和马、徐，王直护插手上影拿单位，妄图控制片影，作为“四人希”复党夺权的一个阵地自有关活动和反革命言计进行了专题揭发，现将揭发考干材料整理印出来，供全厂同志批判"},{"type":"paragraph","text":"这个材料分为三个部分，第一部分是王洪文在一九七五年夏秋背着毛主后，党中央，来上海，盲接插手上量的罪恶活动和反革命言论。第二部分是于洪文在上注文艺座谈会（即200号会议）上的反革命言论，第三部分是王洪文一九七六年五月在钓鱼台接见张家龙拿人的材料，对于每一部分的主要内容和当时的省景我们都加了接语说明"},{"type":"paragraph","text":"乒共上海中景制片厂委员会"},{"type":"paragraph","text":"一九七六年12月"}]},"1":{"delete":true},"2":{"delete":true},"3":{"delete":true},"4":{"delete":true},"5":{"delete":true}},"comments":{}},
+  {"version":2,"parts":{},"description":"","comments":{},"newComments":[]},
+]

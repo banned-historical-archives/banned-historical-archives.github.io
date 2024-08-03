@@ -1,0 +1,5 @@
+
+export default [
+// {"version":2,"parts":{"0":{"insertBefore":[{"type":"quotation","text":"毛主席语录"},{"type":"quotation","text":"社会主义革命革到自己头上了，合作化时党内就有人反对，批资产阶级法权他们有反感。搞社会主义革命，不知道资产阶级在哪里，就在共产党内，党内走资本主义道路的当权派。走资派还在走。"}],"type":"title"},"1":{"diff":"=22\t-1\t+讨\t=53\t+，\t=79\t-1\t+抒\t=92"},"2":{"diff":"=60\t+。"},"3":{"type":"signature"},"4":{"diff":"=9\t-1\t+日","type":"signature"}},"comments":{},"description":""}
+  {"version":2,"parts":{"0":{"insertBefore":[{"type":"quotation","text":"毛主席语录"},{"type":"quotation","text":"社会主义革命革到自己头上了，合作化时党内就有人反对，批资产阶级法权他们有反感。搞社会主义革命，不知道资产阶级在哪里，就在共产党内，党内走资本主义道路的当权派。走资派还在走。"}],"type":"title"},"1":{"diff":"=22\t-1\t+%E8%AE%A8\t=53\t+%EF%BC%8C\t=79\t-1\t+%E6%8A%92\t=92"},"2":{"diff":"=60\t+%E3%80%82"},"3":{"type":"signature"},"4":{"diff":"=9\t-1\t+%E6%97%A5","type":"signature"}},"comments":{},"description":""},
+];

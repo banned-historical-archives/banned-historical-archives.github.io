@@ -1,0 +1,4 @@
+export default [
+  {"version":2,"parts":{"0":{"delete":true,"insertAfter":[{"type":"paragraph","text":"《口"},{"type":"paragraph","text":"报》"},{"type":"paragraph","text":"号"},{"type":"paragraph","text":"（节录）"},{"type":"paragraph","text":"二、坚决揭发批判湖北武汉地区（对）文化大革命总是不满意，总是要翻案，总是要算账的总根子总后台。"},{"type":"paragraph","text":"七、立即追查不肯改悔的走资派邓小平窜来湖北武汉地区搞阴谋的人和事！"},{"type":"paragraph","text":"八、强烈要求省、市委领导人答复我们的多次要求，召开省、市党委，省、市革命委员会两委扩大会议，回击右倾翻案风，揭批不肯改悔的走资派邓小平！"},{"type":"paragraph","text":"十二、坚决批判孔老二“克己复礼”的反动玫治纲领，批判不莆改悔的走资派邓小平“兴灭国，继绝世，举逸民”，组织资产阶级司令部的修正主义组织路线。十三，坚决揭发批判不肯改悔的走资派，（排斥）文化大革命涌现的新生力量于革命的“老中青”三结合之外，改“聚义厅为“忠义堂”的修正主义路线，还我“一月风暴”革命委员会。"}]},"1":{"delete":true},"2":{"delete":true},"3":{"delete":true},"4":{"delete":true},"5":{"delete":true}},"comments":{}},
+  {"version":2,"parts":{},"description":"","comments":{},"newComments":[]},
+]
