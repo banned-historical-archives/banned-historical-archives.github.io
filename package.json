@@ -58,6 +58,7 @@
     "next": "^14.0.4",
     "next-sitemap": "^3.1.13",
     "node-fetch": "^2.6.7",
+    "pdf-parse": "^1.1.1",
     "pdf.js": "^0.1.0",
     "pdfjs-dist": "2.12",
     "raw-loader": "^4.0.2",
