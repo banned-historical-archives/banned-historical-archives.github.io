@@ -18,7 +18,7 @@ if (is_pdf) {
     n_files = files.length;
     ext = path.extname(files[0]);
     for (let i = 1; i <= n_files;++i) {
-        if (!fs.existsSync(join(dir, i + ext))) {
+        if (!fs.existsSync(path.join(dir, i + ext))) {
             console.log('检查文件名后缀是否一致且按顺序命名');
             process.exit(1);
         }
@@ -109,17 +109,18 @@ ${JSON.stringify(res, null ,2)}
 确认(Y/n)：`);
         if (check == 'n') return;
 
-    fs.writeFileSync(path.join(js_path, `../config/archives${archive_id}/${id}.ts`), 'export default ' + JSON.stringify(res, null, 2));
+    fs.writeFileSync(path.join(js_path, `../../config/archives${archive_id}/${id}.ts`), 'export default ' + JSON.stringify(res, null, 2));
     if (is_pdf) {
         const f = path.join(process.cwd(), relativePath);
-        const target_path = path.join(js_path, `../raw/archives${archive_id}/${id}.pdf`);
+        const target_path = path.join(js_path, `../../raw/archives${archive_id}/${id}.pdf`);
         fs.cpSync(f, target_path);
     } else {
+        const dir = path.join(process.cwd(), relativePath);
         const files = fs.readdirSync(dir);
         n_files = files.length;
-        fs.ensureDirSync(path.join(js_path, `../raw/archives${archive_id}/${id}`))
+        fs.ensureDirSync(path.join(js_path, `../../raw/archives${archive_id}/${id}`))
         for (let i = 1; i <= n_files;++i) {
-            const target_path = path.join(js_path, `../raw/archives${archive_id}/${id}/${i}${ext}`);
+            const target_path = path.join(js_path, `../../raw/archives${archive_id}/${id}/${i}${ext}`);
             const src = path.join(process.cwd(), relativePath, i + ext);
             fs.cpSync(src, target_path);
         }
