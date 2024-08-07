@@ -2,6 +2,7 @@
 const fs = require('fs-extra');
 const path = require('path');
 const {v4 } = require('uuid');
+const {execSync } = require('child_process');
 
 const readline = require('node:readline');
 
@@ -90,7 +91,7 @@ async function cmd_question(q, default_v = '') {
         }
         res.parser_option.articles.push({
           "title": title,
-          "authors": authors.split(' '),
+          "authors": authors ? authors.split(' ') : [],
           page_start,
           page_end,
           "dates": date ? [
@@ -101,28 +102,46 @@ async function cmd_question(q, default_v = '') {
             }
           ] : []
         });
-        const more = await cmd_question(`是否继续录入文章(Y/n)：`);
-        if (more == 'n') break;
+        const more = await cmd_question(`是否继续录入文章(y/N)：`);
+        if (more != 'y') break;
     }
-    const check = await cmd_question(`
-${JSON.stringify(res, null ,2)}
-确认(Y/n)：`);
-        if (check == 'n') return;
+//    const check = await cmd_question(`
+//${JSON.stringify(res, null ,2)}
+//确认(Y/n)：`);
+//        if (check == 'n') return;
 
-    fs.writeFileSync(path.join(js_path, `../../config/archives${archive_id}/${id}.ts`), 'export default ' + JSON.stringify(res, null, 2));
+    const raw_dir = path.join(js_path, `../../raw/archives${archive_id}`);
+    const config_dir = path.join(js_path, `../../config/archives${archive_id}`);
+    fs.writeFileSync(path.join(config_dir, `${id}.ts`), 'export default ' + JSON.stringify(res, null, 2));
     if (is_pdf) {
         const f = path.join(process.cwd(), relativePath);
-        const target_path = path.join(js_path, `../../raw/archives${archive_id}/${id}.pdf`);
+        const target_path = path.join(raw_dir, `${id}.pdf`);
         fs.cpSync(f, target_path);
     } else {
         const dir = path.join(process.cwd(), relativePath);
         const files = fs.readdirSync(dir);
         n_files = files.length;
-        fs.ensureDirSync(path.join(js_path, `../../raw/archives${archive_id}/${id}`))
+        fs.ensureDirSync(path.join(raw_dir, id))
         for (let i = 1; i <= n_files;++i) {
-            const target_path = path.join(js_path, `../../raw/archives${archive_id}/${id}/${i}${ext}`);
+            const target_path = path.join(raw_dir, `${id}/${i}${ext}`);
             const src = path.join(process.cwd(), relativePath, i + ext);
             fs.cpSync(src, target_path);
+        }
+    }
+
+    execSync('git add . && git commit -m 1 && git push', {cwd: raw_dir});
+    execSync('git add . && git commit -m 1 && git push', {cwd: config_dir});
+    const del = (await cmd_question(`是否删除原始文件(y/N):`)) == 'y';
+    if (del) {
+        if (is_pdf) {
+            fs.unlinkSync(path.join(process.cwd(), relativePath))
+        } else {
+            const dir = path.join(process.cwd(), relativePath);
+            const files = fs.readdirSync(dir);
+            for (const x of files) {
+                fs.unlinkSync(path.join(dir, x));
+            }
+            fs.rmdirSync(dir);
         }
     }
 })();
