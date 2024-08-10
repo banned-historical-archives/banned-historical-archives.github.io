@@ -131,6 +131,7 @@ async function cmd_question(q, default_v = '') {
 
         more = await cmd_question(`是否继续录入文章(y/N)：`);
         if (more != 'y') break;
+        ++i;
     }
 //    const check = await cmd_question(`
 //${JSON.stringify(res, null ,2)}
