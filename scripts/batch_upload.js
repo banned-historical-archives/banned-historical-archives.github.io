@@ -40,7 +40,7 @@ async function cmd_question(q, default_v = '') {
 }
 
 (async () => {
-    const archive_id = await cmd_question('仓库id(0-20，默认17)：', '16');
+    const archive_id = await cmd_question('仓库id(0-30，默认21)：', '21');
     const bookname = await cmd_question('书籍名称：')
     const bookauthor = await cmd_question('书籍作者：')
     const id = v4();
