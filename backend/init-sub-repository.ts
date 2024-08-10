@@ -9,7 +9,7 @@ let branch = process.argv[process.argv.length - 1];
 const dir = branch;
 branch = branch == 'raw' ? 'main' : branch;
 
-for (let i = 0; i <= 20; ++i) {
+for (let i = 0; i <= 30; ++i) {
   const command = `(git clone --depth 1 --branch ${branch} ${prefix}/banned-historical-archives${i}.git ${dir}/archives${i}) || true`;
   console.log(command);
   execSync(command, { cwd: join(__dirname, '..') });

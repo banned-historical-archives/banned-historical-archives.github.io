@@ -1,7 +1,7 @@
 const { execSync } = require("child_process");
 const { join } = require("path");
 
-for (const i of [6, 7, 10, 12, 13]) {
+for (const i of [21,22,23,24,25,26,27,28,29,30]) {
     const dir = join(__dirname, '../raw', 'archives' + i);
     for (const j of ['config', 'ocr_patch', 'ocr_cache', 'parsed']) {
         execSync(`(git pull origin ${j} && git checkout ${j}) || true`,{cwd: dir});
