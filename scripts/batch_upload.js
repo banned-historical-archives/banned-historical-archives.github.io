@@ -74,10 +74,10 @@ async function cmd_question(q, default_v = '') {
     };
     let i = 1;
     while (true) {
-        const title = await cmd_question(`文章${i}标题(默认为书籍标题)：`, bookname);
-        const authors = await cmd_question(`文章${i}作者(多作者使用空格分割,默认为书籍作者）：`, bookauthor);
-        const date = await cmd_question(`文章${i}日期(年月日使用空格分割）：`);
-        const page = await cmd_question(`文章${i}页码范围（使用空格分割，默认为第一页到最后一页）：`);
+        let title = await cmd_question(`文章${i}标题(默认为书籍标题)：`, bookname);
+        let authors = await cmd_question(`文章${i}作者(多作者使用空格分割,默认为书籍作者）：`, bookauthor);
+        let date = await cmd_question(`文章${i}日期(年月日使用空格分割）：`);
+        let page = await cmd_question(`文章${i}页码范围（使用空格分割，默认为第一页到最后一页）：`);
         let page_start = 0;
         let page_end = 0;
         if (page) {
@@ -94,20 +94,42 @@ async function cmd_question(q, default_v = '') {
                 page_end = n_files;
             }
         }
+
+
+        console.log("-----------------------------------------------------");
+        console.log(`当前文章标题：${ title }`);
+        console.log(`当前文章作者：${ authors }`);
+        console.log(`当前文章日期：${ date }`)
+        console.log(`当前文章起始页码：${ page_start }~${ page_end }`);
+        console.log("-----------------------------------------------------");
+        const more = await cmd_question(`请核对当前信息是否正确(1:修改标题/2:修改作者/3:修改日期/4:修改页码/任意字符:无需修改)：`);
+        if (more == '1') {
+            let title = await cmd_question(`文章${i}标题(默认为书籍标题)：`, bookname);
+        } else if (more == '2') {
+            let authors = await cmd_question(`文章${i}作者(多作者使用空格分割,默认为书籍作者）：`, bookauthor);
+        } else if (more == '3') {
+            let date = await cmd_question(`文章${i}日期(年月日使用空格分割）：`);
+        } else if (more == '4') {
+            let page = await cmd_question(`文章${i}页码范围（使用空格分割，默认为第一页到最后一页）：`);
+        }
+
+
         res.parser_option.articles.push({
-          "title": title,
-          "authors": authors ? authors.split(' ') : [],
-          page_start,
-          page_end,
-          "dates": date ? [
-            {
-              "year": parseInt(date.split(' ')[0]) || undefined,
-              "month": parseInt(date.split(' ')[1]) || undefined,
-              "day": parseInt(date.split(' ')[2]) || undefined
-            }
-          ] : []
+            "title": title,
+            "authors": authors ? authors.split(' ') : [],
+            page_start,
+            page_end,
+            "dates": date ? [
+                {
+                    "year": parseInt(date.split(' ')[0]) || undefined,
+                    "month": parseInt(date.split(' ')[1]) || undefined,
+                    "day": parseInt(date.split(' ')[2]) || undefined
+                }
+            ] : []
         });
-        const more = await cmd_question(`是否继续录入文章(y/N)：`);
+
+
+        more = await cmd_question(`是否继续录入文章(y/N)：`);
         if (more != 'y') break;
     }
 //    const check = await cmd_question(`
