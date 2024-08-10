@@ -20,7 +20,7 @@ if (is_pdf) {
     ext = path.extname(files[0]);
     for (let i = 1; i <= n_files;++i) {
         if (!fs.existsSync(path.join(dir, i + ext))) {
-            console.log('检查文件名后缀是否一致且按顺序命名');
+            console.log('检查文件名后缀是否一致且按顺序命名，标准输入：1.jpg, 2.jpg, 3.jpg ...');
             process.exit(1);
         }
     }
