@@ -119,11 +119,6 @@ async function cmd_question(q, default_v = '') {
             "authors": authors ? authors.split(' ') : [],
             page_start,
             page_end,
-            "ocr": {
-               "use_onnx": true,
-               "det_model_dir": "./paddle/onnx/ch_PP-OCRv4_det_infer.onnx",
-               "rec_model_dir": "./paddle/onnx/ch_PP-OCRv4_rec_infer.onnx"
-             },
             "dates": date ? [
                 {
                     "year": parseInt(date.split(' ')[0]) || undefined,
