@@ -9,10 +9,12 @@ const readline = require('node:readline');
 let [node_path, js_path, relativePath] = process.argv;
 
 const is_pdf = relativePath.endsWith('.pdf');
+const is_txt = relativePath.endsWith('.txt');
 let n_files = 0;
 let ext = '';
 if (is_pdf) {
     const f = path.join(process.cwd(), relativePath);
+} else if (is_txt) {
 } else {
     const dir = path.join(process.cwd(), relativePath);
     const files = fs.readdirSync(dir);
@@ -41,6 +43,8 @@ async function cmd_question(q, default_v = '') {
 
 (async () => {
     const archive_id = await cmd_question('仓库id(0-30，默认21)：', '21');
+    const raw_dir = path.join(js_path, `../../raw/archives${archive_id}`);
+    const config_dir = path.join(js_path, `../../config/archives${archive_id}`);
     const bookname = await cmd_question('书籍名称：')
     const bookauthor = await cmd_question('书籍作者：')
     const id = v4();
@@ -49,26 +53,27 @@ async function cmd_question(q, default_v = '') {
             id,
             "name": bookname,
             "internal": false,
-            "type": is_pdf ? "pdf" : "imgs",
+            "type": is_pdf ? "pdf" : is_txt ? "db" : "imgs",
             "official": false,
             "author": bookauthor,
             files: is_pdf ? 
                 `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives${archive_id}/main/${id}.pdf`:
-            (new Array(n_files)).fill(0).map((x, i) =>
+            is_txt ? [] : (new Array(n_files)).fill(0).map((x, i) =>
                 `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives${archive_id}/main/${id}/${i + 1}${ext}`
             ),
         },
         "parser_option": {
           "articles": [
           ],
+          ...is_txt ? {} :{
           "ocr": {
             "use_onnx": true,
             "det_model_dir": "./paddle/onnx/ch_PP-OCRv4_det_infer.onnx",
             "rec_model_dir": "./paddle/onnx/ch_PP-OCRv4_rec_infer.onnx"
-          }
+          }}
         },
-        "parser_id": "automation",
-        "path": is_pdf ? id + '.pdf' : id,
+        "parser_id": is_txt ? "result-json-v2" : "automation",
+        "path": is_pdf ? id + '.pdf' : is_txt ? id + '.json' : id,
         "resource_type": "book",
         "version": 2
     };
@@ -77,24 +82,25 @@ async function cmd_question(q, default_v = '') {
         let title = await cmd_question(`文章${i}标题(默认为书籍标题)：`, bookname);
         let authors = await cmd_question(`文章${i}作者(多作者使用空格分割,默认为书籍作者）：`, bookauthor);
         let date = await cmd_question(`文章${i}日期(年月日使用空格分割）：`);
-        let page = await cmd_question(`文章${i}页码范围（使用空格分割，默认为第一页到最后一页）：`);
         let page_start = 0;
         let page_end = 0;
-        if (page) {
-            page_start = parseInt(page.split(' ')[0]);
-            page_end = parseInt(page.split(' ')[1]);
-        } else {
-            page_start = 1;
-            if (is_pdf) {
-                const pdf = require('pdf-parse');
-                const pdfBuffer = fs.readFileSync(path.join(process.cwd(), relativePath));
-                const {numpages} = await pdf(pdfBuffer)
-                page_end = numpages;
+        if (!is_txt) {
+            let page = await cmd_question(`文章${i}页码范围（使用空格分割，默认为第一页到最后一页）：`);
+            if (page) {
+                page_start = parseInt(page.split(' ')[0]);
+                page_end = parseInt(page.split(' ')[1]);
             } else {
-                page_end = n_files;
+                page_start = 1;
+                if (is_pdf) {
+                    const pdf = require('pdf-parse');
+                    const pdfBuffer = fs.readFileSync(path.join(process.cwd(), relativePath));
+                    const {numpages} = await pdf(pdfBuffer)
+                    page_end = numpages;
+                } else {
+                    page_end = n_files;
+                }
             }
         }
-
 
         console.log("-----------------------------------------------------");
         console.log(`当前文章标题：${ title }`);
@@ -113,8 +119,7 @@ async function cmd_question(q, default_v = '') {
             page = await cmd_question(`文章${i}页码范围（使用空格分割，默认为第一页到最后一页）：`);
         }
 
-
-        res.parser_option.articles.push({
+        const r = {
             "title": title,
             "authors": authors ? authors.split(' ') : [],
             page_start,
@@ -126,8 +131,27 @@ async function cmd_question(q, default_v = '') {
                     "day": parseInt(date.split(' ')[2]) || undefined
                 }
             ] : []
-        });
+        }
 
+        if (is_txt) {
+            const f = path.join(process.cwd(), relativePath);
+            const target_path = path.join(raw_dir, `${id}.json`);
+            fs.writeFileSync(target_path, JSON.stringify({
+                ...r,
+                is_range_date: false,
+                comments: [],
+                comment_pivots: [],
+                description: '',
+                parts: 
+                fs.readFileSync(f).toString().replace(/\r/g, '').split('\n').map(i => ({
+                    text: i,
+                    type: 'paragraph',
+                    }))
+            }, null, 2));
+            break;
+        } else {
+            res.parser_option.articles.push(r);
+        }
 
         more = await cmd_question(`是否继续录入文章(y/N)：`);
         if (more != 'y') break;
@@ -138,13 +162,12 @@ async function cmd_question(q, default_v = '') {
 //确认(Y/n)：`);
 //        if (check == 'n') return;
 
-    const raw_dir = path.join(js_path, `../../raw/archives${archive_id}`);
-    const config_dir = path.join(js_path, `../../config/archives${archive_id}`);
     fs.writeFileSync(path.join(config_dir, `${id}.ts`), 'export default ' + JSON.stringify(res, null, 2));
     if (is_pdf) {
         const f = path.join(process.cwd(), relativePath);
         const target_path = path.join(raw_dir, `${id}.pdf`);
         fs.cpSync(f, target_path);
+    } else if (is_txt) {
     } else {
         const dir = path.join(process.cwd(), relativePath);
         const files = fs.readdirSync(dir);
@@ -161,7 +184,7 @@ async function cmd_question(q, default_v = '') {
     execSync('git add . && git commit -m 1 && git push', {cwd: config_dir});
     const del = (await cmd_question(`是否删除原始文件(y/N):`)) == 'y';
     if (del) {
-        if (is_pdf) {
+        if (is_pdf || is_txt) {
             fs.unlinkSync(path.join(process.cwd(), relativePath))
         } else {
             const dir = path.join(process.cwd(), relativePath);
