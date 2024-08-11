@@ -102,7 +102,7 @@ async function cmd_question(q, default_v = '') {
         console.log(`当前文章日期：${ date }`)
         console.log(`当前文章起始页码：${ page_start }~${ page_end }`);
         console.log("-----------------------------------------------------");
-        const more = await cmd_question(`请核对当前信息是否正确(1:修改标题/2:修改作者/3:修改日期/4:修改页码/任意字符:无需修改)：`);
+        let more = await cmd_question(`请核对当前信息是否正确(1:修改标题/2:修改作者/3:修改日期/4:修改页码/任意字符:无需修改)：`);
         if (more == '1') {
             title = await cmd_question(`文章${i}标题(默认为书籍标题)：`, bookname);
         } else if (more == '2') {
@@ -119,6 +119,11 @@ async function cmd_question(q, default_v = '') {
             "authors": authors ? authors.split(' ') : [],
             page_start,
             page_end,
+            "ocr": {
+               "use_onnx": true,
+               "det_model_dir": "./paddle/onnx/ch_PP-OCRv4_det_infer.onnx",
+               "rec_model_dir": "./paddle/onnx/ch_PP-OCRv4_rec_infer.onnx"
+             },
             "dates": date ? [
                 {
                     "year": parseInt(date.split(' ')[0]) || undefined,
