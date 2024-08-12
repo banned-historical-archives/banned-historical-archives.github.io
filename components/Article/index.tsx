@@ -300,13 +300,16 @@ function PureArticle({
             setPlaying(!playing);
             if (!playing) {
               const tts = new SpeechSynthesisUtterance(
-                contents.map((part) => part.text).join('\n'),
+                contents
+                  .filter((part) => part.type !== ContentType.image)
+                  .map((part) => part.text)
+                  .join('\n'),
               );
               tts.voice = speechSynthesis
                 .getVoices()
                 .find((i: any) => i.lang == 'zh-CN')!;
               tts.pitch = 0.5;
-              tts.rate = 1;
+              tts.rate = 1.25;
               speechSynthesis.speak(tts);
             } else {
               speechSynthesis.cancel();
