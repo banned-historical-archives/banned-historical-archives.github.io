@@ -253,6 +253,11 @@ function PureArticle({
       </Stack>
     </>
   ) : null;
+
+  for (let i = 0; i < comments.length; i++) {
+    comments[i].index = i;
+  }
+
   const commentsComponent = comments.filter((i) => i.index !== -1).length ? (
     <>
       <Divider sx={{ mt: 2, mb: 2 }} />
@@ -274,7 +279,7 @@ function PureArticle({
                 {bracket_right}
               </a>
             </span>
-            <Stack spacing={1}>
+            <Stack spacing={1}> 
               {i.text
                 .split('\n')
                 .filter((j) => j)
