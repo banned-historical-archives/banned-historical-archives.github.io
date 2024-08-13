@@ -271,7 +271,7 @@ function PureArticle({
                 style={{ userSelect: 'none' }}
               >
                 {bracket_left}
-                {i.index}
+                {i_idx}
                 {bracket_right}
               </a>
             </span>
