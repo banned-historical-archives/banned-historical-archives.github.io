@@ -53,7 +53,7 @@ async function cmd_question(q, default_v = '') {
             id,
             "name": bookname,
             "internal": false,
-            "type": is_pdf ? "pdf" : is_txt ? "db" : "imgs",
+            "type": is_pdf ? "pdf" : is_txt ? "db" : "img",
             "official": false,
             "author": bookauthor,
             files: is_pdf ? 
