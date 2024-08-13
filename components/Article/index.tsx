@@ -255,7 +255,7 @@ function PureArticle({
   ) : null;
 
   for (let i = 0; i < comments.length; i++) {
-    comments[i].index = i;
+    comments[i].index = i + 1;
   }
 
   const commentsComponent = comments.filter((i) => i.index !== -1).length ? (
