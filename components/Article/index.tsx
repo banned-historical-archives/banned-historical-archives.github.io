@@ -262,11 +262,10 @@ function PureArticle({
       {comments
         .filter((i) => i.index !== -1)
         .map((i) => (
-          <Stack direction="row">
+          <Stack direction="row" key={i.id}>
             <span>
               <a
                 id={`comment${i.index}_comment`}
-                key={i.id}
                 href={`#comment${i.index}_content`}
                 style={{ userSelect: 'none' }}
               >
