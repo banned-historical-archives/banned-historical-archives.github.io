@@ -253,12 +253,8 @@ function PureArticle({
       </Stack>
     </>
   ) : null;
-
-  for (let i = 0; i < comments.length; i++) {
-    comments[i].index = i + 1;
-  }
-
-  const commentsComponent = comments.filter((i) => i.index !== -1).length ? (
+  
+  const commentsComponent = comments.filter((i, i_idx) => i.index !== -1).length ? (
     <>
       <Divider sx={{ mt: 2, mb: 2 }} />
       <Typography variant="h6" sx={{ mb: 2 }}>
@@ -270,8 +266,8 @@ function PureArticle({
           <Stack direction="row" key={i.id}>
             <span>
               <a
-                id={`comment${i.index}_comment`}
-                href={`#comment${i.index}_content`}
+                id={`comment${i_idx}_comment`}
+                href={`#comment${i_idx}_content`}
                 style={{ userSelect: 'none' }}
               >
                 {bracket_left}
