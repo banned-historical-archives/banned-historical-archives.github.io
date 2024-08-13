@@ -254,7 +254,7 @@ function PureArticle({
     </>
   ) : null;
   
-  const commentsComponent = comments.filter((i, i_idx) => i.index !== -1).length ? (
+  const commentsComponent = comments.filter((i) => i.index !== -1).length ? (
     <>
       <Divider sx={{ mt: 2, mb: 2 }} />
       <Typography variant="h6" sx={{ mb: 2 }}>
@@ -262,7 +262,7 @@ function PureArticle({
       </Typography>
       {comments
         .filter((i) => i.index !== -1)
-        .map((i) => (
+        .map((i, i_idx) => (
           <Stack direction="row" key={i.id}>
             <span>
               <a
