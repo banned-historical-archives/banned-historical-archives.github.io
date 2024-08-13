@@ -57,8 +57,9 @@ function PureArticle({
         s.push(`〔${comment_idx}〕`);
         content.push(
           <a
+            id={`comment${comment_idx}_content`}
             key={Math.random()}
-            href={`#comment${comment_idx}`}
+            href={`#comment${comment_idx}_comment`}
             style={{ userSelect: 'none' }}
           >
             {bracket_left}
@@ -261,11 +262,18 @@ function PureArticle({
       {comments
         .filter((i) => i.index !== -1)
         .map((i) => (
-          <Stack direction="row" id={`comment${i.index}`} key={i.id}>
-            <span style={{ userSelect: 'none' }}>
-              {bracket_left}
-              {i.index}
-              {bracket_right}
+          <Stack direction="row">
+            <span>
+              <a
+                id={`comment${i.index}_comment`}
+                key={i.id}
+                href={`#comment${i.index}_content`}
+                style={{ userSelect: 'none' }}
+              >
+                {bracket_left}
+                {i.index}
+                {bracket_right}
+              </a>
             </span>
             <Stack spacing={1}>
               {i.text
