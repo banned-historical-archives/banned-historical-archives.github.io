@@ -68,7 +68,7 @@ async function cmd_question(q, default_v = '') {
           ],
           ...is_txt ? {} :{
           "ocr": {
-            "extract_text_from_pdf": extract_text_from_pdf ? true : false,
+            "extract_text_from_pdf": extract_text_from_pdf === 'y' ? true : false,
 
             "use_onnx": true,
             "det_model_dir": "./paddle/onnx/ch_PP-OCRv4_det_infer.onnx",
