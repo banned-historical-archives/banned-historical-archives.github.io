@@ -93,7 +93,7 @@
 
 [\[Github\]](https://github.com/banned-historical-archives/banned-historical-archives.github.io)
 
-如果以备份为目的 fork 本仓库，最好同时 fork 本仓库对应的资源仓库 banned-historical-archives0, banned-historical-archives1, banned-historical-archives2 ... banned-historical-archives20
+如果以备份为目的 fork 本仓库，最好同时 fork 本仓库对应的资源仓库 banned-historical-archives0, banned-historical-archives1, banned-historical-archives2 ... banned-historical-archives30
 
 ## 其他
 
