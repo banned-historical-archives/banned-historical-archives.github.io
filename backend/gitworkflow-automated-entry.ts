@@ -115,7 +115,12 @@ export async function start() {
         version: 2,
         parser_option: {
           articles: config.articles,
-          ocr: config.ocr || {},
+          ocr: {
+            use_onnx: true,
+            det_model_dir: './paddle/onnx/ch_PP-OCRv4_det_infer.onnx',
+            rec_model_dir: './paddle/onnx/ch_PP-OCRv4_rec_infer.onnx',
+            ...config.ocr,
+          },
           ocr_exceptions: config.ocr_exceptions || {},
         },
         parser_id: 'automation',
