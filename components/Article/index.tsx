@@ -266,12 +266,12 @@ function PureArticle({
           <Stack direction="row" key={i.id}>
             <span>
               <a
-                id={`comment${i_idx}_comment`}
-                href={`#comment${i_idx}_content`}
+                id={`comment${i_idx + 1}_comment`}
+                href={`#comment${i_idx + 1}_content`}
                 style={{ userSelect: 'none' }}
               >
                 {bracket_left}
-                {i_idx}
+                {i_idx + 1}
                 {bracket_right}
               </a>
             </span>
