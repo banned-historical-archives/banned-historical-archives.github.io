@@ -47,7 +47,7 @@ async function cmd_question(q, default_v = '') {
     const config_dir = path.join(js_path, `../../config/archives${archive_id}`);
     const bookname = await cmd_question('书籍名称：')
     const bookauthor = await cmd_question('书籍作者：')
-    const extract_text_from_pdf = await cmd_question('是否需要 OCR（y/n）：')
+    const extract_text_from_pdf = await cmd_question('是否跳过 OCR（y/n）：')
     const id = v4();
     const res = {
         entity: {
