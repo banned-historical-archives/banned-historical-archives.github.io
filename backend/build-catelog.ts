@@ -54,7 +54,7 @@ function catelog_temp_to_catelog(c: BookCatelogTemp): BookCatelog {
 (async () => {
   let n_book = 0;
   let n_tag = 0;
-  for (let i = 0; i <= 20; ++i) {
+  for (let i = 0; i <= 30; ++i) {
     const p = join(__dirname, '../parsed/archives' + i);
     console.log(p);
     if (!(await fs.pathExists(p))) continue;
