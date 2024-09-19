@@ -184,7 +184,7 @@ const columns: GridColDef<BookCatelogItem>[] = [
       params: GridValueGetterParams<BookCatelogItem, BookCatelogItem>,
     ) => params.row.tags!.map((i) => i.name).join(','),
     renderCell: (params: GridRenderCellParams<string, BookCatelogItem>) => (
-      <div style={{ overflow: 'scroll', maxHeight: '100px' }}>
+      <div style={{ overflow: 'scroll', height: '100px' }}>
         <Tags tags={params.row.tags!} />
       </div>
     ),
