@@ -149,6 +149,10 @@ https://huggingface.co/datasets/banned-historical-archives/banned-historical-arc
 * https://jojokanbao.cn
 * https://github.com/ProletRevDicta/Prolet Prolet
 * https://maoistlegacy.de maoistlegacy
+* https://huggingface.co/datasets/banned-historical-archives/renminribao 人民日报数据库
+* https://huggingface.co/datasets/banned-historical-archives/wenhuibao_disk 文汇报数据库
+* http://museums.cnd.org/CR/ 文革博物馆
+* http://geming.20m.com/wenge/wenge.htm 文化大革命文献馆
 * https://github.com/banned-historical-archives/CCRD CCRD 中国当代政治运动史数据库
   * 中国文化大革命文库（第三版），包含广西“文革”档案资料（机密）
   * 中国反右运动数据库
@@ -170,7 +174,7 @@ https://huggingface.co/datasets/banned-historical-archives/banned-historical-arc
 | 光明日报   | 暂缺 |
 | 文汇报   | 已收录涉及关键人物的文章 |
 | 解放日报   | 暂缺 |
-| 解放军报   | 待解析，不完整 |
+| 解放军报   | 待解析 |
 | 各地方报   | 待解析，不完整 |
 | 学习与批判 | 部分录入 |
 | 参考消息   | 待解析   |
