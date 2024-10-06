@@ -24,7 +24,7 @@ export function useAuthorFilterDialog(authors_all: string[]) {
     setAuthorDialog(false);
   }, [selected]);
   const AuthorDialog = (
-    <Dialog onClose={onClose} open={show}>
+    <Dialog onClose={onClose} open={show} fullWidth maxWidth="lg">
       <DialogTitle>选择作者</DialogTitle>
       <DialogContent>
         {authors_all.map((i) => (
