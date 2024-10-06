@@ -34,7 +34,7 @@ export function useTagFilterDialog(
     setTagDialog(false);
   }, [default_tags, tags_all, selected]);
   const TagDialog = (
-    <Dialog onClose={onClose} open={show}>
+    <Dialog onClose={onClose} open={show} fullWidth maxWidth="lg">
       <DialogTitle>选择标签</DialogTitle>
       <DialogContent>
         {Array.from(tags_all_order_by_type.keys()).map((type) => (
