@@ -29,7 +29,7 @@ export function useSourceFilterDialog(sources_all: string[]) {
     setSourceDialog(false);
   }, [selected]);
   const SourceDialog = (
-    <Dialog onClose={onClose} open={show}>
+    <Dialog onClose={onClose} open={show} fullWidth maxWidth="lg">
       <DialogTitle>选择来源</DialogTitle>
       <DialogContent>
         {sources_all.map((i) => (
