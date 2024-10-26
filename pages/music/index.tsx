@@ -138,6 +138,7 @@ function Song({
     if (id == focusedId)
       getDetails(id, archiveId).then((details) => {
         setDetails(details);
+        setLyricRight(details.lyrics.length - 1);
       });
   }, [id, focusedId]);
   useEffect(() => {
@@ -145,6 +146,7 @@ function Song({
       if (i == id) {
         getDetails(id, archiveId).then((details) => {
           setDetails(details);
+          setLyricRight(details.lyrics.length - 1);
         });
       }
     }
@@ -588,9 +590,6 @@ export default function Music({ music }: { music: MusicIndexes }) {
       </Head>
       <Typography variant="h4" sx={{ mb: 1 }}>
         音乐
-      </Typography>
-      <Typography variant="body1" sx={{ mb: 1 }}>
-        多媒体资料包括音乐及歌词、电影、照片、录音等。目前主要收录社会主义中国创作的红色音乐。
       </Typography>
       <Player ee={ee.current} indexes={music} setFocusedId={setFocusedId} />
       <Stack sx={{ flex: 1, width: '100%' }}>
