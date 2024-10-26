@@ -96,21 +96,22 @@ export type Date = {
   day?: number;
 };
 
+export type MusicLyric = {
+  lyricist: string;
+  version: string;
+  content: string;
+  audios: {
+    url: string;
+    source: string;
+    artist: string;
+  }[];
+}
 export type Music = {
   id: string;
   name: string;
   composer: string;
   description: string;
-  lyrics: {
-    lyricist: string;
-    version: string;
-    content: string;
-    audios: {
-      url: string;
-      source: string;
-      artist: string;
-    }[];
-  }[];
+  lyrics: MusicLyric[];
 };
 export type Pivot = {
   part_idx: number; // 从 0 开始
@@ -494,5 +495,6 @@ export type BookCatelogItem = {
 export type ArticleIndexes = { [aid: string]: number[] }; // book_number_id
 export type TagIndexes = [string, string][]; // type, name
 export type BookIndexes = [string, string, number][]; // id, name, archive_id
-export type MusicIndexes = [string, string, number][]; // id, name, archive_id
+export type MusicIndex = [string, string, number]; // id, name, archive_id
+export type MusicIndexes = MusicIndex[]; // id, name, archive_id
 export type GalleryIndexes = (VideoMetaData | PictureMetaData)[];

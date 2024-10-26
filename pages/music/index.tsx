@@ -1,3 +1,4 @@
+import { EventEmitter } from 'events';
 import React, {
   ReactElement,
   useEffect,
@@ -6,6 +7,14 @@ import React, {
   useRef,
   useState,
 } from 'react';
+import {
+  DataGridPro,
+  GridColDef,
+  GridRenderCellParams,
+  GridValueGetterParams,
+  useGridApiRef,
+  zhCN,
+} from '@mui/x-data-grid-pro';
 import Head from 'next/head';
 import { diff_match_patch, Diff } from 'diff-match-patch';
 import Popover from '@mui/material/Popover';
@@ -37,7 +46,12 @@ import Menu from '@mui/material/Menu';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import Divider from '@mui/material/Divider';
-import { Music as MusicEntity, MusicIndexes } from '../../types';
+import {
+  Music as MusicEntity,
+  MusicIndexes,
+  MusicIndex,
+  MusicLyric,
+} from '../../types';
 import Stack from '@mui/material/Stack';
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
@@ -63,34 +77,43 @@ export const getStaticProps: GetStaticProps = async (
   };
 };
 
+const getDetails = async (
+  id: string,
+  archives_id: number,
+): Promise<MusicEntity> => {
+  const url = `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives${archives_id}/parsed/${id.substr(
+    0,
+    3,
+  )}/${id}/${id}.metadata`;
+  const res = (await (await fetch(url)).json()) as MusicEntity;
+  return res;
+};
+
 function Song({
-  idx,
-  setPlaying,
-  setPlayingMusicIndex,
-  setPlayingLyricIndex,
-  setPlayingFileIndex,
-  musicIndex,
-  details,
-  musicIndexes,
+  ee,
+  id,
+  archiveId,
+  name,
+  focusedId,
 }: {
-  musicIndex: number;
-  idx: number;
-  details?: MusicEntity;
-  musicIndexes: MusicIndexes;
-  setPlaying: Function;
-  setPlayingMusicIndex: Function;
-  setPlayingLyricIndex: Function;
-  setPlayingFileIndex: Function;
+  focusedId: string;
+  ee: EventEmitter;
+  name: string;
+  archiveId: number;
+  id: string;
 }) {
   const [lyricLeft, setLyricLeft] = useState(0);
   const [lyricRight, setLyricRight] = useState(0);
+  const [details, setDetails] = useState<MusicEntity>();
 
   const leftContents = useMemo(
-    () => (details?.lyrics[lyricLeft] || details?.lyrics[0])?.content.split('\n'),
+    () =>
+      (details?.lyrics[lyricLeft] || details?.lyrics[0])?.content.split('\n'),
     [lyricLeft, details],
   );
   const rightContents = useMemo(
-    () => (details?.lyrics[lyricRight] || details?.lyrics[0])?.content.split('\n'),
+    () =>
+      (details?.lyrics[lyricRight] || details?.lyrics[0])?.content.split('\n'),
     [lyricRight, details],
   );
   const diff: Diff[][] = useMemo(() => {
@@ -110,21 +133,39 @@ function Song({
       ++i;
     }
     return res;
-  }, [musicIndex, lyricLeft, lyricRight, details]);
-  const loading = !details || details?.id !== musicIndexes[idx][0];
-  const accordionDetails = loading ? (
-    <></>
-  ) : (
+  }, [lyricLeft, lyricRight, details]);
+  useEffect(() => {
+    if (id == focusedId)
+      getDetails(id, archiveId).then((details) => {
+        setDetails(details);
+      });
+  }, [id, focusedId]);
+  useEffect(() => {
+    function listener(i: string, n: string) {
+      if (i == id) {
+        getDetails(id, archiveId).then((details) => {
+          setDetails(details);
+        });
+      }
+    }
+    ee.on('musicChanged', listener);
+    return () => {
+      ee.off('musicChanged', listener);
+    };
+  }, [ee, archiveId, id]);
+  const [expanded, setExpanded] = useState(false);
+
+  const accordionDetails = (
     <AccordionDetails>
       <Divider />
       <Typography variant="subtitle1" sx={{ mt: 2, mb: 2 }}>
         演唱/演奏版本：
       </Typography>
       <Stack>
-        {details.lyrics.map((lyric, idx) => (
+        {details?.lyrics.map((lyric, idx) => (
           <Stack key={idx} sx={{ display: 'inline' }}>
             {lyric.audios.map((audio, aid) => {
-              const name = `${details?.name}-${lyric.version}-${
+              const displayName = `${details?.name}-${lyric.version}-${
                 audio.artist || '未知'
               }`;
               return (
@@ -133,12 +174,13 @@ function Song({
                   sx={{ justifyContent: 'start' }}
                   startIcon={<PlayCircleIcon />}
                   onClick={() => {
-                    setPlayingLyricIndex(idx);
-                    setPlayingFileIndex(0);
-                    setPlaying(true);
+                    ee.emit('musicChanged', id, name, archiveId);
+                    ee.emit('lyricChanged', lyric);
+                    ee.emit('artistChanged', audio.artist);
+                    ee.emit('musicStart', audio.url);
                   }}
                 >
-                  {name}
+                  {displayName}
                 </Button>
               );
             })}
@@ -146,7 +188,7 @@ function Song({
         ))}
       </Stack>
       <Divider sx={{ mt: 2 }} />
-      {details.lyrics.length > 1 ? (
+      {details?.lyrics.length && details?.lyrics.length > 1 ? (
         <Typography variant="subtitle1" sx={{ mt: 2, mb: 2 }}>
           歌词对比：
         </Typography>
@@ -174,7 +216,7 @@ function Song({
             ))}
           </Stack>
         </Stack>
-        {details.lyrics.length > 1 ? (
+        {details?.lyrics.length && details?.lyrics.length > 1 ? (
           <>
             <Stack sx={{ flex: 1 }}>
               <Select
@@ -186,7 +228,7 @@ function Song({
                   setLyricRight(parseInt(e.target.value as string));
                 }}
               >
-                {details.lyrics.map((lyric, idx) => (
+                {details?.lyrics.map((lyric, idx) => (
                   <MenuItem key={idx} value={idx}>
                     {lyric.version}
                   </MenuItem>
@@ -208,23 +250,26 @@ function Song({
       </Stack>
     </AccordionDetails>
   );
+
   return (
     <Accordion
-      expanded={musicIndexes[idx][0] == details?.id}
+      expanded={focusedId == id || expanded}
       disableGutters
+      style={{
+        flex: 1,
+        margin: '5px 0 5px 0',
+      }}
       onChange={(e, expanded) => {
+        setExpanded(expanded);
         if (expanded) {
-          setPlayingMusicIndex(idx);
-          setPlayingLyricIndex(0);
-          setPlayingFileIndex(0);
-          setTimeout(() => {
-            location.href = '#' + idx;
-          }, 100);
+          getDetails(id, archiveId).then((details) => {
+            setDetails(details);
+          });
         }
       }}
     >
-      <AccordionSummary expandIcon={<ExpandMoreIcon />} id={idx.toString()}>
-        <Typography variant="h6">{musicIndexes[idx][1]}</Typography>
+      <AccordionSummary expandIcon={<ExpandMoreIcon />} id={id}>
+        <Typography variant="subtitle1">{name}</Typography>
       </AccordionSummary>
       {accordionDetails}
     </Accordion>
@@ -238,22 +283,130 @@ enum RepeatType {
 }
 
 function Player({
-  playing,
-  playingName,
-  playNext,
-  repeatType,
-  setPlaying,
-  setRepeatType,
+  ee,
+  indexes,
+  setFocusedId,
 }: {
-  playingName: string;
-  repeatType: RepeatType;
-  playNext: Function;
-  setRepeatType: Function;
-  playing: boolean;
-  setPlaying: Function;
+  setFocusedId: (id: string) => void;
+  ee: EventEmitter;
+  indexes: MusicIndexes;
 }) {
+  const [playing, setPlaying] = useState(false);
+
+  const [repeatType, setRepeatType] = useState(RepeatType.shuffle);
+
+  const [songName, setSongName] = useState('');
+  const [versionName, setVersionName] = useState('');
+  const [artistName, setArtistName] = useState('');
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  useEffect(() => {
+    function lyricChanged(lyric: MusicLyric) {
+      setVersionName(lyric.version);
+    }
+    function artistChanged(artist: string) {
+      setArtistName(artist);
+    }
+    function musicChanged(
+      id: string,
+      name: string,
+      archiveId: number,
+      lyricIndex?: number, // -1 -> random
+      audioIndex?: number, // -1 -> random
+      autoplay?: boolean,
+    ) {
+      ee.emit('musicPause');
+      setSongName(name);
+      if (lyricIndex != undefined)
+        getDetails(id, archiveId).then((first) => {
+          if (lyricIndex == -1) {
+            lyricIndex = Math.floor(Math.random() * first.lyrics.length);
+          }
+          ee.emit('lyricChanged', first.lyrics[lyricIndex!]);
+          if (audioIndex != undefined) {
+            if (audioIndex == -1) {
+              audioIndex = Math.floor(
+                Math.random() * first.lyrics[lyricIndex!].audios.length,
+              );
+            }
+            ee.emit(
+              'artistChanged',
+              first.lyrics[lyricIndex!].audios[audioIndex].artist,
+            );
+            if (autoplay) {
+              ee.emit(
+                'musicStart',
+                first.lyrics[lyricIndex!].audios[audioIndex].url,
+              );
+            } else {
+              audioRef.current?.setAttribute(
+                'src',
+
+                first.lyrics[lyricIndex!].audios[audioIndex].url,
+              );
+            }
+          }
+        });
+    }
+    function musicPause() {
+      setPlaying(false);
+      audioRef.current?.pause();
+    }
+    function musicStart(url: string) {
+      setPlaying(true);
+      audioRef.current?.setAttribute('src', url);
+      audioRef.current?.play().catch(() => {});
+    }
+    ee.on('musicPause', musicPause);
+    ee.on('musicStart', musicStart);
+    ee.on('artistChanged', artistChanged);
+    ee.on('musicChanged', musicChanged);
+    ee.on('lyricChanged', lyricChanged);
+    return () => {
+      ee.off('musicPause', musicPause);
+      ee.off('musicStart', musicStart);
+      ee.off('artistChanged', artistChanged);
+      ee.off('musicChanged', musicChanged);
+      ee.off('lyricChanged', lyricChanged);
+    };
+  }, []);
+
+  const playNext = useCallback(async () => {
+    if (repeatType === RepeatType.one) {
+      audioRef.current?.play().catch(() => {});
+    } else if (repeatType === RepeatType.all) {
+      let idx = indexes.findIndex((i) => i[1] == songName);
+      if (indexes.length - 1 == idx) {
+        idx == 0;
+      } else {
+        idx++;
+      }
+      setFocusedId(indexes[idx][0]);
+      ee.emit(
+        'musicChanged',
+        indexes[idx][0],
+        indexes[idx][1],
+        indexes[idx][2],
+        0,
+        0,
+        true,
+      );
+    } else if (repeatType === RepeatType.shuffle) {
+      const m = indexes[Math.floor(indexes.length * Math.random())];
+      setFocusedId(m[0]);
+      ee.emit('musicChanged', m[0], m[1], m[2], -1, -1, true);
+    }
+  }, [indexes, songName, repeatType]);
+
   return (
     <>
+      <audio
+        ref={audioRef}
+        onEnded={() => {
+          playNext();
+        }}
+        style={{ position: 'fixed', left: '100%' }}
+      />
       <Box
         sx={{
           bottom: 30,
@@ -290,13 +443,19 @@ function Player({
               },
             }}
           >
-            {playingName}
+            {songName}-{versionName}-{artistName}
           </Typography>
         </Paper>
         <SpeedDial
           ariaLabel="player"
           sx={{ position: 'absolute', bottom: 16, right: 16 }}
-          onClick={() => setPlaying(!playing)}
+          onClick={() => {
+            if (playing) ee.emit('musicPause');
+            else {
+              setPlaying(true);
+              audioRef.current?.play().catch(() => {});
+            }
+          }}
           icon={playing ? <PauseCircleIcon /> : <PlayCircleIcon />}
         >
           <SpeedDialAction
@@ -355,113 +514,72 @@ function Player({
     </>
   );
 }
-type PlayList = { [key: string]: string };
 export default function Music({ music }: { music: MusicIndexes }) {
-  const [playing, setPlaying] = useState(false);
-
-  const [repeatType, setRepeatType] = useState(RepeatType.shuffle);
-
-  const [playingDetails, setPlayingDetails] = useState<MusicEntity>();
-  const [playingMusicIndex, setPlayingMusicIndex] = useState(0);
-  const [playingLyricIndex, setPlayingLyricIndex] = useState(0);
-  const [playingFileIndex, setPlayingFileIndex] = useState<number>(0);
-  const audioRef = useRef<HTMLAudioElement | null>(null);
-
-  /*
-    `${music[0].name}-${music[0].lyrics[0].version}-${
-      music[0].lyrics[0].audios[0].artist || '未知'
-    }`,
-  );
-  */
-
-  const getDetails = useCallback(
-    async (id: string, archives_id: number): Promise<MusicEntity> => {
-      const url = `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives${archives_id}/parsed/${id.substr(
-        0,
-        3,
-      )}/${id}/${id}.metadata`;
-      const res = (await (await fetch(url)).json()) as MusicEntity;
-      return res;
-    },
-    [],
-  );
-
-  useEffect(() => {
-    getDetails(music[playingMusicIndex][0], music[playingMusicIndex][2]).then(
-      (first) => {
-        setPlayingDetails(first);
-        setPlayingLyricIndex(0);
-        setPlayingFileIndex(0);
+  const ee = useRef(new EventEmitter());
+  ee.current.setMaxListeners(9876543);
+  const indexesRef = useRef(music);
+  const [focusedId, setFocusedId] = useState('');
+  const columns: GridColDef<{ index: MusicIndex }>[] = [
+    {
+      field: 'name',
+      headerName: '名称',
+      minWidth: 350,
+      flex: 1,
+      renderCell: (
+        params: GridRenderCellParams<string, { index: MusicIndex }>,
+      ) => {
+        return (
+          <Song
+            key={params.row.index[0]}
+            id={params.row.index[0]}
+            focusedId={focusedId}
+            name={params.row.index[1]}
+            archiveId={params.row.index[2]}
+            ee={ee.current}
+          />
+        );
       },
-    );
-  }, [playingMusicIndex]);
+    },
+    {
+      field: 'tags',
+      headerName: '标签',
+      minWidth: 100,
+      renderCell: (
+        params: GridRenderCellParams<string, { index: MusicIndex }>,
+      ) => {
+        return null;
+      },
+    },
+  ];
 
+  const apiRef = useGridApiRef();
   useEffect(() => {
-    if (!audioRef.current) return;
-    if (playing) {
-      audioRef.current.play().catch(() => {});
-    } else {
-      audioRef.current.pause();
-    }
-  }, [playing]);
+    function onChange(id: string) {
+      const idx = indexesRef.current.findIndex((i) => i[0] == id);
 
-  useEffect(() => {
-    if (!audioRef.current) return;
-    if (!playing) return;
-    const version = playingDetails?.lyrics[playingLyricIndex];
-    if (!version) return;
-    if (!version.audios[playingFileIndex]) return;
-    audioRef.current.src = version.audios[playingFileIndex].url;
-    audioRef.current.play().catch(() => {});
-  }, [playingDetails, playing, playingFileIndex, playingLyricIndex]);
-
-  const playNext = useCallback(async () => {
-    if (repeatType === RepeatType.one) {
-      audioRef.current!.play().catch(() => {});
-    } else if (repeatType === RepeatType.all) {
-      const version = playingDetails!.lyrics[playingLyricIndex];
-      if (version.audios[playingFileIndex + 1]) {
-        setPlayingFileIndex(playingFileIndex + 1);
-      } else if (playingDetails!.lyrics[playingLyricIndex + 1]) {
-        setPlayingLyricIndex(playingLyricIndex + 1);
-        setPlayingFileIndex(0);
-      } else if (music[playingMusicIndex + 1]) {
-        setPlayingMusicIndex(playingMusicIndex + 1);
-        setPlayingLyricIndex(0);
-        setPlayingFileIndex(0);
-        setTimeout(() => {
-          location.href = '#' + (playingMusicIndex + 1);
-        }, 100);
-      } else {
-        setPlayingMusicIndex(0);
-        setPlayingLyricIndex(0);
-        setPlayingFileIndex(0);
-        setTimeout(() => {
-          location.href = '#' + 0;
-        }, 100);
-      }
-    } else if (repeatType === RepeatType.shuffle) {
-      const m_idx = Math.floor(Math.random() * music.length);
-      const m = music[m_idx];
-      setPlayingMusicIndex(m_idx);
-      const details = await getDetails(m[0], m[2]);
-      setPlayingDetails(details);
-      const l = Math.floor(details.lyrics.length * Math.random());
-      setPlayingLyricIndex(l);
-      setPlayingFileIndex(
-        Math.floor(details.lyrics[l].audios.length * Math.random()),
-      );
+      setFocusedId('');
       setTimeout(() => {
-        location.href = '#' + m_idx;
-      }, 100);
+        apiRef.current.scrollToIndexes({
+          colIndex: 0,
+          rowIndex: idx,
+        });
+
+        setFocusedId(id);
+      }, 500); // 等待收起动画结束
     }
-  }, [
-    playingDetails,
-    playingMusicIndex,
-    playingFileIndex,
-    playingLyricIndex,
-    repeatType,
-  ]);
+    ee.current.on('musicChanged', onChange);
+    ee.current.emit(
+      'musicChanged',
+      music[0][0],
+      music[0][1],
+      music[0][2],
+      0,
+      0,
+    );
+    return () => {
+      ee.current.off('musicChanged', onChange);
+    };
+  }, []);
 
   return (
     <Stack p={2} sx={{ height: '100%', overflow: 'scroll' }}>
@@ -474,46 +592,20 @@ export default function Music({ music }: { music: MusicIndexes }) {
       <Typography variant="body1" sx={{ mb: 1 }}>
         多媒体资料包括音乐及歌词、电影、照片、录音等。目前主要收录社会主义中国创作的红色音乐。
       </Typography>
-      <audio
-        ref={audioRef}
-        onEnded={() => {
-          playNext();
-        }}
-        src={
-          playingDetails?.lyrics[playingLyricIndex].audios[playingFileIndex].url
-        }
-        style={{ position: 'fixed', left: '100%' }}
-      />
-      <Player
-        playing={playing}
-        playNext={playNext}
-        repeatType={repeatType}
-        playingName={`${playingDetails?.name}-${
-          playingDetails?.lyrics[playingLyricIndex]?.version
-        }-${
-          playingDetails?.lyrics[playingLyricIndex]?.audios[playingFileIndex]
-            ?.artist || '未知'
-        }`}
-        setRepeatType={setRepeatType}
-        setPlaying={setPlaying}
-      />
-      {music.map((i, idx) => (
-        <Song
-          key={idx}
-          musicIndex={playingMusicIndex}
-          idx={idx}
-          details={
-            music[playingMusicIndex][0] === playingDetails?.id
-              ? playingDetails
-              : undefined
-          }
-          setPlaying={setPlaying}
-          setPlayingLyricIndex={setPlayingLyricIndex}
-          setPlayingMusicIndex={setPlayingMusicIndex}
-          setPlayingFileIndex={setPlayingFileIndex}
-          musicIndexes={music}
+      <Player ee={ee.current} indexes={music} setFocusedId={setFocusedId} />
+      <Stack sx={{ flex: 1, width: '100%' }}>
+        <DataGridPro
+          apiRef={apiRef}
+          getRowId={(row) => row.index[1]}
+          localeText={zhCN.components.MuiDataGrid.defaultProps.localeText}
+          getRowHeight={() => 'auto'}
+          rows={music.map((i) => ({ index: i }))}
+          columns={columns}
+          pageSize={100}
+          rowsPerPageOptions={[100]}
+          disableSelectionOnClick
         />
-      ))}
+      </Stack>
     </Stack>
   );
 }
