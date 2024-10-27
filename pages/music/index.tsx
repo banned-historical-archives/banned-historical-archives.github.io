@@ -104,9 +104,11 @@ function Song({
   const [lyricLeft, setLyricLeft] = useState(0);
   const [lyricRight, setLyricRight] = useState(0);
   const [details, setDetails] = useState<MusicEntity>();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     getDetails(id, archiveId).then((res) => {
+      setLoading(false);
       setDetails(res);
     });
   }, []);
@@ -140,6 +142,14 @@ function Song({
     return res;
   }, [lyricLeft, lyricRight, details]);
 
+  if (loading) 
+
+return <Stack padding="20px" spacing="10px">
+<Skeleton variant="rectangular" width={"100%"} height={20} />
+<Skeleton variant="rectangular" width={"100%"} height={20} />
+<Skeleton variant="rectangular" width={"100%"} height={20} />
+<Skeleton variant="rectangular" width={"100%"} height={20} />
+</Stack>
   return (
     <Stack padding="20px">
       <Typography variant="subtitle1" sx={{ mb: 2 }}>
@@ -478,7 +488,6 @@ export default function Music({ music }: { music: MusicIndexes }) {
   const indexesRef = useRef<Column[]>(
     music.map((i) => ({ id: i[0], name: i[1], archiveId: i[2] })),
   );
-  const [height, setHeight] = useState<{ [key: string]: number | 'auto' }>({});
   const columns: GridColDef<Column>[] = useMemo(
     () => [
       {
@@ -501,7 +510,7 @@ export default function Music({ music }: { music: MusicIndexes }) {
         },
       },
     ],
-    [height],
+    [],
   );
 
   const apiRef = useGridApiRef();
@@ -554,8 +563,8 @@ export default function Music({ music }: { music: MusicIndexes }) {
             />
           )}
           getRowId={(row) => row.id}
+          getDetailPanelHeight={() => "auto"}
           localeText={zhCN.components.MuiDataGrid.defaultProps.localeText}
-          getRowHeight={(row) => height[row.model.id] || 63}
           rows={indexesRef.current}
           columns={columns}
           pageSize={100}
