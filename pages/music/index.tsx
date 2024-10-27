@@ -62,8 +62,9 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { DiffViewer } from '../../components/DiffViewer';
 import { readFile } from 'fs-extra';
 import { join } from 'path';
-import { Skeleton } from '@mui/material';
+import { Chip, Skeleton } from '@mui/material';
 import { GridApiPro } from '@mui/x-data-grid-pro/models/gridApiPro';
+import Tags from '../../components/Tags';
 
 export const getStaticProps: GetStaticProps = async (
   context: GetStaticPropsContext,
@@ -481,12 +482,15 @@ type Column = {
   id: string;
   archiveId: number;
   name: string;
+  nLyrics: number;
+  tags: string[];
+  composer: string;
 };
 export default function Music({ music }: { music: MusicIndexes }) {
   const ee = useRef(new EventEmitter());
   ee.current.setMaxListeners(9876543);
   const indexesRef = useRef<Column[]>(
-    music.map((i) => ({ id: i[0], name: i[1], archiveId: i[2] })),
+    music.map((i) => ({ id: i[0], name: i[1], archiveId: i[2], tags: i[4], nLyrics: i[3], composer: i[5] })),
   );
   const columns: GridColDef<Column>[] = useMemo(
     () => [
@@ -502,11 +506,37 @@ export default function Music({ music }: { music: MusicIndexes }) {
         },
       },
       {
+        field: 'composer',
+        headerName: '作曲',
+        minWidth: 150,
+        renderCell: (params: GridRenderCellParams<string, Column>) => {
+          return params.row.composer;
+        },
+      },
+      {
+        field: 'nLyrics',
+        headerName: '歌词版本数量',
+        minWidth: 150,
+        renderCell: (params: GridRenderCellParams<string, Column>) => {
+          return params.row.nLyrics;
+        },
+      },
+      {
         field: 'tags',
         headerName: '标签',
-        minWidth: 100,
+        minWidth: 300,
         renderCell: (params: GridRenderCellParams<string, Column>) => {
-          return null;
+          return (
+            <Stack direction="row">
+              {(params.row.tags || []).map((i) => (
+                <Chip key={i} sx={{ m: 0.3 }} label={i} onClick={() => {
+                  apiRef.current.setFilterModel({items:[{
+                    columnField: 'tags', operatorValue: 'contains', value: i
+                  }]})
+                }}/>
+              ))}
+            </Stack>
+          );
         },
       },
     ],
@@ -554,6 +584,11 @@ export default function Music({ music }: { music: MusicIndexes }) {
       <Stack sx={{ flex: 1, width: '100%' }}>
         <DataGridPro
           apiRef={apiRef}
+            initialState={{
+              sorting: {
+                sortModel: [{ field: 'nLyrics', sort: 'desc' }],
+              },
+            }}
           getDetailPanelContent={({ row }) => (
             <Song
               id={row.id}

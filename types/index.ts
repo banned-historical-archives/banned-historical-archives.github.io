@@ -252,6 +252,7 @@ export type MusicMetaData = {
   name: string;
   composer: string;
   description: string;
+  tags?: string[];
   lyrics: {
     lyricist: string;
     version: string;
@@ -495,6 +496,6 @@ export type BookCatelogItem = {
 export type ArticleIndexes = { [aid: string]: number[] }; // book_number_id
 export type TagIndexes = [string, string][]; // type, name
 export type BookIndexes = [string, string, number][]; // id, name, archive_id
-export type MusicIndex = [string, string, number]; // id, name, archive_id
-export type MusicIndexes = MusicIndex[]; // id, name, archive_id
+export type MusicIndex = [string, string, number, number, string[], string]; // id, name, archive_id, lryic_length, tags, composer
+export type MusicIndexes = MusicIndex[];
 export type GalleryIndexes = (VideoMetaData | PictureMetaData)[];

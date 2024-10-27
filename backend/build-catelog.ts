@@ -28,7 +28,6 @@ type BookCatelogTemp = {
 };
 const gallery_indexes: GalleryIndexes = [];
 const music_indexes: MusicIndexes = [];
-const music_indexes_temp: any[] = [];
 const book_catelog_temp: BookCatelogTemp = {};
 const article_indexes: ArticleIndexes = {};
 const tag_cache: { [type: string]: { [name: string]: number } } = {};
@@ -83,7 +82,7 @@ function catelog_temp_to_catelog(c: BookCatelogTemp): BookCatelog {
 
         if (cfg.resource_type === 'music') {
           const music_metadata = metadata as MusicMetaData;
-          music_indexes_temp.push([metadata.id, metadata.name, i, music_metadata.lyrics.length])
+          music_indexes.push([metadata.id, metadata.name, i, music_metadata.lyrics.length, music_metadata.tags || [], music_metadata.composer])
         } else if (cfg.resource_type === 'video') {
           gallery_indexes.push(metadata as VideoMetaData);
         } else if (cfg.resource_type === 'picture') {
@@ -168,6 +167,7 @@ function catelog_temp_to_catelog(c: BookCatelogTemp): BookCatelog {
       }
     }
   }
+  /*
   fs.writeFileSync(
     join(__dirname, '../book_catelog.json'),
     JSON.stringify(catelog_temp_to_catelog(book_catelog_temp)),
@@ -180,10 +180,12 @@ function catelog_temp_to_catelog(c: BookCatelogTemp): BookCatelog {
     join(__dirname, '../gallery_indexes.json'),
     JSON.stringify(gallery_indexes),
   );
+  */
   fs.writeFileSync(
     join(__dirname, '../music_indexes.json'),
-    JSON.stringify(music_indexes_temp.sort((a,b) => b[3] - a[3]).map(i => [i[0],i[1],i[2]])),
+    JSON.stringify(music_indexes),
   );
+  /*
   fs.writeFileSync(
     join(__dirname, '../book_indexes.json'),
     JSON.stringify(book_indexes),
@@ -192,4 +194,5 @@ function catelog_temp_to_catelog(c: BookCatelogTemp): BookCatelog {
     join(__dirname, '../article_indexes.json'),
     JSON.stringify(article_indexes),
   );
+  */
 })();
