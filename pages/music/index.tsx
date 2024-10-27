@@ -63,6 +63,7 @@ import { DiffViewer } from '../../components/DiffViewer';
 import { readFile } from 'fs-extra';
 import { join } from 'path';
 import { Skeleton } from '@mui/material';
+import { GridApiPro } from '@mui/x-data-grid-pro/models/gridApiPro';
 
 export const getStaticProps: GetStaticProps = async (
   context: GetStaticPropsContext,
@@ -94,9 +95,7 @@ function Song({
   id,
   archiveId,
   name,
-  focusedId,
 }: {
-  focusedId: string;
   ee: EventEmitter;
   name: string;
   archiveId: number;
@@ -105,6 +104,12 @@ function Song({
   const [lyricLeft, setLyricLeft] = useState(0);
   const [lyricRight, setLyricRight] = useState(0);
   const [details, setDetails] = useState<MusicEntity>();
+
+  useEffect(() => {
+    getDetails(id, archiveId).then((res) => {
+      setDetails(res);
+    });
+  }, []);
 
   const leftContents = useMemo(
     () =>
@@ -134,33 +139,10 @@ function Song({
     }
     return res;
   }, [lyricLeft, lyricRight, details]);
-  useEffect(() => {
-    if (id == focusedId)
-      getDetails(id, archiveId).then((details) => {
-        setDetails(details);
-        setLyricRight(details.lyrics.length - 1);
-      });
-  }, [id, focusedId]);
-  useEffect(() => {
-    function listener(i: string, n: string) {
-      if (i == id) {
-        getDetails(id, archiveId).then((details) => {
-          setDetails(details);
-          setLyricRight(details.lyrics.length - 1);
-        });
-      }
-    }
-    ee.on('musicChanged', listener);
-    return () => {
-      ee.off('musicChanged', listener);
-    };
-  }, [ee, archiveId, id]);
-  const [expanded, setExpanded] = useState(false);
 
-  const accordionDetails = (
-    <AccordionDetails>
-      <Divider />
-      <Typography variant="subtitle1" sx={{ mt: 2, mb: 2 }}>
+  return (
+    <Stack padding="20px">
+      <Typography variant="subtitle1" sx={{ mb: 2 }}>
         演唱/演奏版本：
       </Typography>
       <Stack>
@@ -250,31 +232,7 @@ function Song({
           </>
         ) : null}
       </Stack>
-    </AccordionDetails>
-  );
-
-  return (
-    <Accordion
-      expanded={focusedId == id || expanded}
-      disableGutters
-      style={{
-        flex: 1,
-        margin: '5px 0 5px 0',
-      }}
-      onChange={(e, expanded) => {
-        setExpanded(expanded);
-        if (expanded) {
-          getDetails(id, archiveId).then((details) => {
-            setDetails(details);
-          });
-        }
-      }}
-    >
-      <AccordionSummary expandIcon={<ExpandMoreIcon />} id={id}>
-        <Typography variant="subtitle1">{name}</Typography>
-      </AccordionSummary>
-      {accordionDetails}
-    </Accordion>
+    </Stack>
   );
 }
 
@@ -285,13 +243,11 @@ enum RepeatType {
 }
 
 function Player({
+  apiRef,
   ee,
-  indexes,
-  setFocusedId,
 }: {
-  setFocusedId: (id: string) => void;
+  apiRef: React.MutableRefObject<GridApiPro>;
   ee: EventEmitter;
-  indexes: MusicIndexes;
 }) {
   const [playing, setPlaying] = useState(false);
 
@@ -377,28 +333,22 @@ function Player({
     if (repeatType === RepeatType.one) {
       audioRef.current?.play().catch(() => {});
     } else if (repeatType === RepeatType.all) {
-      let idx = indexes.findIndex((i) => i[1] == songName);
-      if (indexes.length - 1 == idx) {
+      const rows = apiRef.current.getAllRowIds();
+      let idx = rows.findIndex((i) => i == songName);
+      if (rows.length - 1 == idx) {
         idx == 0;
       } else {
         idx++;
       }
-      setFocusedId(indexes[idx][0]);
-      ee.emit(
-        'musicChanged',
-        indexes[idx][0],
-        indexes[idx][1],
-        indexes[idx][2],
-        0,
-        0,
-        true,
-      );
+      const row = apiRef.current.getRow(rows[idx]);
+      ee.emit('musicChanged', row.id, row.name, row.archiveId, 0, 0, true);
     } else if (repeatType === RepeatType.shuffle) {
-      const m = indexes[Math.floor(indexes.length * Math.random())];
-      setFocusedId(m[0]);
-      ee.emit('musicChanged', m[0], m[1], m[2], -1, -1, true);
+      const rows = apiRef.current.getAllRowIds();
+      const m = rows[Math.floor(rows.length * Math.random())];
+      const row = apiRef.current.getRow(m);
+      ee.emit('musicChanged', row.id, row.name, row.archiveId, -1, -1, true);
     }
-  }, [indexes, songName, repeatType]);
+  }, [apiRef, songName, repeatType]);
 
   return (
     <>
@@ -516,68 +466,68 @@ function Player({
     </>
   );
 }
+
+type Column = {
+  id: string;
+  archiveId: number;
+  name: string;
+};
 export default function Music({ music }: { music: MusicIndexes }) {
   const ee = useRef(new EventEmitter());
   ee.current.setMaxListeners(9876543);
-  const indexesRef = useRef(music);
-  const [focusedId, setFocusedId] = useState('');
-  const columns: GridColDef<{ index: MusicIndex }>[] = [
-    {
-      field: 'name',
-      headerName: '名称',
-      minWidth: 350,
-      flex: 1,
-      renderCell: (
-        params: GridRenderCellParams<string, { index: MusicIndex }>,
-      ) => {
-        return (
-          <Song
-            key={params.row.index[0]}
-            id={params.row.index[0]}
-            focusedId={focusedId}
-            name={params.row.index[1]}
-            archiveId={params.row.index[2]}
-            ee={ee.current}
-          />
-        );
+  const indexesRef = useRef<Column[]>(
+    music.map((i) => ({ id: i[0], name: i[1], archiveId: i[2] })),
+  );
+  const [height, setHeight] = useState<{ [key: string]: number | 'auto' }>({});
+  const columns: GridColDef<Column>[] = useMemo(
+    () => [
+      {
+        field: 'name',
+        headerName: '名称',
+        minWidth: 350,
+        flex: 1,
+        valueGetter: (params: GridValueGetterParams<string, Column>) =>
+          params.row.name,
+        renderCell: (params: GridRenderCellParams<string, Column>) => {
+          return params.row.name;
+        },
       },
-    },
-    {
-      field: 'tags',
-      headerName: '标签',
-      minWidth: 100,
-      renderCell: (
-        params: GridRenderCellParams<string, { index: MusicIndex }>,
-      ) => {
-        return null;
+      {
+        field: 'tags',
+        headerName: '标签',
+        minWidth: 100,
+        renderCell: (params: GridRenderCellParams<string, Column>) => {
+          return null;
+        },
       },
-    },
-  ];
+    ],
+    [height],
+  );
 
   const apiRef = useGridApiRef();
   useEffect(() => {
     function onChange(id: string) {
-      const idx = indexesRef.current.findIndex((i) => i[0] == id);
+      const idx = indexesRef.current.findIndex((i) => i.id == id);
 
-      setFocusedId('');
-      setTimeout(() => {
+      try {
         apiRef.current.scrollToIndexes({
           colIndex: 0,
           rowIndex: idx,
         });
-
-        setFocusedId(id);
-      }, 500); // 等待收起动画结束
+        apiRef.current.setExpandedDetailPanels([id]);
+      } catch (e) {}
     }
     ee.current.on('musicChanged', onChange);
-    ee.current.emit(
-      'musicChanged',
-      music[0][0],
-      music[0][1],
-      music[0][2],
-      0,
-      0,
-    );
+    setTimeout(() => {
+      ee.current.emit(
+        'musicChanged',
+        indexesRef.current[0].id,
+        indexesRef.current[0].name,
+        indexesRef.current[0].archiveId,
+        0,
+        0,
+      );
+    }, 500);
     return () => {
       ee.current.off('musicChanged', onChange);
     };
@@ -591,14 +541,22 @@ export default function Music({ music }: { music: MusicIndexes }) {
       <Typography variant="h4" sx={{ mb: 1 }}>
         音乐
       </Typography>
-      <Player ee={ee.current} indexes={music} setFocusedId={setFocusedId} />
+      <Player ee={ee.current} apiRef={apiRef} />
       <Stack sx={{ flex: 1, width: '100%' }}>
         <DataGridPro
           apiRef={apiRef}
-          getRowId={(row) => row.index[1]}
+          getDetailPanelContent={({ row }) => (
+            <Song
+              id={row.id}
+              name={row.name}
+              archiveId={row.archiveId}
+              ee={ee.current}
+            />
+          )}
+          getRowId={(row) => row.id}
           localeText={zhCN.components.MuiDataGrid.defaultProps.localeText}
-          getRowHeight={() => 'auto'}
-          rows={music.map((i) => ({ index: i }))}
+          getRowHeight={(row) => height[row.model.id] || 63}
+          rows={indexesRef.current}
           columns={columns}
           pageSize={100}
           rowsPerPageOptions={[100]}
