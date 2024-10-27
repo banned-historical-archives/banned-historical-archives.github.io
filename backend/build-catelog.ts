@@ -167,7 +167,6 @@ function catelog_temp_to_catelog(c: BookCatelogTemp): BookCatelog {
       }
     }
   }
-  /*
   fs.writeFileSync(
     join(__dirname, '../book_catelog.json'),
     JSON.stringify(catelog_temp_to_catelog(book_catelog_temp)),
@@ -180,12 +179,10 @@ function catelog_temp_to_catelog(c: BookCatelogTemp): BookCatelog {
     join(__dirname, '../gallery_indexes.json'),
     JSON.stringify(gallery_indexes),
   );
-  */
   fs.writeFileSync(
     join(__dirname, '../music_indexes.json'),
     JSON.stringify(music_indexes),
   );
-  /*
   fs.writeFileSync(
     join(__dirname, '../book_indexes.json'),
     JSON.stringify(book_indexes),
@@ -194,5 +191,4 @@ function catelog_temp_to_catelog(c: BookCatelogTemp): BookCatelog {
     join(__dirname, '../article_indexes.json'),
     JSON.stringify(article_indexes),
   );
-  */
 })();

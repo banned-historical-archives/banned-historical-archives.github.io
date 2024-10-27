@@ -268,6 +268,7 @@ function Player({
   const [versionName, setVersionName] = useState('');
   const [artistName, setArtistName] = useState('');
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const curId = useRef('');
 
   useEffect(() => {
     function lyricChanged(lyric: MusicLyric) {
@@ -286,6 +287,7 @@ function Player({
     ) {
       ee.emit('musicPause');
       setSongName(name);
+      curId.current = id;
       if (lyricIndex != undefined)
         getDetails(id, archiveId).then((first) => {
           if (lyricIndex == -1) {
@@ -344,22 +346,23 @@ function Player({
     if (repeatType === RepeatType.one) {
       audioRef.current?.play().catch(() => {});
     } else if (repeatType === RepeatType.all) {
-      const rows = apiRef.current.getAllRowIds();
-      let idx = rows.findIndex((i) => i == songName);
-      if (rows.length - 1 == idx) {
+      const rows = apiRef.current.getVisibleRowModels();
+      let idx = apiRef.current.getRowIndexRelativeToVisibleRows(curId.current)
+      if (rows.size - 1 == idx) {
         idx == 0;
       } else {
         idx++;
       }
-      const row = apiRef.current.getRow(rows[idx]);
+      const row = apiRef.current.getRow(Array.from(rows.keys())[idx]);
       ee.emit('musicChanged', row.id, row.name, row.archiveId, 0, 0, true);
     } else if (repeatType === RepeatType.shuffle) {
-      const rows = apiRef.current.getAllRowIds();
-      const m = rows[Math.floor(rows.length * Math.random())];
-      const row = apiRef.current.getRow(m);
+      const rows = apiRef.current.getVisibleRowModels();
+
+      const m = Math.floor(rows.size * Math.random());
+      const row = apiRef.current.getRow(Array.from(rows.keys())[m]);
       ee.emit('musicChanged', row.id, row.name, row.archiveId, -1, -1, true);
     }
-  }, [apiRef, songName, repeatType]);
+  }, [apiRef, repeatType]);
 
   return (
     <>
@@ -546,7 +549,7 @@ export default function Music({ music }: { music: MusicIndexes }) {
   const apiRef = useGridApiRef();
   useEffect(() => {
     function onChange(id: string) {
-      const idx = indexesRef.current.findIndex((i) => i.id == id);
+      const idx = apiRef.current.getRowIndexRelativeToVisibleRows(id)
 
       try {
         apiRef.current.setExpandedDetailPanels([id]);
@@ -558,11 +561,13 @@ export default function Music({ music }: { music: MusicIndexes }) {
     }
     ee.current.on('musicChanged', onChange);
     setTimeout(() => {
+      const rows = apiRef.current.getVisibleRowModels()
+      const row = rows.get(Array.from(rows.keys())[0])!
       ee.current.emit(
         'musicChanged',
-        indexesRef.current[0].id,
-        indexesRef.current[0].name,
-        indexesRef.current[0].archiveId,
+        row.id,
+        row.name,
+        row.archiveId,
         0,
         0,
       );
