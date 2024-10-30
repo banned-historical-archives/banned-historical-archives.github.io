@@ -111,6 +111,7 @@ function Song({
     getDetails(id, archiveId).then((res) => {
       setLoading(false);
       setDetails(res);
+      setLyricRight(res.lyrics.length - 1);
     });
   }, []);
 
