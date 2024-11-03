@@ -33,9 +33,7 @@
 
 [https://banned-historical-archives.github.io](https://banned-historical-archives.github.io)
 
-## 介绍
-
-和谐历史档案馆，[开源](https://github.com/banned-historical-archives/banned-historical-archives.github.io)的数字档案馆。我们致力于搜集、整合各类受官方封禁的文稿、报纸、杂志和多媒体资料，对并它们进行标准化处理，通过解析、识别和分类，形成规范化的文稿档案和多媒体档案数据库。
+和谐历史档案馆，[开源](https://github.com/banned-historical-archives/banned-historical-archives.github.io)的数字档案馆。我们致力于搜集、整合各类受官方封禁的文件、报纸、杂志和多媒体资料，对并它们进行标准化处理，通过解析、识别和分类，形成规范化的文稿档案和多媒体档案数据库。
 
 尽管民间有许多人在进行资料收集和校验工作，但分散的工作可能难以避免重复劳动，资料的二次汇编难以确保真实性，且缺少统一的版本管理，难以维护。我们运用一系列自动化工具解决了这些问题，另外支持对每篇文稿的溯源。
 
@@ -44,9 +42,9 @@
 我们还收录了一些重要的学术性、第三方解读的哲学、政治经济学、历史书籍、报纸和杂志。
 报纸和杂志也被转换为标准文稿档案录入本站，主要包括红旗杂志、学习与批判、参考消息、人民日报、文汇报等。
 
-多媒体资料涵盖音乐及歌词、电影、照片、录音等，目前主要收录了一些社会主义中国创作的红色音乐。
+多媒体资料涵盖音乐及歌词、电影、照片、录音、录像等，目前主要收录社会主义中国创作的红色音乐。
 
-### 官方封禁大量文件（甚至包括过去官方发布的公开的文件）的原因
+### 官方封禁的原因（包括过去官方公开的文件）
 * 1976年10月6日**怀仁堂政变**后，执政党与国家的统治群体已经完成了转化。没有无倾向性的史料，不敢鸣放的当权派冷处理及封禁与己方立场不一致的史料成为必然。
 * 建国以来，党的八届三中全会以来，特别是无产阶级文化大革命时期的历史资料包含了大量无产阶级专政实践经验，对当前官方政权稳定极为不利。
 * 许多观点与现行教科书、宣传方向和政策立场存在矛盾。官方甚至修改、编造和美化历史，为防止激起群众好奇心，避免对有争议的历史深入挖掘和讨论。
@@ -99,14 +97,14 @@
 ## 功能
 
 1. 基本的文稿、音乐、图片查询功能；
-2. 文稿版本对比——多版本逐字对比、多版本逐行对比和文字原稿对比；
-![文稿版本对比](https://user-images.githubusercontent.com/109972625/183229751-6e00a481-78a0-4fcc-a203-f73607bdc0c6.jpg)
+2. 多版本逐字对比、多版本逐行对比和文字原稿对比；
+ ![版本对比](https://user-images.githubusercontent.com/109972625/183229751-6e00a481-78a0-4fcc-a203-f73607bdc0c6.jpg)
 
 例如[在扩大的中央工作会议上的讲话](https://banned-historical-archives.github.io/articles/3546cdaf62)这篇文章，点击右上角“对比”按钮，选择“对比不同来源解析后的文本”，可见毛泽东选集官方版本中被删减的内容。
 
-![文稿来源对比](https://banned-historical-archives.github.io/images/comparison_pdf.png)
+![来源对比](https://banned-historical-archives.github.io/images/comparison_pdf.png)
 
-3. 文稿来源对比
+3. 文件来源对比
 4. 歌曲歌词版本对比
 
 ## 与其他文库/数据库的区别
@@ -175,15 +173,16 @@ https://huggingface.co/datasets/banned-historical-archives/banned-historical-arc
 | 文汇报   | 已收录涉及关键人物的文章 |
 | 解放日报   | 暂缺 |
 | 解放军报   | 待解析 |
+| 新民晚报   | 待解析 |
+| 杭州日报   | 待解析 |
 | 各地方报   | 待解析，不完整 |
 | 学习与批判 | 部分录入 |
 | 参考消息   | 待解析   |
 | 自然辩证法 | 已收录 |
 
-## 收录的文稿和书籍
+## 收录的文本
 
-[收录的文稿和书籍](https://github.com/banned-historical-archives/banned-historical-archives.github.io/wiki/%E6%94%B6%E5%BD%95%E7%9A%84%E6%96%87%E7%A8%BF%E5%92%8C%E4%B9%A6%E7%B1%8D)
-
+[收录的文本](https://github.com/banned-historical-archives/banned-historical-archives.github.io/wiki/%E6%94%B6%E5%BD%95%E7%9A%84%E6%96%87%E6%9C%AC）
 ## 收录的多媒体资料
 
 [收录的多媒体资料](https://github.com/banned-historical-archives/banned-historical-archives.github.io/wiki/%E6%94%B6%E5%BD%95%E7%9A%84%E5%A4%9A%E5%AA%92%E4%BD%93%E8%B5%84%E6%96%99)
