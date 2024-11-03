@@ -73,7 +73,7 @@ const routes = [
     path: '/',
   },
   {
-    name: '文本',
+    name: '文档',
     path: '/articles',
   },
   {
