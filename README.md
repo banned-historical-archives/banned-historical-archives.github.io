@@ -182,7 +182,7 @@ https://huggingface.co/datasets/banned-historical-archives/banned-historical-arc
 
 ## 收录的文本
 
-[收录的文本](https://github.com/banned-historical-archives/banned-historical-archives.github.io/wiki/%E6%94%B6%E5%BD%95%E7%9A%84%E6%96%87%E6%9C%AC）
+[收录的文本](https://github.com/banned-historical-archives/banned-historical-archives.github.io/wiki/%E6%94%B6%E5%BD%95%E7%9A%84%E6%96%87%E6%9C%AC)
 ## 收录的多媒体资料
 
 [收录的多媒体资料](https://github.com/banned-historical-archives/banned-historical-archives.github.io/wiki/%E6%94%B6%E5%BD%95%E7%9A%84%E5%A4%9A%E5%AA%92%E4%BD%93%E8%B5%84%E6%96%99)
