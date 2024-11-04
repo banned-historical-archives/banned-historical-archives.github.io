@@ -145,40 +145,55 @@ https://huggingface.co/datasets/banned-historical-archives/banned-historical-arc
 
 * 网友赠送
 * https://jojokanbao.cn
-* https://github.com/ProletRevDicta/Prolet Prolet
-* https://maoistlegacy.de maoistlegacy
-* https://huggingface.co/datasets/banned-historical-archives/renminribao 人民日报数据库
-* https://huggingface.co/datasets/banned-historical-archives/wenhuibao_disk 文汇报数据库
-* http://museums.cnd.org/CR/ 文革博物馆
-* http://geming.20m.com/wenge/wenge.htm 文化大革命文献馆
-* https://github.com/banned-historical-archives/CCRD CCRD 中国当代政治运动史数据库
+* https://github.com/ProletRevDicta/Prolet
+* maoistlegacy https://maoistlegacy.de 
+* 人民日报数据库 https://huggingface.co/datasets/banned-historical-archives/renminribao 
+* 文汇报数据库 https://huggingface.co/datasets/banned-historical-archives/wenhuibao_disk 
+* 文革博物馆 http://museums.cnd.org/CR/ 
+* 文化大革命文献馆 http://geming.20m.com/wenge/wenge.htm 
+* CCRD 中国当代政治运动史数据库 https://github.com/banned-historical-archives/CCRD 
   * 中国文化大革命文库（第三版），包含广西“文革”档案资料（机密）
   * 中国反右运动数据库
   * 中国大跃进-大饥荒数据库
   * 中国五十年代初中期的政治运动数据库：从土地改革到公私合营
-* https://zh.annas-archive.org/ 安娜的档案
-* http://www.mzdbl.cn 毛泽东博览
-* https://www.marxists.org/chinese/index.html 中文马克思主义文库
-* https://bannedthought.net/ bannedthought
-* https://ip.lidicity.com/hj/cn/index.html 怀旧金曲立地城
+* 安娜的档案 https://zh.annas-archive.org/ 
+* 毛泽东博览 http://www.mzdbl.cn 
+* 中文马克思主义文库 https://www.marxists.org/chinese/index.html 
+* bannedthought https://bannedthought.net/ 
+* 怀旧金曲立地城 https://ip.lidicity.com/hj/cn/index.html 
+* 文革照片 	https://huggingface.co/datasets/banned-historical-archives/CR-photo 	
+* 漫画（-1949） 	https://huggingface.co/datasets/banned-historical-archives/manhua-before-1949 	
+* 解放日报 	https://huggingface.co/datasets/banned-historical-archives/jiefangribao 	
+* 新民晚报 	https://huggingface.co/datasets/banned-historical-archives/xinminwanbao 	
+* 画报(-1949) 	https://huggingface.co/datasets/banned-historical-archives/huabao-before-1949 	
+* 人民画报 	https://huggingface.co/datasets/banned-historical-archives/renminhuabao 	
+* 解放军报 	https://huggingface.co/datasets/banned-historical-archives/jiefangjunbao 	
+* 中国妇女 	https://huggingface.co/datasets/banned-historical-archives/zhongguofunv 	
+* 北京周报 	https://huggingface.co/datasets/banned-historical-archives/peking-review 	
+* 杭州日报 	https://huggingface.co/datasets/banned-historical-archives/hangzhouribao 	
+* 新中华报 	https://huggingface.co/datasets/banned-historical-archives/xinzhonghuabao 	
+* 故事会 	https://huggingface.co/datasets/banned-historical-archives/gushihui 	
+* 工农兵画报 	https://huggingface.co/datasets/banned-historical-archives/gongnongbinghuabao 	
+* 炎黄春秋 	https://huggingface.co/datasets/banned-historical-archives/yanhuangchunqiu 	
+* 连环画报 	https://huggingface.co/datasets/banned-historical-archives/lianhuanhuabao 	
+* 中央日报 	https://huggingface.co/datasets/banned-historical-archives/zhongyangribao 	
+* 香港工商晚报 	https://huggingface.co/datasets/banned-historical-archives/hkgongshangwanbao 	
+* 香港大公报 	https://huggingface.co/datasets/banned-historical-archives/dagongbao 	
+* 香港工商日报 	https://huggingface.co/datasets/banned-historical-archives/hkgongshangribao 	
+* 香港华侨日报 	https://huggingface.co/datasets/banned-historical-archives/huaqiaoribao 	
+* 参考消息 	https://huggingface.co/datasets/banned-historical-archives/cankaoxiaoxi 	
+* 裁判文书 	https://huggingface.co/datasets/banned-historical-archives/legal-judgements 	
 
-
-## 计划收录的报刊杂志
+## 报刊杂志收录状态
 
 | 名称       | 收录状态 |
 | ---------- | -------- |
 | 红旗       | 已收录58-76年；77后待录入 |
 | 人民日报   | 已收录涉及关键人物的文章 |
-| 光明日报   | 暂缺 |
 | 文汇报   | 已收录涉及关键人物的文章 |
-| 解放日报   | 暂缺 |
-| 解放军报   | 待解析 |
-| 新民晚报   | 待解析 |
-| 杭州日报   | 待解析 |
-| 各地方报   | 待解析，不完整 |
 | 学习与批判 | 部分录入 |
-| 参考消息   | 待解析   |
 | 自然辩证法 | 已收录 |
+| 其他   | 待解析 |
 
 ## 收录的文本
 
