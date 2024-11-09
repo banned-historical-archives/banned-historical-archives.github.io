@@ -67,15 +67,6 @@
 [为革命而研究历史](https://banned-historical-archives.github.io/articles/e37bedd965)
 [马克思主义者研究历史是为了革命](https://banned-historical-archives.github.io/articles/ab6301b793)
 
-## Wiki
-
-资源贡献\校对\纠错  
-[\[Github issues\]](https://github.com/banned-historical-archives/banned-historical-archives.github.io/issues)  
-[本地运行](https://github.com/banned-historical-archives/banned-historical-archives.github.io/blob/master/docs/local.md)
-[本地搜索](https://github.com/banned-historical-archives/banned-historical-archives.github.io/blob/master/docs/local-search-engine.md)
-[文稿录入与校对](https://github.com/banned-historical-archives/banned-historical-archives.github.io/blob/master/docs/upload-and-correction.md)
-[标准化加工及开发说明](https://github.com/banned-historical-archives/banned-historical-archives.github.io/blob/master/docs/standarization.md)
-
 ## 安全提醒
 
 为了保护您的隐私与安全，建议您在访问过程中使用翻墙工具。
@@ -206,3 +197,13 @@ https://huggingface.co/datasets/banned-historical-archives/banned-historical-arc
 ## 收录的多媒体资料
 
 [收录的多媒体资料](https://github.com/banned-historical-archives/banned-historical-archives.github.io/wiki/%E6%94%B6%E5%BD%95%E7%9A%84%E5%A4%9A%E5%AA%92%E4%BD%93%E8%B5%84%E6%96%99)
+
+
+## 其他
+
+[\[资源贡献\]](https://github.com/banned-historical-archives/banned-historical-archives.github.io/issues)  
+[本地运行](https://github.com/banned-historical-archives/banned-historical-archives.github.io/blob/master/docs/local.md)
+[本地搜索](https://github.com/banned-historical-archives/banned-historical-archives.github.io/blob/master/docs/local-search-engine.md)
+[文稿录入与校对](https://github.com/banned-historical-archives/banned-historical-archives.github.io/blob/master/docs/upload-and-correction.md)
+[标准化加工及开发说明](https://github.com/banned-historical-archives/banned-historical-archives.github.io/blob/master/docs/standarization.md)
+
