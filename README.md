@@ -62,6 +62,11 @@
 * 分析历史资料中的矛盾以及背后的原因：时间地点人物的矛盾；言行不一的矛盾；对同一事物前后观点的矛盾；
 * 深挖争议性话题以及被刻意回避的话题;通常真相与主流宣传相反
 
+## 为什么研究历史
+
+[为革命而研究历史](https://banned-historical-archives.github.io/articles/e37bedd965)
+[马克思主义者研究历史是为了革命](https://banned-historical-archives.github.io/articles/ab6301b793)
+
 ## Wiki
 
 资源贡献\校对\纠错  
