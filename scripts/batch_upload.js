@@ -58,7 +58,7 @@ async function cmd_question(q, default_v = '') {
             "official": false,
             "author": bookauthor,
             files: is_pdf ? 
-                `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives${archive_id}/main/${id}.pdf`:
+                [`https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives${archive_id}/main/${id}.pdf`]:
             is_txt ? [] : (new Array(n_files)).fill(0).map((x, i) =>
                 `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives${archive_id}/main/${id}/${i + 1}${ext}`
             ),
