@@ -317,7 +317,7 @@ function PureArticle({
                 .getVoices()
                 .find((i: any) => i.lang == 'zh-CN')!;
               tts.pitch = 0.5;
-              tts.rate = 1.25;
+              tts.rate = 1;
               speechSynthesis.speak(tts);
             } else {
               speechSynthesis.cancel();
