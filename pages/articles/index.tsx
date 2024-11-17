@@ -5,6 +5,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import {
   DataGridPro,
   GridColDef,
+  GridFilterItem,
   GridRenderCellParams,
   GridValueGetterParams,
   useGridApiRef,
@@ -48,7 +49,7 @@ import Tags from '../../components/Tags';
 import Authors from '../../components/Authors';
 import {
   DateFilter,
-  useDateFiletrDialog,
+  useDateFilterDialog,
 } from '../../components/useDateFilterDialog';
 import { useAuthorFilterDialog } from '../../components/useAuthorFilterDialog';
 import { useTagFilterDialog } from '../../components/useTagFilterDialog';
@@ -105,6 +106,23 @@ function date_include(a: Article, b: DateFilter) {
   }
 }
 
+
+const default_date_filter = {
+  year_a: 1800,
+  year_b: 2200,
+  month_a: 1,
+  month_b: 12,
+  day_a: 1,
+  day_b: 31,
+};
+
+const default_sources = [
+  '毛泽东选集',
+  '毛泽东全集',
+  '毛泽东文集',
+  '中国文化大革命文库',
+];
+const default_authors = ['毛泽东', '江青', '王洪文', '张春桥', '姚文元'];
 export default function Articles({
   catelog,
   book_indexes,
@@ -300,22 +318,27 @@ const columns = useRef<GridColDef<BookCatelogItem>[] >([
 
   const { TagDialog, tagFilter, setTagDialog, setTagFilter, tags } =
     useTagFilterDialog(tags_all, tags_all_order_by_type);
-  const { DateFilterDialog, dateFilter, showDateFilterDialog } =
-    useDateFiletrDialog();
+    const [dateFilter, setDateFilter] = useState<DateFilter>(default_date_filter);
+  const { DateFilterDialog, showDateFilterDialog } =
+    useDateFilterDialog(default_date_filter, (d) => {
+      setDateFilter(d)
+  });
+
+  const [authorFilter, setAuthorFilter] = useState<string | null>(null)
   const {
-    authors,
-    authorFilter,
-    setAuthorFilter,
     AuthorDialog,
-    setAuthorDialog,
-  } = useAuthorFilterDialog(authors_all);
+    showAuthorDialog,
+  } = useAuthorFilterDialog(authors_all, (author: string) => {
+    setAuthorFilter(author ? author : null);
+  });
+
+  const [sourceFilter, setSourceFilter] = useState<string | null>(null)
   const {
-    sources,
-    sourceFilter,
-    setSourceFilter,
     SourceDialog,
-    setSourceDialog,
-  } = useSourceFilterDialog(sources_all);
+    showSourceDialog,
+  } = useSourceFilterDialog(sources_all, (s: string) => {
+    setSourceFilter(s)
+  });
   const [tipsAnchorEl, setTipsAnchorEl] = useState<HTMLElement | null>(null);
 
   const showTips = (event: React.MouseEvent<HTMLElement>) => {
@@ -433,7 +456,7 @@ const columns = useRef<GridColDef<BookCatelogItem>[] >([
               <Stack direction="row" alignItems="center">
                 <Typography variant="body1">作者：</Typography>
                 <Stack direction="row" spacing={1}>
-                  {authors.map((i) => {
+                  {Array.from(new Set([...default_authors, authorFilter].filter(i => i))).map((i) => {
                     return (
                       <Chip
                         key={i}
@@ -441,8 +464,7 @@ const columns = useRef<GridColDef<BookCatelogItem>[] >([
                         variant={i == authorFilter ? 'filled' : 'outlined'}
                         color={i == authorFilter ? 'primary' : 'default'}
                         onDelete={
-                          i == authorFilter
-                            ? () => setAuthorFilter(null)
+                          i == authorFilter ? () => setAuthorFilter(null)
                             : undefined
                         }
                         onClick={(e) => {
@@ -454,7 +476,7 @@ const columns = useRef<GridColDef<BookCatelogItem>[] >([
                   <Chip
                     label={'更多'}
                     onClick={(e) => {
-                      setAuthorDialog(true);
+                      showAuthorDialog();
                     }}
                   />
                 </Stack>
@@ -466,7 +488,7 @@ const columns = useRef<GridColDef<BookCatelogItem>[] >([
                   来源：
                 </Typography>
                 <Stack direction="row" spacing={1}>
-                  {sources.map((i) => {
+                  {Array.from(new Set([...default_sources, sourceFilter].filter(x => x))).map((i) => {
                     const isSelected = i == sourceFilter;
                     return (
                       <Chip
@@ -486,7 +508,7 @@ const columns = useRef<GridColDef<BookCatelogItem>[] >([
                   <Chip
                     label={'更多'}
                     onClick={(e) => {
-                      setSourceDialog(true);
+                      showSourceDialog();
                     }}
                   />
                 </Stack>
@@ -563,7 +585,7 @@ const columns = useRef<GridColDef<BookCatelogItem>[] >([
               },
             }}
             localeText={zhCN.components.MuiDataGrid.defaultProps.localeText}
-            getRowHeight={() => 'auto'}
+            getRowHeight={() => 100}
             rows={filtered_articles}
             columns={columns.current}
             pageSize={100}

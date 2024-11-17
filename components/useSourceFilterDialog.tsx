@@ -11,25 +11,11 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import { Chip } from '@mui/material';
 
-const default_sources = [
-  '毛泽东选集',
-  '毛泽东全集',
-  '毛泽东文集',
-  '中国文化大革命文库',
-];
-export function useSourceFilterDialog(sources_all: string[]) {
-  const [show, setSourceDialog] = useState(false);
-  const [sourceFilter, setSourceFilter] = useState<string | null>(null);
-  const [sources, setSources] = useState<string[]>(default_sources);
+export function useSourceFilterDialog(sources_all: string[], onChange: (s: string) => void) {
+  const [show, setShow] = useState(false);
   const [selected, setSelected] = useState<string>(sources_all[0]);
-  const onClose = useCallback(() => setSourceDialog(false), []);
-  const onConfirm = useCallback(() => {
-    setSources(Array.from(new Set([...default_sources, selected])));
-    setSourceFilter(selected);
-    setSourceDialog(false);
-  }, [selected]);
   const SourceDialog = (
-    <Dialog onClose={onClose} open={show} fullWidth maxWidth="lg">
+    <Dialog onClose={() => setShow(false)} open={show} fullWidth maxWidth="lg">
       <DialogTitle>选择来源</DialogTitle>
       <DialogContent>
         {sources_all.map((i) => (
@@ -44,8 +30,13 @@ export function useSourceFilterDialog(sources_all: string[]) {
         ))}
       </DialogContent>
       <DialogActions>
-        <Button onClick={onClose}>取消</Button>
-        <Button onClick={onConfirm} autoFocus>
+        <Button onClick={() => {
+          setShow(false)
+        }}>取消</Button>
+        <Button onClick={() => {
+    onChange(selected);
+    setShow(false);
+        }} autoFocus>
           确定
         </Button>
       </DialogActions>
@@ -53,9 +44,6 @@ export function useSourceFilterDialog(sources_all: string[]) {
   );
   return {
     SourceDialog,
-    sourceFilter,
-    setSourceDialog,
-    setSourceFilter,
-    sources,
+    showSourceDialog: () => setShow(true),
   };
 }

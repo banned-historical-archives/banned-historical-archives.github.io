@@ -1,4 +1,4 @@
-import { ChangeEvent, useCallback, useState } from 'react';
+import { ChangeEvent, useCallback, useRef, useState } from 'react';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
@@ -7,15 +7,6 @@ import DialogContent from '@mui/material/DialogContent';
 import Dialog from '@mui/material/Dialog';
 import TextField from '@mui/material/TextField';
 import DialogTitle from '@mui/material/DialogTitle';
-
-const default_date_filter = {
-  year_a: 1800,
-  year_b: 2200,
-  month_a: 1,
-  month_b: 12,
-  day_a: 1,
-  day_b: 31,
-};
 
 export type DateFilter = {
   year_a?: number;
@@ -34,74 +25,17 @@ function to_number(s: string) {
   return undefined;
 }
 
-export function useDateFiletrDialog() {
-  const [dateFilter, setDateFilter] = useState<DateFilter>(default_date_filter);
-  const [dateFilterDialog, setDateFilterDialog] = useState<
-    {
-      show: boolean;
-    } & DateFilter
-  >({
-    show: false,
-    ...default_date_filter,
-  });
-  const dayAOnChange = useCallback(
-    (e: ChangeEvent<HTMLInputElement>) =>
-      setDateFilterDialog((d) => ({
-        ...d,
-        day_a: to_number(e.target.value),
-      })),
-    [],
-  );
-  const monthAOnChange = useCallback(
-    (e: ChangeEvent<HTMLInputElement>) =>
-      setDateFilterDialog((d) => ({
-        ...d,
-        month_a: to_number(e.target.value),
-      })),
-    [],
-  );
-  const dayBOnChange = useCallback(
-    (e: ChangeEvent<HTMLInputElement>) =>
-      setDateFilterDialog((d) => ({
-        ...d,
-        day_b: to_number(e.target.value),
-      })),
-    [],
-  );
-  const monthBOnChange = useCallback(
-    (e: ChangeEvent<HTMLInputElement>) =>
-      setDateFilterDialog((d) => ({
-        ...d,
-        month_b: to_number(e.target.value),
-      })),
-    [],
-  );
-  const yearBOnChange = useCallback(
-    (e: ChangeEvent<HTMLInputElement>) =>
-      setDateFilterDialog((d) => ({
-        ...d,
-        year_b: to_number(e.target.value),
-      })),
-    [],
-  );
-  const yearAOnChange = useCallback(
-    (e: ChangeEvent<HTMLInputElement>) =>
-      setDateFilterDialog((d) => ({
-        ...d,
-        year_a: to_number(e.target.value),
-      })),
-    [],
-  );
-  const onClose = useCallback(
-    () => setDateFilterDialog((s) => ({ ...s, show: false })),
-    [],
-  );
+export function useDateFilterDialog(default_date_filter: DateFilter, onChange: (d: DateFilter) => void) {
+  const dateFilter = useRef<DateFilter>(default_date_filter);
+  const [show, setShow] = useState(false);
+  const [_, forceUpdate] = useState(0);
+
   const onConfirm = useCallback(() => {
-    const d = dateFilterDialog;
-    const filter: DateFilter = {};
+    const d = dateFilter.current;
+    const res: DateFilter = {};
     if (d.year_a && d.year_b && d.year_b >= d.year_a) {
-      filter.year_a = d.year_a;
-      filter.year_b = d.year_b;
+      res.year_a = d.year_a;
+      res.year_b = d.year_b;
     }
     if (
       d.month_a &&
@@ -111,8 +45,8 @@ export function useDateFiletrDialog() {
       d.month_b >= 1 &&
       d.month_b <= 12
     ) {
-      filter.month_a = d.month_a;
-      filter.month_b = d.month_b;
+      res.month_a = d.month_a;
+      res.month_b = d.month_b;
     }
     if (
       d.day_a &&
@@ -122,65 +56,82 @@ export function useDateFiletrDialog() {
       d.day_b >= 1 &&
       d.day_b <= 31
     ) {
-      filter.day_a = d.day_a;
-      filter.day_b = d.day_b;
+      res.day_a = d.day_a;
+      res.day_b = d.day_b;
     }
-    if (filter.year_a && filter.month_a && filter.day_a) {
-      setDateFilterDialog((s) => ({
-        ...s,
-        show: false,
-      }));
-      setDateFilter((d) => filter);
+    if (res.year_a && res.month_a && res.day_a) {
+      onChange(res)
+      setShow(false);
+      dateFilter.current = res;
+      forceUpdate(x => x + 1);
     }
-  }, [dateFilterDialog]);
+  }, []);
 
   const DateFilterDialog = (
-    <Dialog onClose={onClose} open={dateFilterDialog.show}>
+    <Dialog onClose={() => setShow(false)} open={show}>
       <DialogTitle>时间过滤器</DialogTitle>
       <DialogContent>
         <Stack spacing={1}>
           <Typography variant="subtitle1">开始时间</Typography>
           <TextField
             label="年"
-            value={dateFilterDialog.year_a}
+            value={dateFilter.current.year_a}
             size="small"
-            onChange={yearAOnChange}
+            onChange={(e) => {
+              dateFilter.current.year_a= to_number(e.target.value);
+              forceUpdate(x => x + 1);
+            }}
           />
           <TextField
             label="月"
-            value={dateFilterDialog.month_a}
+            value={dateFilter.current.month_a}
             size="small"
-            onChange={monthAOnChange}
+            onChange={(e) => {
+              dateFilter.current.month_a= to_number(e.target.value);
+              forceUpdate(x => x + 1);
+            }}
           />
           <TextField
             label="日"
-            value={dateFilterDialog.day_a}
+            value={dateFilter.current.day_a}
             size="small"
-            onChange={dayAOnChange}
+            onChange={(e) => {
+              dateFilter.current.day_a= to_number(e.target.value);
+              forceUpdate(x => x + 1);
+            }}
           />
           <Typography variant="subtitle1">结束时间</Typography>
           <TextField
             label="年"
-            value={dateFilterDialog.year_b}
+            value={dateFilter.current.year_b}
             size="small"
-            onChange={yearBOnChange}
+            onChange={(e) => {
+              dateFilter.current.year_b = to_number(e.target.value);
+              forceUpdate(x => x + 1);
+            }}
           />
           <TextField
             label="月"
-            value={dateFilterDialog.month_b}
+            value={dateFilter.current.month_b}
             size="small"
-            onChange={monthBOnChange}
+            onChange={(e) => {
+              dateFilter.current.month_b = to_number(e.target.value);
+              forceUpdate(x => x + 1);
+            }}
           />
           <TextField
             label="日"
-            value={dateFilterDialog.day_b}
+            value={dateFilter.current.day_b}
             size="small"
-            onChange={dayBOnChange}
+            onChange={(e) => {
+              dateFilter.current.day_b = to_number(e.target.value);
+              forceUpdate(x => x + 1);
+            }}
           />
         </Stack>
       </DialogContent>
       <DialogActions>
-        <Button onClick={onClose}>取消</Button>
+        <Button onClick={() => setShow(false)}>取消</Button>
         <Button onClick={onConfirm} autoFocus>
           确定
         </Button>
@@ -189,8 +140,6 @@ export function useDateFiletrDialog() {
   );
   return {
     DateFilterDialog,
-    dateFilter,
-    showDateFilterDialog: () =>
-      setDateFilterDialog((d) => ({ ...d, show: true })),
+    showDateFilterDialog: () => setShow(true),
   };
 }

@@ -1,4 +1,4 @@
-import { ChangeEvent, useCallback, useState } from 'react';
+import { ChangeEvent, useCallback, useRef, useState } from 'react';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
@@ -11,20 +11,12 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import { Chip } from '@mui/material';
 
-const default_authors = ['毛泽东', '江青', '王洪文', '张春桥', '姚文元'];
-export function useAuthorFilterDialog(authors_all: string[]) {
-  const [show, setAuthorDialog] = useState(false);
-  const [authorFilter, setAuthorFilter] = useState<string | null>(null);
-  const [authors, setAuthors] = useState<string[]>(default_authors);
+export function useAuthorFilterDialog(authors_all: string[], onChange: (author: string) => void) {
+  const [show, setShow] = useState(false);
+  const authorFilter = useRef<string | null>('');
   const [selected, setSelected] = useState<string>(authors_all[0]);
-  const onClose = useCallback(() => setAuthorDialog(false), []);
-  const onConfirm = useCallback(() => {
-    setAuthors(Array.from(new Set([...default_authors, selected])));
-    setAuthorFilter(selected);
-    setAuthorDialog(false);
-  }, [selected]);
   const AuthorDialog = (
-    <Dialog onClose={onClose} open={show} fullWidth maxWidth="lg">
+    <Dialog onClose={() => {setShow(false)}} open={show} fullWidth maxWidth="lg">
       <DialogTitle>选择作者</DialogTitle>
       <DialogContent>
         {authors_all.map((i) => (
@@ -39,8 +31,10 @@ export function useAuthorFilterDialog(authors_all: string[]) {
         ))}
       </DialogContent>
       <DialogActions>
-        <Button onClick={onClose}>取消</Button>
-        <Button onClick={onConfirm} autoFocus>
+        <Button onClick={() => {setShow(false)}}>取消</Button>
+        <Button onClick={() => {
+          onChange(selected);
+        }} autoFocus>
           确定
         </Button>
       </DialogActions>
@@ -48,9 +42,6 @@ export function useAuthorFilterDialog(authors_all: string[]) {
   );
   return {
     AuthorDialog,
-    authorFilter,
-    setAuthorDialog,
-    setAuthorFilter,
-    authors,
+    showAuthorDialog: () => setShow(true),
   };
 }
