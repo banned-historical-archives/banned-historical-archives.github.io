@@ -4,7 +4,7 @@ import { ReactElement, useState, useEffect, useMemo } from 'react';
 import Popover from '@mui/material/Popover';
 import { Tag } from '../types';
 
-export default function Tags({ tags }: { tags: Tag[] }) {
+export default function Tags({ tags, onClick }: { tags: Tag[], onClick?: Function }) {
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
   const [label, setLabel] = useState('');
 
@@ -39,12 +39,16 @@ export default function Tags({ tags }: { tags: Tag[] }) {
             setAnchorEl(event.currentTarget);
           }}
           onMouseLeave={handleClose}
-          onClick={() =>
-            window.open(
-              `/articles?tag=${encodeURIComponent(tag.name)}`,
-              '_blank',
-            )
-          }
+          onClick={() => {
+
+            if (onClick) {
+              onClick(tag);
+            } else {
+              window.open(
+                `/articles?tag=${encodeURIComponent(tag.name)}`,
+                '_blank',
+              )}
+          }}
           sx={{ m: 0.3 }}
           label={tag.name}
         />

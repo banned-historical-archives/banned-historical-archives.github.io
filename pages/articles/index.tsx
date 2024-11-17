@@ -1,4 +1,4 @@
-import { ReactElement, useState, useEffect, useMemo } from 'react';
+import { ReactElement, useState, useEffect, useMemo, useRef } from 'react';
 import Popover from '@mui/material/Popover';
 import Head from 'next/head';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -7,6 +7,7 @@ import {
   GridColDef,
   GridRenderCellParams,
   GridValueGetterParams,
+  useGridApiRef,
   zhCN,
 } from '@mui/x-data-grid-pro';
 
@@ -83,7 +84,40 @@ function ensure_two_digits(a?: number, fallback = '') {
   return a < 10 ? `0${a}` : a;
 }
 
-const columns: GridColDef<BookCatelogItem>[] = [
+function date_include(a: Article, b: DateFilter) {
+  const date_a = b.year_a! * 10000 + b.month_a! * 100 + b.day_a!;
+  const date_b = b.year_b! * 10000 + b.month_b! * 100 + b.day_b!;
+  if (a.is_range_date) {
+    const range_a =
+      a.dates[0].year! * 10000 +
+      (a.dates[0].month || 0) * 100 +
+      (a.dates[0].day || 0);
+    const range_b =
+      a.dates[1].year! * 10000 +
+      (a.dates[1].month || 0) * 100 +
+      (a.dates[1].day || 0);
+    return range_a >= date_a && range_b <= date_b;
+  } else {
+    return a.dates.reduce((m, i) => {
+      const d = i.year! * 10000 + (i.month || 0) * 100 + (i.day || 0);
+      return m && date_a <= d && date_b >= d;
+    }, true);
+  }
+}
+
+export default function Articles({
+  catelog,
+  book_indexes,
+  tag_indexes,
+}: {
+  catelog: BookCatelog;
+  book_indexes: BookIndexes;
+  tag_indexes: TagIndexes;
+}) {
+  const [ready, setReady] = useState(false);
+  const apiRef = useGridApiRef();
+
+const columns = useRef<GridColDef<BookCatelogItem>[] >([
   {
     field: 'title',
     headerName: '标题',
@@ -107,7 +141,11 @@ const columns: GridColDef<BookCatelogItem>[] = [
     ) => params.row.authors.map((i) => i).join(','),
     renderCell: (params: GridRenderCellParams<string, BookCatelogItem>) => (
       <div style={{ overflow: 'visible' }}>
-        <Authors authors={params.row.authors} />
+        <Authors authors={params.row.authors} onClick={(a: string) => {
+          apiRef.current.upsertFilterItem({
+            columnField: 'authors', operatorValue: 'contains', value: a
+          })
+        }}/>
       </div>
     ),
   },
@@ -171,6 +209,15 @@ const columns: GridColDef<BookCatelogItem>[] = [
     valueGetter: (
       params: GridValueGetterParams<BookCatelogItem, BookCatelogItem>,
     ) => params.row.books!.join(','),
+    renderCell: (params: GridRenderCellParams<string, BookCatelogItem>) => (
+      <div style={{ overflow: 'scroll', height: '100px' }}>
+        <Tags tags={params.row.books?.map(i => ({name: i, type: '来源' as any, id: i})) || []} onClick={(t: Tag) => {
+          apiRef.current.upsertFilterItem({
+            columnField: 'publications', operatorValue: 'contains', value: t.name
+          })
+        }}/>
+      </div>
+    ),
   },
   {
     field: 'tags',
@@ -185,43 +232,16 @@ const columns: GridColDef<BookCatelogItem>[] = [
     ) => params.row.tags!.map((i) => i.name).join(','),
     renderCell: (params: GridRenderCellParams<string, BookCatelogItem>) => (
       <div style={{ overflow: 'scroll', height: '100px' }}>
-        <Tags tags={params.row.tags!} />
+        <Tags tags={params.row.tags!} onClick={(t: Tag) => {
+                  apiRef.current.upsertFilterItem({
+                    columnField: 'tags', operatorValue: 'contains', value: t.name
+                  })
+        }}/>
       </div>
     ),
   },
-];
+]);
 
-function date_include(a: Article, b: DateFilter) {
-  const date_a = b.year_a! * 10000 + b.month_a! * 100 + b.day_a!;
-  const date_b = b.year_b! * 10000 + b.month_b! * 100 + b.day_b!;
-  if (a.is_range_date) {
-    const range_a =
-      a.dates[0].year! * 10000 +
-      (a.dates[0].month || 0) * 100 +
-      (a.dates[0].day || 0);
-    const range_b =
-      a.dates[1].year! * 10000 +
-      (a.dates[1].month || 0) * 100 +
-      (a.dates[1].day || 0);
-    return range_a >= date_a && range_b <= date_b;
-  } else {
-    return a.dates.reduce((m, i) => {
-      const d = i.year! * 10000 + (i.month || 0) * 100 + (i.day || 0);
-      return m && date_a <= d && date_b >= d;
-    }, true);
-  }
-}
-
-export default function Articles({
-  catelog,
-  book_indexes,
-  tag_indexes,
-}: {
-  catelog: BookCatelog;
-  book_indexes: BookIndexes;
-  tag_indexes: TagIndexes;
-}) {
-  const [ready, setReady] = useState(false);
   useEffect(() => {
     catelog.forEach((i) => {
       try {
@@ -509,6 +529,7 @@ export default function Articles({
         </Stack>
         <Stack sx={{ flex: 1, width: '100%' }}>
           <DataGridPro
+            apiRef={apiRef}
             getRowId={(row) => row.id}
             initialState={{
               sorting: {
@@ -544,7 +565,7 @@ export default function Articles({
             localeText={zhCN.components.MuiDataGrid.defaultProps.localeText}
             getRowHeight={() => 'auto'}
             rows={filtered_articles}
-            columns={columns}
+            columns={columns.current}
             pageSize={100}
             rowsPerPageOptions={[100]}
             disableSelectionOnClick
