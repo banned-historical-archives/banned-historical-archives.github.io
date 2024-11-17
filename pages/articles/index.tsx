@@ -228,7 +228,7 @@ const columns = useRef<GridColDef<BookCatelogItem>[] >([
       params: GridValueGetterParams<BookCatelogItem, BookCatelogItem>,
     ) => params.row.books!.join(','),
     renderCell: (params: GridRenderCellParams<string, BookCatelogItem>) => (
-      <div style={{ overflow: 'scroll', height: '100px' }}>
+      <div style={{ overflow: 'scroll', height: '100%'}}>
         <Tags tags={params.row.books?.map(i => ({name: i, type: '来源' as any, id: i})) || []} onClick={(t: Tag) => {
           apiRef.current.upsertFilterItem({
             columnField: 'publications', operatorValue: 'contains', value: t.name

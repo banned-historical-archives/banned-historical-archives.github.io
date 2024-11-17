@@ -40,7 +40,6 @@ export default function Tags({ tags, onClick }: { tags: Tag[], onClick?: Functio
           }}
           onMouseLeave={handleClose}
           onClick={() => {
-
             if (onClick) {
               onClick(tag);
             } else {
@@ -49,7 +48,7 @@ export default function Tags({ tags, onClick }: { tags: Tag[], onClick?: Functio
                 '_blank',
               )}
           }}
-          sx={{ m: 0.3 }}
+          sx={{ m: 0.3, float: 'left' }}
           label={tag.name}
         />
       ))}
