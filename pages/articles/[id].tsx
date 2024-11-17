@@ -14,7 +14,7 @@ import Menu from '@mui/material/Menu';
 import Paper from '@mui/material/Paper';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
-import Grid from '@mui/material/Grid';
+import Grid2 from '@mui/material/Grid2';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import MenuItem from '@mui/material/MenuItem';
 import Chip from '@mui/material/Chip';
@@ -429,7 +429,7 @@ export default function ArticleViewer({
 
   const details = (
     <>
-      <Grid item xs={12} md={6}>
+      <Grid2 size={6}>
         <Stack direction="row" spacing={1} alignItems="center">
           <Typography variant="body1">作者：</Typography>
           <Stack direction="row" sx={{ overflowX: 'scroll', flex: 1 }}>
@@ -454,8 +454,8 @@ export default function ArticleViewer({
             />
           ))}
         </Stack>
-      </Grid>
-      <Grid item xs={12} md={3}>
+      </Grid2>
+      <Grid2 size={3}>
         <Typography variant="body1" sx={{ overflowX: 'scroll' }}>
           时间：
           {article.is_range_date
@@ -464,8 +464,8 @@ export default function ArticleViewer({
               )}`
             : article.dates.map((i) => date_to_string(i as Date)).join(',')}
         </Typography>
-      </Grid>
-      <Grid item xs={12} md={3}>
+      </Grid2>
+      <Grid2 size={3}>
         <Stack direction="row" alignItems="center">
           <Typography variant="body1">标签：</Typography>
           <Stack
@@ -477,8 +477,8 @@ export default function ArticleViewer({
             <Tags tags={Array.from(all_tags.values())} />
           </Stack>
         </Stack>
-      </Grid>
-      <Grid item xs={12} md={6}>
+      </Grid2>
+      <Grid2 size={6}>
         <Stack direction="row" alignItems="center" spacing={1}>
           <Typography variant="body1">选择来源：</Typography>
           <Stack
@@ -579,7 +579,7 @@ export default function ArticleViewer({
             </MenuItem>
           </Menu>
         </Stack>
-      </Grid>
+      </Grid2>
     </>
   );
 
@@ -596,26 +596,26 @@ export default function ArticleViewer({
         }}
         pb={0}
       >
-        <Grid
+        <Grid2
           container
           alignItems="center"
           sx={{ pt: 2, pl: 2, pr: 2 }}
           spacing={2}
         >
-          <Grid item xs={10} md={6}>
+          <Grid2 size={6}>
             <Typography variant="body1" sx={{ overflowX: 'scroll' }}>
               标题：
               {article.title}
               {aliases.length ? `(别名:${aliases.join(',')})` : ''}
             </Typography>
-          </Grid>
-          <Grid item xs={2} sx={{ display: { md: 'none', xs: 'flex' } }}>
+          </Grid2>
+          <Grid2 size={2} sx={{ display: { md: 'none', xs: 'flex' } }}>
             <Button onClick={() => setShowMore(!showMore)}>
               {showMore ? '隐藏' : '展开'}
             </Button>
-          </Grid>
+          </Grid2>
           {showMore ? details : null}
-        </Grid>
+        </Grid2>
         <Stack
           direction="row"
           divider={<Divider orientation="vertical" flexItem />}

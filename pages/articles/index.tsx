@@ -7,19 +7,18 @@ import {
   GridColDef,
   GridFilterItem,
   GridRenderCellParams,
-  GridValueGetterParams,
+  GridToolbar,
+  GridValueGetter,
   useGridApiRef,
-  zhCN,
 } from '@mui/x-data-grid-pro';
 
 import Link from 'next/link';
 
 import Layout from '../../components/Layout';
-import { Article } from '../../types/index';
+import { Article, Date } from '../../types/index';
 
 import TextField from '@mui/material/TextField';
 import DialogTitle from '@mui/material/DialogTitle';
-import Grid from '@mui/material/Grid';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import Dialog from '@mui/material/Dialog';
@@ -56,6 +55,7 @@ import { useTagFilterDialog } from '../../components/useTagFilterDialog';
 import { useSourceFilterDialog } from '../../components/useSourceFilterDialog';
 import { readFile } from 'fs-extra';
 import { join } from 'path';
+import { Grid2 } from '@mui/material';
 
 export const getStaticProps: GetStaticProps = async (
   context: GetStaticPropsContext,
@@ -135,16 +135,16 @@ export default function Articles({
   const [ready, setReady] = useState(false);
   const apiRef = useGridApiRef();
 
-const columns = useRef<GridColDef<BookCatelogItem>[] >([
+const columns = useRef<GridColDef[] >([
   {
     field: 'title',
     headerName: '标题',
     minWidth: 350,
     flex: 1,
-    renderCell: (params: GridRenderCellParams<string, BookCatelogItem>) => {
+    renderCell: (params: GridRenderCellParams<BookCatelogItem>) => {
       return (
         <a href={`/articles/${params.row.id}`} rel="noreferrer" target="_blank">
-          {params.row!.title}
+          {params.row.title}
         </a>
       );
     },
@@ -155,13 +155,13 @@ const columns = useRef<GridColDef<BookCatelogItem>[] >([
     minWidth: 150,
     flex: 1,
     valueGetter: (
-      params: GridValueGetterParams<BookCatelogItem, BookCatelogItem>,
-    ) => params.row.authors.map((i) => i).join(','),
-    renderCell: (params: GridRenderCellParams<string, BookCatelogItem>) => (
+      authors: string[]
+    ) => authors.map((i) => i).join(','),
+    renderCell: (params: GridRenderCellParams<BookCatelogItem>) => (
       <div style={{ overflow: 'visible' }}>
         <Authors authors={params.row.authors} onClick={(a: string) => {
           apiRef.current.upsertFilterItem({
-            columnField: 'authors', operatorValue: 'contains', value: a
+            field: 'authors', operator: 'contains', value: a
           })
         }}/>
       </div>
@@ -175,9 +175,9 @@ const columns = useRef<GridColDef<BookCatelogItem>[] >([
     minWidth: 150,
     flex: 1,
     valueGetter: (
-      params: GridValueGetterParams<BookCatelogItem, BookCatelogItem>,
+      dates: Date[]
     ) =>
-      params.row.dates
+      dates
         .map((i) =>
           i
             ? [
@@ -190,12 +190,12 @@ const columns = useRef<GridColDef<BookCatelogItem>[] >([
             : '----/--/--',
         )
         .join(' '),
-    renderCell: (params: GridRenderCellParams<string, BookCatelogItem>) => (
+    renderCell: (params: GridRenderCellParams<BookCatelogItem>) => (
       <Stack spacing={1}>
-        {params.row!.is_range_date ? (
+        {params.row.is_range_date ? (
           <Typography variant="caption">
-            {params
-              .row!.dates.map((i) =>
+            {
+              params.row.dates.map((i) =>
                 [i.year, ensure_two_digits(i.month), ensure_two_digits(i.day)]
                   .filter((j) => j)
                   .join('/'),
@@ -204,8 +204,7 @@ const columns = useRef<GridColDef<BookCatelogItem>[] >([
               .join('至')}
           </Typography>
         ) : (
-          params
-            .row!.dates.map((i) =>
+            params.row!.dates.map((i) =>
               [i.year, ensure_two_digits(i.month), ensure_two_digits(i.day)]
                 .filter((j) => j)
                 .join('/'),
@@ -225,13 +224,13 @@ const columns = useRef<GridColDef<BookCatelogItem>[] >([
     flex: 1,
     minWidth: 150,
     valueGetter: (
-      params: GridValueGetterParams<BookCatelogItem, BookCatelogItem>,
-    ) => params.row.books!.join(','),
-    renderCell: (params: GridRenderCellParams<string, BookCatelogItem>) => (
+      _: any, row: BookCatelogItem
+    ) => row.books!.join(','),
+    renderCell: (params: GridRenderCellParams<BookCatelogItem>) => (
       <div style={{ overflow: 'scroll', height: '100%'}}>
         <Tags tags={params.row.books?.map(i => ({name: i, type: '来源' as any, id: i})) || []} onClick={(t: Tag) => {
           apiRef.current.upsertFilterItem({
-            columnField: 'publications', operatorValue: 'contains', value: t.name
+            field: 'publications', operator: 'contains', value: t.name
           })
         }}/>
       </div>
@@ -246,13 +245,13 @@ const columns = useRef<GridColDef<BookCatelogItem>[] >([
       return tags_a > tags_b ? 1 : -1;
     },
     valueGetter: (
-      params: GridValueGetterParams<BookCatelogItem, BookCatelogItem>,
-    ) => params.row.tags!.map((i) => i.name).join(','),
-    renderCell: (params: GridRenderCellParams<string, BookCatelogItem>) => (
+      tags: Tag[]
+    ) => tags.map((i) => i.name).join(','),
+    renderCell: (params: GridRenderCellParams<BookCatelogItem>) => (
       <div style={{ overflow: 'scroll', height: '100px' }}>
         <Tags tags={params.row.tags!} onClick={(t: Tag) => {
                   apiRef.current.upsertFilterItem({
-                    columnField: 'tags', operatorValue: 'contains', value: t.name
+                    field: 'tags', operator: 'contains', value: t.name
                   })
         }}/>
       </div>
@@ -390,8 +389,8 @@ const columns = useRef<GridColDef<BookCatelogItem>[] >([
         sx={{ position: 'relative', flex: 1, height: '100%' }}
       >
         <Stack direction="row">
-          <Grid container spacing={1}>
-            <Grid item xs={12} md={5}>
+          <Grid2 container spacing={1}>
+            <Grid2 size={5}>
               <Stack direction="row" alignItems="center">
                 <Typography variant="body1" sx={{ whiteSpace: 'nowrap' }}>
                   时间范围：
@@ -418,8 +417,8 @@ const columns = useRef<GridColDef<BookCatelogItem>[] >([
                   />
                 </Stack>
               </Stack>
-            </Grid>
-            <Grid item xs={12} md={7} sx={{ overflowX: 'scroll' }}>
+            </Grid2>
+            <Grid2 size={7} sx={{ overflowX: 'scroll' }}>
               <Stack direction="row" alignItems="center">
                 <Typography variant="body1" sx={{ whiteSpace: 'nowrap' }}>
                   标签：
@@ -451,8 +450,8 @@ const columns = useRef<GridColDef<BookCatelogItem>[] >([
                   />
                 </Stack>
               </Stack>
-            </Grid>
-            <Grid item xs={12} md={5} sx={{ overflowX: 'scroll' }}>
+            </Grid2>
+            <Grid2 size={5} sx={{ overflowX: 'scroll' }}>
               <Stack direction="row" alignItems="center">
                 <Typography variant="body1">作者：</Typography>
                 <Stack direction="row" spacing={1}>
@@ -481,8 +480,8 @@ const columns = useRef<GridColDef<BookCatelogItem>[] >([
                   />
                 </Stack>
               </Stack>
-            </Grid>
-            <Grid item xs={12} md={6} sx={{ overflowX: 'scroll' }}>
+            </Grid2>
+            <Grid2 size={6} sx={{ overflowX: 'scroll' }}>
               <Stack direction="row" alignItems="center">
                 <Typography variant="body1" sx={{ whiteSpace: 'nowrap' }}>
                   来源：
@@ -513,11 +512,9 @@ const columns = useRef<GridColDef<BookCatelogItem>[] >([
                   />
                 </Stack>
               </Stack>
-            </Grid>
-            <Grid
-              item
-              xs={1}
-              md={1}
+            </Grid2>
+            <Grid2
+              size={1}
               sx={{ display: { md: 'flex', xs: 'none' } }}
             >
               <Popover
@@ -546,10 +543,10 @@ const columns = useRef<GridColDef<BookCatelogItem>[] >([
               >
                 高级检索
               </Button>
-            </Grid>
-          </Grid>
+            </Grid2>
+          </Grid2>
         </Stack>
-        <Stack sx={{ flex: 1, width: '100%' }}>
+        <Stack sx={{ flex: 1, width: '100%', height: '500px' }}>
           <DataGridPro
             apiRef={apiRef}
             getRowId={(row) => row.id}
@@ -564,7 +561,8 @@ const columns = useRef<GridColDef<BookCatelogItem>[] >([
                       ? location.search.startsWith('?tag=')
                         ? [
                             {
-                              columnField: 'tags',
+                              field: 'tags',
+                              operator: 'contains',
                               value: decodeURIComponent(
                                 location.search.split('=')[1],
                               ),
@@ -573,7 +571,8 @@ const columns = useRef<GridColDef<BookCatelogItem>[] >([
                         : location.search.startsWith('?author=')
                         ? [
                             {
-                              columnField: 'authors',
+                              field: 'authors',
+                              operator: 'contains',
                               value: decodeURIComponent(
                                 location.search.split('=')[1],
                               ),
@@ -584,13 +583,13 @@ const columns = useRef<GridColDef<BookCatelogItem>[] >([
                 },
               },
             }}
-            localeText={zhCN.components.MuiDataGrid.defaultProps.localeText}
+            localeText={{
+
+            }}
             getRowHeight={() => 100}
             rows={filtered_articles}
             columns={columns.current}
-            pageSize={100}
-            rowsPerPageOptions={[100]}
-            disableSelectionOnClick
+            pageSizeOptions={[100]}
           />
         </Stack>
       </Stack>

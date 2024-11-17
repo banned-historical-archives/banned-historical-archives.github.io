@@ -11,9 +11,8 @@ import {
   DataGridPro,
   GridColDef,
   GridRenderCellParams,
-  GridValueGetterParams,
+  GridValueGetter,
   useGridApiRef,
-  zhCN,
 } from '@mui/x-data-grid-pro';
 import Head from 'next/head';
 import { diff_match_patch, Diff } from 'diff-match-patch';
@@ -347,9 +346,9 @@ function Player({
     if (repeatType === RepeatType.one) {
       audioRef.current?.play().catch(() => {});
     } else if (repeatType === RepeatType.all) {
-      const rows = apiRef.current.getVisibleRowModels();
+      const rows = apiRef.current.getSortedRowIds();
       let idx = apiRef.current.getRowIndexRelativeToVisibleRows(curId.current)
-      if (rows.size - 1 == idx) {
+      if (rows.length - 1 == idx) {
         idx == 0;
       } else {
         idx++;
@@ -357,10 +356,10 @@ function Player({
       const row = apiRef.current.getRow(Array.from(rows.keys())[idx]);
       ee.emit('musicChanged', row.id, row.name, row.archiveId, 0, 0, true);
     } else if (repeatType === RepeatType.shuffle) {
-      const rows = apiRef.current.getVisibleRowModels();
+      const rows = apiRef.current.getSortedRowIds();
 
-      const m = Math.floor(rows.size * Math.random());
-      const row = apiRef.current.getRow(Array.from(rows.keys())[m]);
+      const m = Math.floor(rows.length * Math.random());
+      const row = apiRef.current.getRow(rows[m]);
       ee.emit('musicChanged', row.id, row.name, row.archiveId, -1, -1, true);
     }
   }, [apiRef, repeatType]);
@@ -503,9 +502,8 @@ export default function Music({ music }: { music: MusicIndexes }) {
         headerName: '名称',
         minWidth: 350,
         flex: 1,
-        valueGetter: (params: GridValueGetterParams<string, Column>) =>
-          params.row.name,
-        renderCell: (params: GridRenderCellParams<string, Column>) => {
+        valueGetter: (name: string) => name,
+        renderCell: (params: GridRenderCellParams<Column>) => {
           return params.row.name;
         },
       },
@@ -513,7 +511,7 @@ export default function Music({ music }: { music: MusicIndexes }) {
         field: 'composer',
         headerName: '作曲',
         minWidth: 150,
-        renderCell: (params: GridRenderCellParams<string, Column>) => {
+        renderCell: (params: GridRenderCellParams<Column>) => {
           return params.row.composer;
         },
       },
@@ -521,7 +519,7 @@ export default function Music({ music }: { music: MusicIndexes }) {
         field: 'nLyrics',
         headerName: '歌词版本数量',
         minWidth: 150,
-        renderCell: (params: GridRenderCellParams<string, Column>) => {
+        renderCell: (params: GridRenderCellParams<Column>) => {
           return params.row.nLyrics;
         },
       },
@@ -529,13 +527,13 @@ export default function Music({ music }: { music: MusicIndexes }) {
         field: 'tags',
         headerName: '标签',
         minWidth: 300,
-        renderCell: (params: GridRenderCellParams<string, Column>) => {
+        renderCell: (params: GridRenderCellParams<Column>) => {
           return (
             <Stack direction="row">
               {(params.row.tags || []).map((i) => (
                 <Chip key={i} sx={{ m: 0.3 }} label={i} onClick={() => {
                   apiRef.current.setFilterModel({items:[{
-                    columnField: 'tags', operatorValue: 'contains', value: i
+                    field: 'tags', operator: 'contains', value: i
                   }]})
                 }}/>
               ))}
@@ -562,8 +560,8 @@ export default function Music({ music }: { music: MusicIndexes }) {
     }
     ee.current.on('musicChanged', onChange);
     setTimeout(() => {
-      const rows = apiRef.current.getVisibleRowModels()
-      const row = rows.get(Array.from(rows.keys())[0])!
+      const rows = apiRef.current.getSortedRows()
+      const row = rows[0]
       ee.current.emit(
         'musicChanged',
         row.id,
@@ -587,7 +585,7 @@ export default function Music({ music }: { music: MusicIndexes }) {
         音乐
       </Typography>
       <Player ee={ee.current} apiRef={apiRef} />
-      <Stack sx={{ flex: 1, width: '100%' }}>
+      <Stack sx={{ flex: 1, width: '100%', height: '500px' }}>
         <DataGridPro
           apiRef={apiRef}
             initialState={{
@@ -605,12 +603,9 @@ export default function Music({ music }: { music: MusicIndexes }) {
           )}
           getRowId={(row) => row.id}
           getDetailPanelHeight={() => "auto"}
-          localeText={zhCN.components.MuiDataGrid.defaultProps.localeText}
           rows={indexesRef.current}
           columns={columns}
-          pageSize={100}
-          rowsPerPageOptions={[100]}
-          disableSelectionOnClick
+          pageSizeOptions={[100]}
         />
       </Stack>
     </Stack>

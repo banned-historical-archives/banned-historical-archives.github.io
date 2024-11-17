@@ -30,7 +30,7 @@ import Menu from '@mui/material/Menu';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import Divider from '@mui/material/Divider';
-import { GalleryIndexes, PictureMetaData } from '../../types';
+import { Date, GalleryIndexes, PictureMetaData } from '../../types';
 import Stack from '@mui/material/Stack';
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
@@ -43,8 +43,7 @@ import {
   DataGridPro,
   GridColDef,
   GridRenderCellParams,
-  GridValueGetterParams,
-  zhCN,
+  GridValueGetter,
 } from '@mui/x-data-grid-pro';
 import { ensure_two_digits } from '../../utils';
 import ImageTags from '../../components/ImageTags';
@@ -78,7 +77,7 @@ const columns: GridColDef<PictureMetaData>[] = [
     headerName: '预览',
     minWidth: 350,
     flex: 1,
-    renderCell: (params: GridRenderCellParams<string, PictureMetaData>) => (
+    renderCell: (params: GridRenderCellParams<PictureMetaData>) => (
       <ClickToShow url={params.row!.url} />
     ),
   },
@@ -87,7 +86,7 @@ const columns: GridColDef<PictureMetaData>[] = [
     headerName: '名称',
     minWidth: 350,
     flex: 1,
-    renderCell: (params: GridRenderCellParams<string, PictureMetaData>) => (
+    renderCell: (params: GridRenderCellParams<PictureMetaData>) => (
       <div>{params.row!.name}</div>
     ),
   },
@@ -96,7 +95,7 @@ const columns: GridColDef<PictureMetaData>[] = [
     headerName: '描述',
     minWidth: 150,
     flex: 1,
-    renderCell: (params: GridRenderCellParams<string, PictureMetaData>) => (
+    renderCell: (params: GridRenderCellParams<PictureMetaData>) => (
       <div>{params.row.description}</div>
     ),
   },
@@ -104,7 +103,7 @@ const columns: GridColDef<PictureMetaData>[] = [
     field: 'source',
     headerName: '来源',
     flex: 1,
-    renderCell: (params: GridRenderCellParams<string, PictureMetaData>) => (
+    renderCell: (params: GridRenderCellParams<PictureMetaData>) => (
       <div>{params.row.source}</div>
     ),
   },
@@ -114,18 +113,18 @@ const columns: GridColDef<PictureMetaData>[] = [
     minWidth: 150,
     flex: 1,
     valueGetter: (
-      params: GridValueGetterParams<PictureMetaData, PictureMetaData>,
+      _, row: Date
     ) =>
-      params.row.year
+      row.year
         ? [
-            params.row.year || '----',
-            ensure_two_digits(params.row.month, '--'),
-            ensure_two_digits(params.row.day, '--'),
+            row.year || '----',
+            ensure_two_digits(row.month, '--'),
+            ensure_two_digits(row.day, '--'),
           ]
             .filter((j) => j)
             .join('/')
         : '----/--/--',
-    renderCell: (params: GridRenderCellParams<string, PictureMetaData>) => (
+    renderCell: (params: GridRenderCellParams<PictureMetaData>) => (
       <Stack spacing={1}>
         <Typography variant="caption">
           {params.row.year
@@ -150,9 +149,9 @@ const columns: GridColDef<PictureMetaData>[] = [
       return tags_a > tags_b ? 1 : -1;
     },
     valueGetter: (
-      params: GridValueGetterParams<PictureMetaData, PictureMetaData>,
-    ) => params.row.tags.map((i) => i.name).join(','),
-    renderCell: (params: GridRenderCellParams<string, PictureMetaData>) => (
+      tags: Tag[]
+    ) => tags.map((i) => i.name).join(','),
+    renderCell: (params: GridRenderCellParams<PictureMetaData>) => (
       <div style={{ overflow: 'visible' }}>
         <ImageTags tags={params.row.tags} />
       </div>
@@ -168,16 +167,13 @@ export default function Gallery({ gallery }: { gallery: GalleryIndexes }) {
       <Typography variant="h4" sx={{ mb: 1 }}>
         图库
       </Typography>
-      <Stack sx={{ flex: 1, width: '100%' }}>
+      <Stack sx={{ flex: 1, width: '100%', height: '500px' }}>
         <DataGridPro
           getRowId={(row) => row.id}
-          localeText={zhCN.components.MuiDataGrid.defaultProps.localeText}
           getRowHeight={() => 'auto'}
           rows={gallery}
           columns={columns}
-          pageSize={100}
-          rowsPerPageOptions={[100]}
-          disableSelectionOnClick
+          pageSizeOptions={[100]}
         />
       </Stack>
     </Stack>
