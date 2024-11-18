@@ -49,6 +49,7 @@ import { ensure_two_digits } from '../../utils';
 import ImageTags from '../../components/ImageTags';
 import { readFile } from 'fs-extra';
 import { join } from 'path';
+import { zhCN } from '@mui/x-data-grid/locales';
 
 export const getStaticProps: GetStaticProps = async (
   context: GetStaticPropsContext,
@@ -173,6 +174,7 @@ export default function Gallery({ gallery }: { gallery: GalleryIndexes }) {
           getRowHeight={() => 'auto'}
           rows={gallery}
           columns={columns}
+          localeText={zhCN.components.MuiDataGrid.defaultProps.localeText}
           pageSizeOptions={[100]}
         />
       </Stack>

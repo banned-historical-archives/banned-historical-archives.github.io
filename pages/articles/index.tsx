@@ -1,5 +1,6 @@
 import { ReactElement, useState, useEffect, useMemo, useRef } from 'react';
 import Popover from '@mui/material/Popover';
+import { zhCN } from '@mui/x-data-grid/locales';
 import Head from 'next/head';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import {
@@ -619,8 +620,7 @@ const columns = useRef<GridColDef[] >([
               setFilterModel(f);
               filterModelRef.current = f;
             }}
-            localeText={{
-            }}
+            localeText={zhCN.components.MuiDataGrid.defaultProps.localeText}
             getRowHeight={() => 100}
             rows={filtered_articles}
             columns={columns.current}

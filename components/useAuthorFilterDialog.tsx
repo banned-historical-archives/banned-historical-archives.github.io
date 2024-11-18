@@ -11,6 +11,7 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import { Chip } from '@mui/material';
 import { DataGridPro, GridColDef, GridRenderCellParams, GridToolbar } from '@mui/x-data-grid-pro';
+import { zhCN } from '@mui/x-data-grid/locales';
 
 export function useAuthorFilterDialog(authors_all: string[], onChange: (author: string) => void) {
   const [show, setShow] = useState(false);
@@ -50,6 +51,7 @@ export function useAuthorFilterDialog(authors_all: string[], onChange: (author: 
             disableRowSelectionOnClick
             rows={authors}
             columns={columns.current}
+            localeText={zhCN.components.MuiDataGrid.defaultProps.localeText}
             pageSizeOptions={[100]}
           />
       </DialogContent>

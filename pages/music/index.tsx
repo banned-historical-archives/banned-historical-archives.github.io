@@ -64,6 +64,7 @@ import { join } from 'path';
 import { Chip, Skeleton } from '@mui/material';
 import { GridApiPro } from '@mui/x-data-grid-pro/models/gridApiPro';
 import Tags from '../../components/Tags';
+import { zhCN } from '@mui/x-data-grid/locales';
 
 export const getStaticProps: GetStaticProps = async (
   context: GetStaticPropsContext,
@@ -605,6 +606,7 @@ export default function Music({ music }: { music: MusicIndexes }) {
           getDetailPanelHeight={() => "auto"}
           rows={indexesRef.current}
           columns={columns}
+          localeText={zhCN.components.MuiDataGrid.defaultProps.localeText}
           pageSizeOptions={[100]}
         />
       </Stack>
