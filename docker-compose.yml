@@ -10,6 +10,7 @@ services:
       - elasticsearch
     environment:
       - NODE_ENV=development
+      - node_options="--max-old-space-size=8192" 
 
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:8.7.1
