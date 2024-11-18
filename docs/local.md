@@ -16,11 +16,11 @@ npm run init-config
 ```
 npm run init-catelog
 ```
-### e.运行web服务器
+### e.构建辅助文件
 ```
 npm run dev:nextjs-helper
-
-另开终端执行
-
+```
+### e.运行前端服务器
+```
 npx next dev
 ```

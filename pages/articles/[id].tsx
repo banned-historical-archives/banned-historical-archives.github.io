@@ -76,9 +76,7 @@ export const getStaticProps: GetStaticProps = async (
   const { id } = context.params as {
     id: string;
   };
-  const data = await (
-    await fetch('http://localhost:3001/get_article?id=' + id)
-  ).json();
+  const data = JSON.parse(readFileSync(join(process.cwd(), 'next_helper', id.slice(0,3), id + '.json')).toString())
   return {
     props: {
       books: data.books,
