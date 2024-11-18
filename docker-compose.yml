@@ -1,29 +1,13 @@
 version: '3'
 services:
-  app:
-    build: .
-    ports:
-      - "3000:3000"
-    volumes:
-      - .:/app
-    depends_on:
-      - elasticsearch
-    networks:
-      - bha
-    environment:
-      - NODE_ENV=development
-      - node_options="--max-old-space-size=8192" 
-      - ES_URL=http://bha:9200
-
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:8.7.1
-    container_name: elasticsearch
+    hostname: elasticsearch
     environment:
       - discovery.type=single-node
       - http.cors.enabled=true
-      - http.cors.allow-origin=*
-      - xpack.security.authc.anonymous.username=anonymous_user
-      - xpack.security.authc.anonnymous.authz_exceptioin=true
+      - http.cors.allow-origin="*"
+      - xpack.security.authc.anonymous.username=anonymous
       - xpack.security.authc.anonymous.roles=superuser
       - ELASTIC_USERNAME=elastic
       - ELASTIC_PASSWORD=password
@@ -35,6 +19,25 @@ services:
     expose:
       - "9200"
 
+  app:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - ES_URL=http://elasticsearch:9200
+        - ES_USERNAME=elastic
+        - ES_PASSWORD=password
+        # - node_options="--max-old-space-size=8192" 
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+    depends_on:
+      - elasticsearch
+    networks:
+      - bha
+    environment:
+      - NODE_ENV=development
 networks:
   bha:
     driver: bridge

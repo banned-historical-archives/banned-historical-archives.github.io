@@ -14,7 +14,6 @@ RUN npm run init-parsed
 RUN npm run init-config
 RUN npm run build-catelog
 RUN npm run dev:nextjs-helper
-RUN npm run init-es
 RUN npm run build
 
 EXPOSE 3000
