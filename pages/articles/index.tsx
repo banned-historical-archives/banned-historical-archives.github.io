@@ -279,7 +279,6 @@ const columns = useRef<GridColDef[] >([
                 id: 'publications',
             field: 'publications', operator: 'contains', value: t.name
           }]};
-          console.log(newFilter)
           setFilterModel(newFilter);
           filterModelRef.current = newFilter;
         }}/>
@@ -308,7 +307,6 @@ const columns = useRef<GridColDef[] >([
                 id: 'tags',
                     field: 'tags', operator: 'contains', value: t.name
           }]};
-          console.log(newFilter)
           setFilterModel(newFilter);
           filterModelRef.current = newFilter;
         }}/>
