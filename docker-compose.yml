@@ -8,9 +8,12 @@ services:
       - .:/app
     depends_on:
       - elasticsearch
+    networks:
+      - bha
     environment:
       - NODE_ENV=development
       - node_options="--max-old-space-size=8192" 
+      - ES_URL=http://bha:9200
 
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:8.7.1
@@ -28,10 +31,10 @@ services:
     ports:
       - "9200:9200"
     networks:
-      - app-network
+      - bha
     expose:
       - "9200"
 
 networks:
-  app-network:
+  bha:
     driver: bridge

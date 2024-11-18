@@ -17,6 +17,7 @@ parsed
 
 Dockerfile
 docker-compose.yml
+.dockerignore
 
 book_catelog.json
 tag_indexes.json

@@ -3,7 +3,7 @@ import * as dotenv from 'dotenv';
 dotenv.config();
 
 const esClient = new Client({
-  node: 'http://localhost:9200',
+  node: process.env['ES_URL'] || 'http://localhost:9200',
   auth: {
     username: process.env['ES_USERNAME']! || 'elastic',
     password: process.env['ES_PASSWORD']! || 'password',
