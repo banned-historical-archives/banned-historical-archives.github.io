@@ -6,6 +6,7 @@ import {
   DataGridPro,
   GridColDef,
   GridFilterItem,
+  GridFilterModel,
   GridRenderCellParams,
   GridToolbar,
   GridValueGetter,
@@ -56,6 +57,7 @@ import { useSourceFilterDialog } from '../../components/useSourceFilterDialog';
 import { readFile } from 'fs-extra';
 import { join } from 'path';
 import { Grid2 } from '@mui/material';
+import { getGridFilter } from '@mui/x-data-grid/internals';
 
 export const getStaticProps: GetStaticProps = async (
   context: GetStaticPropsContext,
@@ -134,6 +136,38 @@ export default function Articles({
 }) {
   const [ready, setReady] = useState(false);
   const apiRef = useGridApiRef();
+  const [filterModel, setFilterModel] = useState<GridFilterModel>({items:[]});
+  const filterModelRef = useRef<GridFilterModel>({items:[]});
+
+  useEffect(() => {
+
+    setFilterModel({
+      ...filterModel,
+      items: typeof location !== 'undefined' && location.search
+        ? location.search.startsWith('?tag=')
+          ? [
+              {
+                field: 'tags',
+                operator: 'contains',
+                value: decodeURIComponent(
+                  location.search.split('=')[1],
+                ),
+              },
+            ]
+          : location.search.startsWith('?author=')
+          ? [
+              {
+                field: 'authors',
+                operator: 'contains',
+                value: decodeURIComponent(
+                  location.search.split('=')[1],
+                ),
+              },
+            ]
+          : []
+        : [],
+    })
+  }, []);
 
 const columns = useRef<GridColDef[] >([
   {
@@ -160,9 +194,16 @@ const columns = useRef<GridColDef[] >([
     renderCell: (params: GridRenderCellParams<BookCatelogItem>) => (
       <div style={{ overflow: 'visible' }}>
         <Authors authors={params.row.authors} onClick={(a: string) => {
-          apiRef.current.upsertFilterItem({
+          const newFilter: GridFilterModel ={
+            ...filterModelRef.current,
+            items:[
+              ...filterModelRef.current.items.filter(i => i.field != 'authors'),
+              {
+                id: 'authors',
             field: 'authors', operator: 'contains', value: a
-          })
+          }]};
+          setFilterModel(newFilter);
+          filterModelRef.current = newFilter;
         }}/>
       </div>
     ),
@@ -229,9 +270,17 @@ const columns = useRef<GridColDef[] >([
     renderCell: (params: GridRenderCellParams<BookCatelogItem>) => (
       <div style={{ overflow: 'scroll', height: '100%'}}>
         <Tags tags={params.row.books?.map(i => ({name: i, type: '来源' as any, id: i})) || []} onClick={(t: Tag) => {
-          apiRef.current.upsertFilterItem({
+          const newFilter: GridFilterModel ={
+            ...filterModelRef.current,
+            items:[
+              ...filterModelRef.current.items.filter(i => i.field != 'publications'),
+              {
+                id: 'publications',
             field: 'publications', operator: 'contains', value: t.name
-          })
+          }]};
+          console.log(newFilter)
+          setFilterModel(newFilter);
+          filterModelRef.current = newFilter;
         }}/>
       </div>
     ),
@@ -250,9 +299,17 @@ const columns = useRef<GridColDef[] >([
     renderCell: (params: GridRenderCellParams<BookCatelogItem>) => (
       <div style={{ overflow: 'scroll', height: '100px' }}>
         <Tags tags={params.row.tags!} onClick={(t: Tag) => {
-                  apiRef.current.upsertFilterItem({
+          const newFilter: GridFilterModel ={
+            ...filterModelRef.current,
+            items:[
+              ...filterModelRef.current.items.filter(i => i.field != 'publications'),
+              {
+                id: 'tags',
                     field: 'tags', operator: 'contains', value: t.name
-                  })
+          }]};
+          console.log(newFilter)
+          setFilterModel(newFilter);
+          filterModelRef.current = newFilter;
         }}/>
       </div>
     ),
@@ -556,37 +613,13 @@ const columns = useRef<GridColDef[] >([
               sorting: {
                 sortModel: [{ field: 'dates', sort: 'asc' }],
               },
-              filter: {
-                filterModel: {
-                  items:
-                    typeof location !== 'undefined' && location.search
-                      ? location.search.startsWith('?tag=')
-                        ? [
-                            {
-                              field: 'tags',
-                              operator: 'contains',
-                              value: decodeURIComponent(
-                                location.search.split('=')[1],
-                              ),
-                            },
-                          ]
-                        : location.search.startsWith('?author=')
-                        ? [
-                            {
-                              field: 'authors',
-                              operator: 'contains',
-                              value: decodeURIComponent(
-                                location.search.split('=')[1],
-                              ),
-                            },
-                          ]
-                        : []
-                      : [],
-                },
-              },
+            }}
+            filterModel={filterModel}
+            onFilterModelChange={f => {
+              setFilterModel(f);
+              filterModelRef.current = f;
             }}
             localeText={{
-
             }}
             getRowHeight={() => 100}
             rows={filtered_articles}
