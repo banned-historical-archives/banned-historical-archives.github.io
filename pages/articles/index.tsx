@@ -549,6 +549,8 @@ const columns = useRef<GridColDef[] >([
         <Stack sx={{ flex: 1, width: '100%', height: '500px' }}>
           <DataGridPro
             apiRef={apiRef}
+            headerFilters
+            disableColumnFilter
             getRowId={(row) => row.id}
             initialState={{
               sorting: {
