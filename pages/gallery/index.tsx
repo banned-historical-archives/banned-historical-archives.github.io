@@ -30,7 +30,7 @@ import Menu from '@mui/material/Menu';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import Divider from '@mui/material/Divider';
-import { Date, GalleryIndexes, PictureMetaData } from '../../types';
+import { Date, GalleryIndexes, PictureMetaData, Tag } from '../../types';
 import Stack from '@mui/material/Stack';
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
