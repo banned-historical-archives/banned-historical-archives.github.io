@@ -302,7 +302,7 @@ const columns = useRef<GridColDef[] >([
           const newFilter: GridFilterModel ={
             ...filterModelRef.current,
             items:[
-              ...filterModelRef.current.items.filter(i => i.field != 'publications'),
+              ...filterModelRef.current.items.filter(i => i.field != 'tags'),
               {
                 id: 'tags',
                     field: 'tags', operator: 'contains', value: t.name
