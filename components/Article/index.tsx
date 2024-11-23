@@ -9,12 +9,18 @@ import {
   TextField,
   Typography,
   FormControlLabel,
+  Input,
+  Grid2,
+  Slider,
+  FormControl,
+  InputLabel,
 } from '@mui/material';
 import SpeedDial from '@mui/material/SpeedDial';
 import PlayCircleIcon from '@mui/icons-material/PlayCircle';
-import PauseCircleIcon from '@mui/icons-material/PauseCircle';
+import StopCircleIcon from '@mui/icons-material/StopCircle';
+import SettingsIcon from '@mui/icons-material/Settings';
 import { diff_match_patch, Diff } from 'diff-match-patch';
-import { ReactElement, useEffect, useRef, useState } from 'react';
+import { ReactElement, useEffect, useMemo, useRef, useState } from 'react';
 import { Article, Content, Comment } from '../../types';
 import { ContentType, ParserResult } from '../../types';
 import { bracket_left, bracket_right, crypto_md5 } from '../../utils';
@@ -30,6 +36,20 @@ function PureArticle({
   description?: string;
 }) {
   const [playing, setPlaying] = useState(false);
+  const [pitch, setPitch] = useState(1);
+  const [rate, setRate] = useState(1);
+  const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
+  const [showSettings, setShowSettings] = useState(false);
+  const [voices, setVoices] = useState<SpeechSynthesisVoice[]>([]);
+  const [selectedVoice, setSelectedVoice] = useState<string>();
+  useEffect(() => {
+    const v = speechSynthesis.getVoices()
+    setVoices(v.sort((a,b) => a.lang > b.lang ? 1 : -1));
+    setSelectedVoice(localStorage.getItem('tts_voice') || v.find(i => i.lang == 'zh-CN')?.name || v[0]?.name)
+    setPitch(parseFloat(localStorage.getItem('tts_pitch') || '1'))
+    setRate(parseFloat(localStorage.getItem('tts_rate') || '1'))
+  }, []);
+
   const contentsComponent = contents.map((part) => {
     let s: string[] = [];
     const part_comments = comments.filter((i) => i.part_idx === part.index);
@@ -307,25 +327,118 @@ function PureArticle({
           onClick={() => {
             setPlaying(!playing);
             if (!playing) {
-              const tts = new SpeechSynthesisUtterance(
+              const ssu = new SpeechSynthesisUtterance(
                 contents
                   .filter((part) => part.type !== ContentType.image)
                   .map((part) => part.text)
                   .join('\n'),
               );
-              tts.voice = speechSynthesis
-                .getVoices()
-                .find((i: any) => i.lang == 'zh-CN')!;
-              tts.pitch = 0.5;
-              tts.rate = 1;
-              speechSynthesis.speak(tts);
+              ssu.voice = voices
+                .find((i) => i.name == selectedVoice)!;
+              ssu.pitch = pitch;
+              ssu.rate = rate;
+              speechSynthesis.speak(ssu);
             } else {
               speechSynthesis.cancel();
             }
           }}
         >
-          {playing ? <PauseCircleIcon /> : <PlayCircleIcon />}
+          {playing ? <StopCircleIcon /> : <PlayCircleIcon />}
         </Button>
+        <Button
+          sx={{
+            position: 'absolute',
+            top: 4,
+          zIndex: 999,
+            left: '25px',
+            minWidth: 0,
+            opacity: '0.5',
+            width: '20px',
+            height: '20px',
+            borderRadius: '10px',
+          }}
+          ref={(e) => {
+            setAnchorEl(e);
+          }}
+          onClick={() => {
+            setShowSettings(!showSettings)
+          }}
+        >
+          <SettingsIcon />
+        </Button>
+        <Popover
+        open={showSettings}
+        anchorEl={anchorEl}
+        onClose={() => setShowSettings(false)}
+        sx={{
+          marginTop: '10px',
+        }}
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'left',
+        }}
+        >
+          <Grid2
+            container
+            alignItems="center"
+            justifyContent="center"
+            sx={{p: 2, width: '400px' }}
+            spacing={2}
+            rowSpacing={1}
+          >
+            <Grid2 size={12}>
+              <FormControl fullWidth>
+  <InputLabel id="demo-simple-select-label">语音</InputLabel>
+  <Select
+    labelId="demo-simple-select-label"
+    value={selectedVoice}
+    label="语音"
+    onChange={(e) => {
+      setSelectedVoice(e.target.value);
+      localStorage.setItem('tts_voice', e.target.value);
+    }}
+  >
+    {voices.map(i => 
+      <MenuItem key={i.name} value={i.name}>{i.lang}-{i.name}</MenuItem>
+    )}
+  </Select>
+</FormControl>
+            </Grid2>
+            <Grid2 size={2}>
+              <Typography>速度</Typography>
+            </Grid2>
+            <Grid2 size={10} >
+              <Slider
+                value={rate}
+                valueLabelDisplay="auto"
+                step={0.1}
+                marks
+                min={0.1}
+                max={2}
+                onChange={(e, value) => {
+                  setRate(value as number);
+                  localStorage.setItem('tts_rate', value.toString())
+                }}
+              />
+            </Grid2>
+            <Grid2 size={2}>
+              <Typography>音高</Typography></Grid2>
+            <Grid2 size={10} >
+              <Slider
+                value={pitch}
+                valueLabelDisplay="auto"
+                step={0.1}
+                marks
+                min={0.1}
+                max={2}
+                onChange={(e, value) => {
+                  setPitch(value as number)
+                  localStorage.setItem('tts_pitch', value.toString())
+                }}
+              />
+            </Grid2>
+          </Grid2>
+        </Popover>
         {contentsComponent}
         {descriptionComponent}
         {commentsComponent}
