@@ -193,7 +193,7 @@ const columns = useRef<GridColDef[] >([
       authors: string[]
     ) => authors.map((i) => i).join(','),
     renderCell: (params: GridRenderCellParams<BookCatelogItem>) => (
-      <div style={{ overflow: 'visible' }}>
+      <div style={{ overflow: 'scroll' }}>
         <Authors authors={params.row.authors} onClick={(a: string) => {
           const newFilter: GridFilterModel ={
             ...filterModelRef.current,
