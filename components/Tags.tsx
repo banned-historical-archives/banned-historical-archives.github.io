@@ -22,10 +22,11 @@ export default function Tags({ tags, onClick }: { tags: Tag[], onClick?: Functio
         disableRestoreFocus
         sx={{
           pointerEvents: 'none',
+          marginTop: '10px',
         }}
         anchorOrigin={{
           vertical: 'bottom',
-          horizontal: 'center',
+          horizontal: 'left',
         }}
       >
         <Typography sx={{ p: 1 }}>{label}</Typography>
