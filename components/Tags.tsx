@@ -28,7 +28,7 @@ export default function Tags({ tags, onClick }: { tags: Tag[], onClick?: Functio
           horizontal: 'center',
         }}
       >
-        <Typography sx={{ p: 2 }}>{label}</Typography>
+        <Typography sx={{ p: 1 }}>{label}</Typography>
       </Popover>
 
       {tags.map((tag) => (
