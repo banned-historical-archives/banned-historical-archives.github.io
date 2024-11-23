@@ -109,7 +109,6 @@ function date_include(a: Article, b: DateFilter) {
   }
 }
 
-
 const default_date_filter = {
   year_a: 1800,
   year_b: 2200,
@@ -137,183 +136,211 @@ export default function Articles({
 }) {
   const [ready, setReady] = useState(false);
   const apiRef = useGridApiRef();
-  const [filterModel, setFilterModel] = useState<GridFilterModel>({items:[]});
-  const filterModelRef = useRef<GridFilterModel>({items:[]});
+  const [filterModel, setFilterModel] = useState<GridFilterModel>({
+    items: [],
+  });
+  const filterModelRef = useRef<GridFilterModel>({ items: [] });
 
   useEffect(() => {
-
     setFilterModel({
       ...filterModel,
-      items: typeof location !== 'undefined' && location.search
-        ? location.search.startsWith('?tag=')
-          ? [
-              {
-                field: 'tags',
-                operator: 'contains',
-                value: decodeURIComponent(
-                  location.search.split('=')[1],
-                ),
-              },
-            ]
-          : location.search.startsWith('?author=')
-          ? [
-              {
-                field: 'authors',
-                operator: 'contains',
-                value: decodeURIComponent(
-                  location.search.split('=')[1],
-                ),
-              },
-            ]
-          : []
-        : [],
-    })
+      items:
+        typeof location !== 'undefined' && location.search
+          ? location.search.startsWith('?tag=')
+            ? [
+                {
+                  field: 'tags',
+                  operator: 'contains',
+                  value: decodeURIComponent(location.search.split('=')[1]),
+                },
+              ]
+            : location.search.startsWith('?author=')
+            ? [
+                {
+                  field: 'authors',
+                  operator: 'contains',
+                  value: decodeURIComponent(location.search.split('=')[1]),
+                },
+              ]
+            : []
+          : [],
+    });
   }, []);
 
-const columns = useRef<GridColDef[] >([
-  {
-    field: 'title',
-    headerName: '标题',
-    minWidth: 350,
-    flex: 1,
-    renderCell: (params: GridRenderCellParams<BookCatelogItem>) => {
-      return (
-        <a href={`/articles/${params.row.id}`} rel="noreferrer" target="_blank">
-          {params.row.title}
-        </a>
-      );
+  const columns = useRef<GridColDef[]>([
+    {
+      field: 'title',
+      headerName: '标题',
+      minWidth: 350,
+      flex: 1,
+      renderCell: (params: GridRenderCellParams<BookCatelogItem>) => {
+        return (
+          <a
+            href={`/articles/${params.row.id}`}
+            rel="noreferrer"
+            target="_blank"
+          >
+            {params.row.title}
+          </a>
+        );
+      },
     },
-  },
-  {
-    field: 'authors',
-    headerName: '作者',
-    minWidth: 150,
-    flex: 1,
-    valueGetter: (
-      authors: string[]
-    ) => authors.map((i) => i).join(','),
-    renderCell: (params: GridRenderCellParams<BookCatelogItem>) => (
-      <div style={{ overflow: 'scroll' }}>
-        <Authors authors={params.row.authors} onClick={(a: string) => {
-          const newFilter: GridFilterModel ={
-            ...filterModelRef.current,
-            items:[
-              ...filterModelRef.current.items.filter(i => i.field != 'authors'),
-              {
-                id: 'authors',
-            field: 'authors', operator: 'contains', value: a
-          }]};
-          setFilterModel(newFilter);
-          filterModelRef.current = newFilter;
-        }}/>
-      </div>
-    ),
-  },
-  {
-    field: 'dates',
-    headerName: '时间',
-    description:
-      '可能包含多个时间点（起草时间，发布时间，子文稿时间等）或时间段',
-    minWidth: 150,
-    flex: 1,
-    valueGetter: (
-      dates: Date[]
-    ) =>
-      dates
-        .map((i) =>
-          i
-            ? [
-                i.year || '----',
-                ensure_two_digits(i.month, '--'),
-                ensure_two_digits(i.day, '--'),
-              ]
-                .filter((j) => j)
-                .join('/')
-            : '----/--/--',
-        )
-        .join(' '),
-    renderCell: (params: GridRenderCellParams<BookCatelogItem>) => (
-      <Stack spacing={1}>
-        {params.row.is_range_date ? (
-          <Typography variant="caption">
-            {
-              params.row.dates.map((i) =>
+    {
+      field: 'authors',
+      headerName: '作者',
+      minWidth: 150,
+      flex: 1,
+      valueGetter: (authors: string[]) => authors.map((i) => i).join(','),
+      renderCell: (params: GridRenderCellParams<BookCatelogItem>) => (
+        <div style={{ overflow: 'scroll' }}>
+          <Authors
+            authors={params.row.authors}
+            onClick={(a: string) => {
+              const newFilter: GridFilterModel = {
+                ...filterModelRef.current,
+                items: [
+                  ...filterModelRef.current.items.filter(
+                    (i) => i.field != 'authors',
+                  ),
+                  {
+                    id: 'authors',
+                    field: 'authors',
+                    operator: 'contains',
+                    value: a,
+                  },
+                ],
+              };
+              setFilterModel(newFilter);
+              filterModelRef.current = newFilter;
+            }}
+          />
+        </div>
+      ),
+    },
+    {
+      field: 'dates',
+      headerName: '时间',
+      description:
+        '可能包含多个时间点（起草时间，发布时间，子文稿时间等）或时间段',
+      minWidth: 150,
+      flex: 1,
+      valueGetter: (dates: Date[]) =>
+        dates
+          .map((i) =>
+            i
+              ? [
+                  i.year || '----',
+                  ensure_two_digits(i.month, '--'),
+                  ensure_two_digits(i.day, '--'),
+                ]
+                  .filter((j) => j)
+                  .join('/')
+              : '----/--/--',
+          )
+          .join(' '),
+      renderCell: (params: GridRenderCellParams<BookCatelogItem>) => (
+        <Stack spacing={1}>
+          {params.row.is_range_date ? (
+            <Typography variant="caption">
+              {params.row.dates
+                .map((i) =>
+                  [i.year, ensure_two_digits(i.month), ensure_two_digits(i.day)]
+                    .filter((j) => j)
+                    .join('/'),
+                )
+                .sort((a, b) => (a > b ? 1 : -1))
+                .join('至')}
+            </Typography>
+          ) : (
+            params
+              .row!.dates.map((i) =>
                 [i.year, ensure_two_digits(i.month), ensure_two_digits(i.day)]
                   .filter((j) => j)
                   .join('/'),
               )
-              .sort((a, b) => (a > b ? 1 : -1))
-              .join('至')}
-          </Typography>
-        ) : (
-            params.row!.dates.map((i) =>
-              [i.year, ensure_two_digits(i.month), ensure_two_digits(i.day)]
-                .filter((j) => j)
-                .join('/'),
-            )
-            .map((j) => (
-              <Typography key={j} variant="caption">
-                {j}
-              </Typography>
-            ))
-        )}
-      </Stack>
-    ),
-  },
-  {
-    field: 'publications',
-    headerName: '来源',
-    flex: 1,
-    minWidth: 150,
-    valueGetter: (
-      _: any, row: BookCatelogItem
-    ) => row.books!.join(','),
-    renderCell: (params: GridRenderCellParams<BookCatelogItem>) => (
-      <div style={{ overflow: 'scroll', height: '100%'}}>
-        <Tags tags={params.row.books?.map(i => ({name: i, type: '来源' as any, id: i})) || []} onClick={(t: Tag) => {
-          const newFilter: GridFilterModel ={
-            ...filterModelRef.current,
-            items:[
-              ...filterModelRef.current.items.filter(i => i.field != 'publications'),
-              {
-                id: 'publications',
-            field: 'publications', operator: 'contains', value: t.name
-          }]};
-          setFilterModel(newFilter);
-          filterModelRef.current = newFilter;
-        }}/>
-      </div>
-    ),
-  },
-  {
-    field: 'tags',
-    headerName: '标签',
-    minWidth: 150,
-    flex: 1,
-    sortComparator: (tags_a: string, tags_b: string) => {
-      return tags_a > tags_b ? 1 : -1;
+              .map((j) => (
+                <Typography key={j} variant="caption">
+                  {j}
+                </Typography>
+              ))
+          )}
+        </Stack>
+      ),
     },
-    valueGetter: (
-      tags: Tag[]
-    ) => tags.map((i) => i.name).join(','),
-    renderCell: (params: GridRenderCellParams<BookCatelogItem>) => (
-      <div style={{ overflow: 'scroll', height: '100px' }}>
-        <Tags tags={params.row.tags!} onClick={(t: Tag) => {
-          const newFilter: GridFilterModel ={
-            ...filterModelRef.current,
-            items:[
-              ...filterModelRef.current.items.filter(i => i.field != 'tags'),
-              {
-                id: 'tags',
-                    field: 'tags', operator: 'contains', value: t.name
-          }]};
-          setFilterModel(newFilter);
-          filterModelRef.current = newFilter;
-        }}/>
-      </div>
-    ),
-  },
-]);
+    {
+      field: 'publications',
+      headerName: '来源',
+      flex: 1,
+      minWidth: 150,
+      valueGetter: (_: any, row: BookCatelogItem) => row.books!.join(','),
+      renderCell: (params: GridRenderCellParams<BookCatelogItem>) => (
+        <div style={{ overflow: 'scroll', height: '100%' }}>
+          <Tags
+            tags={
+              params.row.books?.map((i) => ({
+                name: i,
+                type: '来源' as any,
+                id: i,
+              })) || []
+            }
+            onClick={(t: Tag) => {
+              const newFilter: GridFilterModel = {
+                ...filterModelRef.current,
+                items: [
+                  ...filterModelRef.current.items.filter(
+                    (i) => i.field != 'publications',
+                  ),
+                  {
+                    id: 'publications',
+                    field: 'publications',
+                    operator: 'contains',
+                    value: t.name,
+                  },
+                ],
+              };
+              setFilterModel(newFilter);
+              filterModelRef.current = newFilter;
+            }}
+          />
+        </div>
+      ),
+    },
+    {
+      field: 'tags',
+      headerName: '标签',
+      minWidth: 150,
+      flex: 1,
+      sortComparator: (tags_a: string, tags_b: string) => {
+        return tags_a > tags_b ? 1 : -1;
+      },
+      valueGetter: (tags: Tag[]) => tags.map((i) => i.name).join(','),
+      renderCell: (params: GridRenderCellParams<BookCatelogItem>) => (
+        <div style={{ overflow: 'scroll', height: '100px' }}>
+          <Tags
+            tags={params.row.tags!}
+            onClick={(t: Tag) => {
+              const newFilter: GridFilterModel = {
+                ...filterModelRef.current,
+                items: [
+                  ...filterModelRef.current.items.filter(
+                    (i) => i.field != 'tags',
+                  ),
+                  {
+                    id: 'tags',
+                    field: 'tags',
+                    operator: 'contains',
+                    value: t.name,
+                  },
+                ],
+              };
+              setFilterModel(newFilter);
+              filterModelRef.current = newFilter;
+            }}
+          />
+        </div>
+      ),
+    },
+  ]);
 
   useEffect(() => {
     catelog.forEach((i) => {
@@ -373,27 +400,29 @@ const columns = useRef<GridColDef[] >([
 
   const { TagDialog, tagFilter, setTagDialog, setTagFilter, tags } =
     useTagFilterDialog(tags_all, tags_all_order_by_type);
-    const [dateFilter, setDateFilter] = useState<DateFilter>(default_date_filter);
-  const { DateFilterDialog, showDateFilterDialog } =
-    useDateFilterDialog(default_date_filter, (d) => {
-      setDateFilter(d)
-  });
+  const [dateFilter, setDateFilter] = useState<DateFilter>(default_date_filter);
+  const { DateFilterDialog, showDateFilterDialog } = useDateFilterDialog(
+    default_date_filter,
+    (d) => {
+      setDateFilter(d);
+    },
+  );
 
-  const [authorFilter, setAuthorFilter] = useState<string | null>(null)
-  const {
-    AuthorDialog,
-    showAuthorDialog,
-  } = useAuthorFilterDialog(authors_all, (author: string) => {
-    setAuthorFilter(author ? author : null);
-  });
+  const [authorFilter, setAuthorFilter] = useState<string | null>(null);
+  const { AuthorDialog, showAuthorDialog } = useAuthorFilterDialog(
+    authors_all,
+    (author: string) => {
+      setAuthorFilter(author ? author : null);
+    },
+  );
 
-  const [sourceFilter, setSourceFilter] = useState<string | null>(null)
-  const {
-    SourceDialog,
-    showSourceDialog,
-  } = useSourceFilterDialog(sources_all, (s: string) => {
-    setSourceFilter(s)
-  });
+  const [sourceFilter, setSourceFilter] = useState<string | null>(null);
+  const { SourceDialog, showSourceDialog } = useSourceFilterDialog(
+    sources_all,
+    (s: string) => {
+      setSourceFilter(s);
+    },
+  );
   const [tipsAnchorEl, setTipsAnchorEl] = useState<HTMLElement | null>(null);
 
   const showTips = (event: React.MouseEvent<HTMLElement>) => {
@@ -446,7 +475,7 @@ const columns = useRef<GridColDef[] >([
       >
         <Stack direction="row">
           <Grid2 container spacing={1}>
-            <Grid2 size={{md: 5, xs: 12}}>
+            <Grid2 size={{ md: 5, xs: 12 }}>
               <Stack direction="row" alignItems="center">
                 <Typography variant="body1" sx={{ whiteSpace: 'nowrap' }}>
                   时间范围：
@@ -474,7 +503,7 @@ const columns = useRef<GridColDef[] >([
                 </Stack>
               </Stack>
             </Grid2>
-            <Grid2 size={{md: 7, xs: 12}} sx={{ overflowX: 'scroll' }}>
+            <Grid2 size={{ md: 7, xs: 12 }} sx={{ overflowX: 'scroll' }}>
               <Stack direction="row" alignItems="center">
                 <Typography variant="body1" sx={{ whiteSpace: 'nowrap' }}>
                   标签：
@@ -507,11 +536,15 @@ const columns = useRef<GridColDef[] >([
                 </Stack>
               </Stack>
             </Grid2>
-            <Grid2 size={{xs: 12, md: 5}} sx={{ overflowX: 'scroll' }}>
+            <Grid2 size={{ xs: 12, md: 5 }} sx={{ overflowX: 'scroll' }}>
               <Stack direction="row" alignItems="center">
                 <Typography variant="body1">作者：</Typography>
                 <Stack direction="row" spacing={1}>
-                  {Array.from(new Set([...default_authors, authorFilter].filter(i => i))).map((i) => {
+                  {Array.from(
+                    new Set(
+                      [...default_authors, authorFilter].filter((i) => i),
+                    ),
+                  ).map((i) => {
                     return (
                       <Chip
                         key={i}
@@ -519,7 +552,8 @@ const columns = useRef<GridColDef[] >([
                         variant={i == authorFilter ? 'filled' : 'outlined'}
                         color={i == authorFilter ? 'primary' : 'default'}
                         onDelete={
-                          i == authorFilter ? () => setAuthorFilter(null)
+                          i == authorFilter
+                            ? () => setAuthorFilter(null)
                             : undefined
                         }
                         onClick={(e) => {
@@ -537,13 +571,17 @@ const columns = useRef<GridColDef[] >([
                 </Stack>
               </Stack>
             </Grid2>
-            <Grid2 size={{md: 6, xs: 12}} sx={{ overflowX: 'scroll' }}>
+            <Grid2 size={{ md: 6, xs: 12 }} sx={{ overflowX: 'scroll' }}>
               <Stack direction="row" alignItems="center">
                 <Typography variant="body1" sx={{ whiteSpace: 'nowrap' }}>
                   来源：
                 </Typography>
                 <Stack direction="row" spacing={1}>
-                  {Array.from(new Set([...default_sources, sourceFilter].filter(x => x))).map((i) => {
+                  {Array.from(
+                    new Set(
+                      [...default_sources, sourceFilter].filter((x) => x),
+                    ),
+                  ).map((i) => {
                     const isSelected = i == sourceFilter;
                     return (
                       <Chip
@@ -569,10 +607,7 @@ const columns = useRef<GridColDef[] >([
                 </Stack>
               </Stack>
             </Grid2>
-            <Grid2
-              size={1}
-              sx={{ display: { md: 'flex', xs: 'none' } }}
-            >
+            <Grid2 size={1} sx={{ display: { md: 'flex', xs: 'none' } }}>
               <Popover
                 id="tips"
                 open={!!tipsAnchorEl}
@@ -614,7 +649,7 @@ const columns = useRef<GridColDef[] >([
               },
             }}
             filterModel={filterModel}
-            onFilterModelChange={f => {
+            onFilterModelChange={(f) => {
               setFilterModel(f);
               filterModelRef.current = f;
             }}

@@ -43,11 +43,15 @@ function PureArticle({
   const [voices, setVoices] = useState<SpeechSynthesisVoice[]>([]);
   const [selectedVoice, setSelectedVoice] = useState<string>();
   useEffect(() => {
-    const v = speechSynthesis.getVoices()
-    setVoices(v.sort((a,b) => a.lang > b.lang ? 1 : -1));
-    setSelectedVoice(localStorage.getItem('tts_voice') || v.find(i => i.lang == 'zh-CN')?.name || v[0]?.name)
-    setPitch(parseFloat(localStorage.getItem('tts_pitch') || '1'))
-    setRate(parseFloat(localStorage.getItem('tts_rate') || '1'))
+    const v = speechSynthesis.getVoices();
+    setVoices(v.sort((a, b) => (a.lang > b.lang ? 1 : -1)));
+    setSelectedVoice(
+      localStorage.getItem('tts_voice') ||
+        v.find((i) => i.lang == 'zh-CN')?.name ||
+        v[0]?.name,
+    );
+    setPitch(parseFloat(localStorage.getItem('tts_pitch') || '1'));
+    setRate(parseFloat(localStorage.getItem('tts_rate') || '1'));
   }, []);
 
   const contentsComponent = contents.map((part) => {
@@ -122,7 +126,12 @@ function PureArticle({
           alt=""
           key={key}
           src={part.text}
-          style={{ width: '50%', display: 'block', margin: 'auto', marginTop: '1.25em' }}
+          style={{
+            width: '50%',
+            display: 'block',
+            margin: 'auto',
+            marginTop: '1.25em',
+          }}
         />
       );
     } else if (part.type === ContentType.image_description) {
@@ -273,7 +282,7 @@ function PureArticle({
       </Stack>
     </>
   ) : null;
-  
+
   const commentsComponent = comments.filter((i) => i.index !== -1).length ? (
     <>
       <Divider sx={{ mt: 2, mb: 2 }} />
@@ -295,7 +304,7 @@ function PureArticle({
                 {bracket_right}
               </a>
             </span>
-            <Stack spacing={1}> 
+            <Stack spacing={1}>
               {i.text
                 .split('\n')
                 .filter((j) => j)
@@ -333,8 +342,7 @@ function PureArticle({
                   .map((part) => part.text)
                   .join('\n'),
               );
-              ssu.voice = voices
-                .find((i) => i.name == selectedVoice)!;
+              ssu.voice = voices.find((i) => i.name == selectedVoice)!;
               ssu.pitch = pitch;
               ssu.rate = rate;
               speechSynthesis.speak(ssu);
@@ -349,7 +357,7 @@ function PureArticle({
           sx={{
             position: 'absolute',
             top: 4,
-          zIndex: 999,
+            zIndex: 999,
             left: '25px',
             minWidth: 0,
             opacity: '0.5',
@@ -361,53 +369,55 @@ function PureArticle({
             setAnchorEl(e);
           }}
           onClick={() => {
-            setShowSettings(!showSettings)
+            setShowSettings(!showSettings);
           }}
         >
           <SettingsIcon />
         </Button>
         <Popover
-        open={showSettings}
-        anchorEl={anchorEl}
-        onClose={() => setShowSettings(false)}
-        sx={{
-          marginTop: '10px',
-        }}
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'left',
-        }}
+          open={showSettings}
+          anchorEl={anchorEl}
+          onClose={() => setShowSettings(false)}
+          sx={{
+            marginTop: '10px',
+          }}
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'left',
+          }}
         >
           <Grid2
             container
             alignItems="center"
             justifyContent="center"
-            sx={{p: 2, width: '400px' }}
+            sx={{ p: 2, width: '400px' }}
             spacing={2}
             rowSpacing={1}
           >
             <Grid2 size={12}>
               <FormControl fullWidth>
-  <InputLabel id="demo-simple-select-label">语音</InputLabel>
-  <Select
-    labelId="demo-simple-select-label"
-    value={selectedVoice}
-    label="语音"
-    onChange={(e) => {
-      setSelectedVoice(e.target.value);
-      localStorage.setItem('tts_voice', e.target.value);
-    }}
-  >
-    {voices.map(i => 
-      <MenuItem key={i.name} value={i.name}>{i.lang}-{i.name}</MenuItem>
-    )}
-  </Select>
-</FormControl>
+                <InputLabel id="demo-simple-select-label">语音</InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  value={selectedVoice}
+                  label="语音"
+                  onChange={(e) => {
+                    setSelectedVoice(e.target.value);
+                    localStorage.setItem('tts_voice', e.target.value);
+                  }}
+                >
+                  {voices.map((i) => (
+                    <MenuItem key={i.name} value={i.name}>
+                      {i.lang}-{i.name}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
             </Grid2>
             <Grid2 size={2}>
               <Typography>速度</Typography>
             </Grid2>
-            <Grid2 size={10} >
+            <Grid2 size={10}>
               <Slider
                 value={rate}
                 valueLabelDisplay="auto"
@@ -417,13 +427,14 @@ function PureArticle({
                 max={2}
                 onChange={(e, value) => {
                   setRate(value as number);
-                  localStorage.setItem('tts_rate', value.toString())
+                  localStorage.setItem('tts_rate', value.toString());
                 }}
               />
             </Grid2>
             <Grid2 size={2}>
-              <Typography>音高</Typography></Grid2>
-            <Grid2 size={10} >
+              <Typography>音高</Typography>
+            </Grid2>
+            <Grid2 size={10}>
               <Slider
                 value={pitch}
                 valueLabelDisplay="auto"
@@ -432,8 +443,8 @@ function PureArticle({
                 min={0.1}
                 max={2}
                 onChange={(e, value) => {
-                  setPitch(value as number)
-                  localStorage.setItem('tts_pitch', value.toString())
+                  setPitch(value as number);
+                  localStorage.setItem('tts_pitch', value.toString());
                 }}
               />
             </Grid2>

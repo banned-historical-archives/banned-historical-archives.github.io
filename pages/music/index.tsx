@@ -144,14 +144,15 @@ function Song({
     return res;
   }, [lyricLeft, lyricRight, details]);
 
-  if (loading) 
-
-return <Stack padding="20px" spacing="10px">
-<Skeleton variant="rectangular" width={"100%"} height={20} />
-<Skeleton variant="rectangular" width={"100%"} height={20} />
-<Skeleton variant="rectangular" width={"100%"} height={20} />
-<Skeleton variant="rectangular" width={"100%"} height={20} />
-</Stack>
+  if (loading)
+    return (
+      <Stack padding="20px" spacing="10px">
+        <Skeleton variant="rectangular" width={'100%'} height={20} />
+        <Skeleton variant="rectangular" width={'100%'} height={20} />
+        <Skeleton variant="rectangular" width={'100%'} height={20} />
+        <Skeleton variant="rectangular" width={'100%'} height={20} />
+      </Stack>
+    );
   return (
     <Stack padding="20px">
       <Typography variant="subtitle1" sx={{ mb: 2 }}>
@@ -348,7 +349,7 @@ function Player({
       audioRef.current?.play().catch(() => {});
     } else if (repeatType === RepeatType.all) {
       const rows = apiRef.current.getSortedRowIds();
-      let idx = apiRef.current.getRowIndexRelativeToVisibleRows(curId.current)
+      let idx = apiRef.current.getRowIndexRelativeToVisibleRows(curId.current);
       if (rows.length - 1 == idx) {
         idx == 0;
       } else {
@@ -494,7 +495,14 @@ export default function Music({ music }: { music: MusicIndexes }) {
   const ee = useRef(new EventEmitter());
   ee.current.setMaxListeners(9876543);
   const indexesRef = useRef<Column[]>(
-    music.map((i) => ({ id: i[0], name: i[1], archiveId: i[2], tags: i[4], nLyrics: i[3], composer: i[5] })),
+    music.map((i) => ({
+      id: i[0],
+      name: i[1],
+      archiveId: i[2],
+      tags: i[4],
+      nLyrics: i[3],
+      composer: i[5],
+    })),
   );
   const columns: GridColDef<Column>[] = useMemo(
     () => [
@@ -532,11 +540,22 @@ export default function Music({ music }: { music: MusicIndexes }) {
           return (
             <Stack direction="row">
               {(params.row.tags || []).map((i) => (
-                <Chip key={i} sx={{ m: 0.3 }} label={i} onClick={() => {
-                  apiRef.current.setFilterModel({items:[{
-                    field: 'tags', operator: 'contains', value: i
-                  }]})
-                }}/>
+                <Chip
+                  key={i}
+                  sx={{ m: 0.3 }}
+                  label={i}
+                  onClick={() => {
+                    apiRef.current.setFilterModel({
+                      items: [
+                        {
+                          field: 'tags',
+                          operator: 'contains',
+                          value: i,
+                        },
+                      ],
+                    });
+                  }}
+                />
               ))}
             </Stack>
           );
@@ -549,7 +568,7 @@ export default function Music({ music }: { music: MusicIndexes }) {
   const apiRef = useGridApiRef();
   useEffect(() => {
     function onChange(id: string) {
-      const idx = apiRef.current.getRowIndexRelativeToVisibleRows(id)
+      const idx = apiRef.current.getRowIndexRelativeToVisibleRows(id);
 
       try {
         apiRef.current.setExpandedDetailPanels([id]);
@@ -561,16 +580,9 @@ export default function Music({ music }: { music: MusicIndexes }) {
     }
     ee.current.on('musicChanged', onChange);
     setTimeout(() => {
-      const rows = apiRef.current.getSortedRows()
-      const row = rows[0]
-      ee.current.emit(
-        'musicChanged',
-        row.id,
-        row.name,
-        row.archiveId,
-        0,
-        0,
-      );
+      const rows = apiRef.current.getSortedRows();
+      const row = rows[0];
+      ee.current.emit('musicChanged', row.id, row.name, row.archiveId, 0, 0);
     }, 500);
     return () => {
       ee.current.off('musicChanged', onChange);
@@ -589,11 +601,11 @@ export default function Music({ music }: { music: MusicIndexes }) {
       <Stack sx={{ flex: 1, width: '100%', height: '500px' }}>
         <DataGridPro
           apiRef={apiRef}
-            initialState={{
-              sorting: {
-                sortModel: [{ field: 'nLyrics', sort: 'desc' }],
-              },
-            }}
+          initialState={{
+            sorting: {
+              sortModel: [{ field: 'nLyrics', sort: 'desc' }],
+            },
+          }}
           getDetailPanelContent={({ row }) => (
             <Song
               id={row.id}
@@ -603,7 +615,7 @@ export default function Music({ music }: { music: MusicIndexes }) {
             />
           )}
           getRowId={(row) => row.id}
-          getDetailPanelHeight={() => "auto"}
+          getDetailPanelHeight={() => 'auto'}
           rows={indexesRef.current}
           columns={columns}
           localeText={zhCN.components.MuiDataGrid.defaultProps.localeText}

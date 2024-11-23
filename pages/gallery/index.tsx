@@ -113,9 +113,7 @@ const columns: GridColDef<PictureMetaData>[] = [
     headerName: '时间',
     minWidth: 150,
     flex: 1,
-    valueGetter: (
-      _, row: Date
-    ) =>
+    valueGetter: (_, row: Date) =>
       row.year
         ? [
             row.year || '----',
@@ -149,9 +147,7 @@ const columns: GridColDef<PictureMetaData>[] = [
     sortComparator: (tags_a: string, tags_b: string) => {
       return tags_a > tags_b ? 1 : -1;
     },
-    valueGetter: (
-      tags: Tag[]
-    ) => tags.map((i) => i.name).join(','),
+    valueGetter: (tags: Tag[]) => tags.map((i) => i.name).join(','),
     renderCell: (params: GridRenderCellParams<PictureMetaData>) => (
       <div style={{ overflow: 'visible' }}>
         <ImageTags tags={params.row.tags} />

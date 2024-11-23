@@ -11,7 +11,10 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import { Chip } from '@mui/material';
 
-export function useSourceFilterDialog(sources_all: string[], onChange: (s: string) => void) {
+export function useSourceFilterDialog(
+  sources_all: string[],
+  onChange: (s: string) => void,
+) {
   const [show, setShow] = useState(false);
   const [selected, setSelected] = useState<string>(sources_all[0]);
   const SourceDialog = (
@@ -30,13 +33,20 @@ export function useSourceFilterDialog(sources_all: string[], onChange: (s: strin
         ))}
       </DialogContent>
       <DialogActions>
-        <Button onClick={() => {
-          setShow(false)
-        }}>取消</Button>
-        <Button onClick={() => {
-    onChange(selected);
-    setShow(false);
-        }} autoFocus>
+        <Button
+          onClick={() => {
+            setShow(false);
+          }}
+        >
+          取消
+        </Button>
+        <Button
+          onClick={() => {
+            onChange(selected);
+            setShow(false);
+          }}
+          autoFocus
+        >
           确定
         </Button>
       </DialogActions>

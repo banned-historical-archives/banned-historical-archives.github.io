@@ -389,22 +389,27 @@ export function get_article_id(r: ParserResult) {
   const res = crypto_md5(
     JSON.stringify([
       r.title,
-      r.dates.sort((a, b) =>
-        `${a.year || '0000'}-${ensure_two_digits(a.month)}-${ensure_two_digits(
-          a.day,
-        )}` >
-          `${b.year || '0000'}-${ensure_two_digits(b.month)}-${ensure_two_digits(
-            b.day,
-          )}`
-          ? 1
-          : -1,
-      ).map(a => `${a.year || '0000'}-${ensure_two_digits(a.month)}-${ensure_two_digits(
-        a.day,
-      )}`),
+      r.dates
+        .sort((a, b) =>
+          `${a.year || '0000'}-${ensure_two_digits(
+            a.month,
+          )}-${ensure_two_digits(a.day)}` >
+          `${b.year || '0000'}-${ensure_two_digits(
+            b.month,
+          )}-${ensure_two_digits(b.day)}`
+            ? 1
+            : -1,
+        )
+        .map(
+          (a) =>
+            `${a.year || '0000'}-${ensure_two_digits(
+              a.month,
+            )}-${ensure_two_digits(a.day)}`,
+        ),
       !!r.is_range_date,
       r.authors.sort((a, b) => (a > b ? 1 : -1)),
-      r.file_id || ''
-    ])
+      r.file_id || '',
+    ]),
   );
   return res.substr(0, 10);
 }

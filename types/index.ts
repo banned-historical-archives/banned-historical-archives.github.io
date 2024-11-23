@@ -105,7 +105,7 @@ export type MusicLyric = {
     source: string;
     artist: string;
   }[];
-}
+};
 export type Music = {
   id: string;
   name: string;

@@ -25,7 +25,10 @@ function to_number(s: string) {
   return undefined;
 }
 
-export function useDateFilterDialog(default_date_filter: DateFilter, onChange: (d: DateFilter) => void) {
+export function useDateFilterDialog(
+  default_date_filter: DateFilter,
+  onChange: (d: DateFilter) => void,
+) {
   const dateFilter = useRef<DateFilter>(default_date_filter);
   const [show, setShow] = useState(false);
   const [_, forceUpdate] = useState(0);
@@ -60,10 +63,10 @@ export function useDateFilterDialog(default_date_filter: DateFilter, onChange: (
       res.day_b = d.day_b;
     }
     if (res.year_a && res.month_a && res.day_a) {
-      onChange(res)
+      onChange(res);
       setShow(false);
       dateFilter.current = res;
-      forceUpdate(x => x + 1);
+      forceUpdate((x) => x + 1);
     }
   }, []);
 
@@ -78,8 +81,8 @@ export function useDateFilterDialog(default_date_filter: DateFilter, onChange: (
             value={dateFilter.current.year_a}
             size="small"
             onChange={(e) => {
-              dateFilter.current.year_a= to_number(e.target.value);
-              forceUpdate(x => x + 1);
+              dateFilter.current.year_a = to_number(e.target.value);
+              forceUpdate((x) => x + 1);
             }}
           />
           <TextField
@@ -87,8 +90,8 @@ export function useDateFilterDialog(default_date_filter: DateFilter, onChange: (
             value={dateFilter.current.month_a}
             size="small"
             onChange={(e) => {
-              dateFilter.current.month_a= to_number(e.target.value);
-              forceUpdate(x => x + 1);
+              dateFilter.current.month_a = to_number(e.target.value);
+              forceUpdate((x) => x + 1);
             }}
           />
           <TextField
@@ -96,8 +99,8 @@ export function useDateFilterDialog(default_date_filter: DateFilter, onChange: (
             value={dateFilter.current.day_a}
             size="small"
             onChange={(e) => {
-              dateFilter.current.day_a= to_number(e.target.value);
-              forceUpdate(x => x + 1);
+              dateFilter.current.day_a = to_number(e.target.value);
+              forceUpdate((x) => x + 1);
             }}
           />
           <Typography variant="subtitle1">结束时间</Typography>
@@ -107,7 +110,7 @@ export function useDateFilterDialog(default_date_filter: DateFilter, onChange: (
             size="small"
             onChange={(e) => {
               dateFilter.current.year_b = to_number(e.target.value);
-              forceUpdate(x => x + 1);
+              forceUpdate((x) => x + 1);
             }}
           />
           <TextField
@@ -116,7 +119,7 @@ export function useDateFilterDialog(default_date_filter: DateFilter, onChange: (
             size="small"
             onChange={(e) => {
               dateFilter.current.month_b = to_number(e.target.value);
-              forceUpdate(x => x + 1);
+              forceUpdate((x) => x + 1);
             }}
           />
           <TextField
@@ -125,7 +128,7 @@ export function useDateFilterDialog(default_date_filter: DateFilter, onChange: (
             size="small"
             onChange={(e) => {
               dateFilter.current.day_b = to_number(e.target.value);
-              forceUpdate(x => x + 1);
+              forceUpdate((x) => x + 1);
             }}
           />
         </Stack>

@@ -13,23 +13,23 @@ services:
       - ELASTIC_PASSWORD=password
       - xpack.security.http.ssl.enabled=false
     ports:
-      - "9200:9200"
+      - '9200:9200'
     networks:
       - bha
     expose:
-      - "9200"
+      - '9200'
 
   app:
-    build: 
+    build:
       context: .
       dockerfile: Dockerfile
       args:
         - ES_URL=http://elasticsearch:9200
         - ES_USERNAME=elastic
         - ES_PASSWORD=password
-        # - node_options="--max-old-space-size=8192" 
+        # - node_options="--max-old-space-size=8192"
     ports:
-      - "3000:3000"
+      - '3000:3000'
     volumes:
       - .:/app
     depends_on:

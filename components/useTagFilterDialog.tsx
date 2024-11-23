@@ -42,8 +42,9 @@ export function useTagFilterDialog(
             <Typography variant="body1" sx={{ whiteSpace: 'nowrap' }}>
               {type}：
             </Typography>
-            {Array.from(tags_all_order_by_type.get(type)!.values()).sort((a,b) => a.name>b.name ? 1 : -1).map(
-              (tag) => (
+            {Array.from(tags_all_order_by_type.get(type)!.values())
+              .sort((a, b) => (a.name > b.name ? 1 : -1))
+              .map((tag) => (
                 <Chip
                   sx={{ m: 0.5 }}
                   key={tag.id}
@@ -52,8 +53,7 @@ export function useTagFilterDialog(
                   color={selected === tag.id ? 'primary' : 'default'}
                   variant={selected === tag.id ? 'filled' : 'outlined'}
                 />
-              ),
-            )}
+              ))}
           </>
         ))}
       </DialogContent>

@@ -24,3 +24,6 @@ parsed/archives*
 ocr_cache/archives*
 ocr_patch/archives*
 raw/archives*
+
+migration
+next_helper

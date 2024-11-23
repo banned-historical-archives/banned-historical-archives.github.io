@@ -11,7 +11,7 @@ const book_indexes = JSON.parse(
 ) as BookIndexes;
 
 (async () => {
-  const root = join(process.cwd(), 'next_helper')
+  const root = join(process.cwd(), 'next_helper');
   ensureDirSync(root);
 
   for (const article_id of Object.keys(article_indexes)) {
@@ -46,11 +46,12 @@ const book_indexes = JSON.parse(
       books.push(book);
     }
 
-    ensureDirSync(join(root, article_id.slice(0, 3)))
-    writeFileSync(join(root, article_id.slice(0, 3), article_id + '.json'), 
+    ensureDirSync(join(root, article_id.slice(0, 3)));
+    writeFileSync(
+      join(root, article_id.slice(0, 3), article_id + '.json'),
       JSON.stringify({
         books,
-      })
+      }),
     );
   }
 })();

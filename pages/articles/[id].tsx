@@ -76,7 +76,11 @@ export const getStaticProps: GetStaticProps = async (
   const { id } = context.params as {
     id: string;
   };
-  const data = JSON.parse(readFileSync(join(process.cwd(), 'next_helper', id.slice(0,3), id + '.json')).toString())
+  const data = JSON.parse(
+    readFileSync(
+      join(process.cwd(), 'next_helper', id.slice(0, 3), id + '.json'),
+    ).toString(),
+  );
   return {
     props: {
       books: data.books,
@@ -427,7 +431,7 @@ export default function ArticleViewer({
 
   const details = (
     <>
-      <Grid2 size={{md: 6, xs: 12}}>
+      <Grid2 size={{ md: 6, xs: 12 }}>
         <Stack direction="row" spacing={1} alignItems="center">
           <Typography variant="body1">作者：</Typography>
           <Stack direction="row" sx={{ overflowX: 'scroll', flex: 1 }}>
@@ -453,7 +457,7 @@ export default function ArticleViewer({
           ))}
         </Stack>
       </Grid2>
-      <Grid2 size={{md: 3, xs: 12}}>
+      <Grid2 size={{ md: 3, xs: 12 }}>
         <Typography variant="body1" sx={{ overflowX: 'scroll' }}>
           时间：
           {article.is_range_date
@@ -463,7 +467,7 @@ export default function ArticleViewer({
             : article.dates.map((i) => date_to_string(i as Date)).join(',')}
         </Typography>
       </Grid2>
-      <Grid2 size={{xs: 12, md: 3}}>
+      <Grid2 size={{ xs: 12, md: 3 }}>
         <Stack direction="row" alignItems="center">
           <Typography variant="body1">标签：</Typography>
           <Stack
@@ -476,7 +480,7 @@ export default function ArticleViewer({
           </Stack>
         </Stack>
       </Grid2>
-      <Grid2 size={{xs: 12, md: 6}}>
+      <Grid2 size={{ xs: 12, md: 6 }}>
         <Stack direction="row" alignItems="center" spacing={1}>
           <Typography variant="body1">选择来源：</Typography>
           <Stack
@@ -600,14 +604,17 @@ export default function ArticleViewer({
           sx={{ pt: 2, pl: 2, pr: 2 }}
           spacing={2}
         >
-          <Grid2 size={{md: 6, xs: 10}}>
+          <Grid2 size={{ md: 6, xs: 10 }}>
             <Typography variant="body1" sx={{ overflowX: 'scroll' }}>
               标题：
               {article.title}
               {aliases.length ? `(别名:${aliases.join(',')})` : ''}
             </Typography>
           </Grid2>
-          <Grid2 size={2} sx={{ display: { md: 'none', xs: 'flex' }, justifyContent: 'end' }}>
+          <Grid2
+            size={2}
+            sx={{ display: { md: 'none', xs: 'flex' }, justifyContent: 'end' }}
+          >
             <Button onClick={() => setShowMore(!showMore)}>
               {showMore ? '隐藏' : '展开'}
             </Button>

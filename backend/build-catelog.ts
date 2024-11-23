@@ -82,7 +82,14 @@ function catelog_temp_to_catelog(c: BookCatelogTemp): BookCatelog {
 
         if (cfg.resource_type === 'music') {
           const music_metadata = metadata as MusicMetaData;
-          music_indexes.push([metadata.id, metadata.name, i, music_metadata.lyrics.length, music_metadata.tags || [], music_metadata.composer])
+          music_indexes.push([
+            metadata.id,
+            metadata.name,
+            i,
+            music_metadata.lyrics.length,
+            music_metadata.tags || [],
+            music_metadata.composer,
+          ]);
         } else if (cfg.resource_type === 'video') {
           gallery_indexes.push(metadata as VideoMetaData);
         } else if (cfg.resource_type === 'picture') {

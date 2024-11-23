@@ -29,11 +29,6 @@ import { ContentType, Date, ParserResult } from '../types';
  }
  */
 
-
- for (const i of [
-'几天',
-'，1',
-'，3',])
-console.log( md5(i), crypto_md5(i))
+  for (const i of ['几天', '，1', '，3']) console.log(md5(i), crypto_md5(i));
   debugger;
 })();
