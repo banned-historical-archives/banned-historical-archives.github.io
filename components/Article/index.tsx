@@ -18,12 +18,11 @@ import {
 import SpeedDial from '@mui/material/SpeedDial';
 import PlayCircleIcon from '@mui/icons-material/PlayCircle';
 import StopCircleIcon from '@mui/icons-material/StopCircle';
-import SettingsIcon from '@mui/icons-material/Settings';
 import { diff_match_patch, Diff } from 'diff-match-patch';
 import { ReactElement, useEffect, useMemo, useRef, useState } from 'react';
 import { Article, Content, Comment } from '../../types';
 import { ContentType, ParserResult } from '../../types';
-import { bracket_left, bracket_right, crypto_md5 } from '../../utils';
+import { bracket_left, bracket_right, crypto_md5, sleep } from '../../utils';
 import PatchableArticle from './PatchableArticle';
 
 function PureArticle({
@@ -35,6 +34,7 @@ function PureArticle({
   comments: Comment[];
   description?: string;
 }) {
+  const ssu = useRef<SpeechSynthesisUtterance>();
   const [playing, setPlaying] = useState(false);
   const [pitch, setPitch] = useState(1);
   const [rate, setRate] = useState(1);
@@ -43,15 +43,21 @@ function PureArticle({
   const [voices, setVoices] = useState<SpeechSynthesisVoice[]>([]);
   const [selectedVoice, setSelectedVoice] = useState<string>();
   useEffect(() => {
-    const v = speechSynthesis.getVoices();
-    setVoices(v.sort((a, b) => (a.lang > b.lang ? 1 : -1)));
-    setSelectedVoice(
-      localStorage.getItem('tts_voice') ||
-        v.find((i) => i.lang == 'zh-CN')?.name ||
-        v[0]?.name,
-    );
-    setPitch(parseFloat(localStorage.getItem('tts_pitch') || '1'));
-    setRate(parseFloat(localStorage.getItem('tts_rate') || '1'));
+    (async () => {
+      let v = speechSynthesis.getVoices();
+      while (!v.length) {
+        v = speechSynthesis.getVoices();
+        await sleep(100);
+      }
+      setVoices(v.sort((a, b) => (a.lang > b.lang ? 1 : -1)));
+      setSelectedVoice(
+        localStorage.getItem('tts_voice') ||
+          v.find((i) => i.lang == 'zh-CN')?.name ||
+          v[0]?.name,
+      );
+      setPitch(parseFloat(localStorage.getItem('tts_pitch') || '1'));
+      setRate(parseFloat(localStorage.getItem('tts_rate') || '1'));
+    })();
   }, []);
 
   const contentsComponent = contents.map((part) => {
@@ -333,46 +339,19 @@ function PureArticle({
             height: '20px',
             borderRadius: '10px',
           }}
+          ref={(e) => {
+            setAnchorEl(e);
+          }}
           onClick={() => {
-            setPlaying(!playing);
             if (!playing) {
-              const ssu = new SpeechSynthesisUtterance(
-                contents
-                  .filter((part) => part.type !== ContentType.image)
-                  .map((part) => part.text)
-                  .join('\n'),
-              );
-              ssu.voice = voices.find((i) => i.name == selectedVoice)!;
-              ssu.pitch = pitch;
-              ssu.rate = rate;
-              speechSynthesis.speak(ssu);
+              setShowSettings(!showSettings);
             } else {
+              setPlaying(false);
               speechSynthesis.cancel();
             }
           }}
         >
           {playing ? <StopCircleIcon /> : <PlayCircleIcon />}
-        </Button>
-        <Button
-          sx={{
-            position: 'absolute',
-            top: 4,
-            zIndex: 999,
-            left: '25px',
-            minWidth: 0,
-            opacity: '0.5',
-            width: '20px',
-            height: '20px',
-            borderRadius: '10px',
-          }}
-          ref={(e) => {
-            setAnchorEl(e);
-          }}
-          onClick={() => {
-            setShowSettings(!showSettings);
-          }}
-        >
-          <SettingsIcon />
         </Button>
         <Popover
           open={showSettings}
@@ -447,6 +426,29 @@ function PureArticle({
                   localStorage.setItem('tts_pitch', value.toString());
                 }}
               />
+            </Grid2>
+            <Grid2 size={12}>
+              <Button
+                variant="outlined"
+                onClick={() => {
+                  setPlaying(true);
+                  setShowSettings(false);
+                  ssu.current = new SpeechSynthesisUtterance(
+                    contents
+                      .filter((part) => part.type !== ContentType.image)
+                      .map((part) => part.text)
+                      .join('\n'),
+                  );
+                  ssu.current.voice = voices.find(
+                    (i) => i.name == selectedVoice,
+                  )!;
+                  ssu.current.pitch = pitch;
+                  ssu.current.rate = rate;
+                  speechSynthesis.speak(ssu.current);
+                }}
+              >
+                朗读
+              </Button>
             </Grid2>
           </Grid2>
         </Popover>
