@@ -446,7 +446,7 @@ const columns = useRef<GridColDef[] >([
       >
         <Stack direction="row">
           <Grid2 container spacing={1}>
-            <Grid2 size={5}>
+            <Grid2 size={{md: 5, xs: 12}}>
               <Stack direction="row" alignItems="center">
                 <Typography variant="body1" sx={{ whiteSpace: 'nowrap' }}>
                   时间范围：
@@ -474,7 +474,7 @@ const columns = useRef<GridColDef[] >([
                 </Stack>
               </Stack>
             </Grid2>
-            <Grid2 size={7} sx={{ overflowX: 'scroll' }}>
+            <Grid2 size={{md: 7, xs: 12}} sx={{ overflowX: 'scroll' }}>
               <Stack direction="row" alignItems="center">
                 <Typography variant="body1" sx={{ whiteSpace: 'nowrap' }}>
                   标签：
@@ -507,7 +507,7 @@ const columns = useRef<GridColDef[] >([
                 </Stack>
               </Stack>
             </Grid2>
-            <Grid2 size={5} sx={{ overflowX: 'scroll' }}>
+            <Grid2 size={{xs: 12, md: 5}} sx={{ overflowX: 'scroll' }}>
               <Stack direction="row" alignItems="center">
                 <Typography variant="body1">作者：</Typography>
                 <Stack direction="row" spacing={1}>
@@ -537,7 +537,7 @@ const columns = useRef<GridColDef[] >([
                 </Stack>
               </Stack>
             </Grid2>
-            <Grid2 size={6} sx={{ overflowX: 'scroll' }}>
+            <Grid2 size={{md: 6, xs: 12}} sx={{ overflowX: 'scroll' }}>
               <Stack direction="row" alignItems="center">
                 <Typography variant="body1" sx={{ whiteSpace: 'nowrap' }}>
                   来源：
