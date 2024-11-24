@@ -44,6 +44,9 @@ function PureArticle({
   const [selectedVoice, setSelectedVoice] = useState<string>();
   useEffect(() => {
     (async () => {
+      if (!window.speechSynthesis) {
+        return;
+      }
       let v = speechSynthesis.getVoices();
       while (!v.length) {
         v = speechSynthesis.getVoices();
@@ -331,6 +334,7 @@ function PureArticle({
         <Button
           sx={{
             position: 'absolute',
+            visibility: selectedVoice ? 'visible' : 'hidden',
             top: 4,
             left: 0,
             minWidth: 0,
