@@ -55,6 +55,10 @@ function PureArticle({
       setVoices(v.sort((a, b) => (a.lang > b.lang ? 1 : -1)));
       setSelectedVoice(
         localStorage.getItem('tts_voice') ||
+          v.find((i) => i.lang == 'zh_CN')?.name ||
+          v.find((i) => i.lang == 'zh_CN_')?.name ||
+          v.find((i) => i.name.indexOf('中国') >= 0)?.name ||
+          v.find((i) => i.name.indexOf('中文') >= 0)?.name ||
           v.find((i) => i.lang == 'zh-CN')?.name ||
           v[0]?.name,
       );
