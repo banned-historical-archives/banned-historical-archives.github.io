@@ -88,12 +88,11 @@ function catelog_temp_to_catelog(c: BookCatelogTemp): BookCatelog {
             i,
             music_metadata.lyrics.length,
             music_metadata.tags || [],
-            music_metadata.composer,
-            music_metadata.lyrics.reduce((m, i) => {
-              if (i.lyricist)
-                m.push(i.lyricist);
+            music_metadata.composers,
+            Array.from(music_metadata.lyrics.reduce((m, i) => {
+              i.lyricists.forEach(x =>m.add(x));
               return m;
-            }, [] as string[]),
+            }, new Set<string>())),
             Array.from(music_metadata.lyrics.reduce((m, i) => {
               for (const x of i.audios) {
                 for (const y of x.artists) {

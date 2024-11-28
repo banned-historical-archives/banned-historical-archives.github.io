@@ -97,7 +97,7 @@ export type Date = {
 };
 
 export type MusicLyric = {
-  lyricist: string;
+  lyricists: string[];
   version: string;
   content: string;
   audios: {
@@ -113,7 +113,7 @@ export type MusicLyric = {
 export type Music = {
   id: string;
   name: string;
-  composer: string;
+  composers: string[];
   description: string;
   lyrics: MusicLyric[];
 };
@@ -254,7 +254,7 @@ export type AutomatedEntryOption =
 export type MusicMetaData = {
   id: string;
   name: string;
-  composer: string;
+  composers: string[];
   description: string;
   tags?: string[];
   lyrics: MusicLyric[];
@@ -491,6 +491,6 @@ export type BookCatelogItem = {
 export type ArticleIndexes = { [aid: string]: number[] }; // book_number_id
 export type TagIndexes = [string, string][]; // type, name
 export type BookIndexes = [string, string, number][]; // id, name, archive_id
-export type MusicIndex = [string, string, number, number, string[], string, string[], {name: string, type: string}[], string[], string[]]; // id, name, archive_id, lryic_length, tags, composer, lyricists, artists, sources, art forms
+export type MusicIndex = [string, string, number, number, string[], string[], string[], {name: string, type: string}[], string[], string[]]; // id, name, archive_id, lryic_length, tags, composers, lyricists, artists, sources, art forms
 export type MusicIndexes = MusicIndex[];
 export type GalleryIndexes = (VideoMetaData | PictureMetaData)[];
