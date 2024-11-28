@@ -89,6 +89,33 @@ function catelog_temp_to_catelog(c: BookCatelogTemp): BookCatelog {
             music_metadata.lyrics.length,
             music_metadata.tags || [],
             music_metadata.composer,
+            music_metadata.lyrics.reduce((m, i) => {
+              if (i.lyricist)
+                m.push(i.lyricist);
+              return m;
+            }, [] as string[]),
+            Array.from(music_metadata.lyrics.reduce((m, i) => {
+              for (const x of i.audios) {
+                for (const y of x.artists) {
+                  m.add(y.name + '&' + y.type);
+                }
+              }
+              return m;
+            }, new Set<string>())).map(i => ({name: i.split('&')[0], type: i.split('&')[1]})),
+            Array.from(music_metadata.lyrics.reduce((m, i) => {
+              for (const x of i.audios) {
+                for (const y of x.sources) {
+                  m.add(y);
+                }
+              }
+              return m;
+            }, new Set<string>())),
+            Array.from(music_metadata.lyrics.reduce((m, i) => {
+              for (const x of i.audios) {
+                m.add(x.art_form);
+              }
+              return m;
+            }, new Set<string>())),
           ]);
         } else if (cfg.resource_type === 'video') {
           gallery_indexes.push(metadata as VideoMetaData);

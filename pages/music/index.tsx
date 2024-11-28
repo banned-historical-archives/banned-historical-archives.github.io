@@ -163,7 +163,7 @@ function Song({
           <Stack key={idx} sx={{ display: 'inline' }}>
             {lyric.audios.map((audio, aid) => {
               const displayName = `${details?.name}-${lyric.version}-${
-                audio.artist || '未知'
+                audio.artists.map(i => `${i.name}(${i.type})`).join(' ') || '未知'
               }`;
               return (
                 <Button
@@ -173,7 +173,7 @@ function Song({
                   onClick={() => {
                     ee.emit('musicChanged', id, name, archiveId);
                     ee.emit('lyricChanged', lyric);
-                    ee.emit('artistChanged', audio.artist);
+                    ee.emit('artistChanged', audio.artists);
                     ee.emit('musicStart', audio.url);
                   }}
                 >
@@ -276,8 +276,8 @@ function Player({
     function lyricChanged(lyric: MusicLyric) {
       setVersionName(lyric.version);
     }
-    function artistChanged(artist: string) {
-      setArtistName(artist);
+    function artistChanged(artists: {name: string, type: string}[]) {
+      setArtistName(artists.map(i => `${i.name}(${i.type})`).join(' '));
     }
     function musicChanged(
       id: string,
@@ -304,7 +304,7 @@ function Player({
             }
             ee.emit(
               'artistChanged',
-              first.lyrics[lyricIndex!].audios[audioIndex].artist,
+              first.lyrics[lyricIndex!].audios[audioIndex].artists,
             );
             if (autoplay) {
               ee.emit(
@@ -490,6 +490,10 @@ type Column = {
   nLyrics: number;
   tags: string[];
   composer: string;
+  lyricists: string[];
+  artists: {name: string,type: string}[];
+  sources: string[];
+  art_forms: string[];
 };
 export default function Music({ music }: { music: MusicIndexes }) {
   const ee = useRef(new EventEmitter());
@@ -502,6 +506,10 @@ export default function Music({ music }: { music: MusicIndexes }) {
       tags: i[4],
       nLyrics: i[3],
       composer: i[5],
+      art_forms: i[9],
+      lyricists: i[6],
+      artists: i[7],
+      sources: i[8],
     })),
   );
   const columns: GridColDef<Column>[] = useMemo(
@@ -522,6 +530,38 @@ export default function Music({ music }: { music: MusicIndexes }) {
         minWidth: 150,
         renderCell: (params: GridRenderCellParams<Column>) => {
           return params.row.composer;
+        },
+      },
+      {
+        field: 'lyricists',
+        headerName: '作词',
+        minWidth: 150,
+        renderCell: (params: GridRenderCellParams<Column>) => {
+          return params.row.lyricists.join(',');
+        },
+      },
+      {
+        field: 'artists',
+        headerName: '演奏',
+        minWidth: 150,
+        renderCell: (params: GridRenderCellParams<Column>) => {
+          return params.row.artists.map(i => i.name).join(',');
+        },
+      },
+      {
+        field: 'sources',
+        headerName: '来源',
+        minWidth: 150,
+        renderCell: (params: GridRenderCellParams<Column>) => {
+          return params.row.sources.join(',');
+        },
+      },
+      {
+        field: 'art_forms',
+        headerName: '艺术形式',
+        minWidth: 150,
+        renderCell: (params: GridRenderCellParams<Column>) => {
+          return params.row.art_forms.join(',');
         },
       },
       {
@@ -600,6 +640,8 @@ export default function Music({ music }: { music: MusicIndexes }) {
       <Player ee={ee.current} apiRef={apiRef} />
       <Stack sx={{ flex: 1, width: '100%', height: '500px' }}>
         <DataGridPro
+            disableColumnFilter
+            headerFilters
           apiRef={apiRef}
           initialState={{
             sorting: {

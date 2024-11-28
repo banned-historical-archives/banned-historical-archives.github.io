@@ -102,8 +102,12 @@ export type MusicLyric = {
   content: string;
   audios: {
     url: string;
-    source: string;
-    artist: string;
+    sources: string[];
+    art_form: string; // 合唱，说书。。。
+    artists: {
+      name: string;
+      type: string; // 伴奏，合唱团，领唱，乐团。。。 'accompaniment' | 'choir' | 'lead singer' | 'orchestra' | 'command';
+    }[]
   }[];
 };
 export type Music = {
@@ -253,16 +257,7 @@ export type MusicMetaData = {
   composer: string;
   description: string;
   tags?: string[];
-  lyrics: {
-    lyricist: string;
-    version: string;
-    content: string;
-    audios: {
-      url: string;
-      source: string;
-      artist: string;
-    }[];
-  }[];
+  lyrics: MusicLyric[];
 };
 
 export type PictureMetaData = {
@@ -496,6 +491,6 @@ export type BookCatelogItem = {
 export type ArticleIndexes = { [aid: string]: number[] }; // book_number_id
 export type TagIndexes = [string, string][]; // type, name
 export type BookIndexes = [string, string, number][]; // id, name, archive_id
-export type MusicIndex = [string, string, number, number, string[], string]; // id, name, archive_id, lryic_length, tags, composer
+export type MusicIndex = [string, string, number, number, string[], string, string[], {name: string, type: string}[], string[], string[]]; // id, name, archive_id, lryic_length, tags, composer, lyricists, artists, sources, art forms
 export type MusicIndexes = MusicIndex[];
 export type GalleryIndexes = (VideoMetaData | PictureMetaData)[];
