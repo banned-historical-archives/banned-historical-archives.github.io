@@ -489,7 +489,7 @@ type Column = {
   name: string;
   nLyrics: number;
   tags: string[];
-  composer: string;
+  composers: string[];
   lyricists: string[];
   artists: {name: string,type: string}[];
   sources: string[];
@@ -505,7 +505,7 @@ export default function Music({ music }: { music: MusicIndexes }) {
       archiveId: i[2],
       tags: i[4],
       nLyrics: i[3],
-      composer: i[5],
+      composers: i[5],
       art_forms: i[9],
       lyricists: i[6],
       artists: i[7],
@@ -529,7 +529,7 @@ export default function Music({ music }: { music: MusicIndexes }) {
         headerName: '作曲',
         minWidth: 150,
         renderCell: (params: GridRenderCellParams<Column>) => {
-          return params.row.composer;
+          return params.row.composers.join(',');
         },
       },
       {
