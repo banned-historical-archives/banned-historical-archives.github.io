@@ -10,6 +10,7 @@ import React, {
 import {
   DataGridPro,
   GridColDef,
+  GridFilterModel,
   GridRenderCellParams,
   GridValueGetter,
   useGridApiRef,
@@ -50,6 +51,7 @@ import {
   MusicIndexes,
   MusicIndex,
   MusicLyric,
+  Tag,
 } from '../../types';
 import Stack from '@mui/material/Stack';
 import Accordion from '@mui/material/Accordion';
@@ -61,7 +63,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { DiffViewer } from '../../components/DiffViewer';
 import { readFile } from 'fs-extra';
 import { join } from 'path';
-import { Chip, Skeleton } from '@mui/material';
+import { Chip, Grid2, Skeleton } from '@mui/material';
 import { GridApiPro } from '@mui/x-data-grid-pro/models/gridApiPro';
 import Tags from '../../components/Tags';
 import { zhCN } from '@mui/x-data-grid/locales';
@@ -163,7 +165,8 @@ function Song({
           <Stack key={idx} sx={{ display: 'inline' }}>
             {lyric.audios.map((audio, aid) => {
               const displayName = `${details?.name}-${lyric.version}-${
-                audio.artists.map(i => `${i.name}(${i.type})`).join(' ') || '未知'
+                audio.artists.map((i) => `${i.name}(${i.type})`).join(' ') ||
+                '未知'
               }`;
               return (
                 <Button
@@ -276,8 +279,8 @@ function Player({
     function lyricChanged(lyric: MusicLyric) {
       setVersionName(lyric.version);
     }
-    function artistChanged(artists: {name: string, type: string}[]) {
-      setArtistName(artists.map(i => `${i.name}(${i.type})`).join(' '));
+    function artistChanged(artists: { name: string; type: string }[]) {
+      setArtistName(artists.map((i) => `${i.name}(${i.type})`).join(' '));
     }
     function musicChanged(
       id: string,
@@ -491,13 +494,17 @@ type Column = {
   tags: string[];
   composers: string[];
   lyricists: string[];
-  artists: {name: string,type: string}[];
+  artists: { name: string; type: string }[];
   sources: string[];
   art_forms: string[];
 };
 export default function Music({ music }: { music: MusicIndexes }) {
   const ee = useRef(new EventEmitter());
   ee.current.setMaxListeners(9876543);
+  const filterModelRef = useRef<GridFilterModel>({ items: [] });
+  const [filterModel, setFilterModel] = useState<GridFilterModel>({
+    items: [],
+  });
   const indexesRef = useRef<Column[]>(
     music.map((i) => ({
       id: i[0],
@@ -512,12 +519,30 @@ export default function Music({ music }: { music: MusicIndexes }) {
       sources: i[8],
     })),
   );
+  const buildHeaderOnClick = useCallback((field: string) => {
+    return (t: Tag) => {
+      const newFilter: GridFilterModel = {
+        ...filterModelRef.current,
+        items: [
+          ...filterModelRef.current.items.filter((i) => i.field != field),
+          {
+            id: field,
+            field: field,
+            operator: 'contains',
+            value: t.name,
+          },
+        ],
+      };
+      setFilterModel(newFilter);
+      filterModelRef.current = newFilter;
+    };
+  }, []);
   const columns: GridColDef<Column>[] = useMemo(
     () => [
       {
         field: 'name',
         headerName: '名称',
-        minWidth: 350,
+        minWidth: 250,
         flex: 1,
         valueGetter: (name: string) => name,
         renderCell: (params: GridRenderCellParams<Column>) => {
@@ -525,43 +550,99 @@ export default function Music({ music }: { music: MusicIndexes }) {
         },
       },
       {
-        field: 'composer',
+        field: 'composers',
         headerName: '作曲',
         minWidth: 150,
+        valueGetter: (_: any, row: Column) => row.composers.join(','),
         renderCell: (params: GridRenderCellParams<Column>) => {
-          return params.row.composers.join(',');
+          return (
+            <div style={{ overflow: 'scroll', height: '100%' }}>
+              <Tags
+                tags={params.row.composers.map((i) => ({
+                  name: i,
+                  type: 'composer',
+                }))}
+                onClick={buildHeaderOnClick('composers')}
+              />
+            </div>
+          );
         },
       },
       {
         field: 'lyricists',
         headerName: '作词',
+        valueGetter: (_: any, row: Column) => row.lyricists.join(','),
         minWidth: 150,
         renderCell: (params: GridRenderCellParams<Column>) => {
-          return params.row.lyricists.join(',');
+          return (
+            <div style={{ overflow: 'scroll', height: '100%' }}>
+              <Tags
+                tags={params.row.lyricists.map((i) => ({
+                  name: i,
+                  type: 'lyricist',
+                }))}
+                onClick={buildHeaderOnClick('lyricists')}
+              />
+            </div>
+          );
         },
       },
       {
         field: 'artists',
-        headerName: '演奏',
+        headerName: '艺术家',
+        valueGetter: (_: any, row: Column) =>
+          row.artists.map((i) => i.name).join(','),
         minWidth: 150,
         renderCell: (params: GridRenderCellParams<Column>) => {
-          return params.row.artists.map(i => i.name).join(',');
+          return (
+            <div style={{ overflow: 'scroll', height: '100%' }}>
+              <Tags
+                tags={params.row.artists.map((i) => ({
+                  name: i.name,
+                  type: i.type,
+                }))}
+                onClick={buildHeaderOnClick('artists')}
+              />
+            </div>
+          );
         },
       },
       {
         field: 'sources',
         headerName: '来源',
+        valueGetter: (_: any, row: Column) => row.sources.join(','),
         minWidth: 150,
         renderCell: (params: GridRenderCellParams<Column>) => {
-          return params.row.sources.join(',');
+          return (
+            <div style={{ overflow: 'scroll', height: '100%' }}>
+              <Tags
+                tags={params.row.sources.map((i) => ({
+                  name: i,
+                  type: 'source',
+                }))}
+                onClick={buildHeaderOnClick('sources')}
+              />
+            </div>
+          );
         },
       },
       {
         field: 'art_forms',
         headerName: '艺术形式',
         minWidth: 150,
+        valueGetter: (_: any, row: Column) => row.art_forms.join(','),
         renderCell: (params: GridRenderCellParams<Column>) => {
-          return params.row.art_forms.join(',');
+          return (
+            <div style={{ overflow: 'scroll', height: '100%' }}>
+              <Tags
+                tags={params.row.art_forms.map((i) => ({
+                  name: i,
+                  type: 'art_form',
+                }))}
+                onClick={buildHeaderOnClick('art_forms')}
+              />
+            </div>
+          );
         },
       },
       {
@@ -575,29 +656,19 @@ export default function Music({ music }: { music: MusicIndexes }) {
       {
         field: 'tags',
         headerName: '标签',
-        minWidth: 300,
+        minWidth: 200,
+        valueGetter: (_: any, row: Column) => row.tags.join(','),
         renderCell: (params: GridRenderCellParams<Column>) => {
           return (
-            <Stack direction="row">
-              {(params.row.tags || []).map((i) => (
-                <Chip
-                  key={i}
-                  sx={{ m: 0.3 }}
-                  label={i}
-                  onClick={() => {
-                    apiRef.current.setFilterModel({
-                      items: [
-                        {
-                          field: 'tags',
-                          operator: 'contains',
-                          value: i,
-                        },
-                      ],
-                    });
-                  }}
-                />
-              ))}
-            </Stack>
+            <div style={{ overflow: 'scroll', height: '100%' }}>
+              <Tags
+                tags={params.row.tags.map((i) => ({
+                  name: i,
+                  type: 'tag',
+                }))}
+                onClick={buildHeaderOnClick('tags')}
+              />
+            </div>
           );
         },
       },
@@ -640,8 +711,8 @@ export default function Music({ music }: { music: MusicIndexes }) {
       <Player ee={ee.current} apiRef={apiRef} />
       <Stack sx={{ flex: 1, width: '100%', height: '500px' }}>
         <DataGridPro
-            disableColumnFilter
-            headerFilters
+          disableColumnFilter
+          headerFilters
           apiRef={apiRef}
           initialState={{
             sorting: {
@@ -656,6 +727,11 @@ export default function Music({ music }: { music: MusicIndexes }) {
               ee={ee.current}
             />
           )}
+          filterModel={filterModel}
+          onFilterModelChange={(f) => {
+            setFilterModel(f);
+            filterModelRef.current = f;
+          }}
           getRowId={(row) => row.id}
           getDetailPanelHeight={() => 'auto'}
           rows={indexesRef.current}

@@ -1,7 +1,7 @@
 export type Tag = {
   id?: string;
   name: string;
-  type: TagType;
+  type: string;
 };
 
 export type Comment = {
@@ -107,7 +107,7 @@ export type MusicLyric = {
     artists: {
       name: string;
       type: string; // 伴奏，合唱团，领唱，乐团。。。 'accompaniment' | 'choir' | 'lead singer' | 'orchestra' | 'command';
-    }[]
+    }[];
   }[];
 };
 export type Music = {
@@ -491,6 +491,17 @@ export type BookCatelogItem = {
 export type ArticleIndexes = { [aid: string]: number[] }; // book_number_id
 export type TagIndexes = [string, string][]; // type, name
 export type BookIndexes = [string, string, number][]; // id, name, archive_id
-export type MusicIndex = [string, string, number, number, string[], string[], string[], {name: string, type: string}[], string[], string[]]; // id, name, archive_id, lryic_length, tags, composers, lyricists, artists, sources, art forms
+export type MusicIndex = [
+  string,
+  string,
+  number,
+  number,
+  string[],
+  string[],
+  string[],
+  { name: string; type: string }[],
+  string[],
+  string[],
+]; // id, name, archive_id, lryic_length, tags, composers, lyricists, artists, sources, art forms
 export type MusicIndexes = MusicIndex[];
 export type GalleryIndexes = (VideoMetaData | PictureMetaData)[];
