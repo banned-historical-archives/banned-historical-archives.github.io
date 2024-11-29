@@ -681,11 +681,11 @@ export default function Music({ music }: { music: MusicIndexes }) {
       const idx = apiRef.current.getRowIndexRelativeToVisibleRows(id);
 
       try {
-        apiRef.current.setExpandedDetailPanels([id]);
         apiRef.current.scrollToIndexes({
           colIndex: 0,
           rowIndex: idx,
         });
+        apiRef.current.setExpandedDetailPanels([id]);
       } catch (e) {}
     }
     ee.current.on('musicChanged', onChange);
