@@ -351,20 +351,22 @@ function Player({
     if (repeatType === RepeatType.one) {
       audioRef.current?.play().catch(() => {});
     } else if (repeatType === RepeatType.all) {
-      const rows = apiRef.current.getSortedRowIds();
+      const sorted = apiRef.current.getSortedRowIds().filter(i => apiRef.current.state.visibleRowsLookup[i])
       let idx = apiRef.current.getRowIndexRelativeToVisibleRows(curId.current);
-      if (rows.length - 1 == idx) {
-        idx == 0;
-      } else {
+      if (sorted.length - 1 == idx) {
+        idx = 0;
+      } else if (idx >= 0) {
         idx++;
+      } else {
+        idx = 0;
       }
-      const row = apiRef.current.getRow(Array.from(rows.keys())[idx]);
+      const row = apiRef.current.getRow(sorted[idx]);
       ee.emit('musicChanged', row.id, row.name, row.archiveId, 0, 0, true);
     } else if (repeatType === RepeatType.shuffle) {
-      const rows = apiRef.current.getSortedRowIds();
+      const row_ids = Object.keys(apiRef.current.state.visibleRowsLookup).filter(i => apiRef.current.state.visibleRowsLookup[i]);
 
-      const m = Math.floor(rows.length * Math.random());
-      const row = apiRef.current.getRow(rows[m]);
+      const m = Math.floor(row_ids.length * Math.random());
+      const row = apiRef.current.getRow(row_ids[m]);
       ee.emit('musicChanged', row.id, row.name, row.archiveId, -1, -1, true);
     }
   }, [apiRef, repeatType]);
@@ -502,9 +504,6 @@ export default function Music({ music }: { music: MusicIndexes }) {
   const ee = useRef(new EventEmitter());
   ee.current.setMaxListeners(9876543);
   const filterModelRef = useRef<GridFilterModel>({ items: [] });
-  const [filterModel, setFilterModel] = useState<GridFilterModel>({
-    items: [],
-  });
   const indexesRef = useRef<Column[]>(
     music.map((i) => ({
       id: i[0],
@@ -533,7 +532,7 @@ export default function Music({ music }: { music: MusicIndexes }) {
           },
         ],
       };
-      setFilterModel(newFilter);
+      apiRef.current.setFilterModel(newFilter);
       filterModelRef.current = newFilter;
     };
   }, []);
@@ -727,9 +726,8 @@ export default function Music({ music }: { music: MusicIndexes }) {
               ee={ee.current}
             />
           )}
-          filterModel={filterModel}
           onFilterModelChange={(f) => {
-            setFilterModel(f);
+            apiRef.current.setFilterModel(f);
             filterModelRef.current = f;
           }}
           getRowId={(row) => row.id}
