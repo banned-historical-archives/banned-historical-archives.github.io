@@ -199,7 +199,7 @@ function Song({
             size="small"
             value={details?.lyrics[lyricLeft] ? lyricLeft : 0}
             label="版本"
-            sx={{ mb: 1 }}
+            sx={{ mb: 1, display: details?.lyrics.length && details?.lyrics.length > 1 ? 'block' : 'none' }}
             onChange={(e) => {
               setLyricLeft(parseInt(e.target.value as string));
             }}
@@ -210,7 +210,7 @@ function Song({
               </MenuItem>
             ))}
           </Select>
-          <Stack>
+          <Stack sx={{mt: details?.lyrics.length && details?.lyrics.length > 1 ? 0 : '10px'}}>
             {leftContents?.map((line, idx) => (
               <Typography key={idx}>{line}</Typography>
             ))}
@@ -351,7 +351,9 @@ function Player({
     if (repeatType === RepeatType.one) {
       audioRef.current?.play().catch(() => {});
     } else if (repeatType === RepeatType.all) {
-      const sorted = apiRef.current.getSortedRowIds().filter(i => apiRef.current.state.visibleRowsLookup[i])
+      const sorted = apiRef.current
+        .getSortedRowIds()
+        .filter((i) => apiRef.current.state.visibleRowsLookup[i]);
       let idx = apiRef.current.getRowIndexRelativeToVisibleRows(curId.current);
       if (sorted.length - 1 == idx) {
         idx = 0;
@@ -363,7 +365,9 @@ function Player({
       const row = apiRef.current.getRow(sorted[idx]);
       ee.emit('musicChanged', row.id, row.name, row.archiveId, 0, 0, true);
     } else if (repeatType === RepeatType.shuffle) {
-      const row_ids = Object.keys(apiRef.current.state.visibleRowsLookup).filter(i => apiRef.current.state.visibleRowsLookup[i]);
+      const row_ids = Object.keys(
+        apiRef.current.state.visibleRowsLookup,
+      ).filter((i) => apiRef.current.state.visibleRowsLookup[i]);
 
       const m = Math.floor(row_ids.length * Math.random());
       const row = apiRef.current.getRow(row_ids[m]);
