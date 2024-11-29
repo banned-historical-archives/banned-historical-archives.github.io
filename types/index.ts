@@ -103,7 +103,7 @@ export type MusicLyric = {
   audios: {
     url: string;
     sources: string[];
-    art_form: string; // 合唱，说书。。。
+    art_forms: string[]; // 合唱，说书。。。
     artists: {
       name: string;
       type: string; // 伴奏，合唱团，领唱，乐团。。。 'accompaniment' | 'choir' | 'lead singer' | 'orchestra' | 'command';

@@ -118,7 +118,8 @@ function catelog_temp_to_catelog(c: BookCatelogTemp): BookCatelog {
             Array.from(
               music_metadata.lyrics.reduce((m, i) => {
                 for (const x of i.audios) {
-                  m.add(x.art_form);
+                  for (const j of x.art_forms)
+                    m.add(j);
                 }
                 return m;
               }, new Set<string>()),
