@@ -1,4 +1,21 @@
-## 本地运行
+## 本地运行(docker版本, 推荐)
+此版本内置本地搜索引擎
+
+### a.安装依赖
+依赖： docker / docker desktop
+
+### b.下载docker compose文件
+
+https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives.github.io/refs/heads/master/docker-compose.yml
+
+### c.在docker compose文件目录运行
+
+```
+docker compose up -d
+// 使用浏览器访问 localhost:3000
+```
+
+## 本地运行(host版本)
 
 ### a.安装依赖
 依赖： nodejs > 14
@@ -20,7 +37,13 @@ npm run init-catelog
 ```
 npm run dev:nextjs-helper
 ```
+### f.构建前端文件
+```
+npm run build
+```
 ### e.运行前端服务器
 ```
-npx next dev
+npx serve@latest out
+// 使用浏览器访问 localhost:3000
 ```
+此版本需要额外步骤安装[本地搜索引擎](./local-search-engine.md)

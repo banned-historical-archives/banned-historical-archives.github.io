@@ -1,4 +1,8 @@
-### 初始化本地搜索引擎
+### 本地搜索引擎(docker compose版本，推荐)
+
+[参考本地运行web服务器](./local.md)
+
+### 本地搜索引擎(host版本)
 0. [本地运行web服务器](./local.md)
 1. 安装 docker 并使用 docker 运行 elasticsearch
 
@@ -15,4 +19,8 @@ docker run -d --name es01 -p 9200:9200 -p 9300:9300 --env-file "./backend/es_doc
 
 ```
 npm run init-es
+```
+如果需要重置并初始化执行
+```
+npm run init-es reset
 ```
