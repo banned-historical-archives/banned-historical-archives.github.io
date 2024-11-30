@@ -8,6 +8,9 @@ const nextConfig = {
   trailingSlash: false,
   staticPageGenerationTimeout: 800,
   output: 'export',
+  env: {
+    LOCAL_SEARCH_ENGINE: process.env.LOCAL_SEARCH_ENGINE,
+  },
   webpack: (config) => {
     config.module.rules.push(
       {

@@ -14,6 +14,7 @@ RUN npm run init-parsed
 RUN npm run init-config
 RUN npm run build-catelog
 RUN npm run dev:nextjs-helper
+ENV LOCAL_SEARCH_ENGINE = 1
 RUN npm run build
 
 EXPOSE 3000

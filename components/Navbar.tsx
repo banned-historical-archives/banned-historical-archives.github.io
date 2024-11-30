@@ -170,7 +170,7 @@ export default function Navbar() {
                 placeholder="全站搜索"
                 onKeyDown={(e) => {
                   if (e.key === 'Enter') {
-                    if (location.hostname === 'localhost') {
+                    if (process?.env?.LOCAL_SEARCH_ENGINE) {
                       router.push({
                         pathname: '/search/[keyword]',
                         query: {
