@@ -44,8 +44,6 @@ export default function Search() {
   const [es_from, setFrom] = useState(0);
   const [page, setPage] = useState(1);
   const [res, setRes] = useState<any>();
-  const router = useRouter();
-  const keyword = router.query['keyword'] as string;
   async function update(keyword: string, es_size: number, es_from: number) {
     const x = await (
       await fetch(
@@ -65,9 +63,12 @@ export default function Search() {
     console.log(x);
     setRes(x.hits);
   }
+  const [k, setK] = useState('');
   useEffect(() => {
+    const keyword = new URLSearchParams(location.search).get('keyword') as string;
+    setK(keyword);
     update(keyword, es_size, es_from);
-  }, [keyword, es_size, es_from]);
+  }, [es_size, es_from]);
 
   useEffect(() => {
     setFrom(es_size * (page - 1));
@@ -81,7 +82,7 @@ export default function Search() {
         <title>和谐历史档案馆 Banned Historical Archives</title>
       </Head>
       <Typography variant="h4" sx={{ mb: 1 }}>
-        搜索:{keyword}
+        搜索:{k}
       </Typography>
       {res.hits.map((i: any) => (
         <div key={i._id}>

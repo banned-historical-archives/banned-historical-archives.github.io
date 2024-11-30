@@ -171,12 +171,13 @@ export default function Navbar() {
                 onKeyDown={(e) => {
                   if (e.key === 'Enter') {
                     if (process?.env?.LOCAL_SEARCH_ENGINE) {
-                      router.push({
-                        pathname: '/search/[keyword]',
-                        query: {
-                          keyword: inputValue,
-                        },
-                      });
+                      window.open(
+                        `${location.protocol}//${location.hostname}/search?keywork=` +
+                          encodeURIComponent(
+                              inputValue,
+                          ),
+                        '_blank',
+                      );
                       return;
                     }
                     window.open(
