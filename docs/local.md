@@ -12,7 +12,15 @@ https://raw.githubusercontent.com/banned-historical-archives/banned-historical-a
 
 ```
 docker compose up -d
+// 初次运行会自动建立索引，使用docker logs root-app-1查看进度
 // 使用浏览器访问 localhost:3000
+```
+
+### d.版本更新
+
+```
+// 先手动删除elastic-search的容器，再执行
+docker compose up -d pull --always
 ```
 
 ## 本地运行(host版本)
