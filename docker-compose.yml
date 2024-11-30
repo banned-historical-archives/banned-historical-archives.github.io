@@ -23,8 +23,6 @@ services:
     image: ghcr.io/banned-historical-archives/banned-historical-archives.github.io:latest
     ports:
       - '3000:3000'
-    volumes:
-      - .:/app
     depends_on:
       - elasticsearch
     networks:

@@ -37,12 +37,15 @@ const book_indexes = JSON.parse(
       });
     } catch (e) {}
   } else {
-    const countResult = await esClient.count({
-      index: 'article',
-    });
-    if (countResult.count != 0) {
-      console.log('article not empty');
-      return;
+    try {
+      const countResult = await esClient.count({
+        index: 'article',
+      });
+      if (countResult.count != 0) {
+        console.log('article not empty');
+        return;
+      }
+    } catch (e) {
     }
   }
 
