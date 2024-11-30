@@ -199,7 +199,13 @@ function Song({
             size="small"
             value={details?.lyrics[lyricLeft] ? lyricLeft : 0}
             label="版本"
-            sx={{ mb: 1, display: details?.lyrics.length && details?.lyrics.length > 1 ? 'block' : 'none' }}
+            sx={{
+              mb: 1,
+              display:
+                details?.lyrics.length && details?.lyrics.length > 1
+                  ? 'block'
+                  : 'none',
+            }}
             onChange={(e) => {
               setLyricLeft(parseInt(e.target.value as string));
             }}
@@ -210,7 +216,14 @@ function Song({
               </MenuItem>
             ))}
           </Select>
-          <Stack sx={{mt: details?.lyrics.length && details?.lyrics.length > 1 ? 0 : '10px'}}>
+          <Stack
+            sx={{
+              mt:
+                details?.lyrics.length && details?.lyrics.length > 1
+                  ? 0
+                  : '10px',
+            }}
+          >
             {leftContents?.map((line, idx) => (
               <Typography key={idx}>{line}</Typography>
             ))}

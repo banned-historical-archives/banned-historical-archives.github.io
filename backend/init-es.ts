@@ -45,8 +45,7 @@ const book_indexes = JSON.parse(
         console.log('article not empty');
         return;
       }
-    } catch (e) {
-    }
+    } catch (e) {}
   }
 
   const es_articles: ESArticle[] = [];

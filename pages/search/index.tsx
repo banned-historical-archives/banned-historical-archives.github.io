@@ -47,7 +47,9 @@ export default function Search() {
   async function update(keyword: string, es_size: number, es_from: number) {
     const x = await (
       await fetch(
-        `${location.protocol}//${location.hostname}:9200/article/_search/?source=${encodeURIComponent(
+        `${location.protocol}//${
+          location.hostname
+        }:9200/article/_search/?source=${encodeURIComponent(
           JSON.stringify({
             //index: 'article',
             from: es_from,
@@ -65,7 +67,9 @@ export default function Search() {
   }
   const [k, setK] = useState('');
   useEffect(() => {
-    const keyword = new URLSearchParams(location.search).get('keyword') as string;
+    const keyword = new URLSearchParams(location.search).get(
+      'keyword',
+    ) as string;
     setK(keyword);
     update(keyword, es_size, es_from);
   }, [es_size, es_from]);
