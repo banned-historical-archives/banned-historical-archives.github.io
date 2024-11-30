@@ -20,14 +20,7 @@ services:
       - '9200'
 
   app:
-    build:
-      context: .
-      dockerfile: Dockerfile
-      args:
-        - ES_URL=http://elasticsearch:9200
-        - ES_USERNAME=elastic
-        - ES_PASSWORD=password
-        # - node_options="--max-old-space-size=8192"
+    image: ghcr.io/banned-historical-archives/banned-historical-archives.github.io:latest
     ports:
       - '3000:3000'
     volumes:
@@ -38,6 +31,10 @@ services:
       - bha
     environment:
       - NODE_ENV=development
+      - ES_URL=http://elasticsearch:9200
+      - ES_USERNAME=elastic
+      - ES_PASSWORD=password
+      # - node_options="--max-old-space-size=8192"
 networks:
   bha:
     driver: bridge

@@ -24,17 +24,27 @@ const book_indexes = JSON.parse(
 ) as BookIndexes;
 
 (async () => {
-  // 清空
-  try {
-    await esClient.deleteByQuery({
-      index: 'article',
-      body: {
-        query: {
-          match_all: {},
+  if (process.argv[process.argv.length - 1] === 'reset') {
+    // 清空
+    try {
+      await esClient.deleteByQuery({
+        index: 'article',
+        body: {
+          query: {
+            match_all: {},
+          },
         },
-      },
+      });
+    } catch (e) {}
+  } else {
+    const countResult = await esClient.count({
+      index: 'article',
     });
-  } catch (e) {}
+    if (countResult.count != 0) {
+      console.log('article not empty');
+      return;
+    }
+  }
 
   const es_articles: ESArticle[] = [];
   let t = 0;
