@@ -5,6 +5,7 @@ import { ArticleIndexes, BookIndexes, ParserResult } from '../types';
 import { readFileSync } from 'fs';
 import { join } from 'path';
 import { readJSONSync } from 'fs-extra';
+import { sleep } from '../utils';
 
 type ESArticle = {
   article_id: string;
@@ -37,15 +38,21 @@ const book_indexes = JSON.parse(
       });
     } catch (e) {}
   } else {
-    try {
-      const countResult = await esClient.count({
-        index: 'article',
-      });
-      if (countResult.count != 0) {
-        console.log('article not empty');
-        return;
+    while (true) {
+      try{
+        const countResult = await esClient.count({
+          index: 'article',
+        });
+        if (countResult.count != 0) {
+          console.log('article not empty');
+          return;
+        }
+        await sleep(1000);
+        break;
+      } catch (e) {
+        console.log(e);
       }
-    } catch (e) {}
+    } 
   }
 
   const es_articles: ESArticle[] = [];
