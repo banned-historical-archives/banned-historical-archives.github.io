@@ -13,7 +13,7 @@ https://raw.githubusercontent.com/banned-historical-archives/banned-historical-a
 ```
 docker compose up -d
 // 初次运行会自动建立索引，使用docker logs root-app-1查看进度
-// 使用浏览器访问 localhost:3000
+// 使用浏览器访问 127.0.0.1:3000
 ```
 
 ### d.版本更新
@@ -52,6 +52,6 @@ npm run build
 ### e.运行前端服务器
 ```
 npx serve@latest out
-// 使用浏览器访问 localhost:3000
+// 使用浏览器访问 127.0.0.1:3000
 ```
 此版本需要额外步骤安装[本地搜索引擎](./local-search-engine.md)
