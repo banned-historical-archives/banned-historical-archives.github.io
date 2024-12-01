@@ -16,15 +16,18 @@ services:
       - bha
     expose:
       - '9200'
+    ports:
+      - '9200:9200'
 
   nginx:
     image: nginx:latest
     hostname: nginx
     ports:
-      - '3000:3000'
-      - '9200:9200'
+      - '8000:8000'
     networks:
       - bha
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
 
   app:
     image: ghcr.io/banned-historical-archives/banned-historical-archives.github.io:latest
@@ -33,6 +36,8 @@ services:
       - nginx
     networks:
       - bha
+    ports:
+      - '3000:3000'
     environment:
       - NODE_ENV=development
       - ES_URL=http://elasticsearch:9200
