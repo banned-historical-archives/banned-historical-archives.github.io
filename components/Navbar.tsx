@@ -172,7 +172,7 @@ export default function Navbar() {
                   if (e.key === 'Enter') {
                     if (process?.env?.LOCAL_SEARCH_ENGINE) {
                       window.open(
-                        `${location.protocol}//${location.hostname}/search?keyword=` +
+                        `${location.protocol}//${location.host}/search?keyword=` +
                           encodeURIComponent(inputValue),
                         '_blank',
                       );
