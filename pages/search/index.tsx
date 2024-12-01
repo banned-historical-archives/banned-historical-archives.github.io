@@ -47,9 +47,14 @@ export default function Search() {
   async function update(keyword: string, es_size: number, es_from: number) {
     const x = await (
       await fetch(
-        `${location.protocol}//${
+        `${
+          location.hostname == 'localhost' || 
+          location.hostname == '127.0.0.1' ?
+          `${location.protocol}//${
+          location.host
+        }:9200` : `${location.protocol}//${
           location.hostname
-        }:9200/article/_search/?source=${encodeURIComponent(
+        }/search_api`}/article/_search/?source=${encodeURIComponent(
           JSON.stringify({
             //index: 'article',
             from: es_from,

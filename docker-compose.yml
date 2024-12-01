@@ -12,19 +12,25 @@ services:
       - ELASTIC_USERNAME=elastic
       - ELASTIC_PASSWORD=password
       - xpack.security.http.ssl.enabled=false
-    ports:
-      - '9200:9200'
     networks:
       - bha
     expose:
       - '9200'
 
-  app:
-    image: ghcr.io/banned-historical-archives/banned-historical-archives.github.io:latest
+  nginx:
+    image: nginx:latest
+    hostname: nginx
     ports:
       - '3000:3000'
+      - '9200:9200'
+    networks:
+      - bha
+
+  app:
+    image: ghcr.io/banned-historical-archives/banned-historical-archives.github.io:latest
     depends_on:
       - elasticsearch
+      - nginx
     networks:
       - bha
     environment:

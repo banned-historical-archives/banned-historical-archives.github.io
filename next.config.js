@@ -8,10 +8,8 @@ const nextConfig = {
   trailingSlash: false,
   staticPageGenerationTimeout: 800,
   output: 'export',
-  basePath: process.env.BASE_PATH || '/',
   env: {
     LOCAL_SEARCH_ENGINE: process.env.LOCAL_SEARCH_ENGINE,
-    BASE_PATH: process.env.BASE_PATH,
   },
   webpack: (config) => {
     config.module.rules.push(

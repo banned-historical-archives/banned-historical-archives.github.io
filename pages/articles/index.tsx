@@ -176,7 +176,7 @@ export default function Articles({
       renderCell: (params: GridRenderCellParams<BookCatelogItem>) => {
         return (
           <a
-            href={`${process.env.BASE_PATH || ''}/articles/${params.row.id}`}
+            href={`/articles/${params.row.id}`}
             rel="noreferrer"
             target="_blank"
           >
