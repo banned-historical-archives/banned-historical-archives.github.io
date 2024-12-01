@@ -17,13 +17,13 @@ services:
     expose:
       - '9200'
     ports:
-      - '9200:9200'
+      - '127.0.0.1:9200:9200'
 
   nginx:
     image: nginx:latest
     hostname: nginx
     ports:
-      - '8000:8000'
+      - '127.0.0.1:8000:8000'
     networks:
       - bha
     volumes:
@@ -37,7 +37,7 @@ services:
     networks:
       - bha
     ports:
-      - '3000:3000'
+      - '127.0.0.1:3000:3000'
     environment:
       - NODE_ENV=development
       - ES_URL=http://elasticsearch:9200
