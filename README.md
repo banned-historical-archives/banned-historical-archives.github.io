@@ -70,8 +70,8 @@
 
 ## 为什么研究历史
 
-[为革命而研究历史](https://banned-historical-archives.github.io/articles/e37bedd965)
-[马克思主义者研究历史是为了革命](https://banned-historical-archives.github.io/articles/ab6301b793)
+* [为革命而研究历史](https://banned-historical-archives.github.io/articles/e37bedd965)
+* [马克思主义者研究历史是为了革命](https://banned-historical-archives.github.io/articles/ab6301b793)
 
 ## 安全提醒
 

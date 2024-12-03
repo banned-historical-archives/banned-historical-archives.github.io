@@ -49,7 +49,7 @@ npm run dev:nextjs-helper
 ```
 npm run build
 ```
-### e.运行前端服务器
+### g.运行前端服务器
 ```
 npx serve@latest out
 // 使用浏览器访问 127.0.0.1:3000
