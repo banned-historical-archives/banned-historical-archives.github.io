@@ -19,7 +19,14 @@ import SpeedDial from '@mui/material/SpeedDial';
 import PlayCircleIcon from '@mui/icons-material/PlayCircle';
 import StopCircleIcon from '@mui/icons-material/StopCircle';
 import { diff_match_patch, Diff } from 'diff-match-patch';
-import { ReactElement, useEffect, useMemo, useRef, useState } from 'react';
+import {
+  CSSProperties,
+  ReactElement,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import { Article, Content, Comment } from '../../types';
 import { ContentType, ParserResult } from '../../types';
 import { bracket_left, bracket_right, crypto_md5, sleep } from '../../utils';
@@ -35,6 +42,7 @@ function PureArticle({
   description?: string;
 }) {
   const ssu = useRef<SpeechSynthesisUtterance>();
+  const containerRef = useRef<HTMLDivElement>(null);
   const [playing, setPlaying] = useState(false);
   const [pitch, setPitch] = useState(1);
   const [rate, setRate] = useState(1);
@@ -42,6 +50,21 @@ function PureArticle({
   const [showSettings, setShowSettings] = useState(false);
   const [voices, setVoices] = useState<SpeechSynthesisVoice[]>([]);
   const [selectedVoice, setSelectedVoice] = useState<string>();
+  const [currentTTSIndex, setCurrentTTSIndex] = useState(-1);
+
+  useEffect(() => {
+    if (currentTTSIndex < 0) return;
+    ssu.current = new SpeechSynthesisUtterance(contents[currentTTSIndex].text);
+    ssu.current.voice = voices.find((i) => i.name == selectedVoice)!;
+    ssu.current.pitch = pitch;
+    ssu.current.rate = rate;
+    speechSynthesis.speak(ssu.current);
+
+    ssu.current.onerror = (event) => console.error('发生错误：', event.error);
+    ssu.current.onend = () => {
+      setCurrentTTSIndex(currentTTSIndex + 1);
+    };
+  }, [currentTTSIndex, contents]);
   useEffect(() => {
     (async () => {
       if (!window.speechSynthesis) {
@@ -66,216 +89,271 @@ function PureArticle({
     })();
   }, []);
 
-  const contentsComponent = contents.map((part) => {
-    let s: string[] = [];
-    const part_comments = comments.filter((i) => i.part_idx === part.index);
-    let text = part.text;
-    let t = 0;
-    const texts: string[] = [];
-    if (part_comments.length) {
-      for (const part_comment of part_comments) {
-        const p = text.substr(t, part_comment.offset - t);
-        texts.push(p);
-        t += p.length;
-      }
-      if (t < text.length) {
-        texts.push(text.substr(t));
-      }
-    } else {
-      texts.push(text);
-    }
-    const content: (ReactElement | string)[] = [];
-    texts.forEach((text, idx) => {
-      content.push(<span key={`${crypto_md5(text)}-${idx}`}>{text}</span>);
-      s.push(text);
-      if (part_comments.length) {
-        const comment_idx = part_comments.shift()!.index;
-        s.push(`〔${comment_idx}〕`);
-        content.push(
-          <a
-            id={`comment${comment_idx}_content`}
-            key={Math.random()}
-            href={`#comment${comment_idx}_comment`}
-            style={{ userSelect: 'none' }}
-          >
-            {bracket_left}
-            {comment_idx}
-            {bracket_right}
-          </a>,
-        );
-      }
-    });
-
-    if (part.type === ContentType.title) s.unshift('# ');
-    else if (part.type === ContentType.subtitle) s.unshift('## ');
-    else if (part.type === ContentType.subtitle2) s.unshift('### ');
-    else if (part.type === ContentType.subtitle3) s.unshift('#### ');
-
-    const key = part.id;
-    if (part.type === ContentType.title) {
-      return (
-        <Typography
-          key={key}
-          variant="h5"
-          sx={{ textAlign: 'center', margin: 4 }}
-        >
-          {content}
-        </Typography>
-      );
-    } else if (part.type === ContentType.appellation) {
-      return (
-        <Typography
-          key={key}
-          variant="body1"
-          sx={{ margin: 0.5, fontWeight: 'bold' }}
-        >
-          {content}
-        </Typography>
-      );
-    } else if (part.type === ContentType.image) {
-      return (
-        <img
-          alt=""
-          key={key}
-          src={part.text}
-          style={{
-            width: '50%',
-            display: 'block',
-            margin: 'auto',
-            marginTop: '1.25em',
-          }}
-        />
-      );
-    } else if (part.type === ContentType.image_description) {
-      return (
-        <Typography
-          key={key}
-          variant="subtitle1"
-          sx={{ textAlign: 'center', marginBottom: '1.25em' }}
-        >
-          {content}
-        </Typography>
-      );
-    } else if (part.type === ContentType.subdate) {
-      return (
-        <Typography key={key} variant="subtitle1" sx={{ textAlign: 'center' }}>
-          {content}
-        </Typography>
-      );
-    } else if (part.type === ContentType.place) {
-      return (
-        <Typography key={key} variant="subtitle1" sx={{ textAlign: 'center' }}>
-          {content}
-        </Typography>
-      );
-    } else if (part.type === ContentType.authors) {
-      return (
-        <Typography key={key} variant="subtitle1" sx={{ textAlign: 'center' }}>
-          {content}
-        </Typography>
-      );
-    } else if (part.type === ContentType.signature) {
-      return (
-        <Typography key={key} variant="subtitle1" sx={{ textAlign: 'right' }}>
-          {content}
-        </Typography>
-      );
-    } else if (part.type === ContentType.subtitle) {
-      return (
-        <Typography
-          key={key}
-          variant="subtitle1"
-          sx={{
-            textAlign: 'center',
-            fontSize: '1.5em',
-            fontWeight: 'bold',
-            margin: '1.25em 0 1.25em 0',
-          }}
-        >
-          {content}
-        </Typography>
-      );
-    } else if (part.type === ContentType.subtitle2) {
-      return (
-        <Typography
-          key={key}
-          variant="subtitle1"
-          sx={{
-            textAlign: 'center',
-            fontSize: '1.17em',
-            fontWeight: 'bold',
-            margin: '1.25em 0 1.25em 0',
-          }}
-        >
-          {content}
-        </Typography>
-      );
-    } else if (part.type === ContentType.subtitle3) {
-      return (
-        <Typography
-          key={key}
-          variant="subtitle1"
-          sx={{
-            textAlign: 'center',
-            fontWeight: 'bold',
-            margin: '0.625em 0 0.625em 0',
-          }}
-        >
-          {content}
-        </Typography>
-      );
-    } else if (
-      part.type === ContentType.subtitle4 ||
-      part.type === ContentType.subtitle5
-    ) {
-      return (
-        <Typography key={key} variant="subtitle1" sx={{ textAlign: 'center' }}>
-          {content}
-        </Typography>
-      );
-    } else if (part.type === ContentType.paragraph) {
-      return (
-        <Typography
-          key={key}
-          variant="body1"
-          sx={{ textIndent: '2em', margin: 0.5 }}
-        >
-          {content}
-        </Typography>
-      );
-    } else if (part.type === ContentType.quotation) {
-      return (
-        <Stack spacing={1} key={key}>
-          {part.text
-            .split('\n')
-            .filter((j) => j)
-            .map((j, j_idx) => (
-              <Typography
-                variant="body1"
-                key={j_idx}
-                sx={{
-                  color: 'grey',
-                  padding: '0.625em 2.5em 0.625em 2.5em',
-                  borderLeft: '2px solid',
-                }}
+  const contentsComponent = useMemo(
+    () =>
+      contents.map((part, idx) => {
+        const highlight = idx === currentTTSIndex;
+        const x = highlight
+          ? (e: any) => {
+              if (e) {
+                e.scrollIntoView({
+                  behavior: 'smooth',
+                  block: 'center',
+                  inline: 'nearest',
+                });
+              }
+            }
+          : undefined;
+        const ext_css: CSSProperties = highlight ? { color: '#cf0000' } : {};
+        let s: string[] = [];
+        const part_comments = comments.filter((i) => i.part_idx === part.index);
+        let text = part.text;
+        let t = 0;
+        const texts: string[] = [];
+        if (part_comments.length) {
+          for (const part_comment of part_comments) {
+            const p = text.substr(t, part_comment.offset - t);
+            texts.push(p);
+            t += p.length;
+          }
+          if (t < text.length) {
+            texts.push(text.substr(t));
+          }
+        } else {
+          texts.push(text);
+        }
+        const content: (ReactElement | string)[] = [];
+        texts.forEach((text, idx) => {
+          content.push(<span key={`${crypto_md5(text)}-${idx}`}>{text}</span>);
+          s.push(text);
+          if (part_comments.length) {
+            const comment_idx = part_comments.shift()!.index;
+            s.push(`〔${comment_idx}〕`);
+            content.push(
+              <a
+                id={`comment${comment_idx}_content`}
+                key={Math.random()}
+                href={`#comment${comment_idx}_comment`}
+                style={{ userSelect: 'none' }}
               >
-                {j}
-              </Typography>
-            ))}
-        </Stack>
-      );
-    } else {
-      return (
-        <Typography
-          key={key}
-          variant="body1"
-          sx={{ textIndent: '2em', margin: 0.5 }}
-        >
-          {content}
-        </Typography>
-      );
-    }
-  });
+                {bracket_left}
+                {comment_idx}
+                {bracket_right}
+              </a>,
+            );
+          }
+        });
+
+        if (part.type === ContentType.title) s.unshift('# ');
+        else if (part.type === ContentType.subtitle) s.unshift('## ');
+        else if (part.type === ContentType.subtitle2) s.unshift('### ');
+        else if (part.type === ContentType.subtitle3) s.unshift('#### ');
+
+        const key = part.id;
+        if (part.type === ContentType.title) {
+          return (
+            <Typography
+              key={key}
+              ref={x}
+              variant="h5"
+              sx={{ textAlign: 'center', margin: 4, ...ext_css }}
+            >
+              {content}
+            </Typography>
+          );
+        } else if (part.type === ContentType.appellation) {
+          return (
+            <Typography
+              key={key}
+              ref={x}
+              variant="body1"
+              sx={{ margin: 0.5, fontWeight: 'bold', ...ext_css }}
+            >
+              {content}
+            </Typography>
+          );
+        } else if (part.type === ContentType.image) {
+          return (
+            <img
+              alt=""
+              ref={x}
+              key={key}
+              src={part.text}
+              style={{
+                width: '50%',
+                display: 'block',
+                margin: 'auto',
+                marginTop: '1.25em',
+              }}
+            />
+          );
+        } else if (part.type === ContentType.image_description) {
+          return (
+            <Typography
+              key={key}
+              ref={x}
+              variant="subtitle1"
+              sx={{ textAlign: 'center', marginBottom: '1.25em', ...ext_css }}
+            >
+              {content}
+            </Typography>
+          );
+        } else if (part.type === ContentType.subdate) {
+          return (
+            <Typography
+              ref={x}
+              key={key}
+              variant="subtitle1"
+              sx={{ textAlign: 'center', ...ext_css }}
+            >
+              {content}
+            </Typography>
+          );
+        } else if (part.type === ContentType.place) {
+          return (
+            <Typography
+              ref={x}
+              key={key}
+              variant="subtitle1"
+              sx={{ textAlign: 'center', ...ext_css }}
+            >
+              {content}
+            </Typography>
+          );
+        } else if (part.type === ContentType.authors) {
+          return (
+            <Typography
+              ref={x}
+              key={key}
+              variant="subtitle1"
+              sx={{ textAlign: 'center', ...ext_css }}
+            >
+              {content}
+            </Typography>
+          );
+        } else if (part.type === ContentType.signature) {
+          return (
+            <Typography
+              ref={x}
+              key={key}
+              variant="subtitle1"
+              sx={{ textAlign: 'right', ...ext_css }}
+            >
+              {content}
+            </Typography>
+          );
+        } else if (part.type === ContentType.subtitle) {
+          return (
+            <Typography
+              key={key}
+              ref={x}
+              variant="subtitle1"
+              sx={{
+                textAlign: 'center',
+                fontSize: '1.5em',
+                fontWeight: 'bold',
+                margin: '1.25em 0 1.25em 0',
+                ...ext_css,
+              }}
+            >
+              {content}
+            </Typography>
+          );
+        } else if (part.type === ContentType.subtitle2) {
+          return (
+            <Typography
+              key={key}
+              ref={x}
+              variant="subtitle1"
+              sx={{
+                textAlign: 'center',
+                fontSize: '1.17em',
+                fontWeight: 'bold',
+                margin: '1.25em 0 1.25em 0',
+                ...ext_css,
+              }}
+            >
+              {content}
+            </Typography>
+          );
+        } else if (part.type === ContentType.subtitle3) {
+          return (
+            <Typography
+              ref={x}
+              key={key}
+              variant="subtitle1"
+              sx={{
+                textAlign: 'center',
+                fontWeight: 'bold',
+                margin: '0.625em 0 0.625em 0',
+                ...ext_css,
+              }}
+            >
+              {content}
+            </Typography>
+          );
+        } else if (
+          part.type === ContentType.subtitle4 ||
+          part.type === ContentType.subtitle5
+        ) {
+          return (
+            <Typography
+              ref={x}
+              key={key}
+              variant="subtitle1"
+              sx={{ textAlign: 'center', ...ext_css }}
+            >
+              {content}
+            </Typography>
+          );
+        } else if (part.type === ContentType.paragraph) {
+          return (
+            <Typography
+              key={key}
+              variant="body1"
+              ref={x}
+              sx={{ textIndent: '2em', margin: 0.5, ...ext_css }}
+            >
+              {content}
+            </Typography>
+          );
+        } else if (part.type === ContentType.quotation) {
+          return (
+            <Stack ref={x} spacing={1} key={key}>
+              {part.text
+                .split('\n')
+                .filter((j) => j)
+                .map((j, j_idx) => (
+                  <Typography
+                    variant="body1"
+                    key={j_idx}
+                    sx={{
+                      color: 'grey',
+                      padding: '0.625em 2.5em 0.625em 2.5em',
+                      borderLeft: '2px solid',
+                      ...ext_css,
+                    }}
+                  >
+                    {j}
+                  </Typography>
+                ))}
+            </Stack>
+          );
+        } else {
+          return (
+            <Typography
+              key={key}
+              ref={x}
+              variant="body1"
+              sx={{ textIndent: '2em', margin: 0.5, ...ext_css }}
+            >
+              {content}
+            </Typography>
+          );
+        }
+      }),
+    [contents, currentTTSIndex],
+  );
   const descriptionComponent = description ? (
     <>
       <Divider sx={{ mt: 2, mb: 2 }} />
@@ -354,7 +432,9 @@ function PureArticle({
               setShowSettings(!showSettings);
             } else {
               setPlaying(false);
+              ssu.current!.onend = null;
               speechSynthesis.cancel();
+              setCurrentTTSIndex(-1);
             }
           }}
         >
@@ -440,18 +520,7 @@ function PureArticle({
                 onClick={() => {
                   setPlaying(true);
                   setShowSettings(false);
-                  ssu.current = new SpeechSynthesisUtterance(
-                    contents
-                      .filter((part) => part.type !== ContentType.image)
-                      .map((part) => part.text)
-                      .join('\n'),
-                  );
-                  ssu.current.voice = voices.find(
-                    (i) => i.name == selectedVoice,
-                  )!;
-                  ssu.current.pitch = pitch;
-                  ssu.current.rate = rate;
-                  speechSynthesis.speak(ssu.current);
+                  setCurrentTTSIndex(0);
                 }}
               >
                 朗读
@@ -459,9 +528,11 @@ function PureArticle({
             </Grid2>
           </Grid2>
         </Popover>
-        {contentsComponent}
-        {descriptionComponent}
-        {commentsComponent}
+        <div ref={containerRef}>
+          {contentsComponent}
+          {descriptionComponent}
+          {commentsComponent}
+        </div>
       </div>
     </>
   );

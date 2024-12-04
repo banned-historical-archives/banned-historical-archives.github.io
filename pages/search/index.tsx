@@ -48,13 +48,10 @@ export default function Search() {
     const x = await (
       await fetch(
         `${
-          location.hostname == 'localhost' || 
-          location.hostname == '127.0.0.1' ?
-          `${location.protocol}//${
-          location.host
-        }:9200` : `${location.protocol}//${
-          location.hostname
-        }/search_api`}/article/_search/?source=${encodeURIComponent(
+          location.hostname == 'localhost' || location.hostname == '127.0.0.1'
+            ? `${location.protocol}//${location.host}:9200`
+            : `${location.protocol}//${location.hostname}/search_api`
+        }/article/_search/?source=${encodeURIComponent(
           JSON.stringify({
             //index: 'article',
             from: es_from,

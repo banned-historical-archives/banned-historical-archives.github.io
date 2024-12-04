@@ -39,7 +39,7 @@ const book_indexes = JSON.parse(
     } catch (e) {}
   } else {
     while (true) {
-      try{
+      try {
         const countResult = await esClient.count({
           index: 'article',
         });
@@ -52,7 +52,7 @@ const book_indexes = JSON.parse(
       } catch (e) {
         console.log(e);
       }
-    } 
+    }
   }
 
   const es_articles: ESArticle[] = [];
