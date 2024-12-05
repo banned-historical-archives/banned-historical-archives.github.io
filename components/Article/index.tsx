@@ -62,7 +62,7 @@ function PureArticle({
 
     ssu.current.onerror = (event) => console.error('发生错误：', event.error);
     ssu.current.onend = () => {
-      if (contents.length - 1 < currentTTSIndex)
+      if (contents.length - 1 > currentTTSIndex)
         setCurrentTTSIndex(currentTTSIndex + 1);
       else {
         setPlaying(false);
