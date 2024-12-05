@@ -62,7 +62,14 @@ function PureArticle({
 
     ssu.current.onerror = (event) => console.error('发生错误：', event.error);
     ssu.current.onend = () => {
-      setCurrentTTSIndex(currentTTSIndex + 1);
+      if (contents.length - 1 < currentTTSIndex)
+        setCurrentTTSIndex(currentTTSIndex + 1);
+      else {
+        setPlaying(false);
+        ssu.current!.onend = null;
+        speechSynthesis.cancel();
+        setCurrentTTSIndex(-1);
+      }
     };
   }, [currentTTSIndex, contents]);
   useEffect(() => {
