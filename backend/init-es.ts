@@ -49,8 +49,12 @@ const book_indexes = JSON.parse(
         }
         await sleep(1000);
         break;
-      } catch (e) {
+      } catch (e: any) {
+        if (e.toString().indexOf('index_not_found_exception')>=0) {
+          break;
+        }
         console.log(e);
+        await sleep(1000);
       }
     }
   }
