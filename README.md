@@ -121,7 +121,8 @@
 
 [\[Github\]](https://github.com/banned-historical-archives/banned-historical-archives.github.io)
 
-如果以备份为目的 fork 本仓库，最好同时 fork 本仓库对应的资源仓库 banned-historical-archives0, banned-historical-archives1, banned-historical-archives2 ... banned-historical-archives30
+* 如果以备份为目的 fork 本仓库，建议 fork 本仓库对应的资源仓库 banned-historical-archives0, banned-historical-archives1, banned-historical-archives2 ... banned-historical-archives30
+* 资源仓库的分支：main 原始文件分支；config 配置文件分支；；ocr_cache ocr识别结果(自动生成)；ocr_patch ocr补丁分支；parsed 自动构建的中间文件，用于主仓库的构建；
 
 ## 其他
 
