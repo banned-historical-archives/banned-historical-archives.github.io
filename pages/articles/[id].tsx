@@ -66,7 +66,9 @@ export async function getStaticPaths() {
         id: i,
       },
     })),
-    fallback: false, // can also be true or 'blocking'
+    // fallback: false, // can also be true or 'blocking'
+
+    fallback: 'blocking', 
   };
 }
 
