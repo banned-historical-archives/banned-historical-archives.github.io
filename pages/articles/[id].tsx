@@ -137,6 +137,7 @@ export default function ArticleViewer() {
       ).json();
       setArticleId(id);
       setBooks(data.books);
+      booksRef.current = data.books;
       setComparePublication(data.books[data.books.length - 1].id);
       setSelectedPublication(data.books[0].id);
     })();
