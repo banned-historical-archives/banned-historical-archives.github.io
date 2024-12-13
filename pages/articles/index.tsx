@@ -315,7 +315,7 @@ export default function Articles({
       },
       valueGetter: (tags: Tag[]) => tags.map((i) => i.name).join(','),
       renderCell: (params: GridRenderCellParams<BookCatelogItem>) => (
-        <div style={{ overflow: 'scroll', height: '100px' }}>
+        <div style={{ overflow: 'scroll', height: '100%' }}>
           <Tags
             tags={params.row.tags!}
             onClick={(t: Tag) => {
@@ -654,7 +654,6 @@ export default function Articles({
               filterModelRef.current = f;
             }}
             localeText={zhCN.components.MuiDataGrid.defaultProps.localeText}
-            getRowHeight={() => 100}
             rows={filtered_articles}
             columns={columns.current}
             pageSizeOptions={[100]}
