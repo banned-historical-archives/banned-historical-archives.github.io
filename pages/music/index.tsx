@@ -157,6 +157,7 @@ function Song({
     );
   return (
     <Stack padding="20px">
+    <Paper sx={{ flex: 1, mx: 'auto', p: '20px' }}>
       <Typography variant="subtitle1" sx={{ mb: 2 }}>
         演唱/演奏版本：
       </Typography>
@@ -216,18 +217,11 @@ function Song({
               </MenuItem>
             ))}
           </Select>
-          <Stack
-            sx={{
-              mt:
-                details?.lyrics.length && details?.lyrics.length > 1
-                  ? 0
-                  : '10px',
-            }}
-          >
+              <Paper sx={{p: "20px"}}>
             {leftContents?.map((line, idx) => (
               <Typography key={idx}>{line}</Typography>
             ))}
-          </Stack>
+          </Paper>
         </Stack>
         {details?.lyrics.length && details?.lyrics.length > 1 ? (
           <>
@@ -247,20 +241,20 @@ function Song({
                   </MenuItem>
                 ))}
               </Select>
-              <Stack>
+              <Paper sx={{p: "20px"}}>
                 {rightContents?.map((line, idx) => (
                   <Typography key={idx}>{line}</Typography>
                 ))}
-              </Stack>
+              </Paper>
             </Stack>
-            <Stack sx={{ flex: 1 }}>
-              <Stack>
+            <Stack sx={{ flex: 1, pt: "48px" }}>
+              <Paper sx={{p: "20px"}}>
                 <DiffViewer diff={diff} />
-              </Stack>
+              </Paper>
             </Stack>
           </>
         ) : null}
-      </Stack>
+      </Stack></Paper>
     </Stack>
   );
 }
