@@ -1,4 +1,4 @@
-name: build-txt
+name: build-json
 on:
   workflow_dispatch:
   push:
