@@ -66,30 +66,12 @@ export async function getStaticPaths() {
         id: i,
       },
     })),
-    // fallback: false, // can also be true or 'blocking'
-
-    fallback: 'blocking', 
+    fallback: false, // can also be true or 'blocking'
   };
 }
-
-export const getStaticProps: GetStaticProps = async (
-  context: GetStaticPropsContext,
-) => {
-  const { id } = context.params as {
-    id: string;
-  };
-  const data = JSON.parse(
-    readFileSync(
-      join(process.cwd(), 'next_helper', id.slice(0, 3), id + '.json'),
-    ).toString(),
-  );
-  return {
-    props: {
-      books: data.books,
-    },
-  };
-};
-
+export async function getStaticProps() {
+  return { props: {} };
+}
 enum CompareType {
   none = 'none',
   origin = 'origin',
@@ -114,18 +96,17 @@ enum CompareMode {
   description_and_comments = '描述和注释',
 }
 
-export default function ArticleViewer({
-  books,
-}: {
-  books: {
-    id: string;
-    type: string;
-    name: string;
-    tags: { type: string; name: string }[];
-    files: string[];
-    article: ParserResult;
-  }[];
-}) {
+export default function ArticleViewer() {
+  const [books, setBooks] = useState<
+    {
+      id: string;
+      type: string;
+      name: string;
+      tags: { type: string; name: string }[];
+      files: string[];
+      article: ParserResult;
+    }[]
+  >([]);
   const [articleId, setArticleId] = useState<string>();
   const booksRef = useRef(books);
 
@@ -133,13 +114,33 @@ export default function ArticleViewer({
   const [showMore, setShowMore] = useState(true);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [compareType, setCompareType] = useState<CompareType>(CompareType.none);
-  const [comparedPublication, setComparePublication] = useState<string>(
-    books[books.length - 1].id,
-  );
+  const [comparedPublication, setComparePublication] = useState<string>();
   const [compareMode, setCompareMode] = useState(CompareMode.line);
-  const [selectedPublication, setSelectedPublication] = useState<string>(
-    books[0].id,
-  );
+  const [selectedPublication, setSelectedPublication] = useState<string>();
+
+  const isLocalhost =
+    ((global || (window as any))['location'] as any)?.hostname === 'localhost';
+  useEffect(() => {
+    (async () => {
+      const id = location.href
+        .replace('index.html', '')
+        .split('/')
+        .filter((i) => i)
+        .slice(-1)[0];
+      const data = await (
+        await fetch(
+          `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives.github.io/json/json/${id.slice(
+            0,
+            3,
+          )}/${id}.json`,
+        )
+      ).json();
+      setArticleId(id);
+      setBooks(data.books);
+      setComparePublication(data.books[data.books.length - 1].id);
+      setSelectedPublication(data.books[0].id);
+    })();
+  }, []);
 
   const addOCRComparisonPublicationV2 = useCallback(
     (publicationId: string, patch: PatchV2) => {
@@ -169,6 +170,9 @@ export default function ArticleViewer({
   }, []);
 
   const article_diff: Diff[][] = useMemo(() => {
+    if (!comparedPublication || !selectedPublication) {
+      return [];
+    }
     if (compareType !== CompareType.version || !(typeof window !== 'undefined'))
       return [];
     const article_a = booksRef.current.find(
@@ -220,16 +224,14 @@ export default function ArticleViewer({
 
   const showCompareMenu = !!anchorEl;
 
-  const isLocalhost =
-    ((global || (window as any))['location'] as any)?.hostname === 'localhost';
+  const book = books.find((i) => i.id == selectedPublication)!;
+  const comparedBook = books.find((i) => i.id == comparedPublication)!;
+  const article = book?.article;
 
-  const book = booksRef.current.find((i) => i.id == selectedPublication)!;
-  const comparedBook = booksRef.current.find(
-    (i) => i.id == comparedPublication,
-  )!;
-  const article = book.article;
+  if (!article || !comparedBook) return null;
+
   const aliases: string[] = [];
-  booksRef.current.forEach((book) => {
+  books.forEach((book) => {
     if (book.article.alias) aliases.push(book.article.alias);
   });
 
@@ -255,16 +257,11 @@ export default function ArticleViewer({
   );
 
   const all_tags = new Map<string, Tag>();
-  booksRef.current.forEach((i) => {
+  books.forEach((i) => {
     i.tags.forEach((j) => {
       all_tags.set(j.type + '##' + j.name, j as Tag);
     });
   });
-
-  useEffect(() => {
-    setArticleId(location.pathname.split('/').slice(-1)[0]);
-  }, []);
-  if (!articleId) return null;
 
   const compare_elements: ReactElement[] = [];
   compare_elements.push(
@@ -276,16 +273,18 @@ export default function ArticleViewer({
       }}
       key="version_a"
     >
-      <ArticleComponent
-        article={article}
-        articleId={articleId!}
-        publicationId={selectedPublication}
-        publicationName={book.name}
-        description={description}
-        comments={articleComments}
-        contents={articleContents}
-        patchable={compareType === CompareType.originProofread}
-      />
+      {selectedPublication ? (
+        <ArticleComponent
+          article={article}
+          articleId={articleId!}
+          publicationId={selectedPublication}
+          publicationName={book.name}
+          description={description}
+          comments={articleComments}
+          contents={articleContents}
+          patchable={compareType === CompareType.originProofread}
+        />
+      ) : null}
     </Stack>,
   );
   if (
@@ -382,7 +381,7 @@ export default function ArticleViewer({
               setComparePublication(e.target.value);
             }}
           >
-            {booksRef.current.map((i) => (
+            {books.map((i) => (
               <MenuItem key={i.id} value={i.id}>
                 {i.name}
               </MenuItem>
@@ -394,14 +393,16 @@ export default function ArticleViewer({
             overflowY: 'scroll',
           }}
         >
-          <ArticleComponent
-            description={comparedBook.article.description}
-            articleId={articleId}
-            article={comparedBook.article}
-            publicationId={comparedPublication}
-            comments={comparedArticleComments}
-            contents={comparedArticleContents}
-          />
+          {comparedPublication && articleId ? (
+            <ArticleComponent
+              description={comparedBook.article.description}
+              articleId={articleId}
+              article={comparedBook.article}
+              publicationId={comparedPublication}
+              comments={comparedArticleComments}
+              contents={comparedArticleContents}
+            />
+          ) : null}
         </Stack>
       </Stack>,
       <Stack key="result" sx={{ flex: 1 }}>
@@ -439,7 +440,7 @@ export default function ArticleViewer({
           <Stack direction="row" sx={{ overflowX: 'scroll', flex: 1 }}>
             <Authors authors={article.authors} />
           </Stack>
-          {booksRef.current.map((i) => (
+          {books.map((i) => (
             <img
               alt=""
               style={{ cursor: 'pointer' }}
@@ -490,7 +491,7 @@ export default function ArticleViewer({
             spacing={1}
             sx={{ flex: 1, overflowX: 'scroll' }}
           >
-            {booksRef.current.map((i) => (
+            {books.map((i) => (
               <Chip
                 key={i.id}
                 label={i.name}

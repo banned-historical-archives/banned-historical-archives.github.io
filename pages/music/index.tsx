@@ -157,104 +157,105 @@ function Song({
     );
   return (
     <Stack padding="20px">
-    <Paper sx={{ flex: 1, mx: 'auto', p: '20px' }}>
-      <Typography variant="subtitle1" sx={{ mb: 2 }}>
-        演唱/演奏版本：
-      </Typography>
-      <Stack>
-        {details?.lyrics.map((lyric, idx) => (
-          <Stack key={idx} sx={{ display: 'inline' }}>
-            {lyric.audios.map((audio, aid) => {
-              const displayName = `${details?.name}-${lyric.version}-${
-                audio.artists.map((i) => `${i.name}(${i.type})`).join(' ') ||
-                '未知'
-              }`;
-              return (
-                <Button
-                  key={idx + '-' + aid}
-                  sx={{ justifyContent: 'start' }}
-                  startIcon={<PlayCircleIcon />}
-                  onClick={() => {
-                    ee.emit('musicChanged', id, name, archiveId);
-                    ee.emit('lyricChanged', lyric);
-                    ee.emit('artistChanged', audio.artists);
-                    ee.emit('musicStart', audio.url);
+      <Paper sx={{ flex: 1, mx: 'auto', p: '20px' }}>
+        <Typography variant="subtitle1" sx={{ mb: 2 }}>
+          演唱/演奏版本：
+        </Typography>
+        <Stack>
+          {details?.lyrics.map((lyric, idx) => (
+            <Stack key={idx} sx={{ display: 'inline' }}>
+              {lyric.audios.map((audio, aid) => {
+                const displayName = `${details?.name}-${lyric.version}-${
+                  audio.artists.map((i) => `${i.name}(${i.type})`).join(' ') ||
+                  '未知'
+                }`;
+                return (
+                  <Button
+                    key={idx + '-' + aid}
+                    sx={{ justifyContent: 'start' }}
+                    startIcon={<PlayCircleIcon />}
+                    onClick={() => {
+                      ee.emit('musicChanged', id, name, archiveId);
+                      ee.emit('lyricChanged', lyric);
+                      ee.emit('artistChanged', audio.artists);
+                      ee.emit('musicStart', audio.url);
+                    }}
+                  >
+                    {displayName}
+                  </Button>
+                );
+              })}
+            </Stack>
+          ))}
+        </Stack>
+        <Divider sx={{ mt: 2 }} />
+        {details?.lyrics.length && details?.lyrics.length > 1 ? (
+          <Typography variant="subtitle1" sx={{ mt: 2, mb: 2 }}>
+            歌词对比：
+          </Typography>
+        ) : null}
+        <Stack direction="row" spacing={2}>
+          <Stack sx={{ flex: 1 }}>
+            <Select
+              size="small"
+              value={details?.lyrics[lyricLeft] ? lyricLeft : 0}
+              label="版本"
+              sx={{
+                mb: 1,
+                display:
+                  details?.lyrics.length && details?.lyrics.length > 1
+                    ? 'block'
+                    : 'none',
+              }}
+              onChange={(e) => {
+                setLyricLeft(parseInt(e.target.value as string));
+              }}
+            >
+              {details?.lyrics.map((lyric, idx) => (
+                <MenuItem key={idx} value={idx}>
+                  {lyric.version}
+                </MenuItem>
+              ))}
+            </Select>
+            <Paper sx={{ p: '20px' }}>
+              {leftContents?.map((line, idx) => (
+                <Typography key={idx}>{line}</Typography>
+              ))}
+            </Paper>
+          </Stack>
+          {details?.lyrics.length && details?.lyrics.length > 1 ? (
+            <>
+              <Stack sx={{ flex: 1 }}>
+                <Select
+                  size="small"
+                  value={details?.lyrics[lyricRight] ? lyricRight : 0}
+                  label="版本"
+                  sx={{ mb: 1 }}
+                  onChange={(e) => {
+                    setLyricRight(parseInt(e.target.value as string));
                   }}
                 >
-                  {displayName}
-                </Button>
-              );
-            })}
-          </Stack>
-        ))}
-      </Stack>
-      <Divider sx={{ mt: 2 }} />
-      {details?.lyrics.length && details?.lyrics.length > 1 ? (
-        <Typography variant="subtitle1" sx={{ mt: 2, mb: 2 }}>
-          歌词对比：
-        </Typography>
-      ) : null}
-      <Stack direction="row" spacing={2}>
-        <Stack sx={{ flex: 1 }}>
-          <Select
-            size="small"
-            value={details?.lyrics[lyricLeft] ? lyricLeft : 0}
-            label="版本"
-            sx={{
-              mb: 1,
-              display:
-                details?.lyrics.length && details?.lyrics.length > 1
-                  ? 'block'
-                  : 'none',
-            }}
-            onChange={(e) => {
-              setLyricLeft(parseInt(e.target.value as string));
-            }}
-          >
-            {details?.lyrics.map((lyric, idx) => (
-              <MenuItem key={idx} value={idx}>
-                {lyric.version}
-              </MenuItem>
-            ))}
-          </Select>
-              <Paper sx={{p: "20px"}}>
-            {leftContents?.map((line, idx) => (
-              <Typography key={idx}>{line}</Typography>
-            ))}
-          </Paper>
+                  {details?.lyrics.map((lyric, idx) => (
+                    <MenuItem key={idx} value={idx}>
+                      {lyric.version}
+                    </MenuItem>
+                  ))}
+                </Select>
+                <Paper sx={{ p: '20px' }}>
+                  {rightContents?.map((line, idx) => (
+                    <Typography key={idx}>{line}</Typography>
+                  ))}
+                </Paper>
+              </Stack>
+              <Stack sx={{ flex: 1, pt: '48px' }}>
+                <Paper sx={{ p: '20px' }}>
+                  <DiffViewer diff={diff} />
+                </Paper>
+              </Stack>
+            </>
+          ) : null}
         </Stack>
-        {details?.lyrics.length && details?.lyrics.length > 1 ? (
-          <>
-            <Stack sx={{ flex: 1 }}>
-              <Select
-                size="small"
-                value={details?.lyrics[lyricRight] ? lyricRight : 0}
-                label="版本"
-                sx={{ mb: 1 }}
-                onChange={(e) => {
-                  setLyricRight(parseInt(e.target.value as string));
-                }}
-              >
-                {details?.lyrics.map((lyric, idx) => (
-                  <MenuItem key={idx} value={idx}>
-                    {lyric.version}
-                  </MenuItem>
-                ))}
-              </Select>
-              <Paper sx={{p: "20px"}}>
-                {rightContents?.map((line, idx) => (
-                  <Typography key={idx}>{line}</Typography>
-                ))}
-              </Paper>
-            </Stack>
-            <Stack sx={{ flex: 1, pt: "48px" }}>
-              <Paper sx={{p: "20px"}}>
-                <DiffViewer diff={diff} />
-              </Paper>
-            </Stack>
-          </>
-        ) : null}
-      </Stack></Paper>
+      </Paper>
     </Stack>
   );
 }
