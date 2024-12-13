@@ -1,0 +1,32 @@
+name: build-txt
+on:
+  workflow_dispatch:
+  push:
+    branches: ['master']
+
+permissions:
+  contents: write
+jobs:
+  container-job:
+    runs-on: ubuntu-latest
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}
+      cancel-in-progress: true
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+      - run: npm install
+      - run: node_options="--max-old-space-size=8192" npm run init-parsed
+      - run: node_options="--max-old-space-size=8192" npm run init-config
+      - run: node_options="--max-old-space-size=8192" npm run build-catelog
+      - run: node_options="--max-old-space-size=8192" npm run dev:nextjs-helper
+      - run: git config --global http.postBuffer 2097152000
+      - run: git config --global user.email "you@example.com"
+      - run: git config --global user.name "Your Name"
+      - run: mv next_helper json
+      - run: git checkout --orphan x
+      - run: git reset --hard
+      - run: git add json
+      - run: git commit -m i
+      - run: git push origin x:json -f
