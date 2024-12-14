@@ -2,7 +2,7 @@ import { join, basename, dirname, extname } from 'node:path/posix';
 import fs from 'node:fs';
 import fsextra from 'fs-extra';
 import {
-  BookCatelog,
+  ArticleList,
   BookConfig,
   BookMetaData,
   Config,

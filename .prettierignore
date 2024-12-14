@@ -12,6 +12,8 @@ yarn.lock
 catelog.json
 article_indexes.json
 
+indexes/*.json
+
 book_catelog.json
 music_catelog.json
 gallery_catelog.json

@@ -24,7 +24,7 @@ import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
 import {
   ArticleIndexes,
-  BookCatelog,
+  ArticleList,
   ContentType,
   ParserResult,
   Patch,

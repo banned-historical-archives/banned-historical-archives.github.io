@@ -61,3 +61,5 @@ ocr_patch/archives*
 raw/archives*
 
 next_helper
+
+indexes/*.json

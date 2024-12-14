@@ -32,8 +32,8 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import {
   ArticleCategory,
   ArticleType,
-  BookCatelog,
-  BookCatelogItem,
+  ArticleList,
+  ArticleListItem,
   BookIndexes,
   TagIndexes,
   TagType,
@@ -130,7 +130,7 @@ export default function Articles({
   book_indexes,
   tag_indexes,
 }: {
-  catelog: BookCatelog;
+  catelog: ArticleList;
   book_indexes: BookIndexes;
   tag_indexes: TagIndexes;
 }) {
@@ -173,7 +173,7 @@ export default function Articles({
       headerName: '标题',
       minWidth: 350,
       flex: 1,
-      renderCell: (params: GridRenderCellParams<BookCatelogItem>) => {
+      renderCell: (params: GridRenderCellParams<ArticleListItem>) => {
         return (
           <a
             href={`/articles/${params.row.id}`}
@@ -191,7 +191,7 @@ export default function Articles({
       minWidth: 150,
       flex: 1,
       valueGetter: (authors: string[]) => authors.map((i) => i).join(','),
-      renderCell: (params: GridRenderCellParams<BookCatelogItem>) => (
+      renderCell: (params: GridRenderCellParams<ArticleListItem>) => (
         <div style={{ overflow: 'scroll' }}>
           <Authors
             authors={params.row.authors}
@@ -238,7 +238,7 @@ export default function Articles({
               : '----/--/--',
           )
           .join(' '),
-      renderCell: (params: GridRenderCellParams<BookCatelogItem>) => (
+      renderCell: (params: GridRenderCellParams<ArticleListItem>) => (
         <Stack spacing={1}>
           {params.row.is_range_date ? (
             <Typography variant="caption">
@@ -272,8 +272,8 @@ export default function Articles({
       headerName: '来源',
       flex: 1,
       minWidth: 150,
-      valueGetter: (_: any, row: BookCatelogItem) => row.books!.join(','),
-      renderCell: (params: GridRenderCellParams<BookCatelogItem>) => (
+      valueGetter: (_: any, row: ArticleListItem) => row.books!.join(','),
+      renderCell: (params: GridRenderCellParams<ArticleListItem>) => (
         <div style={{ overflow: 'scroll', height: '100%' }}>
           <Tags
             tags={
@@ -314,7 +314,7 @@ export default function Articles({
         return tags_a > tags_b ? 1 : -1;
       },
       valueGetter: (tags: Tag[]) => tags.map((i) => i.name).join(','),
-      renderCell: (params: GridRenderCellParams<BookCatelogItem>) => (
+      renderCell: (params: GridRenderCellParams<ArticleListItem>) => (
         <div style={{ overflow: 'scroll', height: '100%' }}>
           <Tags
             tags={params.row.tags!}

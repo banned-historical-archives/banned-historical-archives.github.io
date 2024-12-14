@@ -476,8 +476,8 @@ export type PatchV2 = {
   description?: StringDiff; // 如果为空字符串表示无变更，如果不存在，表示删除
 };
 
-export type BookCatelog = BookCatelogItem[];
-export type BookCatelogItem = {
+export type ArticleList = ArticleListItem[];
+export type ArticleListItem = {
   id: string;
   title: string;
   authors: string[];

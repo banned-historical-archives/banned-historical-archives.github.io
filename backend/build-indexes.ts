@@ -16,7 +16,7 @@ import {
   VideoMetaData,
 } from '../types';
 
-type BookCatelogTemp = {
+type ArticleMap = {
   [article_id: string]: {
     title: string;
     authors: string[];
@@ -28,10 +28,9 @@ type BookCatelogTemp = {
 };
 const gallery_indexes: GalleryIndexes = [];
 const music_indexes: MusicIndexes = [];
-const book_catelog_temp: BookCatelogTemp = {};
+const article_map: ArticleMap = {};
 const article_indexes: ArticleIndexes = {};
 const tag_cache: { [type: string]: { [name: string]: number } } = {};
-const article_tag_cache = {};
 const tag_indexes: TagIndexes = [];
 const book_indexes_cache: {
   [id: string]: { name: string; archive_id: number; number_id: number };
@@ -41,7 +40,7 @@ const catelog_tags_cache: {
   [article_id: string]: { [tag_id: string]: boolean };
 } = {};
 
-function catelog_temp_to_catelog(c: BookCatelogTemp): ArticleList {
+function article_map_to_list(c: ArticleMap): ArticleList {
   return Object.keys(c).map((i) => {
     const a = c[i];
     return {
@@ -151,8 +150,8 @@ function catelog_temp_to_catelog(c: BookCatelogTemp): ArticleList {
                   )
                 ).toString(),
               ) as { type: string; name: string }[];
-              if (!book_catelog_temp[article_id])
-                book_catelog_temp[article_id] = {
+              if (!article_map[article_id])
+                article_map[article_id] = {
                   title: article.title,
                   dates: article.dates,
                   authors: article.authors,
@@ -170,14 +169,14 @@ function catelog_temp_to_catelog(c: BookCatelogTemp): ArticleList {
                   tag_cache[tag.type][tag.name] = n_tag;
                   if (catelog_tags_cache[article_id][n_tag] == undefined) {
                     catelog_tags_cache[article_id][n_tag] = true;
-                    book_catelog_temp[article_id].tag_ids.push(n_tag);
+                    article_map[article_id].tag_ids.push(n_tag);
                   }
                   n_tag++;
                 } else {
                   const x = tag_cache[tag.type][tag.name];
                   if (catelog_tags_cache[article_id][x] == undefined) {
                     catelog_tags_cache[article_id][x] = true;
-                    book_catelog_temp[article_id].tag_ids.push(x);
+                    article_map[article_id].tag_ids.push(x);
                   }
                 }
               });
@@ -191,11 +190,11 @@ function catelog_temp_to_catelog(c: BookCatelogTemp): ArticleList {
                   number_id: n_book,
                 };
                 book_indexes.push([bookMetaData.id, bookMetaData.name, i]);
-                book_catelog_temp[article_id].book_ids.push(n_book);
+                article_map[article_id].book_ids.push(n_book);
                 article_indexes[article_id].push(n_book);
                 ++n_book;
               } else {
-                book_catelog_temp[article_id].book_ids.push(
+                article_map[article_id].book_ids.push(
                   book_indexes_cache[bookMetaData.id].number_id,
                 );
                 article_indexes[article_id].push(
@@ -208,28 +207,41 @@ function catelog_temp_to_catelog(c: BookCatelogTemp): ArticleList {
       }
     }
   }
+
+
+  const article_list = article_map_to_list(article_map);
+  const chunk_size = 10000;
   fs.writeFileSync(
-    join(__dirname, '../book_catelog.json'),
-    JSON.stringify(catelog_temp_to_catelog(book_catelog_temp)),
+    join(__dirname, '../indexes/file_count.json'),
+    JSON.stringify({
+      book: Math.floor(article_list.length / chunk_size)
+    }),
   );
+  for (let i = 0; i < Math.floor(article_list.length / chunk_size); i ++) {
+    fs.writeFileSync(
+      join(__dirname, `../indexes/article_list_${i}.json`),
+      JSON.stringify(article_list.slice(i * chunk_size, (i + 1) * chunk_size)),
+    );
+  }
+
   fs.writeFileSync(
-    join(__dirname, '../tag_indexes.json'),
+    join(__dirname, '../indexes/tags.json'),
     JSON.stringify(tag_indexes),
   );
   fs.writeFileSync(
-    join(__dirname, '../gallery_indexes.json'),
+    join(__dirname, '../indexes/gallery.json'),
     JSON.stringify(gallery_indexes),
   );
   fs.writeFileSync(
-    join(__dirname, '../music_indexes.json'),
+    join(__dirname, '../indexes/music.json'),
     JSON.stringify(music_indexes),
   );
   fs.writeFileSync(
-    join(__dirname, '../book_indexes.json'),
+    join(__dirname, '../indexes/book.json'),
     JSON.stringify(book_indexes),
   );
   fs.writeFileSync(
-    join(__dirname, '../article_indexes.json'),
+    join(__dirname, '../indexes/article_to_book.json'),
     JSON.stringify(article_indexes),
   );
 })();
