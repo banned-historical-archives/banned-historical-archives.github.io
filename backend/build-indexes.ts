@@ -14,6 +14,7 @@ import {
   GalleryIndexes,
   PictureMetaData,
   VideoMetaData,
+  Tag,
 } from '../types';
 
 type ArticleMap = {
@@ -22,25 +23,28 @@ type ArticleMap = {
     authors: string[];
     dates: any;
     is_range_date: boolean;
-    tag_ids: number[];
     book_ids: number[];
+    tag_ids: number[];
+    books: {name: string, id: string, archive_id: number}[];
+    tags: {name: string, type: string}[];
   };
 };
 const gallery_indexes: GalleryIndexes = [];
 const music_indexes: MusicIndexes = [];
 const article_map: ArticleMap = {};
-const article_indexes: ArticleIndexes = {};
-const tag_cache: { [type: string]: { [name: string]: number } } = {};
 const tag_indexes: TagIndexes = [];
-const book_indexes_cache: {
-  [id: string]: { name: string; archive_id: number; number_id: number };
-} = {};
-const book_indexes: BookIndexes = [];
-const catelog_tags_cache: {
-  [article_id: string]: { [tag_id: string]: boolean };
-} = {};
 
-function article_map_to_list(c: ArticleMap): ArticleList {
+function article_map_to_list(c: ArticleMap): {
+  id: string;
+    title: string;
+    authors: string[];
+    dates: any;
+    is_range_date: boolean;
+    book_ids: number[];
+    tag_ids: number[];
+    books: {name: string, id: string, archive_id: number}[];
+    tags: {name: string, type: string}[];
+  }[] {
   return Object.keys(c).map((i) => {
     const a = c[i];
     return {
@@ -50,8 +54,6 @@ function article_map_to_list(c: ArticleMap): ArticleList {
   });
 }
 (async () => {
-  let n_book = 0;
-  let n_tag = 0;
   for (let i = 0; i <= 30; ++i) {
     const p = join(__dirname, '../parsed/archives' + i);
     console.log(p);
@@ -158,49 +160,14 @@ function article_map_to_list(c: ArticleMap): ArticleList {
                   is_range_date: article.is_range_date,
                   tag_ids: [],
                   book_ids: [],
+                  tags: tags,
+                  books: [],
                 };
-              tags.forEach((tag) => {
-                if (!tag_cache[tag.type]) tag_cache[tag.type] = {};
-                if (!catelog_tags_cache[article_id]) {
-                  catelog_tags_cache[article_id] = {};
-                }
-                if (tag_cache[tag.type][tag.name] == undefined) {
-                  tag_indexes.push([tag.type, tag.name]);
-                  tag_cache[tag.type][tag.name] = n_tag;
-                  if (catelog_tags_cache[article_id][n_tag] == undefined) {
-                    catelog_tags_cache[article_id][n_tag] = true;
-                    article_map[article_id].tag_ids.push(n_tag);
-                  }
-                  n_tag++;
-                } else {
-                  const x = tag_cache[tag.type][tag.name];
-                  if (catelog_tags_cache[article_id][x] == undefined) {
-                    catelog_tags_cache[article_id][x] = true;
-                    article_map[article_id].tag_ids.push(x);
-                  }
-                }
+              article_map[article_id].books?.push({
+                name: bookMetaData.name,
+                archive_id: i,
+                id: bookMetaData.id,
               });
-              if (!article_indexes[article_id]) {
-                article_indexes[article_id] = [];
-              }
-              if (!book_indexes_cache[bookMetaData.id]) {
-                book_indexes_cache[bookMetaData.id] = {
-                  name: bookMetaData.name,
-                  archive_id: i,
-                  number_id: n_book,
-                };
-                book_indexes.push([bookMetaData.id, bookMetaData.name, i]);
-                article_map[article_id].book_ids.push(n_book);
-                article_indexes[article_id].push(n_book);
-                ++n_book;
-              } else {
-                article_map[article_id].book_ids.push(
-                  book_indexes_cache[bookMetaData.id].number_id,
-                );
-                article_indexes[article_id].push(
-                  book_indexes_cache[bookMetaData.id].number_id,
-                );
-              }
             }
           }
         }
@@ -218,16 +185,44 @@ function article_map_to_list(c: ArticleMap): ArticleList {
     }),
   );
   for (let i = 0; i < Math.floor(article_list.length / chunk_size); i ++) {
+    const a_list = article_list.slice(i * chunk_size, (i + 1) * chunk_size);
+    const b_map = new Map<string, number>();
+    const books: string[] = [];
+    const t_map = new Map<string, number>();
+    const tags: {type: string, name: string}[] = [];
+    a_list.forEach(i => {
+      i.books.forEach(j => {
+        if (!b_map.has(j.id)) {
+          books.push(j.name);
+          b_map.set(j.id, books.length - 1);
+          i.book_ids.push(books.length - 1)
+        } else {
+          i.book_ids.push(b_map.get(j.id)!);
+        }
+      });
+      i.tags.forEach(j => {
+        const id = `${j.type}--${j.name}`;
+        if (!t_map.has(id)) {
+          tags.push(j);
+          t_map.set(id, tags.length - 1);
+          i.tag_ids.push(tags.length - 1)
+        } else {
+          i.tag_ids.push(t_map.get(id)!);
+        }
+      });
+      delete (i as any).books;
+      delete (i as any).tags;
+    });
     fs.writeFileSync(
       join(__dirname, `../indexes/article_list_${i}.json`),
-      JSON.stringify(article_list.slice(i * chunk_size, (i + 1) * chunk_size)),
+      JSON.stringify({
+        articles: a_list,
+        books,
+        tags,
+      }),
     );
   }
 
-  fs.writeFileSync(
-    join(__dirname, '../indexes/tags.json'),
-    JSON.stringify(tag_indexes),
-  );
   fs.writeFileSync(
     join(__dirname, '../indexes/gallery.json'),
     JSON.stringify(gallery_indexes),
@@ -235,13 +230,5 @@ function article_map_to_list(c: ArticleMap): ArticleList {
   fs.writeFileSync(
     join(__dirname, '../indexes/music.json'),
     JSON.stringify(music_indexes),
-  );
-  fs.writeFileSync(
-    join(__dirname, '../indexes/book.json'),
-    JSON.stringify(book_indexes),
-  );
-  fs.writeFileSync(
-    join(__dirname, '../indexes/article_to_book.json'),
-    JSON.stringify(article_indexes),
   );
 })();
