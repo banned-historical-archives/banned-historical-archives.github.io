@@ -335,12 +335,12 @@ export default function Articles() {
   const [progress, setProgress] = useState(0);
   useEffect(() => {
     (async () => {
-      const file_count: { book: number } = await (
+      const file_count: { article_list: number } = await (
         await fetch(
           'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives.github.io/refs/heads/indexes/indexes/file_count.json',
         )
       ).json();
-      for (let i = 0; i < file_count.book; ++i) {
+      for (let i = 0; i < file_count.article_list; ++i) {
         const article_list: ArticleListV2 = await (
           await fetch(
             `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives.github.io/refs/heads/indexes/indexes/article_list_${i}.json`,
@@ -387,7 +387,7 @@ export default function Articles() {
           );
         }
         setReady(true);
-        setProgress((i / (file_count.book - 1)) * 100);
+        setProgress((i / (file_count.article_list - 1)) * 100);
       }
       setArticles([...articlesRef.current]);
       setAllAuthors(Array.from(authorsSetRef.current.keys()));

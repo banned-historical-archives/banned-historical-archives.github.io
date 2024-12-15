@@ -183,7 +183,7 @@ function article_map_to_list(c: ArticleMap): {
   fs.writeFileSync(
     join(__dirname, '../indexes/file_count.json'),
     JSON.stringify({
-      book: n_chunk,
+      article_list: n_chunk,
     }),
   );
   for (let i = 0; i < n_chunk; i++) {
