@@ -20,12 +20,10 @@ export function useTagFilterDialog(
   const [tagFilter, setTagFilter] = useState<string | null>(null);
   const [tags, setTags] = useState<Tag[]>([]);
   const [selected, setSelected] = useState<Tag | null>(
-    tags_all.length
-      ? tags_all[0]
-      : null,
+    tags_all.length ? tags_all[0] : null,
   );
   const onClose = useCallback(() => setTagDialog(false), []);
-  const [default_tags, setDefaultTags] = useState<Tag[]>([])
+  const [default_tags, setDefaultTags] = useState<Tag[]>([]);
   useEffect(() => {
     const t = Array.from(
       tags_all_order_by_type.get(TagType.articleType)?.values() || [],
@@ -35,7 +33,7 @@ export function useTagFilterDialog(
   }, [tags_all_order_by_type]);
   const onConfirm = useCallback(() => {
     setTags(selected ? [...default_tags, selected] : default_tags);
-    setTagFilter(selected ?selected.id!: null);
+    setTagFilter(selected ? selected.id! : null);
     setTagDialog(false);
   }, [selected, default_tags]);
   const TagDialog = (

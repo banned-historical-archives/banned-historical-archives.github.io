@@ -111,7 +111,7 @@ type TableArticle = {
   dates: any;
   is_range_date: boolean;
   books: string[];
-  tags: {name: string,type: string, id: string}[];
+  tags: { name: string; type: string; id: string }[];
 };
 const default_authors = ['毛泽东', '江青', '王洪文', '张春桥', '姚文元'];
 export default function Articles() {
@@ -325,7 +325,7 @@ export default function Articles() {
   ]);
 
   const [allSources, setAllSources] = useState<string[]>([]);
-  const [allTags, setAllTags] = useState<{name: string, type: string}[]>([]);
+  const [allTags, setAllTags] = useState<{ name: string; type: string }[]>([]);
   const [allAuthors, setAllAuthors] = useState<string[]>([]);
   const [articles, setArticles] = useState<TableArticle[]>([]);
   const articlesRef = useRef<TableArticle[]>([]);
@@ -335,12 +335,17 @@ export default function Articles() {
   const [progress, setProgress] = useState(0);
   useEffect(() => {
     (async () => {
-      const file_count: {book: number} = await (await fetch('https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives.github.io/refs/heads/indexes/indexes/file_count.json')).json();
+      const file_count: { book: number } = await (
+        await fetch(
+          'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives.github.io/refs/heads/indexes/indexes/file_count.json',
+        )
+      ).json();
       for (let i = 0; i < file_count.book; ++i) {
-        const article_list: ArticleListV2 = await(
+        const article_list: ArticleListV2 = await (
           await fetch(
             `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives.github.io/refs/heads/indexes/indexes/article_list_${i}.json`,
-          )).json();
+          )
+        ).json();
         for (const k of article_list.tags) {
           const id = `${k.type}--${k.name}`;
           if (!tagsSetRef.current.has(id)) {
@@ -382,16 +387,18 @@ export default function Articles() {
           );
         }
         setReady(true);
-        setProgress(i / (file_count.book - 1) * 100);
+        setProgress((i / (file_count.book - 1)) * 100);
       }
       setArticles([...articlesRef.current]);
       setAllAuthors(Array.from(authorsSetRef.current.keys()));
       setAllSources(Array.from(sourcesSetRef.current.keys()));
-      setAllTags(Array.from(tagsSetRef.current.keys()).map(x => ({
-        id: x,
-        name: x.split('--')[1],
-        type: x.split('--')[0],
-      })));
+      setAllTags(
+        Array.from(tagsSetRef.current.keys()).map((x) => ({
+          id: x,
+          name: x.split('--')[1],
+          type: x.split('--')[0],
+        })),
+      );
       setLoaded(true);
     })();
   }, []);
@@ -460,21 +467,13 @@ export default function Articles() {
       )
       .filter((i) =>
         sourceFilter
-          ? !!i.books.find(
-              (k) => k.indexOf(sourceFilter) > -1,
-            )
+          ? !!i.books.find((k) => k.indexOf(sourceFilter) > -1)
           : true,
       )
       .filter((i) =>
         tagFilter ? !!i.tags.find((k) => k.id === tagFilter) : true,
       );
-  }, [
-    articles,
-    dateFilter,
-    tagFilter,
-    authorFilter,
-    sourceFilter,
-  ]);
+  }, [articles, dateFilter, tagFilter, authorFilter, sourceFilter]);
 
   if (!ready) return null;
   return (
@@ -655,7 +654,9 @@ export default function Articles() {
             </Grid2>
           </Grid2>
         </Stack>
-        {!loaded ? <LinearProgress variant="determinate" value={progress}/> : null}
+        {!loaded ? (
+          <LinearProgress variant="determinate" value={progress} />
+        ) : null}
         <Stack sx={{ flex: 1, width: '100%', height: '500px' }}>
           <DataGridPro
             apiRef={apiRef}

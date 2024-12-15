@@ -25,8 +25,8 @@ type ArticleMap = {
     is_range_date: boolean;
     book_ids: number[];
     tag_ids: number[];
-    books: {name: string, id: string, archive_id: number}[];
-    tags: {name: string, type: string}[];
+    books: { name: string; id: string; archive_id: number }[];
+    tags: { name: string; type: string }[];
   };
 };
 const gallery_indexes: GalleryIndexes = [];
@@ -35,15 +35,15 @@ const article_map: ArticleMap = {};
 
 function article_map_to_list(c: ArticleMap): {
   id: string;
-    title: string;
-    authors: string[];
-    dates: any;
-    is_range_date: boolean;
-    book_ids: number[];
-    tag_ids: number[];
-    books: {name: string, id: string, archive_id: number}[];
-    tags: {name: string, type: string}[];
-  }[] {
+  title: string;
+  authors: string[];
+  dates: any;
+  is_range_date: boolean;
+  book_ids: number[];
+  tag_ids: number[];
+  books: { name: string; id: string; archive_id: number }[];
+  tags: { name: string; type: string }[];
+}[] {
   return Object.keys(c).map((i) => {
     const a = c[i];
     return {
@@ -174,7 +174,6 @@ function article_map_to_list(c: ArticleMap): {
     }
   }
 
-
   const article_list = article_map_to_list(article_map);
   const chunk_size = 10000;
   let n_chunk = Math.floor(article_list.length / chunk_size) + 1;
@@ -184,31 +183,31 @@ function article_map_to_list(c: ArticleMap): {
   fs.writeFileSync(
     join(__dirname, '../indexes/file_count.json'),
     JSON.stringify({
-      book: n_chunk
+      book: n_chunk,
     }),
   );
-  for (let i = 0; i < n_chunk; i ++) {
+  for (let i = 0; i < n_chunk; i++) {
     const a_list = article_list.slice(i * chunk_size, (i + 1) * chunk_size);
     const b_map = new Map<string, number>();
     const books: string[] = [];
     const t_map = new Map<string, number>();
-    const tags: {type: string, name: string}[] = [];
-    a_list.forEach(i => {
-      i.books.forEach(j => {
+    const tags: { type: string; name: string }[] = [];
+    a_list.forEach((i) => {
+      i.books.forEach((j) => {
         if (!b_map.has(j.id)) {
           books.push(j.name);
           b_map.set(j.id, books.length - 1);
-          i.book_ids.push(books.length - 1)
+          i.book_ids.push(books.length - 1);
         } else {
           i.book_ids.push(b_map.get(j.id)!);
         }
       });
-      i.tags.forEach(j => {
+      i.tags.forEach((j) => {
         const id = `${j.type}--${j.name}`;
         if (!t_map.has(id)) {
           tags.push(j);
           t_map.set(id, tags.length - 1);
-          i.tag_ids.push(tags.length - 1)
+          i.tag_ids.push(tags.length - 1);
         } else {
           i.tag_ids.push(t_map.get(id)!);
         }
