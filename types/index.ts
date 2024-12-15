@@ -476,6 +476,19 @@ export type PatchV2 = {
   description?: StringDiff; // 如果为空字符串表示无变更，如果不存在，表示删除
 };
 
+export type ArticleListV2 = {
+  articles: {
+    id: string;
+    title: string;
+    authors: string[];
+    dates: any;
+    is_range_date: boolean;
+    book_ids: number[];
+    tag_ids: number[];
+  }[];
+  books: string[];
+  tags: { name: string; type: string }[];
+};
 export type ArticleList = ArticleListItem[];
 export type ArticleListItem = {
   id: string;

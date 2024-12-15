@@ -32,7 +32,6 @@ type ArticleMap = {
 const gallery_indexes: GalleryIndexes = [];
 const music_indexes: MusicIndexes = [];
 const article_map: ArticleMap = {};
-const tag_indexes: TagIndexes = [];
 
 function article_map_to_list(c: ArticleMap): {
   id: string;
@@ -178,13 +177,17 @@ function article_map_to_list(c: ArticleMap): {
 
   const article_list = article_map_to_list(article_map);
   const chunk_size = 10000;
+  let n_chunk = Math.floor(article_list.length / chunk_size) + 1;
+  if (article_list.length % chunk_size == 0) {
+    n_chunk--;
+  }
   fs.writeFileSync(
     join(__dirname, '../indexes/file_count.json'),
     JSON.stringify({
-      book: Math.floor(article_list.length / chunk_size)
+      book: n_chunk
     }),
   );
-  for (let i = 0; i < Math.floor(article_list.length / chunk_size); i ++) {
+  for (let i = 0; i < n_chunk; i ++) {
     const a_list = article_list.slice(i * chunk_size, (i + 1) * chunk_size);
     const b_map = new Map<string, number>();
     const books: string[] = [];

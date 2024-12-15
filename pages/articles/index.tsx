@@ -17,7 +17,7 @@ import {
 import Link from 'next/link';
 
 import Layout from '../../components/Layout';
-import { Article, Date } from '../../types/index';
+import { Article, ArticleListV2, Date } from '../../types/index';
 
 import TextField from '@mui/material/TextField';
 import DialogTitle from '@mui/material/DialogTitle';
@@ -57,29 +57,8 @@ import { useTagFilterDialog } from '../../components/useTagFilterDialog';
 import { useSourceFilterDialog } from '../../components/useSourceFilterDialog';
 import { readFile } from 'fs-extra';
 import { join } from 'path';
-import { Grid2 } from '@mui/material';
+import { Grid2, LinearProgress } from '@mui/material';
 import { getGridFilter } from '@mui/x-data-grid/internals';
-
-export const getStaticProps: GetStaticProps = async (
-  context: GetStaticPropsContext,
-) => {
-  const res = JSON.parse(
-    (await readFile(join(process.cwd(), './book_catelog.json'))).toString(),
-  );
-  const tag_indexes = JSON.parse(
-    (await readFile(join(process.cwd(), './tag_indexes.json'))).toString(),
-  );
-  const book_indexes = JSON.parse(
-    (await readFile(join(process.cwd(), './book_indexes.json'))).toString(),
-  );
-  return {
-    props: {
-      catelog: res,
-      tag_indexes,
-      book_indexes,
-    },
-  };
-};
 
 function ensure_two_digits(a?: number, fallback = '') {
   if (!a && a !== 0) {
@@ -124,16 +103,18 @@ const default_sources = [
   '毛泽东文集',
   '中国文化大革命文库',
 ];
+
+type TableArticle = {
+  id: string;
+  title: string;
+  authors: string[];
+  dates: any;
+  is_range_date: boolean;
+  books: string[];
+  tags: {name: string,type: string, id: string}[];
+};
 const default_authors = ['毛泽东', '江青', '王洪文', '张春桥', '姚文元'];
-export default function Articles({
-  catelog,
-  book_indexes,
-  tag_indexes,
-}: {
-  catelog: ArticleList;
-  book_indexes: BookIndexes;
-  tag_indexes: TagIndexes;
-}) {
+export default function Articles() {
   const [ready, setReady] = useState(false);
   const apiRef = useGridApiRef();
   const [filterModel, setFilterModel] = useState<GridFilterModel>({
@@ -141,6 +122,7 @@ export default function Articles({
   });
   const filterModelRef = useRef<GridFilterModel>({ items: [] });
 
+  const [loaded, setLoaded] = useState(false);
   useEffect(() => {
     setFilterModel({
       ...filterModel,
@@ -342,40 +324,83 @@ export default function Articles({
     },
   ]);
 
+  const [allSources, setAllSources] = useState<string[]>([]);
+  const [allTags, setAllTags] = useState<{name: string, type: string}[]>([]);
+  const [allAuthors, setAllAuthors] = useState<string[]>([]);
+  const [articles, setArticles] = useState<TableArticle[]>([]);
+  const articlesRef = useRef<TableArticle[]>([]);
+  const tagsSetRef = useRef(new Set<string>());
+  const sourcesSetRef = useRef(new Set<string>());
+  const authorsSetRef = useRef(new Set<string>());
+  const [progress, setProgress] = useState(0);
   useEffect(() => {
-    catelog.forEach((i) => {
-      try {
-        i.tags = i.tag_ids.map(
-          (j) =>
-            ({
-              type: tag_indexes[j][0],
-              name: tag_indexes[j][1],
-            } as Tag),
-        );
-        i.books = i.book_ids.map((j) => book_indexes[j][1]);
-      } catch (e) {
-        debugger;
+    (async () => {
+      const file_count: {book: number} = await (await fetch('https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives.github.io/refs/heads/indexes/indexes/file_count.json')).json();
+      for (let i = 0; i < file_count.book; ++i) {
+        const article_list: ArticleListV2 = await(
+          await fetch(
+            `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives.github.io/refs/heads/indexes/indexes/article_list_${i}.json`,
+          )).json();
+        for (const k of article_list.tags) {
+          const id = `${k.type}--${k.name}`;
+          if (!tagsSetRef.current.has(id)) {
+            tagsSetRef.current.add(id);
+          }
+        }
+        for (const k of article_list.books) {
+          if (!sourcesSetRef.current.has(k)) {
+            sourcesSetRef.current.add(k);
+          }
+        }
+        for (const k of article_list.articles) {
+          for (const a of k.authors) {
+            if (!authorsSetRef.current.has(a)) {
+              authorsSetRef.current.add(a);
+            }
+          }
+
+          articlesRef.current.push({
+            ...k,
+            // TODO
+            tags: Array.from(new Set(k.tag_ids)).map((t) => ({
+              ...article_list.tags[t],
+              id: `${article_list.tags[t].type}--${article_list.tags[t].name}`,
+            })),
+            books: k.book_ids.map((b) => article_list.books[b]),
+          });
+        }
+        if (i % 10 == 0) {
+          setArticles([...articlesRef.current]);
+          setAllAuthors(Array.from(authorsSetRef.current.keys()));
+          setAllSources(Array.from(sourcesSetRef.current.keys()));
+          setAllTags(
+            Array.from(tagsSetRef.current.keys()).map((x) => ({
+              id: x,
+              name: x.split('--')[1],
+              type: x.split('--')[0],
+            })),
+          );
+        }
+        setReady(true);
+        setProgress(i / (file_count.book - 1) * 100);
       }
-    });
-    setReady(true);
-  }, [catelog, book_indexes, tag_indexes]);
-  const tags_all = useMemo(() => {
-    const m = new Map<string, Tag>();
-    tag_indexes.forEach((i, idx) => {
-      m.set(idx.toString(), {
-        type: i[0],
-        name: i[1],
-        id: idx.toString(),
-      } as Tag);
-    });
-    return m;
-  }, [tag_indexes]);
+      setArticles([...articlesRef.current]);
+      setAllAuthors(Array.from(authorsSetRef.current.keys()));
+      setAllSources(Array.from(sourcesSetRef.current.keys()));
+      setAllTags(Array.from(tagsSetRef.current.keys()).map(x => ({
+        id: x,
+        name: x.split('--')[1],
+        type: x.split('--')[0],
+      })));
+      setLoaded(true);
+    })();
+  }, []);
   const tags_all_order_by_type = useMemo(() => {
     const m = new Map<string, Map<string, Tag>>();
-    tag_indexes.forEach((i, idx) => {
-      const type = i[0];
-      const name = i[1];
-      const id = idx.toString();
+    allTags.forEach((i) => {
+      const type = i.type;
+      const name = i.name;
+      const id = `${type}--${name}`;
       if (!m.get(type)) {
         m.set(type, new Map());
       }
@@ -383,23 +408,17 @@ export default function Articles({
       m.get(type)!.set(id, { type, name, id } as Tag);
     });
     return m;
-  }, [tag_indexes]);
-  const sources_all = useMemo(() => {
-    const set = new Set<string>();
-    catelog.forEach((i) =>
-      i.book_ids.forEach((j) => set.add(book_indexes[j][1])),
-    );
-    return Array.from(set).sort();
-  }, [catelog, book_indexes]);
+  }, [allTags]);
+  const sources_all_sorted = useMemo(() => {
+    return allSources.sort();
+  }, [allSources]);
 
-  const authors_all = useMemo(() => {
-    const set = new Set<string>();
-    catelog.forEach((i) => i.authors.forEach((j) => j && set.add(j)));
-    return Array.from(set).sort();
-  }, [catelog]);
+  const authors_all_sorted = useMemo(() => {
+    return allAuthors.sort();
+  }, [allAuthors]);
 
   const { TagDialog, tagFilter, setTagDialog, setTagFilter, tags } =
-    useTagFilterDialog(tags_all, tags_all_order_by_type);
+    useTagFilterDialog(allTags, tags_all_order_by_type);
   const [dateFilter, setDateFilter] = useState<DateFilter>(default_date_filter);
   const { DateFilterDialog, showDateFilterDialog } = useDateFilterDialog(
     default_date_filter,
@@ -410,7 +429,7 @@ export default function Articles({
 
   const [authorFilter, setAuthorFilter] = useState<string | null>(null);
   const { AuthorDialog, showAuthorDialog } = useAuthorFilterDialog(
-    authors_all,
+    authors_all_sorted,
     (author: string) => {
       setAuthorFilter(author ? author : null);
     },
@@ -418,7 +437,7 @@ export default function Articles({
 
   const [sourceFilter, setSourceFilter] = useState<string | null>(null);
   const { SourceDialog, showSourceDialog } = useSourceFilterDialog(
-    sources_all,
+    sources_all_sorted,
     (s: string) => {
       setSourceFilter(s);
     },
@@ -434,28 +453,27 @@ export default function Articles({
   };
 
   const filtered_articles = useMemo(() => {
-    return catelog
+    return articles
       .filter((i) => date_include(i as unknown as Article, dateFilter))
       .filter((i) =>
         authorFilter ? !!i.authors.find((k) => k === authorFilter) : true,
       )
       .filter((i) =>
         sourceFilter
-          ? !!i.book_ids.find(
-              (k) => book_indexes[k][1].indexOf(sourceFilter) > -1,
+          ? !!i.books.find(
+              (k) => k.indexOf(sourceFilter) > -1,
             )
           : true,
       )
       .filter((i) =>
-        tagFilter ? !!i.tag_ids.find((k) => k.toString() === tagFilter) : true,
+        tagFilter ? !!i.tags.find((k) => k.id === tagFilter) : true,
       );
   }, [
-    catelog,
+    articles,
     dateFilter,
     tagFilter,
     authorFilter,
     sourceFilter,
-    book_indexes,
   ]);
 
   if (!ready) return null;
@@ -637,6 +655,7 @@ export default function Articles({
             </Grid2>
           </Grid2>
         </Stack>
+        {!loaded ? <LinearProgress variant="determinate" value={progress}/> : null}
         <Stack sx={{ flex: 1, width: '100%', height: '500px' }}>
           <DataGridPro
             apiRef={apiRef}
