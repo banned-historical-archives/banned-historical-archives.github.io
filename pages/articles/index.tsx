@@ -667,6 +667,7 @@ export default function Articles() {
               sorting: {
                 sortModel: [{ field: 'dates', sort: 'asc' }],
               },
+              pagination: { paginationModel: { pageSize: 1000 } },
             }}
             filterModel={filterModel}
             onFilterModelChange={(f) => {
@@ -676,7 +677,8 @@ export default function Articles() {
             localeText={zhCN.components.MuiDataGrid.defaultProps.localeText}
             rows={filtered_articles}
             columns={columns.current}
-            pageSizeOptions={[100]}
+            pagination
+            pageSizeOptions={[20, 100, 1000]}
           />
         </Stack>
       </Stack>
