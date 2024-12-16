@@ -158,7 +158,7 @@ export default function Articles() {
       renderCell: (params: GridRenderCellParams<ArticleListItem>) => {
         return (
           <a
-            href={`/articles/${params.row.id}`}
+            href={`/article?id=${encodeURIComponent(params.row.id)}`}
             rel="noreferrer"
             target="_blank"
           >
