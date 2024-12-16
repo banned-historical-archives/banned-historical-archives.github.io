@@ -18,7 +18,7 @@ Allow: /
 Host: https://banned-historical-archives.github.io
 
 # Sitemaps
-Sitemap: Sitemap: https://www.example.com/sitemap-index.xml`);
+Sitemap: https://banned-historical-archives.github.io/sitemap-index.xml`);
 
 const chunk_size = 4000;
 const n = Math.ceil(ids.length / chunk_size);
