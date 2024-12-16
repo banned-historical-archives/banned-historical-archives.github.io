@@ -56,22 +56,6 @@ pdfjs.GlobalWorkerOptions.workerSrc = `/pdfjs-dist/legacy/build/pdf.worker.min.j
 const commit_hash = process.env.COMMIT_HASH;
 const virtual_publication_id = '--preview-patch--';
 
-export async function getStaticPaths() {
-  const article_indexes = JSON.parse(
-    readFileSync(join(process.cwd(), 'article_indexes.json')).toString(),
-  ) as ArticleIndexes;
-  return {
-    paths: Object.keys(article_indexes).map((i) => ({
-      params: {
-        id: i,
-      },
-    })),
-    fallback: false, // can also be true or 'blocking'
-  };
-}
-export async function getStaticProps() {
-  return { props: {} };
-}
 enum CompareType {
   none = 'none',
   origin = 'origin',
@@ -122,11 +106,7 @@ export default function ArticleViewer() {
     ((global || (window as any))['location'] as any)?.hostname === 'localhost';
   useEffect(() => {
     (async () => {
-      const id = location.href
-        .replace('index.html', '')
-        .split('/')
-        .filter((i) => i)
-        .slice(-1)[0];
+      const id = new URLSearchParams(location.search).get('id')!;
       const data = await (
         await fetch(
           `https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives.github.io/json/json/${id.slice(
