@@ -20,11 +20,6 @@ Host: https://banned-historical-archives.github.io
 # Sitemaps
 Sitemap: https://banned-historical-archives.github.io/sitemap.xml`);
 
-writeFileSync(join(dir, `sitemap.xml`), `<?xml version="1.0" encoding="UTF-8"?>
-<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-<sitemap><loc>https://banned-historical-archives.github.io/sitemap-0.xml</loc></sitemap>
-</sitemapindex>`);
-
 const chunk_size = 4000;
 const n = Math.ceil(ids.length / chunk_size);
 const now = (new Date()).toISOString();
@@ -54,3 +49,10 @@ ${x
 </urlset>`,
   );
 }
+writeFileSync(join(dir, 'sitemap-index.xml'), `<?xml version="1.0" encoding="UTF-8"?>
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+   ${(new Array(n)).fill(0).map((_,i)=>`<sitemap>
+      <loc>https://banned-historical-archives.github.io/sitemap-${i}.xml</loc>
+      <lastmod>${now}</lastmod>
+   </sitemap>`).join('\n')}
+</sitemapindex>`)
