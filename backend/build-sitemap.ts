@@ -34,10 +34,9 @@ for (let i = 0; i < n; i++) {
 ${
   i == 0
     ? `<url><loc>${host}</loc><lastmod>${now}</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>${host}</loc><lastmod>${now}</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
 <url><loc>${host}/gallery</loc><lastmod>${now}</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
 <url><loc>${host}/music</loc><lastmod>${now}</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>${host}/search</loc><lastmod>${now}</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>`
+<url><loc>${host}/articles</loc><lastmod>${now}</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>`
     : ''
 }
 ${x
