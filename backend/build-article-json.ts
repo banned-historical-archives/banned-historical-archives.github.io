@@ -1,25 +1,21 @@
 import { ensureDirSync, readFile, readFileSync } from 'fs-extra';
 import { join } from 'path';
-import { ArticleIndexes, BookIndexes } from '../types';
+import { ArticleIndexesWithBookInfo } from '../types';
 import { writeFileSync } from 'fs';
+import { get_article_indexes } from './get_article_indexes';
 
-const article_indexes = JSON.parse(
-  readFileSync(join(process.cwd(), 'article_indexes.json')).toString(),
-) as ArticleIndexes;
-const book_indexes = JSON.parse(
-  readFileSync(join(process.cwd(), 'book_indexes.json')).toString(),
-) as BookIndexes;
+const article_indexes = get_article_indexes();
 
 (async () => {
-  const root = join(process.cwd(), 'next_helper');
+  const root = join(process.cwd(), 'json');
   ensureDirSync(root);
 
   for (const article_id of Object.keys(article_indexes)) {
-    const book_number_ids = article_indexes[article_id];
+    const book_arr = article_indexes[article_id];
     const books = [];
-    for (const i of book_number_ids) {
-      const archives_id = book_indexes[i][2];
-      const book_id = book_indexes[i][0];
+    for (const i of book_arr) {
+      const archives_id = i[2];
+      const book_id = i[0];
       const book_path = join(
         process.cwd(),
         'parsed/archives' + archives_id,

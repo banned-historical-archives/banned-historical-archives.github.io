@@ -51,19 +51,6 @@ import { readFile } from 'fs-extra';
 import { join } from 'path';
 import { zhCN } from '@mui/x-data-grid/locales';
 
-export const getStaticProps: GetStaticProps = async (
-  context: GetStaticPropsContext,
-) => {
-  const res = JSON.parse(
-    (await readFile(join(process.cwd(), './gallery_indexes.json'))).toString(),
-  ) as GalleryIndexes;
-  return {
-    props: {
-      gallery: res,
-    },
-  };
-};
-
 const ClickToShow = ({ url }: { url: string }) => {
   const [clicked, setClicked] = useState(false);
   return clicked ? (
@@ -155,7 +142,13 @@ const columns: GridColDef<PictureMetaData>[] = [
     ),
   },
 ];
-export default function Gallery({ gallery }: { gallery: GalleryIndexes }) {
+export default function Gallery() {
+  const [gallery, setGallery] = useState<GalleryIndexes>([]);
+  useEffect(() => {
+    (async () => {
+      setGallery(await (await fetch('https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives.github.io/refs/heads/indexes/indexes/gallery.json')).json())
+    })();
+  }, []);
   return (
     <Stack p={2} sx={{ height: '100%', overflow: 'scroll' }}>
       <Head>

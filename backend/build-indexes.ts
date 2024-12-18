@@ -4,7 +4,6 @@ import JSON5 from 'json5';
 import {
   ArticleIndexes,
   ArticleList,
-  BookIndexes,
   MusicMetaData,
   MusicIndexes,
   TagIndexes,
@@ -192,6 +191,10 @@ function article_map_to_list(c: ArticleMap): {
     const books: string[] = [];
     const t_map = new Map<string, number>();
     const tags: { type: string; name: string }[] = [];
+    fs.writeFileSync(
+      join(__dirname, `../indexes/article_list_with_book_info_${i}.json`),
+      JSON.stringify(a_list.map(x => ([x.id, x.books.map(j => [j.id, j.name, j.archive_id])]))),
+    );
     a_list.forEach((i) => {
       i.books.forEach((j) => {
         if (!b_map.has(j.id)) {

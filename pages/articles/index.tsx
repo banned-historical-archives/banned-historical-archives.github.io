@@ -34,7 +34,6 @@ import {
   ArticleType,
   ArticleList,
   ArticleListItem,
-  BookIndexes,
   TagIndexes,
   TagType,
 } from '../../types';

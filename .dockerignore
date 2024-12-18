@@ -19,14 +19,6 @@ Dockerfile
 docker-compose.yml
 .dockerignore
 
-book_catelog.json
-tag_indexes.json
-book_indexes.json
-
-article_indexes.json
-music_indexes.json
-gallery_indexes.json
-
 .env
 
 public/pdfjs-dist

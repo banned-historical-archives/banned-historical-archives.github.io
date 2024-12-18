@@ -31,7 +31,7 @@ jobs:
           TITLE: ${{ github.event.issue.title }}
       - run: node_options="--max-old-space-size=8192" npm run init-parsed
       - run: node_options="--max-old-space-size=8192" npm run init-config
-      - run: node_options="--max-old-space-size=8192" npm run build-catelog
+      - run: node_options="--max-old-space-size=8192" npm run build-indexes
       - id: get_archive_id
         run: echo ::set-output name=archive_id::$(npx ts-node --project ./tsconfig.build.json backend/gitworkflow-get-archive-id.ts)
         env:

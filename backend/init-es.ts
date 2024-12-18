@@ -1,11 +1,12 @@
 import 'reflect-metadata';
 
 import esClient from './connect-es';
-import { ArticleIndexes, BookIndexes, ParserResult } from '../types';
+import { ArticleIndexes, ParserResult } from '../types';
 import { readFileSync } from 'fs';
 import { join } from 'path';
 import { readJSONSync } from 'fs-extra';
 import { sleep } from '../utils';
+import { get_article_indexes } from './get_article_indexes';
 
 type ESArticle = {
   article_id: string;
@@ -17,12 +18,7 @@ type ESArticle = {
   content: string;
 };
 
-const article_indexes = JSON.parse(
-  readFileSync(join(process.cwd(), 'article_indexes.json')).toString(),
-) as ArticleIndexes;
-const book_indexes = JSON.parse(
-  readFileSync(join(process.cwd(), 'book_indexes.json')).toString(),
-) as BookIndexes;
+const article_indexes = get_article_indexes();
 
 (async () => {
   if (process.argv[process.argv.length - 1] === 'reset') {
@@ -64,8 +60,7 @@ const book_indexes = JSON.parse(
 
   const total = Object.keys(article_indexes).length;
   for (const article_id of Object.keys(article_indexes)) {
-    for (const book_number_id of article_indexes[article_id]) {
-      const book = book_indexes[book_number_id];
+    for (const book of article_indexes[article_id]) {
       const [book_id, book_name, archive_id] = book;
       const article = readJSONSync(
         join(

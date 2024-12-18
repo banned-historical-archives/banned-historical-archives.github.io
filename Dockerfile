@@ -12,8 +12,8 @@ COPY . .
 
 RUN npm run init-parsed
 RUN npm run init-config
-RUN npm run build-catelog
-RUN npm run dev:nextjs-helper
+RUN npm run build-indexes
+RUN npm run build-article-json
 ENV LOCAL_SEARCH_ENGINE = 1
 RUN npm run build
 

@@ -68,19 +68,6 @@ import { GridApiPro } from '@mui/x-data-grid-pro/models/gridApiPro';
 import Tags from '../../components/Tags';
 import { zhCN } from '@mui/x-data-grid/locales';
 
-export const getStaticProps: GetStaticProps = async (
-  context: GetStaticPropsContext,
-) => {
-  const res = JSON.parse(
-    (await readFile(join(process.cwd(), './music_indexes.json'))).toString(),
-  ) as MusicIndexes;
-  return {
-    props: {
-      music: res,
-    },
-  };
-};
-
 const getDetails = async (
   id: string,
   archives_id: number,
@@ -512,9 +499,15 @@ type Column = {
   sources: string[];
   art_forms: string[];
 };
-export default function Music({ music }: { music: MusicIndexes }) {
+export default function Music() {
+  const [music, setMusic] = useState<MusicIndexes>([]);
   const ee = useRef(new EventEmitter());
   ee.current.setMaxListeners(9876543);
+  useEffect(() => {
+    (async() => {
+      setMusic(await (await fetch('https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives.github.io/refs/heads/indexes/indexes/music.json')).json())
+    })();
+  }, []);
   const filterModelRef = useRef<GridFilterModel>({ items: [] });
   const indexesRef = useRef<Column[]>(
     music.map((i) => ({

@@ -2,10 +2,9 @@ import { readFileSync } from 'fs';
 import {writeFileSync} from'fs-extra';
 import { join } from 'path';
 import { ArticleIndexes } from '../types';
+import { get_article_indexes } from './get_article_indexes';
 
-const article_indexes = JSON.parse(
-  readFileSync(join(process.cwd(), 'article_indexes.json')).toString(),
-) as ArticleIndexes;
+const article_indexes = get_article_indexes();
 
 const ids = Object.keys(article_indexes);
 

@@ -6,7 +6,6 @@ import {
   ArticleCategory,
   ArticleIndexes,
   BookConfig,
-  BookIndexes,
   ParserResult,
   BookMetaData,
   Tag,
@@ -15,6 +14,7 @@ import {
 import { get_article_id, uuid } from '../utils';
 import fs, { readFileSync, writeFileSync } from 'fs';
 import { ensureDirSync } from 'fs-extra';
+import { get_article_indexes } from './get_article_indexes';
 
 /*
   const temp = {
@@ -40,17 +40,12 @@ import { ensureDirSync } from 'fs-extra';
   }
   */
 
-const article_indexes = JSON.parse(
-  readFileSync(join(process.cwd(), 'article_indexes.json')).toString(),
-) as ArticleIndexes;
-const book_indexes = JSON.parse(
-  readFileSync(join(process.cwd(), 'book_indexes.json')).toString(),
-) as BookIndexes;
+const article_indexes = get_article_indexes();
 
 Object.keys(article_indexes).forEach((article_id) => {
-  for (const book_number_id of article_indexes[article_id]) {
-    const book_id = book_indexes[book_number_id][0];
-    const archives_id = 'archives' + book_indexes[book_number_id][2];
+  for (const book of article_indexes[article_id]) {
+    const book_id = book[0];
+    const archives_id = 'archives' + book[2];
     const book_metadata = JSON.parse(
       fs
         .readFileSync(

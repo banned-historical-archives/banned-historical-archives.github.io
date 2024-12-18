@@ -4,8 +4,9 @@ import { isAbsolute } from 'node:path';
 import https from 'https';
 import { Transform } from 'stream';
 import fs, { readFileSync } from 'node:fs';
-import { ArticleIndexes, BookIndexes, AutomatedEntryOption } from '../types';
+import { ArticleIndexes, AutomatedEntryOption } from '../types';
 import JSON5 from 'json5';
+import { get_article_indexes } from './get_article_indexes';
 
 const body = (process.env as any).BODY.trim();
 const raw_title = (process.env as any).TITLE.trim();
@@ -18,13 +19,8 @@ export async function start() {
       articleId: string;
       publicationId: string;
     };
-    const a_indexes = JSON.parse(
-      readFileSync(join(__dirname, '../article_indexes.json')).toString(),
-    ) as ArticleIndexes;
-    const b_indexes = JSON.parse(
-      readFileSync(join(__dirname, '../book_indexes.json')).toString(),
-    ) as BookIndexes;
-    const candidates = a_indexes[obj.articleId].map((i) => b_indexes[i]);
+    const a_indexes = get_article_indexes();
+    const candidates = a_indexes[obj.articleId];
     console.log(candidates.find((i) => i[0] == obj.publicationId)![2]);
     process.exit(0);
   }

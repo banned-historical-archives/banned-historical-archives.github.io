@@ -1,4 +1,5 @@
-import { ArticleIndexes, BookIndexes } from '../types';
+import { ArticleIndexes } from '../types';
+import { get_article_indexes } from './get_article_indexes';
 
 const { mkdirSync, existsSync, readFileSync, writeFileSync } = require('fs');
 const { join } = require('path');
@@ -26,12 +27,7 @@ let final: {
   patch: any;
 };
 let decoded = '';
-const book_indexes = JSON.parse(
-  readFileSync(join(__dirname, '../book_indexes.json')).toString(),
-) as BookIndexes;
-const article_indexes = JSON.parse(
-  readFileSync(join(__dirname, '../article_indexes.json')).toString(),
-) as ArticleIndexes;
+const article_indexes = get_article_indexes();
 try {
   const patch = JSON.parse(body) as {
     articleId: string;
@@ -44,9 +40,7 @@ try {
   };
   decoded = decodeURIComponent(JSON.stringify(final.patch)).replace(/\n/g, '');
 
-  const candidates = article_indexes[patch.articleId].map(
-    (i) => book_indexes[i],
-  );
+  const candidates = article_indexes[patch.articleId];
   const archive_id = candidates.find((i) => i[0] == patch.publicationId)![2];
   console.log('archive_id', archive_id);
   const filepath = join(

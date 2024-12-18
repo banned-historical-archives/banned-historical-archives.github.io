@@ -1,8 +1,7 @@
 name: build-indexes
 on:
-  workflow_dispatch:
-  push:
-    branches: ['master']
+  repository_dispatch:
+    types: [build-indexes]
 
 permissions:
   contents: write
@@ -19,8 +18,7 @@ jobs:
       - run: npm install
       - run: node_options="--max-old-space-size=8192" npm run init-parsed
       - run: node_options="--max-old-space-size=8192" npm run init-config
-      - run: node_options="--max-old-space-size=8192" npm run build-catelog
-      - run: node_options="--max-old-space-size=8192" npm run dev:nextjs-helper && npm run build-indexes
+      - run: node_options="--max-old-space-size=8192" npm run build-indexes
       - run: git config --global http.postBuffer 2097152000
       - run: git config --global user.email "you@example.com"
       - run: git config --global user.name "Your Name"
