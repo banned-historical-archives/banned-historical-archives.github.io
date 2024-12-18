@@ -20,13 +20,13 @@ jobs:
       - uses: actions/checkout@v4
         with:
           ref: 'indexes'
-          path: '../indexes'
+          path: 'tmp_indexes'
       - uses: actions/checkout@v4
         with:
           ref: 'json'
-          path: '../json'
-      - run: mv ../json/json ./
-      - run: mv ../indexes/indexes ./
+          path: 'tmp_json'
+      - run: mv tmp_json/json ./
+      - run: mv tmp_indexes/indexes ./
       - run: node_options="--max-old-space-size=8192" npm run build-txt
       - run: git config --global http.postBuffer 2097152000
       - run: git config --global user.email "you@example.com"

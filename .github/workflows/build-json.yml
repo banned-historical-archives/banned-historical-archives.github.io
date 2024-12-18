@@ -19,9 +19,9 @@ jobs:
       - uses: actions/checkout@v4
         with:
           ref: 'indexes'
-          path: '../indexes'
+          path: 'tmp_indexes'
       - run: npm install
-      - run: mv ../indexes/indexes ./
+      - run: mv tmp_indexes/indexes ./
       - run: node_options="--max-old-space-size=8192" npm run build-article-json
       - run: git config --global http.postBuffer 2097152000
       - run: git config --global user.email "you@example.com"
