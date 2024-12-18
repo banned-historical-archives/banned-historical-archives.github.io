@@ -11,6 +11,7 @@ const nextConfig = {
   output: 'export',
   env: {
     LOCAL_SEARCH_ENGINE: process.env.LOCAL_SEARCH_ENGINE,
+    LOCAL_INDEXES: process.env.LOCAL_INDEXES,
   },
   webpack: (config) => {
     config.module.rules.push(
