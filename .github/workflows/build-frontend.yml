@@ -1,8 +1,8 @@
 name: build-frontend
 on:
-  workflow_dispatch:
-  push:
-    branches: ['master']
+  workflow_run:
+    workflows: ["build"]
+    types: [completed]
 
 permissions:
   contents: write
@@ -23,6 +23,11 @@ jobs:
       - name: Use Node.js
         uses: actions/setup-node@v3
       - run: npm install
+      - uses: actions/checkout@v4
+        with:
+          ref: 'indexes'
+          path: 'tmp_indexes'
+      - run: mv tmp_indexes/indexes ./
       - run: cp -r ./node_modules/pdfjs-dist ./public/
 
       - run: node_options="--max-old-space-size=8192" npm run build
