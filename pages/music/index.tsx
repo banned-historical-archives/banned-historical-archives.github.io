@@ -500,29 +500,39 @@ type Column = {
   art_forms: string[];
 };
 export default function Music() {
-  const [music, setMusic] = useState<MusicIndexes>([]);
   const ee = useRef(new EventEmitter());
   ee.current.setMaxListeners(9876543);
+  const filterModelRef = useRef<GridFilterModel>({ items: [] });
+  const [indexes, setIndexes] = useState<Column[]>([]);
+  const apiRef = useGridApiRef();
   useEffect(() => {
-    (async() => {
-      setMusic(await (await fetch('https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives.github.io/refs/heads/indexes/indexes/music.json')).json())
+    (async () => {
+      const data = await (
+        await fetch(
+          'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives.github.io/refs/heads/indexes/indexes/music.json',
+        )
+      ).json();
+      setIndexes(
+        data.map((i: any) => ({
+          id: i[0],
+          name: i[1],
+          archiveId: i[2],
+          tags: i[4],
+          nLyrics: i[3],
+          composers: i[5],
+          art_forms: i[9],
+          lyricists: i[6],
+          artists: i[7],
+          sources: i[8],
+        })),
+      );
+      setTimeout(() => {
+        const rows = apiRef.current.getSortedRows();
+        const row = rows[0];
+        ee.current.emit('musicChanged', row.id, row.name, row.archiveId, 0, 0);
+      }, 500);
     })();
   }, []);
-  const filterModelRef = useRef<GridFilterModel>({ items: [] });
-  const indexesRef = useRef<Column[]>(
-    music.map((i) => ({
-      id: i[0],
-      name: i[1],
-      archiveId: i[2],
-      tags: i[4],
-      nLyrics: i[3],
-      composers: i[5],
-      art_forms: i[9],
-      lyricists: i[6],
-      artists: i[7],
-      sources: i[8],
-    })),
-  );
   const buildHeaderOnClick = useCallback((field: string) => {
     return (t: Tag) => {
       const newFilter: GridFilterModel = {
@@ -680,7 +690,6 @@ export default function Music() {
     [],
   );
 
-  const apiRef = useGridApiRef();
   useEffect(() => {
     function onChange(id: string) {
       const idx = apiRef.current.getRowIndexRelativeToVisibleRows(id);
@@ -694,11 +703,6 @@ export default function Music() {
       } catch (e) {}
     }
     ee.current.on('musicChanged', onChange);
-    setTimeout(() => {
-      const rows = apiRef.current.getSortedRows();
-      const row = rows[0];
-      ee.current.emit('musicChanged', row.id, row.name, row.archiveId, 0, 0);
-    }, 500);
     return () => {
       ee.current.off('musicChanged', onChange);
     };
@@ -737,7 +741,7 @@ export default function Music() {
           }}
           getRowId={(row) => row.id}
           getDetailPanelHeight={() => 'auto'}
-          rows={indexesRef.current}
+          rows={indexes}
           columns={columns}
           localeText={zhCN.components.MuiDataGrid.defaultProps.localeText}
           pageSizeOptions={[100]}

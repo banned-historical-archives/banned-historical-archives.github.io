@@ -1,7 +1,7 @@
 name: build-frontend
 on:
   workflow_run:
-    workflows: ["build"]
+    workflows: ['build']
     types: [completed]
 
 permissions:

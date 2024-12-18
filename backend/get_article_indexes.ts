@@ -1,6 +1,6 @@
-import { readFileSync } from "fs";
-import { join } from "path";
-import { ArticleIndexes, ArticleIndexesWithBookInfo } from "../types";
+import { readFileSync } from 'fs';
+import { join } from 'path';
+import { ArticleIndexes, ArticleIndexesWithBookInfo } from '../types';
 
 export function get_article_indexes(): ArticleIndexesWithBookInfo {
   const fc = JSON.parse(

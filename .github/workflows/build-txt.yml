@@ -1,7 +1,7 @@
 name: build-txt
 on:
   workflow_run:
-    workflows: ["build-json"]
+    workflows: ['build-json']
     types: [completed]
 
 permissions:

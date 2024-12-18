@@ -194,7 +194,12 @@ function article_map_to_list(c: ArticleMap): {
     const tags: { type: string; name: string }[] = [];
     fs.writeFileSync(
       join(__dirname, `../indexes/article_list_with_book_info_${i}.json`),
-      JSON.stringify(a_list.map(x => ([x.id, x.books.map(j => [j.id, j.name, j.archive_id])]))),
+      JSON.stringify(
+        a_list.map((x) => [
+          x.id,
+          x.books.map((j) => [j.id, j.name, j.archive_id]),
+        ]),
+      ),
     );
     a_list.forEach((i) => {
       i.books.forEach((j) => {

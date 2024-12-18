@@ -503,7 +503,9 @@ export type ArticleListItem = {
 };
 export type ArticleIndexes = { [aid: string]: number[] }; // book_number_id
 export type TagIndexes = [string, string][]; // type, name
-export type ArticleIndexesWithBookInfo = { [aid: string]:[string, string, number][]}; // id, name, archive_id
+export type ArticleIndexesWithBookInfo = {
+  [aid: string]: [string, string, number][];
+}; // id, name, archive_id
 export type MusicIndex = [
   string,
   string,

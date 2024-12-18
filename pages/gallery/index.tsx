@@ -146,7 +146,13 @@ export default function Gallery() {
   const [gallery, setGallery] = useState<GalleryIndexes>([]);
   useEffect(() => {
     (async () => {
-      setGallery(await (await fetch('https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives.github.io/refs/heads/indexes/indexes/gallery.json')).json())
+      setGallery(
+        await (
+          await fetch(
+            'https://raw.githubusercontent.com/banned-historical-archives/banned-historical-archives.github.io/refs/heads/indexes/indexes/gallery.json',
+          )
+        ).json(),
+      );
     })();
   }, []);
   return (

@@ -1,5 +1,5 @@
 import { readFileSync } from 'fs';
-import {writeFileSync} from'fs-extra';
+import { writeFileSync } from 'fs-extra';
 import { join } from 'path';
 import { ArticleIndexes } from '../types';
 import { get_article_indexes } from './get_article_indexes';
@@ -10,7 +10,9 @@ const ids = Object.keys(article_indexes);
 
 const dir = 'out';
 const host = 'https://banned-historical-archives.github.io';
-writeFileSync(join(dir, `robot.txt`), `# *
+writeFileSync(
+  join(dir, `robot.txt`),
+  `# *
 User-agent: *
 Allow: /
 
@@ -18,11 +20,12 @@ Allow: /
 Host: ${host}
 
 # Sitemaps
-Sitemap: ${host}/sitemap-index.xml`);
+Sitemap: ${host}/sitemap-index.xml`,
+);
 
 const chunk_size = 4000;
 const n = Math.ceil(ids.length / chunk_size);
-const now = (new Date()).toISOString();
+const now = new Date().toISOString();
 for (let i = 0; i < n; i++) {
   const x = ids.slice(i * chunk_size, (i + 1) * chunk_size);
   writeFileSync(
@@ -47,10 +50,18 @@ ${x
 </urlset>`,
   );
 }
-writeFileSync(join(dir, 'sitemap-index.xml'), `<?xml version="1.0" encoding="UTF-8"?>
+writeFileSync(
+  join(dir, 'sitemap-index.xml'),
+  `<?xml version="1.0" encoding="UTF-8"?>
 <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-   ${(new Array(n)).fill(0).map((_,i)=>`<sitemap>
+   ${new Array(n)
+     .fill(0)
+     .map(
+       (_, i) => `<sitemap>
       <loc>${host}/sitemap-${i}.xml</loc>
       <lastmod>${now}</lastmod>
-   </sitemap>`).join('\n')}
-</sitemapindex>`)
+   </sitemap>`,
+     )
+     .join('\n')}
+</sitemapindex>`,
+);
