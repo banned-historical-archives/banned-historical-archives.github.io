@@ -1,7 +1,7 @@
 name: build-json
 on:
   workflow_run:
-    workflows: ["build-indexes"]
+    workflows: ["build"]
     types: [completed]
 
 permissions:
@@ -16,15 +16,16 @@ jobs:
       - uses: actions/checkout@v4
       - name: Use Node.js
         uses: actions/setup-node@v3
+      - uses: actions/checkout@v4
+        with:
+          ref: 'indexes'
+          path: '../indexes'
       - run: npm install
-      - run: node_options="--max-old-space-size=8192" npm run init-parsed
-      - run: node_options="--max-old-space-size=8192" npm run init-config
-      - run: node_options="--max-old-space-size=8192" npm run build-indexes
+      - run: mv ../indexes/indexes ./
       - run: node_options="--max-old-space-size=8192" npm run build-article-json
       - run: git config --global http.postBuffer 2097152000
       - run: git config --global user.email "you@example.com"
       - run: git config --global user.name "Your Name"
-      - run: mv next_helper json
       - run: git checkout --orphan x
       - run: git reset --hard
       - run: git add json

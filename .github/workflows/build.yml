@@ -6,47 +6,25 @@ on:
 
 permissions:
   contents: write
-  pages: write
-  id-token: write
-  actions: write
-
 jobs:
   container-job:
-    runs-on: ubuntu-22.04
-
+    runs-on: ubuntu-latest
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}
       cancel-in-progress: true
-
     steps:
       - uses: actions/checkout@v4
       - name: Use Node.js
         uses: actions/setup-node@v3
       - run: npm install
-      - run: cp -r ./node_modules/pdfjs-dist ./public/
       - run: node_options="--max-old-space-size=8192" npm run init-parsed
       - run: node_options="--max-old-space-size=8192" npm run init-config
       - run: node_options="--max-old-space-size=8192" npm run build-indexes
-      - run: node_options="--max-old-space-size=8192" npm run build-article-json && npm run build
-
       - run: git config --global http.postBuffer 2097152000
       - run: git config --global user.email "you@example.com"
       - run: git config --global user.name "Your Name"
-
       - run: git checkout --orphan x
       - run: git reset --hard
-      - run: mv out ../out
-      - run: ls -Q | grep -v ".git" | xargs rm -fr
-      - run: mv ../out/* ./
-      - run: touch .nojekyll
-      - run: rm -rf .next
-      - run: git add .
+      - run: git add indexes
       - run: git commit -m i
-      - run: git push origin x:gh-pages -f
-
-      # - name: Deploy 🚀
-      #   uses: JamesIves/github-pages-deploy-action@v4
-      #   with:
-      #     force: true
-      #     folder: 'out'
-      #     clean: true
+      - run: git push origin x:indexes -f
