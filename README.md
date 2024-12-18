@@ -33,20 +33,20 @@
 
 [https://banned-historical-archives.github.io](https://banned-historical-archives.github.io)
 
-和谐历史档案馆，[开源](https://github.com/banned-historical-archives/banned-historical-archives.github.io)的数字档案馆。我们致力于搜集、整合各类受官方封禁的文件、报纸、杂志和多媒体资料，对并它们进行标准化处理，通过解析、识别和分类，形成规范化的文稿档案和多媒体档案数据库。
+和谐历史档案馆，[开源](https://github.com/banned-historical-archives/banned-historical-archives.github.io)的数字档案馆。我们致力于搜集、整合各类受官方封禁的文件、报纸、杂志和多媒体资料，对并它们进行标准化处理，通过解析、识别和分类，形成规范化的文档和多媒体档案数据库。
 
-尽管民间有许多人在进行资料收集和校验工作，但分散的工作可能难以避免重复劳动，资料的二次汇编难以确保真实性，且缺少统一的版本管理，难以维护。我们运用一系列自动化工具解决了这些问题，另外支持对每篇文稿的溯源。
+尽管民间有许多人在进行资料收集和校验工作，但分散的工作可能难以避免重复劳动，资料的二次汇编难以确保真实性，且缺少统一的版本管理，难以维护。我们运用一系列自动化工具解决了这些问题，另外支持对每篇文档的溯源。
 
-其中[已录入的文稿资料](https://github.com/banned-historical-archives/banned-historical-archives.github.io/wiki/%E6%94%B6%E5%BD%95%E7%9A%84%E6%96%87%E7%A8%BF%E5%92%8C%E4%B9%A6%E7%B1%8D)至少30万篇；[待录入的文稿资料](https://huggingface.co/datasets/banned-historical-archives/banned-historical-archives)超过百万篇，正在加工和整理。文稿内容包括但不限于中央发布的文件、中央高层会议纪要、主要人物的通知、著作、谈话/对话/讲话、宣言/声明、电报、通讯、书信、消息、评论/批语/批注/批示、意见、指示/命令，以及群众运动中的重要文献。涉及的主要人物包括毛泽东、江青、姚文元、张春桥、王洪文等。所收录资料立场不一，请注意辨别。我们仅进行收录和校对工作，力求保持文稿原貌，其内容并不代表我们的观点。
+其中[已录入的文本资料](https://github.com/banned-historical-archives/banned-historical-archives.github.io/wiki/%E6%94%B6%E5%BD%95%E7%9A%84%E6%96%87%E7%A8%BF%E5%92%8C%E4%B9%A6%E7%B1%8D)至少30万篇；[待录入的文本资料](https://huggingface.co/datasets/banned-historical-archives/banned-historical-archives)超过百万篇，正在加工和整理。文档内容包括但不限于中央发布的文件、中央高层会议纪要、主要人物的通知、著作、谈话/对话/讲话、宣言/声明、电报、通讯、书信、消息、评论/批语/批注/批示、意见、指示/命令，以及群众运动中的重要文献。涉及的主要人物包括毛泽东、江青、姚文元、张春桥、王洪文等。所收录资料立场不一，请注意辨别。我们仅进行收录和校对工作，力求保持文档原貌，其内容并不代表我们的观点。
 
 我们还收录了一些重要的学术性、第三方解读的哲学、政治经济学、历史书籍、报纸和杂志。
-报纸和杂志也被转换为标准文稿档案录入本站，主要包括红旗杂志、学习与批判、参考消息、人民日报、文汇报等。
+报纸和杂志也被转换为标准文档录入本站，主要包括红旗杂志、学习与批判、参考消息、人民日报、文汇报等。
 
 多媒体资料涵盖音乐及歌词、电影、照片、录音、录像等，目前主要收录社会主义中国创作的红色音乐。
 
 ### 官方封禁的原因（包括过去官方公开的文件）
-* 1976年10月6日**怀仁堂政变**后，执政党与国家的统治群体已经完成了转化。没有无倾向性的史料，不敢鸣放的当权派冷处理及封禁与己方立场不一致的史料成为必然。
-* 建国以来，党的八届三中全会以来，特别是无产阶级文化大革命时期的历史资料包含了大量无产阶级专政实践经验，对当前官方政权稳定极为不利。
+* 自1976年10月6日怀仁堂政变以来，执政党及其统治集团的合法性持续受到质疑。尽管他们编织了无数谎言，事实终将无法掩盖，信息封锁也因此变得不可避免。
+* 无产阶级文化大革命时期的历史资料包含了大量对抗特权阶级的斗争经验，对当前官方政权稳定极为不利。
 * 许多观点与现行教科书、宣传方向和政策立场存在矛盾。官方甚至修改、编造和美化历史，为防止激起群众好奇心，避免对有争议的历史深入挖掘和讨论。
 
 ### 被封禁的资料中揭示的内容
@@ -98,7 +98,7 @@
 
 ## 功能
 
-1. 基本的文稿、音乐、图片查询功能；
+1. 基本的文本、音乐、图片查询功能；
 2. 多版本逐字对比、多版本逐行对比和文字原稿对比；
  ![版本对比](https://user-images.githubusercontent.com/109972625/183229751-6e00a481-78a0-4fcc-a203-f73607bdc0c6.jpg)
 
@@ -111,11 +111,11 @@
 
 ## 与其他文库/数据库的区别
 
-- 收录多种来源的文稿，可进行版本对比。
-- 收录的文稿都经过文本识别或者校对并且进行了最细粒度的加工，最大程度保证文本的质量，不仅保留每个段落原有的排版信息，还保留了原有的角标注释信息。非标准化的加工则无法区分文中子标题/子标题日期/段落/引文/注释等信息，无论是正文的版本对比还是其他数据的对比都很困难。
+- 收录多种来源的文档，可进行版本对比。
+- 收录的文档都经过文本识别或者校对并且进行了最细粒度的加工，最大程度保证文本的质量，不仅保留每个段落原有的排版信息，还保留了原有的角标注释信息。非标准化的加工则无法区分文中子标题/子标题日期/段落/引文/注释等信息，无论是正文的版本对比还是其他数据的对比都很困难。
 - 可溯源，可验证。所有信息均来自对原始文件（如 pdf）的解析，可以校验原始文件的摘要确保一致。
 - 文本识别的模型、训练集、代码，以及解析算法公开透明。
-- 包含完整的文稿校对记录。
+- 包含完整的文档校对记录。
 
 ## 源代码
 
@@ -218,6 +218,6 @@ https://huggingface.co/datasets/banned-historical-archives/banned-historical-arc
 [\[资源贡献\]](https://github.com/banned-historical-archives/banned-historical-archives.github.io/issues)  
 [本地运行](https://github.com/banned-historical-archives/banned-historical-archives.github.io/blob/master/docs/local.md)
 [本地搜索](https://github.com/banned-historical-archives/banned-historical-archives.github.io/blob/master/docs/local-search-engine.md)
-[文稿录入与校对](https://github.com/banned-historical-archives/banned-historical-archives.github.io/blob/master/docs/upload-and-correction.md)
+[文本录入与校对](https://github.com/banned-historical-archives/banned-historical-archives.github.io/blob/master/docs/upload-and-correction.md)
 [标准化加工及开发说明](https://github.com/banned-historical-archives/banned-historical-archives.github.io/blob/master/docs/standarization.md)
 

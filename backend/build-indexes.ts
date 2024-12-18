@@ -179,6 +179,7 @@ function article_map_to_list(c: ArticleMap): {
   if (article_list.length % chunk_size == 0) {
     n_chunk--;
   }
+  fs.ensureDirSync(join(__dirname, '../indexes'));
   fs.writeFileSync(
     join(__dirname, '../indexes/file_count.json'),
     JSON.stringify({
