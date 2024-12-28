@@ -144,7 +144,7 @@ function Song({
     );
   return (
     <Stack padding="20px">
-      <Paper sx={{ flex: 1, mx: 'auto', p: '20px' }}>
+      <Paper sx={{ flex: 1, mx: 'auto', p: '20px', width: '100%' }}>
         <Typography variant="subtitle1" sx={{ mb: 2 }}>
           演唱/演奏版本：
         </Typography>
