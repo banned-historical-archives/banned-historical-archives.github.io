@@ -52,7 +52,7 @@ function article_map_to_list(c: ArticleMap): {
   });
 }
 (async () => {
-  for (let i = 0; i <= 30; ++i) {
+  for (let i = 0; i <= 31; ++i) {
     const p = join(__dirname, '../parsed/archives' + i);
     console.log(p);
     if (!(await fs.pathExists(p))) continue;
