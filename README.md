@@ -30,6 +30,7 @@
 ![archives0](https://github.com/banned-historical-archives/banned-historical-archives28/actions/workflows/build_parsed.yml/badge.svg)
 ![archives0](https://github.com/banned-historical-archives/banned-historical-archives29/actions/workflows/build_parsed.yml/badge.svg)
 ![archives0](https://github.com/banned-historical-archives/banned-historical-archives30/actions/workflows/build_parsed.yml/badge.svg)
+![archives0](https://github.com/banned-historical-archives/banned-historical-archives31/actions/workflows/build_parsed.yml/badge.svg)
 
 [https://banned-historical-archives.github.io](https://banned-historical-archives.github.io)
 
