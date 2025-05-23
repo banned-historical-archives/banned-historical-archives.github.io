@@ -95,7 +95,7 @@
 
 ### 3. 本地文本搜索（面向不懂技术的使用者）
 
-下载[此分支](https://github.com/banned-historical-archives/banned-historical-archives.github.io/tree/txt)的压缩包，安装 VS Code 并使用它打开解压后的目录，在 VS Code 中进行搜索
+下载[此分支](https://github.com/banned-historical-archives/banned-historical-archives.github.io/tree/txt)的[压缩包](https://github.com/banned-historical-archives/banned-historical-archives.github.io/archive/refs/heads/txt.zip)，安装 VS Code 并使用它打开解压后的目录，在 VS Code 中进行搜索
 
 ## 功能
 
