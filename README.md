@@ -154,6 +154,8 @@ https://huggingface.co/datasets/banned-historical-archives/banned-historical-arc
 ## 资料主要来源
 
 * 网友赠送
+* 维基解密
+* CIA解密资料
 * https://jojokanbao.cn
 * https://github.com/ProletRevDicta/Prolet
 * maoistlegacy https://maoistlegacy.de 
