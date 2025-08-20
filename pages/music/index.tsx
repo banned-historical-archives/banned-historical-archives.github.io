@@ -68,6 +68,9 @@ import { GridApiPro } from '@mui/x-data-grid-pro/models/gridApiPro';
 import Tags from '../../components/Tags';
 import { zhCN } from '@mui/x-data-grid/locales';
 
+const ee = new EventEmitter();
+ee.setMaxListeners(9876543);
+
 const getDetails = async (
   id: string,
   archives_id: number,
@@ -81,12 +84,10 @@ const getDetails = async (
 };
 
 function Song({
-  ee,
   id,
   archiveId,
   name,
 }: {
-  ee: EventEmitter;
   name: string;
   archiveId: number;
   id: string;
@@ -135,7 +136,7 @@ function Song({
 
   if (loading)
     return (
-      <Stack padding="20px" spacing="10px">
+      <Stack padding="20px" spacing="10px" width="800px" height="200px">
         <Skeleton variant="rectangular" width={'100%'} height={20} />
         <Skeleton variant="rectangular" width={'100%'} height={20} />
         <Skeleton variant="rectangular" width={'100%'} height={20} />
@@ -143,108 +144,156 @@ function Song({
       </Stack>
     );
   return (
-    <Stack padding="20px">
-      <Paper sx={{ flex: 1, mx: 'auto', p: '20px', width: '100%' }}>
-        <Typography variant="subtitle1" sx={{ mb: 2 }}>
-          演唱/演奏版本：
-        </Typography>
-        <Stack>
-          {details?.lyrics.map((lyric, idx) => (
-            <Stack key={idx} sx={{ display: 'inline' }}>
-              {lyric.audios.map((audio, aid) => {
-                const displayName = `${details?.name}-${lyric.version}-${
-                  audio.artists.map((i) => `${i.name}(${i.type})`).join(' ') ||
-                  '未知'
-                }`;
-                return (
-                  <Button
-                    key={idx + '-' + aid}
-                    sx={{ justifyContent: 'start' }}
-                    startIcon={<PlayCircleIcon />}
-                    onClick={() => {
-                      ee.emit('musicChanged', id, name, archiveId);
-                      ee.emit('lyricChanged', lyric);
-                      ee.emit('artistChanged', audio.artists);
-                      ee.emit('musicStart', audio.url);
-                    }}
-                  >
-                    {displayName}
-                  </Button>
-                );
-              })}
-            </Stack>
-          ))}
-        </Stack>
-        <Divider sx={{ mt: 2 }} />
-        {details?.lyrics.length && details?.lyrics.length > 1 ? (
-          <Typography variant="subtitle1" sx={{ mt: 2, mb: 2 }}>
-            歌词对比：
-          </Typography>
-        ) : null}
-        <Stack direction="row" spacing={2}>
-          <Stack sx={{ flex: 1 }}>
-            <Select
-              size="small"
-              value={details?.lyrics[lyricLeft] ? lyricLeft : 0}
-              label="版本"
-              sx={{
-                mb: 1,
-                display:
-                  details?.lyrics.length && details?.lyrics.length > 1
-                    ? 'block'
-                    : 'none',
-              }}
-              onChange={(e) => {
-                setLyricLeft(parseInt(e.target.value as string));
-              }}
-            >
-              {details?.lyrics.map((lyric, idx) => (
-                <MenuItem key={idx} value={idx}>
-                  {lyric.version}
-                </MenuItem>
-              ))}
-            </Select>
-            <Paper sx={{ p: '20px' }}>
-              {leftContents?.map((line, idx) => (
-                <Typography key={idx}>{line}</Typography>
-              ))}
-            </Paper>
-          </Stack>
-          {details?.lyrics.length && details?.lyrics.length > 1 ? (
-            <>
-              <Stack sx={{ flex: 1 }}>
-                <Select
-                  size="small"
-                  value={details?.lyrics[lyricRight] ? lyricRight : 0}
-                  label="版本"
-                  sx={{ mb: 1 }}
-                  onChange={(e) => {
-                    setLyricRight(parseInt(e.target.value as string));
+    <Paper sx={{ flex: 1, mx: 'auto', p: '20px', 'width': '800px', 'maxHeight': '500px' }}>
+      <Typography variant="subtitle1" sx={{ mb: 2 }}>
+        演唱/演奏版本：
+      </Typography>
+      <Stack>
+        {details?.lyrics.map((lyric, idx) => (
+          <Stack key={idx} sx={{ display: 'inline' }}>
+            {lyric.audios.map((audio, aid) => {
+              const displayName = `${details?.name}-${lyric.version}-${
+                audio.artists.map((i) => `${i.name}(${i.type})`).join(' ') ||
+                '未知'
+              }`;
+              return (
+                <Button
+                  key={idx + '-' + aid}
+                  sx={{ justifyContent: 'start' }}
+                  startIcon={<PlayCircleIcon />}
+                  onClick={() => {
+                    ee.emit('musicChanged', id, name, archiveId);
+                    ee.emit('lyricChanged', lyric);
+                    ee.emit('artistChanged', audio.artists);
+                    ee.emit('musicStart', audio.url);
                   }}
                 >
-                  {details?.lyrics.map((lyric, idx) => (
-                    <MenuItem key={idx} value={idx}>
-                      {lyric.version}
-                    </MenuItem>
-                  ))}
-                </Select>
-                <Paper sx={{ p: '20px' }}>
-                  {rightContents?.map((line, idx) => (
-                    <Typography key={idx}>{line}</Typography>
-                  ))}
-                </Paper>
-              </Stack>
-              <Stack sx={{ flex: 1, pt: '48px' }}>
-                <Paper sx={{ p: '20px' }}>
-                  <DiffViewer diff={diff} />
-                </Paper>
-              </Stack>
-            </>
-          ) : null}
+                  {displayName}
+                </Button>
+              );
+            })}
+          </Stack>
+        ))}
+      </Stack>
+      <Divider sx={{ mt: 2 }} />
+      {details?.lyrics.length && details?.lyrics.length > 1 ? (
+        <Typography variant="subtitle1" sx={{ mt: 2, mb: 2 }}>
+          歌词对比：
+        </Typography>
+      ) : null}
+      <Stack direction="row" spacing={2}>
+        <Stack sx={{ flex: 1 }}>
+          <Select
+            size="small"
+            value={details?.lyrics[lyricLeft] ? lyricLeft : 0}
+            label="版本"
+            sx={{
+              mb: 1,
+              display:
+                details?.lyrics.length && details?.lyrics.length > 1
+                  ? 'block'
+                  : 'none',
+            }}
+            onChange={(e) => {
+              setLyricLeft(parseInt(e.target.value as string));
+            }}
+          >
+            {details?.lyrics.map((lyric, idx) => (
+              <MenuItem key={idx} value={idx}>
+                {lyric.version}
+              </MenuItem>
+            ))}
+          </Select>
+          <Paper sx={{ p: '20px' }}>
+            {leftContents?.map((line, idx) => (
+              <Typography key={idx}>{line}</Typography>
+            ))}
+          </Paper>
         </Stack>
-      </Paper>
-    </Stack>
+        {details?.lyrics.length && details?.lyrics.length > 1 ? (
+          <>
+            <Stack sx={{ flex: 1 }}>
+              <Select
+                size="small"
+                value={details?.lyrics[lyricRight] ? lyricRight : 0}
+                label="版本"
+                sx={{ mb: 1 }}
+                onChange={(e) => {
+                  setLyricRight(parseInt(e.target.value as string));
+                }}
+              >
+                {details?.lyrics.map((lyric, idx) => (
+                  <MenuItem key={idx} value={idx}>
+                    {lyric.version}
+                  </MenuItem>
+                ))}
+              </Select>
+              <Paper sx={{ p: '20px' }}>
+                {rightContents?.map((line, idx) => (
+                  <Typography key={idx}>{line}</Typography>
+                ))}
+              </Paper>
+            </Stack>
+            <Stack sx={{ flex: 1, pt: '48px' }}>
+              <Paper sx={{ p: '20px' }}>
+                <DiffViewer diff={diff} />
+              </Paper>
+            </Stack>
+          </>
+        ) : null}
+      </Stack>
+    </Paper>
   );
+}
+
+const playing = {id: ''};
+
+function SongWrap({ row }: { row: Column }) {
+  const anchorElRef = useRef<HTMLDivElement>(null);
+
+  const [open,setOpen] = useState(playing.id == row.id);
+
+  useEffect(() => {
+    const listener = (id: string) => {
+      if (id == row.id) {
+        setOpen(true);
+      } else {
+        setOpen(false);
+      }
+    };
+    ee.on('musicChanged',listener);
+    return () => {
+      ee.off('musicChanged', listener)
+    }
+  }, [row]);
+
+  const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
+    setOpen(!open)
+  };
+
+  const handleClose = () => {
+    setOpen(false)
+  };
+
+  return (
+    <>
+      <div style={{cursor:'pointer',color: '#cc0000', padding: '5px'}} onClick={handleClick} ref={anchorElRef}>{row.name}</div>
+      <Popover
+        open={open}
+        anchorEl={() => anchorElRef.current!}
+        onClose={handleClose}
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'left',
+        }}
+      >
+        {open ? (
+          <Song id={row.id} name={row.name} archiveId={row.archiveId} />
+        ) : null}
+      </Popover>
+    </>
+  );
+
 }
 
 enum RepeatType {
@@ -255,10 +304,8 @@ enum RepeatType {
 
 function Player({
   apiRef,
-  ee,
 }: {
   apiRef: React.MutableRefObject<GridApiPro>;
-  ee: EventEmitter;
 }) {
   const [playing, setPlaying] = useState(false);
 
@@ -428,6 +475,9 @@ function Player({
               audioRef.current?.play().catch(() => {});
             }
           }}
+          open={true}
+          onOpen={() => {}}
+          onClose={() => {}}
           icon={playing ? <PauseCircleIcon /> : <PlayCircleIcon />}
         >
           <SpeedDialAction
@@ -437,6 +487,9 @@ function Player({
               playNext();
             }}
             tooltipTitle={'下一首'}
+          open={true}
+          onOpen={() => {}}
+          onClose={() => {}}
           />
           <SpeedDialAction
             icon={
@@ -500,8 +553,6 @@ type Column = {
   art_forms: string[];
 };
 export default function Music() {
-  const ee = useRef(new EventEmitter());
-  ee.current.setMaxListeners(9876543);
   const filterModelRef = useRef<GridFilterModel>({ items: [] });
   const [indexes, setIndexes] = useState<Column[]>([]);
   const apiRef = useGridApiRef();
@@ -529,7 +580,7 @@ export default function Music() {
       setTimeout(() => {
         const rows = apiRef.current.getSortedRows();
         const row = rows[0];
-        ee.current.emit('musicChanged', row.id, row.name, row.archiveId, 0, 0);
+        ee.emit('musicChanged', row.id, row.name, row.archiveId, 0, 0);
       }, 500);
     })();
   }, []);
@@ -560,7 +611,8 @@ export default function Music() {
         flex: 1,
         valueGetter: (name: string) => name,
         renderCell: (params: GridRenderCellParams<Column>) => {
-          return params.row.name;
+          return <SongWrap row={params.row}/>;
+
         },
       },
       {
@@ -692,6 +744,7 @@ export default function Music() {
 
   useEffect(() => {
     function onChange(id: string) {
+      playing.id = id;
       const idx = apiRef.current.getRowIndexRelativeToVisibleRows(id);
 
       try {
@@ -702,9 +755,9 @@ export default function Music() {
         apiRef.current.setExpandedDetailPanels([id]);
       } catch (e) {}
     }
-    ee.current.on('musicChanged', onChange);
+    ee.on('musicChanged', onChange);
     return () => {
-      ee.current.off('musicChanged', onChange);
+      ee.off('musicChanged', onChange);
     };
   }, []);
 
@@ -716,7 +769,7 @@ export default function Music() {
       <Typography variant="h4" sx={{ mb: 1 }}>
         音乐
       </Typography>
-      <Player ee={ee.current} apiRef={apiRef} />
+      <Player apiRef={apiRef} />
       <Stack sx={{ flex: 1, width: '100%', height: '500px' }}>
         <DataGridPro
           disableColumnFilter
@@ -727,20 +780,11 @@ export default function Music() {
               sortModel: [{ field: 'nLyrics', sort: 'desc' }],
             },
           }}
-          getDetailPanelContent={({ row }) => (
-            <Song
-              id={row.id}
-              name={row.name}
-              archiveId={row.archiveId}
-              ee={ee.current}
-            />
-          )}
           onFilterModelChange={(f) => {
             apiRef.current.setFilterModel(f);
             filterModelRef.current = f;
           }}
           getRowId={(row) => row.id}
-          getDetailPanelHeight={() => 'auto'}
           rows={indexes}
           columns={columns}
           localeText={zhCN.components.MuiDataGrid.defaultProps.localeText}
