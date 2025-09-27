@@ -144,7 +144,7 @@ function Song({
       </Stack>
     );
   return (
-    <Paper sx={{ flex: 1, mx: 'auto', p: '20px', 'width': '800px', 'maxHeight': '500px' }}>
+    <Stack sx={{ flex: 1, mx: 'auto', p: '20px', 'width': '800px', 'maxHeight': '500px' }}>
       <Typography variant="subtitle1" sx={{ mb: 2 }}>
         演唱/演奏版本：
       </Typography>
@@ -242,7 +242,7 @@ function Song({
           </>
         ) : null}
       </Stack>
-    </Paper>
+    </Stack>
   );
 }
 
@@ -280,11 +280,15 @@ function SongWrap({ row }: { row: Column }) {
       <div style={{cursor:'pointer',color: '#cc0000', padding: '5px'}} onClick={handleClick} ref={anchorElRef}>{row.name}</div>
       <Popover
         open={open}
+        marginThreshold={10}
         anchorEl={() => anchorElRef.current!}
         onClose={handleClose}
         anchorOrigin={{
           vertical: 'bottom',
           horizontal: 'left',
+        }}
+        style={{
+          overflow: 'scroll'
         }}
       >
         {open ? (
