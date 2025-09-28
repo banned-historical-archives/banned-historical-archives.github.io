@@ -157,19 +157,25 @@ function Song({
                 '未知'
               }`;
               return (
-                <Button
-                  key={idx + '-' + aid}
-                  sx={{ justifyContent: 'start' }}
-                  startIcon={<PlayCircleIcon />}
-                  onClick={() => {
-                    ee.emit('musicChanged', id, name, archiveId);
-                    ee.emit('lyricChanged', lyric);
-                    ee.emit('artistChanged', audio.artists);
-                    ee.emit('musicStart', audio.url);
-                  }}
-                >
-                  {displayName}
-                </Button>
+                <Stack key={idx + '-' + aid} direction="row">
+                  <Button
+                    sx={{ justifyContent: 'start', flex: 1 }}
+                    startIcon={<PlayCircleIcon />}
+                    onClick={() => {
+                      ee.emit('musicChanged', id, name, archiveId);
+                      ee.emit('lyricChanged', lyric);
+                      ee.emit('artistChanged', audio.artists);
+                      ee.emit('musicStart', audio.url);
+                    }}
+                  >
+                    {displayName}
+                  </Button>
+                  <a href={lyric.audios[0].url} download>
+                    <Button type="button">
+                      下载
+                    </Button>
+                  </a>
+                </Stack>
               );
             })}
           </Stack>
