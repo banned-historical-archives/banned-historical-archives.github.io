@@ -324,7 +324,10 @@ function Player({
   const [songName, setSongName] = useState('');
   const [versionName, setVersionName] = useState('');
   const [artistName, setArtistName] = useState('');
+  const [progress, setProgress] = useState(0);
+  const [cursorProgress, setCursorProgress] = useState(0);
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const playerPosRef = useRef({width:0,left:0})
   const curId = useRef('');
 
   useEffect(() => {
@@ -390,7 +393,13 @@ function Player({
     ee.on('artistChanged', artistChanged);
     ee.on('musicChanged', musicChanged);
     ee.on('lyricChanged', lyricChanged);
+
+    function onTimeupdate(e: any) {
+      setProgress(e.target.currentTime/ e.target.duration);
+    }
+    audioRef.current?.addEventListener('timeupdate', onTimeupdate);
     return () => {
+      audioRef.current?.removeEventListener('timeupdate', onTimeupdate);
       ee.off('musicPause', musicPause);
       ee.off('musicStart', musicStart);
       ee.off('artistChanged', artistChanged);
@@ -459,6 +468,22 @@ function Player({
             transform: 'translateY(50%)',
             zIndex: 10,
             right: 70,
+            userSelect: 'none'
+          }}
+          onMouseEnter={(e)=> {
+            const { left}= (e.target as any).getBoundingClientRect();
+            playerPosRef.current={width: window.innerWidth - left - 84,left};
+          }}
+          onMouseMove={(e) => {
+            const {width,left}= playerPosRef.current;
+            setCursorProgress((e.pageX-left)/width);
+          }}
+          onMouseLeave={(e)=>{
+            setCursorProgress(0);
+          }}
+          onClick={(e) => {
+            if (audioRef.current)
+            audioRef.current.currentTime = cursorProgress * audioRef.current.duration;
           }}
         >
           <Typography
@@ -474,6 +499,22 @@ function Player({
           >
             {songName}-{versionName}-{artistName}
           </Typography>
+            <div style={{
+              position: 'absolute',
+              bottom:0,
+              left:0,
+              width: `${cursorProgress*100}%`,
+              background: 'rgba(255,0,0,0.14)',
+              height: '100%',
+            }}/>
+            <div style={{
+              position: 'absolute',
+              bottom:0,
+              left:0,
+              width: `${progress*100}%`,
+              background: 'rgba(255,0,0,0.14)',
+              height: '100%',
+            }}/>
         </Paper>
         <SpeedDial
           ariaLabel="player"
