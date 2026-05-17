@@ -56,7 +56,7 @@
     "json5": "^2.2.2",
     "memo_file": "^1.1.0",
     "mysql2": "^2.3.3",
-    "next": "^15.0.3",
+    "next": "^15.5.18",
     "next-sitemap": "^4.2.3",
     "node-fetch": "^2.6.7",
     "pdf-parse": "^1.1.1",
