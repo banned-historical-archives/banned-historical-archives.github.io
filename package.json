@@ -44,7 +44,7 @@
     "diff-match-patch": "^1.0.5",
     "dommatrix": "^1.0.3",
     "dotenv": "^16.0.3",
-    "epub": "^1.2.1",
+    "epub": "^2.1.1",
     "express": "^4.22.1",
     "fast-xml-parser": "^4.3.2",
     "file-type": "^17.0.0",
